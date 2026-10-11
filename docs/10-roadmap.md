@@ -26,7 +26,7 @@
 - [x] Setup Git LFS, `.gitattributes`, `.gitignore`; commit pertama
 - [ ] Aktifkan plugin inti — GAS, Enhanced Input, StateTree, Niagara, Motion Warping sudah; **Chaos** diaktifkan dari editor (Edit → Plugins) lalu `Build.cs` ditambah `GeometryCollectionEngine`
 - [x] Kelas C++ dasar (`AJDGameMode`, `AJDPlayerController`, `AJDCharacterBase`, `AJDHumanCharacter`) — build sukses di editor. Setelah `git pull` yang mengubah C++: hapus `Binaries/` lalu buka `.uproject` (tanpa itu editor memuat DLL lama)
-- [ ] Belajar dasar editor: Blueprint dari class C++ (`BP_Aksa`, `BP_JDPlayerController`, `BP_JDGameMode`), level `Test_Greybox`, Play In Editor
+- [x] Blueprint dari class C++ (`BP_Aksa`, `BP_JDPlayerController`, `BP_JDGameMode`), level `Test_Greybox`, Play In Editor — dibuat skrip `Tools/ue_setup_greybox.py` lewat Python Remote Execution (12 Okt 2026); `Test_Greybox` jadi map default
 - [ ] Siapkan task tracker (Trello / GitHub Projects / Notion)
 
 **Selesai jika**: project bisa di-build dari Visual Studio, karakter default bisa dimainkan, dan semua tersimpan di Git.

@@ -26,6 +26,7 @@
 | Nama project / module | `Jayadwara` |
 | Prefix class C++ | `JD` (contoh: `AJDHumanCharacter`) |
 | Version control | Git + **Git LFS** (repo sendiri di folder `jayadwara`) |
+| Otomasi editor | **Python Remote Execution** aktif (`DefaultEngine.ini`). Claude menjalankan skrip di editor yang sedang terbuka dengan `python Tools/ue_remote.py <file.py>` (atau `-c "<kode>"`) dan membaca output-nya. Membuat/mengisi `.uasset` lewat skrip Python di `Tools/`, bukan edit manual |
 
 ## Plugin
 
@@ -167,6 +168,7 @@ Content/Jayadwara/
 ├── UI/
 └── Cinematics/      (LS_)
 ```
+Konten pihak ketiga tetap di folder aslinya supaya referensinya tidak putus: `Characters/Mannequins/`, `Input/`, `LevelPrototyping/` (disalin dari `Templates/TemplateResources/High` UE 5.6, tanpa `.fbx` sumber). Placeholder Fase 0–1, diganti aset Aksa sendiri di Fase 2.
 
 ## Konvensi Penamaan Aset
 
