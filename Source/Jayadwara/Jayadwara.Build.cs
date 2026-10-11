@@ -8,13 +8,18 @@ public class Jayadwara : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput" });
+		// Daftar modul mengikuti docs/12-technical-design.md (Dependensi module).
+		// GeometryCollectionEngine (Chaos Destruction) ditambah di Fase 1 (Mar 2027) setelah plugin-nya diaktifkan dari editor.
+		PublicDependencyModuleNames.AddRange(new string[]
+		{
+			"Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput",
+			"GameplayAbilities", "GameplayTags", "GameplayTasks",
+			"AIModule", "StateTreeModule", "GameplayStateTreeModule",
+			"Niagara", "MotionWarping"
+		});
 
-		PrivateDependencyModuleNames.AddRange(new string[] {  });
+		PrivateDependencyModuleNames.AddRange(new string[] { "UMG", "Slate", "SlateCore" });
 
-		// Uncomment if you are using Slate UI
-		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
-		
 		// Uncomment if you are using online features
 		// PrivateDependencyModuleNames.Add("OnlineSubsystem");
 
