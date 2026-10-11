@@ -5,7 +5,7 @@ tiap LOD dibuat dari SALINAN bagian lewat hook PREP di 05_export_fbx.py.
 
 Keluaran (OUT_DIR, default Art/Export):
   SK_Jayadwara.fbx          LOD0 (penuh)
-  SK_Jayadwara_LOD1..3.fbx  LOD1–3, skeleton & socket sama (diimpor ke slot LOD di UE: Tools/ue_import_jayadwara.py)
+  SK_Jayadwara_LOD1..3.fbx  LOD1–3, skeleton sama (diimpor ke slot LOD di UE: Tools/ue_import_jayadwara.py)
   SK_Jayadwara_sockets.json socket: tulang induk + posisi (Blender m & ruang komponen UE cm) — UE tidak membuat
                             socket skeletal mesh dari empty FBX, jadi skrip UE membacanya dari sini.
 Per LOD, per bagian: decimate COLLAPSE (rasio, dengan minimal tris per bagian) lalu bersihkan bobot (≤4 influence,
@@ -116,7 +116,7 @@ for o in sorted((o for o in bpy.data.objects if o.name.startswith("SOCKET_")), k
                     "ue_component_cm": [round(p.x * 100, 3), round(-p.y * 100, 3), round(p.z * 100, 3)]})
 arm.data.pose_position = prev
 with open(os.path.join(OUT_DIR, f"{MESH_NAME}_sockets.json"), "w", encoding="utf-8") as f:
-    json.dump({"mesh": MESH_NAME, "note": "posisi rest; ue_component_cm mengasumsikan konversi FBX (x, -y, z) x 100 — cek di UE",
+    json.dump({"mesh": MESH_NAME, "note": "posisi rest; ue_component_cm = (x, -y, z) x 100, terverifikasi di UE 5.6.1 (Iterasi 6) pada skala import 1",
                "sockets": sockets}, f, indent=2)
 
 print(f"\n{'LOD':6s} {'tris':>8s} {'% LOD0':>7s} {'bagian dibuang':>15s}")

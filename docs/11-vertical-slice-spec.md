@@ -57,7 +57,7 @@
 ### Aset
 | Aset | Sumber yang Disarankan |
 |---|---|
-| Aksa (manusia) | Commission / base mesh + kustom |
+| Aksa (manusia) | **Dibuat sendiri** (Blender, bersama Claude). Sementara memakai **MetaHuman** sebagai placeholder visual, lihat [12](12-technical-design.md#mesh-logika-vs-mesh-visual-aksa) (keputusan 12 Okt 2026) |
 | Jayadwara | Blender, dibuat bersama Claude ([rencana](13-rencana-model-jayadwara.md)); commission opsional untuk polish final (aset paling penting secara visual) |
 | Jerangkong + minion kerangka | Commission / Fab + modifikasi |
 | Candi Lawang Sapta + area penggalian | Kit modular stylized (Fab) + kustom |

@@ -1,6 +1,6 @@
 {
   "mesh": "SK_Jayadwara",
-  "note": "posisi rest; ue_component_cm mengasumsikan konversi FBX (x, -y, z) x 100 \u2014 cek di UE",
+  "note": "posisi rest; ue_component_cm = (x, -y, z) x 100, terverifikasi di UE 5.6.1 (Iterasi 6) pada skala import 1",
   "sockets": [
     {
       "name": "SOCKET_back_center",

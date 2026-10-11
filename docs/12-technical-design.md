@@ -69,6 +69,22 @@ AJDEnemyBase  (AJDCharacterBase)
 - Alasan memilih ganti pawn (bukan memperbesar satu karakter): kamera, collision, movement, dan animasi untuk dua skala sangat berbeda; lebih mudah dikontrol dan di-debug.
 - Transisi visual memakai **Level Sequence** (Sequencer).
 
+#### Mesh logika vs mesh visual (Aksa)
+
+Model Aksa dibuat sendiri; sampai jadi, **MetaHuman** dipakai sebagai placeholder visual (keputusan 12 Okt 2026). Supaya penggantiannya tidak menyentuh logika:
+
+| Lapisan | Isi | Diganti saat model sendiri jadi? |
+|---|---|---|
+| **Mesh logika** = `GetMesh()` di `BP_Aksa` | Manny (`SKM_Manny_Simple`), **disembunyikan** tapi animasi tetap jalan (`VisibilityBasedAnimTickOption = AlwaysTickPoseAndRefreshBones`). Menjalankan `ABP_Aksa`, montage silat, Anim Notify hit, socket | Tidak |
+| **Mesh visual** | Komponen MetaHuman (body, face, groom) yang menyalin pose dari mesh logika lewat **Retarget Pose From Mesh** | **Ya**: ganti komponen ini dengan `SK_Aksa` |
+
+Aturan:
+- Kode C++, montage, Anim Notify, dan trace hit **hanya** memakai mesh logika dan nama tulang Mannequin (`hand_r`, `foot_l`, ...). Tidak ada referensi ke aset MetaHuman di C++.
+- Semua animasi dibuat/diimpor untuk **skeleton Mannequin**, tidak pernah untuk skeleton MetaHuman.
+- Jangan bergantung pada fitur khusus MetaHuman (rig wajah, Live Link, lip-sync). Dialog vertical slice = teks + potret.
+- `SK_Aksa` nanti dibuat dengan nama tulang Mannequin (seperti Jayadwara), sehingga bisa memakai retarget yang sama atau langsung menjadi mesh logika.
+- Kapsul dan kamera disetel untuk tinggi Aksa, bukan tinggi MetaHuman/Manny; retarget menutupi selisih proporsi.
+
 ### Combat (satu sistem, dua skala)
 
 - Semua serangan adalah **Gameplay Ability** (`UJDGA_LightAttack`, `UJDGA_HeavyAttack`, `UJDGA_Dodge`, `UJDGA_Block`, dst.) yang dipakai **manusia dan raksasa**.
@@ -151,6 +167,9 @@ Source/Jayadwara/
 ├── World/           (DestructibleBuilding, Civilian)
 ├── Episode/         (EpisodeDirector, EpisodeData)
 └── UI/              (base class widget C++)
+
+Source/JayadwaraEditor/   (modul Editor-only, tidak ikut build game)
+└── JDEditorToolsLibrary  (dipanggil skrip Python di Tools/: Physics Asset, node Anim Graph, retarget ke folder)
 ```
 
 ### Content

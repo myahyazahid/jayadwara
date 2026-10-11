@@ -87,7 +87,7 @@
 | # | Pertanyaan | Dampak |
 |---|---|---|
 | 1 | **Syarat transformasi** — bebas / momen tertentu / setelah syarat? | Desain loop episode |
-| 2 | **Sumber aset 3D selain Jayadwara** (Aksa, monster, lingkungan) — modeling sendiri (Blender), commission, Fab, atau campuran? | Bottleneck terbesar, budget |
+| 2 | **Sumber aset 3D selain Jayadwara** (monster, lingkungan) — modeling sendiri (Blender), commission, Fab, atau campuran? *Aksa sudah diputuskan (12 Okt 2026): dibuat sendiri, MetaHuman sebagai placeholder.* | Bottleneck terbesar, budget |
 | 3 | **Harga & model season berikutnya** — update gratis atau DLC? | Model bisnis |
 | 4 | **Durasi target total game** | Ukuran tiap episode |
 | 5 | **Pengalaman developer** dengan Unreal / C++ / Blender | Lama Fase 0 dan kebutuhan belajar |

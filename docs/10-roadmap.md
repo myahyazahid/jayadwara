@@ -37,6 +37,9 @@ Model raksasa Jayadwara dibuat di Blender **lebih awal** dari rencana semula (se
 - Proxy dari Iterasi 1 dipakai sebagai pawn raksasa di prototype Fase 1 (Feb 2027).
 - Integrasi UE (Iterasi 6) menunggu Fase 0 selesai.
 
+### Jalur art paralel — Model Aksa *(usulan, jadwal belum diputuskan)*
+Model Aksa dibuat sendiri di Blender; rencana & iterasi di [19-rencana-model-aksa.md](19-rencana-model-aksa.md) (±90–115 jam). Sementara, MetaHuman dipakai sebagai placeholder visual. Mulai sekarang (menggeser Fase 0–1) atau di pengadaan aset Fase 2 (Apr–Mei 2027) diputuskan developer (keputusan A9).
+
 ## Fase 1 — Prototype Greybox (Des 2026 – Mar 2027)
 
 Tujuan: membuktikan **inti gameplay seru** sebelum membuat aset mahal. Semua visual masih kotak, mannequin, dan Mixamo.

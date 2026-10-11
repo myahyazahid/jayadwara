@@ -11,7 +11,7 @@
 | **Genre** | Action-adventure episodik, *kyodai hero* (giant hero) |
 | **Engine** | Unreal Engine 5.6.1 (C++ + Blueprint) |
 | **Platform** | **PC — Steam** |
-| **Gaya visual** | **Stylized** |
+| **Gaya visual** | **Stylized semi-realistis** (proporsi mendekati normal, bentuk tegas, detail disederhanakan, material PBR) |
 | **Bahasa** | Audio/teks Indonesia + subtitle Inggris |
 | **Tim** | **Solo developer** + Claude (C++, dokumen, tooling) |
 | **Kapasitas** | Sambilan, **±10–15 jam / minggu** |

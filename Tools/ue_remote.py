@@ -8,6 +8,7 @@ Pakai:
 Output (print/log dari skrip) dicetak di terminal; exit code 1 kalau skrip melempar error.
 """
 import argparse
+import json
 import os
 import sys
 import time
@@ -15,6 +16,28 @@ import time
 UE_ROOT = os.environ.get("UE_ROOT", r"C:\Program Files\Epic Games\UE_5.6")
 sys.path.insert(0, os.path.join(UE_ROOT, r"Engine\Plugins\Experimental\PythonScriptPlugin\Content\Python"))
 import remote_execution  # noqa: E402
+
+
+def _receive_message(self, expected_type):
+    """Pengganti versi engine: aslinya berhenti saat satu recv() < buffer, sehingga output besar terpotong.
+    Di sini baca terus sampai JSON lengkap."""
+    data = b""
+    while True:
+        part = self._command_channel_socket.recv(1 << 20)
+        if not part:
+            break
+        data += part
+        try:
+            json.loads(data.decode("utf-8"))
+        except ValueError:                                       # JSON belum lengkap
+            continue
+        message = remote_execution._RemoteExecutionMessage(None, None)
+        if message.from_json_bytes(data) and message.passes_receive_filter(self._node_id) and message.type_ == expected_type:
+            return message
+    raise RuntimeError("Remote party failed to send a valid response!")
+
+
+remote_execution._RemoteExecutionCommandConnection._receive_message = _receive_message
 
 
 def main():

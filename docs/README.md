@@ -33,6 +33,11 @@ Aksa Jaya Mangkubumi, agen baru sebuah lembaga rahasia penanganan anomali, menya
 | 13 | [Rencana Model Jayadwara](13-rencana-model-jayadwara.md) | Pipeline & iterasi membuat model raksasa di Blender 5.2 sampai siap dipakai di UE |
 | 14 | [Model Sheet Jayadwara](14-model-sheet-jayadwara.md) | Design lock: proporsi, palet, part list, keputusan desain K1–K8 (hasil Iterasi 0) |
 | 15 | [Spesifikasi Material Jayadwara](15-spesifikasi-material-jayadwara.md) | Slot, tekstur, parameter master material UE, alur hand-paint (hasil Iterasi 4) |
+| 16 | [Panduan Arc 1](16-panduan-arc-1.md) | **Usulan.** Arahan desain Ep 1–10: aturan per episode, mekanik baru, benang merah, kartu episode |
+| 17 | [Skenario Arc 1](17-skenario-arc-1.md) | **Usulan.** Skenario adegan per adegan Ep 1 (lengkap); Ep 2–10 menyusul |
+| 18 | [Kebutuhan Episode 1](18-kebutuhan-episode-1.md) | **Usulan.** Daftar kerja Ep 1: sistem C++, karakter & animasi, level, VFX, audio, UI, data, urutan F0–F2 |
+| 19 | [Rencana Model Aksa](19-rencana-model-aksa.md) | **Usulan.** Iterasi 0–7 membuat model Aksa di Blender (skeleton Mannequin, basis MPFB2) sampai menggantikan MetaHuman di UE |
+| 20 | [Rencana Model Jerangkong](20-rencana-model-jerangkong.md) | **Usulan.** Iterasi 0–5 boss Ep 1 + minion kerangka (satu model, potongan kaku untuk mekanik rontok/susun ulang) |
 
 ---
 
@@ -43,7 +48,7 @@ Aksa Jaya Mangkubumi, agen baru sebuah lembaga rahasia penanganan anomali, menya
 | Judul | **JAYADWARA: Guardian of the Seven Gates** |
 | Engine | Unreal Engine **5.6.1**, C++ + Blueprint |
 | Platform | PC (Steam) |
-| Gaya visual | Stylized |
+| Gaya visual | **Stylized semi-realistis**: proporsi mendekati normal, bentuk tegas, detail disederhanakan, material PBR (dikonfirmasi ulang 12 Okt 2026; realistis penuh ditolak karena volume monster, animasi, dan performa) |
 | Tim | Solo + Claude, sambilan ±10–15 jam/minggu |
 | Struktur | Linear semi-open-world, **50 episode** dalam **5 arc** |
 | Karakter utama | **Aksa Jaya Mangkubumi** ("Aksa"), codename **Lawang** |
