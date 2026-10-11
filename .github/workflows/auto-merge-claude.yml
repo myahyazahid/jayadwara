@@ -1,0 +1,66 @@
+# Push dari Claude ke branch claude/** -> cek ringan -> merge otomatis ke development (docs/12 "Version Control").
+# Runner GitHub tidak punya Unreal Engine, jadi C++ TIDAK di-compile di sini: tes build tetap di editor setelah git pull.
+name: Auto-merge Claude ke development
+
+on:
+  push:
+    branches:
+      - 'claude/**'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: auto-merge-development
+  cancel-in-progress: false
+
+env:
+  # Jangan unduh isi file LFS (.blend/.fbx/.png/.uasset): tidak dibutuhkan dan memakan kuota bandwidth LFS.
+  GIT_LFS_SKIP_SMUDGE: '1'
+
+jobs:
+  check:
+    name: Cek ringan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: false
+
+      - name: Jayadwara.uproject valid JSON
+        run: python3 -m json.tool Jayadwara.uproject > /dev/null
+
+      - name: Sintaks skrip Python (Tools, Art/Scripts)
+        run: python3 -m py_compile Tools/*.py Art/Scripts/*.py
+
+      - name: Folder hasil build tidak ikut ter-commit
+        run: |
+          if git ls-files | grep -E '^(Binaries|Intermediate|Saved|DerivedDataCache)/'; then
+            echo "::error::Folder hasil build ter-commit; seharusnya diabaikan .gitignore."
+            exit 1
+          fi
+
+  merge:
+    name: Merge ke development
+    needs: check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: development
+          fetch-depth: 0
+          lfs: false
+
+      - name: Merge branch Claude
+        env:
+          SOURCE: ${{ github.ref_name }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin "$SOURCE"
+          if ! git merge --no-edit "origin/$SOURCE"; then
+            echo "::error::Konflik dengan development; selesaikan manual (merge development ke $SOURCE)."
+            exit 1
+          fi
+          # --no-verify: lewati hook pre-push LFS; objek LFS yang dirujuk sudah ada di server.
+          git push --no-verify origin HEAD:development
