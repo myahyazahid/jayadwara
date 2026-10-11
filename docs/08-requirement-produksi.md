@@ -3,7 +3,14 @@
 ## Art Direction
 
 - **Gaya visual**: *keputusan terbuka* — realistis (Lumen/Nanite) atau stylized (lebih ringan untuk tim kecil).
-- **Desain Jayadwara**: berbasis arca Dwarapala; motif ukiran, batik, wayang, candi; topeng/helm bermotif Kala-Bhoma. **Tidak** merah-perak, **tidak** ada lampu timer di dada.
+- **Desain Jayadwara**: hero bergaya **tokusatsu**, berbasis arca Dwarapala; motif ukiran, batik, wayang, candi; helm bermotif Kala-Bhoma.
+  - **Concept final**: [`jayadwara_final.webp`](concept-art/jayadwara_final.webp) (turnaround 4 sisi, detail kepala, detail armor, siluet, palet). Gambar AI = brief untuk commission/modeling, bukan aset final. Varian lain di `concept-art/` (v01–v06 dan dua sheet "Jayadwara_ Nusantara ...") hanya arsip eksplorasi, bukan final.
+  - **Palet**: merah (utama), hitam, emas, putih (faceplate), merah marun gelap. Tidak ada armor silver.
+  - **Helm**: merah bersudut, dua tanduk emas besar menyapu ke atas, ornamen emas berukir di dahi, faceplate putih dengan mata menyala.
+  - **Armor**: pelat merah bersudut dengan trim emas berukir — ornamen dada bermotif surya dengan permata emas di tengah, bahu berukir tradisional, sabuk + selendang panjang bermotif batik, pelindung kaki ramping.
+  - **Badan**: ramping-atletis (aman di-retarget ke skeleton Mannequin), undersuit hitam, pose khas kuda-kuda silat.
+  - **Inspirasi**: relief candi, gunungan wayang, surya, gunung.
+  - **Batas IP (hindari kemiripan Ultraman)**: tidak ada lampu/timer di dada, tidak ada kristal di dahi, tidak ada bilah kembar di atas kepala, tidak ada mata lensa besar, tidak ada kombinasi badan merah-silver, permata dada tidak berkedip/berfungsi sebagai timer, tidak ada emblem garuda (Bima Satria Garuda). Faceplate putih = titik paling dekat ke Ultra — saat commission, minta bentuk mulut/pipi dibedakan.
 - **Desain monster**: siluet jelas dan kelemahan yang terlihat secara visual.
 - **Rasa skala**: kamera, fog, kendaraan, dan pejalan kaki sebagai pembanding ukuran.
 - **Cutscene pembuka**: gaya wayang kulit (narasi Ki Sastro).
@@ -63,14 +70,24 @@
 
 ---
 
+## Keputusan yang Sudah Diambil
+
+| Pertanyaan | Keputusan |
+|---|---|
+| Ukuran tim | **Solo** + Claude |
+| Kapasitas kerja | Sambilan, **±10–15 jam/minggu** |
+| Gaya visual | **Stylized** |
+| Platform | **PC (Steam)** |
+| Engine & bahasa | **UE 5.6.1, C++ + Blueprint** (Claude tidak bisa mengedit `.uasset`) |
+| Isi rilis pertama | **Season 1 = Arc 1 (Ep 1–10)** sebagai Early Access (lihat [roadmap](10-roadmap.md)) |
+| Sumber aset 3D Jayadwara | **Modeling sendiri di Blender 5.2 bersama Claude** (via Blender MCP); commission hanya opsional untuk polish. Model dibuat **sebelum** UE terpasang (lihat [rencana model](13-rencana-model-jayadwara.md)) |
+
 ## Keputusan Terbuka
 
 | # | Pertanyaan | Dampak |
 |---|---|---|
-| 1 | **Ukuran tim** — solo atau ada anggota lain? | Scope, jadwal, pembagian peran |
-| 2 | **Gaya visual** — realistis atau stylized? | Pipeline aset, performa |
-| 3 | **Platform target** — PC saja atau juga konsol? | Batas destruction & Lumen, spesifikasi minimum |
-| 4 | **Blueprint saja, atau C++ + Blueprint?** | GAS butuh C++ minimal untuk setup |
-| 5 | **Isi rilis pertama** — Arc 1 saja, atau lebih? | Target milestone |
-| 6 | **Syarat transformasi** — bebas / momen tertentu / setelah syarat? | Desain loop episode |
-| 7 | **Durasi target total game** | Ukuran tiap episode |
+| 1 | **Syarat transformasi** — bebas / momen tertentu / setelah syarat? | Desain loop episode |
+| 2 | **Sumber aset 3D selain Jayadwara** (Aksa, monster, lingkungan) — modeling sendiri (Blender), commission, Fab, atau campuran? | Bottleneck terbesar, budget |
+| 3 | **Harga & model season berikutnya** — update gratis atau DLC? | Model bisnis |
+| 4 | **Durasi target total game** | Ukuran tiap episode |
+| 5 | **Pengalaman developer** dengan Unreal / C++ / Blender | Lama Fase 0 dan kebutuhan belajar |

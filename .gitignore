@@ -1,0 +1,18 @@
+# Unreal Engine (docs/12-technical-design.md)
+Binaries/
+Intermediate/
+Saved/
+DerivedDataCache/
+.vs/
+*.sln
+*.suo
+*.VC.db
+
+# Blender
+*.blend1
+*.blend2
+*.blend@
+
+# Python (script di Art/Scripts, Tools)
+__pycache__/
+*.pyc

@@ -22,6 +22,17 @@ Aksa Jaya Mangkubumi, agen baru sebuah lembaga rahasia penanganan anomali, menya
 | 07 | [Gameplay & Sistem](07-gameplay-sistem.md) | Mode manusia, mode raksasa, meter sinkronisasi, struktur episode |
 | 08 | [Requirement & Produksi](08-requirement-produksi.md) | Art, audio, teknis UE5, legal, scope, milestone, keputusan terbuka |
 
+### Dokumen Produksi
+
+| # | Dokumen | Isi |
+|---|---|---|
+| 09 | [Product Brief](09-product-brief.md) | Pengganti PRD: target pemain, pembanding, USP, model bisnis, risiko |
+| 10 | [Roadmap](10-roadmap.md) | Fase 0–5 dari setup sampai Early Access Season 1 |
+| 11 | [Spesifikasi Vertical Slice](11-vertical-slice-spec.md) | Batas scope Episode 1 dan kriteria selesai |
+| 12 | [Technical Design (TDD)](12-technical-design.md) | Arsitektur C++, plugin, struktur folder, konvensi, Git LFS |
+| 13 | [Rencana Model Jayadwara](13-rencana-model-jayadwara.md) | Pipeline & iterasi membuat model raksasa di Blender 5.2 sampai siap dipakai di UE |
+| 14 | [Model Sheet Jayadwara](14-model-sheet-jayadwara.md) | Design lock: proporsi, palet, part list, keputusan desain K1–K8 (hasil Iterasi 0) |
+
 ---
 
 ## Ringkasan Keputusan yang Sudah Final
@@ -29,7 +40,10 @@ Aksa Jaya Mangkubumi, agen baru sebuah lembaga rahasia penanganan anomali, menya
 | Aspek | Keputusan |
 |---|---|
 | Judul | **JAYADWARA: Guardian of the Seven Gates** |
-| Engine | Unreal Engine 5 |
+| Engine | Unreal Engine **5.6.1**, C++ + Blueprint |
+| Platform | PC (Steam) |
+| Gaya visual | Stylized |
+| Tim | Solo + Claude, sambilan ±10–15 jam/minggu |
 | Struktur | Linear semi-open-world, **50 episode** dalam **5 arc** |
 | Karakter utama | **Aksa Jaya Mangkubumi** ("Aksa"), codename **Lawang** |
 | Wujud raksasa | **Jayadwara** (roh Dwarapala) |
