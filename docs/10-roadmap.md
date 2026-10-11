@@ -25,7 +25,7 @@
 - [x] Buat project C++ **Jayadwara** di `C:\repository\unreal_engine\jayadwara` (template Blank C++, dibuat di folder sementara lalu dipindah, karena wizard menolak folder berisi file)
 - [x] Setup Git LFS, `.gitattributes`, `.gitignore`; commit pertama
 - [ ] Aktifkan plugin inti — GAS, Enhanced Input, StateTree, Niagara, Motion Warping sudah; **Chaos** diaktifkan dari editor (Edit → Plugins) lalu `Build.cs` ditambah `GeometryCollectionEngine`
-- [ ] Kelas C++ dasar (`AJDGameMode`, `AJDPlayerController`, `AJDCharacterBase`, `AJDHumanCharacter`) — kode ada, **belum diuji build**
+- [x] Kelas C++ dasar (`AJDGameMode`, `AJDPlayerController`, `AJDCharacterBase`, `AJDHumanCharacter`) — build sukses di editor. Setelah `git pull` yang mengubah C++: hapus `Binaries/` lalu buka `.uproject` (tanpa itu editor memuat DLL lama)
 - [ ] Belajar dasar editor: Blueprint dari class C++ (`BP_Aksa`, `BP_JDPlayerController`, `BP_JDGameMode`), level `Test_Greybox`, Play In Editor
 - [ ] Siapkan task tracker (Trello / GitHub Projects / Notion)
 
