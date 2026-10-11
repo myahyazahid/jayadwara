@@ -1,0 +1,132 @@
+{
+  "mesh": "SK_Jayadwara",
+  "note": "posisi rest; ue_component_cm mengasumsikan konversi FBX (x, -y, z) x 100 \u2014 cek di UE",
+  "sockets": [
+    {
+      "name": "SOCKET_back_center",
+      "bone": "spine_04",
+      "blender_m": [
+        0.0,
+        0.13,
+        1.45
+      ],
+      "ue_component_cm": [
+        0.0,
+        -13.0,
+        145.0
+      ]
+    },
+    {
+      "name": "SOCKET_chest_sun",
+      "bone": "spine_05",
+      "blender_m": [
+        0.0,
+        -0.176,
+        1.48
+      ],
+      "ue_component_cm": [
+        0.0,
+        17.6,
+        148.0
+      ]
+    },
+    {
+      "name": "SOCKET_eye_l",
+      "bone": "head",
+      "blender_m": [
+        0.05,
+        -0.12,
+        1.78
+      ],
+      "ue_component_cm": [
+        5.0,
+        12.0,
+        178.0
+      ]
+    },
+    {
+      "name": "SOCKET_eye_r",
+      "bone": "head",
+      "blender_m": [
+        -0.05,
+        -0.12,
+        1.78
+      ],
+      "ue_component_cm": [
+        -5.0,
+        12.0,
+        178.0
+      ]
+    },
+    {
+      "name": "SOCKET_foot_l",
+      "bone": "foot_l",
+      "blender_m": [
+        0.26,
+        -0.18,
+        0.05
+      ],
+      "ue_component_cm": [
+        26.0,
+        18.0,
+        5.0
+      ]
+    },
+    {
+      "name": "SOCKET_foot_r",
+      "bone": "foot_r",
+      "blender_m": [
+        -0.26,
+        -0.18,
+        0.05
+      ],
+      "ue_component_cm": [
+        -26.0,
+        18.0,
+        5.0
+      ]
+    },
+    {
+      "name": "SOCKET_hand_l",
+      "bone": "hand_l",
+      "blender_m": [
+        0.556,
+        0.0,
+        0.97705
+      ],
+      "ue_component_cm": [
+        55.6,
+        -0.0,
+        97.705
+      ]
+    },
+    {
+      "name": "SOCKET_hand_r",
+      "bone": "hand_r",
+      "blender_m": [
+        -0.556,
+        0.0,
+        0.97705
+      ],
+      "ue_component_cm": [
+        -55.6,
+        -0.0,
+        97.705
+      ]
+    },
+    {
+      "name": "SOCKET_head_top",
+      "bone": "head",
+      "blender_m": [
+        0.0,
+        0.0,
+        1.9
+      ],
+      "ue_component_cm": [
+        0.0,
+        -0.0,
+        190.0
+      ]
+    }
+  ]
+}

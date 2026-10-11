@@ -2,7 +2,8 @@
 
 Jalankan di Blender setelah 01/02. Membuat salinan sementara dari semua bagian, menggabungkannya jadi satu mesh
 `SK_Jayadwara_Proxy` (4 slot material), mengekspor, lalu membersihkan salinan. Scene asli tidak berubah.
-Variabel opsional sebelum exec: FBX_OUT (path tujuan).
+Variabel opsional sebelum exec: FBX_OUT (path tujuan), MESH_NAME, PREP (LOD: fungsi(salinan) -> False untuk membuang
+bagian; boleh mengubah mesh salinan, mis. decimate — lihat 16_make_lods.py).
 Opsi FBX divalidasi terhadap properti operator di Blender yang sedang dipakai (tidak hardcode buta).
 """
 import os
@@ -10,7 +11,8 @@ import os
 import bpy
 
 FBX_OUT = globals().get("FBX_OUT") or r"C:\repository\unreal_engine\jayadwara\Art\Export\SK_Jayadwara_Proxy.fbx"
-MESH_NAME = "SK_Jayadwara_Proxy"
+MESH_NAME = globals().get("MESH_NAME") or "SK_Jayadwara_Proxy"     # hero: MESH_NAME="SK_Jayadwara", FBX_OUT=...\SK_Jayadwara.fbx
+PREP = globals().get("PREP")
 ARM_NAME = "JD_Armature"
 
 scene = bpy.context.scene
@@ -29,6 +31,9 @@ for ob in bpy.data.objects:
         d = ob.copy()
         d.data = ob.data.copy()
         tmp_coll.objects.link(d)
+        if PREP is not None and PREP(d) is False:
+            bpy.data.objects.remove(d, do_unlink=True)
+            continue
         dups.append(d)
 act = max(dups, key=lambda o: len(o.data.vertices))        # undersuit (punya modifier Armature)
 for o in bpy.context.view_layer.objects:
@@ -65,7 +70,8 @@ def enum_ok(prop, value):
 
 wanted = dict(
     filepath=FBX_OUT, use_selection=True, object_types={"ARMATURE", "MESH", "EMPTY"},
-    use_mesh_modifiers=True, add_leaf_bones=False, use_armature_deform_only=True, bake_anim=False,
+    use_mesh_modifiers=True, add_leaf_bones=False, use_armature_deform_only=False,   # tulang IK (non-deform) harus ikut terekspor
+    bake_anim=False,                                                                   # aksi pose test JD_PoseTest tidak ikut
     use_triangles=True, global_scale=1.0, apply_unit_scale=True, use_custom_props=False,
     embed_textures=False, use_tspace=False,
 )

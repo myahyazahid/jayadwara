@@ -32,6 +32,7 @@ Aksa Jaya Mangkubumi, agen baru sebuah lembaga rahasia penanganan anomali, menya
 | 12 | [Technical Design (TDD)](12-technical-design.md) | Arsitektur C++, plugin, struktur folder, konvensi, Git LFS |
 | 13 | [Rencana Model Jayadwara](13-rencana-model-jayadwara.md) | Pipeline & iterasi membuat model raksasa di Blender 5.2 sampai siap dipakai di UE |
 | 14 | [Model Sheet Jayadwara](14-model-sheet-jayadwara.md) | Design lock: proporsi, palet, part list, keputusan desain K1–K8 (hasil Iterasi 0) |
+| 15 | [Spesifikasi Material Jayadwara](15-spesifikasi-material-jayadwara.md) | Slot, tekstur, parameter master material UE, alur hand-paint (hasil Iterasi 4) |
 
 ---
 

@@ -138,8 +138,52 @@ def pose_jongkok(arm):
     arm_chain(arm, "r", V(-0.20, -0.85, -0.45), V(-0.10, -0.95, -0.20))
 
 
+def pose_tangan_atas(arm):                    # kedua lengan terangkat terbuka (uji pauldron vs helm & telinga)
+    arm_chain(arm, "l", V(0.55, 0.0, 0.83), V(0.45, -0.05, 0.89))
+    arm_chain(arm, "r", V(-0.55, 0.0, 0.83), V(-0.45, -0.05, 0.89))
+
+
+def pose_raih_depan(arm):                     # kedua lengan lurus ke depan (uji pauldron vs dada)
+    arm_chain(arm, "l", V(0.25, -0.96, 0.10), V(0.10, -0.99, 0.10))
+    arm_chain(arm, "r", V(-0.25, -0.96, 0.10), V(-0.10, -0.99, 0.10))
+
+
+def pose_tendang_tinggi(arm):                 # tendangan setinggi kepala (uji kain & sabuk vs paha)
+    for b, d in (("spine_02", -4), ("spine_03", -4), ("spine_04", -4)):
+        rot(arm, b, "X", d)
+    legs(arm, {"l": V(0.05, -0.45, 0.89), "r": V(-0.10, 0.0, -1.0)},
+         {"l": V(0.05, -0.50, 0.86), "r": V(-0.03, 0.0, -1.0)}, "lr")
+    aim(arm, "foot_l", V(0.0, -0.5, 0.85))
+    ground(arm, "calf_r")
+    arm_chain(arm, "l", V(0.80, 0.10, -0.55), V(0.85, 0.10, -0.50))
+    arm_chain(arm, "r", V(-0.80, 0.10, -0.55), V(-0.85, 0.10, -0.50))
+
+
+def pose_tangkis(arm):                        # penjagaan: kedua lengan bawah tegak di depan wajah
+    arm_chain(arm, "l", V(0.45, -0.50, -0.74), V(-0.15, -0.35, 0.92))
+    arm_chain(arm, "r", V(-0.45, -0.50, -0.74), V(0.15, -0.35, 0.92))
+
+
+def pose_bungkuk(arm):                        # membungkuk ke depan 48° (uji pelat dada/punggung vs sabuk)
+    for b in ("spine_01", "spine_02", "spine_03", "spine_04"):
+        rot(arm, b, "X", 12)
+    rot(arm, "head", "X", -20)
+
+
+def pose_putar_badan(arm):                    # memutar badan 48° (uji pelat dada vs pauldron & kain)
+    for b in ("spine_01", "spine_02", "spine_03", "spine_04"):
+        rot(arm, b, "Z", 12)
+
+
+def pose_tengok(arm):                         # menoleh 55° (uji helm/tanduk vs pauldron & kerah)
+    for b, d in (("neck_01", 10), ("neck_02", 10), ("head", 35)):
+        rot(arm, b, "Z", d)
+
+
 POSES = [("a_pose", None), ("kuda_kuda", pose_kuda_kuda), ("pukul", pose_pukul),
-         ("tendang", pose_tendang), ("injak", pose_injak), ("jongkok", pose_jongkok)]
+         ("tendang", pose_tendang), ("injak", pose_injak), ("jongkok", pose_jongkok),
+         ("tangan_atas", pose_tangan_atas), ("raih_depan", pose_raih_depan), ("tendang_tinggi", pose_tendang_tinggi),
+         ("tangkis", pose_tangkis), ("bungkuk", pose_bungkuk), ("putar_badan", pose_putar_badan), ("tengok", pose_tengok)]
 
 
 def build_action():

@@ -15,9 +15,10 @@ SIDES = {"l": +1, "r": -1}
 
 # ---------------------------------------------------------------- warna (docs/14, bagian 3)
 HEX = {
-    "red": "#852323", "gold": "#B28047", "black": "#332E2E",
-    "white": "#DBD9DA", "marun": "#422628",
-    "gem": "#FFEFB9", "eye": "#FFF4D6",
+    # revisi: warna dibuat sehidup konsep (nilai mid hasil ukur docs/14 tampak kusam di bawah pencahayaan render)
+    "red": "#A8262B", "gold": "#D6A33A", "black": "#2A2626",
+    "white": "#E2E0DE", "marun": "#5A1A1E",
+    "gem": "#FFC86B", "eye": "#FFF1C8",
 }
 EMISSIVE = {"gem", "eye"}
 
@@ -40,6 +41,8 @@ def get_material(slot):
     """Material `M_Jayadwara_<slot>`: warna dari atribut vertex `JD_Zone`; alpha atribut = emissive."""
     name = f"M_Jayadwara_{slot}"
     mat = bpy.data.materials.get(name) or bpy.data.materials.new(name)
+    if mat.get("JD_TEX"):                    # sudah dibangun ulang berbasis tekstur (08_materials.py) -> jangan ditimpa
+        return mat
     mat.use_nodes = True
     nt = mat.node_tree
     nt.nodes.clear()
@@ -138,11 +141,18 @@ def get_collection(name):
 
 
 def finish_part(name, bm, coll_name, zone, slot, kind="rigid", bone=None, weights=None,
-                chain=None, smooth=False):
+                chain=None, smooth=False, bones=None):
     """Ubah bmesh menjadi objek, beri warna zona + material slot + metadata rig."""
     loose = [v for v in bm.verts if not v.link_edges]      # higiene: buang vertex lepas (mis. artefak Skin modifier)
     if loose:
         bmesh.ops.delete(bm, geom=loose, context="VERTS")
+    if smooth == "angle":                                   # hard-surface: muka smooth, tepi > 35° tetap tajam
+        for f in bm.faces:
+            f.smooth = True
+        for e in bm.edges:
+            if len(e.link_faces) == 2 and e.calc_face_angle(0.0) > math.radians(35):
+                e.smooth = False
+        smooth = False
     mesh = bpy.data.meshes.new(name)
     bm.to_mesh(mesh)
     bm.free()
@@ -161,6 +171,8 @@ def finish_part(name, bm, coll_name, zone, slot, kind="rigid", bone=None, weight
         obj["jd_weights"] = json.dumps(weights)
     if chain:
         obj["jd_chain"] = chain              # nama dasar rantai tulang, mis. "scarf_l"
+    if bones:
+        obj["jd_bones"] = json.dumps(list(bones))   # daftar eksplisit tulang rantai (mis. 3 ruas jari), urut dari pangkal
     if smooth:
         try:
             mesh.shade_smooth()

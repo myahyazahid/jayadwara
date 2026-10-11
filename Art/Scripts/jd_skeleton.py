@@ -16,9 +16,10 @@ SPINE_Z = [0.99, 1.09, 1.19, 1.29, 1.39, 1.50]               # spine_01..05
 NECK_Z = [1.50, 1.58, 1.64]
 CROWN_Z = 1.90
 
-CLOTH_FRONT_Z = [1.15, 0.93, 0.71, 0.49]                     # 3 tulang
-CLOTH_BACK_Z = [1.15, 0.92, 0.68, 0.45]
-CLOTH_FRONT_Y, CLOTH_BACK_Y = -0.14, 0.125
+CLOTH_FRONT_Z = [1.10, 0.88, 0.66, 0.44]                     # 3 tulang (revisi: lebih panjang seperti konsep)
+CLOTH_BACK_Z = [1.10, 0.87, 0.64, 0.42]
+HAND_SCALE = 1.30                                             # revisi: sarung tangan konsep besar
+CLOTH_FRONT_Y, CLOTH_BACK_Y = -0.118, 0.112      # revisi: menempel ke sabuk pas-badan
 CLOTH_FRONT_DY, CLOTH_BACK_DY = -0.02, +0.03      # mengembang menjauhi paha (hem depan y≈-0,20; belakang ≈+0,215)
 SCARF_N = 6
 
@@ -33,12 +34,12 @@ def arm_dir(s):
 
 def scarf_points(s):
     """7 titik pusat selendang (helai sisi): dari sabuk samping mengembang ke bawah-luar-belakang."""
-    start, end = Vector((s * 0.165, -0.02, 1.15)), Vector((s * 0.35, 0.28, 0.50))   # ujung ±0,35 m ke samping, +0,28 m ke belakang (diukur dari sheet)
+    start, end = Vector((s * 0.140, -0.02, 1.08)), Vector((s * 0.35, 0.28, 0.50))   # ujung ±0,35 m ke samping, +0,28 m ke belakang (diukur dari sheet)
     pts = []
     for i in range(SCARF_N + 1):
         t = i / SCARF_N
         p = start.lerp(end, t)
-        p.x = s * (0.165 + (0.35 - 0.165) * (t ** 0.85))     # sedikit melengkung keluar
+        p.x = s * (0.140 + (0.35 - 0.140) * (t ** 0.85))     # sedikit melengkung keluar
         pts.append(p)
     return pts
 
@@ -46,6 +47,37 @@ def scarf_points(s):
 def cloth_points(z_list, y, dy):
     """Titik pusat panel kain; dy = pergeseran Y per segmen (depan: -, belakang: +) supaya mengembang menjauhi paha."""
     return [Vector((0.0, y + dy * i, z)) for i, z in enumerate(z_list)]
+
+
+FINGER_LAT = {"index": 0.033, "middle": 0.011, "ring": -0.011, "pinky": -0.033}   # posisi sepanjang sumbu "depan" telapak
+FINGER_SC = {"index": 0.96, "middle": 1.0, "ring": 1.0, "pinky": 0.90}
+FINGERS = ["thumb", "index", "middle", "ring", "pinky"]
+
+
+def hand_frame(sd):
+    """Frame tangan (kepalan, telapak menghadap paha): (arah lengan d, depan, ke-dalam, titik dasar)."""
+    s = SIDES[sd]
+    d = arm_dir(s)
+    wrist = Vector((s * 0.205, 0, 1.585)) + d * (UPPERARM_LEN + LOWERARM_LEN)
+    front = Vector((0, -1, 0))
+    front = (front - front.project(d)).normalized()
+    inw = Vector((-s, 0, 0))
+    inw = (inw - inw.project(d) - inw.project(front)).normalized()
+    return d, front, inw, wrist + d * 0.012
+
+
+def finger_joints(sd, name):
+    """4 titik sendi jari terkepal: pangkal, sendi-1, sendi-2, ujung (3 ruas -> tulang `<jari>_01..03`)."""
+    d, front, inw, base = hand_frame(sd)
+
+    def pt(lf, iw, fw):
+        k = HAND_SCALE
+        return base + front * (lf * k) + inw * (iw * k) + d * (fw * k)
+
+    if name == "thumb":
+        return [pt(0.052, 0.0, 0.034), pt(0.058, 0.014, 0.068), pt(0.050, 0.036, 0.090), pt(0.034, 0.052, 0.090)]
+    lf, sc = FINGER_LAT[name], FINGER_SC[name]
+    return [pt(lf, 0.0, 0.092), pt(lf, 0.016, 0.128 * sc), pt(lf, 0.046, 0.140 * sc), pt(lf, 0.062, 0.104 * sc)]
 
 
 def build_bones():
@@ -75,11 +107,22 @@ def build_bones():
         add(f"upperarm_{sd}", f"clavicle_{sd}", shoulder, elbow, True)
         add(f"lowerarm_{sd}", f"upperarm_{sd}", elbow, wrist, True)
         add(f"hand_{sd}", f"lowerarm_{sd}", wrist, wrist + d * HAND_LEN, True)
+        add(f"upperarm_twist_01_{sd}", f"upperarm_{sd}", shoulder.lerp(elbow, 0.5), elbow, True)
+        add(f"lowerarm_twist_01_{sd}", f"lowerarm_{sd}", elbow.lerp(wrist, 0.5), wrist, True)
+        for fn in FINGERS:                                          # jari terkepal: 3 ruas per jari
+            J = finger_joints(sd, fn)
+            prev = f"hand_{sd}"
+            for i in range(3):
+                n = f"{fn}_{i + 1:02d}_{sd}"
+                add(n, prev, J[i], J[i + 1], connect=False)
+                prev = n
 
         hip, knee, ankle = Vector((s * HIP_X, 0, 0.91)), Vector((s * KNEE_X, 0, 0.57)), Vector((s * ANKLE_X, 0, 0.12))
         ball, toe = Vector((s * BALL_X, -0.18, 0.05)), Vector((s * TOE_X, -0.28, 0.04))
         add(f"thigh_{sd}", "pelvis", hip, knee)
         add(f"calf_{sd}", f"thigh_{sd}", knee, ankle, True)
+        add(f"thigh_twist_01_{sd}", f"thigh_{sd}", hip.lerp(knee, 0.5), knee, True)
+        add(f"calf_twist_01_{sd}", f"calf_{sd}", knee.lerp(ankle, 0.5), ankle, True)
         add(f"foot_{sd}", f"calf_{sd}", ankle, ball, True)
         add(f"ball_{sd}", f"foot_{sd}", ball, toe, True)
 
@@ -98,7 +141,23 @@ def build_bones():
             n = f"{chain}_{i + 1:02d}"
             add(n, prev, pts[i], pts[i + 1], connect=(i > 0))
             prev = n
+
+    # tulang IK gaya Mannequin (tidak men-deform mesh)
+    add("ik_foot_root", "root", (0, 0, 0), (0, 0, 0.10))
+    add("ik_hand_root", "root", (0, 0, 0), (0, 0, 0.10))
+    seg_ = {n: (h, t) for n, _p, h, t, _c in B}
+    for sd in SIDES:
+        a = seg_[f"foot_{sd}"][0]
+        add(f"ik_foot_{sd}", "ik_foot_root", a, a + Vector((0, -0.10, 0)))
+    hr = seg_["hand_r"][0]
+    add("ik_hand_gun", "ik_hand_root", hr, hr + arm_dir(SIDES["r"]) * 0.08)
+    for sd in SIDES:
+        h = seg_[f"hand_{sd}"][0]
+        add(f"ik_hand_{sd}", "ik_hand_gun", h, h + arm_dir(SIDES[sd]) * 0.08)
     return B
+
+
+IK_BONES = ["ik_foot_root", "ik_hand_root", "ik_foot_l", "ik_foot_r", "ik_hand_gun", "ik_hand_l", "ik_hand_r"]
 
 
 def bone_segments():
@@ -128,4 +187,5 @@ def build_sockets():
 
 # Bone yang ikut memberi bobot pada undersuit (bukan root/kain)
 SKIN_BONES = (["pelvis"] + [f"spine_{i:02d}" for i in range(1, 6)] + ["neck_01", "neck_02"]
-              + [f"{b}_{sd}" for sd in SIDES for b in ("clavicle", "upperarm", "lowerarm", "hand", "thigh", "calf")])
+              + [f"{b}_{sd}" for sd in SIDES for b in ("clavicle", "upperarm", "lowerarm", "hand", "thigh", "calf",
+                                                        "upperarm_twist_01", "lowerarm_twist_01", "thigh_twist_01", "calf_twist_01")])

@@ -179,6 +179,10 @@ Content/Jayadwara/
 | `T_` | Texture | `DA_` / `DT_` | Data Asset / Data Table |
 | `GA_` / `GE_` | Gameplay Ability / Effect | `IA_` / `IMC_` | Input Action / Mapping Context |
 | `LS_` | Level Sequence | `S_` / `SC_` | Sound Wave / Sound Cue |
+| `SKEL_` | Skeleton | `PA_` | Physics Asset |
+| `IK_` | IK Rig | `RTG_` | IK Retargeter |
+
+> `SKEL_`, `PA_`, `IK_`, `RTG_` ditambahkan di Iterasi 5 model Jayadwara (usulan [13](13-rencana-model-jayadwara.md)); contoh `SKEL_Jayadwara`, `PA_Jayadwara`, `IK_Jayadwara`, `RTG_Mannequin_To_Jayadwara`. LOD tetap di dalam satu aset `SK_` (bukan aset terpisah).
 
 ## Version Control
 

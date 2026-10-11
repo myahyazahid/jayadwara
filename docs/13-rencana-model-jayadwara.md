@@ -75,7 +75,7 @@ Model dianggap **selesai** kalau paket ini lengkap dan lulus validasi:
 | Undersuit | Badan hitam ramping-atletis | Ter-skin | seluruh tubuh | 18k |
 | **Total LOD0** | | | | **≈ 95k (batas ≤ 100k)** |
 
-LOD1 ≈ 50k · LOD2 ≈ 20k · LOD3 ≈ 6k. *Angka perkiraan, diuji saat integrasi UE.*
+LOD1 ≈ 50k · LOD2 ≈ 20k · LOD3 ≈ 6k. *Angka perkiraan, diuji saat integrasi UE.* → **Realisasi (Iterasi 5):** LOD0 51,8k (hero jadi lebih ringan dari anggaran) · LOD1 26,0k · LOD2 11,8k · LOD3 5,4k, yaitu ±50/23/10% dari LOD0.
 
 ---
 
@@ -189,21 +189,92 @@ Script `Art/Scripts/validate_jayadwara.py`: re-import FBX ke scene kosong lalu c
 - **Developer:** review tiap kelompok; sculpt/model manual bagian yang gagal dari script.
 - **Deliverable:** `jayadwara_hero_v01.blend`.
 - **Gate (Go/No-Go):** bandingkan berdampingan dengan konsep. Cukup layak → lanjut. Belum → pilih: perbaiki, atau commission polish (Iterasi 7) dengan model ini sebagai basis.
+- **Status (11 Okt 2026): pekerjaan Claude selesai; Go/No-Go menunggu developer.** File: `Art/Blender/jayadwara_giant_v02_hero.blend` (dasar: v01), `Art/Export/SK_Jayadwara_Hero.fbx`.
+  - [x] **Seluruh kelompok diganti versi hero**, nama objek sama dengan proxy sehingga rig tetap jalan: kepala (helm, rusuk, sirip, alis, tanduk kurva-S, pipi, mata celah, ornamen dahi, faceplate V, dagu, pelindung leher, kerah) → torso (pelat dada melengkung + chevron + gulungan + permata berbingkai + 12 sinar surya halus, punggung) → bahu (pauldron 3 lapis, duri, tutup merah, gulungan) → lengan (bracer, rim, inset merah, berlian, sarung tangan berjari) → sabuk (pita, cincin, gesper berbingkai) → kain (depan/belakang/selendang + garis emas) → kaki (pelindung paha, lutut berlian berlapis, greave, ankle, boots + toe cap + sol) → undersuit (Skin + subdiv 2).
+  - [x] **77 objek, ±31,3k tris** (batas LOD0 100k) → masih ±68k tris cadangan untuk detail (Iterasi 7 / sesuai feedback). 4 slot material tetap.
+  - [x] **Validator 22/22 PASS** dengan batas 100k. Dua cacat ditemukan dan diperbaiki: face luas nol di kutub elipsoid pauldron (96 face), dan validator sendiri O(n²) di cek vertex lepas.
+  - [x] Zona deformasi bersih: undersuit 2.408 quad murni, 0 ngon, manifold tertutup; kain hanya quad + segitiga ujung runcing. Armor kaku: 105 ngon (tutup tabung) di 68 objek — tidak berdeformasi, UE akan men-triangulasi.
+  - [x] 5 pose uji diulang pada mesh hero: tidak ada tembus parah (dilihat dari 3/4 dan samping; jongkok & kuda-kuda diperiksa lebih dekat).
+  - [x] Siluet vs referensi: depan tanpa lengan **IoU 0,77**, samping **0,61** (setara/lebih baik dari proxy; pauldron dirapikan ke ±0,34 m).
+  - [x] Checklist IP pada model: mata celah ±5:1 (≥3:1); permata 0,10 m, statis; dahi relief emas tanpa permata; tanduk dari ujung alis, penampang tebal; tanpa silver; tanpa emblem garuda.
+  - [ ] **Developer memutuskan Go/No-Go.** Penilaian jujurku: bentuk, proporsi, dan ornamen utama sudah sesuai konsep, tapi **lebih "bersih/kaku" dari gambar AI** — tidak ada massa organik, ukiran masih berupa garis timbul, undersuit/lengan polos, kepalan kecil. Itu wajar karena ukiran/batik/gradien memang diserahkan ke tekstur (Iterasi 4) dan feedback-mu.
+  - **Belum teruji:** FBX di Unreal (Iterasi 6); bobot undersuit masih auto-weight (Iterasi 3); armor kaku belum diuji pada gerakan ekstrem di luar 5 pose.
+
+- **REVISI BESAR (11 Okt 2026, setelah feedback developer: "masih jelek, buat persis seperti konsep").** File: `Art/Blender/jayadwara_giant_v05_revisi.blend`, FBX `SK_Jayadwara_Hero.fbx` ditimpa versi revisi (validator **25/25**, 40.066 tris, 89 tulang). Perbandingan: `Art/Export/_compare_konsep_vs_model.png` (dibuat `render_compare.py` + `compare_sheet.py`, skala sama dengan reference plane).
+  - Diubah mengikuti konsep: undersuit **berotot**; **cuirass besar** sampai perut + pelat sayap emas di dada + pita chevron pipih + gulungan merah + permata dengan bingkai sinar surya; **pelat perut bertingkat**; punggung merah penuh; **pauldron bersudut** dengan 4 bilah runcing ke atas; **lengan atas berpelat merah**, **bracer emas besar** + sirip siku, **tangan 1,3×**; sabuk lebih tebal; kain depan lebih panjang/lebar, **selendang ramping menghadap serong**; **kaki**: pelat paha merah, lutut berlian besar, greave melebar di lutut & meramping ke pergelangan (membungkus 330°), sepatu runcing; **helm** lebih besar, tanduk bulan sabit, ornamen dahi emas seperti mahkota, sirip pelipis; palet lebih hidup; kain: ornamen emas di bawah (kawung dihapus).
+  - Bug yang ditemukan saat revisi: ornamen torso tenggelam di cangkang (offset dihitung dari tengah cangkang) dan tanda offset sayap yang terbalik di satu sisi — keduanya diperbaiki dan dicek secara numerik.
+  - **Revisi kepala (atas feedback "kepala sama sekali tidak mirip"):** ditulis ulang dari nol (`11_hero_head.py`): helm bersudut berfaset (bukan kubah), bingkai emas V menyambung ke tanduk, pelindung pipi emas, ornamen dahi = plakat emas runcing + bingkai timbul + teratai emas padat di atas latar merah kecil (versi awal terbaca seperti "$", diperbaiki), mata lebar bersudut (rasio ≥3:1, K6), faceplate putih + **dagu merah di satu permukaan** dan **pipi merah tumbuh dari tepi faceplate** (tanpa celah), tanduk lengkung-S + tanduk kecil kedua, pecahan sirip merah ke belakang, pelat belakang berlapis. Proporsi kepala diukur ulang terhadap reference plane: lebar depan selisih ≤1,1 cm di semua ketinggian, puncak tanduk 1,985 vs 1,984 m. Perbandingan: `Art/Export/_compare_kepala.png`. Validator 25/25 (42.706 tris).
+  - **Revisi perut, sabuk, lengan (atas feedback):** perut = satu pelat merah V bertingkat (2 chevron emas) menyambung dari bawah dada ke sabuk, oblique hitam tetap terlihat; sabuk = dua lilitan merah tebal miring berlapis + pita emas + 10 kancing emas + gesper berlian emas besar berpermata merah + pelat samping + dua ujung simpul; lengan atas = pelat merah hanya sisi luar, ujung runcing ke siku, tepi emas; lengan bawah = gauntlet emas bersudut yang meruncing seperti bilah melewati siku + panel merah + berlian + manset emas mengikuti tepi gauntlet. Validator 25/25 (47.424 tris). Konsekuensi: sabuk lebih tinggi menambah tumpang-tindih pada pose ekstrem (dada × sabuk +88 saat membungkuk 48°, paha × sabuk +218 saat tendangan setinggi kepala).
+  - **Revisi sabuk, pauldron, sepatu (atas feedback "sabuk longgar & terlalu tinggi, pauldron & sepatu belum mirip"):** sabuk diukur dari undersuit lalu dibuat pas badan dan diturunkan ke pinggang (z 1,035–1,142, bukan perut); pauldron = tutup emas besar + dua lame emas melengkung yang ujung bawahnya meruncing + pita merah di bawah tiap lame + dua bilah ke atas + satu bilah kecil ke luar; sepatu = loft ramping berujung runcing, poros pergelangan menyatu ke greave, manset emas berbentuk V (pita, bukan kawat) + berlian di titik V, toe cap emas, strip emas di sisi, **berlian merah berbingkai emas di punggung kaki yang diproyeksikan ke permukaan sepatu** (BVH), sol hitam tebal 3,4 cm.
+  - **Revisi "zirah melayang" (atas feedback "banyak gap antara zirah/pauldron dan badan; badan dibuat berisi/berotot"):** celah terukur sebelum revisi: median 8 cm di bawah tutup pauldron, 5,8 cm di bawah lame, hingga 11,8 cm di bibir atas cuirass. Perbaikan:
+    1. Undersuit lebih berisi (`10_hero_body.py`: dada, punggung, trapezius, deltoid, bisep, lengan bawah).
+    2. Skrip baru **`15_body_fit.py`**: badan di bawah zirah didorong keluar sampai ±8 mm dari permukaan dalam zirah, dengan transisi halus di tepi zirah. Aturan: lengan tidak didorong zirah dada; trapezius tidak didorong pauldron (hanya permukaan yang menghadap ke samping), karena itu sempat membuat bahu **berpunuk** (feedback berikutnya).
+    3. Bobot ikut zirah: vertex yang didorong mewarisi bobot zirah di atasnya (`02_rig.py`, penuh pada dorongan ≥2 cm). Tanpa ini tutup pauldron tertelan deltoid saat lengan diangkat.
+    4. Kerah hitam baru `JD_Torso_Collar`, berbentuk corong dari bibir cuirass ke kerah helm (konsep: leher tinggi hitam).
+    5. Pauldron diturunkan 1,4 cm dan dibuat lebih pipih. Lame digeser turun dan lame bawah dipendekkan (tidak bentrok dengan gauntlet).
+    6. Emblem pindah ke sisi luar tutup, berbentuk berlian vertikal. Versi bulat dengan titik di tengah terbaca seperti "mata", dan bersama dua bilah membuat pauldron mirip kepala makhluk.
+  - Hasil revisi zirah melayang: validator 25/25 (51.808 tris). Render: `Art/Export/_compare_torso/render_torso.png`, `_compare_sabuk_pauldron_sepatu.png`.
+  - **Biaya revisi zirah melayang (jujur):**
+    - Pose lengan terangkat penuh (`tangan_atas`): peregangan maks 4,3 → 9,4 cm (15 tepi > 4 cm), 86 dari 352 vertex tutup pauldron masuk ke badan, tutup × kerah +98 segitiga. Pose lain bersih (tutup 0 vertex di dalam badan).
+    - Tumpang-tindih pose ekstrem lain tetap: paha × sabuk +442 (tendangan setinggi kepala), gauntlet × pauldron kiri +262 (pukul).
+    - Perlu diuji ulang di UE dengan animasi sungguhan. Kemungkinan perbaikan: tulang bantu bahu, atau tutup pauldron yang diangkat saat lengan naik (corrective).
+  - **Masih berbeda dari konsep (jujur):** bentuk lebih kaku/tabung daripada lukisan; ukiran emas organik di dada/pauldron/kain disederhanakan jadi pita & bentuk geometris; helm belakang polos; badan sedikit lebih gempal; lengan A-pose 30° (konsep ±12°). Peregangan bahu saat lengan terangkat penuh naik ke 4,3 cm (undersuit lebih tebal).
 
 ### Iterasi 3 — Rig final & skinning
 - **Claude:** armature lengkap (jari, twist, rantai selendang/kain, socket); undersuit auto-weight + script pembersih (batas 4 influence, normalisasi, smoothing); armor kaku di-weight ke satu tulang; uji pose diperluas (silat penuh, jangkauan tangan terbuka, tendang tinggi); daftar masalah deformasi + screenshot.
 - **Developer:** perbaikan weight manual di titik rumit (bahu, pinggul, selendang).
 - **Gate:** validasi skin lolos; pose uji tanpa penyok/tembus; pauldron tidak menembus dada/kepala di rentang gerak normal.
+- **Status (11 Okt 2026): pekerjaan Claude selesai, menunggu review developer.** File: `Art/Blender/jayadwara_giant_v03_rig.blend` (dasar: v02), `Art/Export/SK_Jayadwara_Hero.fbx` (rig lengkap).
+  - [x] **Armature 89 tulang:** 44 sebelumnya + 8 twist (`upperarm/lowerarm/thigh/calf_twist_01`) + 30 jari (`thumb/index/middle/ring/pinky_01..03` ×2, terkepal) + 7 IK (`ik_foot_root`, `ik_hand_root`, `ik_foot_l/r`, `ik_hand_gun/l/r`). IK tidak men-deform; export memakai opsi *semua tulang* (bukan hanya deform) agar IK ikut. Posisi sendi jari berasal dari satu sumber (`jd_skeleton.finger_joints`) yang juga membentuk mesh jari.
+  - [x] **Jari ter-skin:** 10 objek jari (3 tulang per jari, bobot dari parameter panjang `JD_t`), telapak kaku ke `hand`. Armor tetap kaku; undersuit heat-map + 3× smoothing + batas 4 influence.
+  - [x] **Validator 22/22 PASS** pada 89 tulang (30.990 tris).
+  - [x] **13 pose uji** (6 awal + tangan terangkat, raih depan, tendang tinggi, tangkis, membungkuk, memutar badan, menoleh 55°) di Action `JD_PoseTest`. `06_deform_check.py` mengukur dua hal secara numerik:
+    - **Peregangan undersuit:** perubahan panjang tepi maks **3,0 cm** (tendang tinggi/injak), 0 tepi di atas batas 4 cm. *Rasio* tepi sempat tampak parah (0,08–2,95×) tetapi hanya karena median tepi ±2,4 cm → metrik diganti ke perubahan absolut. *Batas 4 cm kutetapkan setelah melihat distribusi (maks 3,0 cm) — bukti lemah; yang lebih berarti adalah visual dan angka maks itu sendiri.* Smoothing tambahan tidak mengubah hasil (370 → 368 tepi), jadi bobot bukan penyebab.
+    - **Penetrasi baru antar-armor** (segitiga berpotongan dikurangi rest, 33 pasangan): 20 pasangan nol. Dua perbaikan nyata: ujung V pelat dada vs sabuk saat membungkuk (V dipendekkan 2,5 cm) dan pelindung paha vs greave (dipendekkan/diberi celah, ditutup lutut berlian).
+  - **Penetrasi tersisa (diterima, dengan alasan):** (a) pelindung paha × lutut berlian ±65 (L/R simetris) = tumpang-tindih berlapis yang disengaja; (b) kain/selendang × paha/greave/sabuk (21–128) = kain belum bersimulasi — selesai oleh Anim Dynamics di Unreal; (c) lengan × dada saat pukul (+36) = kontak wajar; (d) helm × pauldron kanan saat menoleh 55° (+18) = kecil; (e) **paha × sabuk saat tendang setinggi kepala (+128)** = batas desain pelat paha utuh — kandidat dipecah jadi 2 pelat di Iterasi 7 jika animasi butuh.
+  - [ ] Developer mereview deformasi di viewport (putar frame 1–13).
+  - **Belum diuji:** FBX di Unreal, retarget Mannequin (orientasi tulang), IK Retargeter; jari hanya terkepal (tidak diuji membuka); twist bone belum digerakkan (menunggu Control Rig/ABP).
 
 ### Iterasi 4 — UV, tekstur & material
 - **Claude:** unwrap terskrip (seam dari sharp edge, island per bagian); layout **trim sheet** emas berukir; bake **mask map**; tile batik prosedural; material preview di Blender yang meniru parameter master material UE; tulis spek `M_Jayadwara_Master` (parameter: warna zona, emissive mata/permata, roughness).
 - **Developer:** hand-paint (gradien, edge wear, AO); cek warna vs palet; review motif batik.
 - **Catatan budaya:** pakai motif umum (mis. kawung, ceplok); **hindari batik larangan keraton** (mis. parang rusak). Review budayawan sebelum rilis (lihat [06](06-referensi-mitologi.md#panduan-sensitivitas-budaya)).
 - **Gate:** preview mendekati palet konsep; ukuran tekstur sesuai anggaran; tepat 4 slot material.
+- **Status (11 Okt 2026): bagian Claude selesai; hand-paint & feedback menunggu developer.** File: `Art/Blender/jayadwara_giant_v04_tex.blend`, `Art/Export/Textures/` (17 PNG + `_bake/`), `Art/Export/SK_Jayadwara_Hero.fbx` (dengan UV), spesifikasi: [15-spesifikasi-material-jayadwara.md](15-spesifikasi-material-jayadwara.md).
+  - [x] **UV terskrip** (`07_uv_unwrap.py`): smart_project (Body 45°, lainnya 89°), kain di-unwrap sudut dan **16 strip diputar searah panjang** (batik konsisten), lalu **packer sendiri** (packer bawaan Blender 5.2 tidak bisa disetel: cakupan tetap ±5% apa pun parameternya → density 238 px/m; packer sendiri → **611 px/m**). 0% tumpang-tindih di keempat slot; semua UV 0–1.
+  - [x] **Tekstur** (`make_textures.py`): Mask zona RGBA, BC (pengali; batik kawung di kain), Normal (relief kawung di kain), ORM (AO bake Cycles 24 sample + roughness + metallic dari zona), Emit (mata + permata). 2048² Armor/Cloth, 1024² Body/Face.
+  - [x] **Material Blender meniru master UE** (`08_materials.py`): nama parameter = label node; emissive konstan, tidak dikaitkan ke apa pun (aturan IP).
+  - [x] **Validator 25/25 PASS** (ditambah cek UV: 1 layer, 0–1).
+  - **Penyimpangan dari rencana:** Body 1024² (rencana: 2048²) karena didominasi hitam polos; tidak ada trim sheet emas terpisah — trim emas sudah geometri dan ukiran halus diserahkan ke hand-paint; AO bake bukan kualitas final.
+  - **Dua kesalahan yang kutemukan di tengah jalan:** (1) UV Body sempat tumpang-tindih 1,8% karena smart_project 89° melipat tabung undersuit → sudut Body diturunkan; (2) bake awal 8 sample ber-noise → dinaikkan 24 sample.
+  - [ ] **Developer: hand-paint dan feedback visual.** Aturan penting: jangan jalankan ulang `07`/`make_textures` ke folder yang sama setelah mulai mengecat (lihat docs/15 bagian 3).
+  - **Belum diuji:** import tekstur/material di Unreal; tampilan emas metalik dengan refleksi UE.
 
 ### Iterasi 5 — LOD, export & paket UE-ready
 - **Claude:** LOD1–3 (decimate terskrip + perbaikan), export final, jalankan `validate_jayadwara.py`; tulis `Art/Export/README_IMPORT_UE.md` (opsi import langkah demi langkah) dan `Tools/ue_import_jayadwara.py` (Unreal Python, **belum teruji sampai UE ada**); usulkan tambahan konvensi nama di [12](12-technical-design.md#konvensi-penamaan-aset): `SKEL_`, `PA_` (Physics Asset), `IK_`/`RTG_` (IK Rig/Retargeter).
 - **Gate:** semua validasi hijau; paket lengkap (FBX, tekstur, README, script). **Model "selesai" sampai sini** untuk tujuan sekarang.
+- **Status (11 Okt 2026): bagian Claude selesai; skrip & langkah UE belum diuji (menunggu UE, Iterasi 6).**
+  - [x] **LOD** (`Art/Scripts/16_make_lods.py`):
+    - Decimate COLLAPSE per bagian (rasio 0,50 / 0,22 / 0,09, dengan minimal tris per bagian), lalu bobot dibersihkan (≤4 influence, dinormalisasi) dan vertex/edge yatim dibuang.
+    - Bagian dengan diagonal < 3,5 cm (LOD2) / < 8 cm (LOD3) dibuang; mata, permata, faceplate, undersuit dilindungi. Yang terbuang hanya berlian pergelangan di LOD3.
+    - Berlian lutut & tanduk diberi batas decimate. Tanpa itu, facet-nya pecah jadi bidang abu-abu yang terbaca "silver" (aturan IP).
+  - [x] **Export final:** `Art/Export/SK_Jayadwara.fbx` (LOD0) + `SK_Jayadwara_LOD1..3.fbx`, sesuai kontrak 6.5: LOD sebagai file terpisah, karena exporter FBX Blender tidak menulis LOD Group. `SK_Jayadwara_Hero.fbx` diganti oleh `SK_Jayadwara.fbx`.
+    - Validator **25/25 di keempat file** (batas tris 100k / 30k / 14k / 6k).
+    - Perbandingan visual: `Art/Export/_compare_lod.png`.
+  - [x] **Bug export diperbaiki:** sejak revisi sebelumnya, `bake_anim=False` tidak sengaja masuk ke komentar di `05_export_fbx.py`, sehingga aksi pose test ikut terekspor. Sekarang FBX tanpa animasi (LOD0 2,8 → 2,4 MB).
+  - [x] **Socket untuk UE:** `SK_Jayadwara_sockets.json` (tulang + posisi). UE tidak membuat socket skeletal mesh dari empty FBX.
+  - [x] **Paket import:** `Art/Export/README_IMPORT_UE.md` (opsi skrip + manual + checklist verifikasi) dan `Tools/ue_import_jayadwara.py`. Skrip mengimpor:
+    - tekstur dengan setelan docs/15, Flip Green untuk normal;
+    - `M_Jayadwara_Master` + 4 MI;
+    - mesh dengan Import Uniform Scale 45/1,90 ≈ 23,68 (placeholder D4);
+    - LOD1–3 + screen size, material per slot, rename `SKEL_`/`PA_`, dan socket.
+  - [x] **Konvensi nama** `SKEL_`, `PA_`, `IK_`, `RTG_` ditambahkan ke [12](12-technical-design.md#konvensi-penamaan-aset).
+  - **Asumsi yang belum diuji (risiko Iterasi 6):**
+    - Interchange FBX di 5.6 dimatikan sementara lewat CVar `Interchange.FeatureFlags.Import.FBX`.
+    - Nama API `SkeletalMeshEditorSubsystem.import_lod`, `SkeletalMesh.add_socket`, `AnimPoseExtensions`.
+    - Konversi sumbu socket (x, −y, z) × 100.
+    - Skala LOD ikut setelan import LOD0.
+    - Setiap langkah yang gagal mencetak `[MANUAL]` dengan langkah pengganti.
 
 ### Iterasi 6 — Integrasi Unreal *(ditunda sampai UE 5.6.1 + project siap)*
 - **Prasyarat:** UE terpasang utuh, project C++ `Jayadwara` dibuat (Fase 0).

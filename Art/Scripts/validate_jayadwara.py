@@ -82,10 +82,26 @@ me = mesh.data
 tris = sum(len(p.vertices) - 2 for p in me.polygons)
 check(f"tris ≤ {args.max_tris}", tris <= args.max_tris, f"{tris}")
 check(f"slot material = {args.materials}", len(me.materials) == args.materials, str([m.name if m else None for m in me.materials]))
-loose = sum(1 for v in me.vertices if not any(v.index in e.vertices for e in me.edges)) if len(me.vertices) < 50000 else -1
+used_verts = set()
+for e in me.edges:
+    used_verts.update(e.vertices)
+loose = sum(1 for v in me.vertices if v.index not in used_verts)
 check("tidak ada vertex lepas", loose == 0, f"{loose}")
 zero_area = sum(1 for p in me.polygons if p.area < 1e-9)
 check("tidak ada face luas nol", zero_area == 0, f"{zero_area}")
+
+# ---- UV (Iterasi 4): satu layer, semua koordinat di 0..1
+import numpy as np  # noqa: E402
+
+uvl = me.uv_layers.get("UVMap") or (me.uv_layers[0] if len(me.uv_layers) else None)
+check("ada layer UV", uvl is not None, [l.name for l in me.uv_layers].__str__())
+if uvl is not None:
+    arr = np.empty(len(me.loops) * 2, dtype=np.float32)
+    uvl.data.foreach_get("uv", arr)
+    arr = arr.reshape(-1, 2)
+    out = int(((arr < -0.001) | (arr > 1.001)).any(axis=1).sum())
+    check("semua UV di dalam 0..1", out == 0, f"{out} loop di luar; rentang x[{arr[:, 0].min():.3f},{arr[:, 0].max():.3f}] y[{arr[:, 1].min():.3f},{arr[:, 1].max():.3f}]")
+    check("hanya 1 layer UV", len(me.uv_layers) == 1, f"{len(me.uv_layers)}")
 
 # ---- skin weight
 names = {vg.index: vg.name for vg in mesh.vertex_groups}

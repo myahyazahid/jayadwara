@@ -56,7 +56,7 @@ bones = SK.build_bones()
 for name, parent, head, tail, connect in bones:
     b = eb.new(name)
     b.head, b.tail = head, tail
-    b.use_deform = True          # root ikut deform agar ikut terekspor (mode "hanya tulang deform")
+    b.use_deform = name not in SK.IK_BONES      # tulang IK tidak men-deform; root ikut deform agar terekspor
 for name, parent, head, tail, connect in bones:
     if parent:
         eb[name].parent = eb[parent]
@@ -99,6 +99,37 @@ def clean_weights(obj, limit=MAX_INFLUENCE):
     return mx, unweighted
 
 
+def smooth_weights(obj, iters=3, factor=0.5):
+    """Haluskan bobot rata-rata dengan tetangga (hilangkan sambungan tajam hasil heat-map)."""
+    me = obj.data
+    n = len(me.vertices)
+    adj = [set() for _ in range(n)]
+    for e in me.edges:
+        a, b = e.vertices
+        adj[a].add(b)
+        adj[b].add(a)
+    W = [{g.group: g.weight for g in v.groups} for v in me.vertices]
+    for _ in range(iters):
+        new = []
+        for i in range(n):
+            nb = adj[i]
+            acc = {}
+            for j in nb:
+                for g, w in W[j].items():
+                    acc[g] = acc.get(g, 0.0) + w / len(nb)
+            m = {}
+            for g in set(W[i]) | set(acc):
+                m[g] = (1 - factor) * W[i].get(g, 0.0) + factor * acc.get(g, 0.0)
+            new.append(m)
+        W = new
+    for vi, m in enumerate(W):
+        for g, w in m.items():
+            if w > 1e-4:
+                obj.vertex_groups[g].add([vi], w, "REPLACE")
+            else:
+                obj.vertex_groups[g].remove([vi])
+
+
 def point_seg_dist(p, a, b):
     ab = b - a
     t = max(0.0, min(1.0, (p - a).dot(ab) / max(ab.length_squared, 1e-12)))
@@ -128,7 +159,7 @@ for obj in parts:
         wmap = json.loads(obj["jd_weights"]) if "jd_weights" in obj else {obj["jd_bone"]: 1.0}
         set_weights(obj, {b: {i: w for i in range(n)} for b, w in wmap.items()})
     elif kind == "strip":
-        chain = SK.chain_bones(obj["jd_chain"])
+        chain = json.loads(obj["jd_bones"]) if "jd_bones" in obj else SK.chain_bones(obj["jd_chain"])
         nb = len(chain)
         tl = obj.data.attributes["JD_t"].data
         assign = {b: {} for b in chain}
@@ -173,6 +204,8 @@ except Exception as e:  # noqa
     print("auto weights gagal:", e)
 for b in arm_data.bones:
     b.use_deform = saved[b.name]
+if ok_auto and body.vertex_groups:
+    smooth_weights(body, iters=3, factor=0.5)
 mx, unw = clean_weights(body)
 if not ok_auto or unw > 0 or not body.vertex_groups:
     print(f"fallback jarak (auto={ok_auto}, tanpa weight={unw})")
@@ -184,6 +217,33 @@ if not ok_auto or unw > 0 or not body.vertex_groups:
         mod.use_vertex_groups = True
     body.parent = arm
     body.parent_type = "OBJECT"
+FOLLOW_FULL = 0.02                       # m; dorongan 15_body_fit >= ini -> badan 100% mengikuti bobot zirah di atasnya
+if "JD_FitPush" in body.data.attributes and "jd_fit_src" in body:
+    # otot yang ditempelkan ke zirah (15_body_fit) ikut bobot zirah itu -> bergerak bersama, tidak menembus keluar zirah
+    src_names = json.loads(body["jd_fit_src"])
+    pushv = [a.value for a in body.data.attributes["JD_FitPush"].data]
+    srcv = [a.value for a in body.data.attributes["JD_FitSrc"].data]
+    wmaps = []
+    for n in src_names:
+        o = bpy.data.objects.get(n)
+        wmaps.append(json.loads(o["jd_weights"]) if o and "jd_weights" in o else {o["jd_bone"]: 1.0} if o and "jd_bone" in o else {})
+    n_follow = 0
+    for v in body.data.vertices:
+        si = srcv[v.index]
+        if si < 0 or not wmaps[si]:
+            continue
+        f = min(1.0, pushv[v.index] / FOLLOW_FULL)
+        cur = {body.vertex_groups[g.group].name: g.weight for g in v.groups}
+        for bn in set(cur) | set(wmaps[si]):
+            w = (1 - f) * cur.get(bn, 0.0) + f * wmaps[si].get(bn, 0.0)
+            vg = body.vertex_groups.get(bn) or body.vertex_groups.new(name=bn)
+            if w > 1e-4:
+                vg.add([v.index], w, "REPLACE")
+            else:
+                vg.remove([v.index])
+        n_follow += 1
+    smooth_weights(body, iters=2, factor=0.5)
+    print(f"undersuit ikut zirah: {n_follow} vertex (penuh pada dorongan >= {FOLLOW_FULL * 100:.0f} cm)")
 print("undersuit modifier:", [m.type for m in body.modifiers], "parent:", body.parent.name if body.parent else None)
 
 # ------------------------------------------------------------------ bersihkan weight semua mesh
