@@ -193,7 +193,7 @@ Content/Jayadwara/
 - **Branch:**
   - `main`: versi stabil. Diisi merge dari `development` di akhir fase/milestone.
   - `development`: integrasi harian. Kerja editor (`.uasset`/`.umap`) dilakukan di sini.
-  - `claude/*`: kode dari Claude. Setiap push otomatis di-merge ke `development` oleh GitHub Actions (`.github/workflows/auto-merge-claude.yml`) setelah cek ringan: `.uproject` valid, sintaks Python, tidak ada folder build ter-commit. **C++ tidak di-compile di CI** (runner tanpa UE), jadi developer tetap mengetes build di editor setelah `git pull` di `development`. Kalau rusak, perbaikan lewat push baru ke `claude/*`. Kalau merge konflik, job gagal dan konflik diselesaikan manual.
+  - `claude/*`: kode dari Claude. Developer `git checkout` branch ini + `git pull`, mengetes build di editor, lalu membuat PR ke `development` dan merge. (Auto-merge lewat GitHub Actions sempat dicoba dan dihapus: runner GitHub tidak punya UE, jadi C++ tidak bisa diverifikasi sebelum merge.)
 - Tutup editor sebelum `git checkout` / `git pull` (aset biner yang sedang terbuka tidak ter-reload).
 - Pertimbangkan backup remote privat (GitHub/GitLab dengan kuota LFS yang cukup).
 
