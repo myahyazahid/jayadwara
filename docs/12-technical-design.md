@@ -21,7 +21,7 @@
 | Item | Nilai |
 |---|---|
 | Engine | Unreal Engine 5.6.1 (Epic Games Launcher) |
-| IDE | Visual Studio 2022 (workload *Game development with C++*) atau Rider |
+| IDE / toolchain | Visual Studio 2022 (workload *Game development with C++*) atau Rider. **Terpasang (Okt 2026):** Build Tools 2022 17.14 + *.NET Framework 4.8 SDK* + MSVC v14.38 (versi preferred UE 5.6), tanpa IDE. Tanpa .NET Framework SDK, UBT gagal dengan "Could not find NetFxSDK install dir". |
 | Lokasi project | `C:\repository\unreal_engine\jayadwara` |
 | Nama project / module | `Jayadwara` |
 | Prefix class C++ | `JD` (contoh: `AJDHumanCharacter`) |
@@ -190,6 +190,11 @@ Content/Jayadwara/
 - **`.gitattributes`** — LFS untuk: `*.uasset`, `*.umap`, `*.fbx`, `*.obj`, `*.png`, `*.tga`, `*.psd`, `*.wav`, `*.mp3`, `*.ogg`, `*.mp4`, `*.blend`.
 - **`.gitignore`** — abaikan: `Binaries/`, `Intermediate/`, `Saved/`, `DerivedDataCache/`, `.vs/`, `*.sln`, `*.suo`, `*.VC.db`.
 - Commit minimal setiap sesi kerja; pesan commit jelas (mis. `feat(combat): tambah combo pukulan ringan`).
+- **Branch:**
+  - `main`: versi stabil. Diisi merge dari `development` di akhir fase/milestone.
+  - `development`: integrasi harian. Kerja editor (`.uasset`/`.umap`) dilakukan di sini.
+  - `claude/*`: kode dari Claude. Developer mengetes di editor dulu, lalu merge ke `development`.
+- Tutup editor sebelum `git checkout` / `git pull` (aset biner yang sedang terbuka tidak ter-reload).
 - Pertimbangkan backup remote privat (GitHub/GitLab dengan kuota LFS yang cukup).
 
 ## Target Performa

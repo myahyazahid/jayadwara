@@ -20,12 +20,13 @@
 
 ## Fase 0 — Setup & Fondasi (Okt – Nov 2026)
 
-- [ ] Install Unreal Engine 5.6.1
-- [ ] Install Visual Studio 2022 + workload *Game development with C++*
-- [ ] Buat project C++ **Jayadwara** di `C:\repository\unreal_engine\jayadwara`
-- [ ] Setup Git LFS, `.gitattributes`, `.gitignore`; commit pertama
-- [ ] Aktifkan plugin inti (GAS, Enhanced Input, StateTree, Chaos, Niagara, Motion Warping)
-- [ ] Belajar dasar editor: Blueprint dari class C++, level, Play In Editor
+- [x] Install Unreal Engine 5.6.1
+- [x] Install toolchain C++ — Build Tools 2022 + .NET Framework 4.8 SDK + MSVC v14.38 (lihat [12](12-technical-design.md#lingkungan)); IDE penuh opsional
+- [x] Buat project C++ **Jayadwara** di `C:\repository\unreal_engine\jayadwara` (template Blank C++, dibuat di folder sementara lalu dipindah, karena wizard menolak folder berisi file)
+- [x] Setup Git LFS, `.gitattributes`, `.gitignore`; commit pertama
+- [ ] Aktifkan plugin inti — GAS, Enhanced Input, StateTree, Niagara, Motion Warping sudah; **Chaos** diaktifkan dari editor (Edit → Plugins) lalu `Build.cs` ditambah `GeometryCollectionEngine`
+- [ ] Kelas C++ dasar (`AJDGameMode`, `AJDPlayerController`, `AJDCharacterBase`, `AJDHumanCharacter`) — kode ada, **belum diuji build**
+- [ ] Belajar dasar editor: Blueprint dari class C++ (`BP_Aksa`, `BP_JDPlayerController`, `BP_JDGameMode`), level `Test_Greybox`, Play In Editor
 - [ ] Siapkan task tracker (Trello / GitHub Projects / Notion)
 
 **Selesai jika**: project bisa di-build dari Visual Studio, karakter default bisa dimainkan, dan semua tersimpan di Git.
