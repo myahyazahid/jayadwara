@@ -1,0 +1,22 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "{55062BA7-46B1-3AA9-7F8D-B6A73B9C0A60}",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "Jayadwara",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "ModelingToolsEditorMode",
+			"Enabled": true,
+			"TargetAllowList": [
+				"Editor"
+			]
+		}
+	]
+}
