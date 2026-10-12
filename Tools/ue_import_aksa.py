@@ -7,7 +7,7 @@ Hasil di /Game/Jayadwara/Characters/Aksa/:
   Materials/ M_Aksa_Master (BC*AO, N, ORM; two-sided) + MI_Aksa_<Skin|Eyes|Hair|Cloth|Gear> (parameter tekstur BC/N/ORM)
   Mesh/      SK_Aksa (skala 1; tinggi 180,6 cm = Manny) + 7 socket dari SK_Aksa_Proxy_sockets.json
 Pakai: python Tools/ue_remote.py Tools/ue_import_aksa.py   (FBX dipilih otomatis: SK_Aksa.fbx > SK_Aksa_WIP.fbx > SK_Aksa_Proxy.fbx)
-Mesh lama di Mesh/ dihapus dulu (impor ulang bersih). Langkah yang gagal mencetak "[MANUAL]".
+Mesh ditimpa (bukan dihapus) supaya rujukan BP_Aksa tetap utuh; paket final SK_Aksa.fbx ikut LOD1-3. Langkah yang gagal mencetak "[MANUAL]".
 """
 import json
 import os
@@ -24,6 +24,9 @@ ROOT = "/Game/Jayadwara/Characters/Aksa"
 MESH_NAME = "SK_Aksa"
 SKELETON = "/Game/Characters/Mannequins/Meshes/SK_Mannequin"
 PHYSICS = "/Game/Characters/Mannequins/Rigs/PA_Mannequin"
+PHYSICS_AKSA = f"{ROOT}/Mesh/PA_Aksa"                       # dibuat Tools/ue_setup_aksa.py (dipakai bila ada)
+LOD_FILES = {1: "SK_Aksa_LOD1.fbx", 2: "SK_Aksa_LOD2.fbx", 3: "SK_Aksa_LOD3.fbx"}   # hanya untuk paket final SK_Aksa.fbx
+LOD_SCREEN_SIZE = {0: 1.0, 1: 0.45, 2: 0.22, 3: 0.10}
 SLOTS = ["Skin", "Eyes", "Hair", "Cloth", "Gear"]
 ROUGHNESS = {"Skin": 0.55, "Eyes": 0.15, "Hair": 0.6, "Cloth": 0.85, "Gear": 0.6}
 
@@ -45,7 +48,7 @@ def manual(msg):
 # ------------------------------------------------------------------ tekstur + material (Iterasi 5)
 TEX_DIR = os.path.join(_EXPORT, "Textures_Aksa")
 TEX_ROOT = f"{ROOT}/Textures"
-RETEX = os.environ.get("AKSA_RETEX") == "1"            # timpa tekstur yang sudah ada (default: JANGAN — developer mungkin sudah mengecat)
+RETEX = os.environ.pop("AKSA_RETEX", None) == "1"      # timpa tekstur yang sudah ada (default: JANGAN — developer mungkin sudah mengecat); env dibuang setelah dibaca (proses editor persisten)
 TEX_KINDS = {"BC": (True, "TC_DEFAULT"), "N": (False, "TC_NORMALMAP"), "ORM": (False, "TC_MASKS"), "SSS": (False, "TC_MASKS"),
              "Mask": (False, "TC_MASKS")}
 
@@ -93,7 +96,8 @@ def import_textures():
     return out
 
 
-def build_master():
+def build_master(textures):
+    """Dibangun ulang tiap impor (graf milik skrip; MI tidak dihapus, hanya parent-nya dipasang ulang)."""
     path = f"{ROOT}/Materials/M_Aksa_Master"
     if EAL.does_asset_exist(path):
         EAL.delete_asset(path)
@@ -102,6 +106,11 @@ def build_master():
     def tex_param(name, y, sampler):
         n = MEL.create_material_expression(mat, unreal.MaterialExpressionTextureSampleParameter2D, -600, y)
         n.set_editor_property("parameter_name", name)
+        # WAJIB tekstur default bertipe sama dengan sampler: tanpa itu UE memakai DefaultTexture (Color) dan sampler
+        # Normal/Masks gagal compile -> semua MI jatuh ke material default abu-abu di game (temuan Iterasi 6).
+        default = textures.get(f"T_Aksa_Skin_{name}")
+        if default is not None:
+            n.set_editor_property("texture", default)
         n.set_editor_property("sampler_type", sampler)
         return n
 
@@ -119,19 +128,22 @@ def build_master():
         manual("M_Aksa_Master: ada pin yang gagal terhubung (BC*AO / N / Roughness / Metallic)")
     mat.set_editor_property("two_sided", True)
     mat.set_editor_property("used_with_skeletal_mesh", True)
+    mat.set_editor_property("used_with_morph_targets", True)          # SK_Aksa punya 8 morph target (penting untuk build cook)
     MEL.recompile_material(mat)
+    EAL.save_loaded_asset(mat, only_if_is_dirty=False)
     return mat
 
 
 def build_materials(textures):
-    master = build_master()
+    master = build_master(textures)
     mis = {}
     for s in SLOTS:
         p = f"{ROOT}/Materials/MI_Aksa_{s}"
-        if EAL.does_asset_exist(p):
-            EAL.delete_asset(p)
-        mi = asset_tools.create_asset(f"MI_Aksa_{s}", f"{ROOT}/Materials", unreal.MaterialInstanceConstant,
-                                      unreal.MaterialInstanceConstantFactoryNew())
+        if EAL.does_asset_exist(p):                         # dipakai ulang (tidak dihapus): rujukan & setelan developer tetap
+            mi = EAL.load_asset(p)
+        else:
+            mi = asset_tools.create_asset(f"MI_Aksa_{s}", f"{ROOT}/Materials", unreal.MaterialInstanceConstant,
+                                          unreal.MaterialInstanceConstantFactoryNew())
         mi.set_editor_property("parent", master)
         for kind in ("BC", "N", "ORM"):
             tex = textures.get(f"T_Aksa_{s}_{kind}")
@@ -139,17 +151,16 @@ def build_materials(textures):
                 manual(f"MI_Aksa_{s}: tekstur {kind} tidak ada")
                 continue
             MEL.set_material_instance_texture_parameter_value(mi, kind, tex)
+        EAL.save_loaded_asset(mi, only_if_is_dirty=False)
         mis[s] = mi
-    log("M_Aksa_Master + 5 MI dibuat (BC/N/ORM per slot)")
+    log("M_Aksa_Master + 5 MI siap & tersimpan (BC/N/ORM per slot)")
     return mis
 
 
 # ------------------------------------------------------------------ mesh
 def import_mesh(skeleton):
     dest = f"{ROOT}/Mesh"
-    for name in (MESH_NAME,):
-        if EAL.does_asset_exist(f"{dest}/{name}"):
-            EAL.delete_asset(f"{dest}/{name}")
+    # Tidak dihapus dulu: BP_Aksa merujuk SK_Aksa (Iterasi 6); replace_existing menimpa isi aset dan rujukan tetap utuh.
     ui = unreal.FbxImportUI()
     ui.set_editor_property("import_mesh", True)
     ui.set_editor_property("import_as_skeletal", True)
@@ -186,6 +197,46 @@ def import_mesh(skeleton):
     used = mesh.get_editor_property("skeleton")
     log(f"{MESH_NAME} terimpor; skeleton = {used.get_path_name()} (sama dengan SK_Mannequin: {used.get_path_name().split('.')[0] == SKELETON})")
     return mesh
+
+
+def import_lods(mesh):
+    """LOD1-3 dari FBX terpisah (skeleton sama), lalu screen size per LOD. Hanya bila FBX utama = SK_Aksa.fbx."""
+    if os.path.basename(FBX) != "SK_Aksa.fbx":
+        log("LOD dilewati (bukan paket final SK_Aksa.fbx)")
+        return
+    sub = unreal.get_editor_subsystem(unreal.SkeletalMeshEditorSubsystem) if hasattr(unreal, "SkeletalMeshEditorSubsystem") else None
+    fn = getattr(sub, "import_lod", None) if sub else None
+    if fn is None and hasattr(unreal, "EditorSkeletalMeshLibrary"):
+        fn = getattr(unreal.EditorSkeletalMeshLibrary, "import_lod", None)
+    if fn is None:
+        manual("API import LOD tidak ditemukan — Skeletal Mesh Editor > LOD Settings > LOD Import (LOD1-3)")
+        return
+    unreal.SystemLibrary.execute_console_command(None, "Interchange.FeatureFlags.Import.FBX 0")
+    try:
+        for i, f in LOD_FILES.items():
+            path = os.path.join(_EXPORT, f)
+            if not os.path.exists(path):
+                manual(f"LOD{i}: {f} tidak ada — jalankan Art/Scripts/aksa_60_lods.py")
+                continue
+            res = fn(mesh, i, path)
+            if res is None or (isinstance(res, int) and res < 0):
+                manual(f"LOD{i} gagal diimpor dari {f}")
+            else:
+                log(f"LOD{i} <- {f}")
+    finally:
+        unreal.SystemLibrary.execute_console_command(None, "Interchange.FeatureFlags.Import.FBX 1")
+    try:
+        infos = []
+        for i, info in enumerate(mesh.get_editor_property("lod_info")):
+            if i in LOD_SCREEN_SIZE:
+                ss = unreal.PerPlatformFloat()
+                ss.set_editor_property("default", LOD_SCREEN_SIZE[i])
+                info.set_editor_property("screen_size", ss)
+            infos.append(info)
+        mesh.set_editor_property("lod_info", infos)
+        log(f"LOD: {len(infos)} level, screen size {LOD_SCREEN_SIZE}")
+    except Exception as e:  # noqa: BLE001
+        manual(f"screen size LOD: set manual {LOD_SCREEN_SIZE} ({e})")
 
 
 def assign_materials(mesh, mis):
@@ -234,6 +285,9 @@ def add_sockets(mesh):
 
 
 def main():
+    if unreal.EditorLevelLibrary.get_pie_worlds(False):
+        unreal.log_error("[Aksa] Editor sedang Play (PIE) — hentikan dulu lalu jalankan ulang")
+        return
     if not os.path.exists(FBX):
         unreal.log_error(f"[Aksa] FBX tidak ada: {FBX} — jalankan Art/Scripts/aksa_14_export.py di Blender dulu")
         return
@@ -245,10 +299,12 @@ def main():
     mesh = import_mesh(skeleton)
     if mesh is not None:
         assign_materials(mesh, mis)
-        pa = EAL.load_asset(PHYSICS)
+        import_lods(mesh)
+        assign_materials(mesh, mis)                                # slot LOD baru ikut material yang sama
+        pa = EAL.load_asset(PHYSICS_AKSA) if EAL.does_asset_exist(PHYSICS_AKSA) else EAL.load_asset(PHYSICS)
         if pa is not None:
             mesh.set_editor_property("physics_asset", pa)
-            log("physics asset: PA_Mannequin (sementara)")
+            log(f"physics asset: {pa.get_name()}")
         add_sockets(mesh)
         try:
             mts = [str(m.get_name()) for m in mesh.get_editor_property("morph_targets")]

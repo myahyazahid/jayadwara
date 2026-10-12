@@ -29,6 +29,8 @@ Nama file: `T_Aksa_<Slot>_<BC|N|ORM|SSS|Mask>.png` (`Art/Export/Textures_Aksa/`)
 `M_Aksa_Master` (dibuat `Tools/ue_import_aksa.py`): `BC × AO` → Base Color, `N` → Normal, `ORM.G` → Roughness, `ORM.B` → Metallic; two-sided, skeletal mesh. Parameter tekstur: **BC, N, ORM**. Lima instance `MI_Aksa_<Slot>` mengisi tiga parameter itu dengan tekstur slotnya. Tekstur diimpor dengan pengaturan benar (BC sRGB; N Normalmap, non-sRGB; ORM/SSS/Mask non-sRGB).
 
 - **Kornea mata:** di Blender memakai Coat (Principled). Di UE belum ada (master Default Lit); opsi: material Eyes terpisah dengan Clear Coat (Iterasi 6) — tetap 5 slot.
+- **Wajib:** tiap parameter tekstur di master punya tekstur default bertipe sama dengan sampler-nya (BC Color, N Normal, ORM Masks; skrip memakai tekstur Skin). Tanpa itu UE mengisi `DefaultTexture` (Color), sampler Normal/Masks gagal compile, dan **semua MI jatuh ke material default abu-abu di game** (temuan Iterasi 6). Master juga ditandai *used with morph targets*.
+- Master dibangun ulang tiap impor; MI dipakai ulang (tidak dihapus) dan disimpan eksplisit.
 - Impor ulang **tidak menimpa tekstur yang sudah ada** (aman bagi hasil cat developer); untuk menimpa: `AKSA_RETEX=1`.
 - `M_Aksa_Proxy` (warna dari vertex color, Iterasi 1) tidak lagi dipakai; asetnya boleh dihapus manual.
 

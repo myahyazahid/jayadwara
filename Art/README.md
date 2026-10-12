@@ -53,6 +53,8 @@ Dijalankan di Blender (mis. lewat MCP: `exec(open(path).read())`), kecuali yang 
 | `aksa_50_uv.py` | Aksa Iterasi 5: UV per slot (smart_project + packer sendiri, mata planar) + NPZ `Export/_uv_faces_aksa.npz` → `aksa_v05_tex.blend` (jangan ulang setelah developer mengecat) |
 | `make_textures_aksa.py` | Aksa Iterasi 5: tekstur dasar `Export/Textures_Aksa/T_Aksa_<Slot>_<BC\|N\|ORM\|SSS\|Mask>.png` dari NPZ (Python sistem: `python -I`) |
 | `aksa_51_materials.py` | Aksa Iterasi 5: material Blender bertekstur meniru `M_Aksa_Master` UE |
+| `aksa_60_lods.py` | Aksa Iterasi 6: paket final `Export/SK_Aksa.fbx` (LOD0 + morph) + `SK_Aksa_LOD1..3.fbx` + socket JSON (validasi tiap LOD dengan `--max-tris`) |
+| `aksa_61_portraits.py` | Aksa Iterasi 6: potret dialog netral/senyum/marah → `Export/Portraits/` (headless dari `aksa_v05_tex.blend`) |
 | `aksa_41_render_morphs.py` + `aksa_41_morph_sheet.py` | Aksa: render 8 morph target wajah + grid (`Export/_aksa_morphs.png`) |
 | `aksa_31_render_body.py` | Aksa: render badan Eevee 3/4 depan/belakang + close-up tangan & boots |
 | `ak_hair3.py` | Aksa rambut gaya 3 (aktif): disisir ke belakang + belahan samping, helai sejajar, tepi ditempel ke kurva garis rambut |
@@ -75,7 +77,7 @@ Import ke Unreal: `Export/README_IMPORT_UE.md` + `Tools/ue_import_jayadwara.py` 
 
 ## Aksa — urutan dan impor (Iterasi 1)
 Urutan: `aksa_00_setup_scene.py` (headless, `aksa_v00_setup.blend`) → buka v00 di Blender → `aksa_10_armature.py` → `aksa_11_proxy.py` → `aksa_20_head.py` (Iterasi 2, menyimpan v02) → `aksa_13_pose_tests.py` → `aksa_14_export.py` (untuk WIP: set `FBX_OUT`/`MESH_NAME` = `Art/Export/SK_Aksa_WIP.fbx` / `SK_Aksa_WIP` sebelum exec) → `validate_aksa.py`. Render banding: `aksa_12_render.py` (headless, argumen `-- <outdir> [pose]`) lalu `python -I Art/Scripts/aksa_12_compare_sheet.py <outdir>`.
-Impor ke Unreal (editor terbuka): `python Tools/ue_remote.py Tools/ue_import_aksa.py` (mesh ke skeleton `SK_Mannequin` asli; tulang `sash_*` tergabung ke skeleton itu) lalu cek visual `python Tools/ue_remote.py Tools/ue_check_aksa.py` (hapus actor uji + pulihkan kamera: `-c "CLEAN=True; exec(open(r'<path ue_check_aksa.py>').read())"`).
+Impor ke Unreal (editor terbuka, **tidak sedang Play**): `python Tools/ue_remote.py Tools/ue_import_aksa.py` (mesh + LOD1–3 ke skeleton `SK_Mannequin` asli; tulang `sash_*`/`jacket_*` tergabung ke skeleton itu), lalu `python Tools/ue_remote.py Tools/ue_setup_aksa.py` (PA_Aksa, ABP_Aksa + Anim Dynamics jaket, BP_Aksa memakai SK_Aksa, potret dialog) lalu cek visual `python Tools/ue_remote.py Tools/ue_check_aksa.py` (hapus actor uji + pulihkan kamera: `-c "CLEAN=True; exec(open(r'<path ue_check_aksa.py>').read())"`).
 Spike skeleton (hanya perlu diulang kalau Manny/UE berubah): `Tools/ue_export_manny.py` → `aksa_spike_analyze_manny.py` → `aksa_spike_roundtrip.py` → `Tools/ue_spike_aksa_import.py` → `aksa_spike_compare.py`.
 
 ## Asal aset pihak ketiga

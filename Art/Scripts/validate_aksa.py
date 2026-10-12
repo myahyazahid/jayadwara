@@ -10,6 +10,7 @@ Dasar: Art/Reference/manny/SKM_Manny_Simple.fbx (impor yang sama) dan manny_rest
 Keluar dengan kode 1 kalau ada yang gagal.
 """
 import json
+import re
 import math
 import os
 import sys
@@ -123,7 +124,7 @@ if require_uv:
         for p_ in me.polygons:
             pts = [uv.data[i].uv for i in range(p_.loop_start, p_.loop_start + p_.loop_total)]
             a2 = sum(pts[i][0] * pts[(i + 1) % len(pts)][1] - pts[(i + 1) % len(pts)][0] * pts[i][1] for i in range(len(pts)))
-            if abs(a2) < 1e-10:
+            if abs(a2) < 1e-10 and p_.area > 1e-8:               # muka luas nol tak terlihat -> diabaikan
                 degen += 1
         check("UV: segitiga degenerate <2% (dinding tipis trim/tali)", degen <= len(me.polygons) // 50, f"{degen} poligon")
 
@@ -153,7 +154,7 @@ if "--require-morph" in argv:
     check("tiap morph target menggeser vertex", not empty, f"kosong: {empty}")
 
 # ---- socket
-sj = fbx.with_name(fbx.stem + "_sockets.json")
+sj = fbx.with_name(re.sub(r"_LOD\d+$", "", fbx.stem) + "_sockets.json")       # LOD memakai socket LOD0
 if sj.exists():
     data = json.loads(sj.read_text(encoding="utf-8"))
     bad = [s["name"] for s in data["sockets"] if s["bone"] not in B]

@@ -84,6 +84,7 @@ Aturan:
 - Jangan bergantung pada fitur khusus MetaHuman (rig wajah, Live Link, lip-sync). Dialog vertical slice = teks + potret.
 - `SK_Aksa` nanti dibuat dengan nama tulang Mannequin (seperti Jayadwara), sehingga bisa memakai retarget yang sama atau langsung menjadi mesh logika.
 - Kapsul dan kamera disetel untuk tinggi Aksa, bukan tinggi MetaHuman/Manny; retarget menutupi selisih proporsi.
+- **Status (12 Okt 2026, Iterasi 6 [19](19-rencana-model-aksa.md)):** `SK_Aksa` memakai skeleton Mannequin asli dan tinggi Manny, jadi ia **langsung menjadi mesh logika** di `BP_Aksa` (`ABP_Aksa` = salinan `ABP_Unarmed` + Anim Dynamics ujung jaket). Lapisan mesh visual/MetaHuman tidak dipakai; aturan di atas tetap berlaku (C++ hanya memakai `GetMesh()` dan nama tulang Mannequin).
 
 ### Combat (satu sistem, dua skala)
 
