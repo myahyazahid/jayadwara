@@ -1,0 +1,119 @@
+{
+  "mesh": "SK_Jerangkong",
+  "export_scale": 14.0,
+  "note": "posisi rest; ue_component_cm = (x, -y, z) x 100 x export_scale (konvensi docs/13 Iterasi 6)",
+  "sockets": [
+    {
+      "name": "SOCKET_chest_core",
+      "bone": "spine_04",
+      "blender_m": [
+        0.0,
+        -0.02,
+        1.68
+      ],
+      "ue_component_cm": [
+        0.0,
+        28.0,
+        2352.0
+      ]
+    },
+    {
+      "name": "SOCKET_foot_l_hit",
+      "bone": "foot_l",
+      "blender_m": [
+        0.33,
+        -0.17,
+        0.05
+      ],
+      "ue_component_cm": [
+        462.0,
+        238.0,
+        70.0
+      ]
+    },
+    {
+      "name": "SOCKET_foot_r_hit",
+      "bone": "foot_r",
+      "blender_m": [
+        -0.3,
+        -0.17,
+        0.05
+      ],
+      "ue_component_cm": [
+        -420.0,
+        238.0,
+        70.0
+      ]
+    },
+    {
+      "name": "SOCKET_hand_l_hit",
+      "bone": "hand_l",
+      "blender_m": [
+        0.48,
+        -0.16,
+        0.51
+      ],
+      "ue_component_cm": [
+        672.0,
+        224.0,
+        714.0
+      ]
+    },
+    {
+      "name": "SOCKET_hand_r_hit",
+      "bone": "hand_r",
+      "blender_m": [
+        -0.485,
+        -0.11,
+        0.51
+      ],
+      "ue_component_cm": [
+        -679.0,
+        154.0,
+        714.0
+      ]
+    },
+    {
+      "name": "SOCKET_mouth_fx",
+      "bone": "jaw",
+      "blender_m": [
+        0.0,
+        -0.32,
+        1.92
+      ],
+      "ue_component_cm": [
+        0.0,
+        448.0,
+        2688.0
+      ]
+    },
+    {
+      "name": "SOCKET_skull_weakpoint",
+      "bone": "head",
+      "blender_m": [
+        0.0,
+        -0.3,
+        2.13
+      ],
+      "ue_component_cm": [
+        0.0,
+        420.0,
+        2982.0
+      ]
+    },
+    {
+      "name": "SOCKET_throw_r",
+      "bone": "hand_r",
+      "blender_m": [
+        -0.52,
+        -0.12,
+        0.62
+      ],
+      "ue_component_cm": [
+        -728.0,
+        168.0,
+        868.0
+      ]
+    }
+  ]
+}

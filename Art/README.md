@@ -34,6 +34,8 @@ Dijalankan di Blender (mis. lewat MCP: `exec(open(path).read())`), kecuali yang 
 | `05_export_fbx.py` | Export FBX. Proxy: default (`SK_Jayadwara_Proxy`). Hero: pakai `16_make_lods.py` (memanggil skrip ini per LOD lewat `PREP`) |
 | `16_make_lods.py` | Iterasi 5: paket export final `Export/SK_Jayadwara.fbx` (LOD0) + `_LOD1..3.fbx` (decimate per bagian, bobot dibersihkan) + `SK_Jayadwara_sockets.json` |
 | `make_reference_planes_aksa.py` *(sistem)* | Aksa: referensi ortografis ternormalisasi (1000 px = 1,75 m) dari turnaround → `Reference/ak_*.png` |
+| `make_reference_planes_jerangkong.py` *(sistem)* | Jerangkong: referensi ortografis ternormalisasi (1000 px = 2,2 m) + crop detail + palet → `Reference/jk_*.png` |
+| `jerangkong_00_setup_scene.py` | Jerangkong Iterasi 0: scene `jerangkong_v00_setup.blend` (collection per kelompok potongan, reference plane, penggaris 2,2 m, landmark `JK_LM_*`, target bungkuk sedang `JK_TGT_*`). Headless: `blender --background --factory-startup --python Art/Scripts/jerangkong_00_setup_scene.py` |
 | `aksa_00_setup_scene.py` | Aksa Iterasi 0: scene `aksa_v00_setup.blend` (collection, reference plane, penggaris 1,75 m, landmark `AK_LM_*`). Headless: `blender --background --factory-startup --python Art/Scripts/aksa_00_setup_scene.py` |
 | `aksa_spike_analyze_manny.py` *(Blender headless)* | Aksa spike S2: analisis FBX Manny dari `Tools/ue_export_manny.py` → `Reference/manny/manny_rest.json` |
 | `aksa_spike_roundtrip.py`, `aksa_spike_compare.py` *(Blender headless)* | Aksa spike S3/S4: export uji sesuai kontrak (+ tulang `root`), lalu banding pose referensi hasil impor/ekspor UE dengan Manny |

@@ -125,6 +125,22 @@ Hierarki & nama Mannequin (tanpa twist bone; tulang kaku tidak butuh) + `jaw` + 
 - **Developer:** menyetujui model sheet & J1–J9.
 - **Gate:** reference plane sejajar; model sheet disetujui.
 
+**Status (12 Okt 2026): selesai dari sisi Claude, menunggu persetujuan developer.** Atas permintaan "siapkan untuk modeling jerangkong" (dibaca sebagai J9 = mulai sekarang, jalur art paralel). Artefak: `Art/Reference/jk_*.png` (`make_reference_planes_jerangkong.py`), scene `Art/Blender/jerangkong_v00_setup.blend` (`jerangkong_00_setup_scene.py`; plane dicek sejajar lewat render ortografis), model sheet [23](23-model-sheet-jerangkong.md). Temuan: tampak samping konsep bungkuk berlebihan (tengkorak 0,43 m di depan pergelangan kaki) → target bungkuk sedang ditandai `JK_TGT_*` di scene (S2), dan pose rest diusulkan sudah bungkuk agar retarget otomatis bungkuk (S3).
+
+### Jalur B — basis model developer (Tripo AI), 12 Okt 2026
+
+Developer membuat model awal dengan Tripo AI dari konsep: `Art/Source/jerangkong_tripo_v01.glb` (asli: `yahya_design/rKHD3GD0eELe7BHA74wR.glb`). Diimpor oleh `Art/Scripts/jerangkong_01_import_tripo.py` → `Art/Blender/jerangkong_v01_tripo.blend` (objek `JK_Source`, menghadap -Y, puncak tengkorak 2,19 m, vertex jahitan UV digabung).
+
+| Temuan | Nilai | Akibat |
+|---|---|---|
+| Struktur | 1 mesh, 38,5k tris, 19k vertex, tanpa rig/animasi, 1 material (BC/N/ORM 2048²) | LOD0 sedikit di atas anggaran 35k → decimate ringan |
+| Siluet depan vs konsep | IoU 0,86 | Proporsi sudah sesuai model sheet |
+| Postur samping | Lebih tegak dari konsep, lengan menggantung lurus | Sudah mendekati bungkuk sedang (S2) |
+| Geometri | Lunak/membulat; retak, gigi, rongga mata sebagian besar dari tekstur; jari sebagian menempel; 13k tepi non-manifold | Cukup untuk kamera raksasa; tengkorak perlu dipertegas untuk close-up |
+| Tekstur | Warna mirip konsep, tapi ada noda merah di permukaan tulang bahu/selangka | Melanggar S11 → dibersihkan di tekstur |
+
+**Usulan:** Jalur B menggantikan modeling dari primitif. Iterasi 1 menjadi: rig dipasang ke mesh ini → mesh dipotong jadi 17 potongan (bobot kaku 1 tulang, ujung potongan ditutup) → 14 `SM_` → export & uji di UE. Iterasi 2 menyempit menjadi perbaikan: tengkorak (retak bergeometri, rongga mata & rahang dipertegas), pemisahan rahang, pembersihan merah S11. Material: 1 material dasar (tekstur Tripo) + mask emissive Kala, menggantikan 4 slot (6.4) kecuali developer memilih tetap 4 slot. **Syarat:** lisensi Tripo untuk akun yang dipakai mengizinkan pemakaian komersial (dicek developer).
+
 ### Iterasi 1 — Proxy + rig + potongan
 **Tujuan:** proxy ringan yang langsung dipakai boss greybox Fase 1 dan untuk membuktikan mekanik rontok/susun ulang.
 - **Claude:** 17 potongan dari primitif (silinder/kapsul/kotak berbevel), tengkorak dari bentuk dasar + retak sebagai inset; skeleton + parent kaku; 5 uji pose (idle bungkuk, sapuan, hantaman, lempar, roboh); export SK + 14 SM + `parts.json`; validator; import UE, retarget 3 animasi Mannequin, tampilkan di `Test_GiantScale` pada 31 m di samping Jayadwara dan di `Test_Greybox` pada skala minion.
@@ -158,9 +174,9 @@ Hierarki & nama Mannequin (tanpa twist bone; tulang kaku tidak butuh) + `jaw` + 
 - [ ] Energi Kala merah gelap (konsisten dengan sisi Kala), tanpa biru/silver.
 - [ ] Tidak meniru desain monster kerangka dari IP lain secara spesifik.
 
-## 9. Model Sheet *(diisi di Iterasi 0)*
+## 9. Model Sheet
 
-Proporsi (tinggi berdiri, tinggi bahu, panjang lengan relatif kaki, lebar bahu, ukuran tengkorak relatif badan), palet hex (tulang terang/gelap, tanah, lumut, kain, perunggu, merah Kala), dan ukuran tiap potongan.
+Diisi di Iterasi 0 sebagai dokumen terpisah: **[23-model-sheet-jerangkong.md](23-model-sheet-jerangkong.md)** (proporsi terukur, postur bungkuk sedang, palet, ukuran potongan, keputusan desain S1–S12).
 
 ## 10. Risiko
 

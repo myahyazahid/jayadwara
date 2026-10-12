@@ -1,0 +1,119 @@
+{
+  "mesh": "SK_Kerangka",
+  "export_scale": 0.85,
+  "note": "posisi rest; ue_component_cm = (x, -y, z) x 100 x export_scale (konvensi docs/13 Iterasi 6)",
+  "sockets": [
+    {
+      "name": "SOCKET_chest_core",
+      "bone": "spine_04",
+      "blender_m": [
+        0.0,
+        -0.02,
+        1.68
+      ],
+      "ue_component_cm": [
+        0.0,
+        1.7,
+        142.8
+      ]
+    },
+    {
+      "name": "SOCKET_foot_l_hit",
+      "bone": "foot_l",
+      "blender_m": [
+        0.33,
+        -0.17,
+        0.05
+      ],
+      "ue_component_cm": [
+        28.05,
+        14.45,
+        4.25
+      ]
+    },
+    {
+      "name": "SOCKET_foot_r_hit",
+      "bone": "foot_r",
+      "blender_m": [
+        -0.3,
+        -0.17,
+        0.05
+      ],
+      "ue_component_cm": [
+        -25.5,
+        14.45,
+        4.25
+      ]
+    },
+    {
+      "name": "SOCKET_hand_l_hit",
+      "bone": "hand_l",
+      "blender_m": [
+        0.48,
+        -0.16,
+        0.51
+      ],
+      "ue_component_cm": [
+        40.8,
+        13.6,
+        43.35
+      ]
+    },
+    {
+      "name": "SOCKET_hand_r_hit",
+      "bone": "hand_r",
+      "blender_m": [
+        -0.485,
+        -0.11,
+        0.51
+      ],
+      "ue_component_cm": [
+        -41.225,
+        9.35,
+        43.35
+      ]
+    },
+    {
+      "name": "SOCKET_mouth_fx",
+      "bone": "jaw",
+      "blender_m": [
+        0.0,
+        -0.32,
+        1.92
+      ],
+      "ue_component_cm": [
+        0.0,
+        27.2,
+        163.2
+      ]
+    },
+    {
+      "name": "SOCKET_skull_weakpoint",
+      "bone": "head",
+      "blender_m": [
+        0.0,
+        -0.3,
+        2.13
+      ],
+      "ue_component_cm": [
+        0.0,
+        25.5,
+        181.05
+      ]
+    },
+    {
+      "name": "SOCKET_throw_r",
+      "bone": "hand_r",
+      "blender_m": [
+        -0.52,
+        -0.12,
+        0.62
+      ],
+      "ue_component_cm": [
+        -44.2,
+        10.2,
+        52.7
+      ]
+    }
+  ]
+}
