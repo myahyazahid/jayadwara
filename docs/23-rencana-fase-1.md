@@ -1,6 +1,6 @@
 # 23 — Rencana Fase 1: Prototype Greybox
 
-> **Status: USULAN v0.2 (12 Okt 2026)**. Q1–Q14 sudah dijawab developer, kecuali **Q3** dan **Q6** (menunggu penjelasan) serta pertanyaan lanjutan Q15–Q16 ([bagian 10](#10-keputusan--pertanyaan)). Angka di dokumen ini adalah usulan awal Claude untuk dituning.
+> **Status: USULAN v0.3 (12 Okt 2026)**. Q1–Q16 sudah dijawab developer; pertanyaan lanjutan Q17–Q18 terbuka ([bagian 10](#10-keputusan--pertanyaan)). Angka di dokumen ini adalah usulan awal Claude untuk dituning.
 > **Tanpa tanggal:** jadwal mulai & selesai tiap iterasi ditentukan developer (Q1). Urutan iterasi tetap.
 > Turunan dari [10](10-roadmap.md#fase-1--prototype-greybox-des-2026--mar-2027) (target bulanan), [18](18-kebutuhan-episode-1.md) (daftar kebutuhan bertanda F1), dan [12](12-technical-design.md) (arsitektur). Kalau dokumen ini bertentangan dengan 12, yang menang 12; perbedaannya dicatat di bagian 4.
 
@@ -32,9 +32,10 @@ Kalau G1–G3 gagal: **perbaiki combat dulu** sebelum masuk Fase 2 ([18](18-kebu
 ### Masuk Fase 1
 - GAS (ASC, atribut, tag, ability) untuk semua karakter.
 - Combat manusia: pukulan ringan (combo 3), berat, dodge, tangkis + parry, hit reaction, stagger, soft target, Motion Warping, hit-stop, camera shake.
-- Musuh: minion kerangka (pakai Manny), StateTree, 3 gelombang, **bangkit lagi** kalau tidak dihabisi (finisher: Q6).
+- Musuh: minion kerangka (pakai Manny), StateTree, 3 gelombang, **bangkit lagi** kalau tidak dihabisi + **finisher versi greybox** (Q6).
 - Checkpoint & kalah (mati → ulang dari checkpoint).
 - Transformasi: ganti pawn + ganti IMC + combat raksasa memakai ability yang sama dengan `UJDCombatProfile` raksasa.
+- **Kalah sebagai Jayadwara → kembali jadi Aksa di tempat**, bertahan sampai **energi transformasi** penuh lagi, lalu bisa berubah lagi (Q15, bagian 4.5).
 - Gedung hancur (Chaos, pre-fractured), meter sinkronisasi, transformasi berakhir paksa.
 - Boss Jerangkong greybox: fase 1 rontok & susun ulang 2×, fase 2 tengkorak sebagai titik lemah.
 - HUD debug sederhana (bar Health/Stamina/Sync, penanda target) — fungsional, bukan visual final.
@@ -75,7 +76,7 @@ Mengikuti [12](12-technical-design.md#arsitektur-inti). Tambahan dan penegasan:
 | Folder | Class | Isi | Iterasi |
 |---|---|---|---|
 | `Abilities/` | `UJDAbilitySystemComponent` | Turunan ASC: aktivasi ability dari *input tag* (pressed/held/released), buffer input | 1 |
-| | `UJDAttributeSet` | Health, MaxHealth, Stamina, MaxStamina, **Poise, MaxPoise**, Sync, MaxSync; meta-attribute `IncomingDamage`, `IncomingPoiseDamage` | 1 |
+| | `UJDAttributeSet` | Health, MaxHealth, Stamina, MaxStamina, **Poise, MaxPoise**, Sync, MaxSync, **TransformEnergy, MaxTransformEnergy** (Aksa); meta-attribute `IncomingDamage`, `IncomingPoiseDamage` | 1 |
 | | `UJDGameplayAbility` | Basis ability: input tag, kebijakan aktivasi, helper montage & combat profile | 1 |
 | | `UJDAbilitySet` (DataAsset) | Ability + GE awal per karakter (Aksa, Jayadwara, minion, boss) | 1 |
 | | `UJDInputConfig` (DataAsset) | Input Action → input tag | 1 |
@@ -87,7 +88,7 @@ Mengikuti [12](12-technical-design.md#arsitektur-inti). Tambahan dan penegasan:
 | | `UJDAnimNotifyState_Invulnerable` | i-frame dodge | 3 |
 | | `UJDGA_LightAttack`, `UJDGA_HeavyAttack`, `UJDGA_Dodge`, `UJDGA_Block` (+ parry) | Ability combat bersama dua skala | 2–3 |
 | | `UJDGA_HitReact` | Dipicu event hit: reaksi ringan, stagger, knockdown | 4 |
-| | `UJDGA_Finisher` *(versi greybox)* | Pukulan ke musuh yang roboh/stagger; memecah tengkorak (Q6) | 5 |
+| | `UJDGA_Finisher` *(versi greybox)* | Pukulan berat ke minion yang roboh → tengkorak hancur, tidak bangkit lagi; animasi pukulan berat biasa (Q6). Versi dengan animasi khusus di F2 | 5 |
 | | `UJDTargetingComponent` | Soft target: pilih musuh terdekat searah input; boss → titik lemah | 4 |
 | `Characters/` | `AJDEnemyBase` | Atribut, mati, roboh, **bangkit lagi** (minion), token serangan | 5 |
 | | `AJDBossBase`, `AJDBoss_Jerangkong` | Fase, titik lemah, bagian tubuh yang bisa rontok & menyusun ulang | 8 |
@@ -109,7 +110,7 @@ Mengikuti [12](12-technical-design.md#arsitektur-inti). Tambahan dan penegasan:
 | # | Hal | Usulan | Alasan |
 |---|---|---|---|
 | R1 | Letak ASC | Di **karakter** (bukan PlayerState) | Aksa dan Jayadwara adalah dua pawn dengan atribut berbeda; Sync hanya milik Jayadwara. Single-player, tidak butuh replikasi |
-| R2 | Health saat transformasi | **Terpisah** per pawn. Aksa kembali dengan Health saat ia ditinggal. Health Jayadwara habis → kembali jadi manusia (Q9, lanjutannya Q15) | Sesuai "pawn manusia disembunyikan, bukan dihapus" |
+| R2 | Health saat transformasi | **Terpisah** per pawn. Aksa kembali dengan Health saat ia ditinggal. Health Jayadwara habis → kembali jadi Aksa di tempat (Q9, Q15, bagian 4.5) | Sesuai "pawn manusia disembunyikan, bukan dihapus" |
 | R3 | Poise | Ditambahkan ke `UJDAttributeSet` | [18](18-kebutuhan-episode-1.md) menyebut "poise sederhana"; GAS membuatnya bisa diregen & dimodifikasi seperti atribut lain |
 | R4 | GE di C++ | GE inti didefinisikan di C++; hanya parameter di DataAsset | Claude tidak bisa membaca `.uasset`; review lewat PR jadi mungkin |
 | R5 | Feedback (SFX, VFX, shake) | Lewat **Gameplay Cue** (`GameplayCue.Hit.*`, `GameplayCue.Parry`, ...) | Ganti SFX/VFX placeholder → final tanpa menyentuh kode |
@@ -121,9 +122,9 @@ Didaftarkan di `Config/DefaultGameplayTags.ini` pada Iterasi 1.
 
 | Kelompok | Tag |
 |---|---|
-| Input | `Input.Attack.Light`, `Input.Attack.Heavy`, `Input.Dodge`, `Input.Block`, `Input.Jump`, `Input.Transform`, `Input.LockOn` (Q3) |
+| Input | `Input.Attack.Light`, `Input.Attack.Heavy`, `Input.Dodge`, `Input.Block`, `Input.Jump`, `Input.Transform`, `Input.LockOn` |
 | Ability | `Ability.Attack.Light`, `Ability.Attack.Heavy`, `Ability.Dodge`, `Ability.Block`, `Ability.HitReact`, `Ability.Finisher` |
-| State | `State.Attacking`, `State.Combat.ComboWindow`, `State.Dodging`, `State.Invulnerable`, `State.Blocking`, `State.ParryWindow`, `State.Stagger`, `State.Knockdown`, `State.Dead`, `State.Downed` (minion roboh, bisa bangkit) |
+| State | `State.Transform.Ready`, `State.Attacking`, `State.Combat.ComboWindow`, `State.Dodging`, `State.Invulnerable`, `State.Blocking`, `State.ParryWindow`, `State.Stagger`, `State.Knockdown`, `State.Dead`, `State.Downed` (minion roboh, bisa bangkit) |
 | Event | `Event.Hit`, `Event.Hit.Blocked`, `Event.Hit.Parried`, `Event.Combo.Continue`, `Event.Poise.Broken`, `Event.BodyPart.Detached`, `Event.BodyPart.Reattached` |
 | Data | `Data.Damage`, `Data.PoiseDamage`, `Data.SyncPenalty` (SetByCaller) |
 | Cue | `GameplayCue.Hit.Light`, `GameplayCue.Hit.Heavy`, `GameplayCue.Hit.Blocked`, `GameplayCue.Parry`, `GameplayCue.Dodge`, `GameplayCue.Bone.Break`, `GameplayCue.Giant.Footstep`, `GameplayCue.Building.Collapse` |
@@ -136,22 +137,37 @@ Didaftarkan di `Config/DefaultGameplayTags.ini` pada Iterasi 1.
 | Aksi | Keyboard-mouse | PlayStation | Xbox / generik (layout Xbox) |
 |---|---|---|---|
 | Gerak / kamera | WASD / mouse | L-stick / R-stick | L-stick / R-stick |
-| Pukulan ringan | **LMB** | □ | X |
-| Pukulan berat (+ finisher, Q6) | **E** (alternatif: Mouse 4) | △ | Y |
-| Tangkis (tahan) + parry (tekan tepat waktu) | **RMB** | **R2** | RT |
-| Dodge (arah dari gerak) | **Left Shift** | ○ | B |
+| Pukulan ringan | **J** | □ | X |
+| Pukulan berat (+ finisher) | **K** | △ | Y |
+| Tangkis (tahan) + parry (tekan tepat waktu) | **U** | **R2** | RT |
+| Dodge (arah dari gerak) | **I** | ○ | B |
 | Lompat | **Space** | ✕ | A |
-| Lock-on (kalau Q3 = ya) | **Q** / klik tengah | R3 | RS (klik) |
+| Lock-on (boss raksasa) | **Q** / klik tengah | R3 | RS (klik) |
 | Transformasi | **T** | **L1 + R1** | LB + RB |
 | Cheat/konsol (dev) | `~` | — | — |
 
-Usulan keyboard ditentukan Claude (Q5) untuk direview: tangkis di **RMB** karena parry butuh ketepatan waktu dan jari di mouse paling cepat (pola Sekiro di PC); berat di **E** supaya tidak bentrok dengan WASD.
+Keyboard ditentukan developer (review Q5): **J / K / U / I** untuk tangan kanan, WASD tangan kiri. Konsekuensinya, saat bertarung tangan kanan tidak di mouse, jadi kamera harus bisa mengurus dirinya sendiri: soft target membingkai musuh, lock-on membingkai boss, dan kamera kembali ke belakang Aksa saat mouse diam (Q18). Mouse tetap bisa dipakai kapan saja.
 
 **Catatan teknis gamepad:**
 - **Xbox (XInput)** langsung terbaca Unreal.
-- **DualShock 4 / DualSense** dan **gamepad USB generik** (DirectInput) **tidak** terbaca Unreal secara bawaan. Rilis Steam: **Steam Input** memetakan semuanya ke layout Xbox. Selama pengembangan (PIE di luar Steam): DS4Windows untuk pad PlayStation, atau plugin **RawInput** (bawaan UE, perlu konfigurasi per perangkat) / emulator XInput untuk pad generik. Diuji di Iterasi 1 dengan controller milik developer (Q16).
+- **DualShock 4 / DualSense** dan **gamepad USB generik** (DirectInput) **tidak** terbaca Unreal secara bawaan. Rilis Steam: **Steam Input** memetakan semuanya ke layout Xbox. Selama pengembangan (PIE di luar Steam): DS4Windows untuk DualShock/DualSense asli; **x360ce** (Xbox 360 Controller Emulator) untuk pad generik, atau plugin **RawInput** (bawaan UE, perlu konfigurasi per perangkat).
+- **Controller developer (Q16): pad USB generik gaya PlayStation**, dua analog, tombol bernomor 1–4 (1 = atas/△, 2 = kanan/○, 3 = bawah/✕, 4 = kiri/□), tombol ANALOG harus menyala supaya stik aktif. Jalur uji: x360ce → terbaca sebagai pad Xbox di UE. Disiapkan di Iterasi 1.
 - Pad tanpa dua analog stick (mis. gaya PS1 digital) tidak bisa mengendalikan kamera dengan baik.
 - Ikon tombol sesuai perangkat (prompt tutorial) tetap F2.
+
+### 4.5 Kalah sebagai Jayadwara & energi transformasi (Q15)
+
+Seperti serial tokusatsu: kalau Jayadwara kalah, ia kembali jadi manusia, dan pertarungan berlanjut.
+
+1. Health Jayadwara 0 → efek menyusut (yang sudah ada) → **Aksa muncul di tempat Jayadwara jatuh**. Boss tetap di fase & HP-nya (progres tidak hilang).
+2. Aksa main biasa, tidak bisa melukai boss raksasa; boss tetap menyerang (injakan, puing) → **menghindar** dengan dodge & lari.
+3. **Energi transformasi** (`TransformEnergy`, HUD manusia) habis setelah kalah dan terisi lagi seiring waktu (awal: penuh dalam ±40 s). Saat penuh: `State.Transform.Ready` → tekan **T / L1+R1** → berubah lagi.
+4. Jayadwara kembali dengan Health ±50% (dituning).
+5. Aksa mati saat jadi manusia → ulang dari checkpoint awal fase boss.
+
+Aturan IP ([08](08-requirement-produksi.md)): energi ditampilkan sebagai **bar di HUD**, bukan lampu/permata di dada yang berkedip; tidak ada batas waktu 3 menit selama jadi raksasa.
+
+Untuk transformasi pertama Ep 1 (cutscene) dan `Test_Loop`, energi diisi penuh oleh trigger setelah gelombang 3.
 
 ## 5. Angka awal combat (semua dituning lewat DataAsset)
 
@@ -167,7 +183,8 @@ Usulan keyboard ditentukan Claude (Q5) untuk direview: tangkis di **RMB** karena
 | Hit-stop | 0,06 s | 0,12 s | Time dilation lokal pada penyerang & korban |
 | Play rate montage | 1,0 | **±0,55** | Locomotion raksasa sudah 1/√skala ≈ 0,2; serangan setara itu terlalu lambat, jadi angka ini dicari di Iterasi 6 |
 | Minion | HP 30, poise 20, wind-up serangan 0,5 s dengan kedip | — | Maks. **2 penyerang** bersamaan (token) |
-| Minion bangkit | roboh 4 s lalu bangkit dengan HP 50% kecuali di-finisher | — | Gelombang 3 saja (Q6) |
+| Minion bangkit | roboh 4 s lalu bangkit dengan HP 50% kecuali di-finisher | — | Gelombang 3 saja |
+| Energi transformasi | 0 → penuh ±40 s setelah kalah | Health kembali ±50% | Bagian 4.5 |
 | Dodge arah | 4 animasi (depan, belakang, kiri, kanan) relatif kamera (Q10) | sama | |
 | Gedung | Kerusakan sebanding gaya: pukulan, tabrakan badan (termasuk jalan pelan, kerusakan kecil), terpental, proyektil (Q7) | — | Ambang dituning supaya meter tidak terlalu kejam |
 
@@ -190,7 +207,7 @@ Kapasitas ±50 jam/bulan. Jam di bawah = **jam developer** (build, editor, tunin
 
 ### Iterasi 1 — Fondasi GAS
 - **Claude:** pemetaan kontrol KB/M + gamepad (bagian 4.4), `UJDAbilitySystemComponent`, `UJDAttributeSet`, `UJDGameplayAbility`, `UJDAbilitySet`, `UJDInputConfig`, GE awal (init atribut, regen stamina, damage), ASC di `AJDCharacterBase` + `IAbilitySystemInterface`, binding input tag di karakter, `DefaultGameplayTags.ini`, `UJDCheatManager` (`JD.God`, `JD.Damage <n>`), `UJDHUDWidget` (bar Health/Stamina). Skrip `Tools/ue_setup_combat.py`: buat `IMC_Human` (salin `IMC_Default`) + IA combat, `DA_InputConfig_Human`, `DA_AbilitySet_Aksa`, level `Test_Combat`.
-- **Developer:** build, jalankan skrip, buat `WBP_HUD_Human` dari base class (dua progress bar), uji dengan keyboard-mouse dan controller sendiri (Q16).
+- **Developer:** build, jalankan skrip, buat `WBP_HUD_Human` dari base class (dua progress bar), uji dengan keyboard-mouse dan pad generik lewat x360ce (Q16).
 - **Gate:** di `Test_Combat`, bar Health/Stamina tampil; gerak + kamera jalan di KB/M dan gamepad; `JD.Damage 10` mengurangi Health; stamina turun lewat cheat lalu regen; `showdebug abilitysystem` menampilkan atribut & tag.
 
 ### Iterasi 2 — Combo ringan & hit
@@ -204,7 +221,7 @@ Kapasitas ±50 jam/bulan. Jam di bawah = **jam developer** (build, editor, tunin
 - **Gate:** parry ke dummy bisa dilakukan dengan sengaja ≥ 7 dari 10 kali setelah 5 menit latihan; dodge menembus serangan tanpa kena; stamina jadi pertimbangan (tidak bisa spam tangkis/dodge).
 
 ### Iterasi 4 — Reaksi, stagger, target, warp
-- **Claude:** `UJDGA_HitReact` (ringan / stagger / knockdown dari poise), regen poise, `UJDTargetingComponent` (soft target searah input dalam kerucut; indikator di HUD), Motion Warping ke target, lock kamera (Q3).
+- **Claude:** `UJDGA_HitReact` (ringan / stagger / knockdown dari poise), regen poise, `UJDTargetingComponent` (soft target searah input dalam kerucut; indikator di HUD; Q3), kamera kembali ke belakang Aksa saat mouse diam (Q18), Motion Warping ke target, lock kamera (Q3).
 - **Developer:** animasi hit react ×2, stagger, knockdown + bangun; warp target di montage; tuning radius target.
 - **Gate:** pukulan "menempel" ke musuh terdekat searah stik/WASD tanpa terasa menyedot; pukulan berat membuat dummy stagger; pemain bisa kena stagger juga.
 
@@ -214,12 +231,12 @@ Kapasitas ±50 jam/bulan. Jam di bawah = **jam developer** (build, editor, tunin
 - **Gate:** 3 gelombang selesai dalam 4–6 menit; musuh tidak menyerang bareng-bareng; gelombang 3 memaksa pemain memakai finisher; mati di gelombang 3 → ulang dari awal gelombang 3.
 
 ### Iterasi 6 — Transformasi & combat raksasa
-- **Claude:** `IMC_Giant` (skrip), ASC & atribut Jayadwara (`DA_AbilitySet_Jayadwara`, Sync awal penuh), `DA_CombatProfile_Giant`, socket hit dari `SK_Jayadwara_sockets.json`, rig kamera raksasa (framing target, lag, jarak saat combat), transformasi tombol **T** / **L1+R1** dengan syarat (Q8), `AJDTrainingDummy` skala raksasa.
+- **Claude:** `IMC_Giant` (skrip), ASC & atribut Jayadwara (`DA_AbilitySet_Jayadwara`, Sync awal penuh), `DA_CombatProfile_Giant`, socket hit dari `SK_Jayadwara_sockets.json`, rig kamera raksasa (framing target, lag, jarak saat combat) + **lock-on boss** (Q3), transformasi tombol **T** / **L1+R1** dengan syarat (Q8), **kalah → Aksa muncul di tempat + `TransformEnergy` + berubah lagi** (bagian 4.5), `AJDTrainingDummy` skala raksasa.
 - **Developer:** retarget montage combat Aksa ke Jayadwara (RTG yang sudah ada), tuning play rate, shake, hit-stop; uji di `Test_GiantScale`.
-- **Gate:** combo, berat, dodge, tangkis jalan sebagai Jayadwara dengan **ability yang sama**; terasa berat tapi tidak lamban (G2); bolak-balik transformasi tanpa bug kamera/input.
+- **Gate:** combo, berat, dodge, tangkis jalan sebagai Jayadwara dengan **ability yang sama**; terasa berat tapi tidak lamban (G2); bolak-balik transformasi tanpa bug kamera/input; kalah → jadi Aksa di tempat → energi penuh → berubah lagi berjalan tanpa reload.
 
 ### Iterasi 7 — Gedung hancur & meter sinkronisasi
-- **Claude:** `AJDDestructibleBuilding` (kerusakan sebanding gaya dari pukulan, tabrakan badan, terpental, proyektil; Q7), pembersih puing (puing → hilang bertahap), `UJDSyncComponent` + `UJDSyncConfig` + `UJDGE_SyncPenalty`, `OnSyncDepleted` → kembali ke manusia + ulang checkpoint, `AJDCivilianMarker` (Q11), `WBP_HUD_Giant` base (bar Sync), cheat `JD.Sync <n>`.
+- **Claude:** `AJDDestructibleBuilding` (kerusakan sebanding gaya dari pukulan, tabrakan badan, terpental, proyektil; Q7), pembersih puing (puing → hilang bertahap), `UJDSyncComponent` + `UJDSyncConfig` + `UJDGE_SyncPenalty`, `OnSyncDepleted` → kembali jadi Aksa (alur bagian 4.5, Q17), `AJDCivilianMarker` (Q11), `WBP_HUD_Giant` base (bar Sync), cheat `JD.Sync <n>`.
 - **Developer:** 3–4 gedung kotak (rumah, warung, menara air) → Fracture Mode → Geometry Collection; `Test_Destruction`; uji performa (berapa gedung runtuh bersamaan sebelum < 60 FPS).
 - **Gate:** gedung runtuh meyakinkan dari kamera raksasa; meter turun sesuai DataAsset; meter habis memaksa transformasi berakhir; G6 terpenuhi atau batas jumlah gedung ditetapkan.
 
@@ -299,24 +316,26 @@ PR dibuat kecil (satu iterasi atau setengahnya) karena Claude tidak bisa build U
 |---|---|---|
 | Q1 | Mulai kapan? | **Developer yang menentukan**; dokumen ini tanpa tanggal |
 | Q2 | Referensi rasa combat | **Arkham + Sekiro ringan**: combo sederhana, parry penting, banyak musuh tapi bergantian menyerang |
+| Q3 | Kamera combat | **Soft target** untuk minion (gaya Arkham), **lock-on tombol** untuk boss raksasa (framing dua raksasa seperti adegan tokusatsu) |
 | Q4 | Perangkat | **Keyboard-mouse utama**; gamepad PlayStation, Xbox, dan generik juga harus bisa (bagian 4.4) |
-| Q5 | Parry | Tombol sama dengan tangkis: **R2** di gamepad; keyboard ditentukan Claude (**RMB**, menunggu review) |
+| Q5 | Tombol | Tangkis + parry satu tombol: **R2** / **U**. Keyboard: ringan **J**, berat **K**, dodge **I**; sisanya sesuai usulan |
+| Q6 | Finisher | **Masuk F1** (versi greybox) |
 | Q7 | Penyebab gedung hancur | **Semua**: pukulan, tabrakan badan, terpental, proyektil (kerusakan sebanding gaya) |
 | Q8 | Tombol transformasi | **T** (keyboard), **L1 + R1** (gamepad), berlaku seterusnya. Syarat di `Test_Loop`: setelah gelombang 3; tombol bebas di level uji |
-| Q9 | Health Jayadwara habis | **Kembali jadi manusia** (lanjutannya Q15) |
+| Q9 | Health Jayadwara habis | **Kembali jadi manusia** |
 | Q10 | Dodge | **4 arah** |
 | Q11 | Warga | **Penanda statis** dulu, ditingkatkan nanti |
 | Q12 | Proxy boss | **Model Blender dibuat developer** |
 | Q13 | Task tracker | **GitHub Issues** satu per iterasi, dibuat Claude |
 | Q14 | Playtester | **Developer sendiri**, di PC developer |
+| Q15 | Setelah kalah | **Aksa muncul di tempat Jayadwara kalah**, tetap dimainkan (menghindar), berubah lagi saat energi cukup (bagian 4.5) |
+| Q16 | Controller uji | **Pad USB generik gaya PlayStation**, dua analog (bagian 4.4) |
 
 ### Masih terbuka
 | # | Pertanyaan | Usulan Claude |
 |---|---|---|
-| **Q3** | Kamera combat: soft target saja, atau ada lock-on? (penjelasan + contoh dikirim di chat) | Soft target untuk minion; **lock-on tombol** untuk boss raksasa |
-| **Q6** | Finisher versi greybox di F1? ([18](18-kebutuhan-episode-1.md) menaruh finisher di F2, padahal minion bangkit-lagi di F1) | **Ya**: minion roboh → tekan pukulan berat di dekatnya → kepala dihancurkan, tidak bangkit lagi |
-| **Q15** | Setelah Health Jayadwara habis dan kembali jadi manusia, lalu apa? (a) ulang checkpoint awal fase boss, (b) tetap main sebagai Aksa, bertahan sampai bisa berubah lagi, (c) game over | **(a)**, sama dengan meter habis ([17](17-skenario-arc-1.md#adegan-7--jayadwara-vs-jerangkong--main)) |
-| **Q16** | Controller apa yang kamu punya untuk uji (merek/model, ada dua analog stick?) | — |
+| **Q17** | Meter sinkronisasi habis: alurnya sama dengan Health habis (jadi Aksa di tempat, tunggu energi, berubah lagi)? | **Ya, sama**, supaya pemain belajar satu aturan. Berubah lagi dengan Sync ±50% |
+| **Q18** | Dengan J/K/U/I, tangan kanan tidak di mouse saat bertarung. Kamera di keyboard: otomatis saja, atau tambah tombol putar kamera? | **Otomatis**: kembali ke belakang Aksa saat mouse diam + soft target/lock-on membingkai musuh. Mouse tetap aktif kalau dipegang |
 
 ## 11. Status & hasil
 

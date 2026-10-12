@@ -243,7 +243,7 @@ Arena: halaman candi + galian + desa kecil di bawah bukit (6–10 bangunan yang 
 - Jerangkong lebih agresif dan melempar puing ke arah desa. Pemain bisa **menangkis** puing untuk melindungi warga.
 - Boss hanya bisa dikalahkan dengan menghancurkan tengkorak (jurus spesial #1 atau finisher).
 
-**Meter:** turun kalau bangunan hancur atau warga terkena (versi dasar, [16 D2](16-panduan-arc-1.md#9-keputusan-yang-perlu-dijawab-developer)). Meter habis = transformasi berakhir → kembali ke checkpoint awal fase.
+**Meter:** turun kalau bangunan hancur atau warga terkena (versi dasar, [16 D2](16-panduan-arc-1.md#9-keputusan-yang-perlu-dijawab-developer)). Health Jayadwara habis = kembali jadi Aksa di tempat, menghindar sampai energi transformasi penuh, lalu berubah lagi; Aksa mati = ulang checkpoint awal fase (keputusan 12 Okt 2026, [23](23-rencana-fase-1.md#45-kalah-sebagai-jayadwara--energi-transformasi-q15)). Meter habis: usulan sama (Q17 di 23).
 
 **Checkpoint:** awal fase 1, awal fase 2.
 

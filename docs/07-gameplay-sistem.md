@@ -38,7 +38,8 @@ Pengganti timer transformasi.
 
 ## Transisi & Progression
 
-- **Syarat transformasi**: *keputusan terbuka* — bebas, di momen tertentu, atau setelah syarat (mis. investigasi selesai).
+- **Syarat transformasi**: **energi transformasi** penuh (bar di HUD manusia; keputusan 12 Okt 2026). Transformasi pertama tiap episode boleh dipicu cerita.
+- **Kalah sebagai Jayadwara**: kembali jadi Aksa **di tempat**, pertarungan berlanjut; Aksa menghindar sampai energi penuh lagi lalu berubah lagi. Aksa mati = ulang checkpoint. Detail: [23](23-rencana-fase-1.md#45-kalah-sebagai-jayadwara--energi-transformasi-q15).
 - **Upgrade**:
   - Skill tree silat (berlaku di dua skala).
   - Upgrade scanner Netra.

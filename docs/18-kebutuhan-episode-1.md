@@ -46,7 +46,7 @@
 #### A1. Inti & alur episode
 | Item | Isi | Oleh | Fase |
 |---|---|---|---|
-| `AJDPlayerController`: transformasi | Ganti pawn manusia ↔ raksasa, sembunyikan pawn manusia, ganti `IMC_Human`/`IMC_Giant`, mulai Level Sequence | C | F1 |
+| `AJDPlayerController`: transformasi | Ganti pawn manusia ↔ raksasa, sembunyikan pawn manusia, ganti `IMC_Human`/`IMC_Giant`, mulai Level Sequence. Kalah sebagai raksasa → Aksa muncul di tempat, **energi transformasi** terisi lagi, lalu bisa berubah lagi ([23](23-rencana-fase-1.md#45-kalah-sebagai-jayadwara--energi-transformasi-q15)) | C | F1 |
 | `UJDEpisodeSubsystem` / `AJDEpisodeDirector` | Fase `Intro → Briefing → Investigation → HumanCombat → Transformation → BossFight → Debrief` dari `UJDEpisodeData` | C | F2 |
 | `UJDEpisodeData` | ID, judul, boss, daftar clue, dialog, sequence | C | F2 |
 | Checkpoint | Simpan/muat posisi + fase + atribut di titik tertentu (bukan save lengkap) | C | F1 |
@@ -64,7 +64,7 @@
 | `UJDGA_HeavyAttack` | Pukulan berat, biaya stamina | C | F1 |
 | `UJDGA_Dodge` | Dodge + i-frame | C | F1 |
 | `UJDGA_Block` + parry | Tangkis, parry di jendela waktu, juga menangkis **puing** di boss fase 2 | C | F1 |
-| `UJDGA_Finisher` | Finisher pada musuh stagger; **memecah tengkorak** kerangka | C | F2 |
+| `UJDGA_Finisher` | Finisher pada musuh stagger; **memecah tengkorak** kerangka | C | F1 (greybox: pukulan berat ke minion roboh) → F2 (animasi khusus) |
 | `UJDGA_JurusSpesial01` | Jurus spesial Jayadwara #1 | C+D | F2 |
 | `UJDAnimNotifyState_HitWindow` | Sphere/capsule trace dari socket tangan/kaki | C | F1 |
 | Hit reaction & stagger | Tag `State.Stagger`, montage reaksi, poise sederhana | C | F1 |
