@@ -2,7 +2,7 @@
 
 Satu sumber data untuk rig (jerangkong_10_rig.py), segmentasi potongan (jerangkong_11_pieces.py), socket, dan export.
 Nama tulang = Mannequin (tanpa twist) + `jaw` + `cloth_front/back_01..03` + tulang IK. Pose rest = pose mesh Tripo
-(bungkuk sedang, lengan menggantung; docs/23 S2/S3). Karakter menghadap -Y; kiri karakter = +X (`_l`).
+(bungkuk sedang, lengan menggantung; docs/24 S2/S3). Karakter menghadap -Y; kiri karakter = +X (`_l`).
 Model asimetris (siku kanan lebih rendah), jadi kiri & kanan diukur terpisah, tidak dicerminkan.
 Cara ukur: profil penampang per 4 cm (pusat median), pendar merah sendi dari tekstur warna, render ortografis bergrid.
 """
@@ -33,7 +33,7 @@ CLOTH_FRONT = [(0, -0.13, 1.36), (0, -0.15, 1.12), (0, -0.16, 0.88), (0, -0.17, 
 CLOTH_BACK = [(0, 0.14, 1.36), (0, 0.16, 1.12), (0, 0.17, 0.88), (0, 0.18, 0.62)]
 
 FINGERS = ["thumb", "index", "middle", "ring", "pinky"]
-# jari: offset pangkal (sepanjang sumbu depan telapak) & panjang relatif; geometri jari kaku ikut hand_* (docs/23 S7)
+# jari: offset pangkal (sepanjang sumbu depan telapak) & panjang relatif; geometri jari kaku ikut hand_* (docs/24 S7)
 FINGER_FRONT = {"thumb": -0.045, "index": -0.035, "middle": -0.012, "ring": 0.012, "pinky": 0.033}
 FINGER_LEN = {"thumb": 0.55, "index": 0.95, "middle": 1.0, "ring": 0.95, "pinky": 0.8}
 

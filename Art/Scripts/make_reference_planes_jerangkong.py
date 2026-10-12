@@ -1,4 +1,4 @@
-"""Buat referensi ortografis ternormalisasi dari konsep Jerangkong (docs/20 & docs/23, Iterasi 0 model Jerangkong).
+"""Buat referensi ortografis ternormalisasi dari konsep Jerangkong (docs/20 & docs/24, Iterasi 0 model Jerangkong).
 
 Input : docs/concept-art/jerangkong_v01.webp (1774x887: depan, samping hadap kiri, belakang + tengkorak 3/4 + chart skala)
 Output: Art/Reference/jk_ref_{front,side,back}.png   (RGBA 900x1200, latar transparan)
@@ -12,7 +12,7 @@ Garis tengah: depan/belakang = rata-rata titik tengah tengkorak dan kedua telapa
 (tengkorak & lengan menggantung jauh ke depan, jadi tidak dipakai).
 
 PENTING: tampak samping = postur konsep apa adanya (bungkuk berlebihan, tengkorak ±0,47 m di depan pinggul).
-Model memakai "bungkuk sedang" (docs/23 S2); target posisi tengkorak ditandai landmark di scene, bukan di gambar.
+Model memakai "bungkuk sedang" (docs/24 S2); target posisi tengkorak ditandai landmark di scene, bukan di gambar.
 
 Jalankan: python -I Art/Scripts/make_reference_planes_jerangkong.py
 Catatan: sumber AI beresolusi rendah (±770 px tinggi figur, 1 px sheet ≈ 2,9 mm) -> hanya untuk proporsi & siluet.
@@ -64,7 +64,7 @@ PLAIN = {
     "detail_foot_side": (540, 735, 755, 830),
 }
 
-# swatch palet (sheet): nama -> (kotak, filter). Hasil ukur ditulis ke docs/23 bagian 3.
+# swatch palet (sheet): nama -> (kotak, filter). Hasil ukur ditulis ke docs/24 bagian 3.
 PALETTE = {
     "tulang_terang": ((50, 300, 115, 520), lambda p: (p[:, 0] > 165) & (p[:, 0] - p[:, 2] > 20) & (p[:, 0] - p[:, 2] < 75)),
     "tulang_gelap": ((50, 300, 115, 520), lambda p: (p[:, 0] > 95) & (p[:, 0] < 150) & (p[:, 0] - p[:, 2] > 20)),

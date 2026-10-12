@@ -6,7 +6,7 @@ Hasil: Art/Blender/jerangkong_v01_tripo.blend (objek `JK_Source` di collection `
 
 Normalisasi:
 - GLB Tripo: tinggi 1,0, menghadap +X (Blender) -> diputar -90° di Z supaya menghadap -Y (kontrak Jayadwara/Aksa).
-- Skala: puncak tengkorak = TOP_Z (setinggi konsep; docs/23 S1/S2).
+- Skala: puncak tengkorak = TOP_Z (setinggi konsep; docs/24 S1/S2).
 - Posisi: telapak di z=0; x = rata-rata pusat tengkorak & pusat kedua telapak (sama dengan reference plane depan);
   y = pusat pergelangan kaki (sama dengan reference plane samping).
 - Vertex kembar di jahitan UV digabung (glTF memecah vertex per UV; UV & normal per-loop tetap).

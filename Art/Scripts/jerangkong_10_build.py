@@ -11,7 +11,7 @@ Aturan bobot (docs/20 6.5, disesuaikan): potongan yang bisa rontok = 1 tulang, b
 dan lubang potongannya ditutup (cap, UV ke kotak warna tulang gelap CAP_UV). Potongan poros yang berisi >1 tulang
 (Ribs: rusuk+selangka/belikat, Spine: lumbar+leher, Pelvis: panggul+kain) tidak dipisah di dalam; vertex di batas
 antar-tulang dibagi rata menurut segitiga di sekitarnya. Kain: bobot halus sepanjang rantai cloth_* (+pelvis di atas).
-Jari ikut hand_* (kaku, docs/23 S7). LOD0 dikurangi ke <= TRI_BUDGET (docs/20 J7).
+Jari ikut hand_* (kaku, docs/24 S7). LOD0 dikurangi ke <= TRI_BUDGET (docs/20 J7).
 """
 import importlib
 import os
@@ -98,7 +98,10 @@ uv = uv.reshape(-1, 2)
 lt = np.array([p.loop_start for p in me.polygons])
 fuv = np.stack([uv[lt], uv[lt + 1], uv[lt + 2]], 1)
 os.makedirs(os.path.dirname(FACES_NPZ), exist_ok=True)
-np.savez_compressed(FACES_NPZ, labels=lab.astype(str), fuv=fuv.astype(np.float32), centers=Vco[F].mean(1).astype(np.float32))
+joints = np.array([SK.ARM[sd][k] for sd in "lr" for k in ("shoulder", "elbow", "wrist")]
+                  + [SK.LEG[sd][k] for sd in "lr" for k in ("hip", "knee", "ankle")], dtype=np.float32)
+np.savez_compressed(FACES_NPZ, labels=lab.astype(str), fuv=fuv.astype(np.float32), centers=Vco[F].mean(1).astype(np.float32),
+                    joints=joints)
 
 bone2piece = {b: p for p, bl in SK.PIECE_BONES.items() for b in bl}
 bone2piece.update({"cloth_front": "Pelvis", "cloth_back": "Pelvis"})

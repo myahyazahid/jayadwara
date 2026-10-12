@@ -65,7 +65,7 @@ Kalau G1–G3 gagal: **perbaiki combat dulu** sebelum masuk Fase 2 ([18](18-kebu
 | Model Aksa (Iterasi 5) & MetaHuman placeholder; mesh logika = Manny ([12](12-technical-design.md#mesh-logika-vs-mesh-visual-aksa)) | Combat manusia |
 | Chaos + `GeometryCollectionEngine` aktif | Iterasi 7 |
 | 23 slot kandidat SFX ([Audio/KANDIDAT.md](../Audio/KANDIDAT.md)) | Gameplay Cue mulai Iterasi 2 |
-| Rencana model Jerangkong ([20](20-rencana-model-jerangkong.md)) | Proxy Blender dibuat developer (Q12), dipakai Iterasi 5 & 8 |
+| Model Jerangkong ([20](20-rencana-model-jerangkong.md) jalur B, 12 Okt 2026): `SK_Jerangkong` (boss 30,7 m) & `SK_Kerangka` (minion 1,86 m) + LOD, 14 `SM_Jerangkong_*` + `SK_Jerangkong_parts.json`, `BP_Jerangkong`/`BP_Kerangka`, ABP hasil retarget Mannequin | Iterasi 5 (minion) & 8 (boss); tidak perlu Manny/proxy lagi |
 
 ## 4. Arsitektur Fase 1
 
@@ -227,7 +227,7 @@ Kapasitas ±50 jam/bulan. Jam di bawah = **jam developer** (build, editor, tunin
 
 ### Iterasi 5 — Minion, gelombang, checkpoint
 - **Claude:** `AJDEnemyBase`, minion kerangka (roboh → bangkit lagi, finisher greybox Q6), task StateTree (dekati, strafe, minta token, serang, mundur), `UJDEnemyCoordinatorSubsystem`, `AJDWaveSpawner` (3 gelombang: 3 / 5 / 6), `AJDCheckpoint` + subsystem (mati → muat ulang di awal gelombang 3), cheat `JD.SpawnWave <n>`, `JD.KillAll`.
-- **Developer:** `BP_Minion_Skeleton` (Manny abu-abu, skala ±1,0), animasi minion Mixamo (jalan, serang ×2, roboh, bangkit), `ST_Minion`, susun 3 gelombang di `Test_Combat`, tuning.
+- **Developer:** `BP_Minion_Skeleton` (turunan `AJDEnemyBase` dengan `SK_Kerangka` + `ABP_Kerangka`; model sudah ada, lihat bagian 3), animasi minion Mixamo (di-retarget ke `SK_Kerangka`) (jalan, serang ×2, roboh, bangkit), `ST_Minion`, susun 3 gelombang di `Test_Combat`, tuning.
 - **Gate:** 3 gelombang selesai dalam 4–6 menit; musuh tidak menyerang bareng-bareng; gelombang 3 memaksa pemain memakai finisher; mati di gelombang 3 → ulang dari awal gelombang 3.
 
 ### Iterasi 6 — Transformasi & combat raksasa
@@ -242,7 +242,7 @@ Kapasitas ±50 jam/bulan. Jam di bawah = **jam developer** (build, editor, tunin
 
 ### Iterasi 8 — Boss Jerangkong greybox
 - **Claude:** `AJDBossBase` (fase, titik lemah, kelemahan dari tag; F1: tag diberikan cheat/otomatis), `AJDBoss_Jerangkong`, `UJDBodyPartComponent` (lengan/kaki rontok saat HP bagian habis → aktor fisika → merayap balik → menyambung lagi), transisi ke fase 2 setelah susun ulang ke-2, tengkorak terekspos (penanda HUD), `AJDDebrisProjectile` (bisa ditangkis), task StateTree boss (sapuan, hantaman, lempar).
-- **Developer:** proxy Jerangkong di Blender (Q12, bagian 6.2), `BP_Boss_Jerangkong`, animasi dasar (retarget Mannequin + Mixamo zombie/monster), `ST_Boss_Jerangkong`, arena `Test_Boss` (candi kotak + 6 gedung), tuning.
+- **Developer:** `BP_Boss_Jerangkong` (turunan `AJDBoss_Jerangkong` dengan `SK_Jerangkong`; model, 14 `SM_` potongan & `parts.json` sudah ada, bagian 6.2), animasi dasar (retarget Mannequin + Mixamo zombie/monster), `ST_Boss_Jerangkong`, arena `Test_Boss` (candi kotak + 6 gedung), tuning.
 - **Gate:** pemain sadar "memukul badan tidak cukup" di fase 1; fase 2 bisa dimenangkan dengan memukul tengkorak; boss selesai dalam 6–8 menit.
 
 ### Iterasi 9 — Loop utuh & playtest
@@ -268,7 +268,7 @@ Silat sungguhan baru di F2 (video-mocap / commission, [18](18-kebutuhan-episode-
 ### 6.2 Jalur art paralel (Blender)
 | Item | Butuh di | Catatan |
 |---|---|---|
-| Proxy Jerangkong + 14 potongan `SM_` ([20](20-rencana-model-jerangkong.md) Iterasi 0–1) | Iterasi 5 (minion) & 8 (boss) | **Dibuat developer** di Blender (Q12), Claude membantu skrip/validasi bila diminta. Sebelum jadi, minion memakai Manny |
+| Model Jerangkong + 14 potongan `SM_` ([20](20-rencana-model-jerangkong.md) jalur B) | Iterasi 5 (minion) & 8 (boss) | ✅ **Selesai 12 Okt 2026**: model dibuat developer dengan Tripo AI, dirapikan Claude (rig, potongan, tekstur, LOD, import UE). Pivot SM & rumus pemunculan saat rontok ada di [20](20-rencana-model-jerangkong.md) dan `Art/Export/SK_Jerangkong_parts.json` (dipakai `UJDBodyPartComponent`). Sisa: retak tengkorak bergeometri (opsional), uji FPS |
 | Greybox gedung (3–4 bentuk, skala dari kamera raksasa) | Iterasi 7 | Bisa skrip Blender atau langsung kotak di UE |
 
 ## 7. Alat debug & cheat
@@ -325,7 +325,7 @@ PR dibuat kecil (satu iterasi atau setengahnya) karena Claude tidak bisa build U
 | Q9 | Health Jayadwara habis | **Kembali jadi manusia** |
 | Q10 | Dodge | **4 arah** |
 | Q11 | Warga | **Penanda statis** dulu, ditingkatkan nanti |
-| Q12 | Proxy boss | **Model Blender dibuat developer** |
+| Q12 | Proxy boss | **Model Blender dibuat developer**. Terjawab 12 Okt 2026: dibuat developer dengan Tripo AI, dirapikan Claude ([20](20-rencana-model-jerangkong.md) jalur B) |
 | Q13 | Task tracker | **GitHub Issues** satu per iterasi, dibuat Claude |
 | Q14 | Playtester | **Developer sendiri**, di PC developer |
 | Q15 | Setelah kalah | **Aksa muncul di tempat Jayadwara kalah**, tetap dimainkan (menghindar), berubah lagi saat energi cukup (bagian 4.5) |

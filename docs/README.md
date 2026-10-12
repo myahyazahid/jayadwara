@@ -37,12 +37,11 @@ Aksa Jaya Mangkubumi, agen baru sebuah lembaga rahasia penanganan anomali, menya
 | 17 | [Skenario Arc 1](17-skenario-arc-1.md) | **Usulan.** Skenario adegan per adegan Ep 1 (lengkap); Ep 2–10 menyusul |
 | 18 | [Kebutuhan Episode 1](18-kebutuhan-episode-1.md) | **Usulan.** Daftar kerja Ep 1: sistem C++, karakter & animasi, level, VFX, audio, UI, data, urutan F0–F2 |
 | 19 | [Rencana Model Aksa](19-rencana-model-aksa.md) | **Usulan.** Iterasi 0–7 membuat model Aksa di Blender (skeleton Mannequin, basis MPFB2) sampai menggantikan MetaHuman di UE |
-| 20 | [Rencana Model Jerangkong](20-rencana-model-jerangkong.md) | **Usulan.** Iterasi 0–5 boss Ep 1 + minion kerangka (satu model, potongan kaku untuk mekanik rontok/susun ulang) |
+| 20 | [Rencana Model Jerangkong](20-rencana-model-jerangkong.md) | **v0.2, terpasang di UE.** Boss Ep 1 + minion kerangka dari model Tripo developer (jalur B): satu model, potongan kaku untuk mekanik rontok/susun ulang |
 | 21 | [Model Sheet Aksa](21-model-sheet-aksa.md) | **Draft.** Design lock Aksa: proporsi terukur (H = 1,75 m), palet, part list, keputusan desain D1–D10 (hasil Iterasi 0) |
 | 22 | [Spesifikasi Material Aksa](22-spesifikasi-material-aksa.md) | **Draft.** Slot, tekstur dasar (BC/N/ORM/SSS/Mask), master & instance UE, pipeline UV (hasil Iterasi 5) |
-
-| 23 | [Model Sheet Jerangkong](23-model-sheet-jerangkong.md) | **Draft.** Design lock Jerangkong: proporsi terukur (H = 2,2 m), postur bungkuk sedang, palet, potongan, keputusan S1–S12 (hasil Iterasi 0) |
-| 24 | [Rencana Fase 1](23-rencana-fase-1.md) | **Usulan.** Prototype greybox: 9 iterasi (GAS → combat → minion → raksasa → gedung & meter → boss → playtest), gate, angka awal combat, pertanyaan Q1–Q14 |
+| 23 | [Rencana Fase 1](23-rencana-fase-1.md) | **Usulan.** Prototype greybox: 9 iterasi (GAS → combat → minion → raksasa → gedung & meter → boss → playtest), gate, angka awal combat, pertanyaan Q1–Q14 |
+| 24 | [Model Sheet Jerangkong](24-model-sheet-jerangkong.md) | **Dipakai.** Design lock Jerangkong: proporsi terukur (H = 2,2 m), postur bungkuk sedang, palet, potongan, keputusan S1–S12 (hasil Iterasi 0) |
 
 
 ---

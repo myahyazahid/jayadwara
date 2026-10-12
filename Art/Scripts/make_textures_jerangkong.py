@@ -4,11 +4,12 @@ Input : Art/Source/jerangkong_tripo_v01.glb (gambar tertanam: Color, NormalGL, O
         Art/Export/_jk_faces.npz (label tulang + UV per segitiga, dari jerangkong_10_build.py)
 Output: Art/Export/Textures_Jerangkong/T_Jerangkong_{BC,N,ORM,Emit}.png (2048²)
 
-- Energi Kala (docs/23 S11): piksel merah jenuh (hue -20..10°, saturasi > ±0,5) jadi mask Emit.R, dan warna dasarnya
-  digelapkan (cahaya datang dari emissive, bukan cat merah). Kain tidak menyala (segitiga kain dikecualikan).
+- Energi Kala (docs/24 S11): piksel merah jenuh (hue -20..10°, saturasi > ±0,5) di ZONA KALA (isi rusuk, tulang belakang,
+  leher, bahu, ±9 cm dari sendi, mata & retak) jadi mask Emit.R, warna dasarnya digelapkan (cahaya dari emissive, bukan
+  cat merah). Merah di luar zona (kain, batang tulang, tangan, kaki) dinetralkan ke hue tulang.
 - Noda merah muda tipis di tulang: hue digeser ke hue tulang (28°), saturasi dikurangi -> tidak terbaca darah.
 - Emit.G = retak titik lemah (pendar di segitiga tengkorak bagian dahi) -> parameter WeakPointPulse di UE.
-- Emit.B = gelang perunggu (segitiga lengan di ketinggian gelang dengan warna patina) -> minion menyamarkan gelang (J8).
+- Emit.B = gelang perunggu (segitiga lengan di ketinggian gelang yang lebih gelap dari tulang) -> minion menyamarkan gelang (J8).
 - Kotak CAP (pojok kiri-bawah, 8x8 px) = warna tulang gelap untuk tutup potongan (CAP_UV di jerangkong_10_build.py).
 Normal Tripo = konvensi OpenGL (+Y), sama dengan Blender; skrip import UE membalik hijau.
 
@@ -29,9 +30,10 @@ OUT = ROOT / "Art" / "Export" / "Textures_Jerangkong"
 OUT.mkdir(parents=True, exist_ok=True)
 
 CAP_PX = 8
-CAP_COLOR = (110, 82, 64)                      # tulang gelap #6E5240 (docs/23)
+CAP_COLOR = (110, 82, 64)                      # tulang gelap #6E5240 (docs/24)
 KALA_DARK = np.array([0.16, 0.035, 0.03])      # dasar gelap di bawah cahaya Kala
 BONE_HUE = 28.0
+JOINT_R = 0.09                                 # m (ruang model): radius pendar di sekitar sendi
 
 
 def glb_images(path):
@@ -106,29 +108,33 @@ a = np.asarray(color).astype(float) / 255
 h, s, v = rgb2hsv(a)
 hs = np.where(h > 180, h - 360, h)
 redhue = (1 - ss(10, 20, hs)) * ss(-40, -20, hs)
-E = redhue * ss(0.42, 0.62, s)
-cloth = face_mask((W, H), fuv, np.char.startswith(labels, "cloth"))
-bone = face_mask((W, H), fuv, ~np.char.startswith(labels, "cloth"))
-E = E * (1 - cloth * (1 - bone))                  # kain tidak menyala (tepi bersama tulang tetap)
+E_raw = redhue * ss(0.42, 0.62, s)
+# zona boleh menyala (konsep): isi rusuk/tulang belakang/leher/bahu, sekitar sendi, mata & retak tengkorak.
+# Atlas Tripo melukis merah juga di kain dan batang tulang -> di luar zona merah dinetralkan (uji UE 12 Okt 2026).
+x, y, z = cen[:, 0], cen[:, 1], cen[:, 2]
+jd = np.min(np.linalg.norm(cen[:, None, :] - fz["joints"][None, :, :], axis=2), axis=1)
+torso = np.isin(labels, ["spine_04", "spine_01", "spine_02", "neck_01", "neck_02", "clavicle_l", "clavicle_r"])
+face = (labels == "head") & (y < -0.20)
+allowed_f = (torso | face | (jd < JOINT_R)) & ~np.char.startswith(labels, "cloth")
+allowed = face_mask((W, H), fuv, allowed_f)
+E = E_raw * allowed
 smear = redhue * ss(0.15, 0.30, s) * (1 - E)
+smear = np.maximum(smear, E_raw * (1 - allowed))         # merah di luar zona: dinetralkan penuh
 h2 = np.where(smear > 0, hs * (1 - smear) + BONE_HUE * smear, hs) % 360
-s2 = s * (1 - 0.35 * smear)
+s2 = s * (1 - smear) + np.minimum(s, 0.38) * smear              # saturasi tulang/kain maks ±0,38
 bc = hsv2rgb(h2, s2, v)
 # kain merah: netralkan juga (tanpa nyala) -> coklat kain
 bc = bc * (1 - E[..., None] * 0.85) + KALA_DARK * E[..., None] * 0.85
 
 # Emit.G: retak dahi = segitiga tengkorak di depan-atas
-x, y, z = cen[:, 0], cen[:, 1], cen[:, 2]
 forehead = (labels == "head") & (y < -0.12) & (z > 2.07)                 # di atas rongga mata
 weak = face_mask((W, H), fuv, forehead) * E
 # Emit.B: gelang = segitiga lengan di ketinggian gelang
 arm = np.isin(labels, ["upperarm_l", "upperarm_r", "lowerarm_l", "lowerarm_r", "hand_l", "hand_r"])
 band = ((z > 1.52) & (z < 1.72)) | ((z > 0.78) & (z < 0.97))
 orn_faces = face_mask((W, H), fuv, arm & band)
-hh, sat_, val = h, s, v
-patina = ss(55, 75, hh) * (1 - ss(190, 215, hh)) * ss(0.10, 0.22, sat_)      # hijau-teal kusam
-bronze = ss(15, 25, hh) * (1 - ss(45, 55, hh)) * ss(0.35, 0.5, sat_) * ss(0.25, 0.4, val)
-orn = np.clip(orn_faces * np.maximum(patina, bronze * 0.8) * 1.6, 0, 1)
+# gelang di atlas = perunggu-zaitun GELAP (hue 28-52°, V ±0,33); tulang di ketinggian yang sama jauh lebih terang (V ±0,6)
+orn = np.clip(orn_faces * (1 - ss(0.40, 0.55, v)), 0, 1)
 
 # kotak CAP
 bc8 = (np.clip(bc, 0, 1) * 255).astype(np.uint8)

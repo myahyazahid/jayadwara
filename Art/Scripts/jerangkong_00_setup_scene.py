@@ -1,11 +1,11 @@
-"""Iterasi 0 (docs/20, docs/23) — setup scene Blender untuk model Jerangkong (boss Ep 1 + minion kerangka).
+"""Iterasi 0 (docs/20, docs/24) — setup scene Blender untuk model Jerangkong (boss Ep 1 + minion kerangka).
 
 Jalankan di Blender 5.2 (headless: blender --background --factory-startup --python Art/Scripts/jerangkong_00_setup_scene.py,
 atau lewat MCP: exec(open(path).read())). Membuat: satuan metrik, hierarki collection per kelompok potongan,
 reference plane (depan/samping/belakang), landmark proporsi `JK_LM_*`, penanda target bungkuk sedang `JK_TGT_*`,
 penggaris 2,2 m. Lalu menyimpan jerangkong_v00_setup.blend.
 
-Nilai dari docs/23-model-sheet-jerangkong.md (H = 2,2 m = telapak -> puncak tengkorak di tampak depan konsep).
+Nilai dari docs/24-model-sheet-jerangkong.md (H = 2,2 m = telapak -> puncak tengkorak di tampak depan konsep).
 Karakter menghadap -Y (depan = -Y), sama dengan kontrak Jayadwara/Aksa.
 Script ini hanya membuat basis scene; jangan dijalankan ulang di atas file yang sudah dimodel.
 """
@@ -50,7 +50,7 @@ root_coll = make_collection("JK_Jerangkong", scene.collection)
 root_coll["jk_height_m"] = H
 root_coll["jk_unit"] = "1 unit Blender = 1 m"
 root_coll["jk_source"] = "docs/concept-art/jerangkong_v01.webp"
-root_coll["jk_modelsheet"] = "docs/23-model-sheet-jerangkong.md"
+root_coll["jk_modelsheet"] = "docs/24-model-sheet-jerangkong.md"
 
 # satu collection per kelompok potongan (docs/20 bagian 4)
 COLL_NAMES = [
@@ -125,7 +125,7 @@ def marker(name, loc, color, size=0.05, kind="PLAIN_AXES"):
     return e
 
 
-LANDMARKS = [  # nama, tinggi (m) — docs/23 bagian 2 (tampak depan konsep, akurasi ±2 cm)
+LANDMARKS = [  # nama, tinggi (m) — docs/24 bagian 2 (tampak depan konsep, akurasi ±2 cm)
     ("sole", 0.0), ("ankle", 0.20), ("fingertip", 0.36), ("cloth_hem", 0.57), ("wrist", 0.75),
     ("knee", 0.765), ("bracelet_wrist", 0.83), ("hip_joint", 1.27), ("elbow", 1.33), ("pelvis_top", 1.39),
     ("rib_bottom", 1.51), ("bracelet_upper", 1.62), ("chin", 1.84), ("shoulder_joint", 1.85),
@@ -134,7 +134,7 @@ LANDMARKS = [  # nama, tinggi (m) — docs/23 bagian 2 (tampak depan konsep, aku
 for lm, z in LANDMARKS:
     marker(f"JK_LM_{lm}", (0, 0, z), (1.0, 0.55, 0.0, 1.0))
 
-# Target postur "bungkuk sedang" (docs/23 S2): posisi (y, z) di tampak samping; depan = -Y.
+# Target postur "bungkuk sedang" (docs/24 S2): posisi (y, z) di tampak samping; depan = -Y.
 # Konsep: pusat tengkorak 0,43 m di depan pergelangan kaki. Model: 0,22 m (setengahnya).
 TARGETS = [
     ("skull_center_konsep", (0, -0.43, 2.02), (0.5, 0.5, 0.5, 1.0)),

@@ -1,7 +1,7 @@
-# 23 — Model Sheet Jerangkong (Design Lock)
+# 24 — Model Sheet Jerangkong (Design Lock)
 
 > Hasil **Iterasi 0** dari [20-rencana-model-jerangkong.md](20-rencana-model-jerangkong.md). Mengunci proporsi, postur, palet, potongan, dan keputusan desain sebelum modeling.
-> **Status:** draft (12 Okt 2026) — menunggu persetujuan developer pada bagian [7](#7-pertanyaan-untuk-developer). Angka diukur dari gambar AI beresolusi rendah (tinggi figur ±770 px di sheet → 1 px ≈ 2,9 mm) → akurasi ±2–3 cm, cukup untuk blockout, bukan untuk detail.
+> **Status:** dipakai (12 Okt 2026). Developer menyukai desain Tripo tanpa revisi; S1–S12 dipakai sebagai default (status implementasi di akhir bagian 5). Angka diukur dari gambar AI beresolusi rendah (tinggi figur ±770 px di sheet → 1 px ≈ 2,9 mm) → akurasi ±2–3 cm, cukup untuk blockout, bukan untuk detail.
 > Pola dokumen sama dengan [14](14-model-sheet-jayadwara.md) dan [21](21-model-sheet-aksa.md).
 
 ---
@@ -127,6 +127,9 @@ Semua berstatus **usulan — menunggu persetujuan**; tanpa jawaban, S1–S12 dip
 | **S12** | Pecahan batu & akar | Batu ukir di tengkorak, paha, betis; akar menjuntai dari tengkorak | 2 batu di tengkorak + 1 di paha kiri; motif ukir **umum** (sulur/geometris), bukan relief candi tertentu. Akar: beberapa strip tipis di tengkorak & kaki |
 
 ---
+
+### Status implementasi (jalur B, 12 Okt 2026)
+Model memakai mesh Tripo developer ([20 Jalur B](20-rencana-model-jerangkong.md#jalur-b--basis-model-developer-tripo-ai-12-okt-2026)). S1 ✅ (×14 / ×0,85, dua aset). S2/S3 ✅ (pose rest = postur Tripo yang sudah bungkuk sedang; retarget hanya menyejajarkan lengan). S4 ✅ ukuran sheet. S5 ✅. S6: rusuk Tripo satu per satu (bukan pelat), tetap satu potongan. S7 ✅ jari kaku. S8/S9/S12 ✅ dari geometri Tripo (kain compang-camping bergeometri, gumpalan tanah, batu). S10 ⚠️ retak hanya tekstur + emissive (`Emit.G`, socket `skull_weakpoint`), belum bergeometri. S11 ✅ pendar dibatasi ke zona Kala, merah lain dinetralkan.
 
 ## 6. Checklist IP & budaya (status desain terkunci)
 

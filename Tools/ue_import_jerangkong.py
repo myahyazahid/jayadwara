@@ -136,7 +136,7 @@ def build_master(tex):
     t_bc, t_n, t_orm, t_e = tparam("T_BC", "BC", tex["BC"]), tparam("T_N", "N", tex["N"]), tparam("T_ORM", "ORM", tex["ORM"]), tparam("T_Emit", "Emit", tex["Emit"])
     glow = vparam("GlowColor", GLOW)
     tint = vparam("OrnamentTint", ORNAMENT_TINT)
-    k_int = sparam("GlowIntensity", 8.0)
+    k_int = sparam("GlowIntensity", 2.5)            # uji UE 12 Okt: 8 membuat seluruh badan terbaca merah
     k_weak = sparam("WeakPointPulse", 0.0)              # 1 saat kelemahan aktif (fase 2)
     k_speed = sparam("PulseSpeed", 3.0)
     k_hide = sparam("OrnamentHide", 0.0)                # 1 = minion (J8)
@@ -182,7 +182,7 @@ def build_master(tex):
 
 def build_instances(master):
     mis = {}
-    for name, params in (("MI_Jerangkong", {}), ("MI_Kerangka", {"OrnamentHide": 1.0, "GlowIntensity": 5.0})):
+    for name, params in (("MI_Jerangkong", {}), ("MI_Kerangka", {"OrnamentHide": 1.0, "GlowIntensity": 2.0})):
         path = f"{ROOT}/Materials/{name}"
         mi = EAL.load_asset(path) if EAL.does_asset_exist(path) else asset_tools.create_asset(
             name, f"{ROOT}/Materials", unreal.MaterialInstanceConstant, unreal.MaterialInstanceConstantFactoryNew())

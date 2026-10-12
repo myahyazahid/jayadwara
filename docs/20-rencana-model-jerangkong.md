@@ -1,6 +1,6 @@
 # 20 — Rencana Implementasi: Model Jerangkong (Boss Ep 1 + Minion Kerangka)
 
-> **Status: USULAN v0.1 (12 Okt 2026)**, menunggu persetujuan developer.
+> **Status: v0.2 (12 Okt 2026).** Iterasi 0 selesai; **jalur B (model Tripo developer) disetujui dan dikerjakan sampai integrasi UE** (lihat [Jalur B](#jalur-b--basis-model-developer-tripo-ai-12-okt-2026)). Lisensi Tripo dikonfirmasi developer (komersial); material 1 slot + mask disetujui.
 > Mengikuti pola [13](13-rencana-model-jayadwara.md) dan [19](19-rencana-model-aksa.md), memakai ulang pipeline `Art/Scripts/` (validator, render pembanding, LOD, kontrak export yang sudah diperbaiki di Iterasi 6 Jayadwara).
 > Konsep: [`jerangkong_v01.webp`](concept-art/jerangkong_v01.webp) · Prompt: [`Art/Reference/prompt_jerangkong.md`](../Art/Reference/prompt_jerangkong.md) · Peran di game: [05](05-daftar-episode-boss.md#arc-1--kebangkitan-ep-110), [16](16-panduan-arc-1.md#26-aturan-skala), [17](17-skenario-arc-1.md#adegan-7--jayadwara-vs-jerangkong--main), [18](18-kebutuhan-episode-1.md#b1-model).
 
@@ -125,7 +125,7 @@ Hierarki & nama Mannequin (tanpa twist bone; tulang kaku tidak butuh) + `jaw` + 
 - **Developer:** menyetujui model sheet & J1–J9.
 - **Gate:** reference plane sejajar; model sheet disetujui.
 
-**Status (12 Okt 2026): selesai dari sisi Claude, menunggu persetujuan developer.** Atas permintaan "siapkan untuk modeling jerangkong" (dibaca sebagai J9 = mulai sekarang, jalur art paralel). Artefak: `Art/Reference/jk_*.png` (`make_reference_planes_jerangkong.py`), scene `Art/Blender/jerangkong_v00_setup.blend` (`jerangkong_00_setup_scene.py`; plane dicek sejajar lewat render ortografis), model sheet [23](23-model-sheet-jerangkong.md). Temuan: tampak samping konsep bungkuk berlebihan (tengkorak 0,43 m di depan pergelangan kaki) → target bungkuk sedang ditandai `JK_TGT_*` di scene (S2), dan pose rest diusulkan sudah bungkuk agar retarget otomatis bungkuk (S3).
+**Status (12 Okt 2026): selesai dari sisi Claude, menunggu persetujuan developer.** Atas permintaan "siapkan untuk modeling jerangkong" (dibaca sebagai J9 = mulai sekarang, jalur art paralel). Artefak: `Art/Reference/jk_*.png` (`make_reference_planes_jerangkong.py`), scene `Art/Blender/jerangkong_v00_setup.blend` (`jerangkong_00_setup_scene.py`; plane dicek sejajar lewat render ortografis), model sheet [24](24-model-sheet-jerangkong.md). Temuan: tampak samping konsep bungkuk berlebihan (tengkorak 0,43 m di depan pergelangan kaki) → target bungkuk sedang ditandai `JK_TGT_*` di scene (S2), dan pose rest diusulkan sudah bungkuk agar retarget otomatis bungkuk (S3).
 
 ### Jalur B — basis model developer (Tripo AI), 12 Okt 2026
 
@@ -139,7 +139,46 @@ Developer membuat model awal dengan Tripo AI dari konsep: `Art/Source/jerangkong
 | Geometri | Lunak/membulat; retak, gigi, rongga mata sebagian besar dari tekstur; jari sebagian menempel; 13k tepi non-manifold | Cukup untuk kamera raksasa; tengkorak perlu dipertegas untuk close-up |
 | Tekstur | Warna mirip konsep, tapi ada noda merah di permukaan tulang bahu/selangka | Melanggar S11 → dibersihkan di tekstur |
 
-**Usulan:** Jalur B menggantikan modeling dari primitif. Iterasi 1 menjadi: rig dipasang ke mesh ini → mesh dipotong jadi 17 potongan (bobot kaku 1 tulang, ujung potongan ditutup) → 14 `SM_` → export & uji di UE. Iterasi 2 menyempit menjadi perbaikan: tengkorak (retak bergeometri, rongga mata & rahang dipertegas), pemisahan rahang, pembersihan merah S11. Material: 1 material dasar (tekstur Tripo) + mask emissive Kala, menggantikan 4 slot (6.4) kecuali developer memilih tetap 4 slot. **Syarat:** lisensi Tripo untuk akun yang dipakai mengizinkan pemakaian komersial (dicek developer).
+**Keputusan (disetujui developer 12 Okt 2026):** Jalur B menggantikan modeling dari primitif. Lisensi Tripo akun developer mengizinkan pemakaian komersial (dikonfirmasi developer). **Catatan rilis:** Steam mewajibkan pengungkapan konten buatan AI di formulir rilis. Rencana semula: Iterasi 1 menjadi: rig dipasang ke mesh ini → mesh dipotong jadi 17 potongan (bobot kaku 1 tulang, ujung potongan ditutup) → 14 `SM_` → export & uji di UE. Iterasi 2 menyempit menjadi perbaikan: tengkorak (retak bergeometri, rongga mata & rahang dipertegas), pemisahan rahang, pembersihan merah S11. Material: 1 material dasar (tekstur Tripo) + mask emissive Kala, menggantikan 4 slot (6.4) kecuali developer memilih tetap 4 slot. **Syarat:** lisensi Tripo untuk akun yang dipakai mengizinkan pemakaian komersial (dicek developer).
+
+#### Hasil jalur B (12 Okt 2026): Iterasi 1, 3, 4, 5 selesai dari sisi Claude; Iterasi 2 dipangkas
+
+Pipeline (semua headless, bisa diulang; urutan & perintah di `Art/README.md`):
+
+| Langkah | Skrip | Hasil |
+|---|---|---|
+| Impor & normalisasi | `jerangkong_01_import_tripo.py` | `jerangkong_v01_tripo.blend` (`JK_Source`) |
+| Rig + potongan | `jk_skeleton.py` (sendi diukur dari mesh), `jk_segment.py`, `jerangkong_10_build.py` | `jerangkong_v02_rig.blend`: `JK_Armature` 70 tulang, 17 objek `JK_P_*`, 8 `SOCKET_*`; LOD0 33.984 tris |
+| Tekstur | `make_textures_jerangkong.py` | `Art/Export/Textures_Jerangkong/T_Jerangkong_{BC,N,ORM,Emit}` |
+| Material & uji pose | `jerangkong_12_materials.py`, `jerangkong_13_pose_tests.py` | `M_Jerangkong`; 7 pose → `Art/Export/_jerangkong_pose_tests.png` |
+| Export | `jerangkong_14_export.py` | `SK_Jerangkong(_LOD1..3).fbx`, `SK_Kerangka(_LOD1..3).fbx`, `Jerangkong_Parts/SM_Jerangkong_*.fbx` (14), `SK_Jerangkong_parts.json`, `*_sockets.json` |
+| Validasi | `validate_jerangkong.py` | Boss LOD0 **21/21** (termasuk pivot 14 SM, terburuk 2,3%); 7 FBX lain **18/18** |
+| UE | `Tools/ue_import_jerangkong.py`, `Tools/ue_setup_jerangkong.py`, `Tools/ue_capture_jerangkong.py` | Daftar aset di bawah; bukti visual `Art/Export/_jerangkong_ue_cek.png` |
+
+LOD (tris): 33.984 / 14.881 / 5.923 / 2.507 (anggaran J7 terpenuhi); tengkorak dilindungi (rasio ×1,6) di LOD1–3.
+
+Keputusan teknis yang berubah dari rencana awal:
+
+| Topik | Rencana | Jalur B | Alasan |
+|---|---|---|---|
+| Segmentasi | Model per potongan | Mesh Tripo dipotong otomatis: kapsul tulang terdekat + aturan wilayah (tengkorak/rahang, rusuk, kain) + bidang potong di sendi; lubang potongan ditutup (UV cap ke kotak tulang gelap 8 px di pojok atlas) | Mesh Tripo satu badan |
+| Potongan multi-tulang | 1 tulang | `Ribs` = rusuk + selangka/belikat (S5), `Spine` = lumbar + leher, `Pelvis` = panggul + kain; batas antar-tulang di dalamnya berbobot campuran. Potongan yang bisa rontok tetap 1 tulang bobot 1,0 | Bahu & kain harus ikut animasi |
+| Jari | 3 ruas ter-rig | Tulang jari ada (untuk retarget), tetapi geometri jari kaku ikut `hand_*` | Jari Tripo menempel; tidak terbaca di skala 31 m |
+| Rahang | Model terpisah | Batang mandibula dipotong dari tengkorak (gigi atas ikut tengkorak) | |
+| Material (6.4) | 4 slot | **1 slot** `M_Jerangkong_Master` + `T_Jerangkong_Emit`: R = energi Kala, G = retak titik lemah (`WeakPointPulse` + denyut), B = gelang (`OrnamentHide`, minion J8) | Atlas Tripo tunggal |
+| Merah Kala (S11) | | Pendar hanya di zona konsep (isi rusuk, tulang belakang, leher, bahu, ±9 cm sendi, mata, retak); merah di kain/batang tulang dinetralkan ke warna tulang. `GlowIntensity` 2,5 (boss) / 2,0 (minion); nilai 8 terbukti membuat seluruh badan terbaca merah | Uji UE 12 Okt |
+| Skala (J2) | 1 aset diskalakan di UE | **2 aset dari 1 model**: `SK_Jerangkong` (×14, 30,66 m) & `SK_Kerangka` (×0,85, 1,86 m, MinLOD 1), skeleton masing-masing | Skala harus di-bake (Anim Dynamics, docs/13 Iterasi 6b) |
+| SM (6.2) | Orientasi = tulang | Pivot = kepala tulang pivot, orientasi **identitas** (sumbu komponen), skala boss. Saat rontok: SM = Translation(pivot), lalu inverse(BoneRef), lalu BoneNow (urutan komposisi UE); minion: skala aktor 0,85/14 | Sama persis dengan skinning kaku, jadi cocok di pose apa pun. Diuji di UE: pivot dunia = sendi (selisih 0,00 cm), lengan SM menggantikan tulang tersembunyi tanpa loncatan |
+| Retarget | Auto-align semua | Hanya lengan (`clavicle..hand`) disejajarkan ke A-pose Manny; tulang belakang/leher/kaki memakai pose rest, jadi animasi Manny tetap bungkuk & kuda-kuda lebar. "Run IK Rig" dimatikan (FK murni, sama dengan Jayadwara) | S3 |
+
+Aset UE (`/Game/Jayadwara/Characters/Jerangkong/`): `Textures/` 4 tekstur; `Materials/` master + `MI_Jerangkong`, `MI_Kerangka`; `Mesh/` `SK_`/`SKEL_`/`PA_` Jerangkong & Kerangka (4 LOD, 8 socket, PA 20 kapsul); `Parts/` 14 `SM_Jerangkong_*` (collision kapsul); `Rig/` `IK_` & `RTG_Mannequin_To_` tiap varian; `Anims_Jerangkong/`, `Anims_Kerangka/` (25 aset: `ABP_<varian>` dari ABP_Unarmed tanpa foot IK Control Rig; Anim Dynamics kain depan/belakang hanya di boss, BlendSpace boss ×√14, 3 serangan); `BP_Jerangkong` (AJDGiantCharacter: tinggi 3066 cm, kapsul 45×109,5 cm ×14) & `BP_Kerangka` (Character, kapsul 34×93). Level: `JK_Boss_01` di `Test_GiantScale` (±41 m depan-kiri PlayerStart, menghadap pemain), `JK_Minion_01..03` di `Test_Greybox`.
+
+**Belum / sisa:**
+- Retak tengkorak & rongga mata masih dari tekstur (Iterasi 2 "tengkorak bergeometri" belum dikerjakan); cukup untuk kamera raksasa, perlu dipertegas kalau ada close-up cutscene.
+- Uji PIE (developer, 12 Okt 2026): boss & minion tampil benar (menapak, bungkuk, pendar sesuai zona). Kain minion melar & bergetar cepat (Anim Dynamics skala manusia, sama dengan selendang Aksa) → **kain minion dibuat kaku** (`cloth_dynamics` di `ue_setup_jerangkong.py`); kain boss tetap disimulasikan. Uji FPS 1 boss + 6 minion belum.
+- SM `Ribs` membawa selangka/belikat dalam relasi rest terhadap `spine_04`; kalau bahu sedang terangkat saat rusuk rontok, bagian bahu bisa bergeser sedikit.
+- Kode rontok/susun ulang (`AJDBoss_Jerangkong`, C++ Fase 1), animasi kustom (raungan dengan `jaw`, merayap, susun ulang), dan foot IK raksasa belum.
+- Capture editor (`ue_capture_jerangkong.py`) kadang menangkap pose rest karena editor tidak men-tick animasi saat jendelanya tidak aktif.
 
 ### Iterasi 1 — Proxy + rig + potongan
 **Tujuan:** proxy ringan yang langsung dipakai boss greybox Fase 1 dan untuk membuktikan mekanik rontok/susun ulang.
@@ -176,7 +215,7 @@ Developer membuat model awal dengan Tripo AI dari konsep: `Art/Source/jerangkong
 
 ## 9. Model Sheet
 
-Diisi di Iterasi 0 sebagai dokumen terpisah: **[23-model-sheet-jerangkong.md](23-model-sheet-jerangkong.md)** (proporsi terukur, postur bungkuk sedang, palet, ukuran potongan, keputusan desain S1–S12).
+Diisi di Iterasi 0 sebagai dokumen terpisah: **[24-model-sheet-jerangkong.md](24-model-sheet-jerangkong.md)** (proporsi terukur, postur bungkuk sedang, palet, ukuran potongan, keputusan desain S1–S12).
 
 ## 10. Risiko
 

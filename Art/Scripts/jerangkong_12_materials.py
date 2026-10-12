@@ -11,7 +11,7 @@ import bpy
 
 ROOT = r"C:\repository\unreal_engine\jayadwara"
 TEX = os.path.join(ROOT, "Art", "Export", "Textures_Jerangkong")
-GLOW_COLOR = (0.66, 0.025, 0.012, 1.0)          # #B0201A linear (merah Kala gelap, docs/23)
+GLOW_COLOR = (0.66, 0.025, 0.012, 1.0)          # #B0201A linear (merah Kala gelap, docs/24)
 GLOW_INTENSITY = 2.5
 WEAK_POINT = 1.0
 
