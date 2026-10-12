@@ -1,6 +1,6 @@
 # 23 — Rencana Fase 1: Prototype Greybox
 
-> **Status: USULAN v0.3 (12 Okt 2026)**. Q1–Q16 sudah dijawab developer; pertanyaan lanjutan Q17–Q18 terbuka ([bagian 10](#10-keputusan--pertanyaan)). Angka di dokumen ini adalah usulan awal Claude untuk dituning.
+> **Status: USULAN v0.3 (12 Okt 2026)**. Q1–Q16 dan Q18 sudah dijawab developer; Q17 masih terbuka ([bagian 10](#10-keputusan--pertanyaan)). Angka di dokumen ini adalah usulan awal Claude untuk dituning.
 > **Tanpa tanggal:** jadwal mulai & selesai tiap iterasi ditentukan developer (Q1). Urutan iterasi tetap.
 > Turunan dari [10](10-roadmap.md#fase-1--prototype-greybox-des-2026--mar-2027) (target bulanan), [18](18-kebutuhan-episode-1.md) (daftar kebutuhan bertanda F1), dan [12](12-technical-design.md) (arsitektur). Kalau dokumen ini bertentangan dengan 12, yang menang 12; perbedaannya dicatat di bagian 4.
 
@@ -137,16 +137,16 @@ Didaftarkan di `Config/DefaultGameplayTags.ini` pada Iterasi 1.
 | Aksi | Keyboard-mouse | PlayStation | Xbox / generik (layout Xbox) |
 |---|---|---|---|
 | Gerak / kamera | WASD / mouse | L-stick / R-stick | L-stick / R-stick |
-| Pukulan ringan | **J** | □ | X |
-| Pukulan berat (+ finisher) | **K** | △ | Y |
-| Tangkis (tahan) + parry (tekan tepat waktu) | **U** | **R2** | RT |
-| Dodge (arah dari gerak) | **I** | ○ | B |
+| Pukulan ringan | **LMB** | □ | X |
+| Pukulan berat (+ finisher) | **E** | △ | Y |
+| Tangkis (tahan) + parry (tekan tepat waktu) | **RMB** | **R2** | RT |
+| Dodge (arah dari gerak) | **Left Shift** | ○ | B |
 | Lompat | **Space** | ✕ | A |
 | Lock-on (boss raksasa) | **Q** / klik tengah | R3 | RS (klik) |
 | Transformasi | **T** | **L1 + R1** | LB + RB |
 | Cheat/konsol (dev) | `~` | — | — |
 
-Keyboard ditentukan developer (review Q5): **J / K / U / I** untuk tangan kanan, WASD tangan kiri. Konsekuensinya, saat bertarung tangan kanan tidak di mouse, jadi kamera harus bisa mengurus dirinya sendiri: soft target membingkai musuh, lock-on membingkai boss, dan kamera kembali ke belakang Aksa saat mouse diam (Q18). Mouse tetap bisa dipakai kapan saja.
+Keyboard disetujui developer (Q5): tangan kiri WASD + E/Shift/Space/Q/T, tangan kanan di mouse. Tangkis di **RMB** karena parry butuh ketepatan waktu dan jari di mouse paling cepat (pola Sekiro di PC). Kamera tetap di mouse, jadi tidak perlu kamera otomatis (Q18).
 
 **Catatan teknis gamepad:**
 - **Xbox (XInput)** langsung terbaca Unreal.
@@ -221,7 +221,7 @@ Kapasitas ±50 jam/bulan. Jam di bawah = **jam developer** (build, editor, tunin
 - **Gate:** parry ke dummy bisa dilakukan dengan sengaja ≥ 7 dari 10 kali setelah 5 menit latihan; dodge menembus serangan tanpa kena; stamina jadi pertimbangan (tidak bisa spam tangkis/dodge).
 
 ### Iterasi 4 — Reaksi, stagger, target, warp
-- **Claude:** `UJDGA_HitReact` (ringan / stagger / knockdown dari poise), regen poise, `UJDTargetingComponent` (soft target searah input dalam kerucut; indikator di HUD; Q3), kamera kembali ke belakang Aksa saat mouse diam (Q18), Motion Warping ke target, lock kamera (Q3).
+- **Claude:** `UJDGA_HitReact` (ringan / stagger / knockdown dari poise), regen poise, `UJDTargetingComponent` (soft target searah input dalam kerucut; indikator di HUD; Q3), Motion Warping ke target, lock kamera (Q3).
 - **Developer:** animasi hit react ×2, stagger, knockdown + bangun; warp target di montage; tuning radius target.
 - **Gate:** pukulan "menempel" ke musuh terdekat searah stik/WASD tanpa terasa menyedot; pukulan berat membuat dummy stagger; pemain bisa kena stagger juga.
 
@@ -318,7 +318,7 @@ PR dibuat kecil (satu iterasi atau setengahnya) karena Claude tidak bisa build U
 | Q2 | Referensi rasa combat | **Arkham + Sekiro ringan**: combo sederhana, parry penting, banyak musuh tapi bergantian menyerang |
 | Q3 | Kamera combat | **Soft target** untuk minion (gaya Arkham), **lock-on tombol** untuk boss raksasa (framing dua raksasa seperti adegan tokusatsu) |
 | Q4 | Perangkat | **Keyboard-mouse utama**; gamepad PlayStation, Xbox, dan generik juga harus bisa (bagian 4.4) |
-| Q5 | Tombol | Tangkis + parry satu tombol: **R2** / **U**. Keyboard: ringan **J**, berat **K**, dodge **I**; sisanya sesuai usulan |
+| Q5 | Tombol | Tangkis + parry satu tombol: **R2** / **RMB**. Keyboard: ringan **LMB**, berat **E**, dodge **Left Shift**, lompat **Space**, lock-on **Q**, transformasi **T** (bagian 4.4) |
 | Q6 | Finisher | **Masuk F1** (versi greybox) |
 | Q7 | Penyebab gedung hancur | **Semua**: pukulan, tabrakan badan, terpental, proyektil (kerusakan sebanding gaya) |
 | Q8 | Tombol transformasi | **T** (keyboard), **L1 + R1** (gamepad), berlaku seterusnya. Syarat di `Test_Loop`: setelah gelombang 3; tombol bebas di level uji |
@@ -330,12 +330,12 @@ PR dibuat kecil (satu iterasi atau setengahnya) karena Claude tidak bisa build U
 | Q14 | Playtester | **Developer sendiri**, di PC developer |
 | Q15 | Setelah kalah | **Aksa muncul di tempat Jayadwara kalah**, tetap dimainkan (menghindar), berubah lagi saat energi cukup (bagian 4.5) |
 | Q16 | Controller uji | **Pad USB generik gaya PlayStation**, dua analog (bagian 4.4) |
+| Q18 | Kamera otomatis untuk layout tanpa mouse | **Tidak perlu**: layout akhir tetap memakai mouse (LMB/RMB) |
 
 ### Masih terbuka
 | # | Pertanyaan | Usulan Claude |
 |---|---|---|
 | **Q17** | Meter sinkronisasi habis: alurnya sama dengan Health habis (jadi Aksa di tempat, tunggu energi, berubah lagi)? | **Ya, sama**, supaya pemain belajar satu aturan. Berubah lagi dengan Sync ±50% |
-| **Q18** | Dengan J/K/U/I, tangan kanan tidak di mouse saat bertarung. Kamera di keyboard: otomatis saja, atau tambah tombol putar kamera? | **Otomatis**: kembali ke belakang Aksa saat mouse diam + soft target/lock-on membingkai musuh. Mouse tetap aktif kalau dipegang |
 
 ## 11. Status & hasil
 
