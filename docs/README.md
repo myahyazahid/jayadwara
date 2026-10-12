@@ -40,7 +40,10 @@ Aksa Jaya Mangkubumi, agen baru sebuah lembaga rahasia penanganan anomali, menya
 | 20 | [Rencana Model Jerangkong](20-rencana-model-jerangkong.md) | **Usulan.** Iterasi 0–5 boss Ep 1 + minion kerangka (satu model, potongan kaku untuk mekanik rontok/susun ulang) |
 | 21 | [Model Sheet Aksa](21-model-sheet-aksa.md) | **Draft.** Design lock Aksa: proporsi terukur (H = 1,75 m), palet, part list, keputusan desain D1–D10 (hasil Iterasi 0) |
 | 22 | [Spesifikasi Material Aksa](22-spesifikasi-material-aksa.md) | **Draft.** Slot, tekstur dasar (BC/N/ORM/SSS/Mask), master & instance UE, pipeline UV (hasil Iterasi 5) |
+
 | 23 | [Model Sheet Jerangkong](23-model-sheet-jerangkong.md) | **Draft.** Design lock Jerangkong: proporsi terukur (H = 2,2 m), postur bungkuk sedang, palet, potongan, keputusan S1–S12 (hasil Iterasi 0) |
+| 24 | [Rencana Fase 1](23-rencana-fase-1.md) | **Usulan.** Prototype greybox: 9 iterasi (GAS → combat → minion → raksasa → gedung & meter → boss → playtest), gate, angka awal combat, pertanyaan Q1–Q14 |
+
 
 ---
 
