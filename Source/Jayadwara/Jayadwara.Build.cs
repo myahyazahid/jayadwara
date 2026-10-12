@@ -12,13 +12,14 @@ public class Jayadwara : ModuleRules
 		PublicIncludePaths.Add(ModuleDirectory);
 
 		// Daftar modul mengikuti docs/12-technical-design.md (Dependensi module).
+		// EngineCameras = pola camera shake (Perlin) untuk UJDCameraShake_Hit; plugin bawaan, aktif default.
 		// GeometryCollectionEngine = Chaos Destruction (plugin GeometryCollectionPlugin + ChaosEditor/Fracture di .uproject).
 		PublicDependencyModuleNames.AddRange(new string[]
 		{
 			"Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput",
 			"GameplayAbilities", "GameplayTags", "GameplayTasks",
 			"AIModule", "StateTreeModule", "GameplayStateTreeModule",
-			"Niagara", "MotionWarping", "GeometryCollectionEngine"
+			"Niagara", "MotionWarping", "GeometryCollectionEngine", "EngineCameras"
 		});
 
 		PrivateDependencyModuleNames.AddRange(new string[] { "UMG", "Slate", "SlateCore" });

@@ -37,6 +37,7 @@ Dijalankan di Blender (mis. lewat MCP: `exec(open(path).read())`), kecuali yang 
 | `make_reference_planes_jerangkong.py` *(sistem)* | Jerangkong: referensi ortografis ternormalisasi (1000 px = 2,2 m) + crop detail + palet → `Reference/jk_*.png` |
 | `jerangkong_00_setup_scene.py` | Jerangkong Iterasi 0: scene `jerangkong_v00_setup.blend` (collection per kelompok potongan, reference plane, penggaris 2,2 m, landmark `JK_LM_*`, target bungkuk sedang `JK_TGT_*`). Headless: `blender --background --factory-startup --python Art/Scripts/jerangkong_00_setup_scene.py` |
 | `jerangkong_01_import_tripo.py` | Jerangkong jalur B: impor `Source/jerangkong_tripo_v01.glb` (Tripo) → `jerangkong_v01_tripo.blend` (`JK_Source`, menghadap -Y, 2,19 m) |
+| `jayadwara2_01_import_tripo.py` *(headless)* | Redesign Jayadwara (docs/25 R0): impor GLB Tripo developer → `jayadwara2_v01_tripo.blend` (`JD2_Source`) + laporan tris/tekstur/pulau/non-manifold/simetri/arah hadap. Argumen `-- --src --out --top-z --rot-z` |
 | `jk_skeleton.py`, `jk_segment.py` | Jerangkong: posisi sendi terukur + daftar potongan/socket; segmentasi mesh ke tulang (numpy) |
 | `jerangkong_10_build.py` *(Blender headless)* | Rig + 17 potongan kaku + cap + bobot + socket → `jerangkong_v02_rig.blend`, `Export/_jk_faces.npz` |
 | `make_textures_jerangkong.py` *(sistem)* | Tekstur dari atlas Tripo: BC dibersihkan, Emit (R Kala / G retak / B gelang), N, ORM → `Export/Textures_Jerangkong/` |

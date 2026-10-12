@@ -65,7 +65,7 @@ Kalau G1–G3 gagal: **perbaiki combat dulu** sebelum masuk Fase 2 ([18](18-kebu
 | Model Aksa (Iterasi 5) & MetaHuman placeholder; mesh logika = Manny ([12](12-technical-design.md#mesh-logika-vs-mesh-visual-aksa)) | Combat manusia |
 | Chaos + `GeometryCollectionEngine` aktif | Iterasi 7 |
 | 23 slot kandidat SFX ([Audio/KANDIDAT.md](../Audio/KANDIDAT.md)) | Gameplay Cue mulai Iterasi 2 |
-| Model Jerangkong ([20](20-rencana-model-jerangkong.md) jalur B, 12 Okt 2026): `SK_Jerangkong` (boss 30,7 m) & `SK_Kerangka` (minion 1,86 m) + LOD, 14 `SM_Jerangkong_*` + `SK_Jerangkong_parts.json`, `BP_Jerangkong`/`BP_Kerangka`, ABP hasil retarget Mannequin | Iterasi 5 (minion) & 8 (boss); tidak perlu Manny/proxy lagi |
+| Model Jerangkong ([20](20-rencana-model-jerangkong.md) jalur B, 12 Okt 2026): `SK_Jerangkong` (boss 30,7 m) & `SK_Kerangka` (minion 1,86 m) + LOD, 14 `SM_Jerangkong_*` + `SK_Jerangkong_parts.json`, `BP_Jerangkong`/`BP_Kerangka`, ABP hasil retarget Mannequin | Iterasi 5 (minion) & 8 (boss); tidak perlu Manny/proxy lagi. **Tidak ditaruh di level uji** sampai iterasinya (berat di laptop developer); `ue_setup_jerangkong.py` → `PLACE_IN_LEVELS = False` |
 
 ## 4. Arsitektur Fase 1
 
@@ -118,7 +118,7 @@ Mengikuti [12](12-technical-design.md#arsitektur-inti). Tambahan dan penegasan:
 
 ### 4.3 Gameplay Tags (awal)
 
-Didaftarkan di `Config/DefaultGameplayTags.ini` pada Iterasi 1.
+Didaftarkan sebagai **native tag C++** (`Abilities/JDGameplayTags.h`, `UE_DEFINE_GAMEPLAY_TAG`) pada Iterasi 1, bukan `Config/DefaultGameplayTags.ini`: kode memakai `JDGameplayTags::Input_Attack_Light` tanpa string, dan tag tetap muncul di pemilih tag editor. Tambahan dari implementasi: `Data.StaminaRegen`, `Data.Init.Max*` (SetByCaller atribut awal), `Cheat.God`.
 
 | Kelompok | Tag |
 |---|---|
@@ -206,13 +206,13 @@ Kapasitas ±50 jam/bulan. Jam di bawah = **jam developer** (build, editor, tunin
 | | **Total** | **±212** | Anggaran F1 ±200 |
 
 ### Iterasi 1 — Fondasi GAS
-- **Claude:** pemetaan kontrol KB/M + gamepad (bagian 4.4), `UJDAbilitySystemComponent`, `UJDAttributeSet`, `UJDGameplayAbility`, `UJDAbilitySet`, `UJDInputConfig`, GE awal (init atribut, regen stamina, damage), ASC di `AJDCharacterBase` + `IAbilitySystemInterface`, binding input tag di karakter, `DefaultGameplayTags.ini`, `UJDCheatManager` (`JD.God`, `JD.Damage <n>`), `UJDHUDWidget` (bar Health/Stamina). Skrip `Tools/ue_setup_combat.py`: buat `IMC_Human` (salin `IMC_Default`) + IA combat, `DA_InputConfig_Human`, `DA_AbilitySet_Aksa`, level `Test_Combat`.
-- **Developer:** build, jalankan skrip, buat `WBP_HUD_Human` dari base class (dua progress bar), uji dengan keyboard-mouse dan pad generik lewat x360ce (Q16).
+- **Claude:** pemetaan kontrol KB/M + gamepad (bagian 4.4), `UJDAbilitySystemComponent`, `UJDAttributeSet`, `UJDGameplayAbility`, `UJDAbilitySet`, `UJDInputConfig`, GE awal (init atribut, regen stamina, damage), ASC di `AJDCharacterBase` + `IAbilitySystemInterface`, binding input tag di karakter (+ buffer input di ASC), native gameplay tag (`JDGameplayTags`), `UJDCheatManager` (`JD.God`, `JD.Damage <n>`, `JD.Heal`, `JD.Stamina <n>`, `JD.Debug.Input`), `UJDHUDWidget` (bar Health/Stamina/Energi, layout bawaan dibuat C++ sehingga jalan tanpa WBP). Skrip `Tools/ue_setup_combat.py`: buat `IMC_Human` (salin `IMC_Default`) + IA combat + chord L1+R1, `DA_InputConfig_Human`, `DA_AbilitySet_Aksa`, isi `BP_Aksa` & `BP_JDPlayerController`, level `Test_Combat` (tanpa musuh).
+- **Developer:** build, (Claude menjalankan skrip lewat `ue_remote.py`), uji dengan keyboard-mouse dan pad generik lewat x360ce (Q16). `WBP_HUD_Human` opsional (turunan `UJDHUDWidget`, progress bar bernama `HealthBar`/`StaminaBar`).
 - **Gate:** di `Test_Combat`, bar Health/Stamina tampil; gerak + kamera jalan di KB/M dan gamepad; `JD.Damage 10` mengurangi Health; stamina turun lewat cheat lalu regen; `showdebug abilitysystem` menampilkan atribut & tag.
 
 ### Iterasi 2 — Combo ringan & hit
 - **Claude:** `UJDCombatComponent`, `UJDCombatProfile`, `UJDGA_LightAttack` (3 section, buffer input), notify `HitWindow` & `ComboWindow`, `AJDTrainingDummy` (target diam dengan atribut, angka damage melayang opsional), hit-stop, camera shake, Gameplay Cue hit → SFX kandidat slot 01–02.
-- **Developer:** download animasi Mixamo (bagian 6.1), retarget ke Manny, buat `AM_Aksa_LightCombo` (3 section + notify), slot montage di `ABP_Aksa`, `DA_CombatProfile_Human`, tuning.
+- **Developer:** uji rasa & tuning. (Implementasi 12 Okt 2026: **satu montage per langkah** `AM_Aksa_Light_01..03`, bukan satu montage 3 section, supaya bisa dibuat & diisi notify dari Python; placeholder `MM_Attack_01..03` bawaan Mannequin dengan root motion, waktu hit dari analisis kecepatan tulang. Mixamo *Jab/Cross/Hook* opsional: ganti `SOURCE`/waktu di `Tools/ue_setup_light_combo.py` lalu jalankan ulang. `ABP_Aksa` sudah punya `DefaultSlot`.)
 - **Gate:** combo 3 pukulan ke dummy terasa responsif (tekan cepat = 3 pukulan beruntun, berhenti menekan = berhenti), hit terasa (hit-stop + shake + suara), hitbox terlihat lewat `JD.Debug.Hitbox 1`.
 
 ### Iterasi 3 — Pukulan berat, dodge, tangkis, parry
@@ -278,8 +278,10 @@ Semua lewat `UJDCheatManager` (konsol `~`) dan CVar, hanya di build dev.
 | Perintah | Fungsi |
 |---|---|
 | `JD.God` | Tidak bisa mati |
-| `JD.Damage <n>`, `JD.Heal` | Uji atribut |
-| `JD.Debug.Hitbox 1` | Gambar trace hit, jendela combo/parry |
+| `JD.Damage <n>`, `JD.Heal` | Uji atribut (damage lewat `UJDGE_Damage`, jalur yang sama dengan pukulan musuh) |
+| `JD.Stamina <n>` | Kurangi stamina n → regen mulai setelah jeda 0,8 s |
+| `JD.Debug.Input 1` | Tampilkan input tag yang ditekan/dilepas di layar (uji pemetaan KB/M & gamepad) |
+| `JD.Debug.Hitbox 1` | Gambar sweep hitbox (hijau) & titik kena (merah) |
 | `JD.Debug.AI 1` | State StateTree + token di atas musuh |
 | `JD.SpawnWave <n>`, `JD.KillAll` | Gelombang |
 | `JD.Sync <n>` | Set meter |
@@ -337,8 +339,8 @@ PR dibuat kecil (satu iterasi atau setengahnya) karena Claude tidak bisa build U
 
 | Iter | Status | Tanggal | Catatan |
 |---|---|---|---|
-| 1 | ⬜ | | |
-| 2 | ⬜ | | |
+| 1 | ✅ (KB/M) | 12 Okt 2026 | Build + `ue_setup_combat.py` selesai. Uji otomatis PIE lulus (atribut awal, `JD.Damage`, `JD.God`, `JD.Heal`, regen stamina ±25/s setelah jeda). Uji tangan developer KB/M lulus: HUD tampil (kiri bawah), LMB/E/RMB/Shift/Q terbaca sebagai input tag. **Menyusul:** gamepad lewat x360ce (Q16), `showdebug abilitysystem` |
+| 2 | 🟡 | 12 Okt 2026 | `ue_setup_light_combo.py` selesai: montage + notify, `GC_Hit_Light/Heavy` (SFX Kenney k1, **pilihan sementara** slot 01–02), `DA_CombatProfile_Human`, `BP_TrainingDummy` di `Test_Combat`. Uji otomatis: pukulan 1 ke dummy -10 HP. Fix 13 Okt: tendangan (langkah 3) tertahan foot IK Control Rig `ABP_Aksa` → node dilepas (kaki kanan 29 → 113 cm pada 0,33 s); telapak tidak menyesuaikan tangga/miring sampai foot IK versi F2 (curve `DisableLegIK` sudah ada di `A_Aksa_Attack_*`). Sisa: uji tangan combo 3 pukulan, rasa hit-stop/shake/suara |
 | 3 | ⬜ | | |
 | 4 | ⬜ | | |
 | 5 | ⬜ | | |

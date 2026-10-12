@@ -1,7 +1,7 @@
 {
  "_petunjuk": "Isi k1/k2/k3 setelah mendengarkan Audio/Kandidat/<slot>/. Kosongkan (\"\") kalau belum ada yang cocok. Dipakai Tools/ue_import_audio.py.",
- "01_pukulan_ringan": "",
- "02_pukulan_berat": "",
+ "01_pukulan_ringan": "k1",
+ "02_pukulan_berat": "k1",
  "03_tangkis": "",
  "04_parry": "",
  "05_dodge": "",

@@ -435,3 +435,8 @@ void UJDEditorToolsLibrary::RetargetAssetsToFolder(const TArray<UObject*>& Asset
 	Operation->RemoveFromRoot();
 	UE_LOG(LogJayadwaraEditor, Log, TEXT("RetargetAssetsToFolder: %d aset -> %s"), Assets.Num(), *FolderPath);
 }
+
+FGameplayTag UJDEditorToolsLibrary::MakeGameplayTag(FName TagName)
+{
+	return FGameplayTag::RequestGameplayTag(TagName, /*ErrorIfNotFound*/ true);
+}

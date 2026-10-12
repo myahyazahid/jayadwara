@@ -1,5 +1,7 @@
 #include "Core/JDPlayerController.h"
 
+#include "Abilities/JDAbilitySystemComponent.h"
+#include "AbilitySystemGlobals.h"
 #include "Characters/JDGiantCharacter.h"
 #include "Components/CapsuleComponent.h"
 #include "EnhancedInputComponent.h"
@@ -9,7 +11,15 @@
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "InputMappingContext.h"
+#include "Core/JDCheatManager.h"
 #include "Jayadwara.h"
+#include "UI/JDHUDWidget.h"
+
+AJDPlayerController::AJDPlayerController()
+{
+	CheatClass = UJDCheatManager::StaticClass();
+	HUDWidgetClass = UJDHUDWidget::StaticClass();
+}
 
 void AJDPlayerController::BeginPlay()
 {
@@ -18,6 +28,15 @@ void AJDPlayerController::BeginPlay()
 	if (!IsLocalPlayerController())
 	{
 		return;
+	}
+
+	if (HUDWidgetClass)
+	{
+		HUDWidget = CreateWidget<UJDHUDWidget>(this, HUDWidgetClass);
+		if (HUDWidget)
+		{
+			HUDWidget->AddToViewport();
+		}
 	}
 
 	if (HumanMappingContexts.IsEmpty())
@@ -54,6 +73,27 @@ void AJDPlayerController::SetupInputComponent()
 	if (UEnhancedInputComponent* Input = Cast<UEnhancedInputComponent>(InputComponent))
 	{
 		Input->BindAction(TransformAction, ETriggerEvent::Started, this, &AJDPlayerController::ToggleTransformation);
+	}
+}
+
+void AJDPlayerController::PostProcessInput(const float DeltaTime, const bool bGamePaused)
+{
+	// Setelah semua binding input frame ini jalan: aktifkan ability sesuai tekan/tahan/lepas input tag.
+	if (UJDAbilitySystemComponent* ASC = Cast<UJDAbilitySystemComponent>(UAbilitySystemGlobals::GetAbilitySystemComponentFromActor(GetPawn())))
+	{
+		ASC->ProcessAbilityInput(DeltaTime, bGamePaused);
+	}
+
+	Super::PostProcessInput(DeltaTime, bGamePaused);
+}
+
+void AJDPlayerController::OnPossess(APawn* InPawn)
+{
+	Super::OnPossess(InPawn);
+
+	if (UJDCheatManager* Cheats = Cast<UJDCheatManager>(CheatManager))
+	{
+		Cheats->ApplyToPawn(InPawn);
 	}
 }
 

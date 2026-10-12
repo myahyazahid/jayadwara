@@ -1,5 +1,11 @@
 #include "Characters/JDCharacterBase.h"
 
+#include "Abilities/JDAbilitySet.h"
+#include "Abilities/JDAbilitySystemComponent.h"
+#include "Abilities/JDAttributeSet.h"
+#include "Abilities/JDGameplayTags.h"
+#include "Abilities/JDInputConfig.h"
+#include "Combat/JDCombatComponent.h"
 #include "EnhancedInputComponent.h"
 #include "GameFramework/Controller.h"
 #include "InputActionValue.h"
@@ -9,6 +15,67 @@ AJDCharacterBase::AJDCharacterBase()
 {
 	// Gerak ditangani CharacterMovementComponent (tick sendiri); actor-nya tidak perlu tick.
 	PrimaryActorTick.bCanEverTick = false;
+
+	AbilitySystemComponent = CreateDefaultSubobject<UJDAbilitySystemComponent>(TEXT("AbilitySystem"));
+	// Subobject AttributeSet milik actor pemilik ASC otomatis terdaftar di ASC saat InitializeComponent.
+	AttributeSet = CreateDefaultSubobject<UJDAttributeSet>(TEXT("AttributeSet"));
+	CombatComponent = CreateDefaultSubobject<UJDCombatComponent>(TEXT("Combat"));
+}
+
+UAbilitySystemComponent* AJDCharacterBase::GetAbilitySystemComponent() const
+{
+	return AbilitySystemComponent;
+}
+
+void AJDCharacterBase::BeginPlay()
+{
+	Super::BeginPlay();
+
+	if (!AbilitySystemComponent)
+	{
+		return;
+	}
+	AbilitySystemComponent->InitAbilityActorInfo(this, this);
+
+	AttributeSet->OnOutOfHealth.AddUObject(this, &AJDCharacterBase::HandleOutOfHealth);
+
+	if (AbilitySet)
+	{
+		AbilitySet->GiveToAbilitySystem(AbilitySystemComponent);
+	}
+	else
+	{
+		UE_LOG(LogJayadwara, Warning, TEXT("%s: Ability Set kosong; atribut tetap 0 (Class Defaults > Abilities)."), *GetName());
+	}
+}
+
+void AJDCharacterBase::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+
+	// Controller berubah (transformasi, AI): actor info ASC harus menunjuk controller baru.
+	if (AbilitySystemComponent)
+	{
+		AbilitySystemComponent->InitAbilityActorInfo(this, this);
+	}
+}
+
+void AJDCharacterBase::UnPossessed()
+{
+	if (AbilitySystemComponent)
+	{
+		AbilitySystemComponent->ClearAbilityInput();
+	}
+	Super::UnPossessed();
+}
+
+void AJDCharacterBase::HandleOutOfHealth(AActor* DamageInstigator, float DamageAmount)
+{
+	UE_LOG(LogJayadwara, Log, TEXT("%s: Health habis (damage terakhir %.1f dari %s)"), *GetName(), DamageAmount, *GetNameSafe(DamageInstigator));
+	if (AbilitySystemComponent)
+	{
+		AbilitySystemComponent->SetLooseGameplayTagCount(JDGameplayTags::State_Dead, 1);
+	}
 }
 
 void AJDCharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -43,6 +110,35 @@ void AJDCharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	{
 		Input->BindAction(JumpAction, ETriggerEvent::Started, this, &ACharacter::Jump);
 		Input->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
+	}
+
+	// Aksi combat: tekan/lepas diteruskan ke ASC sebagai input tag; aktivasi diproses di AJDPlayerController::PostProcessInput.
+	if (InputConfig)
+	{
+		for (const FJDInputAction& Entry : InputConfig->AbilityInputActions)
+		{
+			if (Entry.InputAction && Entry.InputTag.IsValid())
+			{
+				Input->BindAction(Entry.InputAction, ETriggerEvent::Started, this, &AJDCharacterBase::AbilityInputPressed, Entry.InputTag);
+				Input->BindAction(Entry.InputAction, ETriggerEvent::Completed, this, &AJDCharacterBase::AbilityInputReleased, Entry.InputTag);
+			}
+		}
+	}
+}
+
+void AJDCharacterBase::AbilityInputPressed(FGameplayTag InputTag)
+{
+	if (AbilitySystemComponent)
+	{
+		AbilitySystemComponent->AbilityInputTagPressed(InputTag);
+	}
+}
+
+void AJDCharacterBase::AbilityInputReleased(FGameplayTag InputTag)
+{
+	if (AbilitySystemComponent)
+	{
+		AbilitySystemComponent->AbilityInputTagReleased(InputTag);
 	}
 }
 

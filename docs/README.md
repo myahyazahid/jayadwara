@@ -42,6 +42,7 @@ Aksa Jaya Mangkubumi, agen baru sebuah lembaga rahasia penanganan anomali, menya
 | 22 | [Spesifikasi Material Aksa](22-spesifikasi-material-aksa.md) | **Draft.** Slot, tekstur dasar (BC/N/ORM/SSS/Mask), master & instance UE, pipeline UV (hasil Iterasi 5) |
 | 23 | [Rencana Fase 1](23-rencana-fase-1.md) | **Usulan.** Prototype greybox: 9 iterasi (GAS → combat → minion → raksasa → gedung & meter → boss → playtest), gate, angka awal combat, pertanyaan Q1–Q14 |
 | 24 | [Model Sheet Jerangkong](24-model-sheet-jerangkong.md) | **Dipakai.** Design lock Jerangkong: proporsi terukur (H = 2,2 m), postur bungkuk sedang, palet, potongan, keputusan S1–S12 (hasil Iterasi 0) |
+| 25 | [Rencana Redesign Jayadwara](25-rencana-redesign-jayadwara.md) | **Persiapan.** Jayadwara2 dari model Tripo developer (lebih realistis): intake → spike → pemisahan → rig → tekstur → LOD → UE, keputusan R1–R10; model lama tetap utuh & bisa dikembalikan |
 
 
 ---

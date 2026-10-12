@@ -7,6 +7,7 @@
 class AJDGiantCharacter;
 class UInputAction;
 class UInputMappingContext;
+class UJDHUDWidget;
 
 /**
  * Pemain. Memasang mapping context mode manusia (docs/12 "Input") dan menangani transformasi manusia <-> Jayadwara.
@@ -15,6 +16,9 @@ class UInputMappingContext;
  * raksasa di-spawn di lokasinya setinggi manusia lalu tumbuh (AJDGiantCharacter::BeginScaleTransition). Kembali ke
  * manusia: raksasa menyusut, pawn manusia ditampilkan lagi, pawn raksasa dihapus. Efek ini sementara; animasi & VFX
  * transformasi sungguhan menyusul. IMC_Giant dan syarat/meter Sync ditambahkan di Fase 1 (Feb 2027).
+ *
+ * GAS (docs/23 Iterasi 1): input ability pawn diproses sekali per frame di PostProcessInput; HUD debug (UJDHUDWidget)
+ * dibuat di sini supaya bertahan saat pawn berganti; cheat "JD.*" lewat UJDCheatManager.
  */
 UCLASS()
 class JAYADWARA_API AJDPlayerController : public APlayerController
@@ -22,6 +26,8 @@ class JAYADWARA_API AJDPlayerController : public APlayerController
 	GENERATED_BODY()
 
 public:
+	AJDPlayerController();
+
 	/** Tombol transformasi: manusia -> Jayadwara, atau sebaliknya. */
 	UFUNCTION(BlueprintCallable, Category = "Transformation")
 	void ToggleTransformation();
@@ -38,6 +44,8 @@ public:
 protected:
 	virtual void BeginPlay() override;
 	virtual void SetupInputComponent() override;
+	virtual void PostProcessInput(const float DeltaTime, const bool bGamePaused) override;
+	virtual void OnPossess(APawn* InPawn) override;
 
 	/** IMC mode manusia. Array karena konten Third Person bawaan 5.6 bisa memisahkan mouse look ke IMC sendiri. */
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
@@ -50,6 +58,10 @@ protected:
 	/** Kelas pawn Jayadwara (BP_Jayadwara) yang di-spawn saat bertransformasi. */
 	UPROPERTY(EditDefaultsOnly, Category = "Transformation")
 	TSubclassOf<AJDGiantCharacter> GiantPawnClass;
+
+	/** HUD debug (bar atribut). Kosong = tanpa HUD. Bisa diganti WBP_HUD_* turunan UJDHUDWidget. */
+	UPROPERTY(EditDefaultsOnly, Category = "UI")
+	TSubclassOf<UJDHUDWidget> HUDWidgetClass;
 
 	/** Lama efek tumbuh/menyusut (detik). */
 	UPROPERTY(EditDefaultsOnly, Category = "Transformation", meta = (ClampMin = "0.1"))
@@ -67,6 +79,9 @@ private:
 
 	UPROPERTY(Transient)
 	TObjectPtr<AJDGiantCharacter> GiantPawn;
+
+	UPROPERTY(Transient)
+	TObjectPtr<UJDHUDWidget> HUDWidget;
 
 	bool bTransforming = false;
 };

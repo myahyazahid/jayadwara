@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameplayTagContainer.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "JDEditorToolsLibrary.generated.h"
 
@@ -84,4 +85,11 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Jayadwara|Editor")
 	static void RetargetAssetsToFolder(const TArray<UObject*>& Assets, USkeletalMesh* SourceMesh, USkeletalMesh* TargetMesh,
 		UIKRetargeter* Retargeter, const FString& FolderPath, const FString& Suffix, bool bIncludeReferencedAssets = true);
+
+	/**
+	 * Gameplay Tag dari nama, untuk mengisi DataAsset dari Python (FGameplayTag::TagName tidak bisa di-set langsung).
+	 * Tag yang tidak terdaftar -> tag kosong + error di log. Dipakai Tools/ue_setup_combat.py.
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Jayadwara|Editor")
+	static FGameplayTag MakeGameplayTag(FName TagName);
 };
