@@ -41,12 +41,15 @@ for ob in bpy.data.objects:
     if ob.type == "MESH" and ob.name.startswith("AK_") and "ak_kind" in ob:
         d = ob.copy()
         d.data = ob.data.copy()
+        if d.data.shape_keys:
+            for kb in d.data.shape_keys.key_blocks[1:]:
+                kb.value = 0.0                                   # morph tidak boleh ikut ter-bake ke mesh dasar
         tmp_coll.objects.link(d)
         if PREP is not None and PREP(d) is False:
             bpy.data.objects.remove(d, do_unlink=True)
             continue
         dups.append(d)
-act = max(dups, key=lambda o: len(o.data.vertices))
+act = next((d for d in dups if d.name.startswith("AK_Head") and d.data.shape_keys), None) or max(dups, key=lambda o: len(o.data.vertices))   # kepala aktif: morph target ikut
 for o in bpy.context.view_layer.objects:
     o.select_set(False)
 for d in dups:

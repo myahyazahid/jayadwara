@@ -32,10 +32,14 @@ def hairline_z(t):
     a = abs(math.degrees(t))
     if a < 38:
         return 1.714 + 0.004 * (a / 38.0)                       # garis rambut depan
-    if a < 80:
-        return 1.718 - (a - 38) / 42.0 * 0.042
+    if a < 70:
+        return 1.718 - (a - 38) / 32.0 * 0.024                      # pelipis (revisi 5c: tidak botak dari samping)
+    if a < 84:
+        return 1.694 - (a - 70) / 14.0 * 0.052                      # cambang turun di depan telinga
+    if a < 95:
+        return 1.642 + (a - 84) / 11.0 * 0.020
     if a < 115:
-        return 1.676 - (a - 80) / 35.0 * 0.020
+        return 1.662 - (a - 95) / 20.0 * 0.006
     return 1.656 - (min(a, 180) - 115) / 65.0 * 0.034
 
 
@@ -43,23 +47,31 @@ def _ang(co):
     return math.atan2(co.x, -(co.y - CENTER_Y))
 
 
+def hairline_at(p):
+    """Garis rambut di titik p: kurva per sudut + cambang (revisi 5c): pita di depan telinga turun ke z 1,645."""
+    base = hairline_z(_ang(p))
+    sb = smooth(0.040, 0.058, abs(p.x)) * smooth(-0.078, -0.054, p.y) * (1.0 - smooth(-0.036, -0.016, p.y))
+    zsb = 1.645 + 0.030 * smooth(-0.060, -0.078, p.y)                  # ujung depan cambang membulat naik ke sudut pelipis
+    return base + (min(base, zsb) - base) * sb
+
+
 def thick(p):
-    t_edge = smooth(0.0, 0.022, p.z - hairline_z(_ang(p)))                       # menipis ke garis rambut
+    t_edge = smooth(0.0, 0.022, p.z - hairline_at(p))                       # menipis ke garis rambut
     top = smooth(1.700, 1.770, p.z)
     front = smooth(0.005, -0.070, p.y) * smooth(1.712, 1.745, p.z)             # jambul depan
     side = smooth(0.035, 0.062, abs(p.x)) * (1 - top)
     part = math.exp(-((p.x - PART_X) / 0.006) ** 2) * smooth(0.02, -0.05, p.y) * top
     temple = smooth(0.030, 0.055, abs(p.x)) * smooth(1.69, 1.73, p.z)
-    t = 0.007 + 0.027 * top + 0.016 * front + 0.010 * temple - 0.006 * part
+    t = 0.005 + 0.008 * top + 0.004 * front + 0.010 * temple - 0.006 * part
     t *= (1 - 0.30 * side)
     return max(0.0015, t * (0.25 + 0.75 * t_edge))
 
 
 def build_shell(bm_out, mesh):
     def ok(co):
-        if co.z < hairline_z(_ang(co)):
+        if co.z < hairline_at(co):
             return False
-        if abs(co.x) > 0.0600 and co.z < 1.705:
+        if abs(co.x) > 0.0600 and co.z < 1.705 and co.y > -0.030:   # telinga (cambang di depannya tetap)
             return False
         return True
 
@@ -70,7 +82,7 @@ def build_shell(bm_out, mesh):
             if i not in vmap:
                 v = mesh.vertices[i]
                 off = thick(v.co)
-                lift = Vector((0.15, -0.45, 0.35)) * (0.007 * smooth(0.0, -0.07, v.co.y) * smooth(1.72, 1.75, v.co.z))  # jambul condong ke depan-atas
+                lift = Vector((0.15, -0.45, 0.35)) * (0.003 * smooth(0.0, -0.07, v.co.y) * smooth(1.72, 1.75, v.co.z))  # jambul condong ke depan-atas
                 vmap[i] = bm_out.verts.new(v.co + v.normal * off + lift)
                 base[vmap[i]] = (v.co.copy(), v.normal.copy())
     for p in keep:
@@ -102,7 +114,7 @@ def build_shell(bm_out, mesh):
     snapped = {}
     for v in bnd:
         co = v.co
-        tgt = Vector((co.x, co.y, hairline_z(_ang(co))))
+        tgt = Vector((co.x, co.y, hairline_at(co)))
         loc, nrm, _i, _d = head_bvh.find_nearest(tgt)
         if loc is not None:
             snapped[v] = (loc, nrm)

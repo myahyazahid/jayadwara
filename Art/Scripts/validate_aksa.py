@@ -1,6 +1,6 @@
 """Validasi FBX Aksa (Iterasi 1+) — Blender headless.
 
-  blender --background --factory-startup --python Art/Scripts/validate_aksa.py -- Art/Export/SK_Aksa_Proxy.fbx [--max-tris 60000] [--require-uv]
+  blender --background --factory-startup --python Art/Scripts/validate_aksa.py -- Art/Export/SK_Aksa_Proxy.fbx [--max-tris 60000] [--require-uv] [--require-morph 8]
 
 Dasar: Art/Reference/manny/SKM_Manny_Simple.fbx (impor yang sama) dan manny_rest.json. Cek:
  tulang: semua 88 tulang Manny ada, induknya sama, posisi <=1 mm dan orientasi <=0,5° (ruang dunia, meter); tulang tambahan hanya
@@ -111,13 +111,46 @@ check("bobot ternormalisasi (±0,01)", nonnorm == 0, f"{nonnorm} vertex")
 mw = mesh.matrix_world
 zs = [(mw @ v.co).z for v in me.vertices]
 height = (max(zs) - min(zs)) * (0.01 if max(zs) - min(zs) > 20 else 1.0)
-check(f"tinggi mesh {manny_h:.3f} m ±2 cm", abs(height - manny_h) <= 0.02, f"{height:.3f} m")
+check(f"tinggi mesh {manny_h:.3f} m -6/+2 cm (rambut boleh lebih rendah)", -0.06 <= height - manny_h <= 0.02, f"{height:.3f} m")
 foot_z = min(zs) * (0.01 if max(zs) - min(zs) > 20 else 1.0)
 check("telapak di z≈0 (±1 cm)", abs(foot_z) <= 0.01, f"{foot_z:.4f} m")
 if require_uv:
     uv = me.uv_layers.active
     ok = uv is not None and all(-0.001 <= c <= 1.001 for d in uv.data for c in d.uv)
     check("UV 0-1", ok, "tidak ada UV" if uv is None else "")
+    if uv is not None:
+        degen = 0
+        for p_ in me.polygons:
+            pts = [uv.data[i].uv for i in range(p_.loop_start, p_.loop_start + p_.loop_total)]
+            a2 = sum(pts[i][0] * pts[(i + 1) % len(pts)][1] - pts[(i + 1) % len(pts)][0] * pts[i][1] for i in range(len(pts)))
+            if abs(a2) < 1e-10:
+                degen += 1
+        check("UV: segitiga degenerate <2% (dinding tipis trim/tali)", degen <= len(me.polygons) // 50, f"{degen} poligon")
+
+# ---- morph target (--require-morph N)
+if "--require-morph" in argv:
+    need = int(argv[argv.index("--require-morph") + 1])
+    keys = list(me.shape_keys.key_blocks) if me.shape_keys else []
+    names = [k.name for k in keys[1:]]
+    check(f">= {need} morph target", len(names) >= need, f"{len(names)}: {names}")
+    unit_m = 0.01 if max(zs) - min(zs) > 20 else 1.0
+    leak, empty = [], []
+    if keys:
+        basis = keys[0]
+        for k in keys[1:]:
+            moved = bad = 0
+            for i, v in enumerate(me.vertices):
+                d = (k.data[i].co - basis.data[i].co).length * unit_m
+                if d > 1e-4:
+                    moved += 1
+                    if basis.data[i].co.z * unit_m < 1.45:
+                        bad += 1
+            if moved == 0:
+                empty.append(k.name)
+            if bad:
+                leak.append((k.name, bad))
+    check("morph target tidak menggeser vertex di bawah leher (z<1,45)", not leak, f"{leak}")
+    check("tiap morph target menggeser vertex", not empty, f"kosong: {empty}")
 
 # ---- socket
 sj = fbx.with_name(fbx.stem + "_sockets.json")

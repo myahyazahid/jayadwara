@@ -41,7 +41,9 @@ else:
             EAS.destroy_actor(a)
     spacing = 100.0
     y0 = -spacing * (len(items) - 1) / 2
-    for i, (mesh_path, anim, t) in enumerate(items):
+    for i, item in enumerate(items):
+        mesh_path, anim, t = item[:3]
+        morphs = item[3] if len(item) > 3 else {}
         mesh = EAL.load_asset(mesh_path)
         seq = EAL.load_asset(ANIM + anim)
         if mesh is None or seq is None:
@@ -61,6 +63,8 @@ else:
         for fn in ("tick_animation", "refresh_bone_transforms"):
             if hasattr(c, fn):
                 getattr(c, fn)(*((0.0, False) if fn == "tick_animation" else ()))
+        for mn, mv in morphs.items():
+            c.set_morph_target(mn, mv)
         print(f"{a.get_actor_label()}  anim={anim}  t={t}")
     if not os.path.exists(CAM_FILE):
         loc, rot = UES.get_level_viewport_camera_info()

@@ -1,7 +1,7 @@
 """Aksa Iterasi 1 — 6 uji pose silat + metrik peregangan (cm absolut) per bagian.
 
 Jalankan di Blender (aksa_v01_proxy.blend terbuka, setelah aksa_11_proxy.py). Membuat action `AK_PoseTest`:
-frame 1 = rest, 2 kuda-kuda, 3 pukul, 4 tendang tinggi, 5 dodge, 6 jongkok, 7 tangan terangkat. Rotasi dalam RUANG ARMATURE
+frame 1 = rest, 2 kuda-kuda, 3 pukul, 4 tendang tinggi, 5 dodge, 6 jongkok, 7 lari, 8 lompat, 9 tendang samping, 10 tangkis, 11 putar badan, 12 lunge, 13 bungkuk, 14 tangan terangkat (13 pose + rest). Rotasi dalam RUANG ARMATURE
 (sumbu +X kiri, -Y depan, +Z atas, tidak bergantung pada orientasi tulang Manny): tiap operasi = (tulang, sumbu, derajat),
 diterapkan dari induk ke anak, pivot di kepala tulang. Setelah itu menghitung peregangan tepi (selisih panjang tepi vs rest,
 cm absolut) per bagian dan mencetak yang terburuk. Pose tidak mengubah pose rest (frame 1) dan tidak ikut export.
@@ -36,6 +36,20 @@ POSES = {
     "jongkok": [("pelvis", "down", 0.46), ("spine_01", "x", -12), ("spine_02", "x", -14), ("thigh_l", "x", -100), ("thigh_r", "x", -100),
                 ("calf_l", "x", 118), ("calf_r", "x", 118), ("foot_l", "x", -20), ("foot_r", "x", -20),
                 ("upperarm_l", "x", -45), ("upperarm_r", "x", -45)],
+    "lari": [("thigh_l", "x", -65), ("calf_l", "x", 75), ("foot_l", "x", -15), ("thigh_r", "x", 25), ("calf_r", "x", 30),
+             ("upperarm_l", "x", 45), ("lowerarm_l", "x", -80), ("upperarm_r", "x", -55), ("lowerarm_r", "x", -85),
+             ("spine_02", "z", -12), ("spine_03", "x", -8)],
+    "lompat": [("pelvis", "down", 0.05), ("thigh_l", "x", -50), ("calf_l", "x", 70), ("thigh_r", "x", -35), ("calf_r", "x", 60),
+               ("upperarm_l", "y", -110), ("upperarm_r", "y", 110)],
+    "tendang_samping": [("spine_02", "y", -14), ("thigh_r", "y", 85), ("calf_r", "y", 5), ("upperarm_l", "y", -40), ("upperarm_r", "y", 60),
+                        ("pelvis", "down", 0.04)],
+    "tangkis": [("upperarm_l", "x", -70), ("lowerarm_l", "x", -105), ("upperarm_r", "x", -75), ("lowerarm_r", "x", -100), ("spine_02", "x", -8)],
+    "putar_badan": [("spine_01", "z", 22), ("spine_02", "z", 22), ("spine_03", "z", 22), ("neck_01", "z", -25), ("upperarm_l", "x", -30),
+                    ("upperarm_r", "x", -30)],
+    "lunge": [("pelvis", "down", 0.22), ("thigh_l", "x", -75), ("calf_l", "x", 85), ("thigh_r", "x", 35), ("calf_r", "x", 5),
+              ("spine_02", "x", -10), ("upperarm_l", "x", -50), ("lowerarm_l", "x", -70)],
+    "bungkuk": [("spine_01", "x", -25), ("spine_02", "x", -25), ("spine_03", "x", -20), ("neck_01", "x", 20), ("upperarm_l", "x", -20),
+                ("upperarm_r", "x", -20), ("thigh_l", "x", -15), ("thigh_r", "x", -15)],
     "tangan_terangkat": [("clavicle_l", "y", -12), ("clavicle_r", "y", 12), ("upperarm_l", "y", -150), ("upperarm_r", "y", 150),
                          ("lowerarm_l", "y", -10), ("lowerarm_r", "y", 10)],
 }

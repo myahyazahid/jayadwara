@@ -46,6 +46,14 @@ Dijalankan di Blender (mis. lewat MCP: `exec(open(path).read())`), kecuali yang 
 | `ak_head.py`, `ak_hair.py` | Aksa Iterasi 2: pembangun kepala (loft cincin + fitur wajah analitik; angka di `KEYS`/`feature`) dan rambut (tudung + gumpalan, seed tetap) |
 | `aksa_20_head.py` | Aksa Iterasi 2: ganti proxy kepala dengan kepala, telinga, mata, alis, rambut, leher → `aksa_v02_head.blend` (jangan jalankan ulang di atas hasil sculpt manual) |
 | `ak_cloth.py`, `aksa_30_outfit.py` | Aksa Iterasi 3: pakaian hero + tangan metaball (loft terbuka, solidify, pelat menempel permukaan, dorong-keluar antar lapisan) → `aksa_v04_outfit.blend` |
+| `aksa_40_rig.py` | Aksa Iterasi 4: tulang twist deform, rantai `jacket_*`, bobot ulang lengan/tangan/kaki/ujung jaket (jalankan setelah `aksa_30`) |
+| `aksa_24_face.py` | Aksa revisi wajah di file kerja v05: alis busur tipis, senyum tipis dipanggang ke Basis, mata lebih terbuka (idempoten; lalu `aksa_50` → textures → `aksa_51` → export) |
+| `ak_hair5.py` | Aksa rambut gaya 5 (aktif, dipanggil `aksa_22`): low fade (warna vertex kulit kepala) + atas bertekstur 950 helai |
+| `ak_hair4.py`, `aksa_23_hair4.py` | Aksa rambut gaya 4 (aktif): cangkang gaya 3 + 1000 helai pita meruncing; `aksa_23` mengganti rambut di file kerja tanpa mengulang kepala/pakaian (lalu ulangi `aksa_50` → textures → `aksa_51` → export) |
+| `aksa_50_uv.py` | Aksa Iterasi 5: UV per slot (smart_project + packer sendiri, mata planar) + NPZ `Export/_uv_faces_aksa.npz` → `aksa_v05_tex.blend` (jangan ulang setelah developer mengecat) |
+| `make_textures_aksa.py` | Aksa Iterasi 5: tekstur dasar `Export/Textures_Aksa/T_Aksa_<Slot>_<BC\|N\|ORM\|SSS\|Mask>.png` dari NPZ (Python sistem: `python -I`) |
+| `aksa_51_materials.py` | Aksa Iterasi 5: material Blender bertekstur meniru `M_Aksa_Master` UE |
+| `aksa_41_render_morphs.py` + `aksa_41_morph_sheet.py` | Aksa: render 8 morph target wajah + grid (`Export/_aksa_morphs.png`) |
 | `aksa_31_render_body.py` | Aksa: render badan Eevee 3/4 depan/belakang + close-up tangan & boots |
 | `ak_hair3.py` | Aksa rambut gaya 3 (aktif): disisir ke belakang + belahan samping, helai sejajar, tepi ditempel ke kurva garis rambut |
 | `aksa_22_mpfb_head.py`, `ak_hair2.py` | Aksa Iterasi 2 putaran 2: kepala dari MPFB (MACRO + TARGETS wajah, dipetakan ke ukuran konsep) + rambut gaya textured crop (cangkang + gumpalan mengikuti aliran) → `aksa_v03_mpfb.blend`. Butuh ekstensi MPFB aktif |

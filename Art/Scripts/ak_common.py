@@ -27,10 +27,10 @@ if str(ART / "Scripts") not in sys.path:
 
 # ---------------------------------------------------------------- warna (docs/21 bagian 3, kolom Usulan)
 HEX = {
-    "skin": "#C68965", "hair": "#1C1A1B", "eye": "#4A3426", "sclera": "#E8E4DC",
+    "skin": "#C68965", "hair": "#0D0C0E", "eye": "#4A3426", "sclera": "#E8E4DC",
     "jacket": "#2B2E45", "shirt": "#1F1D1E", "pants": "#2F2C2E", "batik": "#5A3B2B",
     "gold": "#D6A33A", "boots": "#1A1817", "gloves": "#1F1D1E", "belt": "#1A1817", "stone": "#6B6B6E",
-    "hair_hi": "#2E2420", "iris": "#5A3B27", "pupil": "#0E0B0A", "lip": "#B3735F", "sole": "#121010",
+    "hair_hi": "#1A1613", "iris": "#5A3B27", "pupil": "#0E0B0A", "lip": "#A4584A", "sole": "#121010",
 }
 
 
