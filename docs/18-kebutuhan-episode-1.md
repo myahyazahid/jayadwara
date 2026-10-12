@@ -186,6 +186,8 @@
 | Suara Sang Penjaga | Placeholder: teks + efek suara rendah (voice acting di luar scope) | D | F2 |
 | Ambien | Angin bukit, serangga senja, desa | Pustaka | F2 |
 
+Kandidat SFX placeholder (Kenney + Freesound, semua CC0) dan aturan lisensi: [Audio/KANDIDAT.md](../Audio/KANDIDAT.md), [Audio/README.md](../Audio/README.md). Sonniss GDC Bundle didownload manual.
+
 ### F. UI & Narasi
 | Item | Isi | Oleh | Fase |
 |---|---|---|---|

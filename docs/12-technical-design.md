@@ -189,6 +189,8 @@ Content/Jayadwara/
 ```
 Konten pihak ketiga tetap di folder aslinya supaya referensinya tidak putus: `Characters/Mannequins/`, `Input/`, `LevelPrototyping/` (disalin dari `Templates/TemplateResources/High` UE 5.6, tanpa `.fbx` sumber). Placeholder Fase 0–1, diganti aset Aksa sendiri di Fase 2.
 
+File sumber audio (WAV kandidat, lisensi, pilihan) ada di `Audio/` di root repo, di luar `Content/` seperti `Art/`; import ke `Audio/` di atas lewat `Tools/ue_import_audio.py` (lihat [Audio/README.md](../Audio/README.md)).
+
 ## Konvensi Penamaan Aset
 
 | Prefix | Jenis | Prefix | Jenis |
