@@ -44,6 +44,8 @@ Model Aksa dibuat sendiri di Blender; rencana & iterasi di [19-rencana-model-aks
 
 Tujuan: membuktikan **inti gameplay seru** sebelum membuat aset mahal. Semua visual masih kotak, mannequin, dan Mixamo.
 
+Rencana kerja rinci (iterasi, gate, pembagian Claude/developer): [23-rencana-fase-1.md](23-rencana-fase-1.md).
+
 | Bulan | Target |
 |---|---|
 | **Des 2026** | Gerak karakter manusia + kamera; combo silat dasar (pukul ringan, berat, hindar, tangkis) |
