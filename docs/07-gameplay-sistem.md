@@ -30,7 +30,7 @@ Pengganti timer transformasi.
 | Warga terluka | Meter turun drastis |
 | Melindungi warga / menyelamatkan sandera | Meter naik |
 | Bertarung sesuai kelemahan boss | Meter stabil |
-| Meter habis | Transformasi berakhir paksa |
+| Meter habis | Transformasi berakhir paksa → Aksa di tempat, bisa berubah lagi setelah energi transformasi penuh |
 
 - Diperkenalkan sebagai tutorial di **Ep 6 (Kemamang)**.
 - Payoff naratif di **Ep 50**: harapan warga memulihkan sinkronisasi.
@@ -39,7 +39,7 @@ Pengganti timer transformasi.
 ## Transisi & Progression
 
 - **Syarat transformasi**: **energi transformasi** penuh (bar di HUD manusia; keputusan 12 Okt 2026). Transformasi pertama tiap episode boleh dipicu cerita.
-- **Kalah sebagai Jayadwara**: kembali jadi Aksa **di tempat**, pertarungan berlanjut; Aksa menghindar sampai energi penuh lagi lalu berubah lagi. Aksa mati = ulang checkpoint. Detail: [23](23-rencana-fase-1.md#45-kalah-sebagai-jayadwara--energi-transformasi-q15).
+- **Kalah sebagai Jayadwara** (Health habis atau meter sinkronisasi habis): kembali jadi Aksa **di tempat**, pertarungan berlanjut; Aksa menghindar sampai energi penuh lagi lalu berubah lagi. Aksa mati = ulang checkpoint. Detail: [23](23-rencana-fase-1.md#45-kalah-sebagai-jayadwara--energi-transformasi-q15).
 - **Upgrade**:
   - Skill tree silat (berlaku di dua skala).
   - Upgrade scanner Netra.

@@ -1,6 +1,6 @@
 # 23 — Rencana Fase 1: Prototype Greybox
 
-> **Status: USULAN v0.3 (12 Okt 2026)**. Q1–Q16 dan Q18 sudah dijawab developer; Q17 masih terbuka ([bagian 10](#10-keputusan--pertanyaan)). Angka di dokumen ini adalah usulan awal Claude untuk dituning.
+> **Status: v0.4 (12 Okt 2026)**. Semua pertanyaan (Q1–Q18) sudah dijawab developer ([bagian 10](#10-keputusan--pertanyaan)); menunggu merge PR. Angka di dokumen ini adalah usulan awal Claude untuk dituning.
 > **Tanpa tanggal:** jadwal mulai & selesai tiap iterasi ditentukan developer (Q1). Urutan iterasi tetap.
 > Turunan dari [10](10-roadmap.md#fase-1--prototype-greybox-des-2026--mar-2027) (target bulanan), [18](18-kebutuhan-episode-1.md) (daftar kebutuhan bertanda F1), dan [12](12-technical-design.md) (arsitektur). Kalau dokumen ini bertentangan dengan 12, yang menang 12; perbedaannya dicatat di bagian 4.
 
@@ -159,10 +159,10 @@ Keyboard disetujui developer (Q5): tangan kiri WASD + E/Shift/Space/Q/T, tangan 
 
 Seperti serial tokusatsu: kalau Jayadwara kalah, ia kembali jadi manusia, dan pertarungan berlanjut.
 
-1. Health Jayadwara 0 → efek menyusut (yang sudah ada) → **Aksa muncul di tempat Jayadwara jatuh**. Boss tetap di fase & HP-nya (progres tidak hilang).
+1. Health Jayadwara 0 **atau meter Sync habis** (Q17) → efek menyusut (yang sudah ada) → **Aksa muncul di tempat Jayadwara jatuh**. Boss tetap di fase & HP-nya (progres tidak hilang).
 2. Aksa main biasa, tidak bisa melukai boss raksasa; boss tetap menyerang (injakan, puing) → **menghindar** dengan dodge & lari.
 3. **Energi transformasi** (`TransformEnergy`, HUD manusia) habis setelah kalah dan terisi lagi seiring waktu (awal: penuh dalam ±40 s). Saat penuh: `State.Transform.Ready` → tekan **T / L1+R1** → berubah lagi.
-4. Jayadwara kembali dengan Health ±50% (dituning).
+4. Jayadwara kembali dengan Health ±50% (kalau kalah) atau Sync ±50% (kalau meter habis); dituning.
 5. Aksa mati saat jadi manusia → ulang dari checkpoint awal fase boss.
 
 Aturan IP ([08](08-requirement-produksi.md)): energi ditampilkan sebagai **bar di HUD**, bukan lampu/permata di dada yang berkedip; tidak ada batas waktu 3 menit selama jadi raksasa.
@@ -236,7 +236,7 @@ Kapasitas ±50 jam/bulan. Jam di bawah = **jam developer** (build, editor, tunin
 - **Gate:** combo, berat, dodge, tangkis jalan sebagai Jayadwara dengan **ability yang sama**; terasa berat tapi tidak lamban (G2); bolak-balik transformasi tanpa bug kamera/input; kalah → jadi Aksa di tempat → energi penuh → berubah lagi berjalan tanpa reload.
 
 ### Iterasi 7 — Gedung hancur & meter sinkronisasi
-- **Claude:** `AJDDestructibleBuilding` (kerusakan sebanding gaya dari pukulan, tabrakan badan, terpental, proyektil; Q7), pembersih puing (puing → hilang bertahap), `UJDSyncComponent` + `UJDSyncConfig` + `UJDGE_SyncPenalty`, `OnSyncDepleted` → kembali jadi Aksa (alur bagian 4.5, Q17), `AJDCivilianMarker` (Q11), `WBP_HUD_Giant` base (bar Sync), cheat `JD.Sync <n>`.
+- **Claude:** `AJDDestructibleBuilding` (kerusakan sebanding gaya dari pukulan, tabrakan badan, terpental, proyektil; Q7), pembersih puing (puing → hilang bertahap), `UJDSyncComponent` + `UJDSyncConfig` + `UJDGE_SyncPenalty`, `OnSyncDepleted` → kembali jadi Aksa di tempat (alur bagian 4.5, Q17), `AJDCivilianMarker` (Q11), `WBP_HUD_Giant` base (bar Sync), cheat `JD.Sync <n>`.
 - **Developer:** 3–4 gedung kotak (rumah, warung, menara air) → Fracture Mode → Geometry Collection; `Test_Destruction`; uji performa (berapa gedung runtuh bersamaan sebelum < 60 FPS).
 - **Gate:** gedung runtuh meyakinkan dari kamera raksasa; meter turun sesuai DataAsset; meter habis memaksa transformasi berakhir; G6 terpenuhi atau batas jumlah gedung ditetapkan.
 
@@ -330,12 +330,8 @@ PR dibuat kecil (satu iterasi atau setengahnya) karena Claude tidak bisa build U
 | Q14 | Playtester | **Developer sendiri**, di PC developer |
 | Q15 | Setelah kalah | **Aksa muncul di tempat Jayadwara kalah**, tetap dimainkan (menghindar), berubah lagi saat energi cukup (bagian 4.5) |
 | Q16 | Controller uji | **Pad USB generik gaya PlayStation**, dua analog (bagian 4.4) |
+| Q17 | Meter sinkronisasi habis | **Alur sama dengan kalah** (bagian 4.5); berubah lagi dengan Sync ±50% |
 | Q18 | Kamera otomatis untuk layout tanpa mouse | **Tidak perlu**: layout akhir tetap memakai mouse (LMB/RMB) |
-
-### Masih terbuka
-| # | Pertanyaan | Usulan Claude |
-|---|---|---|
-| **Q17** | Meter sinkronisasi habis: alurnya sama dengan Health habis (jadi Aksa di tempat, tunggu energi, berubah lagi)? | **Ya, sama**, supaya pemain belajar satu aturan. Berubah lagi dengan Sync ±50% |
 
 ## 11. Status & hasil
 

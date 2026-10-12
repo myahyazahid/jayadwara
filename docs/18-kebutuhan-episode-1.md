@@ -85,7 +85,7 @@
 |---|---|---|---|
 | `AJDGiantCharacter` | Skala, kapsul, gerak, kamera | C | ✅ F0 (Iterasi 6) |
 | Rig kamera raksasa | Jarak, FOV, lag, *framing* boss + kota | C+D | F1 |
-| `UJDSyncComponent` | Dengar event gedung/warga → GE penalti; `OnSyncDepleted` → transformasi berakhir | C | F1 |
+| `UJDSyncComponent` | Dengar event gedung/warga → GE penalti; `OnSyncDepleted` → transformasi berakhir, Aksa di tempat (alur sama dengan kalah, [23](23-rencana-fase-1.md#45-kalah-sebagai-jayadwara--energi-transformasi-q15)) | C | F1 |
 | `GE_SyncPenalty_Building`, `GE_SyncPenalty_Civilian` | Besaran dari DataAsset | C+D | F1 |
 
 #### A5. Musuh & boss
