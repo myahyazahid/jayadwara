@@ -138,7 +138,7 @@ Aturan:
 ### Input
 
 - `IMC_Human` dan `IMC_Giant` (Enhanced Input Mapping Context), diganti saat transformasi.
-- Mendukung keyboard-mouse dan gamepad sejak awal.
+- Mendukung keyboard-mouse dan gamepad sejak awal. **Keyboard-mouse perangkat utama**; gamepad PlayStation, Xbox, dan generik harus bisa (pemetaan tombol & catatan teknis di [23](23-rencana-fase-1.md#44-kontrol-q4-q5-q8)). Transformasi: **T** / **L1 + R1**.
 
 ### UI
 
