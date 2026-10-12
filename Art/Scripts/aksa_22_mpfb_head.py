@@ -31,37 +31,38 @@ for m in (C, HD, HA, HA2, HA3, HR):
 from bl_ext.user_default.mpfb.services.humanservice import HumanService  # noqa: E402
 from bl_ext.user_default.mpfb.services.targetservice import TargetService  # noqa: E402
 
-assert any(k in bpy.data.filepath for k in ("aksa_v02", "aksa_v03")), "buka aksa_v02_head.blend atau aksa_v03_mpfb.blend"
-OUT = C.ART / "Blender" / "aksa_v03_mpfb.blend"
+assert any(k in bpy.data.filepath for k in ("aksa_v02", "aksa_v03", "aksa_v04")), "buka aksa_v03_mpfb.blend atau aksa_v04_outfit.blend"
+OUT = C.ART / "Blender" / ("aksa_v04_outfit.blend" if "aksa_v04" in bpy.data.filepath else "aksa_v03_mpfb.blend")
 
-MACRO = {"gender": 1.0, "age": 0.5, "muscle": 0.70, "weight": 0.38, "proportions": 0.80, "height": 0.6,
+MACRO = {"gender": 1.0, "age": 0.5, "muscle": 0.78, "weight": 0.46, "proportions": 0.80, "height": 0.6,
          "cupsize": 0.5, "firmness": 0.5, "race": {"asian": 0.45, "caucasian": 0.30, "african": 0.25}}
 TARGETS = {
-    # kepala & rahang: tegas, bersudut, pipi tirus
-    "head-square": 0.30, "head-invertedtriangular": 0.25, "head-scale-horiz-decr": 0.08, "chin-bones-incr": 0.60, "chin-width-decr": 0.10, "chin-prominent-incr": 0.20,
-    "chin-height-decr": 0.10, "l-cheek-bones-incr": 0.45, "r-cheek-bones-incr": 0.45, "l-cheek-volume-decr": 0.45, "r-cheek-volume-decr": 0.45,
-    "l-cheek-inner-decr": 0.30, "r-cheek-inner-decr": 0.30,
-    # alis rendah, ujung dalam turun (serius); dahi tegas
-    "eyebrows-trans-down": 0.35, "eyebrows-angle-down": 0.30, "eyebrows-trans-forward": 0.25, "forehead-temple-decr": 0.15,
-    # mata: berjarak lebar (konsep), lebih besar, almond, kelopak terbuka
-    "l-eye-trans-out": 1.00, "r-eye-trans-out": 1.00, "l-eye-scale-incr": 0.70, "r-eye-scale-incr": 0.70,
-    "l-eye-height2-incr": 0.25, "r-eye-height2-incr": 0.25, "l-eye-corner1-up": 0.15, "r-eye-corner1-up": 0.15,
-    "l-eye-epicanthus-out": 0.30, "r-eye-epicanthus-out": 0.30, "l-eye-eyefold-up": 0.20, "r-eye-eyefold-up": 0.20,
-    # hidung lurus, lebih pendek, jembatan jelas
-    "nose-hump-decr": 0.40, "nose-point-width-incr": 0.15, "nose-nostrils-width-incr": 0.10, "nose-scale-vert-decr": 0.20,
-    "nose-greek-incr": 0.20,
-    # mulut: bibir tidak maju, sedang
-    "mouth-lowerlip-volume-decr": 0.40, "mouth-upperlip-volume-decr": 0.35, "mouth-scale-depth-decr": 0.55, "mouth-scale-horiz-decr": 0.15,
-    "mouth-trans-backward": 0.45, "l-eye-height1-incr": 0.20, "r-eye-height1-incr": 0.20, "l-eye-height3-incr": 0.15, "r-eye-height3-incr": 0.15,
-    # leher atletis
-    "neck-scale-horiz-incr": 0.25, "neck-scale-depth-incr": 0.15,
+    # referensi developer #2 (stylized game): rahang lebar bersudut, dagu kotak, pipi penuh, wajah agak lebar-pendek
+    "head-square": 0.55, "head-invertedtriangular": 0.10, "head-scale-horiz-incr": 0.10,
+    "chin-bones-incr": 0.80, "chin-width-incr": 0.40, "chin-prominent-incr": 0.30, "chin-height-decr": 0.05,
+    "l-cheek-bones-incr": 0.35, "r-cheek-bones-incr": 0.35, "l-cheek-volume-decr": 0.20, "r-cheek-volume-decr": 0.20,
+    # alis tebal, rendah, miring turun ke arah hidung (intens)
+    "eyebrows-trans-down": 0.25, "eyebrows-angle-down": 0.12, "eyebrows-trans-forward": 0.20, "forehead-temple-decr": 0.10,
+    # mata sedang, kelopak atas berat, sedikit sipit
+    "l-eye-trans-out": 0.70, "r-eye-trans-out": 0.70, "l-eye-scale-incr": 0.35, "r-eye-scale-incr": 0.35,
+    "l-eye-height2-decr": 0.15, "r-eye-height2-decr": 0.15, "l-eye-height1-decr": 0.10, "r-eye-height1-decr": 0.10,
+    "l-eye-eyefold-down": 0.10, "r-eye-eyefold-down": 0.10, "l-eye-epicanthus-out": 0.20, "r-eye-epicanthus-out": 0.20,
+    # hidung lebar, ujung bulat, sayap jelas
+    "nose-width1-incr": 0.45, "nose-width2-incr": 0.45, "nose-width3-incr": 0.35, "nose-nostrils-width-incr": 0.30,
+    "nose-point-width-incr": 0.25, "nose-hump-decr": 0.20, "nose-scale-vert-decr": 0.10, "nose-greek-incr": 0.10,
+    # mulut lebar, bibir tipis, sudut sedikit turun (tegang)
+    "mouth-lowerlip-volume-incr": 0.08, "mouth-upperlip-volume-incr": 0.0, "mouth-cupidsbow-incr": 0.30, "mouth-upperlip-height-incr": 0.10,
+    "mouth-lowerlip-height-incr": 0.12, "mouth-scale-depth-decr": 0.60, "mouth-scale-horiz-incr": 0.10,
+    "mouth-trans-backward": 0.45, "mouth-angles-up": 0.05,
+    # leher tebal
+    "neck-scale-horiz-incr": 0.45, "neck-scale-depth-incr": 0.25,
 }
 EYE_Z, CHIN_TO_EYE, NOSE_Y = 1.668, 0.094, -0.111
 SX_EXTRA = 1.04
-NECK_CUT = 1.465
+NECK_CUT = 1.430
 NECK_FULL_Z = 1.585
-EYE_SCALE = 1.20                    # mata stylized lebih besar (referensi developer): bukaan + bola mata + iris
-IRIS_R = 0.0074                  # di bawah ini hanya silinder leher (bahu MPFB dibuang)
+EYE_SCALE = 1.08                    # mata stylized lebih besar (referensi developer): bukaan + bola mata + iris
+IRIS_R = 0.0070                  # di bawah ini hanya silinder leher (bahu MPFB dibuang)
 NECK_HALF_X = 0.072
 
 arm = C.get_arm()
@@ -179,10 +180,16 @@ ca = head.data.color_attributes["AK_Zone"]
 skin, lip = C.zone_rgba("skin"), C.zone_rgba("lip")
 for i, v in enumerate(head.data.vertices):
     if v.co.y < mouth_m.y - 0.004:
-        e = (v.co.x / 0.0215) ** 2 + ((v.co.z - mouth_m.z) / 0.0105) ** 2
+        e = (v.co.x / 0.0235) ** 2 + ((v.co.z - mouth_m.z) / 0.0125) ** 2
         t = 1.0 - HD.smooth(0.55, 1.0, e)
         if t > 0:
             ca.data[i].color = tuple(skin[j] * (1 - t) + lip[j] * t for j in range(4))
+        dz = abs(v.co.z - mouth_m.z)
+        if dz < 0.0016 and abs(v.co.x) < 0.0175:                           # garis mulut gelap tipis
+            k = (1 - dz / 0.0016) * (1 - HD.smooth(0.011, 0.0175, abs(v.co.x)))
+            c0 = tuple(ca.data[i].color)
+            dark = C.zone_rgba("belt")
+            ca.data[i].color = tuple(c0[j] * (1 - 0.55 * k) + dark[j] * 0.55 * k for j in range(4))
 
 lash = C.zone_rgba("hair")
 for i, v in enumerate(head.data.vertices):
@@ -230,12 +237,12 @@ ex = eye_lm.x
 for sgn_ in (1, -1):
     path = []
     lift_b = (EYE_SCALE - 1.0) * 0.012
-    for fx, dz in [(0.46, 0.0165), (0.74, 0.0210), (1.04, 0.0238), (1.34, 0.0250), (1.60, 0.0228), (1.82, 0.0185)]:
+    for fx, dz in [(0.40, 0.0150), (0.70, 0.0185), (1.02, 0.0218), (1.34, 0.0238), (1.62, 0.0232), (1.84, 0.0205)]:
         pt, nrm = HD.surface_point(bvh, sgn_ * ex * fx, EYE_Z + dz + lift_b, off=0.0020)
         if pt is None:
             raise RuntimeError(f"alis: tidak ada permukaan di x={sgn_ * ex * fx:.3f}")
         path.append(pt)
-    HR.tube(bm, path, [0.0044, 0.0052, 0.0050, 0.0044, 0.0032, 0.0012], n=6, squash=(0.45, 1.0), caps=(True, True), up=Vector((0, -1, 0)))
+    HR.tube(bm, path, [0.0034, 0.0044, 0.0044, 0.0040, 0.0030, 0.0012], n=6, squash=(0.50, 1.0), caps=(True, True), up=Vector((0, -1, 0)))
 parts.append(C.finish_part("AK_Brows", bm, "02_Head", "hair", "Hair", kind="rigid", bone="head"))
 
 bm_shell = bmesh.new()

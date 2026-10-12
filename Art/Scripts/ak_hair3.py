@@ -50,7 +50,7 @@ def thick(p):
     side = smooth(0.035, 0.062, abs(p.x)) * (1 - top)
     part = math.exp(-((p.x - PART_X) / 0.006) ** 2) * smooth(0.02, -0.05, p.y) * top
     temple = smooth(0.030, 0.055, abs(p.x)) * smooth(1.69, 1.73, p.z)
-    t = 0.007 + 0.022 * top + 0.016 * front + 0.010 * temple - 0.006 * part
+    t = 0.007 + 0.027 * top + 0.016 * front + 0.010 * temple - 0.006 * part
     t *= (1 - 0.30 * side)
     return max(0.0015, t * (0.25 + 0.75 * t_edge))
 

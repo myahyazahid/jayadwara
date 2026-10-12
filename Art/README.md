@@ -45,6 +45,8 @@ Dijalankan di Blender (mis. lewat MCP: `exec(open(path).read())`), kecuali yang 
 | `aksa_14_export.py` | Aksa: export `Export/SK_Aksa_Proxy.fbx` (kontrak: `root` tulang sungguhan, objek `Armature`, cm, `FBX_SCALE_ALL`) + `_sockets.json` |
 | `ak_head.py`, `ak_hair.py` | Aksa Iterasi 2: pembangun kepala (loft cincin + fitur wajah analitik; angka di `KEYS`/`feature`) dan rambut (tudung + gumpalan, seed tetap) |
 | `aksa_20_head.py` | Aksa Iterasi 2: ganti proxy kepala dengan kepala, telinga, mata, alis, rambut, leher → `aksa_v02_head.blend` (jangan jalankan ulang di atas hasil sculpt manual) |
+| `ak_cloth.py`, `aksa_30_outfit.py` | Aksa Iterasi 3: pakaian hero + tangan metaball (loft terbuka, solidify, pelat menempel permukaan, dorong-keluar antar lapisan) → `aksa_v04_outfit.blend` |
+| `aksa_31_render_body.py` | Aksa: render badan Eevee 3/4 depan/belakang + close-up tangan & boots |
 | `ak_hair3.py` | Aksa rambut gaya 3 (aktif): disisir ke belakang + belahan samping, helai sejajar, tepi ditempel ke kurva garis rambut |
 | `aksa_22_mpfb_head.py`, `ak_hair2.py` | Aksa Iterasi 2 putaran 2: kepala dari MPFB (MACRO + TARGETS wajah, dipetakan ke ukuran konsep) + rambut gaya textured crop (cangkang + gumpalan mengikuti aliran) → `aksa_v03_mpfb.blend`. Butuh ekstensi MPFB aktif |
 | `aksa_21_render_head.py` + `aksa_21_head_sheet.py` | Aksa: render kepala berbingkai sama dengan `ak_head_*.png` (depan, samping, 3/4; Eevee headless) + lembar konsep vs model (`Export/_compare_aksa_kepala.png`) |
