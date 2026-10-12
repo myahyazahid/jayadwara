@@ -33,7 +33,7 @@
 | `AJDGameMode`, `AJDPlayerController`, `AJDCharacterBase` (Move/Look/Jump), `AJDHumanCharacter` | ✅ Build sukses |
 | `BP_Aksa`, `BP_JDGameMode`, `BP_JDPlayerController`, map `Test_Greybox` | ✅ Lewat `Tools/ue_setup_greybox.py` |
 | Model Jayadwara (FBX, 4 LOD, tekstur, 89 tulang) | ✅ Iterasi 0–5 |
-| Import Jayadwara ke UE (`SK_`/`SKEL_`/`PA_`, 4 MI, 17 tekstur), `AJDGiantCharacter` (skala, kapsul, kamera), `BP_JDGameMode_Giant`, `Test_GiantScale` | 🔄 Iterasi 6 sedang berjalan, belum di-commit |
+| Import Jayadwara ke UE (`SK_`/`SKEL_`/`PA_`, 4 MI, 17 tekstur), `AJDGiantCharacter` (skala, kapsul, kamera), `BP_JDGameMode_Giant`, `Test_GiantScale` | ✅ Iterasi 6 selesai 12 Okt 2026 (mesh 45 m ter-bake, retarget FK, Anim Dynamics); socket hit → Fase 1 |
 | Plugin Chaos + `GeometryCollectionEngine` di `Build.cs` | ⏳ Fase 0 tersisa |
 | Semua item di bagian 3 di bawah | ❌ Belum |
 
@@ -83,7 +83,7 @@
 #### A4. Mode raksasa
 | Item | Isi | Oleh | Fase |
 |---|---|---|---|
-| `AJDGiantCharacter` | Skala, kapsul, gerak, kamera | C | 🔄 F0 (Iterasi 6) |
+| `AJDGiantCharacter` | Skala, kapsul, gerak, kamera | C | ✅ F0 (Iterasi 6) |
 | Rig kamera raksasa | Jarak, FOV, lag, *framing* boss + kota | C+D | F1 |
 | `UJDSyncComponent` | Dengar event gedung/warga → GE penalti; `OnSyncDepleted` → transformasi berakhir | C | F1 |
 | `GE_SyncPenalty_Building`, `GE_SyncPenalty_Civilian` | Besaran dari DataAsset | C+D | F1 |
@@ -135,7 +135,7 @@
 | Kerangka kecil | Jalan, serang, kena, rubuh, bangkit lagi | Sama dengan Jerangkong (skala manusia) | F1 |
 | Warga | Lari, panik, berlindung | Mixamo | F2 |
 | Animation Blueprint | `ABP_Aksa`, `ABP_Jayadwara`, `ABP_Jerangkong` (locomotion + slot montage) | C+D | F1 |
-| Gerak sekunder | Anim Dynamics selendang/kain Jayadwara | D | 🔄 F0 (Iterasi 6) |
+| Gerak sekunder | Anim Dynamics selendang/kain Jayadwara | D | ✅ F0 (Iterasi 6) |
 
 ### C. Lingkungan & Level
 
@@ -223,7 +223,7 @@
 ## 4. Urutan Pengerjaan
 
 ### F0 — sekarang (sampai Nov 2026)
-1. Selesaikan **Iterasi 6** Jayadwara (retarget, Anim Dynamics, uji skala).
+1. ~~Selesaikan **Iterasi 6** Jayadwara (retarget, Anim Dynamics, uji skala).~~ ✅ 12 Okt 2026
 2. Aktifkan Chaos + `GeometryCollectionEngine`.
 
 ### F1 — Prototype greybox (Des 2026 – Mar 2027, ±200 jam)

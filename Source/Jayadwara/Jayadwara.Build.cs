@@ -12,13 +12,13 @@ public class Jayadwara : ModuleRules
 		PublicIncludePaths.Add(ModuleDirectory);
 
 		// Daftar modul mengikuti docs/12-technical-design.md (Dependensi module).
-		// GeometryCollectionEngine (Chaos Destruction) ditambah di Fase 1 (Mar 2027) setelah plugin-nya diaktifkan dari editor.
+		// GeometryCollectionEngine = Chaos Destruction (plugin GeometryCollectionPlugin + ChaosEditor/Fracture di .uproject).
 		PublicDependencyModuleNames.AddRange(new string[]
 		{
 			"Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput",
 			"GameplayAbilities", "GameplayTags", "GameplayTasks",
 			"AIModule", "StateTreeModule", "GameplayStateTreeModule",
-			"Niagara", "MotionWarping"
+			"Niagara", "MotionWarping", "GeometryCollectionEngine"
 		});
 
 		PrivateDependencyModuleNames.AddRange(new string[] { "UMG", "Slate", "SlateCore" });

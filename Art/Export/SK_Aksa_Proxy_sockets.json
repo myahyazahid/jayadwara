@@ -1,0 +1,105 @@
+{
+  "mesh": "SK_Aksa_Proxy",
+  "export_scale": 1.0,
+  "note": "posisi rest; ue_component_cm = (x, -y, z) x 100 (skala 1, tinggi 180,6 cm = Manny)",
+  "sockets": [
+    {
+      "name": "hand_r_hit",
+      "bone": "hand_r",
+      "blender_m": [
+        -0.5292,
+        -0.22805,
+        0.97836
+      ],
+      "ue_component_cm": [
+        -52.92,
+        22.805,
+        97.836
+      ]
+    },
+    {
+      "name": "hand_l_hit",
+      "bone": "hand_l",
+      "blender_m": [
+        0.5292,
+        -0.22806,
+        0.97836
+      ],
+      "ue_component_cm": [
+        52.92,
+        22.806,
+        97.836
+      ]
+    },
+    {
+      "name": "foot_r_hit",
+      "bone": "ball_r",
+      "blender_m": [
+        -0.15778,
+        -0.18938,
+        0.02751
+      ],
+      "ue_component_cm": [
+        -15.778,
+        18.938,
+        2.751
+      ]
+    },
+    {
+      "name": "foot_l_hit",
+      "bone": "ball_l",
+      "blender_m": [
+        0.15778,
+        -0.18929,
+        0.02751
+      ],
+      "ue_component_cm": [
+        15.778,
+        18.929,
+        2.751
+      ]
+    },
+    {
+      "name": "pendant",
+      "bone": "spine_05",
+      "blender_m": [
+        0.0,
+        -0.136,
+        1.312
+      ],
+      "ue_component_cm": [
+        0.0,
+        13.6,
+        131.2
+      ]
+    },
+    {
+      "name": "head_fx",
+      "bone": "head",
+      "blender_m": [
+        0.0,
+        0.0,
+        1.8
+      ],
+      "ue_component_cm": [
+        0.0,
+        -0.0,
+        180.0
+      ]
+    },
+    {
+      "name": "back_fx",
+      "bone": "spine_04",
+      "blender_m": [
+        0.0,
+        0.105,
+        1.26
+      ],
+      "ue_component_cm": [
+        0.0,
+        -10.5,
+        126.0
+      ]
+    }
+  ]
+}

@@ -26,6 +26,10 @@ ANIMS = [
     "/Game/Characters/Mannequins/Anims/Unarmed/Attack/MM_Attack_03",
 ]
 
+# "Run IK Rig" (solver Full-Body IK) dimatikan: dengan mesh 45 m (skala di-bake, Iterasi 6b) solver ini menurunkan
+# pinggul ±19 cm (setara skala manusia) & menggeser badan; retarget FK murni cocok dengan Manny dalam beberapa cm.
+DISABLED_OPS = globals().get("DISABLED_OPS", ["Run IK Rig"])
+
 asset_tools = unreal.AssetToolsHelpers.get_asset_tools()
 EAL = unreal.EditorAssetLibrary
 ST = unreal.RetargetSourceOrTarget
@@ -73,7 +77,11 @@ def main():
     r.add_default_ops()
     r.auto_map_chains(unreal.AutoMapChainType.EXACT, True)
     r.auto_align_all_bones(ST.TARGET, unreal.RetargetAutoAlignMethod.CHAIN_TO_CHAIN)
-    ops = [str(r.get_op_name(i)) for i in range(r.get_num_retarget_ops())]
+    for op in DISABLED_OPS:
+        i = r.get_index_of_op_by_name(op)
+        if i >= 0:
+            r.set_retarget_op_enabled(i, False)
+    ops = [str(r.get_op_name(i)) + ("" if r.get_retarget_op_enabled(i) else " (mati)") for i in range(r.get_num_retarget_ops())]
     log(f"RTG ops: {ops}")
     EAL.save_loaded_asset(rtg, only_if_is_dirty=False)
 

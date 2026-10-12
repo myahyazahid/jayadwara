@@ -2,7 +2,7 @@
 
 Butuh: build C++ dengan AJDGiantCharacter, hasil ue_import_jayadwara.py dan ue_setup_retarget.py.
 Membuat / mengisi ulang:
-  /Game/Jayadwara/Characters/Jayadwara/BP_Jayadwara   parent AJDGiantCharacter, SK_Jayadwara + ABP_Jayadwara, IA_*
+  /Game/Jayadwara/Characters/Jayadwara/BP_Jayadwara   parent AJDGiantCharacter, SK_Jayadwara (45 m ter-bake) + ABP_Jayadwara, IA_*
   /Game/Jayadwara/Core/BP_JDGameMode_Giant             pawn BP_Jayadwara (uji; transformasi sungguhan di Fase 1)
   /Game/Jayadwara/Maps/Test_GiantScale                 salinan Test_Greybox dengan GameMode Override di atas
   Anims/BS_Idle_Walk_Run_JD: sumbu Speed = nilai BlendSpace Mannequin x sqrt(skala raksasa), pasangan dari
@@ -72,16 +72,15 @@ PA_EXCLUDE = ["scarf_", "cloth_", "ik_"]          # digerakkan Anim Dynamics / t
 CHAINS = [("scarf_l_01", "scarf_l_06", 40.0, 10.0), ("scarf_r_01", "scarf_r_06", 40.0, 10.0),
           ("cloth_front_01", "cloth_front_03", 30.0, 5.0), ("cloth_back_01", "cloth_back_03", 30.0, 5.0)]
 CLOTH_LIMIT_BONES = ["thigh_l", "thigh_r", "calf_l", "calf_r"]
-CLOTH_LIMIT_RADIUS = 11.0                         # cm, skala 1 (± tebal paha model); dikali skala raksasa
-BODY_EXTENT = 4.0                                 # cm, skala 1; dikali skala raksasa
-# Diuji di PIE (12 Okt 2026, 45 m): Component space meregang karena mesh berskala 23,68; World space meregang saat
-# bergerak; Actor space stabil. Percepatan karakter (acc > 0) atau gravitasi > 1 membuat rantai memanjang/melayang
-# setelah berhenti. Jadi kain mengikuti gerak badan (pinggul, kaki, belok), belum inersia lari-berhenti.
-SIM_SPACE_ACTOR, ACC_SCALE, GRAVITY_SCALE = 1, 0.0, 1.0
-# DIMATIKAN: Actor space juga merusak SKALA tulang keluaran (panel kain menyusut hilang, selendang jadi garis tipis).
-# Anim Dynamics UE 5.6.1 tidak mendukung mesh berskala 23,68 di komponen. Jalan keluar yang direncanakan: skala
-# raksasa di-bake ke mesh (docs/13 Iterasi 6). Sampai itu, selendang/kain kaku mengikuti pinggul.
-ENABLE_ANIM_DYNAMICS = False
+CLOTH_LIMIT_RADIUS = 11.0                         # cm di skala model 1,90 m (± tebal paha); dikali skala raksasa
+BODY_EXTENT = 4.0                                 # cm di skala model 1,90 m; dikali skala raksasa
+# Diuji di PIE (12 Okt 2026) dengan mesh 45 m ter-bake (komponen skala 1): Component space stabil, skala tulang 1,0.
+#  - acc 0: tenang, berayun pelan & kembali; acc 0,15: selendang terseret ke belakang saat lari, kembali saat berhenti;
+#    acc >= 1 atau gravitasi Froude (x23,68): terlempar ke atas pinggul (waktu anim diperlambat 1/sqrt(skala)
+#    memperbesar efek percepatan). Tuning rasa: ubah ACC_SCALE (0..0,2).
+#  - Komponen BERSKALA (Iterasi 6 awal) membuat Anim Dynamics rusak di semua mode -> alasan skala di-bake ke mesh.
+SIM_SPACE_COMPONENT, ACC_SCALE, GRAVITY_SCALE = 0, 0.1, 1.0
+ENABLE_ANIM_DYNAMICS = True
 
 
 def setup_physics_asset():
@@ -108,12 +107,12 @@ def setup_anim_dynamics(scale):
         c.set_editor_property("end_bone", end)
         c.set_editor_property("swing_limit", swing)
         c.set_editor_property("twist_limit", twist)
-        e = BODY_EXTENT * scale                                  # Actor space = satuan dunia
+        e = BODY_EXTENT * scale                                  # mesh 45 m: satuan komponen = satuan dunia
         c.set_editor_property("box_extents", unreal.Vector(e, e, e))
         c.set_editor_property("collision_radius", e)
         chains.append(c)
     n = unreal.JDEditorToolsLibrary.add_anim_dynamics_chains(abp, chains, CLOTH_LIMIT_BONES, CLOTH_LIMIT_RADIUS * scale,
-                                                             SIM_SPACE_ACTOR, ACC_SCALE, GRAVITY_SCALE)
+                                                             SIM_SPACE_COMPONENT, ACC_SCALE, GRAVITY_SCALE)
     EAL.save_loaded_asset(abp, only_if_is_dirty=False)
     log(f"ABP_Jayadwara: {n} rantai Anim Dynamics")
 

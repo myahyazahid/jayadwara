@@ -1,0 +1,243 @@
+{
+ "height_m": 1.8064,
+ "bone_count": 88,
+ "missing": [],
+ "joints_m": {
+  "pelvis": [
+   -0.0,
+   -0.0228,
+   0.959
+  ],
+  "spine_01": [
+   0.0,
+   -0.0205,
+   0.9957
+  ],
+  "spine_02": [
+   0.0,
+   -0.0332,
+   1.0624
+  ],
+  "spine_03": [
+   0.0,
+   -0.0425,
+   1.1342
+  ],
+  "spine_04": [
+   -0.0,
+   -0.0372,
+   1.2193
+  ],
+  "spine_05": [
+   -0.0,
+   -0.0053,
+   1.411
+  ],
+  "neck_01": [
+   -0.0,
+   0.0157,
+   1.528
+  ],
+  "neck_02": [
+   -0.0,
+   0.0035,
+   1.5777
+  ],
+  "head": [
+   -0.0,
+   -0.0066,
+   1.6258
+  ],
+  "clavicle_l": [
+   0.0143,
+   0.0174,
+   1.463
+  ],
+  "upperarm_l": [
+   0.1901,
+   0.0256,
+   1.4358
+  ],
+  "lowerarm_l": [
+   0.3501,
+   0.0191,
+   1.2089
+  ],
+  "hand_l": [
+   0.4777,
+   -0.157,
+   1.0447
+  ],
+  "thigh_l": [
+   0.0997,
+   -0.0254,
+   0.9354
+  ],
+  "calf_l": [
+   0.1233,
+   -0.026,
+   0.5027
+  ],
+  "foot_l": [
+   0.1409,
+   0.0099,
+   0.0824
+  ],
+  "ball_l": [
+   0.1578,
+   -0.1393,
+   0.0075
+  ],
+  "clavicle_r": [
+   -0.0143,
+   0.0174,
+   1.463
+  ],
+  "upperarm_r": [
+   -0.1901,
+   0.0256,
+   1.4358
+  ],
+  "lowerarm_r": [
+   -0.3501,
+   0.0191,
+   1.2089
+  ],
+  "hand_r": [
+   -0.4777,
+   -0.157,
+   1.0447
+  ],
+  "thigh_r": [
+   -0.0997,
+   -0.0255,
+   0.9354
+  ],
+  "calf_r": [
+   -0.1233,
+   -0.0261,
+   0.5027
+  ],
+  "foot_r": [
+   -0.1409,
+   0.0098,
+   0.0824
+  ],
+  "ball_r": [
+   -0.1578,
+   -0.1394,
+   0.0075
+  ]
+ },
+ "armature_scale": [
+  1.0,
+  1.0,
+  1.0
+ ],
+ "armature_rot_deg": [
+  0.0,
+  -0.0,
+  0.0
+ ],
+ "arm_angle_deg": {
+  "upperarm": 35.2,
+  "lowerarm": 52.9,
+  "whole": 41.1
+ },
+ "stance_m": {
+  "hip_x": 0.0997,
+  "knee_x": 0.1233,
+  "ankle_x": 0.1409
+ },
+ "leg_len_m": 0.853,
+ "hierarchy": {
+  "pelvis": null,
+  "spine_01": "pelvis",
+  "spine_02": "spine_01",
+  "spine_03": "spine_02",
+  "spine_04": "spine_03",
+  "spine_05": "spine_04",
+  "neck_01": "spine_05",
+  "neck_02": "neck_01",
+  "head": "neck_02",
+  "clavicle_l": "spine_05",
+  "upperarm_l": "clavicle_l",
+  "lowerarm_l": "upperarm_l",
+  "lowerarm_twist_02_l": "lowerarm_l",
+  "lowerarm_twist_01_l": "lowerarm_l",
+  "hand_l": "lowerarm_l",
+  "index_metacarpal_l": "hand_l",
+  "index_01_l": "index_metacarpal_l",
+  "index_02_l": "index_01_l",
+  "index_03_l": "index_02_l",
+  "middle_metacarpal_l": "hand_l",
+  "middle_01_l": "middle_metacarpal_l",
+  "middle_02_l": "middle_01_l",
+  "middle_03_l": "middle_02_l",
+  "thumb_01_l": "hand_l",
+  "thumb_02_l": "thumb_01_l",
+  "thumb_03_l": "thumb_02_l",
+  "pinky_metacarpal_l": "hand_l",
+  "pinky_01_l": "pinky_metacarpal_l",
+  "pinky_02_l": "pinky_01_l",
+  "pinky_03_l": "pinky_02_l",
+  "ring_metacarpal_l": "hand_l",
+  "ring_01_l": "ring_metacarpal_l",
+  "ring_02_l": "ring_01_l",
+  "ring_03_l": "ring_02_l",
+  "upperarm_twist_01_l": "upperarm_l",
+  "upperarm_twist_02_l": "upperarm_l",
+  "clavicle_r": "spine_05",
+  "upperarm_r": "clavicle_r",
+  "lowerarm_r": "upperarm_r",
+  "lowerarm_twist_02_r": "lowerarm_r",
+  "lowerarm_twist_01_r": "lowerarm_r",
+  "hand_r": "lowerarm_r",
+  "pinky_metacarpal_r": "hand_r",
+  "pinky_01_r": "pinky_metacarpal_r",
+  "pinky_02_r": "pinky_01_r",
+  "pinky_03_r": "pinky_02_r",
+  "ring_metacarpal_r": "hand_r",
+  "ring_01_r": "ring_metacarpal_r",
+  "ring_02_r": "ring_01_r",
+  "ring_03_r": "ring_02_r",
+  "middle_metacarpal_r": "hand_r",
+  "middle_01_r": "middle_metacarpal_r",
+  "middle_02_r": "middle_01_r",
+  "middle_03_r": "middle_02_r",
+  "index_metacarpal_r": "hand_r",
+  "index_01_r": "index_metacarpal_r",
+  "index_02_r": "index_01_r",
+  "index_03_r": "index_02_r",
+  "thumb_01_r": "hand_r",
+  "thumb_02_r": "thumb_01_r",
+  "thumb_03_r": "thumb_02_r",
+  "upperarm_twist_01_r": "upperarm_r",
+  "upperarm_twist_02_r": "upperarm_r",
+  "thigh_r": "pelvis",
+  "calf_r": "thigh_r",
+  "foot_r": "calf_r",
+  "ball_r": "foot_r",
+  "calf_twist_02_r": "calf_r",
+  "calf_twist_01_r": "calf_r",
+  "thigh_twist_01_r": "thigh_r",
+  "thigh_twist_02_r": "thigh_r",
+  "thigh_l": "pelvis",
+  "calf_l": "thigh_l",
+  "foot_l": "calf_l",
+  "ball_l": "foot_l",
+  "calf_twist_02_l": "calf_l",
+  "calf_twist_01_l": "calf_l",
+  "thigh_twist_01_l": "thigh_l",
+  "thigh_twist_02_l": "thigh_l",
+  "ik_foot_root": null,
+  "ik_foot_l": "ik_foot_root",
+  "ik_foot_r": "ik_foot_root",
+  "ik_hand_root": null,
+  "ik_hand_gun": "ik_hand_root",
+  "ik_hand_l": "ik_hand_gun",
+  "ik_hand_r": "ik_hand_gun",
+  "interaction": null,
+  "center_of_mass": null
+ }
+}

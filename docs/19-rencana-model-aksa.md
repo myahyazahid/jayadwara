@@ -1,6 +1,6 @@
 # 19 — Rencana Implementasi: Model Aksa (Wujud Manusia)
 
-> **Status: USULAN v0.1 (12 Okt 2026)**, menunggu persetujuan developer.
+> **Status: USULAN v0.4 (12 Okt 2026)**, menunggu persetujuan developer. **Iterasi 2 putaran 3 selesai** (kepala MPFB; rambut, alis, mata mengikuti referensi gaya dari developer; menunggu feedback). **Iterasi 0 selesai dari sisi Claude** (spike lulus → jalur (a), skeleton Manny asli) dan **Iterasi 1 selesai dari sisi Claude** (proxy ter-skin, FBX lolos validator 17/17, terimpor ke `SK_Mannequin`, animasi Mannequin jalan); lihat bagian 7. Menunggu review developer: model sheet ([21](21-model-sheet-aksa.md)), A1–A9, proporsi proxy. Permintaan "persiapan modeling Aksa" (12 Okt 2026) dibaca sebagai **A9 = mulai sekarang** sebagai jalur art paralel; roadmap ([10](10-roadmap.md)) belum diubah.
 > Mengikuti pola [13-rencana-model-jayadwara.md](13-rencana-model-jayadwara.md) dan memakai ulang pipeline-nya (`Art/Scripts/`, validator, skrip import UE). Bagian yang berbeda dari Jayadwara ditulis eksplisit.
 > Keputusan dasar (12 Okt 2026): model Aksa **dibuat sendiri** di Blender (Claude + developer); **MetaHuman** dipakai sebagai placeholder visual sampai model ini jadi ([12](12-technical-design.md#mesh-logika-vs-mesh-visual-aksa)).
 
@@ -21,7 +21,8 @@
 | Item | Status |
 |---|---|
 | Konsep | `Aksa versi Final.png` (pose dinamis, ada gauntlet yang dibuang) + `aksa_turnaround_v01.webp` (A-pose depan/samping/belakang + kepala depan/samping, tanpa gauntlet, dengan kalung) |
-| Blender | 5.2.2 LTS + MCP; pipeline Jayadwara (`jd_common.py`, `jd_skeleton.py`, validator, render pembanding) |
+| Blender | 5.2.2 LTS + MCP; pipeline Jayadwara (`jd_common.py`, `jd_skeleton.py`, validator, render pembanding). MPFB2 **belum terpasang** (add-on aktif hanya bawaan: cycles, io_*) |
+| Persiapan Iterasi 0 (12 Okt 2026) | `Art/Reference/ak_*.png` (3 reference plane + kepala + 8 detail + palet), `Art/Blender/aksa_v00_setup.blend` (19 landmark, penggaris 1,75 m), [21-model-sheet-aksa.md](21-model-sheet-aksa.md) |
 | UE | Project jalan; `BP_Aksa` = `SKM_Manny_Simple` + `ABP_Unarmed`; `IK_Mannequin` sudah dibuat (`Tools/ue_setup_retarget.py`) |
 | MetaHuman placeholder | Belum dibuat (developer) |
 
@@ -36,14 +37,40 @@
 
 | # | Keputusan | Default yang direkomendasikan | Alasan |
 |---|---|---|---|
-| **A1** | Skeleton | **Skeleton Mannequin UE5 asli**: `SKM_Manny` diekspor dari UE → dipakai sebagai armature di Blender → `SK_Aksa` diimpor ke `SKEL_Mannequin` yang sama | Semua animasi Manny/Mixamo-retarget langsung jalan tanpa retargeter. Aksa akan punya animasi terbanyak di game. Jayadwara memakai skeleton sendiri + IK Retargeter karena orientasi tulangnya beda; risiko itu diuji di **spike Iterasi 0**. Fallback: skeleton sendiri + retargeter seperti Jayadwara |
+| **A1** | Skeleton | **Terpilih: skeleton Mannequin UE5 asli** (spike lulus 12 Okt 2026, [Temuan](#temuan-iterasi-0-12-okt-2026)): `SKM_Manny` diekspor dari UE → dipakai sebagai armature di Blender → `SK_Aksa` diimpor ke `SKEL_Mannequin` yang sama | Semua animasi Manny/Mixamo-retarget langsung jalan tanpa retargeter. Aksa akan punya animasi terbanyak di game. Jayadwara memakai skeleton sendiri + IK Retargeter karena orientasi tulangnya beda; risiko itu diuji di **spike Iterasi 0**. Fallback: skeleton sendiri + retargeter seperti Jayadwara |
 | **A2** | Basis badan & wajah | **MPFB2** (MakeHuman untuk Blender): mesh manusia dengan topologi bersih, lalu di-stylize lewat skrip agar mirip konsep | Wajah manusia dari primitif skrip cenderung kaku. **Hanya aset CC0** dari MPFB2 yang dipakai. Perlu developer menyetujui pemasangan ekstensinya |
-| **A3** | Tinggi Aksa | **175 cm** | Atlet silat Indonesia; sedikit di bawah Manny. Kapsul & kamera mengikuti ([12](12-technical-design.md#mesh-logika-vs-mesh-visual-aksa)) |
+| **A3** | Tinggi Aksa | **180,6 cm = tinggi Manny** (revisi dari 175 cm; konsep dikali 1,032) | Spike mengukur Manny 180,6 cm dan skala impor tidak bisa menyesuaikan tinggi di UE 5.6.1. Kapsul & kamera mengikuti Manny, jadi tidak ada selisih dengan mesh logika ([12](12-technical-design.md#mesh-logika-vs-mesh-visual-aksa)) |
 | **A4** | Ekspresi wajah | **Morph target saja** (±8: kedip L/R, senyum, marah, mulut terbuka, alis naik, meringis, mata lirik) | Skeleton Mannequin tidak punya tulang wajah; dialog vertical slice = teks + potret. Rig wajah penuh → Iterasi 7 |
 | **A5** | Rambut | **Mesh gumpalan stylized** (seperti konsep), kaku ke `head` | Lebih ringan dan lebih cocok gaya game daripada groom/cards |
 | **A6** | Kulit tertutup baju | **Dihapus** (hanya kepala, leher, lengan bawah, tangan yang tersisa) | Mencegah kulit tembus baju saat pose silat lebar; hemat poligon |
 | **A7** | Kain | **Rantai tulang + Anim Dynamics** untuk selendang (±6 tulang) dan dua ujung depan jaket (±2 tulang); celana & badan jaket ter-skin biasa | Sama dengan selendang Jayadwara; tanpa simulasi kain Chaos (berat) |
 | **A8** | Anggaran poligon | LOD0 ≤ **60k** · LOD1 ≤ 25k · LOD2 ≤ 10k · LOD3 ≤ 4k tris | Mode manusia sering dilihat dekat; tetap di bawah Jayadwara (≤100k) |
+
+### Temuan Iterasi 0 (12 Okt 2026)
+
+Dari membaca hasil Iterasi 6 Jayadwara ([13](13-rencana-model-jayadwara.md#iterasi-6--integrasi-unreal)) dan mengukur turnaround Aksa ([21](21-model-sheet-aksa.md)). Bagian ini **mengubah cara A1 dan A3 dibaca**; keputusan akhirnya dari spike.
+
+1. **A1 dan A3 saling bertabrakan.** Skeleton Mannequin yang tidak diubah berarti tinggi Aksa = tinggi tulang Manny. **Tinggi Manny belum diukur** (spike langkah S1). Di UE 5.6.1, *Import Uniform Scale* masuk ke **skala tulang root**, bukan posisi tulang, dan animasi retarget yang mengunci skala root = 1 membatalkannya lagi (ditemukan di Iterasi 6 Jayadwara). Jadi 175 cm **tidak bisa dicapai lewat skala impor** kalau skeleton Manny dipertahankan.
+2. **Dua jalur, spike memilih:**
+   - **(a) Skeleton Manny asli.** Tinggi Aksa mengikuti Manny; animasi Manny/Mixamo langsung jalan; tanpa retargeter. Syarat: tinggi dan sudut A-pose Manny bisa diterima, dan round-trip Blender↔UE terbukti.
+   - **(b) Skeleton sendiri bernama Mannequin pada 1,75 m + IK Retargeter** (jalur Jayadwara yang sudah jalan: `Tools/ue_setup_retarget.py` bisa dipakai ulang untuk `IK_Aksa` + `RTG_Mannequin_To_Aksa`). Cocok dengan arsitektur mesh logika vs visual ([12](12-technical-design.md#mesh-logika-vs-mesh-visual-aksa)) yang memang menyalin pose dari Manny tersembunyi, jadi tidak ada animasi yang perlu di-retarget satu per satu.
+   - **Rekomendasi Claude:** (a) kalau tinggi Manny dalam ±3% dari 175 cm, atau developer mau Aksa setinggi Manny; selain itu **(b)**. Kalau (b), langkah Iterasi 1 membuat `ak_skeleton.py` (analog `jd_skeleton.py`) dan `05_export_fbx.py` serta `validate_jayadwara.py` digeneralisasi.
+3. **Spike Jayadwara tidak otomatis berlaku.** Di sana skeleton buatan sendiri gagal dipakai di Mannequin (orientasi tulang beda, root roll 90°). Untuk Aksa armature berasal dari ekspor Manny asli, jadi orientasi terjaga, tapi importer FBX Blender tidak selalu menjaga roll tulang. Karena itu spike menguji **round-trip penuh** (UE → Blender → UE), bukan hanya impor.
+4. **Sudut A-pose.** Sheet ±22°, prompt 35°, Manny punya sudut sendiri ([21](21-model-sheet-aksa.md) D2). Mesh harus mengikuti pose rest skeleton; `aksa_spike_analyze_manny.py` mengukurnya.
+5. **MPFB2.** Sumber unduhan dan lisensi aset (CC0) harus diverifikasi sebelum dipasang; belum ada di Blender. Kalau ditolak/gagal, badan dibuat dengan skrip seperti Jayadwara (lebih lama di Iterasi 2).
+6. **Skrip yang masih khusus Jayadwara:** `05_export_fbx.py` (awalan `JD_`, `JD_Armature`) dan `validate_jayadwara.py`. Digeneralisasi di Iterasi 1 (`validate_character.py`), kontrak export (6.4) tidak berubah.
+
+#### Hasil spike (12 Okt 2026) — jalur (a) dipilih
+
+| Langkah | Hasil |
+|---|---|
+| S1 `Tools/ue_export_manny.py` | `SKM_Manny_Simple` setinggi **180,6 cm** (kotak batas, kaki di z=0). Skeleton aset = `/Game/Characters/Mannequins/Meshes/SK_Mannequin` (bukan `SKEL_Mannequin`; dipakai bersama Manny/Quinn, 161 tulang, mesh Manny Simple memakai 88) |
+| S2 `aksa_spike_analyze_manny.py` | 88 tulang. Importer Blender menjadikan node `root` sebagai **objek** (data dalam cm di bawah empty berskala 0,01), 5 tulang akar: `pelvis`, `ik_foot_root`, `ik_hand_root`, `interaction`, `center_of_mass`. **Pose rest Manny:** lengan atas 35° dan lengan bawah 53° dari vertikal (tangan 16 cm di depan badan), pinggul ±0,100 m, lutut ±0,123 m, pergelangan ±0,141 m (stance sempit), panjang kaki 0,853 m, kiri = +X, menghadap -Y |
+| S3 `aksa_spike_roundtrip.py` | Kontrak export dibuktikan: tulang `root` dibuat sungguhan (induk 5 tulang akar), objek armature bernama `Armature`, data x100 di-apply, `FBX_SCALE_ALL`. Tanpa data x100 yang benar, skala meledak 100x atau masuk ke tulang |
+| S4 `ue_spike_aksa_import.py` + `aksa_spike_compare.py` | Impor ke `SK_Mannequin` **tidak membuat skeleton baru**. Mesh diekspor lagi dari UE: 88 tulang Manny identik (selisih ≤0,005 mm, 0,000°) |
+| S5 | Animasi Mannequin (`MM_Attack_01`, `Walk_Fwd`, `MM_Idle`) dibekukan pada mesh Aksa dan Manny di editor: pose identik (`Tools/ue_check_aksa.py`) |
+
+Konsekuensi: **tinggi 180,6 cm** (A3 revisi); **pose rest dan stance kaki mengikuti Manny**, bukan konsep ([21](21-model-sheet-aksa.md) D1/D2, koreksi di model, bukan di tulang); tulang tambahan (`sash_*`) ikut digabung ke `SK_Mannequin` (aset itu berubah di git; Manny/Quinn tidak terpengaruh).
 
 ## 4. Prinsip Desain Model
 
@@ -110,40 +137,68 @@ Sama dengan kontrak Jayadwara yang sudah diperbaiki di Iterasi 6 ([13](13-rencan
 
 > Estimasi jam **kasar** (kapasitas ±10–15 jam/minggu). Direvisi di akhir Iterasi 1.
 
-| Iter | Nama | Estimasi | Butuh UE? |
-|---|---|---|---|
-| 0 | Design lock, fondasi & **spike skeleton** | 8–10 jam | Ya (spike) |
-| 1 | Badan dasar + proxy pakaian + rig Manny | 10–12 jam | Ya (uji ganti MetaHuman) |
-| 2 | **Kepala & wajah** + rambut | 15–20 jam | Tidak |
-| 3 | Pakaian hero | 20–25 jam | Tidak |
-| 4 | Skinning final, rantai kain, morph target | 12–15 jam | Tidak |
-| 5 | UV, tekstur & material | 15–20 jam | Tidak |
-| 6 | LOD, export & integrasi UE | 10–12 jam | Ya |
-| 7 | Polish & varian (opsional) | — | Ya |
+| Iter | Nama | Estimasi | Butuh UE? | Status |
+|---|---|---|---|---|
+| 0 | Design lock, fondasi & **spike skeleton** | 8–10 jam | Ya (spike) | **Selesai sisi Claude** (12 Okt 2026); gate: persetujuan developer |
+| 1 | Badan dasar + proxy pakaian + rig | 10–12 jam | Ya (uji ganti MetaHuman) | **Selesai sisi Claude** (12 Okt 2026); gate: review proporsi developer |
+| 2 | **Kepala & wajah** + rambut | 15–20 jam | Tidak | **Putaran 3 selesai** (MPFB + rambut/alis/mata gaya referensi, 12 Okt 2026); gate Go/No-Go: feedback developer |
+| 3 | Pakaian hero | 20–25 jam | Tidak | Belum |
+| 4 | Skinning final, rantai kain, morph target | 12–15 jam | Tidak | Belum |
+| 5 | UV, tekstur & material | 15–20 jam | Tidak | Belum |
+| 6 | LOD, export & integrasi UE | 10–12 jam | Ya | Belum |
+| 7 | Polish & varian (opsional) | — | Ya | Opsional |
 
 **Total Iter 0–6: ±90–115 jam ≈ 7–9 minggu** pada kapasitas penuh. Di roadmap, model Aksa dijadwalkan di pengadaan aset Fase 2 (Apr–Mei 2027, [10](10-roadmap.md#fase-2--vertical-slice-episode-1-gerbang-yang-retak-apr--des-2027)); kalau dikerjakan lebih awal sebagai jalur art paralel (seperti Jayadwara), tanggal Fase 0–1 ikut bergeser (keputusan A9).
 
 ### Iterasi 0 — Design lock, fondasi & spike skeleton
 **Tujuan:** menghilangkan ambiguitas desain dan risiko teknis terbesar sebelum modeling.
 - **Claude:**
-  - Normalisasi `aksa_turnaround_v01.webp` jadi reference plane depan/samping/belakang + kepala (`make_reference_planes.py`, 1000 px = 1,75 m).
-  - **Model sheet Aksa** (dokumen baru di `docs/`, nomor berikutnya): proporsi (jumlah kepala, bahu, panjang kaki/lengan), palet hex, part list final, keputusan atas ketidakkonsistenan referensi.
-  - Scene `Art/Blender/aksa_v00_setup.blend` (collection per kelompok, penggaris 1,75 m, penanda landmark).
-  - **Spike skeleton (A1):** ekspor `SKM_Manny` dari UE → impor ke Blender → tempel mesh uji sederhana → ekspor dengan kontrak 6.4 → impor ke UE memakai `SKEL_Mannequin` → putar 3 animasi Mannequin. Lulus = tidak ada tulang terpelintir/terbalik dan tidak ada skeleton baru yang dibuat.
-- **Developer:** menyetujui model sheet & A1–A9; memasang ekstensi MPFB2 (A2).
-- **Gate:** model sheet disetujui; spike lulus (atau fallback dipilih); reference plane sejajar.
+  - [x] Normalisasi `aksa_turnaround_v01.webp` jadi reference plane depan/samping/belakang + kepala + 8 crop detail + palet (`Art/Scripts/make_reference_planes_aksa.py` → `Art/Reference/ak_*.png`; 1000 px = 1,75 m; landmark ditimpa ke tiga view dan dicek ±1–2 cm).
+  - [x] **Model sheet Aksa** [21-model-sheet-aksa.md](21-model-sheet-aksa.md): proporsi terukur, palet hex, part list, keputusan desain D1–D10, checklist IP.
+  - [x] Scene `Art/Blender/aksa_v00_setup.blend` (`Art/Scripts/aksa_00_setup_scene.py`: collection per kelompok, reference plane, penggaris 1,75 m, 19 landmark `AK_LM_*`). Catatan: reference plane hanya tampil di viewport ortografis (numpad 1/3/7), bukan di `look` perspektif.
+  - [x] **Spike skeleton (A1/A3)** lulus (hasil di [Temuan](#hasil-spike-12-okt-2026--jalur-a-dipilih)): S1 ekspor Manny, S2 analisis, S3 export sesuai kontrak, S4 impor ke `SK_Mannequin` + banding pose referensi (selisih ≤0,005 mm, 0,000°), S5 animasi Mannequin identik. Jalur (a) dipilih; tinggi Aksa = 180,6 cm (A3 revisi).
+- **Developer:** menyetujui model sheet & A1–A9 (+ D1–D10); memasang ekstensi MPFB2 (A2) setelah sumber/lisensinya dicek.
+- **Gate:** model sheet disetujui (⏳ developer); spike lulus, jalur (a) dipilih (✅); reference plane sejajar (✅).
 
-### Iterasi 1 — Badan dasar + proxy pakaian + rig Manny
-**Tujuan:** proporsi benar, ter-rig, dan **jalur ganti MetaHuman → SK_Aksa terbukti** sejak awal.
-- **Claude:** badan MPFB2 di-fit ke reference plane (tinggi 1,75 m, proporsi atlet ramping); pakaian proxy dari primitif (jaket, celana, boots, selendang) dengan 5 slot warna datar; skinning otomatis ke armature Manny; 6 uji pose (kuda-kuda, pukul, tendang tinggi, dodge, jongkok, tangan terangkat); export; validator; pasang di `BP_Aksa` versi uji dan putar animasi gameplay.
-- **Developer:** review proporsi di Blender dan di game ("bahu lebih lebar", "kaki kurang panjang").
-- **Gate:** siluet depan/samping cocok dengan konsep; animasi Manny jalan di `SK_Aksa` proxy; tidak ada tembus parah di 6 pose.
+### Iterasi 1 — Badan dasar + proxy pakaian + rig (Manny asli, jalur (a))
+**Tujuan:** proporsi benar, ter-rig, dan **jalur SK_Aksa menggantikan placeholder terbukti** sejak awal.
+- **Claude (selesai 12 Okt 2026):**
+  - [x] Armature = Manny asli + tulang `root` + rantai `sash_01..06` (`Art/Scripts/aksa_10_armature.py` → `Art/Blender/aksa_v01_proxy.blend`; 95 tulang, 31 tulang deform; LOD2 Manny jadi hantu referensi `AK_REF_MannyGhost`, tidak ikut export). Referensi diskala 1,032.
+  - [x] Proxy dari primitif (`aksa_11_proxy.py`, `ak_common.py`): 30 bagian, **3.094 tris**, 5 slot (Skin, Eyes, Hair, Cloth, Gear), warna zona lewat vertex color `AK_Zone`. Kepala/rambut/mata kaku ke `head`; kaos, jaket (depan terbuka), kerah, lengan jaket, celana + kantong kargo, sabuk, boots ter-skin dengan bobot jarak ke segmen tulang + haluskan; selendang berbobot sepanjang rantai `sash_*`; kalung/liontin ke `spine_05`. Badan di bawah leher digeser 2,2 cm ke belakang (sumbu konsep, `BODY_SHIFT_Y`).
+  - [x] **Siluet vs konsep** (`aksa_12_render.py` + `aksa_12_compare_sheet.py`, kanvas 1000 px): IoU badan (tanpa lengan dan kaki bawah) depan **0,88**, samping **0,80**, belakang **0,86**. IoU seluruh siluet lebih rendah (0,61/0,79/0,64) karena pose rest Manny beda dari konsep: lengan 35°/53° (konsep 22°) dan kaki lebih rapat (±0,14 vs ±0,22 m di pergelangan).
+  - [x] **6 uji pose** (`aksa_13_pose_tests.py`, action `AK_PoseTest`): kuda-kuda, pukul, tendang tinggi, dodge, jongkok, tangan terangkat. Peregangan tepi maks **7,7 cm** (jongkok dalam, `AK_PantsLeg`; tepi proxy panjang), 7,3 cm (lengan terangkat, `AK_Sleeve`), 6,0 cm (tendang tinggi); pose lain ≤4 cm. Tidak ada robekan atau tembus parah secara visual.
+  - [x] Export (`aksa_14_export.py`) → `Art/Export/SK_Aksa_Proxy.fbx` + `SK_Aksa_Proxy_sockets.json` (7 socket: `hand_*_hit`, `foot_*_hit`, `pendant`, `head_fx`, `back_fx`). **Validator** `validate_aksa.py`: **17/17 lulus** (88 tulang Manny identik ≤0,003 mm dan 0,000°, `root` satu-satunya akar, tulang tambahan hanya `sash_*`, 1 mesh, 5 slot berurutan, ≤4 influence, bobot ternormalisasi, tinggi 1,804 m, 7 socket).
+  - [x] Impor UE (`Tools/ue_import_aksa.py`): `SK_Aksa` di `/Game/Jayadwara/Characters/Aksa/Mesh/` memakai `SK_Mannequin` (tulang `sash_01..06` tergabung; skeleton jadi 167 tulang), `M_Aksa_Proxy` + 5 MI, 7 socket, `PA_Mannequin` sementara. **Animasi Mannequin jalan di SK_Aksa** (`Tools/ue_check_aksa.py`: attack/walk/idle identik dengan Manny).
+  - [ ] **Belum:** `BP_Aksa` belum diganti ke `SK_Aksa` (hanya diuji lewat actor sementara); keputusan penggantian komponen visual menunggu review developer.
+  - [ ] **Belum terverifikasi visual:** warna proxy di UE setelah material terakhir (`M_Aksa_Proxy`: vertex color → Power 2,2 → Base Color). Warna zona terbukti sampai ke UE (uji dengan jalur emissive: jaket, celana, kulit, selendang terbaca), tapi screenshot akhir gagal karena viewport editor tidak merender saat jendela tidak terlihat (`HighResShot` butuh editor aktif). Buka editor lalu `python Tools/ue_remote.py Tools/ue_check_aksa.py` untuk mengecek, hapus actor uji dengan perintah CLEAN di header skrip.
+- **Developer:** review proporsi di Blender (`aksa_v01_proxy.blend`) dan di game ("bahu lebih lebar", "kaki kurang panjang").
+- **Gate:** siluet depan/samping cocok dengan konsep (✅ dalam batas pose Manny: badan 0,80–0,88); animasi Manny jalan di `SK_Aksa` proxy (✅); tidak ada tembus parah di 6 pose (✅ visual; metrik peregangan di atas). **Menunggu review developer.**
+- **Catatan:** badan dibuat dari primitif (bukan MPFB2); MPFB2 baru relevan untuk kepala di Iterasi 2 dan tetap menunggu keputusan A2.
 
 ### Iterasi 2 — Kepala & wajah + rambut
 **Tujuan:** wajah yang terbaca sebagai Aksa. **Bagian paling berisiko**, jadi dikerjakan sebelum pakaian hero.
-- **Claude:** stylize kepala MPFB2 terhadap reference kepala depan/samping (rahang tegas, alis tebal lurus, hidung lurus, mata coklat); mata dengan kornea terpisah; alis sebagai mesh; rambut gumpalan stylized (poni jatuh di dahi, ujung mencuat ke atas); render close-up depan, samping, 3/4 berdampingan dengan konsep (`render_compare.py` mode kepala).
-- **Developer:** feedback wajah (bagian yang paling butuh mata manusia).
-- **Gate (Go/No-Go):** wajah "terasa Aksa" menurut developer. Kalau belum setelah 2 putaran revisi: pilih perbaiki lagi, atau **commission sculpt kepala saja** dengan model ini sebagai basis (jauh lebih murah daripada commission karakter utuh).
+- **Claude (putaran 1 selesai 12 Okt 2026):**
+  - [x] **Kepala dari skrip, bukan MPFB2** (MPFB2 belum disetujui/dipasang; unduhan butuh izin): `Art/Scripts/ak_head.py` membangun kulit sebagai loft cincin (104 level, rapat di zona mata/hidung/mulut; 88 titik per cincin, rapat di muka ±76°) dari profil terukur `ak_head_front/side.png` (KEYS: lebar, y depan/belakang per tinggi, interpolasi Hermite mulus), lalu fitur wajah analitik sepanjang normal: soket + bukaan mata almond, kelopak, alis menonjol, hidung (jembatan, ujung, sayap, lubang), filtrum, bibir atas/bawah, garis mulut, dagu, tulang pipi. **Semua angka wajah ada di `KEYS` dan `feature()`**, jadi iterasi feedback = ubah angka lalu jalankan ulang `aksa_20_head.py`.
+  - [x] Telinga (`AK_Ear_L/R`, dengan cekungan + tepi heliks), mata (`AK_EyeSclera/Iris/Pupil` terpisah, slot Eyes; **kornea ditunda ke Iterasi 5** karena butuh material translucent), alis mesh (`AK_Brows`, menempel ke permukaan lewat ray cast), leher baru (lebih ramping, di belakang rahang).
+  - [x] Rambut (`ak_hair.py`, seed tetap): tudung kulit kepala (tepi dihaluskan) + **343 gumpalan** pipih runcing: 2 lapis poni (menyapu ke +X), volume puncak, tuft keliling, 6 jambul pendek, sisi + cambang, belakang berlapis; ±12% gumpalan berwarna highlight coklat (`AK_HairHi`). Tinggi rambut maks 1,809 m (dalam batas Manny ±2 cm), lebar maks ±0,117 m.
+  - [x] Render pembanding berbingkai sama dengan referensi (`aksa_21_render_head.py` + `aksa_21_head_sheet.py`, Eevee): `Art/Export/_compare_aksa_kepala.png` (depan + samping, konsep vs model) dan `_aksa_kepala_q34.png` (3/4).
+  - [x] Export `Art/Export/SK_Aksa_WIP.fbx` (32.315 tris total) → **validator 17/17**; terimpor ke UE (`Tools/ue_import_aksa.py` memilih FBX terbaru otomatis), `SK_Aksa` terperbarui.
+  - **Anggaran tris:** kepala kulit 18,3k (anggaran 12k), rambut 9,2k + 0,9k (6k), mata 1,5k. Total model 32k < 60k, jadi aman, tapi LOD1+ harus memangkas kepala dan rambut (Iterasi 6).
+  - **Penilaian jujur putaran 1:** siluet kepala, proporsi, mata, hidung, dan massa rambut sudah dalam bahasa konsep, tapi **wajah belum "terasa Aksa"**: area mulut-dagu bergelombang dan terlalu datar, hidung terlalu runcing, tulang pipi/rahang belum tegas, rambut masih terlalu runcing seperti duri dan kurang menyapu seperti helai di konsep, belum ada ekspresi/kehidupan di mata (tanpa kornea/refleksi). Ini batas wajar bentuk dari fungsi; bagian ini memang paling butuh mata manusia.
+- **Claude (putaran 2, 12 Okt 2026, setelah developer: "wajah masih jauh berbeda", izin MPFB, "rambut tidak harus sama dengan konsep, yang penting bagus dan cocok"):**
+  - [x] **MPFB 2.0.18 terpasang** (A2 disetujui): dari extensions.blender.org (ekstensi resmi), `add-on-mpfb-v2.0.18.zip` 43,8 MB, SHA-256 dicocokkan (`c075b3e9…2dad`). Lisensi: kode GPLv3, **aset inti (base mesh, target) CC0**; aset sistem tambahan (mata/alis/rambut MPFB) tidak dipakai.
+  - [x] **Kepala MPFB** (`Art/Scripts/aksa_22_mpfb_head.py`): `create_human` laki-laki 25 th, atletis, campuran Asia/Kaukasia/Afrika (`MACRO`) + ±45 target wajah (`TARGETS`: rahang bentuk V bersudut, pipi tirus, alis rendah ujung dalam turun, mata berjarak lebar dan lebih terbuka, hidung lurus lebih pendek, bibir tidak maju, leher atletis). Kepala + telinga + leher diambil (bahu MPFB dibuang, tepi leher dirapikan, masuk ke dalam kaos), dipetakan ke ukuran konsep (skala 0,757; x 0,787; mata z 1,668; hidung y -0,111). 8.860 tris (sebelumnya 18,3k).
+  - [x] Bola mata di pusat helper mata MPFB (r 12,4 mm), garis bulu mata gelap lewat vertex color, warna bibir, alis mesh lebih tebal-panjang. Bobot: kaku ke `head` di atas garis rahang, campuran `neck_02/neck_01/spine_05` di bawahnya.
+  - [x] **Rambut gaya baru** (`ak_hair2.py`, menggantikan gumpalan duri `ak_hair.py`): textured crop rapi: cangkang bervolume (tebal di atas/depan, tipis di sisi/tengkuk, tepi berdinding) + 170 gumpalan berpenampang lensa yang **menempel mengikuti medan aliran** (menyapu ke depan dan ke kiri karakter, sisi turun), poni pendek berhenti di atas alis, highlight coklat halus 6%. Rambut 7,1k tris (sebelumnya 10k).
+  - [x] `Art/Blender/aksa_v03_mpfb.blend`; export `SK_Aksa_WIP.fbx` **19.751 tris total**, **validator 17/17**; `SK_Aksa` di UE terperbarui. Perbandingan: `Art/Export/_compare_aksa_kepala.png`, `_aksa_kepala_q34.png`.
+  - **Penilaian:** wajah sekarang wajah manusia yang meyakinkan dengan rahang tegas dan alis serius; rambut rapi dan cocok untuk game. Masih beda dari konsep: mata belum sebesar ilustrasi, bibir sedikit tebal, warna kulit masih datar (tekstur & pipi di Iterasi 5), belum ada kornea.
+- **Claude (putaran 3, 12 Okt 2026, developer memberi gambar referensi gaya stylized: "rambutnya kayak gini", "alisnya juga, matanya juga"):**
+  - [x] **Rambut gaya 3** (`ak_hair3.py`): disisir ke belakang dengan belahan samping (kanan karakter), jambul depan rendah, sisi disisir ke belakang; cangkang menipis halus ke garis rambut yang **ditempel tepat ke kurva garis rambut** (tidak bergerigi); 53 helai teratur sejajar berpenampang lensa (2 baris atas berselang, sisi, belakang) dengan normal dihaluskan. Warna tetap hitam Aksa (referensi coklat; tinggal ganti `HEX["hair"]`). Rambut 5,1k tris.
+  - [x] **Mata stylized lebih besar**: daerah mata (kelopak + bola mata) diperbesar 1,20x dengan falloff halus, iris r 7,4 mm, pupil 3 mm, garis bulu mata atas lebih tipis. Warna iris tetap coklat.
+  - [x] **Alis seperti referensi**: tebal, terpisah di tengah, lengkung dengan puncak di 2/3 lalu meruncing ke luar.
+  - [x] Bibir dikecilkan (volume/lebar turun, mundur). Export `SK_Aksa_WIP.fbx` **17.801 tris**, validator **17/17**, `SK_Aksa` di UE terperbarui; gambar `Art/Export/_compare_aksa_kepala.png`, `_aksa_kepala_q34.png` (depan, 3/4, samping).
+- **Developer:** feedback wajah (bagian yang paling butuh mata manusia). Opsi cepat: sculpt langsung di `aksa_v02_head.blend` (objek `AK_Head`, mode Sculpt; skrip tidak boleh dijalankan ulang di atas hasil sculpt), atau beri catatan per bagian untuk putaran 2.
+- **Gate (Go/No-Go):** wajah "terasa Aksa" menurut developer. Kalau belum setelah 2 putaran revisi: pilih perbaiki lagi, atau **commission sculpt kepala saja** dengan model ini sebagai basis (jauh lebih murah daripada commission karakter utuh); MPFB2 (A2) tetap opsi untuk basis wajah yang lebih alami.
 
 ### Iterasi 3 — Pakaian hero
 - **Claude:** jaket (terbuka, kerah tinggi berlapis batik, lengan digulung, kantong dada, aksen emas bahu, emblem emas di punggung), kaos, celana kargo (kantong samping, strap paha), sabuk + gesper emas, selendang batik, sarung tangan tanpa jari, boots bertali + trim emas, kalung + liontin pecahan batu. Hapus kulit tertutup (A6). Skrip fit ala `15_body_fit.py`: pakaian pas di badan tanpa celah dan tanpa tembus.
@@ -199,12 +254,12 @@ Rig wajah penuh untuk cutscene, kepala hi-res, varian pakaian (seragam DWARA, ka
 
 | # | Pertanyaan | Usulan Claude |
 |---|---|---|
-| **A1** | Pakai skeleton Mannequin asli? | **Ya**, dengan spike di Iterasi 0; fallback skeleton sendiri |
+| **A1** | Pakai skeleton Mannequin asli? | **Ya, kalau spike lulus** (jalur (a)); kalau tidak, skeleton sendiri + retargeter (jalur (b)). Lihat [Temuan Iterasi 0](#temuan-iterasi-0-12-okt-2026) |
 | **A2** | Pasang ekstensi MPFB2 di Blender (unduh dari extensions.blender.org)? | **Ya**, hanya aset CC0 |
-| **A3** | Tinggi Aksa 175 cm? | **Ya** |
+| **A3** | Tinggi Aksa 175 cm? | **Ya**, tapi hanya terjamin di jalur (b); di jalur (a) tingginya = tinggi Manny (diukur di spike S1) |
 | **A4** | Ekspresi lewat morph target saja (tanpa rig wajah) untuk sekarang? | **Ya**; rig wajah di Iterasi 7 |
 | **A5–A8** | Rambut gumpalan, hapus kulit tertutup, rantai kain, anggaran 60k | **Ya** (default di bagian 3) |
-| **A9** | Mulai kapan: sekarang sebagai jalur art paralel, atau menunggu Fase 2 (Apr 2027)? | Developer yang menentukan. Kalau sekarang: selesaikan dulu sisa Iterasi 6 Jayadwara supaya tidak dua model setengah jadi |
+| **A9** | Mulai kapan: sekarang sebagai jalur art paralel, atau menunggu Fase 2 (Apr 2027)? | **Dibaca "sekarang"** (permintaan 12 Okt 2026; Iterasi 0 sudah berjalan). Konfirmasi dan dampaknya ke Fase 0–1 di [10](10-roadmap.md) tetap keputusan developer. Sisa Iterasi 6 Jayadwara (uji main di `Test_GiantScale`) jangan sampai terbengkalai |
 
 ---
 

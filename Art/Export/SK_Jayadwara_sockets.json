@@ -1,6 +1,8 @@
 {
   "mesh": "SK_Jayadwara",
-  "note": "posisi rest; ue_component_cm = (x, -y, z) x 100, terverifikasi di UE 5.6.1 (Iterasi 6) pada skala import 1",
+  "export_scale": 23.684211,
+  "giant_height_m": 45.0,
+  "note": "posisi rest; ue_component_cm = (x, -y, z) x 100 x export_scale (konversi terverifikasi di UE 5.6.1, Iterasi 6)",
   "sockets": [
     {
       "name": "SOCKET_back_center",
@@ -12,8 +14,8 @@
       ],
       "ue_component_cm": [
         0.0,
-        -13.0,
-        145.0
+        -307.895,
+        3434.211
       ]
     },
     {
@@ -26,8 +28,8 @@
       ],
       "ue_component_cm": [
         0.0,
-        17.6,
-        148.0
+        416.842,
+        3505.263
       ]
     },
     {
@@ -39,9 +41,9 @@
         1.78
       ],
       "ue_component_cm": [
-        5.0,
-        12.0,
-        178.0
+        118.421,
+        284.211,
+        4215.789
       ]
     },
     {
@@ -53,9 +55,9 @@
         1.78
       ],
       "ue_component_cm": [
-        -5.0,
-        12.0,
-        178.0
+        -118.421,
+        284.211,
+        4215.789
       ]
     },
     {
@@ -67,9 +69,9 @@
         0.05
       ],
       "ue_component_cm": [
-        26.0,
-        18.0,
-        5.0
+        615.789,
+        426.316,
+        118.421
       ]
     },
     {
@@ -81,9 +83,9 @@
         0.05
       ],
       "ue_component_cm": [
-        -26.0,
-        18.0,
-        5.0
+        -615.789,
+        426.316,
+        118.421
       ]
     },
     {
@@ -95,9 +97,9 @@
         0.97705
       ],
       "ue_component_cm": [
-        55.6,
+        1316.842,
         -0.0,
-        97.705
+        2314.066
       ]
     },
     {
@@ -109,9 +111,9 @@
         0.97705
       ],
       "ue_component_cm": [
-        -55.6,
+        -1316.842,
         -0.0,
-        97.705
+        2314.066
       ]
     },
     {
@@ -125,7 +127,7 @@
       "ue_component_cm": [
         0.0,
         -0.0,
-        190.0
+        4500.0
       ]
     }
   ]

@@ -11,7 +11,7 @@ Hasil di /Game/Jayadwara/Characters/Jayadwara/:
   Textures/  T_Jayadwara_<Slot>_<Mask|BC|N|ORM> + T_Jayadwara_Face_Emit (setelan sRGB/kompresi docs/15)
   Materials/ M_Jayadwara_Master + MI_Jayadwara_<Body|Armor|Cloth|Face>
   Mesh/      SK_Jayadwara (LOD0–3), SKEL_Jayadwara, PA_Jayadwara, socket dari SK_Jayadwara_sockets.json
-Skala 1 (tinggi 199 cm, sama dengan Mannequin). Skala raksasa TIDAK di sini — lihat catatan IMPORT_UNIFORM_SCALE.
+Skala import 1: FBX sudah setinggi raksasa (45 m, di-bake di Art/Scripts/16_make_lods.py; docs/13 D4 revisi 6b).
 """
 import json
 import os
@@ -26,9 +26,8 @@ ROOT = "/Game/Jayadwara/Characters/Jayadwara"
 MESH_NAME = "SK_Jayadwara"
 SLOTS = ["Body", "Armor", "Cloth", "Face"]
 
-# Harus 1. Di UE 5.6.1 Import Uniform Scale skeletal mesh masuk ke SKALA tulang root (tidak di-bake ke posisi tulang),
-# dan animasi retarget yang mengunci skala root = 1 akan mengecilkan raksasa lagi. Skala raksasa (±45 m, placeholder)
-# dipasang di komponen mesh karakter raksasa (docs/13 D4, revisi Iterasi 6).
+# Harus 1. Di UE 5.6.1 Import Uniform Scale skeletal mesh masuk ke SKALA tulang root (tidak di-bake ke posisi tulang).
+# Skala raksasa sudah di-bake di FBX (docs/13 D4, revisi Iterasi 6b); posisi socket di JSON juga sudah berskala raksasa.
 IMPORT_UNIFORM_SCALE = 1.0
 
 LOD_FILES = {1: "SK_Jayadwara_LOD1.fbx", 2: "SK_Jayadwara_LOD2.fbx", 3: "SK_Jayadwara_LOD3.fbx"}

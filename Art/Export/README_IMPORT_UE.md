@@ -47,10 +47,10 @@ Kalau ada langkah gagal, Output Log menampilkan baris **`[Jayadwara][MANUAL]`** 
 
 ## 4. Skala raksasa
 
-- Mesh diimpor di **skala 1**: tinggi 199 cm termasuk tanduk, sama konvensinya dengan Mannequin.
-- **Jangan pakai Import Uniform Scale.** Di UE 5.6.1 nilai itu masuk ke *skala tulang root*, bukan di-bake ke posisi tulang; animasi yang mengunci skala root akan mengecilkan raksasa lagi.
-- Skala raksasa diatur di `AJDGiantCharacter`: `GiantHeightCm` (placeholder 4500) / `AuthoredHeightCm` (190) ≈ 23,68. Kapsul, kamera, step height, kecepatan, dan laju animasi ikut dihitung dari angka itu.
-- Kalau `GiantHeightCm` berubah, jalankan ulang `Tools/ue_setup_giant.py` (sumbu Speed BlendSpace raksasa ikut √skala).
+- Skala raksasa **di-bake di FBX** (`Art/Scripts/16_make_lods.py`, `GIANT_HEIGHT_M` = 45, placeholder): mesh di UE ±47,1 m termasuk tanduk, diimpor di skala 1, komponen mesh `BP_Jayadwara` berskala 1. Posisi di `SK_Jayadwara_sockets.json` sudah berskala sama (`export_scale`).
+- **Jangan pakai Import Uniform Scale** (di UE 5.6.1 masuk ke skala tulang root) dan **jangan menskalakan komponen mesh** (Anim Dynamics rusak). Alasan & uji: docs/13 Iterasi 6.
+- Gerak, kapsul, kamera dihitung di `AJDGiantCharacter` dari `GiantHeightCm` / `AuthoredHeightCm` (190). `MeshHeightCm` harus sama dengan `GIANT_HEIGHT_M` × 100.
+- Ganti tinggi raksasa: ubah `GIANT_HEIGHT_M`, jalankan `16_make_lods.py` (Blender), lalu `ue_import_jayadwara.py` → `ue_setup_retarget.py` → `ue_setup_giant.py`; samakan `GiantHeightCm` & `MeshHeightCm`.
 
 ## 5. Opsi B: manual
 
@@ -63,7 +63,7 @@ Kalau ada langkah gagal, Output Log menampilkan baris **`[Jayadwara][MANUAL]`** 
 | `_Mask`, `_ORM`, `_Emit` | off | Masks | |
 
 **B2. Mesh.** Impor `SK_Jayadwara.fbx` ke `Mesh/`:
-- Skeletal Mesh on; Import Uniform Scale **1** (bagian 4); Convert Scene on.
+- Skeletal Mesh on; Import Uniform Scale **1** (FBX sudah 45 m, bagian 4); Convert Scene on.
 - Create Physics Asset on; Import Animations off; Import Materials/Textures off.
 - Normal Import Method: *Import Normals*.
 
@@ -82,7 +82,7 @@ Kalau ada langkah gagal, Output Log menampilkan baris **`[Jayadwara][MANUAL]`** 
 - Cloth: *Material Property Overrides → Two Sided*. Face: `Emissive_Enable = 1`.
 - Pasang MI ke slot dengan nama yang sama di `SK_Jayadwara`.
 
-**B5. Socket.** Di Skeleton Tree, *Add Socket* pada tulang berikut. Posisi dalam ruang komponen (cm, skala 1). Pindahkan socket ke titik ini dengan gizmo:
+**B5. Socket.** Di Skeleton Tree, *Add Socket* pada tulang berikut. Posisi di tabel dalam cm skala model 1,90 m; kalikan `export_scale` (≈23,68), atau pakai nilai `ue_component_cm` di JSON. Pindahkan socket ke titik ini dengan gizmo:
 
 | Socket | Tulang | Posisi komponen (cm, skala 1) |
 |---|---|---|
@@ -106,14 +106,14 @@ Kalau ada langkah gagal, Output Log menampilkan baris **`[Jayadwara][MANUAL]`** 
 
 Status 12 Okt 2026 (dicek Claude lewat Python + capture; detail di docs/13 Iterasi 6):
 
-- [x] Karakter berdiri di z=0, menghadap **+Y** (sama seperti Mannequin), 1,99 m pada skala 1; 45 m di `BP_Jayadwara`.
-- [x] 4 LOD ada, screen size 1,0 / 0,5 / 0,25 / 0,12. *Belum dilihat: loncatan posisi saat pindah LOD.*
+- [x] Karakter berdiri di z=0, menghadap **+Y** (sama seperti Mannequin), ±47,1 m (mesh ter-bake).
+- [x] 4 LOD ada, screen size 1,0 / 0,5 / 0,25 / 0,12; tidak meloncat saat pindah LOD (dicek developer).
 - [x] 4 slot material terpasang MI yang benar; emas tidak tampak silver; mata & permata dada menyala konstan (aturan IP).
 - [x] Normal tidak terbalik (Flip Green on).
 - [x] 9 socket di tulang yang benar (posisi dari JSON; konversi (x, −y, z) × 100 terverifikasi).
-- [ ] Physics asset tidak menahan pose; kapsul kain/selendang dimatikan atau disetel.
-- [x] Retarget animasi jalan/pukul dari Mannequin: posisi tulang selisih beberapa cm dari Manny. *Tangan menembus badan belum dicek visual.*
-- [ ] Performa di level uji (`Test_GiantScale`, target 60 FPS); screen size LOD disetel.
+- [x] Physics asset dirapikan (20 kapsul, tanpa kain/selendang; `ue_setup_giant.py`).
+- [x] Retarget animasi jalan/pukul dari Mannequin: posisi tulang selisih beberapa cm dari Manny (op Run IK Rig dimatikan); tangan tidak menembus badan (dicek developer).
+- [x] Performa di `Test_GiantScale` 60 FPS (dicek developer).
 
 ## 8. Catatan & keterbatasan
 

@@ -2,10 +2,11 @@
 
 Folder ini berisi file sumber untuk aset yang dibuat di Blender 5.2. Unreal hanya membaca `Content/`, jadi folder ini aman di luar project UE.
 Rencana lengkap: [docs/13-rencana-model-jayadwara.md](../docs/13-rencana-model-jayadwara.md) · Model sheet: [docs/14-model-sheet-jayadwara.md](../docs/14-model-sheet-jayadwara.md)
+Model Aksa: rencana [docs/19-rencana-model-aksa.md](../docs/19-rencana-model-aksa.md) · model sheet [docs/21-model-sheet-aksa.md](../docs/21-model-sheet-aksa.md)
 
 | Folder | Isi |
 |---|---|
-| `Reference/` | Referensi ortografis & detail (diturunkan dari `docs/concept-art/jayadwara_final.webp`) |
+| `Reference/` | Referensi ortografis & detail: `jd_*` (dari `jayadwara_final.webp`), `ak_*` (dari `aksa_turnaround_v01.webp`), `manny/` (hasil spike) |
 | `Blender/` | File `.blend` berversi: `jayadwara_giant_vNN_<tahap>.blend` |
 | `Scripts/` | Script Python Blender (modeling, rig, validasi) dan alat bantu referensi |
 | `Export/` | Hasil export FBX + tekstur siap import UE |
@@ -32,6 +33,22 @@ Dijalankan di Blender (mis. lewat MCP: `exec(open(path).read())`), kecuali yang 
 | `09_bake_ao.py` | Bake AO (Cycles) ke `Export/Textures/_bake/` |
 | `05_export_fbx.py` | Export FBX. Proxy: default (`SK_Jayadwara_Proxy`). Hero: pakai `16_make_lods.py` (memanggil skrip ini per LOD lewat `PREP`) |
 | `16_make_lods.py` | Iterasi 5: paket export final `Export/SK_Jayadwara.fbx` (LOD0) + `_LOD1..3.fbx` (decimate per bagian, bobot dibersihkan) + `SK_Jayadwara_sockets.json` |
+| `make_reference_planes_aksa.py` *(sistem)* | Aksa: referensi ortografis ternormalisasi (1000 px = 1,75 m) dari turnaround → `Reference/ak_*.png` |
+| `aksa_00_setup_scene.py` | Aksa Iterasi 0: scene `aksa_v00_setup.blend` (collection, reference plane, penggaris 1,75 m, landmark `AK_LM_*`). Headless: `blender --background --factory-startup --python Art/Scripts/aksa_00_setup_scene.py` |
+| `aksa_spike_analyze_manny.py` *(Blender headless)* | Aksa spike S2: analisis FBX Manny dari `Tools/ue_export_manny.py` → `Reference/manny/manny_rest.json` |
+| `aksa_spike_roundtrip.py`, `aksa_spike_compare.py` *(Blender headless)* | Aksa spike S3/S4: export uji sesuai kontrak (+ tulang `root`), lalu banding pose referensi hasil impor/ekspor UE dengan Manny |
+| `ak_common.py` | Aksa: modul bersama (tinggi 1,806 m, K, warna zona, 5 slot material, bobot jarak/haluskan, segmen tulang, jalur selendang) |
+| `aksa_10_armature.py` | Aksa Iterasi 1: skala referensi, impor Manny, tulang `root` + `sash_01..06` → `aksa_v01_proxy.blend` |
+| `aksa_11_proxy.py` | Aksa Iterasi 1: proxy 30 bagian (3.094 tris, 5 slot) ter-skin ke armature Manny |
+| `aksa_12_render.py` + `aksa_12_compare_sheet.py` | Aksa: render ortografis depan/samping/belakang (opsional per pose) + lembar perbandingan konsep vs proxy dan IoU (`Export/_compare_aksa_proxy_*.png`) |
+| `aksa_13_pose_tests.py` | Aksa: 6 uji pose silat (action `AK_PoseTest`) + peregangan tepi (cm) |
+| `aksa_14_export.py` | Aksa: export `Export/SK_Aksa_Proxy.fbx` (kontrak: `root` tulang sungguhan, objek `Armature`, cm, `FBX_SCALE_ALL`) + `_sockets.json` |
+| `ak_head.py`, `ak_hair.py` | Aksa Iterasi 2: pembangun kepala (loft cincin + fitur wajah analitik; angka di `KEYS`/`feature`) dan rambut (tudung + gumpalan, seed tetap) |
+| `aksa_20_head.py` | Aksa Iterasi 2: ganti proxy kepala dengan kepala, telinga, mata, alis, rambut, leher → `aksa_v02_head.blend` (jangan jalankan ulang di atas hasil sculpt manual) |
+| `ak_hair3.py` | Aksa rambut gaya 3 (aktif): disisir ke belakang + belahan samping, helai sejajar, tepi ditempel ke kurva garis rambut |
+| `aksa_22_mpfb_head.py`, `ak_hair2.py` | Aksa Iterasi 2 putaran 2: kepala dari MPFB (MACRO + TARGETS wajah, dipetakan ke ukuran konsep) + rambut gaya textured crop (cangkang + gumpalan mengikuti aliran) → `aksa_v03_mpfb.blend`. Butuh ekstensi MPFB aktif |
+| `aksa_21_render_head.py` + `aksa_21_head_sheet.py` | Aksa: render kepala berbingkai sama dengan `ak_head_*.png` (depan, samping, 3/4; Eevee headless) + lembar konsep vs model (`Export/_compare_aksa_kepala.png`) |
+| `validate_aksa.py` *(Blender headless)* | Validasi FBX Aksa terhadap Manny (17 cek): `blender --background --factory-startup --python Art/Scripts/validate_aksa.py -- Art/Export/SK_Aksa_Proxy.fbx` |
 | `validate_jayadwara.py` *(Blender headless)* | Validasi FBX: `blender --background --factory-startup --python Art/Scripts/validate_jayadwara.py -- Art/Export/SK_Jayadwara_Proxy.fbx` |
 
 Urutan membangun ulang proxy: `01` → `02` → `03` → `05` → `validate`.
@@ -40,8 +57,19 @@ Import ke Unreal: `Export/README_IMPORT_UE.md` + `Tools/ue_import_jayadwara.py` 
 
 ## Aturan
 - **Satuan:** 1 unit Blender = 1 m. Tinggi Jayadwara = **1,90 m** (telapak kaki → puncak helm, tanpa tanduk). Skala raksasa diterapkan di Unreal saat import.
-- **Penamaan objek:** `JD_<Kelompok>_<Bagian>_<L|R>` (mis. `JD_Armor_Pauldron_L`).
+- **Penamaan objek:** `JD_<Kelompok>_<Bagian>_<L|R>` (mis. `JD_Armor_Pauldron_L`); Aksa: awalan `AK_` (tinggi **1,75 m**, ujung rambut tertinggi).
 - **Versi:** simpan versi baru (`v01`, `v02`, …) di akhir langkah besar; jangan menimpa versi yang sudah disetujui.
 - **Sumber kebenaran:** setelah sebuah iterasi disetujui, `.blend` adalah sumber kebenaran. Script hanya membuat basis; jangan jalankan ulang di atas hasil edit manual.
 - **Git:** `.blend`, `.fbx`, `.png` lewat Git LFS (`.gitattributes`). File cadangan `*.blend1` di-ignore. Jalankan `git lfs install` sekali sebelum commit pertama.
 - **Referensi:** buat ulang dengan `python -I Art/Scripts/make_reference_planes.py` (butuh `pillow`, `numpy`, `scipy`).
+
+## Aksa — urutan dan impor (Iterasi 1)
+Urutan: `aksa_00_setup_scene.py` (headless, `aksa_v00_setup.blend`) → buka v00 di Blender → `aksa_10_armature.py` → `aksa_11_proxy.py` → `aksa_20_head.py` (Iterasi 2, menyimpan v02) → `aksa_13_pose_tests.py` → `aksa_14_export.py` (untuk WIP: set `FBX_OUT`/`MESH_NAME` = `Art/Export/SK_Aksa_WIP.fbx` / `SK_Aksa_WIP` sebelum exec) → `validate_aksa.py`. Render banding: `aksa_12_render.py` (headless, argumen `-- <outdir> [pose]`) lalu `python -I Art/Scripts/aksa_12_compare_sheet.py <outdir>`.
+Impor ke Unreal (editor terbuka): `python Tools/ue_remote.py Tools/ue_import_aksa.py` (mesh ke skeleton `SK_Mannequin` asli; tulang `sash_*` tergabung ke skeleton itu) lalu cek visual `python Tools/ue_remote.py Tools/ue_check_aksa.py` (hapus actor uji + pulihkan kamera: `-c "CLEAN=True; exec(open(r'<path ue_check_aksa.py>').read())"`).
+Spike skeleton (hanya perlu diulang kalau Manny/UE berubah): `Tools/ue_export_manny.py` → `aksa_spike_analyze_manny.py` → `aksa_spike_roundtrip.py` → `Tools/ue_spike_aksa_import.py` → `aksa_spike_compare.py`.
+
+## Asal aset pihak ketiga
+| Aset | Sumber | Lisensi | Dipakai untuk |
+|---|---|---|---|
+| MPFB 2.0.18 (MakeHuman untuk Blender) | extensions.blender.org, `add-on-mpfb-v2.0.18.zip`, SHA-256 `c075b3e9b94b8e5556a5f03f4653602d02ea306de08126e8f55ed6dee28a2dad` | Kode GPLv3 (hanya dijalankan di Blender, tidak didistribusikan di game); **base mesh & target CC0** | Basis kepala + leher Aksa (`aksa_22_mpfb_head.py`) |
+| UE5 Mannequin (`SKM_Manny_Simple`, `SK_Mannequin`) | Template Third Person UE 5.6 | Lisensi Epic (aset Unreal) | Skeleton Aksa; LOD2 Manny hanya hantu referensi di `.blend` |

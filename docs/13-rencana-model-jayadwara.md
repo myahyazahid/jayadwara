@@ -40,7 +40,7 @@ Model dianggap **selesai** kalau paket ini lengkap dan lulus validasi:
 | D1 | Sumber aset | **Blender 5.2 + Claude (MCP)** untuk semua tahap; commission hanya opsional untuk polish (Iterasi 7) | Arahan developer; memangkas bottleneck aset |
 | D2 | Urutan | **Model dulu, UE belakangan**; validasi di UE = Iterasi 6 | UE belum terpasang |
 | D3 | Skeleton | **Kompatibel UE5 Mannequin** (nama + hierarki) + tulang tambahan (selendang, kain) | Satu skeleton dibagi dengan Aksa → ABP/montage/GAS ability dipakai ulang; Kala & Kembar ikut |
-| D4 | Skala authoring | 1 unit Blender = 1 m, tinggi tubuh **±1,9 m**; diimpor ke UE di **skala 1** (199 cm, seperti Mannequin). Skala raksasa dipasang di **komponen mesh `AJDGiantCharacter`** (`GiantHeightCm / 190`). Tinggi raksasa di game (placeholder **±45 m**) dikunci saat greybox. *Revisi Iterasi 6 (12 Okt 2026): semula lewat Import Uniform Scale; di UE 5.6.1 nilai itu masuk ke skala tulang root, bukan posisi tulang* | Modeling & retarget di skala manusia lebih mudah; tinggi raksasa cukup diubah di satu properti tanpa impor ulang |
+| D4 | Skala authoring | 1 unit Blender = 1 m, tinggi tubuh **±1,9 m**. Skala raksasa **di-bake saat export** (`16_make_lods.py` `GIANT_HEIGHT_M`, placeholder **±45 m**, dikunci saat greybox): FBX & socket JSON sudah setinggi raksasa, diimpor ke UE di skala 1, komponen mesh `AJDGiantCharacter` berskala 1. *Revisi Iterasi 6: Import Uniform Scale masuk ke skala tulang root (UE 5.6.1); komponen mesh berskala membuat Anim Dynamics rusak* | Modeling di skala manusia tetap mudah; Anim Dynamics, Physics Asset, socket bekerja di satuan dunia. Ganti tinggi = jalankan ulang export + 3 skrip UE (otomatis) |
 | D5 | Selendang & kain | **Rantai tulang + Anim Dynamics**, bukan Chaos Cloth | Murah, stabil, mudah di-tuning untuk solo dev |
 | D6 | LOD | **4 LOD manual**; tidak mengandalkan Nanite skeletal mesh | Fitur itu belum tentu stabil di 5.6.1 — cek saat UE terpasang |
 | D7 | Detail ukiran & batik | **Texture** (trim sheet + tile batik + mask), bukan geometri | Hemat poligon; cocok gaya stylized |
@@ -276,12 +276,13 @@ Script `Art/Scripts/validate_jayadwara.py`: re-import FBX ke scene kosong lalu c
     - Skala LOD ikut setelan import LOD0.
     - Setiap langkah yang gagal mencetak `[MANUAL]` dengan langkah pengganti.
 
-### Iterasi 6 — Integrasi Unreal
+### Iterasi 6 — Integrasi Unreal ✅
 - **Prasyarat:** UE terpasang utuh, project C++ `Jayadwara` dibuat (Fase 0).
 - **Developer (editor):** import FBX, atur Skeleton, Physics Asset kasar (kapsul per anggota badan), set Import Uniform Scale, material master, Anim Dynamics untuk rantai selendang/kain, IK Rig + Retargeter (Mixamo → Mannequin → Jayadwara).
 - **Claude:** hubungkan `AJDGiantCharacter` (C++), nama socket di Anim Notify State hit detection, `UJDCombatProfile` skala raksasa, perbaiki script import.
 - **Spike risiko:** impor mesh dengan tulang tambahan ke skeleton Mannequin → pastikan animasi Mannequin tetap jalan. Jika gagal: skeleton terpisah + IK Retargeter.
 - **Gate:** pawn raksasa berjalan dengan animasi retarget; socket hit berfungsi; uji skala (±45 m) di level uji dengan gedung; target 60 FPS.
+- **Hasil gate (12 Okt 2026): LULUS**, kecuali socket hit yang dipindah ke Fase 1 (butuh sistem combat; socket sudah ada).
 - **Status (12 Okt 2026): sebagian besar dikerjakan Claude lewat Python Remote Execution** (`Tools/ue_remote.py`):
   - [x] **Bug export ditemukan & diperbaiki** (`05_export_fbx.py`), diuji dengan 7 varian FBX di UE 5.6.1. Penyebabnya:
     - objek armature `JD_Armature` jadi tulang root tambahan (skala 2368, roll 90°); UE hanya melewatinya kalau bernama `Armature`;
@@ -289,17 +290,20 @@ Script `Art/Scripts/validate_jayadwara.py`: re-import FBX ke scene kosong lalu c
     - empty `SOCKET_*` ikut jadi tulang (99 tulang, bukan 89).
     - Perbaikan: salinan armature + mesh diskalakan ×100 dan di-apply (data dalam cm), salinan diberi nama `Armature`, `FBX_SCALE_ALL`, tanpa empty. Hasil: 89 tulang, root skala 1, 199 cm, menghadap +Y.
     - Validator 27/27 di keempat LOD (cek baru: nama `Armature`, tanpa empty; socket dibaca dari `_sockets.json`; satuan cm).
-  - [x] **Import** (`Tools/ue_import_jayadwara.py`, skala 1): 17 tekstur, master + 4 MI (Cloth two-sided), LOD1–3 + screen size, `SKEL_`/`PA_`, 9 socket. Nama API & CVar Interchange dari Iterasi 5 terbukti ada. Perbaikan skrip:
+  - [x] **Import** (`Tools/ue_import_jayadwara.py`, skala import 1; sejak 6b FBX sudah 45 m): 17 tekstur, master + 4 MI (Cloth two-sided), LOD1–3 + screen size, `SKEL_`/`PA_`, 9 socket. Nama API & CVar Interchange dari Iterasi 5 terbukti ada. Perbaikan skrip:
     - socket: `socket_name`/`bone_name` read-only di Python → `set_socket_parent` lalu `rename_socket`;
     - elemen array struct (`materials`, `lod_info`) adalah salinan → dikumpulkan ke list baru lalu di-set.
   - [x] **Cek visual:** berdiri di z=0, emas tidak silver, permata & mata menyala, normal benar (`Saved/Screenshots/jd_*.png`).
   - [x] **Spike risiko diputuskan:** skeleton terpisah + IK Retargeter (orientasi tulang beda dari Mannequin; root roll 90° tidak masalah untuk retarget). `Tools/ue_setup_retarget.py` membuat `IK_Mannequin`, `IK_Jayadwara` (auto-characterize, 20 chain), `RTG_Mannequin_To_Jayadwara` (op stack default 5.6), `ABP_Jayadwara` + 24 animasi `_JD`. Pose hasil retarget selisih beberapa cm dari Manny.
   - [x] **`AJDGiantCharacter`** (C++): skala mesh, kapsul, kamera, step height dari `GiantHeightCm`; kecepatan/lompatan ×√skala dan animasi 1/√skala (skala Froude), BlendSpace raksasa ×√skala. `BP_Jayadwara`, `BP_JDGameMode_Giant`, level `Test_GiantScale` (`Tools/ue_setup_giant.py`). Uji PIE: jalan sampai 2.433 cm/s, tertahan gedung.
-  - [ ] Developer: main di `Test_GiantScale`, nilai rasa gerak & kamera; cek 60 FPS (`stat fps`).
+  - [x] Developer: main di `Test_GiantScale`, rasa gerak & kamera oke; 60 FPS oke; LOD tidak meloncat; tangan tidak menembus badan saat pukul (12 Okt 2026).
   - [x] **Physics Asset** dirapikan (`Tools/ue_setup_giant.py` + modul editor C++ `JayadwaraEditor`): 20 kapsul (pelvis, spine_01/03/05, neck, head, clavicle–upperarm–lowerarm–hand, thigh–calf–foot), 19 constraint Limited 30°, tanpa body selendang/kain/IK, tabrakan antar-body mati.
   - [x] **Foot IK Mannequin dilepas** dari `ABP_Jayadwara`: `CR_Mannequin_FootIK` (ikut dari ABP_Unarmed) membuat kaki mengangkang & telapak terpuntir karena orientasi tulang dan skala berbeda. Foot IK raksasa dibuat sendiri di Fase 1.
-  - [ ] **Anim Dynamics selendang/kain: diblokir.** Node berhasil disisipkan lewat C++ (`AddAnimDynamicsChains`), tapi di UE 5.6.1 Anim Dynamics tidak mendukung mesh berskala 23,68 di komponen: Component space → rantai meregang 3–5×; World space → meregang saat bergerak; Actor space → posisi stabil tapi **skala tulang rusak** (panel kain hilang, selendang jadi garis). Untuk sementara dimatikan (`ENABLE_ANIM_DYNAMICS = False`), kain kaku mengikuti pinggul.
-    - **Usulan perbaikan (perlu keputusan):** bake skala raksasa ke mesh saat export (`05_export_fbx.py` `BAKE_CM = 100 × 23,68`) sehingga komponen mesh berskala 1 dan Anim Dynamics berjalan di Component space. Konsekuensi: D4 berubah lagi (tinggi raksasa dikunci di export, ganti tinggi = export & impor ulang, tetap otomatis lewat skrip); retarget tetap dari Mannequin. Alternatif: node RigidBody (RBAN) + body rantai di Physics Asset, perlu diuji dengan skala yang sama.
+  - [x] **Skala raksasa di-bake ke mesh (Iterasi 6b, disetujui developer).** Upaya pertama (komponen mesh diskalakan 23,68) membuat Anim Dynamics rusak di semua mode: Component space meregang 3–5×, World space meregang saat bergerak, Actor space merusak skala tulang (panel kain hilang). Sekarang:
+    - `16_make_lods.py` mem-bake `GIANT_HEIGHT_M / 1,90` lewat `BAKE_CM` di `05_export_fbx.py`; JSON socket berskala sama (`export_scale`); validator mengecek di skala authoring (28/28 di keempat LOD).
+    - Di UE: mesh 47,1 m, root skala 1, 89 tulang; `AJDGiantCharacter::MeshHeightCm` = 4500 sehingga skala komponen 1.
+    - Retarget: op **Run IK Rig dimatikan**. Di skala 45 m solver Full-Body IK menurunkan pinggul ±19 cm (setara skala manusia) dan menggeser badan; retarget FK murni cocok dengan Manny dalam beberapa cm.
+  - [x] **Anim Dynamics selendang/kain** (4 rantai: `scarf_l/r` 6 tulang, `cloth_front/back` 3 tulang) di Component space, bola penolak di paha & betis, skala tulang tetap 1,0. Uji PIE: berayun saat berjalan, kembali tenang saat berhenti. Tuning di `Tools/ue_setup_giant.py`: `ACC_SCALE` 0,1 (0 = tenang, 0,15 = selendang terseret saat lari; ≥ 1 atau gravitasi Froude = terlempar ke atas karena waktu anim diperlambat 1/√skala).
   - [ ] Socket hit di Anim Notify State + `UJDCombatProfile`: menunggu sistem combat Fase 1.
   - Catatan teknis Iterasi 6:
     - Modul editor C++ `JayadwaraEditor` (`Source/JayadwaraEditor/`, `UJDEditorToolsLibrary`) dipakai skrip Python untuk hal yang tidak terjangkau API Python: `RebuildPhysicsAsset`, `AddAnimDynamicsChains`, `BypassAnimGraphNodes`, `RetargetAssetsToFolder`.
