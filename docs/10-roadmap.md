@@ -53,7 +53,7 @@ Rencana kerja rinci (iterasi, gate, pembagian Claude/developer): [23-rencana-fas
 | **Feb 2027** | Transformasi (ganti pawn manusia ↔ raksasa); kamera skala raksasa; combat raksasa memakai sistem yang sama |
 | **Mar 2027** | Meter sinkronisasi + gedung hancur (Chaos); satu boss greybox dua fase; playtest |
 
-**Selesai jika**: satu loop utuh — manusia bertarung → berubah wujud → kalahkan boss greybox tanpa merusak terlalu banyak gedung — terasa seru menurut kamu dan minimal 2–3 playtester.
+**Selesai jika**: satu loop utuh — manusia bertarung → berubah wujud → kalahkan boss greybox tanpa merusak terlalu banyak gedung — terasa seru menurut kamu (playtest sendiri di PC developer, keputusan 12 Okt 2026; playtester lain opsional).
 
 ## Fase 2 — Vertical Slice: Episode 1 "Gerbang yang Retak" (Apr – Des 2027)
 
