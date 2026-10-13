@@ -1,0 +1,21 @@
+{
+ "nama": "contoh_berkaki_empat",
+ "catatan": "TEMPLATE untuk monster berkaki empat (mis. Babi Ngepet Ep 4). Salin ke Hermes/Tools/pose_<monster>.json, ganti nama tulang dengan nama tulang skeleton monster (jangan ganti skeleton supaya cocok dengan template). Sumbu DUNIA: menghadap -Y (kepala di -Y), kiri = +X, atas = +Z. 'pose': [tulang, x|y|z, derajat] atau [tulang, 'down', meter pada tinggi 1,806 (diskalakan --height/1,806)]. Rotasi sumbu x = mengangguk/mengayun kaki depan-belakang, y = miring kiri-kanan, z = menoleh. Profil adalah KRITERIA uji: wajib disetujui developer/Claude di gate K0 dan tidak diubah sesudahnya.",
+ "tulang_wajib": ["pelvis", "spine_01", "spine_02", "spine_03", "neck_01", "head", "upperarm_l", "upperarm_r", "lowerarm_l", "lowerarm_r", "hand_l", "hand_r", "thigh_l", "thigh_r", "calf_l", "calf_r", "foot_l", "foot_r", "tail_01", "tail_02"],
+ "orientasi": {"depan": [["pelvis", "head"]], "kiri": [["thigh_r", "thigh_l"], ["upperarm_r", "upperarm_l"]]},
+ "kamera": {"tengah": ["pelvis", "neck_01"], "dekat": {"tulang": "upperarm_r", "nama": "bawah", "keterangan": "ketiak kaki depan kanan dari bawah-samping", "offset": [-0.9, -0.2, -0.6], "bidik": [0.0, 0.0, -0.1]}},
+ "pose": {
+  "rest": [],
+  "jalan": [["upperarm_l", "x", -30], ["lowerarm_l", "x", 25], ["thigh_r", "x", -30], ["calf_r", "x", 30], ["upperarm_r", "x", 20], ["thigh_l", "x", 20]],
+  "lari": [["upperarm_l", "x", -55], ["upperarm_r", "x", -45], ["lowerarm_l", "x", 50], ["thigh_l", "x", 45], ["thigh_r", "x", 35], ["calf_l", "x", -40], ["spine_02", "x", -10]],
+  "tunduk_seruduk": [["neck_01", "x", 35], ["head", "x", 20], ["spine_03", "x", 8], ["upperarm_l", "x", -20], ["upperarm_r", "x", -20]],
+  "kepala_tegak": [["neck_01", "x", -40], ["head", "x", -15]],
+  "menoleh": [["neck_01", "z", 40], ["head", "z", 25], ["spine_03", "z", 10]],
+  "putar_badan": [["spine_01", "z", 15], ["spine_02", "z", 15], ["spine_03", "z", 15]],
+  "duduk": [["pelvis", "down", 0.25], ["thigh_l", "x", -60], ["thigh_r", "x", -60], ["calf_l", "x", 80], ["calf_r", "x", 80], ["spine_01", "x", -20]],
+  "berdiri_dua_kaki": [["spine_01", "x", -35], ["spine_02", "x", -25], ["upperarm_l", "x", -60], ["upperarm_r", "x", -60], ["lowerarm_l", "x", 70], ["lowerarm_r", "x", 70]],
+  "miring_kiri": [["spine_02", "y", -15], ["spine_03", "y", -10], ["thigh_l", "y", -15], ["upperarm_l", "y", -15]],
+  "ekor_ayun": [["tail_01", "z", 35], ["tail_02", "z", 30]]
+ },
+ "arah": {}
+}

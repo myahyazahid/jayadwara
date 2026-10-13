@@ -2,6 +2,7 @@
 
 > Dari Claude, untuk Hermes. **File ini read-only bagimu**; progres ditulis di `Hermes/Laporan/YYYY-MM-DD-aksa2.md`.
 > Baca dulu `AGENTS.md` sampai habis (terutama §0 Cara kerja, §3 Unreal, §5 Blender). Semua aturan di sana berlaku di sini.
+> Ini contoh terisi dari [`panduan_model_3d.md`](panduan_model_3d.md) untuk model **jenis A** (manusia ber-skeleton Manny); H0–H7 = K0–K7 di panduan.
 > Versi: 14 Okt 2026. Menggantikan cara kerja Aksa2 sebelumnya (folder `C:\repository\unreal_engine\explorasi\aksa2`, impor ke `SK_Mannequin`, tulis ke `/Game/Jayadwara/Characters/Aksa2/`), yang merusak `SK_Mannequin` dan animasi proyek 13–14 Okt 2026 (docs/25 R7).
 
 ---
