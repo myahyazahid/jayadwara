@@ -6,6 +6,8 @@ Pakai:
   python Tools/ue_remote.py Tools/ue_setup_greybox.py     # jalankan file
   python Tools/ue_remote.py -c "print(unreal.SystemLibrary.get_engine_version())"
 Output (print/log dari skrip) dicetak di terminal; exit code 1 kalau skrip melempar error.
+Hanya terhubung ke editor yang membuka proyek di folder repo tempat skrip ini berada, jadi worktree Hermes
+(AGENTS.md) tidak bisa mengenai editor developer, dan sebaliknya. `--any-editor` = perilaku lama.
 """
 import argparse
 import json
@@ -39,12 +41,20 @@ def _receive_message(self, expected_type):
 
 remote_execution._RemoteExecutionCommandConnection._receive_message = _receive_message
 
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
+def _norm(path):
+    return os.path.normcase(os.path.normpath(path.replace("/", os.sep))) if path else ""
+
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("file", nargs="?")
     ap.add_argument("-c", dest="code")
     ap.add_argument("--wait", type=float, default=5.0, help="detik menunggu editor ditemukan")
+    ap.add_argument("--any-editor", action="store_true",
+                    help="boleh ke editor proyek Jayadwara mana pun (default: hanya editor dari folder repo skrip ini)")
     a = ap.parse_args()
     if a.code:
         command = a.code
@@ -59,9 +69,17 @@ def main():
         deadline = time.time() + a.wait
         while not rex.remote_nodes and time.time() < deadline:
             time.sleep(0.2)
-        nodes = [n for n in rex.remote_nodes if "Jayadwara" in n.get("project_name", "")] or rex.remote_nodes
+        found = list(rex.remote_nodes)
+        if a.any_editor:
+            nodes = [n for n in found if "Jayadwara" in n.get("project_name", "")] or found
+        else:                                   # hanya editor yang membuka proyek di repo/worktree ini (AGENTS.md)
+            nodes = [n for n in found if _norm(n.get("project_root", "")) == _norm(REPO)]
         if not nodes:
             print("Editor tidak ditemukan. Editor terbuka? Remote Execution aktif?", file=sys.stderr)
+            for n in found:
+                print(f"  editor lain: {n.get('project_root')}", file=sys.stderr)
+            if found:
+                print(f"  dicari: {REPO} (pakai --any-editor untuk melewati cek ini)", file=sys.stderr)
             return 2
         rex.open_command_connection(nodes[0]["node_id"])
         res = rex.run_command(command, unattended=True, exec_mode=remote_execution.MODE_EXEC_FILE)
