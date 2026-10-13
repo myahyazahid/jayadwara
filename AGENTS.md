@@ -6,7 +6,7 @@ Repo ini adalah game **JAYADWARA: Guardian of the Seven Gates** (Unreal Engine *
 
 Kalau ragu sebuah tindakan melanggar aturan ini, **jangan lakukan**. Tulis di laporan sebagai usulan.
 
-**Tugas model Aksa2:** ikuti [`Hermes/aksa_hermes.md`](Hermes/aksa_hermes.md) langkah demi langkah, di samping aturan di file ini.
+**Tugas model 3D apa pun** (NPC, monster, boss, varian): ikuti [`Hermes/panduan_model_3d.md`](Hermes/panduan_model_3d.md). Kalau ada instruksi khusus model `Hermes/<model>_hermes.md` (mis. [`aksa_hermes.md`](Hermes/aksa_hermes.md) untuk Aksa2), ikuti itu langkah demi langkah. Aturan di file ini menang atas keduanya.
 
 ---
 
@@ -66,7 +66,7 @@ git lfs pull
 | File Blender, sumber GLB, gambar, ekspor | `Hermes/Art/<topik>/` | Bukan di `Art/` |
 | Catatan, usulan desain, laporan | `Hermes/Laporan/` | Bukan di `docs/` |
 
-Di luar tabel di atas: **read-only**. Kamu boleh membaca semua file untuk memahami proyek. `Hermes/aksa_hermes.md` juga read-only (instruksi dari Claude); progresmu ditulis di `Hermes/Laporan/`.
+Di luar tabel di atas: **read-only**. Kamu boleh membaca semua file untuk memahami proyek. `Hermes/panduan_model_3d.md` dan semua `Hermes/<model>_hermes.md` juga read-only (instruksi dari Claude); progresmu ditulis di `Hermes/Laporan/`.
 
 ## 3. Unreal Engine
 
@@ -99,7 +99,7 @@ Di luar tabel di atas: **read-only**. Kamu boleh membaca semua file untuk memaha
 ## 6. Dokumen desain
 
 - `docs/` adalah sumber kebenaran desain — **read-only** untukmu. Baca `docs/README.md` dulu, lalu dokumen yang relevan (`docs/10-roadmap.md`, `docs/11-vertical-slice-spec.md`, `docs/23-rencana-fase-1.md` untuk scope aktif).
-- Jangan ubah `CLAUDE.md`, `AGENTS.md`, `Hermes/aksa_hermes.md`, `README` mana pun di luar `Hermes/Laporan/`.
+- Jangan ubah `CLAUDE.md`, `AGENTS.md`, `Hermes/panduan_model_3d.md`, `Hermes/*_hermes.md`, `Art/Scripts/pose_profil/*`, `README` mana pun di luar `Hermes/Laporan/`.
 - Ide desain baru / perubahan desain → tulis di laporan sebagai **usulan**, jangan langsung diterapkan.
 
 ## 7. Hal yang selalu dilarang

@@ -20,6 +20,6 @@ Semua keputusan ada di `docs/` — baca `docs/README.md` dulu sebelum mengusulka
 
 ## Hasil kerja Hermes (agent lain)
 Aturan Hermes ada di `AGENTS.md`: kerja di branch `hermes/<topik>`, sandbox `Content/Hermes/`, `Source/Jayadwara/Hermes/`, `Hermes/` (tool, art, laporan). Kalau developer minta review/implementasi hasil Hermes:
-1. Baca `Hermes/Laporan/` di branch itu (tugas Aksa2 mengikuti `Hermes/aksa_hermes.md`; ulangi sendiri `audit_karakter.py` + `banding_karakter.py`, jangan percaya angka laporan begitu saja), lalu `git diff origin/development...origin/hermes/<topik> --stat` — tandai apa pun yang menyentuh file di luar sandbox.
+1. Baca `Hermes/Laporan/` di branch itu (tugas model 3D mengikuti `Hermes/panduan_model_3d.md` + instruksi khusus `Hermes/<model>_hermes.md` bila ada; ulangi sendiri `audit_karakter.py` + `banding_karakter.py`, jangan percaya angka laporan begitu saja), lalu `git diff origin/development...origin/hermes/<topik> --stat` — tandai apa pun yang menyentuh file di luar sandbox.
 2. Review C++/skrip seperti review biasa; cek scope terhadap `docs/10` & `docs/11`.
 3. Implementasi di `development` (bukan merge mentah): C++ dipindah ke folder modul yang benar dengan prefix `JD`; aset `.uasset`/`.umap` dipindah developer di editor (Move + Fix Up Redirectors) atau lewat skrip `Tools/` yang Claude tulis; perbarui `docs/` bila desain berubah.
