@@ -17,3 +17,9 @@ Semua keputusan ada di `docs/` — baca `docs/README.md` dulu sebelum mengusulka
 - **Claude tidak push langsung ke `development` atau `main`.** Kerjakan di branch sendiri `claude/<topik>` (dibuat dari `development`), push branch itu, lalu buat PR ke `development`. Developer yang merge.
 - Commit & PR atas nama developer: author commit `Muhammad Yahya Zahid <myahyazahid11@gmail.com>`. Pesan commit dan deskripsi PR **hanya isi perubahan**, tanpa baris atribusi (`Co-Authored-By`, `Generated with/by Claude Code`, link sesi).
 - Komunikasi dengan developer: bahasa Indonesia santai.
+
+## Hasil kerja Hermes (agent lain)
+Aturan Hermes ada di `AGENTS.md`: kerja di branch `hermes/<topik>`, sandbox `Content/Hermes/`, `Source/Jayadwara/Hermes/`, `Hermes/` (tool, art, laporan). Kalau developer minta review/implementasi hasil Hermes:
+1. Baca `Hermes/Laporan/` di branch itu, lalu `git diff origin/development...origin/hermes/<topik> --stat` — tandai apa pun yang menyentuh file di luar sandbox.
+2. Review C++/skrip seperti review biasa; cek scope terhadap `docs/10` & `docs/11`.
+3. Implementasi di `development` (bukan merge mentah): C++ dipindah ke folder modul yang benar dengan prefix `JD`; aset `.uasset`/`.umap` dipindah developer di editor (Move + Fix Up Redirectors) atau lewat skrip `Tools/` yang Claude tulis; perbarui `docs/` bila desain berubah.

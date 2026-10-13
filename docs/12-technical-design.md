@@ -213,6 +213,7 @@ File sumber audio (WAV kandidat, lisensi, pilihan) ada di `Audio/` di root repo,
 - Repo Git sendiri di `C:\repository\unreal_engine\jayadwara` (Git LFS 3.7.1 sudah terpasang).
 - **`.gitattributes`** — LFS untuk: `*.uasset`, `*.umap`, `*.fbx`, `*.obj`, `*.png`, `*.tga`, `*.psd`, `*.wav`, `*.mp3`, `*.ogg`, `*.mp4`, `*.blend`.
 - **`.gitignore`** — abaikan: `Binaries/`, `Intermediate/`, `Saved/`, `DerivedDataCache/`, `.vs/`, `*.sln`, `*.suo`, `*.VC.db`.
+- **Agent lain (Hermes)** — kerja terisolasi di branch `hermes/<topik>` dan sandbox `Content/Hermes/`, `Source/Jayadwara/Hermes/` (prefix class `JDH`), `Hermes/`; tidak menyentuh file/aset yang sudah ada. Hasilnya di-review & dipindah ke struktur proyek oleh Claude atas permintaan developer. Aturan lengkap: [AGENTS.md](../AGENTS.md).
 - Commit minimal setiap sesi kerja; pesan commit jelas (mis. `feat(combat): tambah combo pukulan ringan`).
 - **Branch:**
   - `main`: versi stabil. Diisi merge dari `development` di akhir fase/milestone.
