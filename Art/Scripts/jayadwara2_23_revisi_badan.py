@@ -39,6 +39,10 @@ K1 = (Z1 - args.leg_cut) / Z1
 K2 = (Z2 - Z1 * K1) / (Z2 - Z1)
 ARM_KEYS = ("upperarm", "lowerarm", "hand", "thumb", "index", "middle", "ring", "pinky")
 CLEAR = 0.015
+PANEL_WIDEN = 1.25               # R7b: helai belakang sedikit lebih lebar (tepi menyelip di bawah helai samping)
+PANEL_RED_UV = (0.0249, 0.9847)   # R7b: texel merah atlas badan = median warna helai samping belakang (0,48/0,07/0,11)
+TOP_Z0, PANEL_TOP_Z = 0.93, 1.12   # R7b: tepi atas helai di atas TOP_Z0 diratakan ke PANEL_TOP_Z (balik sabuk)
+BELT_Z = 1.07                     # R7b: di atas ini pangkal helai menyelip di belakang permukaan sabuk
 BACK_MIN_Y = -0.05                # sinar yang mengenai sesuatu di depan ini = lolos di antara kaki
 TAB_X, TAB_Y, TAB_Z0, TAB_Z1 = 0.12, -0.19, 0.30, 1.05
 
@@ -116,29 +120,103 @@ if not args.no_back:
     for v in nv:
         v.co.y = -v.co.y                                   # cermin ke belakang (rest: ruang objek = dunia)
     bmesh.ops.reverse_faces(bm, faces=nf)
-    # letakkan di permukaan bokong + CLEAR (sinar dari belakang di (x, z)); sinar yang lolos di antara kaki (mengenai kain
-    # depan, y < BACK_MIN_Y) diabaikan. Per kolom (x, z) digeser sama -> tebal lembar terjaga. Lalu menggantung lurus:
-    # dari atas ke bawah permukaan tidak boleh masuk lagi (kain jatuh dari titik terjauh bokong).
+    # R7b (feedback developer): helai harus SEBARIS dengan helai samping belakang, bukan terbenam di bokong & berdiri sendiri.
+    # (a) serpihan kecil ikut terduplikasi dari kain depan -> hanya pulau terbesar dipakai
+    nvset = set(nv)
+    seen, isl = set(), []
+    for v in nv:
+        if v in seen:
+            continue
+        st, grp = [v], [v]
+        seen.add(v)
+        while st:
+            c_ = st.pop()
+            for e in c_.link_edges:
+                w = e.other_vert(c_)
+                if w in nvset and w not in seen:
+                    seen.add(w)
+                    st.append(w)
+                    grp.append(w)
+        isl.append(grp)
+    isl.sort(key=len, reverse=True)
+    junk = [v for g in isl[1:] for v in g]
+    bmesh.ops.delete(bm, geom=junk, context="VERTS")
+    nv = isl[0]
+    # (b) sedikit lebih lebar supaya tepinya menyelip di bawah helai samping
+    for v in nv:
+        v.co.x *= PANEL_WIDEN
+    # (c) kedalaman = permukaan luar helai samping belakang pada tinggi yang sama (+4 mm), minimal bokong + CLEAR;
+    #     di bawah sabuk menyelip di belakang permukaan sabuk; di bawahnya menggantung lurus.
+    B = np.array([tuple(p_) for p_ in bverts])
+    flap = (B[:, 1] > 0.05) & (np.abs(B[:, 0]) > 0.08) & (np.abs(B[:, 0]) < 0.22)
+    zs = np.arange(0.30, 1.10, 0.02)
+    yf = np.array([np.percentile(B[flap & (np.abs(B[:, 2] - z) < 0.02), 1], 90) if (flap & (np.abs(B[:, 2] - z) < 0.02)).sum() > 5 else np.nan
+                   for z in zs])
+    ok = ~np.isnan(yf)
+    yf = np.interp(zs, zs[ok], yf[ok])
+    for _ in range(3):
+        yf[1:-1] = 0.25 * yf[:-2] + 0.5 * yf[1:-1] + 0.25 * yf[2:]
     cols = {}
     for v in nv:
         cols.setdefault((round(v.co.x / 0.01), round(v.co.z / 0.01)), []).append(v)
     target = {}
-    for key, vs in cols.items():
+    for key in cols:
         x, z = key[0] * 0.01, key[1] * 0.01
         hit, _, _, _ = bvh_body.ray_cast(Vector((x, 1.0, z)), Vector((0, -1, 0)), 2.0)
-        target[key] = (hit.y + CLEAR) if (hit is not None and hit.y > BACK_MIN_Y) else None
+        body_y = hit.y if (hit is not None and hit.y > BACK_MIN_Y) else None
+        t = float(np.interp(z, zs, yf)) + 0.004
+        if body_y is not None:
+            t = max(t, body_y + CLEAR)
+            if z > BELT_Z:                                  # pangkal di bawah sabuk: di belakang permukaan sabuk
+                k = min((z - BELT_Z) / 0.06, 1.0)
+                t = t * (1 - k) + (body_y - 0.004) * k
+        target[key] = t
     for x_key in sorted({k[0] for k in cols}):
         prev = None
         for z_key in sorted((k[1] for k in cols if k[0] == x_key), reverse=True):
             t = target[(x_key, z_key)]
-            t = prev if t is None else (t if prev is None else max(t, prev))
-            if t is None:
-                continue
+            if prev is not None and z_key * 0.01 < BELT_Z:
+                t = max(t, prev)
             vs = cols[(x_key, z_key)]
             inner = min(v.co.y for v in vs)
             for v in vs:
                 v.co.y += t - inner
             prev = t
+    # (c2) tepi atas rata: vertex tepi terbuka di atas TOP_Z0 diangkat ke PANEL_TOP_Z (di balik sabuk), pita di bawahnya
+    #     ditarik sebagian -> tanpa celah hitam di antara sabuk dan pangkal helai.
+    nvs = set(nv)
+    top_edge = {v for v in nv if v.co.z > TOP_Z0 and any(e.is_boundary for e in v.link_edges)}
+    for v in nv:
+        if v in top_edge:
+            v.co.z = max(v.co.z, PANEL_TOP_Z)
+        elif v.co.z > TOP_Z0 - 0.05:
+            k = (v.co.z - (TOP_Z0 - 0.05)) / (PANEL_TOP_Z - (TOP_Z0 - 0.05))
+            v.co.z += max(0.0, PANEL_TOP_Z - 0.03 - v.co.z) * min(max(k, 0.0), 1.0) * 0.5
+    # (d) tekstur: interior helai (merah bernoda / gelap dari atlas kain depan) dipetakan ke titik merah bersih yang sama dengan
+    #     helai samping belakang; muka emas (list tepi & ornamen) tetap -> menyatu dengan helai lain.
+    uvl = bm.loops.layers.uv.active
+    img = next(n.image for n in me.materials[0].node_tree.nodes if n.type == "TEX_IMAGE" and n.image.name.startswith("Color"))
+    W_, H_ = img.size
+    px = np.array(img.pixels[:], dtype=np.float32).reshape(H_, W_, 4)
+    faces = {f_ for v in nv for f_ in v.link_faces}
+    n_red = 0
+    for f_ in faces:
+        u = sum(l[uvl].uv[0] for l in f_.loops) / len(f_.loops)
+        w = sum(l[uvl].uv[1] for l in f_.loops) / len(f_.loops)
+        c = px[int(w * (H_ - 1)), int(u * (W_ - 1)), :3]
+        gold = c[0] > 0.45 and c[1] > 0.28 and c[1] > c[2] * 1.4            # emas: merah & hijau tinggi, biru rendah
+        if not gold:
+            for k, l in enumerate(f_.loops):
+                l[uvl].uv = (PANEL_RED_UV[0] + 0.001 * (k % 2), PANEL_RED_UV[1] + 0.001 * ((k // 2) % 2))
+            n_red += 1
+    print(f"helai belakang: {n_red}/{len(faces)} muka interior -> merah bersih (sama dengan helai samping), emas tetap")
+    print(f"helai belakang: {len(junk)} vertex serpihan dibuang, lebar x{PANEL_WIDEN}, kedalaman = helai samping "
+          f"(y {yf.min():.3f}-{yf.max():.3f} m)")
+    # tepi atas yang diratakan bisa membuat muka gepeng (luas nol): larutkan
+    degen = [e for e in bm.edges if e.calc_length() < 1e-5]
+    bmesh.ops.dissolve_degenerate(bm, dist=1e-5, edges=list(bm.edges))
+    bmesh.ops.delete(bm, geom=[f_ for f_ in bm.faces if f_.calc_area() < 1e-10], context="FACES")
+    bmesh.ops.delete(bm, geom=[v for v in bm.verts if not v.link_faces], context="VERTS")
     bm.to_mesh(me)
     bm.free()
     me.update()

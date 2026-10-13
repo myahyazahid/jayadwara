@@ -142,7 +142,7 @@ Supaya R1–R3 jauh lebih ringan:
 | R3 Rig final | ✅ disetujui developer di Play | 13 Okt 2026 | + R3b leher/wajah, R3c–R3d kaki & sayap (tanpa lubang, kinematik); regangan pose ekstrem (tendang 180°) tetap > target lama |
 | R5 LOD | ✅ | 13 Okt 2026 | 37,7k / 18,8k / 8,7k / 3,8k, validator 27/27 ×4 |
 | R6 Keputusan ganti | ✅ **Jayadwara2 dipakai** | 13 Okt 2026 | Transformasi (T) & `BP_JDGameMode_Giant` -> `BP_Jayadwara2`; model lama cadangan |
-| R7 Revisi badan v06 | ✅ dari sisi Claude, menunggu nilai Play | 14 Okt 2026 | Kuda-kuda idle dirapatkan (retarget), kaki −4,5 cm / badan lebih panjang (tinggi tetap), kain tengah belakang |
+| R7 Revisi badan v06 | ✅ dari sisi Claude, menunggu nilai Play (helai belakang R7b dicoba lalu **dibatalkan** developer) | 14 Okt 2026 | Kuda-kuda idle dirapatkan (retarget), kaki −4,5 cm / badan lebih panjang (tinggi tetap), kain tengah belakang |
 
 ### Hasil R0 (13 Okt 2026) — `yahya_design/jayadwara.glb`
 
@@ -361,3 +361,9 @@ Permintaan: (1) kaki jangan terlalu lebar saat idle — samakan dengan Jayadwara
 Skrip: `Art/Scripts/jayadwara2_23_revisi_badan.py` (v05 → **`Art/Blender/jayadwara2_v06_revisi.blend`**, v05 utuh). Export `jayadwara2_14_export.py` + `jayadwara2_16_make_lods.py` pada v06: 39.256 / 19.627 / 9.028 / 3.925 tris, validator 27/27 ×4. UE: `ue_import_jayadwara2.py` → `ue_setup_jayadwara2.py`. Jubah dibangun ulang di atas v06 (docs/26). Pembanding: `Art/Export/_jd2/_revisi_v06_banding.png`.
 
 **Insiden 13–14 Okt:** batch retarget crash berulang karena `SK_Mannequin` tersimpan dengan tulang terbuang (92 vs 171) oleh pekerjaan Aksa2 paralel (agen Hermes); setup yang crash sempat menghapus `Jayadwara2/Anims`. Dipulihkan dari commit (atas persetujuan developer): `SK_Mannequin`, animasi `Mannequins/Anims/Unarmed/*`, `A_Aksa_Attack_01..03`, `Jayadwara2/Anims`, `IK/RTG_Jayadwara2`; pesan untuk Hermes di `C:\repository\unreal_engine\explorasi\PESAN_UNTUK_HERMES_dari_Claude.md`.
+
+**R7b (14 Okt 2026, feedback developer: helai bokong kurang dipoles, kurang ke atas, harus sejajar helai lain):** `jayadwara2_23_revisi_badan.py` — serpihan duplikat dibuang; lebar ×1,25 (tepi menyelip di bawah helai samping); kedalaman = permukaan luar helai samping belakang pada tinggi yang sama (+4 mm, minimal bokong + 1,5 cm); tepi atas diratakan ke 1,12 m dan menyelip di balik sabuk (di atas 1,07 m); interior dipetakan ke texel merah atlas yang sama dengan helai samping (UV 0,0249/0,9847), list emas tetap; muka gepeng dibersihkan. Validator badan 27/27 ×4. Gambar `Art/Export/_jd2/_helai_belakang_v06b.png`.
+
+**Insiden lanjutan (14 Okt):** commit developer `6581b6b "jubah versi final"` ikut menyimpan `SK_Mannequin` rusak (92 tulang) + animasi Manny/`A_Aksa_Attack_*` dari sesi Hermes → retarget crash lagi. Dipulihkan ke versi `2984dc8` di working tree (belum di-commit — perlu di-commit developer). `ue_setup_jayadwara2.py` kini memeriksa `SK_Mannequin` ≥ 161 tulang sebelum retarget (batal dengan pesan jelas, tidak crash).
+
+**R7c (14 Okt 2026):** developer: "helai belakang di-take out saja, lebih bagus tanpa" → `jayadwara2_23_revisi_badan.py -- --no-back` (proporsi & kuda-kuda tetap). Badan 37.690 / 18.845 / 8.667 / 3.768 tris, 27/27 ×4; jubah dibangun ulang, 27/27 ×3; terpasang di UE.

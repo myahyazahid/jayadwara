@@ -94,7 +94,22 @@ def make_ik_rig(folder, name, mesh):
     return rig
 
 
+def ensure_mannequin_bones():
+    """SK_Mannequin di disk hanya menyimpan 92 tulang; tulang lain ditambahkan UE di memori saat mesh yang memakainya dimuat
+    ("missing bones ... will be added now"). Batch retarget animasi Manny SEBELUM itu crash (Index -1, 14 Okt 2026) ->
+    muat mesh pemakai skeleton dulu dan pastikan jumlah tulang lengkap."""
+    for m in (MANNY, "/Game/Characters/Mannequins/Meshes/SKM_Quinn_Simple", "/Game/Jayadwara/Characters/Aksa/Mesh/SK_Aksa"):
+        if EAL.does_asset_exist(m):
+            EAL.load_asset(m)
+    sk = EAL.load_asset("/Game/Characters/Mannequins/Meshes/SK_Mannequin")
+    n = len(unreal.AnimPoseExtensions.get_bone_names(unreal.AnimPoseExtensions.get_reference_pose(sk)))
+    log(f"SK_Mannequin: {n} tulang di memori")
+    if n < 161:
+        raise RuntimeError(f"SK_Mannequin hanya {n} tulang - retarget dibatalkan (akan crash)")
+
+
 def retarget(mesh):
+    ensure_mannequin_bones()
     manny = EAL.load_asset(MANNY)
     ik_m = EAL.load_asset(f"{AKSA_RIG}/IK_Mannequin")
     ik_j = make_ik_rig(f"{J2}/Rig", "IK_Jayadwara2", mesh)

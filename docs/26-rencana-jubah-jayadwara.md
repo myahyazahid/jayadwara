@@ -1,6 +1,6 @@
 # 26 — Rencana Jubah Upacara Jayadwara
 
-> **Status: v1.1 — J1 selesai & disetujui; J2 selesai dari sisi Claude (13 Okt 2026), menunggu developer (tuning warna di MI + gate J2).** Sebagian J3 (simulasi rantai) dan J4 (UJDCapeComponent + tombol Y sementara) sudah ditarik ke J1. J-Q1 & J-Q4 dijawab (bagian 4).
+> **Status: v1.2 (14 Okt 2026) — J0, J1 disetujui; J2, J3 (kain bergerak) & J4 (lepas/pakai, tombol Y) disetujui developer; J5 belum (F2).** Sisa J4: pemicu lock-on (F1 Iter 6) & aksi combat pertama menggantikan tombol Y. Sebagian J3 (simulasi rantai) dan J4 (UJDCapeComponent + tombol Y sementara) sudah ditarik ke J1. J-Q1 & J-Q4 dijawab (bagian 4).
 > Desain: K9 di [14](14-model-sheet-jayadwara.md); alur gameplay: [07](07-gameplay-sistem.md#jubah-upacara); konsep: [`concept-art/jayadwara_jubah_upacara.webp`](concept-art/jayadwara_jubah_upacara.webp).
 > Jadwal: masuk **Fase 2** bareng cutscene transformasi ([23](23-rencana-fase-1.md) "Tidak masuk"). J0–J3 (aset) boleh ditarik lebih awal sebagai jalur art paralel kalau developer mau; J4–J5 butuh lock-on (Fase 1 Iterasi 6) dan Sequencer (F2).
 
@@ -72,9 +72,9 @@
 |---|---|---|---|
 | J0 Persiapan | ✅ disetujui developer | 13 Okt 2026 | Pilih `cap02`; depan dibuka; kerah 1,60 m / ujung 0,10 m; titik kait diukur; fit lokal = pekerjaan utama J1 |
 | J1 Spike bentuk + rig | ✅ **selesai, disetujui developer** (putaran J1b–J1f) | 13 Okt 2026 | Fit lokal tanpa tembus (rest), rig 119 tulang, bobot kinematik, validator 27/27, terpasang di `BP_Jayadwara2` (komponen `Cape`) |
-| J2 Bentuk final & tekstur | ✅ dari sisi Claude, menunggu developer | 13 Okt 2026 | Mask zona (recolor terbukti), LOD0–2 (29,2k/14,6k/7,0k), bros ornate, lubang ditutup, kerah ≤ 1,600 m (K9), validator 27/27 ×3, impor UE stabil |
-| J3 Kain bergerak | 🟡 sebagian (ditarik ke J1c) | 13 Okt 2026 | Node `FAnimNode_JDCapeChains` + kapsul kaki; terbukti terangkat saat jatuh (Simulate). Sisa: uji jalan/lari/berbalik/angin/mendarat di Play, tuning, FPS |
-| J4 Pakai/lepas | 🟡 sebagian (ditarik ke J1b) | 13 Okt 2026 | `UJDCapeComponent` (state, event), dissolve emas, tombol Y sementara. Sisa: pemicu lock-on (F1 Iter 6) & aksi combat pertama, lepas cepat 0,5 s, pakai kembali saat menang, animasi tangan, Niagara, skip |
+| J2 Bentuk final & tekstur | ✅ **disetujui developer** (14 Okt) | 13 Okt 2026 | Mask zona (recolor terbukti), LOD0–2 (29,2k/14,6k/7,0k), bros ornate, lubang ditutup, kerah ≤ 1,600 m (K9), validator 27/27 ×3, impor UE stabil |
+| J3 Kain bergerak | ✅ **disetujui developer di Play** (14 Okt: "kain sudah bergerak dengan baik") | 14 Okt 2026 | Node `FAnimNode_JDCapeChains` + kapsul kaki; terbukti terangkat saat jatuh (Simulate). Sisa: uji jalan/lari/berbalik/angin/mendarat di Play, tuning, FPS |
+| J4 Pakai/lepas | ✅ **lepas/pakai disetujui developer** (14 Okt: "sesuai harapan"); sisa = pemicu otomatis | 14 Okt 2026 | `UJDCapeComponent` (state, event), dissolve emas, tombol Y sementara. Sisa: pemicu lock-on (F1 Iter 6) & aksi combat pertama, lepas cepat 0,5 s, pakai kembali saat menang, animasi tangan, Niagara, skip |
 | J5 Cutscene & polish | ⬜ belum | — | Butuh cutscene transformasi (F2) |
 
 ### Hasil J0 (13 Okt 2026)
