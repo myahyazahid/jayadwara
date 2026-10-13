@@ -52,6 +52,7 @@ Kalau G1–G3 gagal: **perbaiki combat dulu** sebelum masuk Fase 2 ([18](18-kebu
 | Jurus spesial #1 Jayadwara | F2 | Finisher / pukulan berat ke tengkorak |
 | Menu utama, pause, setting grafis | F2 | Play In Editor / build dev |
 | Model final, animasi silat final, VFX final, audio final | F2 | Manny, proxy, Mixamo, kotak, SFX kandidat |
+| Jubah upacara Jayadwara (model, animasi pakai/lepas, Niagara, C++ pakai/lepas) — [07](07-gameplay-sistem.md#jubah-upacara) | F2 (bareng cutscene transformasi) | Tanpa jubah |
 | Motion Matching, Mass AI, skill tree, upgrade | Backlog / F4 | — |
 
 ## 3. Titik awal (12 Okt 2026)
@@ -144,6 +145,7 @@ Didaftarkan sebagai **native tag C++** (`Abilities/JDGameplayTags.h`, `UE_DEFINE
 | Lompat | **Space** | ✕ | A |
 | Lock-on (boss raksasa) | **Q** / klik tengah | R3 | RS (klik) |
 | Transformasi | **T** | **L1 + R1** | LB + RB |
+| Lepas jubah (raksasa) | otomatis saat lock-on pertama / aksi combat pertama ([07](07-gameplay-sistem.md#jubah-upacara)) | — | — |
 | Cheat/konsol (dev) | `~` | — | — |
 
 Keyboard disetujui developer (Q5): tangan kiri WASD + E/Shift/Space/Q/T, tangan kanan di mouse. Tangkis di **RMB** karena parry butuh ketepatan waktu dan jari di mouse paling cepat (pola Sekiro di PC). Kamera tetap di mouse, jadi tidak perlu kamera otomatis (Q18).
