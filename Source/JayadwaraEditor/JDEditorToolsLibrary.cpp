@@ -2,6 +2,7 @@
 
 #include "AnimGraphNode_AnimDynamics.h"
 #include "AnimGraphNode_CopyPoseFromMesh.h"
+#include "AnimGraphNode_JDCapeChains.h"
 #include "AnimGraphNode_ComponentToLocalSpace.h"
 #include "AnimGraphNode_LocalToComponentSpace.h"
 #include "AnimGraphNode_Root.h"
@@ -416,6 +417,110 @@ bool UJDEditorToolsLibrary::SetupCopyPoseAnimBlueprint(UAnimBlueprint* AnimBluep
 	AnimBlueprint->MarkPackageDirty();
 	UE_LOG(LogJayadwaraEditor, Log, TEXT("SetupCopyPoseAnimBlueprint: %s = Copy Pose From Mesh (attach parent) -> Output Pose"), *AnimBlueprint->GetName());
 	return AnimBlueprint->Status != BS_Error;
+}
+
+int32 UJDEditorToolsLibrary::AddCapeChainsNode(UAnimBlueprint* AnimBlueprint, const TArray<FName>& ChainStarts, const TArray<FName>& ChainEnds,
+	const TArray<FName>& ColliderA, const TArray<FName>& ColliderB, const TArray<float>& ColliderRadius, float CollisionMargin)
+{
+	static const TCHAR* CapeTag = TEXT("JD_CapeChains");
+	if (!AnimBlueprint || ChainStarts.Num() != ChainEnds.Num() || ColliderA.Num() != ColliderB.Num() || ColliderA.Num() != ColliderRadius.Num())
+	{
+		return -1;
+	}
+	UEdGraph* Graph = nullptr;
+	for (UEdGraph* Candidate : AnimBlueprint->FunctionGraphs)
+	{
+		if (Candidate && Candidate->GetFName() == UEdGraphSchema_K2::GN_AnimGraph)
+		{
+			Graph = Candidate;
+			break;
+		}
+	}
+	UAnimGraphNode_Root* Root = nullptr;
+	if (Graph)
+	{
+		for (UEdGraphNode* Node : Graph->Nodes)
+		{
+			Root = Root ? Root : Cast<UAnimGraphNode_Root>(Node);
+		}
+	}
+	UEdGraphPin* RootIn = Root ? FindPosePin(Root, EGPD_Input) : nullptr;
+	if (!RootIn)
+	{
+		UE_LOG(LogJayadwaraEditor, Error, TEXT("AddCapeChainsNode: AnimGraph/Output Pose tidak ditemukan di %s"), *AnimBlueprint->GetName());
+		return -1;
+	}
+	auto IsCape = [](const UEdGraphNode* Node) { return Node && Node->NodeComment == CapeTag; };
+	UEdGraphPin* Source = RootIn->LinkedTo.Num() > 0 ? RootIn->LinkedTo[0] : nullptr;
+	while (Source && IsCape(Source->GetOwningNode()))
+	{
+		UEdGraphPin* In = FindPosePin(Source->GetOwningNode(), EGPD_Input);
+		Source = In && In->LinkedTo.Num() > 0 ? In->LinkedTo[0] : nullptr;
+	}
+	if (!Source)
+	{
+		UE_LOG(LogJayadwaraEditor, Error, TEXT("AddCapeChainsNode: Output Pose belum tersambung (jalankan SetupCopyPoseAnimBlueprint dulu)"));
+		return -1;
+	}
+
+	AnimBlueprint->Modify();
+	Graph->Modify();
+	TArray<UEdGraphNode*> Old;
+	for (UEdGraphNode* Node : Graph->Nodes)
+	{
+		if (IsCape(Node))
+		{
+			Old.Add(Node);
+		}
+	}
+	for (UEdGraphNode* Node : Old)
+	{
+		FBlueprintEditorUtils::RemoveNode(AnimBlueprint, Node, true);
+	}
+	RootIn->BreakAllPinLinks();
+
+	auto Make = [&](auto* Dummy, int32 X) {
+		using TNode = std::remove_pointer_t<decltype(Dummy)>;
+		FGraphNodeCreator<TNode> Creator(*Graph);
+		TNode* Node = Creator.CreateNode();
+		Node->NodePosX = Root->NodePosX - X;
+		Node->NodePosY = Root->NodePosY + 200;
+		Node->NodeComment = CapeTag;
+		Creator.Finalize();
+		return Node;
+	};
+	UAnimGraphNode_LocalToComponentSpace* ToComponent = Make(static_cast<UAnimGraphNode_LocalToComponentSpace*>(nullptr), 900);
+	UAnimGraphNode_JDCapeChains* Cape = Make(static_cast<UAnimGraphNode_JDCapeChains*>(nullptr), 600);
+	UAnimGraphNode_ComponentToLocalSpace* ToLocal = Make(static_cast<UAnimGraphNode_ComponentToLocalSpace*>(nullptr), 300);
+
+	FAnimNode_JDCapeChains& N = Cape->Node;
+	for (int32 i = 0; i < ChainStarts.Num(); ++i)
+	{
+		FJDCapeChain Chain;
+		Chain.StartBone.BoneName = ChainStarts[i];
+		Chain.EndBone.BoneName = ChainEnds[i];
+		N.Chains.Add(Chain);
+	}
+	for (int32 i = 0; i < ColliderA.Num(); ++i)
+	{
+		FJDCapeCollider Collider;
+		Collider.BoneA.BoneName = ColliderA[i];
+		Collider.BoneB.BoneName = ColliderB[i];
+		Collider.Radius = ColliderRadius[i];
+		N.Colliders.Add(Collider);
+	}
+	N.CollisionMargin = CollisionMargin;
+
+	Source->MakeLinkTo(FindPosePin(ToComponent, EGPD_Input));
+	FindPosePin(ToComponent, EGPD_Output)->MakeLinkTo(FindPosePin(Cape, EGPD_Input));
+	FindPosePin(Cape, EGPD_Output)->MakeLinkTo(FindPosePin(ToLocal, EGPD_Input));
+	FindPosePin(ToLocal, EGPD_Output)->MakeLinkTo(RootIn);
+
+	FBlueprintEditorUtils::MarkBlueprintAsStructurallyModified(AnimBlueprint);
+	FKismetEditorUtilities::CompileBlueprint(AnimBlueprint);
+	AnimBlueprint->MarkPackageDirty();
+	UE_LOG(LogJayadwaraEditor, Log, TEXT("AddCapeChainsNode: %d rantai, %d kapsul di %s"), ChainStarts.Num(), ColliderA.Num(), *AnimBlueprint->GetName());
+	return AnimBlueprint->Status == BS_Error ? -1 : ChainStarts.Num();
 }
 
 int32 UJDEditorToolsLibrary::BypassAnimGraphNodes(UAnimBlueprint* AnimBlueprint, const FString& ClassNameContains)

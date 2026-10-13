@@ -2,11 +2,12 @@
 
 Butuh: ue_import_jayadwara2_cape.py; modul editor dengan JDEditorToolsLibrary.setup_copy_pose_anim_blueprint.
 Membuat/mengubah:
-  /Game/Jayadwara/Characters/Jayadwara2/Cape/ABP_Jayadwara2_Cape   Copy Pose From Mesh (induk attach) -> Output Pose
+  /Game/Jayadwara/Characters/Jayadwara2/Cape/ABP_Jayadwara2_Cape   Copy Pose From Mesh (induk attach) -> JD Cape Chains
+      (simulasi 5 rantai cape_*: gravitasi, hambatan udara, kapsul paha/betis/pinggul; J1c) -> Output Pose
   BP_Jayadwara2: komponen SkeletalMesh "Cape" di-attach ke Mesh (SK_Jayadwara2_Cape + ABP di atas, tanpa tabrakan)
 Pakai: python Tools/ue_remote.py Tools/ue_setup_jayadwara2_cape.py
        python Tools/ue_remote.py -c "CAPE=False; exec(open(r'Tools/ue_setup_jayadwara2_cape.py').read())"   # lepas jubah dari BP
-J1: jubah SELALU terpakai (juga saat combat) sampai J4 (UJDCapeComponent: lepas/pakai otomatis). Kinematik, tanpa simulasi (J3).
+Lepas/pakai: UJDCapeComponent (tombol Y sementara, J1b); pemicu lock-on/aksi combat di J4.
 """
 import unreal
 
@@ -15,6 +16,10 @@ ROOT = f"{J2}/Cape"
 BP_PATH = f"{J2}/BP_Jayadwara2"
 COMP_NAME = "Cape"
 CAPE = globals().get("CAPE", True)
+CHAINS = ["c", "l", "r", "fl", "fr"]
+COLLIDERS = [("thigh_l", "calf_l", 0.14), ("thigh_r", "calf_r", 0.14), ("calf_l", "foot_l", 0.095),
+             ("calf_r", "foot_r", 0.095), ("pelvis", "spine_03", 0.14)]       # (tulang A, tulang B, radius m authoring)
+MARGIN_M = 0.01
 
 EAL = unreal.EditorAssetLibrary
 asset_tools = unreal.AssetToolsHelpers.get_asset_tools()
@@ -55,8 +60,18 @@ def make_abp(mesh):
     abp = asset_tools.create_asset("ABP_Jayadwara2_Cape", ROOT, unreal.AnimBlueprint, f)
     if not unreal.JDEditorToolsLibrary.setup_copy_pose_anim_blueprint(abp):
         raise RuntimeError("setup_copy_pose_anim_blueprint gagal (lihat Output Log)")
-    EAL.save_loaded_asset(abp, only_if_is_dirty=False)
     log("ABP_Jayadwara2_Cape: Copy Pose From Mesh (attach parent) -> Output Pose")
+    # J1c: simulasi rantai (gravitasi, hambatan udara -> terangkat saat jatuh, kapsul kaki). Radius authoring (m) diukur
+    # dari mesh; sendi rantai saat diam berjarak >= 1,3 cm dari kapsul ini, jadi pose diam tidak terdorong.
+    k = 100.0 * 45.0 / 1.90                                   # m authoring -> cm komponen (skala raksasa di-bake)
+    starts = [f"cape_{c}_01" for c in CHAINS]
+    ends = [f"cape_{c}_06" for c in CHAINS]
+    ca, cb, cr = zip(*[(a, b, r * k) for a, b, r in COLLIDERS])
+    n = unreal.JDEditorToolsLibrary.add_cape_chains_node(abp, starts, ends, list(ca), list(cb), list(cr), MARGIN_M * k)
+    if n < 0:
+        raise RuntimeError("add_cape_chains_node gagal (lihat Output Log)")
+    EAL.save_loaded_asset(abp, only_if_is_dirty=False)
+    log(f"ABP_Jayadwara2_Cape: + JD Cape Chains ({n} rantai, {len(COLLIDERS)} kapsul; tuning Gravity/AirDrag/Stiffness di ABP)")
     return abp
 
 

@@ -87,6 +87,16 @@ public:
 	static bool SetupCopyPoseAnimBlueprint(UAnimBlueprint* AnimBlueprint);
 
 	/**
+	 * Sisipkan node "JD Cape Chains" (FAnimNode_JDCapeChains) tepat sebelum Output Pose (di antara Local->Component dan
+	 * Component->Local). Node lama buatan fungsi ini (komentar "JD_CapeChains") diganti, jadi aman dijalankan ulang.
+	 * Rantai = pasangan ChainStarts[i]..ChainEnds[i]; kapsul = ColliderA[i]..ColliderB[i] dengan ColliderRadius[i] (cm komponen).
+	 * Parameter simulasi lain memakai nilai bawaan node (tuning di ABP). @return jumlah rantai (-1 = gagal).
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Jayadwara|Editor")
+	static int32 AddCapeChainsNode(UAnimBlueprint* AnimBlueprint, const TArray<FName>& ChainStarts, const TArray<FName>& ChainEnds,
+		const TArray<FName>& ColliderA, const TArray<FName>& ColliderB, const TArray<float>& ColliderRadius, float CollisionMargin = 90.0f);
+
+	/**
 	 * Batch retarget (sama dengan IKRetargetBatchOperation.duplicate_and_retarget) tapi hasilnya LANGSUNG ditulis ke
 	 * FolderPath. Versi Python tidak mengisi folder sehingga hasil jatuh ke /Game, dan memindahkannya memutus rujukan
 	 * ABP -> animasi (UE 5.6.1). File bernama sama ditimpa. Aset referensi (BlendSpace, anim di ABP) ikut.

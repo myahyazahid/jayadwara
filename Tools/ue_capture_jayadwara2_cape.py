@@ -30,6 +30,10 @@ SHOTS = {   # nama: (yaw kamera dari aktor (derajat dunia), tinggi z, fov, y akt
     "belakang": (180.0, Z0, 50.0, Y_BACK),
     "belakang34": (145.0, Z0 + 600, 50.0, Y_BACK),
     "bahu34": (150.0, 3700.0, 20.0, Y_BACK),
+    "atas": (None, 9000.0, 40.0, 0.0),              # tegak dari atas (keluhan "tempelan" J1d)
+    "atas_belakang": (150.0, 8000.0, 35.0, Y_BACK),
+    "samping_atas_blk": (120.0, 7000.0, 40.0, Y_BACK),  # sudut screenshot developer (J1e): belakang-samping dari atas
+    "samping_atas_dpn": (240.0, 7000.0, 40.0, 0.0),     # depan-samping dari atas
 }
 
 if STAGE == "setup":
@@ -51,9 +55,13 @@ if STAGE == "setup":
               "| anim:", cape.get_anim_instance().get_class().get_name() if cape and cape.get_anim_instance() else None,
               "| half height", round(hh))
     for name, (yaw, z, fov, y) in SHOTS.items():
-        ang = math.radians(yaw)
-        loc = unreal.Vector(X0 + math.cos(ang) * R, y + math.sin(ang) * R, z)
-        tgt = unreal.Vector(X0, y, z if name == "bahu34" else Z0)
+        if yaw is None:
+            loc, tgt = unreal.Vector(X0 - 10, y, z), unreal.Vector(X0, y, 3400.0)
+        else:
+            ang = math.radians(yaw)
+            rr = R * (0.55 if name == "atas_belakang" else 0.9 if name.startswith("samping_atas") else 1.0)
+            loc = unreal.Vector(X0 + math.cos(ang) * rr, y + math.sin(ang) * rr, z)
+            tgt = unreal.Vector(X0, y, z if name == "bahu34" else (3300.0 if name == "atas_belakang" else 2600.0 if name.startswith("samping_atas") else Z0))
         rot = unreal.MathLibrary.find_look_at_rotation(loc, tgt)
         cap = eas.spawn_actor_from_class(unreal.SceneCapture2D, loc, rot)
         cap.set_actor_label(f"JCCAP_cam_{name}")

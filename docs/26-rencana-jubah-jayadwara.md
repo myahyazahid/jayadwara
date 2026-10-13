@@ -1,6 +1,6 @@
 # 26 — Rencana Jubah Upacara Jayadwara
 
-> **Status: v0.4 — J1 dinilai developer di Play ("sudah bagus, perlu poles") → J1b (poles + tombol Y sementara) selesai dari sisi Claude (13 Okt 2026), menunggu nilai Play.** J-Q1 & J-Q4 dijawab (bagian 4).
+> **Status: v1.0 — J1 SELESAI, disetujui developer (13 Okt 2026, "bagus bgt").** Termasuk putaran J1b–J1f; sebagian J3 (simulasi rantai) dan J4 (UJDCapeComponent + tombol Y sementara) sudah ditarik. Berikutnya: J2. J-Q1 & J-Q4 dijawab (bagian 4).
 > Desain: K9 di [14](14-model-sheet-jayadwara.md); alur gameplay: [07](07-gameplay-sistem.md#jubah-upacara); konsep: [`concept-art/jayadwara_jubah_upacara.webp`](concept-art/jayadwara_jubah_upacara.webp).
 > Jadwal: masuk **Fase 2** bareng cutscene transformasi ([23](23-rencana-fase-1.md) "Tidak masuk"). J0–J3 (aset) boleh ditarik lebih awal sebagai jalur art paralel kalau developer mau; J4–J5 butuh lock-on (Fase 1 Iterasi 6) dan Sequencer (F2).
 
@@ -38,7 +38,7 @@
 | # | Pertanyaan | Default |
 |---|---|---|
 | J-Q1 | Bentuk jubah dibuat dari mana? | ✅ **Dijawab 13 Okt: Tripo.** Developer membuat 3 kandidat (`yahya_design/cape01.glb`, `cap02.glb`, `cape03.glb`), Claude memilih **cap02** (lihat Hasil J0). Usulan awal: **Developer buat di Tripo** dari sheet konsep (gaya sama dengan Jayadwara2, pola jalur B). Alternatif: Claude bangun dari skrip Blender (lebih rapi topologinya, gaya lebih kaku) |
-| J-Q2 | Simulasi kain | **Chaos Cloth**; fallback Anim Dynamics berbatas |
+| J-Q2 | Simulasi kain | ✅ **Diperbarui 13 Okt (J1c): node C++ `FAnimNode_JDCapeChains`** (rantai Verlet ruang dunia + hambatan udara + kapsul kaki) — bisa diatur dari kode/ABP tanpa melukis cloth di editor. Chaos Cloth tetap opsi kalau hasil rantai kurang halus. Usulan awal: Chaos Cloth; fallback Anim Dynamics berbatas |
 | J-Q3 | Animasi lepas/pakai | Developer cari/keyframe di editor (Control Rig) dari referensi pose; Claude siapkan notify & montage lewat skrip. Placeholder: lepas = jubah langsung buyar tanpa gerak tangan |
 | J-Q4 | Kapan mulai | ✅ **Dijawab 13 Okt: J0–J3 sekarang** sebagai jalur art paralel (developer minta mulai). J4–J5 tetap menunggu lock-on (F1 Iter 6) & Sequencer (F2) |
 | J-Q5 | Panjang jubah | Sesuai konsep (sampai mata kaki), karena tidak dipakai di combat |
@@ -71,7 +71,7 @@
 | Iterasi | Status | Tanggal | Ringkas |
 |---|---|---|---|
 | J0 Persiapan | ✅ disetujui developer | 13 Okt 2026 | Pilih `cap02`; depan dibuka; kerah 1,60 m / ujung 0,10 m; titik kait diukur; fit lokal = pekerjaan utama J1 |
-| J1 Spike bentuk + rig | ✅ dinilai developer: bagus, perlu poles | 13 Okt 2026 | Fit lokal tanpa tembus (rest), rig 119 tulang, bobot kinematik, validator 27/27, terpasang di `BP_Jayadwara2` (komponen `Cape`) |
+| J1 Spike bentuk + rig | ✅ **selesai, disetujui developer** (putaran J1b–J1f) | 13 Okt 2026 | Fit lokal tanpa tembus (rest), rig 119 tulang, bobot kinematik, validator 27/27, terpasang di `BP_Jayadwara2` (komponen `Cape`) |
 
 ### Hasil J0 (13 Okt 2026)
 
@@ -128,3 +128,55 @@ Pipeline: `jayadwara2_cape_01_intake.py` → `jayadwara2_cape_10_fit_rig.py` (�
 | Tombol Y: lepas jubah dengan animasi | Belum ada aset animasi tangan (J-Q3) | **C++ `UJDCapeComponent`** (`Source/Jayadwara/Characters/JDCapeComponent.*`, dipasang di `AJDGiantCharacter` sebagai `CapeControl`): state Equipped/Removing/Removed/Returning, `SetCapeEquipped(bool, bInstant)`, `ToggleCape()`, event `OnCapeStateChanged` (untuk montage/Niagara J4). Animasi prosedural: jubah naik 6 % & mundur 5 % tinggi badan sambil **buyar jadi cahaya emas dari bawah ke atas** (2,0 s; pakai kembali 1,6 s). Setelah lepas, mesh disembunyikan & tick dimatikan (tanpa biaya). **Y** = `BindKey` sementara di `AJDGiantCharacter::SetupPlayerInputComponent` (diganti pemicu lock-on/aksi combat di J4). Material **`M_Jayadwara2_Cape_Master`** = salinan master badan + Masked: `v = 0,6·noise(posisi lokal) + 0,4·tinggi`, OpacityMask `v − Dissolve + 0,5`, pinggiran `|v − Dissolve| < 0,04` menyala emas (`Dissolve_GlowColor/Intensity/EdgeWidth`, `Dissolve_HeightRef`) |
 
 Bukti: `Art/Export/_jd2c/_ue_j1b.png` (UE, rest), `_ue_j1b_lepas.png` (Dissolve 0 / 0,3 / 0,6 / 0,85). Animasi & tombol belum bisa diuji Claude (tidak ada tick di editor remote) → developer uji di Play: transformasi (T), lalu **Y** lepas, **Y** lagi pakai kembali.
+
+**Nilai developer J1b (13 Okt):** leher belakang–bahu masih "terpotong", kurang mirip konsep; saat lompat jubah lengket di kaki — seharusnya terangkat saat turun, seperti terbang. → J1c.
+
+### Hasil J1c (13 Okt 2026) — yoke seperti konsep + jubah terangkat saat lompat
+
+| Masalah | Penyebab | Perbaikan |
+|---|---|---|
+| Leher belakang–bahu "terpotong" | Gulungan kerah cap02 (dipadatkan di J1b) + pelat punggung badan terlihat di atasnya. Konsep: jubah menutup punggung atas & puncak bahu sampai pangkal leher, panel putih mulai tepat di bawah kerah, bros permata di bahu | **Yoke dibangun dari skrip** (`build_yoke` di `jayadwara2_cape_10_fit_rig.py`): profil punggung/bahu per irisan vertikal (raycast dari titik di tulang belakang, z 1,42 m), di luar lambung badan (tanpa lengan/pauldron → masuk di bawah pauldron) dan di luar jubah lama; **selubung** ±12° menjembatani cekungan antar pelat belikat (tanpa itu muncul dua "punuk"); 103×23 titik, θ ±76,5° (berhenti otomatis di irisan terakhir yang valid), z 1,36–1,555 m (puncak bahu dari 1,50). UV per zona dari titik atlas bersih: merah, **strip putih tengah** (menyambung panel putih), list emas di kerah & tepi depan (tanpa list bawah supaya menyambung ke jubah). Muka jubah lama di bawah yoke dibuang (1.706). **Ornamen:** 2 bros (cincin emas + 4 ujung wajik + permata merah, r 5 cm, di ±0,15 m / 1,42 m) dan hiasan emas runcing di puncak strip putih |
+| Jubah lengket di kaki saat lompat | Skinning kinematik (bobot pinggul/paha) tidak punya inersia | **Bobot baru:** di bawah 1,28 m jubah ikut **5 rantai `cape_*`** (interpolasi antar-rantai menurut sudut di sekeliling badan, antar-ruas menurut tinggi; transisi ke bobot kaku s/d 1,40 m; yoke & ornamen kaku ke spine_05/clavicle). Uji Blender: rantai diangkat besar → kain melengkung mulus (tanpa sobek). **Node C++ `FAnimNode_JDCapeChains`** (`Source/Jayadwara/Animation/`, node editor `UAnimGraphNode_JDCapeChains`, disisipkan oleh `UJDEditorToolsLibrary::AddCapeChainsNode` setelah Copy Pose): partikel tiap rantai di ruang dunia (Verlet, sub-langkah 1/60 s), gravitasi 980 cm/s², **hambatan udara 2/s** (badan jatuh → kain tertahan udara → terangkat; lari → tertinggal ke belakang), pegas ke pose animasi 5/s², batas sudut 75°, panjang ruas tetap, **kapsul paha/betis/pinggul** (radius 14/9,5/14 cm authoring + margin 1 cm; sendi rantai saat diam ≥1,3 cm dari kapsul) — sekaligus mengatasi tumit tembus J1. Reset otomatis saat teleport/jeda > 0,25 s. Parameter bisa dituning di `ABP_Jayadwara2_Cape` (node "JD Cape Chains") |
+
+**Uji di UE (Simulate lewat remote, `Tools/ue_probe_jayadwara2_cape.py`):** Jayadwara2 jatuh bebas dari 600 m (4.000 cm/s): pada frame 60 fps ujung rantai belakang naik ±9 m dan rantai samping 9–13 m (≈20–30 % panjang jubah) → **jubah terangkat saat jatuh** ✅. Fase mendarat/diam & jalan belum terlihat (editor di latar belakang ±3 fps → node mereset tiap frame, by design) → developer uji di Play. Gambar: `Art/Export/_jd2c/_ue_j1c.png`. Validator 27/27 (34.765 tris).
+
+### Hasil J1d (13 Okt 2026) — revisi bahu/leher
+
+**Nilai developer J1c:** overall bagus; revisi: (1) jubah belakang jangan menutupi pauldron, (2) jangan ada "lipatan pembatas" (sambungan yoke–jubah) — harus lurus, (3) leher belakang belum selaras → jubah naik sampai kerah belakang / warnanya disamakan, (4) jangan ada garis kuning melintang di bagian atas.
+
+| Revisi | Perbaikan |
+|---|---|
+| Tanpa lipatan pembatas, lurus | **Lembar yoke terpisah dihapus** (selalu menyisakan sambungan; dua percobaan — menekuk yoke ke jubah, lalu mendorong jubah ke yoke — tetap bergerigi/bertangga). Diganti **kain jubah asli diteruskan ke atas**: muka di atas 1,24 m dalam rentang punggung dibuang, lalu vertex 0,65–1,24 m direntangkan tegak (×1,82) sampai kerah, dan jarak horizontalnya mengikuti permukaan profil punggung/bahu (selubung + **menggantung lurus**: di bawah 1,50 m jari-jari tidak mengecil ke bawah) ditambah lipatan aslinya (selisih ke rata-rata sel 4°×3 cm). Hasil: lipatan tegak & panel putih bertekstur Tripo menerus tanpa sambungan; rentang memudar di tepi (±99°) |
+| Tidak menutupi pauldron | Semua muka jubah di zona pauldron (|x| > 0,21 m, z > 1,44 m; tepi dalam pauldron diukur 0,20–0,22 m) dibuang |
+| Leher belakang selaras | Kain naik sampai 1,60–1,613 m (≤ dagu 1,613, K9), satu kain dengan jubah → warna sama |
+| Tanpa garis kuning | Tidak ada list emas melintang; yang tersisa hanya list tegak bawaan panel putih jubah |
+| Ornamen (konsep) | 2 bros (±0,155 m, 1,46 m), **2 juntai rantai antar-bros** (lendut 6 & 13 cm), **liontin tengah**, **rantai gantung di bawah tiap bros** + wajik, hiasan runcing di puncak panel putih — semua dari skrip, ditempel ke permukaan kain (sinar lurus dari belakang) |
+
+Bobot rantai (J1c) & node simulasi tetap. Validator 27/27 (29.115 tris). Gambar: `Art/Export/_jd2c/_ue_j1d.png`. **Sisa (J2):** tepi atas kain di dekat pauldron/pangkal leher sedikit bergerigi; bros masih sederhana; tekstur bagian yang direntangkan ×1,8 (ornamen emas kecil di panel ikut memanjang).
+
+### Hasil J1e (13 Okt 2026) — rapikan dari atas
+
+**Nilai developer J1d:** suka; dari atas terlihat seperti tempelan-tempelan, minta lebih rapi & menyatu.
+
+| Penyebab | Perbaikan (`jayadwara2_cape_10_fit_rig.py`) |
+|---|---|
+| Potongan atas per pusat muka → tepi bergerigi, makin besar setelah direntangkan ×1,8 | Semua kain (punggung, sisi, lapel) dipotong dengan **bidang datar** di 1,24 m (`bisect_plane`), lalu direntangkan ke **tinggi target per sudut**: 1,60 m (kerah) di punggung, turun mulus ke 1,44 m (bawah pauldron) di 70–95° → satu garis tepi menerus, tanpa tebing antara punggung & lapel |
+| Lipatan asli ikut sampai tepi → gigi-gigi | Lipatan dipudarkan dalam pita 10 cm di bawah tepi atas (jarak ke tepi, bukan tinggi absolut) |
+| Zona pauldron dibuang per pusat muka → lubang & gerigi | Dipotong bidang z = 1,44 dan x = ±0,21 sebelum dibuang |
+| Serpihan ujung ornamen Tripo | Pulau < 40 vertex dibuang; **semua tepi terbuka di atas 1,30 m dihaluskan** sepanjang garisnya (12 iterasi) + pita di bawahnya dihaluskan ringan |
+
+Juga: `Tools/ue_import_jayadwara2_cape.py` kini **melepas rujukan `BP_Jayadwara2.Cape`** sebelum menghapus mesh lama (sebelumnya impor ulang sering gagal diam-diam: "tidak terimpor sebagai SkeletalMesh"); `ue_capture_jayadwara2_cape.py` punya kamera `atas` & `atas_belakang`. Validator 27/27 (30.270 tris). Gambar: `Art/Export/_jd2c/_ue_j1e.png`, `_ue_j1e_atas.png`.
+
+### Hasil J1f (13 Okt 2026) — bagian atas menempel tubuh, naik sampai kerah di sisi
+
+**Nilai developer J1e:** overall bagus; dari samping / sudut tertentu bagian atas jubah masih seperti tempelan — jubah harus seperti kain yang menempel di tubuh. Hanya bagian atas yang dikerjakan (ukiran emas, garis putih, dll. sudah oke). Saran: naikkan jubah sampai kerah.
+
+| Penyebab | Perbaikan |
+|---|---|
+| Sisi jubah berhenti di bawah pauldron (1,44 m) → tepi potongan seperti lempengan dari samping | Rentang kain yang mengikuti tubuh diperlebar ±99° → **±122°** (bukaan depan 125°; batasnya hanya konstanta, profil badan valid sampai 125°); tepi atas = **kerah 1,60 m sampai 100°**, turun ke 1,55 m di tepi depan |
+| Selubung & "gantung lurus" juga berlaku di sisi → sudut bahu berdiri tegak menjauhi badan (kotak) | Gantung lurus/selubung hanya di punggung tengah (penuh s/d 40°, hilang di 75°); di sisi kain **menempel tubuh** (profil bahu) |
+| Potongan zona pauldron (x = ±0,21) terlihat dari belakang | Potongan dihapus — kain di sisi menempel bahu di bawah pauldron (tidak menutupinya), tanpa tepi potongan |
+
+Ornamen, rantai, panel putih, bobot rantai & node simulasi tidak berubah. Validator 27/27 (29.249 tris). Gambar: `Art/Export/_jd2c/_ue_j1f.png`, `_ue_j1f_samping.png` (sudut screenshot developer). Catatan impor UE: kalau `ue_import_jayadwara2_cape.py` melapor "tidak terimpor", jalankan sekali lagi (aset lama baru terhapus tuntas di frame editor berikutnya).
+
+**Gate J1: ✅ disetujui developer (13 Okt 2026, "bagus bgt") — iterasi J1 ditutup.** Sudah ditarik dari iterasi lain: simulasi rantai `FAnimNode_JDCapeChains` (J3; sisa: uji jalan/lari/mendarat & tuning di Play) dan `UJDCapeComponent` + dissolve + tombol Y sementara (J4; sisa: pemicu lock-on/aksi combat, animasi tangan, Niagara). Sisa untuk J2: tepi atas sedikit kasar dari atas di dekat pauldron, bros masih sederhana, Mask zona warna, LOD1–2, tekstur bagian yang direntangkan ×1,8.

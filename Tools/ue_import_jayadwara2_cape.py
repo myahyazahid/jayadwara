@@ -170,8 +170,29 @@ def build_material(tex):
     return mi
 
 
+def release_bp_reference():
+    """Komponen Cape di BP_Jayadwara2 merujuk mesh lama -> penghapusan gagal diam-diam dan impor tidak terjadi.
+    Kosongkan mesh & ABP komponen itu dulu (ue_setup_jayadwara2_cape.py memasangnya lagi)."""
+    bp = EAL.load_asset(f"{J2}/BP_Jayadwara2")
+    if bp is None:
+        return
+    sds = unreal.get_engine_subsystem(unreal.SubobjectDataSubsystem)
+    lib = unreal.SubobjectDataBlueprintFunctionLibrary
+    for h in sds.k2_gather_subobject_data_for_blueprint(bp):
+        d = lib.get_data(h)
+        if str(lib.get_variable_name(d)) == "Cape":
+            comp = lib.get_object(d)
+            comp.set_editor_property("anim_class", None)
+            comp.set_editor_property("skeletal_mesh_asset", None)
+            unreal.BlueprintEditorLibrary.compile_blueprint(bp)
+            EAL.save_loaded_asset(bp, only_if_is_dirty=False)
+            log("rujukan BP_Jayadwara2.Cape ke mesh lama dilepas (setup akan memasang lagi)")
+    unreal.SystemLibrary.collect_garbage()
+
+
 def import_mesh(mi):
     dest = f"{ROOT}/Mesh"
+    release_bp_reference()
     if EAL.does_directory_exist(dest):
         for a in EAL.list_assets(dest, recursive=True, include_folder=False):
             EAL.delete_asset(a.split(".")[0])
@@ -235,7 +256,11 @@ def main():
             return
     tex = import_textures()
     mi = build_material(tex)
-    import_mesh(mi)
+    if import_mesh(mi) is None:
+        # mesh lama yang masih dirujuk BP/level kadang baru terhapus tuntas setelah GC -> coba sekali lagi
+        unreal.SystemLibrary.collect_garbage()
+        problems.clear()
+        import_mesh(mi)
     EAL.save_directory(ROOT, only_if_is_dirty=True, recursive=True)
     log("selesai." + (f" {len(problems)} langkah manual: {problems}" if problems else ""))
 
