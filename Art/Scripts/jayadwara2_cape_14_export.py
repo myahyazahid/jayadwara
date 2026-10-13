@@ -53,9 +53,12 @@ for img in imgs:
     tmp.save()
     bpy.data.images.remove(tmp)
     print("tekstur:", path, tuple(img.size))
-# J1: material induk M_Jayadwara2_Master butuh Emit & Mask zona. Sementara datar: Emit hitam, Mask = zona merah penuh
-# (warna = atlas Tripo apa adanya, recolor mati). Mask zona merah/emas/putih yang sebenarnya dibuat di J2.
-for key, rgba in (("Emit", (0.0, 0.0, 0.0, 1.0)), ("Mask", (1.0, 0.0, 0.0, 0.0))):
+# Material induk butuh Emit & Mask zona. Emit datar hitam (jubah tanpa bagian menyala). Mask zona (J2) dibuat
+# make_textures_jayadwara2_cape.py dari BC; mask datar "merah penuh" hanya ditulis kalau belum ada.
+flats = [("Emit", (0.0, 0.0, 0.0, 1.0))]
+if not os.path.exists(os.path.join(TEX_DIR, "T_Jayadwara2_Cape_Mask.png")):
+    flats.append(("Mask", (1.0, 0.0, 0.0, 0.0)))
+for key, rgba in flats:
     flat = bpy.data.images.new(f"_flat_{key}", 4, 4, alpha=True)
     flat.pixels = list(rgba) * 16
     flat.filepath_raw = os.path.join(TEX_DIR, f"T_Jayadwara2_Cape_{key}.png")

@@ -57,6 +57,8 @@ HANG_THETA0, HANG_THETA1 = 40.0, 75.0   # J1f: gantung lurus/selubung penuh s/d 
 YOKE_HANG_Z = 1.50               # J1d: di bawah tinggi ini kain yoke menggantung lurus (jari-jari tidak mengecil ke bawah)
 CONF_FADE_DEG, CONF_PLEAT_BAND = 8.0, 0.10   # J1e: lebar peralihan rentang di sisi (derajat); lipatan pudar dalam pita ini di bawah tepi atas (m, ruang lama)
 EDGE_SMOOTH_Z, EDGE_SMOOTH_IT = 1.30, 12   # J1e: tepi terbuka di atas tinggi ini dihaluskan (iterasi)
+HOLE_MAX_SIDES = 20             # J2: loop tepi <= ini sisi dianggap lubang & ditutup
+COLLAR_MAX_Z = 1.600            # J2: batas K9 (dagu 1,613 m) — dicek lagi setelah penghalusan tepi
 CONF_Z_SIDE, CONF_TOP_A0, CONF_TOP_A1 = 1.55, 100.0, 124.0   # J1e: tepi atas di sisi/lapel (bawah pauldron); peralihan 70-95 derajat
 CONF_Z_A, CONF_Z_CUT = 0.65, 1.24   # J1d: kain di atas CONF_Z_A direntangkan; potongan CONF_Z_CUT tiba di kerah YOKE_Z_TOP
 YOKE_THETA, YOKE_ROWS, YOKE_BLEND_ROWS = 122.0, 34, 0   # derajat dari punggung; baris; baris bawah yang menyatu ke jubah
@@ -69,6 +71,7 @@ CHAIN_SAGS = (0.06, 0.13)       # juntai rantai antar-bros (m)
 CHAIN_SIDE, CHAIN_PENDANT, CHAIN_BEAD = 0.20, 0.09, 0.0065   # rantai gantung bros, liontin tengah, ukuran butir (m)
 PIN_Z = 1.535                   # hiasan emas di puncak strip putih
 YOKE_UV = {"red": (0.4027, 0.1999), "white": (0.2039, 0.1783), "gold": (0.5519, 0.8552)}   # atlas cap02; merah = rata-rata jubah
+ARM_MARGIN = 0.03                # 14 Okt: jarak bebas jubah dari kulit lengan (m)
 JUNK_R, JUNK_Z = 0.13, 1.20     # muka jubah sedekat ini ke sumbu tubuh = sisa panel depan di dalam badan/antara kaki
 
 body = bpy.data.objects["JD2_Body"]
@@ -422,6 +425,7 @@ def build_yoke():
         a_ = min(max((abs(t) - CONF_TOP_A0) / (CONF_TOP_A1 - CONF_TOP_A0), 0.0), 1.0)
         z_tt = YOKE_Z_TOP + (CONF_Z_SIDE - YOKE_Z_TOP) * a_ * a_ * (3 - 2 * a_)
         z_new = CONF_Z_A + (z - CONF_Z_A) * (z_tt - CONF_Z_A) / (CONF_Z_CUT - CONF_Z_A)
+        z_new = min(z_new, COLLAR_MAX_Z)                     # K9: kerah <= dagu (1,613) dengan sedikit ruang
         s_t = float(np.clip((t_max - abs(t)) / CONF_FADE_DEG, 0.0, 1.0))
         s_t = s_t * s_t * (3 - 2 * s_t)                       # bentuk radial ikut profil hanya di rentang punggung
         r = v.co.xy.length
@@ -477,6 +481,16 @@ def build_yoke():
                 new_co[v] = v.co * 0.5 + (ns[0].co + ns[1].co) * 0.25
         for v, c_ in new_co.items():
             v.co = c_
+    for v in bverts:
+        v.co.z = min(v.co.z, COLLAR_MAX_Z)
+    # J2: tutup lubang kecil (sisa bukaan ornamen Tripo di area yang direntangkan); tepi kain utama (loop besar) tidak disentuh
+    filled = bmesh.ops.holes_fill(bm, edges=[e for e in bm.edges if e.is_boundary], sides=HOLE_MAX_SIDES)["faces"]
+    u0, v0 = YOKE_UV["red"]
+    for f in filled:
+        f.smooth = True
+        for k, l in enumerate(f.loops):
+            l[uvl].uv = (u0 + 0.0015 * (k % 2), v0 + 0.0015 * ((k // 2) % 2))
+    print(f"lubang kecil ditutup: {len(filled)} muka")
     # pita di bawah tepi ikut dihaluskan ringan supaya tepi tidak terlipat
     band = [v for v in bm.verts if v.co.z > EDGE_SMOOTH_Z and v not in bverts]
     for _ in range(3):
@@ -553,17 +567,23 @@ def build_yoke():
         if p_ is None:
             continue
         M = frame(p_, n_)
-        n_orn += add_part(bmesh.ops.create_cone(bm, cap_ends=True, segments=24, radius1=BROOCH_R, radius2=BROOCH_R * 0.8,
-                                                depth=0.012, matrix=M)["verts"], "gold")
-        for a_ in range(4):
-            ang = math.radians(90 * a_)
+        # J2: bros lebih ornate (konsep): pelat dasar emas, bingkai (bezel) tinggi, 4 ujung panjang + 4 ujung pendek
+        # (bintang 8), permata merah berfaset.
+        n_orn += add_part(bmesh.ops.create_cone(bm, cap_ends=True, segments=32, radius1=BROOCH_R, radius2=BROOCH_R * 0.86,
+                                                depth=0.010, matrix=M)["verts"], "gold")
+        n_orn += add_part(bmesh.ops.create_cone(bm, cap_ends=True, segments=32, radius1=BROOCH_R * 0.74, radius2=BROOCH_R * 0.66,
+                                                depth=0.022, matrix=M @ Matrix.Translation((0, 0, 0.008)))["verts"], "gold")
+        for a_ in range(8):
+            ang = math.radians(45 * a_)
             r_ = Vector((math.cos(ang), math.sin(ang), 0.0))
-            n_orn += add_part(bmesh.ops.create_cone(bm, cap_ends=True, segments=4, radius1=0.012, radius2=0.0, depth=0.032,
-                                                    matrix=M @ Matrix.Translation(r_ * (BROOCH_R + 0.013)) @
+            long_ = a_ % 2 == 0
+            ln, wd = (0.040, 0.013) if long_ else (0.022, 0.009)
+            n_orn += add_part(bmesh.ops.create_cone(bm, cap_ends=True, segments=4, radius1=wd, radius2=0.0, depth=ln,
+                                                    matrix=M @ Matrix.Translation(r_ * (BROOCH_R + ln * 0.4)) @
                                                     Vector((0, 0, 1)).rotation_difference(r_).to_matrix().to_4x4() @
-                                                    Matrix.Diagonal((1, 0.5, 1, 1)))["verts"], "gold")
-        n_orn += add_part(bmesh.ops.create_uvsphere(bm, u_segments=16, v_segments=8, radius=BROOCH_R * 0.62,
-                                                    matrix=M @ Matrix.Translation((0, 0, 0.012)) @ Matrix.Diagonal((1, 1, 0.55, 1)))["verts"], "red")
+                                                    Matrix.Diagonal((1, 0.45, 1, 1)))["verts"], "gold")
+        n_orn += add_part(bmesh.ops.create_icosphere(bm, subdivisions=1, radius=BROOCH_R * 0.58,
+                                                     matrix=M @ Matrix.Translation((0, 0, 0.022)) @ Matrix.Diagonal((1, 1, 0.62, 1)))["verts"], "red")
         # rantai gantung di bawah bros + wajik (konsep: rantai turun di sisi panel putih)
         c_, pts = chain([(sx * bx, bz - BROOCH_R - 0.01 - k * 0.01) for k in range(int(CHAIN_SIDE / 0.01))])
         n_orn += c_
@@ -601,6 +621,52 @@ ev = ev.reshape(-1, 2)
 deg = np.bincount(ev.ravel(), minlength=NV).astype(np.float64)
 deg[deg == 0] = 1
 
+
+# ------------------------------------------------------------------ 1d) jubah mengalah ke belakang lengan (14 Okt)
+# Developer: tangan/lengan menembus jubah di sisi (lapel & panel samping). Kapsul lengan (upperarm, lowerarm, hand per sisi;
+# radius = p90 jarak kulit lengan ke tulang + ARM_MARGIN) dari pose rest; vertex jubah di dalam kapsul didorong ke BELAKANG
+# (+Y) sampai keluar kapsul -> jubah di sisi lengan lebih ramping/berada di belakang lengan. Dorongan disamakan dalam radius
+# SHARE_R (tebal lembar) lalu disebar halus ke tetangga (tanpa penyok).
+def arm_clear():
+    global P
+    caps = []
+    for sd in "lr":
+        for seg, (b0, b1) in {"upper": ("upperarm", "lowerarm"), "lower": ("lowerarm", "hand"), "hand": ("hand", None)}.items():
+            bone = arm.data.bones[f"{b0}_{sd}"]
+            a = np.array(arm.matrix_world @ bone.head_local)
+            b = np.array(arm.matrix_world @ (arm.data.bones[f"{b1}_{sd}"].head_local if b1 else bone.tail_local))
+            if b1 is None:                                   # telapak + jari: perpanjang ke ujung jari
+                b = a + (b - a) * 2.2
+            pts = np.array([tuple(bverts[i]) for i, n in enumerate(dom) if n.startswith(f"{b0}") and n.endswith(f"_{sd}")])
+            if len(pts) == 0:
+                continue
+            ab = b - a
+            t = np.clip(((pts - a) @ ab) / max(ab @ ab, 1e-9), 0, 1)
+            r = float(np.percentile(np.linalg.norm(pts - (a + t[:, None] * ab), axis=1), 90)) + ARM_MARGIN
+            caps.append((a, b, r))
+    need = np.zeros(NV)
+    for a, b, r in caps:
+        ab = b - a
+        t = np.clip(((P - a) @ ab) / max(ab @ ab, 1e-9), 0, 1)
+        q = a + t[:, None] * ab
+        dx, dz = P[:, 0] - q[:, 0], P[:, 2] - q[:, 2]
+        h2 = r * r - dx * dx - dz * dz
+        inside = (np.linalg.norm(P - q, axis=1) < r) & (h2 > 0)
+        req = np.where(inside, q[:, 1] + np.sqrt(np.clip(h2, 0, None)) - P[:, 1], 0.0)
+        need = np.maximum(need, req)
+    m = share_max(need, P)
+    D = m.copy()
+    for _ in range(40):
+        D = np.maximum(m, 0.5 * D + 0.5 * nb_mean(D) * 0.97)
+    P = P.copy()
+    P[:, 1] += D
+    me.vertices.foreach_set("co", P.ravel())
+    me.update()
+    print(f"lengan: {len(caps)} kapsul (r {', '.join(f'{c[2] * 100:.0f}' for c in caps)} cm); {int((need > 0.001).sum())} vertex jubah "
+          f"di dalam lengan, didorong ke belakang maks {D.max() * 100:.1f} cm ({int((D > 0.001).sum())} vertex ikut halus)")
+
+
+arm_clear()
 # ------------------------------------------------------------------ 2) skeleton jubah
 ca = arm.copy()
 ca.data = arm.data.copy()

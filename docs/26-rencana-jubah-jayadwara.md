@@ -1,6 +1,6 @@
 # 26 — Rencana Jubah Upacara Jayadwara
 
-> **Status: v1.0 — J1 SELESAI, disetujui developer (13 Okt 2026, "bagus bgt").** Termasuk putaran J1b–J1f; sebagian J3 (simulasi rantai) dan J4 (UJDCapeComponent + tombol Y sementara) sudah ditarik. Berikutnya: J2. J-Q1 & J-Q4 dijawab (bagian 4).
+> **Status: v1.1 — J1 selesai & disetujui; J2 selesai dari sisi Claude (13 Okt 2026), menunggu developer (tuning warna di MI + gate J2).** Sebagian J3 (simulasi rantai) dan J4 (UJDCapeComponent + tombol Y sementara) sudah ditarik ke J1. J-Q1 & J-Q4 dijawab (bagian 4).
 > Desain: K9 di [14](14-model-sheet-jayadwara.md); alur gameplay: [07](07-gameplay-sistem.md#jubah-upacara); konsep: [`concept-art/jayadwara_jubah_upacara.webp`](concept-art/jayadwara_jubah_upacara.webp).
 > Jadwal: masuk **Fase 2** bareng cutscene transformasi ([23](23-rencana-fase-1.md) "Tidak masuk"). J0–J3 (aset) boleh ditarik lebih awal sebagai jalur art paralel kalau developer mau; J4–J5 butuh lock-on (Fase 1 Iterasi 6) dan Sequencer (F2).
 
@@ -72,6 +72,10 @@
 |---|---|---|---|
 | J0 Persiapan | ✅ disetujui developer | 13 Okt 2026 | Pilih `cap02`; depan dibuka; kerah 1,60 m / ujung 0,10 m; titik kait diukur; fit lokal = pekerjaan utama J1 |
 | J1 Spike bentuk + rig | ✅ **selesai, disetujui developer** (putaran J1b–J1f) | 13 Okt 2026 | Fit lokal tanpa tembus (rest), rig 119 tulang, bobot kinematik, validator 27/27, terpasang di `BP_Jayadwara2` (komponen `Cape`) |
+| J2 Bentuk final & tekstur | ✅ dari sisi Claude, menunggu developer | 13 Okt 2026 | Mask zona (recolor terbukti), LOD0–2 (29,2k/14,6k/7,0k), bros ornate, lubang ditutup, kerah ≤ 1,600 m (K9), validator 27/27 ×3, impor UE stabil |
+| J3 Kain bergerak | 🟡 sebagian (ditarik ke J1c) | 13 Okt 2026 | Node `FAnimNode_JDCapeChains` + kapsul kaki; terbukti terangkat saat jatuh (Simulate). Sisa: uji jalan/lari/berbalik/angin/mendarat di Play, tuning, FPS |
+| J4 Pakai/lepas | 🟡 sebagian (ditarik ke J1b) | 13 Okt 2026 | `UJDCapeComponent` (state, event), dissolve emas, tombol Y sementara. Sisa: pemicu lock-on (F1 Iter 6) & aksi combat pertama, lepas cepat 0,5 s, pakai kembali saat menang, animasi tangan, Niagara, skip |
+| J5 Cutscene & polish | ⬜ belum | — | Butuh cutscene transformasi (F2) |
 
 ### Hasil J0 (13 Okt 2026)
 
@@ -180,3 +184,25 @@ Juga: `Tools/ue_import_jayadwara2_cape.py` kini **melepas rujukan `BP_Jayadwara2
 Ornamen, rantai, panel putih, bobot rantai & node simulasi tidak berubah. Validator 27/27 (29.249 tris). Gambar: `Art/Export/_jd2c/_ue_j1f.png`, `_ue_j1f_samping.png` (sudut screenshot developer). Catatan impor UE: kalau `ue_import_jayadwara2_cape.py` melapor "tidak terimpor", jalankan sekali lagi (aset lama baru terhapus tuntas di frame editor berikutnya).
 
 **Gate J1: ✅ disetujui developer (13 Okt 2026, "bagus bgt") — iterasi J1 ditutup.** Sudah ditarik dari iterasi lain: simulasi rantai `FAnimNode_JDCapeChains` (J3; sisa: uji jalan/lari/mendarat & tuning di Play) dan `UJDCapeComponent` + dissolve + tombol Y sementara (J4; sisa: pemicu lock-on/aksi combat, animasi tangan, Niagara). Sisa untuk J2: tepi atas sedikit kasar dari atas di dekat pauldron, bros masih sederhana, Mask zona warna, LOD1–2, tekstur bagian yang direntangkan ×1,8.
+
+
+### Hasil J2 (13 Okt 2026) — bentuk final & tekstur
+
+| Item | Hasil |
+|---|---|
+| **Mask zona** | `Art/Scripts/make_textures_jayadwara2_cape.py` (python -I) → `T_Jayadwara2_Cape_Mask.png` (R merah, G emas, B 0, A putih; klasifikasi `jd2_atlas.zone_labels` sama dengan badan; texel gelap/lain → merah karena desain jubah tanpa zona hitam) + `_Mask.json`. Pangsa texel: merah 60 %, emas 28 %, putih 12 %. Diverifikasi render Blender (mask sebagai warna) dan UE: **`MI_Jayadwara2_Cape_TesWarna`** (merah → biru tua) mengubah kain saja, list emas & panel putih tetap (`Art/Export/_jd2c/_ue_j2_teswarna.png`). Developer: tuning `Zone_*_Color/_Amount` di `MI_Jayadwara2_Cape`. Catatan: konstanta luminans referensi master jubah masih salinan badan (tingkat terang recolor bisa sedikit beda; cukup diatur warnanya) |
+| **LOD** | `Art/Scripts/jayadwara2_cape_16_make_lods.py` → `SK_Jayadwara2_Cape_LOD1/2.fbx` 14.620 / 7.018 tris (LOD0 29.244); validator 27/27 ×3; impor UE 3 level (layar 1,0/0,5/0,25). Pembanding `_jd2c/_lod_banding.png` |
+| **Bros** | Pelat dasar + bezel tinggi + bintang 8 ujung (4 panjang, 4 pendek) + permata merah berfaset |
+| **Bersih-bersih** | 2 lubang kecil (sisa bukaan ornamen Tripo di area yang direntangkan) ditutup otomatis (`holes_fill` ≤ 20 sisi, UV merah) |
+| **Cek IP (K9)** | Kerah dijepit **≤ 1,600 m** (dagu 1,613) setelah penghalusan; tidak mekar ke belakang kepala; bukan senjata ✅ |
+| **Impor UE** | `ue_import_jayadwara2_cape.py` kini **impor ulang di tempat** (skeleton yang ada dipakai); menghapus lalu mengimpor nama yang sama gagal karena importer "atomic reimport" ke objek lama yang masih di memori (butuh restart editor bila terlanjur). Diuji 2× berturut-turut stabil. Membuat `MI_Jayadwara2_Cape_TesWarna` |
+| Diterima apa adanya | Tekstur bagian atas yang direntangkan ×1,8 (ornamen emas kecil di panel sedikit memanjang); tepi atas kain terbuka (dihaluskan, tidak ditutup list — developer tidak ingin garis kuning) |
+
+**Gate J2 (developer):** validator lulus ✅, cek IP ✅; tinggal tuning warna di MI (opsional) & persetujuan. Gambar: `Art/Export/_jd2c/_ue_j2.png`.
+
+### Catatan 14 Okt 2026 — jubah dibangun ulang di atas badan v06
+Badan Jayadwara2 direvisi (docs/25 R7: kaki −4,5 cm, badan lebih panjang, kain tengah belakang). Pipeline jubah kini dijalankan di atas **`jayadwara2_v06_revisi.blend`** (`jayadwara2_cape_01_intake.py` dibuka pada file itu); hasil 29.184 / 14.590 / 7.002 tris, validator 27/27 ×3, terpasang di UE. Pipeline lain tidak berubah.
+### Catatan 14 Okt 2026 — lengan menembus jubah & modul node
+- **Lengan menembus jubah** (lapel/panel samping saat idle): `jayadwara2_cape_10_fit_rig.py` langkah `arm_clear` — kapsul lengan (upperarm, lowerarm, tangan+jari per sisi; radius p90 kulit lengan + 3 cm) dari pose rest; vertex jubah di dalamnya didorong ke **belakang** (+Y) sampai keluar kapsul, disamakan setebal lembar lalu disebar halus. 1.409 vertex di dalam lengan, dorongan maks 23 cm. Jubah di sisi lengan kini lebih ramping/berada di belakang lengan (`Art/Export/_jd2c/_ue_lengan.png`). Validator 27/27 ×3.
+- **Node "JD Cape Chains" dipindah ke modul `JayadwaraAnimNodes` (UncookedOnly)** — sebelumnya di modul Editor sehingga compiler ABP memperingatkan *"from an Editor Only module, but is placed in a runtime blueprint"* (ABP gagal saat cook/package). Modul baru terdaftar di `Jayadwara.uproject` & `JayadwaraEditor.Target.cs`; class redirect lama→baru di `Config/DefaultEngine.ini` `[CoreRedirects]`. Peringatan hilang.
+- Peringatan Asset Check *"anim sequence asset has no Skeleton"* untuk `Jayadwara2/Anims/*` hanya muncul **sesaat** ketika `ue_import_jayadwara2.py` membuat ulang `SKEL_Jayadwara2`; hilang setelah `ue_setup_jayadwara2.py` me-retarget ulang (selalu jalankan setup setelah impor badan).

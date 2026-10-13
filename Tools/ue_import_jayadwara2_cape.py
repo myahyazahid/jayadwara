@@ -1,12 +1,12 @@
 """Import jubah Jayadwara2 (docs/26 J1) ke Unreal Editor Python. Tidak menyentuh aset badan Jayadwara2.
 
 Hasil di /Game/Jayadwara/Characters/Jayadwara2/Cape/:
-  Textures/  T_Jayadwara2_Cape_BC / _N (flip green) / _ORM (atlas Tripo cap02) + _Emit (hitam) / _Mask (zona merah penuh) — J1 sementara
+  Textures/  T_Jayadwara2_Cape_BC / _N (flip green) / _ORM (atlas Tripo cap02) + _Emit (hitam) + _Mask (zona R merah, G emas, A putih; J2)
   Materials/ M_Jayadwara2_Cape_Master (salinan M_Jayadwara2_Master + Masked dissolve "Dissolve" & pinggiran emas, J1b)
              MI_Jayadwara2_Cape (redaman logam/kekasaran/normal sama dengan badan, two-sided)
-  Mesh/      SK_Jayadwara2_Cape + SKEL_Jayadwara2_Cape (89 tulang badan, nama sama, + rantai cape_*), tanpa Physics Asset
+  Mesh/      SK_Jayadwara2_Cape (LOD0-2, layar 1,0/0,5/0,25; J2) + SKEL_Jayadwara2_Cape (89 tulang badan, nama sama, + rantai cape_*), tanpa Physics Asset
 Skala import 1 (FBX sudah setinggi raksasa, di-bake). Pakai: python Tools/ue_remote.py Tools/ue_import_jayadwara2_cape.py
-Mesh/ dihapus dulu (impor ulang bersih) -> jalankan lagi Tools/ue_setup_jayadwara2_cape.py (skeleton dibuat ulang).
+Mesh lama di-reimport di tempat (skeleton tetap); Mesh/ dihapus hanya kalau mesh/skeleton belum ada. Lalu jalankan Tools/ue_setup_jayadwara2_cape.py.
 Butuh: ue_import_jayadwara2.py sudah dijalankan (M_Jayadwara2_Master).
 """
 import os
@@ -20,6 +20,8 @@ J2 = "/Game/Jayadwara/Characters/Jayadwara2"
 ROOT = f"{J2}/Cape"
 MESH_NAME = "SK_Jayadwara2_Cape"
 MASTER = f"{J2}/Materials/M_Jayadwara2_Master"
+LOD_FILES = {1: "SK_Jayadwara2_Cape_LOD1.fbx", 2: "SK_Jayadwara2_Cape_LOD2.fbx"}   # J2: jayadwara2_cape_16_make_lods.py
+LOD_SCREEN_SIZE = {0: 1.0, 1: 0.5, 2: 0.25}
 
 asset_tools = unreal.AssetToolsHelpers.get_asset_tools()
 EAL = unreal.EditorAssetLibrary
@@ -167,6 +169,14 @@ def build_material(tex):
         MEL.set_material_instance_texture_parameter_value(mi, f"T_{kind}", t)
     MEL.update_material_instance(mi)
     log(f"{name} (induk M_Jayadwara2_Cape_Master, tekstur jubah)")
+    # J2: instance uji recolor (BUKAN untuk game): merah -> biru tua; emas & putih tetap. Membuktikan Mask zona jubah bekerja.
+    tpath = f"{ROOT}/Materials/MI_Jayadwara2_Cape_TesWarna"
+    ti = EAL.load_asset(tpath) if EAL.does_asset_exist(tpath) else asset_tools.create_asset(
+        "MI_Jayadwara2_Cape_TesWarna", f"{ROOT}/Materials", unreal.MaterialInstanceConstant, unreal.MaterialInstanceConstantFactoryNew())
+    MEL.set_material_instance_parent(ti, mi)
+    MEL.set_material_instance_vector_parameter_value(ti, "Zone_red_Color", unreal.LinearColor(0.02, 0.04, 0.16, 1.0))
+    MEL.set_material_instance_scalar_parameter_value(ti, "Zone_red_Amount", 1.0)
+    MEL.update_material_instance(ti)
     return mi
 
 
@@ -193,7 +203,12 @@ def release_bp_reference():
 def import_mesh(mi):
     dest = f"{ROOT}/Mesh"
     release_bp_reference()
-    if EAL.does_directory_exist(dest):
+    # Impor ULANG ke aset yang ada (skeleton sama, tulang identik). Menghapus lalu mengimpor nama yang sama gagal diam-diam:
+    # importer melakukan "atomic reimport" ke objek lama yang sudah dihapus tapi belum dibersihkan dari memori.
+    existing = EAL.load_asset(f"{dest}/{MESH_NAME}") if EAL.does_asset_exist(f"{dest}/{MESH_NAME}") else None
+    skel = EAL.load_asset(f"{dest}/SKEL_Jayadwara2_Cape") if EAL.does_asset_exist(f"{dest}/SKEL_Jayadwara2_Cape") else None
+    reuse = isinstance(existing, unreal.SkeletalMesh) and isinstance(skel, unreal.Skeleton)
+    if not reuse and EAL.does_directory_exist(dest):
         for a in EAL.list_assets(dest, recursive=True, include_folder=False):
             EAL.delete_asset(a.split(".")[0])
     ui = unreal.FbxImportUI()
@@ -204,6 +219,8 @@ def import_mesh(mi):
     ui.set_editor_property("import_textures", False)
     ui.set_editor_property("import_animations", False)
     ui.set_editor_property("create_physics_asset", False)
+    if reuse:
+        ui.set_editor_property("skeleton", skel)
     d = ui.get_editor_property("skeletal_mesh_import_data")
     d.set_editor_property("import_uniform_scale", 1.0)
     d.set_editor_property("convert_scene", True)
@@ -236,6 +253,9 @@ def import_mesh(mi):
     old = skel.get_path_name().split(".")[0]
     if not old.endswith("/SKEL_Jayadwara2_Cape"):
         EAL.rename_asset(old, f"{dest}/SKEL_Jayadwara2_Cape")
+    for a in EAL.list_assets(dest, recursive=False, include_folder=False):      # skeleton nyasar dari impor gagal sebelumnya
+        if a.split(".")[0].endswith("_Skeleton"):
+            EAL.delete_asset(a.split(".")[0])
     ref = unreal.AnimPoseExtensions.get_reference_pose(mesh.get_editor_property("skeleton"))
     names = [str(n) for n in unreal.AnimPoseExtensions.get_bone_names(ref)]
     body = EAL.load_asset(f"{J2}/Mesh/SK_Jayadwara2")
@@ -249,6 +269,33 @@ def import_mesh(mi):
     return mesh
 
 
+def import_lods(mesh):
+    """LOD1-2 (pola ue_import_jayadwara2.py)."""
+    sub = unreal.get_editor_subsystem(unreal.SkeletalMeshEditorSubsystem)
+    set_fbx_legacy(True)
+    try:
+        for i, f in LOD_FILES.items():
+            path = os.path.join(EXPORT, f)
+            if not os.path.exists(path):
+                manual(f"{f} tidak ada (jalankan Art/Scripts/jayadwara2_cape_16_make_lods.py)")
+                continue
+            res = sub.import_lod(mesh, i, path)
+            if res is None or (isinstance(res, int) and res < 0):
+                manual(f"LOD{i} gagal diimpor dari {f}")
+    finally:
+        set_fbx_legacy(False)
+    infos = []
+    for i, info in enumerate(mesh.get_editor_property("lod_info")):
+        if i in LOD_SCREEN_SIZE:
+            ss = unreal.PerPlatformFloat()
+            ss.set_editor_property("default", LOD_SCREEN_SIZE[i])
+            info.set_editor_property("screen_size", ss)
+        infos.append(info)
+    mesh.set_editor_property("lod_info", infos)
+    n = len(infos)
+    log(f"LOD: {n} level, vertex render {[sub.get_num_verts(mesh, i) for i in range(n)]}")
+
+
 def main():
     for f in (f"{MESH_NAME}.fbx",):
         if not os.path.exists(os.path.join(EXPORT, f)):
@@ -256,11 +303,14 @@ def main():
             return
     tex = import_textures()
     mi = build_material(tex)
-    if import_mesh(mi) is None:
+    mesh = import_mesh(mi)
+    if mesh is None:
         # mesh lama yang masih dirujuk BP/level kadang baru terhapus tuntas setelah GC -> coba sekali lagi
         unreal.SystemLibrary.collect_garbage()
         problems.clear()
-        import_mesh(mi)
+        mesh = import_mesh(mi)
+    if mesh is not None:
+        import_lods(mesh)
     EAL.save_directory(ROOT, only_if_is_dirty=True, recursive=True)
     log("selesai." + (f" {len(problems)} langkah manual: {problems}" if problems else ""))
 

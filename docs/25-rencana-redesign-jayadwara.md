@@ -142,6 +142,7 @@ Supaya R1–R3 jauh lebih ringan:
 | R3 Rig final | ✅ disetujui developer di Play | 13 Okt 2026 | + R3b leher/wajah, R3c–R3d kaki & sayap (tanpa lubang, kinematik); regangan pose ekstrem (tendang 180°) tetap > target lama |
 | R5 LOD | ✅ | 13 Okt 2026 | 37,7k / 18,8k / 8,7k / 3,8k, validator 27/27 ×4 |
 | R6 Keputusan ganti | ✅ **Jayadwara2 dipakai** | 13 Okt 2026 | Transformasi (T) & `BP_JDGameMode_Giant` -> `BP_Jayadwara2`; model lama cadangan |
+| R7 Revisi badan v06 | ✅ dari sisi Claude, menunggu nilai Play | 14 Okt 2026 | Kuda-kuda idle dirapatkan (retarget), kaki −4,5 cm / badan lebih panjang (tinggi tetap), kain tengah belakang |
 
 ### Hasil R0 (13 Okt 2026) — `yahya_design/jayadwara.glb`
 
@@ -345,3 +346,18 @@ Developer memilih Jayadwara2 setelah menilai di Play (jalan, lompat; kaki & saya
 - Docs diperbarui: `README` (wujud raksasa & gaya visual), [13](13-rencana-model-jayadwara.md) (status cadangan + cara kembali), [14](14-model-sheet-jayadwara.md) (identitas desain tetap berlaku).
 
 **Sisa untuk fase berikutnya (bukan penghalang):** combat raksasa (F1 Iterasi 6) belum bisa diuji; lipatan pinggul di pose sangat ekstrem; sayap tanpa ayunan bebas (bisa ditambah AD berbatas kecil); kepala hi-res untuk cutscene (Iterasi 7 docs/13); recolor Dwarapala Kala/Kembar lewat `Zone_*` (siap); tuning layar LOD & uji FPS di level nyata.
+
+
+### R7 — Revisi badan v06 (14 Okt 2026, feedback developer)
+
+Permintaan: (1) kaki jangan terlalu lebar saat idle — samakan dengan Jayadwara lama; (2) bokong terekspos di antara dua kain samping belakang — tambah satu helai atau rapatkan; (3) kaki terlalu panjang — pendekkan sedikit / badan lebih panjang, tinggi tetap ("kalau jelek biarkan").
+
+| # | Penyebab / ukuran | Perbaikan |
+|---|---|---|
+| 1 Kuda-kuda | Idle (retarget dari `MM_Idle`): jarak telapak kiri-kanan **1.609 cm** (42 % tinggi) vs model lama **769 cm** (20 %). Sumbu Z lokal paha = abduksi (+10° paha kiri = +303 cm, diukur) | `Tools/ue_setup_jayadwara2.py`: `STANCE_DEG = {thigh_l: −12,6°, thigh_r: +12,6°}` (sumbu Z, setelah pitch `POSTURE_DEG`) → **759 cm**. Kaki yang lebih tegak menurunkan pergelangan ±97 cm (telapak masuk lantai) → akar pose retarget dinaikkan `STANCE_ROOT_UP_CM = 97` → pergelangan 325/303 cm (target ±316). Log `kuda-kuda:` mencetak ukuran ini tiap setup |
+| 2 Kain belakang | Hanya dua kain samping di belakang | **Satu helai tengah belakang**: kain tengah depan dicerminkan ke belakang (bobot ikut), diletakkan di permukaan bokong + 1,5 cm (sinar yang lolos di antara kaki diabaikan) lalu menggantung lurus |
+| 3 Proporsi | Sendi pinggul v05 0,98 m vs model lama 0,91 (kaki 0,84 vs 0,79 m) | Remap tinggi rest: di bawah sendi pinggul ×0,954 (kaki −4,5 cm), pinggul→dada (0,98–1,40 m) ×1,107, di atas 1,40 m tetap → tinggi total sama. Lengan (bobot lengan) & clavicle tidak ikut. Sendi pinggul kini 0,935, lutut 0,573, pelvis 0,887 |
+
+Skrip: `Art/Scripts/jayadwara2_23_revisi_badan.py` (v05 → **`Art/Blender/jayadwara2_v06_revisi.blend`**, v05 utuh). Export `jayadwara2_14_export.py` + `jayadwara2_16_make_lods.py` pada v06: 39.256 / 19.627 / 9.028 / 3.925 tris, validator 27/27 ×4. UE: `ue_import_jayadwara2.py` → `ue_setup_jayadwara2.py`. Jubah dibangun ulang di atas v06 (docs/26). Pembanding: `Art/Export/_jd2/_revisi_v06_banding.png`.
+
+**Insiden 13–14 Okt:** batch retarget crash berulang karena `SK_Mannequin` tersimpan dengan tulang terbuang (92 vs 171) oleh pekerjaan Aksa2 paralel (agen Hermes); setup yang crash sempat menghapus `Jayadwara2/Anims`. Dipulihkan dari commit (atas persetujuan developer): `SK_Mannequin`, animasi `Mannequins/Anims/Unarmed/*`, `A_Aksa_Attack_01..03`, `Jayadwara2/Anims`, `IK/RTG_Jayadwara2`; pesan untuk Hermes di `C:\repository\unreal_engine\explorasi\PESAN_UNTUK_HERMES_dari_Claude.md`.

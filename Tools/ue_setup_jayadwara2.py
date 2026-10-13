@@ -43,6 +43,13 @@ POSTURE_DEG = {"spine_01": 1.0, "spine_03": 5.89, "spine_05": 3.18, "neck_01": -
                "thigh_l": -23.19, "thigh_r": -0.29, "calf_l": 26.27, "calf_r": 22.42}
 # SEMUA tulang ini harus diset berurutan (yang tak tercantum = 0): auto-align meninggalkan sisa offset di spine_02/04 & neck_02 dan
 # set_rotation_offset tak independen antar tetangga; hanya urutan lengkap ini yang mereproduksi hasil ukur.
+# Kuda-kuda (14 Okt 2026, developer): idle Jayadwara2 mengangkang (jarak telapak 1.609 cm = 42 % tinggi) vs model lama 769 cm
+# (20 %). Rotasi sumbu Z lokal paha pada pose retarget: +10 derajat paha kiri melebarkan ±300 cm (diukur), jadi paha dirapatkan.
+# Tanda kanan dicerminkan; ukur ulang (report_lean mencetak jarak telapak) bila skeleton/anim berubah.
+STANCE_DEG = {"thigh_l": -12.6, "thigh_r": 12.6}
+# Kaki yang dirapatkan jadi lebih tegak -> pergelangan turun ke bawah lantai; akar pose retarget dinaikkan (cm, ruang komponen)
+# supaya tinggi pergelangan idle kembali ke tinggi rest (v06: 0,1336 m = ±316 cm). Ukur ulang lewat log "kuda-kuda" bila STANCE_DEG diubah.
+STANCE_ROOT_UP_CM = float(globals().get("STANCE_ROOT_UP_CM", 97.0))   # diukur 14 Okt (badan v06): pergelangan 219 -> target ±316 cm
 POSTURE_BONES = ["spine_01", "spine_02", "spine_03", "spine_04", "spine_05", "neck_01", "neck_02",
                  "thigh_l", "thigh_r", "calf_l", "calf_r"]
 
@@ -100,11 +107,18 @@ def retarget(mesh):
     r.add_default_ops()
     r.auto_map_chains(unreal.AutoMapChainType.EXACT, True)
     r.auto_align_all_bones(ST.TARGET, unreal.RetargetAutoAlignMethod.CHAIN_TO_CHAIN)
-    for bone in POSTURE_BONES:
+    for bone in POSTURE_BONES + [b for b in STANCE_DEG if b not in POSTURE_BONES]:
         deg = POSTURE_DEG.get(bone, 0.0)
         a = math.radians(deg) / 2.0
-        r.set_rotation_offset_for_retarget_pose_bone(bone, unreal.Quat(x=math.sin(a), y=0.0, z=0.0, w=math.cos(a)), ST.TARGET)
-    log(f"pose retarget: {POSTURE_DEG}")
+        q = unreal.Quat(x=math.sin(a), y=0.0, z=0.0, w=math.cos(a))
+        if bone in STANCE_DEG:                                              # aduksi/abduksi (sumbu Z lokal), setelah pitch
+            b_ = math.radians(STANCE_DEG[bone]) / 2.0
+            q = q * unreal.Quat(x=0.0, y=0.0, z=math.sin(b_), w=math.cos(b_))
+        r.set_rotation_offset_for_retarget_pose_bone(bone, q, ST.TARGET)
+    if STANCE_ROOT_UP_CM:
+        base = r.get_root_offset_in_retarget_pose(ST.TARGET)
+        r.set_root_offset_in_retarget_pose(unreal.Vector(base.x, base.y, base.z + STANCE_ROOT_UP_CM), ST.TARGET)
+    log(f"pose retarget: {POSTURE_DEG}; kuda-kuda (Z): {STANCE_DEG}, akar +{STANCE_ROOT_UP_CM:.0f} cm")
     for op in DISABLED_OPS:
         i = r.get_index_of_op_by_name(op)
         if i >= 0:
@@ -156,6 +170,9 @@ def report_lean():
     log(f"idle: kepala - pinggul = ({h.x - p.x:.0f}, {h.y - p.y:.0f}, {h.z - p.z:.0f}) cm, condong depan {lean:.1f}°; "
         f"segmen pinggul>dada/dada/leher/kepala = {[round(v, 1) for v in ang]} (target [4, 2, 2, 8])")
     leg = lambda a, b: math.degrees(math.atan2(g(b).y - g(a).y, -(g(b).z - g(a).z)))
+    fl, fr = g("foot_l"), g("foot_r")
+    log(f"kuda-kuda: jarak telapak kiri-kanan {fl.x - fr.x:.0f} cm (model lama 769), maju-mundur {fl.y - fr.y:.0f} cm; "
+        f"tinggi telapak L/R {fl.z:.0f}/{fr.z:.0f}")
     log(f"kaki: paha>betis L/R = {leg('thigh_l', 'calf_l'):.1f}/{leg('thigh_r', 'calf_r'):.1f}, betis>telapak L/R = "
         f"{leg('calf_l', 'foot_l'):.1f}/{leg('calf_r', 'foot_r'):.1f} (target 4/0, 1/1); tinggi pergelangan L/R = {g('foot_l').z:.0f}/{g('foot_r').z:.0f} cm (target 332)")
 

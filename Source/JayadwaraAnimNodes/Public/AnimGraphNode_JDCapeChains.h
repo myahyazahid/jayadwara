@@ -7,7 +7,7 @@
 
 /** Node AnimGraph untuk FAnimNode_JDCapeChains (simulasi rantai jubah, docs/26). */
 UCLASS()
-class UAnimGraphNode_JDCapeChains : public UAnimGraphNode_SkeletalControlBase
+class JAYADWARAANIMNODES_API UAnimGraphNode_JDCapeChains : public UAnimGraphNode_SkeletalControlBase
 {
 	GENERATED_BODY()
 

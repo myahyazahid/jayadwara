@@ -73,7 +73,7 @@ if STAGE == "setup":
         cc.set_editor_property("capture_every_frame", True)
     # deret uji lepas jubah: aktor membelakangi kamera dengan Dissolve berbeda (UJDCapeComponent memakai parameter yang sama)
     DIS = list(globals().get("CAP_DISSOLVE", []))
-    for i, dv in enumerate(DIS):
+    for i, dv in enumerate([d for d in DIS if d is not None]):
         y = -6000.0 - i * 4200.0
         act = eas.spawn_actor_from_class(bp.generated_class(), unreal.Vector(X0, y, 0), unreal.Rotator(roll=0, pitch=0, yaw=0))
         act.set_actor_label(f"JCCAP_Dis{i}")
@@ -81,8 +81,15 @@ if STAGE == "setup":
         cape = next(c for c in act.get_components_by_class(unreal.SkeletalMeshComponent) if c.get_name().startswith("Cape"))
         mid = cape.create_dynamic_material_instance(0)
         mid.set_scalar_parameter_value("Dissolve", dv)
+    if globals().get("CAP_TES"):                                  # J2: uji recolor zona (MI_Jayadwara2_Cape_TesWarna)
+        act = eas.spawn_actor_from_class(bp.generated_class(), unreal.Vector(X0, -6000.0, 0), unreal.Rotator(roll=0, pitch=0, yaw=0))
+        act.set_actor_label("JCCAP_Tes")
+        act.set_actor_location(unreal.Vector(X0, -6000.0, act.capsule_component.get_scaled_capsule_half_height()), False, False)
+        cape = next(c for c in act.get_components_by_class(unreal.SkeletalMeshComponent) if c.get_name().startswith("Cape"))
+        cape.set_material(0, EAL.load_asset(f"{J2}/Cape/Materials/MI_Jayadwara2_Cape_TesWarna"))
+        DIS = [None]
     if DIS:
-        mid_y = -6000.0 - (len(DIS) - 1) * 2100.0
+        mid_y = -3000.0 if DIS == [None] else -6000.0 - (len(DIS) - 1) * 2100.0
         cap = eas.spawn_actor_from_class(unreal.SceneCapture2D, unreal.Vector(X0 - 14000, mid_y, Z0),
                                          unreal.MathLibrary.find_look_at_rotation(unreal.Vector(X0 - 14000, mid_y, Z0), unreal.Vector(X0, mid_y, Z0)))
         cap.set_actor_label("JCCAP_cam_dissolve")

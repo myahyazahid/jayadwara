@@ -26,7 +26,7 @@ def log(msg):
     unreal.log(f"[Aksa2_Spike] {msg}")
 
 # 1. Pastikan skeleton ada
-skeleton = EAL.load_asset(SKELETON_PATH)
+skeleton = unreal.load_object(None, f"{SKELETON_PATH}.SK_Mannequin") or EAL.load_asset(SKELETON_PATH)
 if not skeleton:
     raise RuntimeError(f"Skeleton tidak ditemukan: {SKELETON_PATH}")
 

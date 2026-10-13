@@ -43,7 +43,7 @@ Aksa Jaya Mangkubumi, agen baru sebuah lembaga rahasia penanganan anomali, menya
 | 23 | [Rencana Fase 1](23-rencana-fase-1.md) | **Usulan.** Prototype greybox: 9 iterasi (GAS → combat → minion → raksasa → gedung & meter → boss → playtest), gate, angka awal combat, pertanyaan Q1–Q14 |
 | 24 | [Model Sheet Jerangkong](24-model-sheet-jerangkong.md) | **Dipakai.** Design lock Jerangkong: proporsi terukur (H = 2,2 m), postur bungkuk sedang, palet, potongan, keputusan S1–S12 (hasil Iterasi 0) |
 | 25 | [Rencana Redesign Jayadwara](25-rencana-redesign-jayadwara.md) | **Persiapan.** Jayadwara2 dari model Tripo developer (lebih realistis): intake → spike → pemisahan → rig → tekstur → LOD → UE, keputusan R1–R10; model lama tetap utuh & bisa dikembalikan |
-| 26 | [Rencana Jubah Jayadwara](26-rencana-jubah-jayadwara.md) | **J1 selesai & disetujui (13 Okt 2026)**: jubah cap02 menempel tubuh sampai kerah, rantai/bros konsep, simulasi rantai (terangkat saat lompat), tombol Y lepas (sementara). Berikutnya J2. Jubah upacara (K9 docs/14): mesh terpisah ikut pose Jayadwara2, Chaos Cloth, pakai/lepas otomatis; basis Tripo `cap02`; J0–J3 ditarik sekarang sebagai jalur art paralel, J4–J5 tetap F2 |
+| 26 | [Rencana Jubah Jayadwara](26-rencana-jubah-jayadwara.md) | **J1 disetujui; J2 selesai (13 Okt 2026), menunggu developer**: jubah cap02 menempel tubuh sampai kerah, Mask zona + LOD0–2, simulasi rantai (J3 sebagian), tombol Y lepas (J4 sebagian). J5 belum. Jubah upacara (K9 docs/14): mesh terpisah ikut pose Jayadwara2, Chaos Cloth, pakai/lepas otomatis; basis Tripo `cap02`; J0–J3 ditarik sekarang sebagai jalur art paralel, J4–J5 tetap F2 |
 
 
 ---

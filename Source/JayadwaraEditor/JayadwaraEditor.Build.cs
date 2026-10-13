@@ -13,7 +13,7 @@ public class JayadwaraEditor : ModuleRules
 		PrivateDependencyModuleNames.AddRange(new string[]
 		{
 			"UnrealEd", "PhysicsCore", "PhysicsUtilities", "MeshUtilitiesEngine",
-			"AnimGraph", "AnimGraphRuntime", "BlueprintGraph", "IKRig", "IKRigEditor", "Jayadwara"
+			"AnimGraph", "AnimGraphRuntime", "BlueprintGraph", "IKRig", "IKRigEditor", "Jayadwara", "JayadwaraAnimNodes"
 		});
 	}
 }

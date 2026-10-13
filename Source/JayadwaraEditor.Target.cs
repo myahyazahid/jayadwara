@@ -12,5 +12,6 @@ public class JayadwaraEditorTarget : TargetRules
 		IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_6;
 		ExtraModuleNames.Add("Jayadwara");
 		ExtraModuleNames.Add("JayadwaraEditor");
+		ExtraModuleNames.Add("JayadwaraAnimNodes");
 	}
 }
