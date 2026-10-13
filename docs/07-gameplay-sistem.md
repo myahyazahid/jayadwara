@@ -50,7 +50,7 @@ Pengganti timer transformasi.
 
 ### Jubah upacara
 
-Keputusan 13 Okt 2026. Desain: K9 di [14](14-model-sheet-jayadwara.md). Jayadwara memakai jubah panjang **hanya di luar combat**; saat bertarung tanpa jubah (kaki & siluet tetap terbaca dari kamera belakang, tanpa simulasi kain di combat).
+Keputusan 13 Okt 2026. Desain: K9 di [14](14-model-sheet-jayadwara.md); rencana iterasi: [26](26-rencana-jubah-jayadwara.md). Jayadwara memakai jubah panjang **hanya di luar combat**; saat bertarung tanpa jubah (kaki & siluet tetap terbaca dari kamera belakang, tanpa simulasi kain di combat).
 
 | Kejadian | Jubah | Pemicu |
 |---|---|---|
