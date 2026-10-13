@@ -24,6 +24,11 @@ ap.add_argument("--materials", type=int, default=4)
 ap.add_argument("--height", type=float, default=1.99, help="tinggi total termasuk tanduk (m)")
 ap.add_argument("--tol", type=float, default=0.03)
 ap.add_argument("--max-influence", type=int, default=4)
+ap.add_argument("--no-zone", action="store_true", help="lewati cek JD_Zone (model bertekstur Tripo, Jayadwara2: tanpa atribut zona)")
+ap.add_argument("--unit", type=float, default=0.01,
+                help="meter per satuan data FBX; 0,01 = cm (kontrak Iterasi 6, 05_export_fbx.py)")
+ap.add_argument("--export-scale", type=float, default=None,
+                help="skala raksasa yang di-bake (default: export_scale di <mesh>_sockets.json, atau 1)")
 args = ap.parse_args(argv)
 
 import jd_skeleton as SK  # noqa: E402
@@ -73,8 +78,19 @@ dg = bpy.context.evaluated_depsgraph_get()
 ev = mesh.evaluated_get(dg)
 corners = [ev.matrix_world @ Vector(c) for c in ev.bound_box]
 zmin, zmax = min(c.z for c in corners), max(c.z for c in corners)
+import json as _json  # noqa: E402
+import re as _re  # noqa: E402
+
+_sj = _re.sub(r"_LOD\d+$", "", os.path.splitext(os.path.abspath(args.fbx))[0]) + "_sockets.json"
+export_scale = args.export_scale
+if export_scale is None:
+    export_scale = _json.load(open(_sj, encoding="utf-8")).get("export_scale", 1.0) if os.path.exists(_sj) else 1.0
+# ukuran dicek di skala authoring (1,90 m): data FBX = cm x export_scale
+zmin, zmax = zmin * args.unit / export_scale, zmax * args.unit / export_scale
+check(f"export_scale tercatat ({export_scale:.3f})", export_scale > 0)
 check("telapak kaki di z≈0", abs(zmin) <= args.tol, f"zmin={zmin:.3f} m")
 check(f"tinggi total ≈ {args.height} m", abs((zmax - zmin) - args.height) <= args.tol, f"{zmax - zmin:.3f} m")
+check("objek armature bernama 'Armature' (UE tidak membuat tulang root tambahan)", arm.name == "Armature", arm.name)
 check("skala armature seragam ≈ 1", all(abs(v - 1) < 1e-3 for v in arm.scale), f"scale={tuple(round(v, 4) for v in arm.scale)}")
 
 # ---- topologi & material
@@ -123,18 +139,25 @@ check("weight ternormalisasi (jumlah=1±0,01)", off_norm == 0, f"{off_norm} vert
 check("ada modifier/relasi armature", any(m.type == "ARMATURE" for m in mesh.modifiers) or mesh.parent == arm,
       f"modifier={[m.type for m in mesh.modifiers]} parent={mesh.parent.name if mesh.parent else None}")
 
-# ---- socket
+# ---- socket: tidak di FBX (UE mengimpor empty sebagai tulang), tapi di <mesh>_sockets.json di sebelahnya
+import json  # noqa: E402
+import re  # noqa: E402
+
+check("tidak ada empty di FBX (jadi tulang di UE)", not empties, str([o.name for o in empties][:6]))
 exp_sockets = list(SK.build_sockets().keys())
-got_sockets = {o.name: o for o in empties}
-missing = [s for s in exp_sockets if s not in got_sockets]
-check("semua socket ada", not missing, f"hilang: {missing}")
-bad_parent = [s for s in exp_sockets if s in got_sockets and not (
-    (got_sockets[s].parent_type == "BONE" and got_sockets[s].parent_bone in got)
-    or (got_sockets[s].parent is not None and got_sockets[s].parent.name in got))]
+sj = re.sub(r"_LOD\d+$", "", os.path.splitext(fbx)[0]) + "_sockets.json"
+data = {}
+if os.path.exists(sj):
+    with open(sj, encoding="utf-8") as f:
+        data = {s["name"]: s for s in json.load(f)["sockets"]}
+missing = [s for s in exp_sockets if s not in data]
+check("semua socket ada di _sockets.json", os.path.exists(sj) and not missing, f"hilang: {missing}" if os.path.exists(sj) else f"tidak ada: {sj}")
+bad_parent = [s for s in exp_sockets if s in data and data[s]["bone"] not in got]
 check("socket ter-parent ke tulang", not bad_parent, f"{bad_parent}")
 
 # ---- atribut warna (info)
-check("atribut warna JD_Zone ada", "JD_Zone" in me.color_attributes)
+if not args.no_zone:
+    check("atribut warna JD_Zone ada", "JD_Zone" in me.color_attributes)
 
 # ---- laporan
 w = max(len(n) for n, _, _ in results)

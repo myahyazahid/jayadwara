@@ -21,11 +21,12 @@
 | Item | Nilai |
 |---|---|
 | Engine | Unreal Engine 5.6.1 (Epic Games Launcher) |
-| IDE | Visual Studio 2022 (workload *Game development with C++*) atau Rider |
+| IDE / toolchain | Visual Studio 2022 (workload *Game development with C++*) atau Rider. **Terpasang (Okt 2026):** Build Tools 2022 17.14 + *.NET Framework 4.8 SDK* + MSVC v14.38 (versi preferred UE 5.6), tanpa IDE. Tanpa .NET Framework SDK, UBT gagal dengan "Could not find NetFxSDK install dir". |
 | Lokasi project | `C:\repository\unreal_engine\jayadwara` |
 | Nama project / module | `Jayadwara` |
 | Prefix class C++ | `JD` (contoh: `AJDHumanCharacter`) |
 | Version control | Git + **Git LFS** (repo sendiri di folder `jayadwara`) |
+| Otomasi editor | **Python Remote Execution** aktif (`DefaultEngine.ini`). Claude menjalankan skrip di editor yang sedang terbuka dengan `python Tools/ue_remote.py <file.py>` (atau `-c "<kode>"`) dan membaca output-nya. Membuat/mengisi `.uasset` lewat skrip Python di `Tools/`, bukan edit manual |
 
 ## Plugin
 
@@ -67,6 +68,23 @@ AJDEnemyBase  (AJDCharacterBase)
 - **Transformasi = ganti pawn**. `AJDPlayerController` melakukan `UnPossess` pawn manusia → spawn/aktifkan pawn raksasa → `Possess`. Pawn manusia disembunyikan, bukan dihapus.
 - Alasan memilih ganti pawn (bukan memperbesar satu karakter): kamera, collision, movement, dan animasi untuk dua skala sangat berbeda; lebih mudah dikontrol dan di-debug.
 - Transisi visual memakai **Level Sequence** (Sequencer).
+
+#### Mesh logika vs mesh visual (Aksa)
+
+Model Aksa dibuat sendiri; sampai jadi, **MetaHuman** dipakai sebagai placeholder visual (keputusan 12 Okt 2026). Supaya penggantiannya tidak menyentuh logika:
+
+| Lapisan | Isi | Diganti saat model sendiri jadi? |
+|---|---|---|
+| **Mesh logika** = `GetMesh()` di `BP_Aksa` | Manny (`SKM_Manny_Simple`), **disembunyikan** tapi animasi tetap jalan (`VisibilityBasedAnimTickOption = AlwaysTickPoseAndRefreshBones`). Menjalankan `ABP_Aksa`, montage silat, Anim Notify hit, socket | Tidak |
+| **Mesh visual** | Komponen MetaHuman (body, face, groom) yang menyalin pose dari mesh logika lewat **Retarget Pose From Mesh** | **Ya**: ganti komponen ini dengan `SK_Aksa` |
+
+Aturan:
+- Kode C++, montage, Anim Notify, dan trace hit **hanya** memakai mesh logika dan nama tulang Mannequin (`hand_r`, `foot_l`, ...). Tidak ada referensi ke aset MetaHuman di C++.
+- Semua animasi dibuat/diimpor untuk **skeleton Mannequin**, tidak pernah untuk skeleton MetaHuman.
+- Jangan bergantung pada fitur khusus MetaHuman (rig wajah, Live Link, lip-sync). Dialog vertical slice = teks + potret.
+- `SK_Aksa` nanti dibuat dengan nama tulang Mannequin (seperti Jayadwara), sehingga bisa memakai retarget yang sama atau langsung menjadi mesh logika.
+- Kapsul dan kamera disetel untuk tinggi Aksa, bukan tinggi MetaHuman/Manny; retarget menutupi selisih proporsi.
+- **Status (12 Okt 2026, Iterasi 6 [19](19-rencana-model-aksa.md)):** `SK_Aksa` memakai skeleton Mannequin asli dan tinggi Manny, jadi ia **langsung menjadi mesh logika** di `BP_Aksa` (`ABP_Aksa` = salinan `ABP_Unarmed` + Anim Dynamics ujung jaket). Lapisan mesh visual/MetaHuman tidak dipakai; aturan di atas tetap berlaku (C++ hanya memakai `GetMesh()` dan nama tulang Mannequin).
 
 ### Combat (satu sistem, dua skala)
 
@@ -120,7 +138,7 @@ AJDEnemyBase  (AJDCharacterBase)
 ### Input
 
 - `IMC_Human` dan `IMC_Giant` (Enhanced Input Mapping Context), diganti saat transformasi.
-- Mendukung keyboard-mouse dan gamepad sejak awal.
+- Mendukung keyboard-mouse dan gamepad sejak awal. **Keyboard-mouse perangkat utama**; gamepad PlayStation, Xbox, dan generik harus bisa (pemetaan tombol & catatan teknis di [23](23-rencana-fase-1.md#44-kontrol-q4-q5-q8)). Transformasi: **T** / **L1 + R1**.
 
 ### UI
 
@@ -150,6 +168,9 @@ Source/Jayadwara/
 ├── World/           (DestructibleBuilding, Civilian)
 ├── Episode/         (EpisodeDirector, EpisodeData)
 └── UI/              (base class widget C++)
+
+Source/JayadwaraEditor/   (modul Editor-only, tidak ikut build game)
+└── JDEditorToolsLibrary  (dipanggil skrip Python di Tools/: Physics Asset, node Anim Graph, retarget ke folder)
 ```
 
 ### Content
@@ -167,6 +188,9 @@ Content/Jayadwara/
 ├── UI/
 └── Cinematics/      (LS_)
 ```
+Konten pihak ketiga tetap di folder aslinya supaya referensinya tidak putus: `Characters/Mannequins/`, `Input/`, `LevelPrototyping/` (disalin dari `Templates/TemplateResources/High` UE 5.6, tanpa `.fbx` sumber). Placeholder Fase 0–1, diganti aset Aksa sendiri di Fase 2.
+
+File sumber audio (WAV kandidat, lisensi, pilihan) ada di `Audio/` di root repo, di luar `Content/` seperti `Art/`; import ke `Audio/` di atas lewat `Tools/ue_import_audio.py` (lihat [Audio/README.md](../Audio/README.md)).
 
 ## Konvensi Penamaan Aset
 
@@ -190,6 +214,11 @@ Content/Jayadwara/
 - **`.gitattributes`** — LFS untuk: `*.uasset`, `*.umap`, `*.fbx`, `*.obj`, `*.png`, `*.tga`, `*.psd`, `*.wav`, `*.mp3`, `*.ogg`, `*.mp4`, `*.blend`.
 - **`.gitignore`** — abaikan: `Binaries/`, `Intermediate/`, `Saved/`, `DerivedDataCache/`, `.vs/`, `*.sln`, `*.suo`, `*.VC.db`.
 - Commit minimal setiap sesi kerja; pesan commit jelas (mis. `feat(combat): tambah combo pukulan ringan`).
+- **Branch:**
+  - `main`: versi stabil. Diisi merge dari `development` di akhir fase/milestone.
+  - `development`: integrasi harian. Kerja editor (`.uasset`/`.umap`) dilakukan di sini.
+  - `claude/*`: kode dari Claude. Developer `git checkout` branch ini + `git pull`, mengetes build di editor, lalu membuat PR ke `development` dan merge. (Auto-merge lewat GitHub Actions sempat dicoba dan dihapus: runner GitHub tidak punya UE, jadi C++ tidak bisa diverifikasi sebelum merge.)
+- Tutup editor sebelum `git checkout` / `git pull` (aset biner yang sedang terbuka tidak ter-reload).
 - Pertimbangkan backup remote privat (GitHub/GitLab dengan kuota LFS yang cukup).
 
 ## Target Performa

@@ -9,11 +9,23 @@ Opsi FBX divalidasi terhadap properti operator di Blender yang sedang dipakai (t
 import os
 
 import bpy
+from mathutils import Matrix
 
 FBX_OUT = globals().get("FBX_OUT") or r"C:\repository\unreal_engine\jayadwara\Art\Export\SK_Jayadwara_Proxy.fbx"
 MESH_NAME = globals().get("MESH_NAME") or "SK_Jayadwara_Proxy"     # hero: MESH_NAME="SK_Jayadwara", FBX_OUT=...\SK_Jayadwara.fbx
 PREP = globals().get("PREP")
 ARM_NAME = "JD_Armature"
+# Iterasi 6 (diuji di UE 5.6.1 dengan 7 varian, lihat docs/13 Iterasi 6). Importer FBX UE:
+#  - menjadikan objek armature tulang root tambahan, KECUALI namanya "Armature"; transform node itu lalu dibuang;
+#  - menaruh faktor unit di header FBX (dan Import Uniform Scale) sebagai SKALA tulang root, bukan di posisi tulang;
+#  - mengimpor empty SOCKET_* sebagai tulang.
+# Maka: armature + mesh disalin, diskalakan BAKE_CM (100: m -> cm) dan skalanya di-apply, salinan armature diberi nama
+# "Armature", diekspor dengan FBX_SCALE_ALL (header 1 cm, node skala 1), tanpa empty. Hasil di UE (skala import 1):
+# 89 tulang, root skala 1, tinggi 199 cm — sama konvensinya dengan Mannequin. Override lewat globals untuk uji.
+ARM_EXPORT_NAME = globals().get("ARM_EXPORT_NAME") or "Armature"
+APPLY_SCALE = globals().get("APPLY_SCALE") or "FBX_SCALE_ALL"
+BAKE_CM = float(globals().get("BAKE_CM", 100.0))
+INCLUDE_SOCKETS = bool(globals().get("INCLUDE_SOCKETS", False))
 
 scene = bpy.context.scene
 arm = bpy.data.objects[ARM_NAME]
@@ -52,14 +64,33 @@ for k in list(joined.keys()):
 print("mesh gabungan:", joined.name, "tris:", sum(len(p.vertices) - 2 for p in joined.data.polygons),
       "slot material:", [m.name for m in joined.data.materials], "modifier:", [m.type for m in joined.modifiers])
 
-# ---- 2. pilih objek yang diekspor: armature, mesh gabungan, socket
+# ---- 2. salinan armature; skala cm di-bake ke data (tulang + vertex)
+arm_x = arm.copy()
+arm_x.data = arm.data.copy()
+arm_x.animation_data_clear()
+tmp_coll.objects.link(arm_x)
+mw = joined.matrix_world.copy()
+joined.parent = None
+joined.matrix_world = mw
+for m in joined.modifiers:
+    if m.type == "ARMATURE":
+        m.object = arm_x
+for o in (arm_x, joined):
+    o.matrix_world = Matrix.Scale(BAKE_CM, 4) @ o.matrix_world
+bpy.context.view_layer.update()
+with bpy.context.temp_override(active_object=arm_x, selected_objects=[arm_x, joined], selected_editable_objects=[arm_x, joined]):
+    bpy.ops.object.transform_apply(location=False, rotation=False, scale=True)
+joined.parent = arm_x
+joined.matrix_parent_inverse = arm_x.matrix_world.inverted()
+
+# ---- 3. pilih objek yang diekspor: armature, mesh gabungan, (socket hanya untuk uji)
 for o in bpy.context.view_layer.objects:
     o.select_set(False)
-export_objs = [arm, joined] + [o for o in bpy.data.objects if o.name.startswith("SOCKET_")]
+export_objs = [arm_x, joined] + ([o for o in bpy.data.objects if o.name.startswith("SOCKET_")] if INCLUDE_SOCKETS else [])
 for o in export_objs:
     o.select_set(True)
 
-# ---- 3. opsi (hanya yang dikenal operator ini)
+# ---- 4. opsi (hanya yang dikenal operator ini)
 rna = bpy.ops.export_scene.fbx.get_rna_type().properties
 
 
@@ -83,19 +114,29 @@ if enum_ok("armature_nodetype", "NULL"):
     wanted["armature_nodetype"] = "NULL"
 if enum_ok("mesh_smooth_type", "FACE"):
     wanted["mesh_smooth_type"] = "FACE"
-if enum_ok("apply_scale_options", "FBX_SCALE_NONE"):
-    wanted["apply_scale_options"] = "FBX_SCALE_NONE"
+if enum_ok("apply_scale_options", APPLY_SCALE):
+    wanted["apply_scale_options"] = APPLY_SCALE
 kwargs = {k: v for k, v in wanted.items() if k in rna}
 print("opsi tidak dikenal (dilewati):", sorted(set(wanted) - set(kwargs)))
 os.makedirs(os.path.dirname(FBX_OUT), exist_ok=True)
-with bpy.context.temp_override(selected_objects=export_objs, selected_editable_objects=export_objs, active_object=arm):
-    res = bpy.ops.export_scene.fbx(**kwargs)
-print("export:", res, "->", FBX_OUT, "|", os.path.getsize(FBX_OUT) // 1024, "KB")
-
-# ---- 4. bersihkan
-bpy.data.objects.remove(joined, do_unlink=True)
-for me in list(bpy.data.meshes):
-    if me.users == 0:
-        bpy.data.meshes.remove(me)
-bpy.data.collections.remove(tmp_coll)
-arm.data.pose_position = prev_pose_pos
+blocker = bpy.data.objects.get(ARM_EXPORT_NAME)
+if blocker is not None:
+    blocker.name = ARM_EXPORT_NAME + "_tmp"
+arm_x.name = ARM_EXPORT_NAME
+try:
+    with bpy.context.temp_override(selected_objects=export_objs, selected_editable_objects=export_objs, active_object=arm_x):
+        res = bpy.ops.export_scene.fbx(**kwargs)
+    print("export:", res, "->", FBX_OUT, "|", os.path.getsize(FBX_OUT) // 1024, "KB")
+finally:
+    # ---- 5. bersihkan
+    arm_data = arm_x.data
+    bpy.data.objects.remove(joined, do_unlink=True)
+    bpy.data.objects.remove(arm_x, do_unlink=True)
+    bpy.data.armatures.remove(arm_data)
+    if blocker is not None:
+        blocker.name = ARM_EXPORT_NAME
+    for me in list(bpy.data.meshes):
+        if me.users == 0:
+            bpy.data.meshes.remove(me)
+    bpy.data.collections.remove(tmp_coll)
+    arm.data.pose_position = prev_pose_pos

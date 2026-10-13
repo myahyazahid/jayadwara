@@ -1,5 +1,7 @@
 # 14 — Model Sheet Jayadwara (Design Lock)
 
+> **13 Okt 2026:** model aktif kini Jayadwara2 ([25](25-rencana-redesign-jayadwara.md)). Identitas desain (palet merah-hitam-emas, faceplate putih, tanduk emas, permata dada statis, kain sisi = selendang K5, batas IP) tetap berlaku; angka proporsi dan part list di sini milik model lama.
+
 > Hasil **Iterasi 0** dari [13-rencana-model-jayadwara.md](13-rencana-model-jayadwara.md). Dokumen ini mengunci proporsi, palet, bagian, dan keputusan desain sebelum modeling.
 > **Status:** draft — menunggu persetujuan developer pada bagian [8](#8-pertanyaan-untuk-developer). Angka diukur dari gambar AI beresolusi rendah (tinggi badan ±360 px) → akurasi ±3 cm, cukup untuk blockout, bukan untuk detail.
 
@@ -118,6 +120,7 @@ Titik di mana sheet **tidak konsisten** atau **bertentangan dengan aturan IP**, 
 | **K6** | Mata & permata | Mata menyala miring; permata dada menyala | Mata **celah sempit miring** (lebar:tinggi ≥ 3:1), bukan oval besar. Permata ≤ 0,11 m, emissive **konstan**; tidak berkedip dan **tidak dikaitkan ke meter Sync** |
 | **K7** | Panjang lengan | Ujung kepalan di 0,478 H (setinggi selangkangan) → lengan terlalu pendek untuk manusia & jangkauan pukulan | Panjang lengan **+10%** → ujung kepalan ≈ 0,44 H (0,84 m); siluet lain tetap |
 | **K8** | Pose rest model | Sheet berpose lengan sedikit terbuka | **A-pose** — lengan ±30° dari tubuh, telapak ke paha. Kaki **melebar seperti di konsep** (diukur dari reference plane): sendi pinggul ±0,10 m, lutut ±0,18 m, pergelangan kaki ±0,24 m; sepatu menghadap keluar ±8°. Dicek lagi terhadap Mannequin saat UE ada. *(Revisi Iterasi 1: sebelumnya "±35°, kaki selebar bahu" — salah baca ukuran lebar kaki dan lengan 30° menjatuhkan pergelangan tepat di landmark 1,05 m.)* |
+| **K9** | Jubah upacara *(13 Okt 2026, disetujui developer)* | Tidak ada di konsep final. Konsep tambahan: [`concept-art/jayadwara_jubah_upacara.webp`](concept-art/jayadwara_jubah_upacara.webp) (acuan); alternatif satu warna di `concept-art/eksplorasi/jayadwara_jubah_alt_merah.webp` | Jubah panjang **merah-putih-emas** (panel putih tengah & sisi, rantai emas, ujung runcing bermotif) dipakai **hanya di luar combat**: cutscene, kedatangan setelah transformasi, pose menang/kepergian. Dilepas sebelum bertarung (alur di [07](07-gameplay-sistem.md#jubah-upacara)). Mesh terpisah `SK_Jayadwara2_Cape` di skeleton yang sama (badan final tidak diubah). **Batas:** kerah tidak lebih tinggi dari dagu dan tidak mekar ke belakang kepala; jubah bukan senjata/perisai. Pauldron & rantai di sheet ikut model yang ada, bukan dibuat ulang |
 
 ---
 
@@ -131,6 +134,7 @@ Titik di mana sheet **tidak konsisten** atau **bertentangan dengan aturan IP**, 
 | Tanpa mata lensa besar | ✅ Celah sempit (K6) |
 | Tanpa badan merah-silver | ✅ Merah/hitam/emas; tidak ada silver |
 | Tanpa emblem garuda | ✅ Tidak ada |
+| Jubah ≠ jubah Ultra (kerah mekar, jubah-senjata) | ✅ K9: kerah ≤ dagu, tanpa kerah mekar, jubah hanya hiasan & dilepas saat combat |
 | Faceplate putih ≠ Ultra | ⚠️ Titik paling dekat — K2 membedakan bentuk; **ulangi cek tiap gate** |
 | Pose/jurus bukan Specium Ray | ➡️ Berlaku di fase animasi: hindari silang lengan bentuk L |
 | Batik: motif umum | ➡️ Berlaku di Iterasi 4: kawung/ceplok; hindari batik larangan keraton (mis. parang rusak) |

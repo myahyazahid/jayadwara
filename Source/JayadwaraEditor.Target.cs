@@ -11,5 +11,6 @@ public class JayadwaraEditorTarget : TargetRules
 		DefaultBuildSettings = BuildSettingsVersion.V5;
 		IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_6;
 		ExtraModuleNames.Add("Jayadwara");
+		ExtraModuleNames.Add("JayadwaraEditor");
 	}
 }

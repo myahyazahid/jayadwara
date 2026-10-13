@@ -1,0 +1,134 @@
+{
+  "mesh": "SK_Jayadwara2",
+  "export_scale": 23.684211,
+  "giant_height_m": 45.0,
+  "note": "posisi rest; ue_component_cm = (x, -y, z) x 100 x export_scale",
+  "sockets": [
+    {
+      "name": "SOCKET_back_center",
+      "bone": "spine_04",
+      "blender_m": [
+        0.0,
+        0.13,
+        1.45
+      ],
+      "ue_component_cm": [
+        0.0,
+        -307.895,
+        3434.211
+      ]
+    },
+    {
+      "name": "SOCKET_chest_sun",
+      "bone": "spine_05",
+      "blender_m": [
+        0.0,
+        -0.2,
+        1.445
+      ],
+      "ue_component_cm": [
+        0.0,
+        473.684,
+        3422.368
+      ]
+    },
+    {
+      "name": "SOCKET_eye_l",
+      "bone": "head",
+      "blender_m": [
+        0.04,
+        -0.14,
+        1.75
+      ],
+      "ue_component_cm": [
+        94.737,
+        331.579,
+        4144.737
+      ]
+    },
+    {
+      "name": "SOCKET_eye_r",
+      "bone": "head",
+      "blender_m": [
+        -0.04,
+        -0.14,
+        1.75
+      ],
+      "ue_component_cm": [
+        -94.737,
+        331.579,
+        4144.737
+      ]
+    },
+    {
+      "name": "SOCKET_foot_l",
+      "bone": "foot_l",
+      "blender_m": [
+        0.3,
+        -0.12,
+        0.06
+      ],
+      "ue_component_cm": [
+        710.526,
+        284.211,
+        142.105
+      ]
+    },
+    {
+      "name": "SOCKET_foot_r",
+      "bone": "foot_r",
+      "blender_m": [
+        -0.3,
+        -0.12,
+        0.06
+      ],
+      "ue_component_cm": [
+        -710.526,
+        284.211,
+        142.105
+      ]
+    },
+    {
+      "name": "SOCKET_hand_l",
+      "bone": "hand_l",
+      "blender_m": [
+        0.3353,
+        -0.1003,
+        0.8962
+      ],
+      "ue_component_cm": [
+        794.118,
+        237.539,
+        2122.522
+      ]
+    },
+    {
+      "name": "SOCKET_hand_r",
+      "bone": "hand_r",
+      "blender_m": [
+        -0.3353,
+        -0.1003,
+        0.8962
+      ],
+      "ue_component_cm": [
+        -794.118,
+        237.539,
+        2122.522
+      ]
+    },
+    {
+      "name": "SOCKET_head_top",
+      "bone": "head",
+      "blender_m": [
+        0.0,
+        0.0,
+        1.9
+      ],
+      "ue_component_cm": [
+        0.0,
+        -0.0,
+        4500.0
+      ]
+    }
+  ]
+}

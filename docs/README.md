@@ -33,6 +33,18 @@ Aksa Jaya Mangkubumi, agen baru sebuah lembaga rahasia penanganan anomali, menya
 | 13 | [Rencana Model Jayadwara](13-rencana-model-jayadwara.md) | Pipeline & iterasi membuat model raksasa di Blender 5.2 sampai siap dipakai di UE |
 | 14 | [Model Sheet Jayadwara](14-model-sheet-jayadwara.md) | Design lock: proporsi, palet, part list, keputusan desain K1–K8 (hasil Iterasi 0) |
 | 15 | [Spesifikasi Material Jayadwara](15-spesifikasi-material-jayadwara.md) | Slot, tekstur, parameter master material UE, alur hand-paint (hasil Iterasi 4) |
+| 16 | [Panduan Arc 1](16-panduan-arc-1.md) | **Usulan.** Arahan desain Ep 1–10: aturan per episode, mekanik baru, benang merah, kartu episode |
+| 17 | [Skenario Arc 1](17-skenario-arc-1.md) | **Usulan.** Skenario adegan per adegan Ep 1 (lengkap); Ep 2–10 menyusul |
+| 18 | [Kebutuhan Episode 1](18-kebutuhan-episode-1.md) | **Usulan.** Daftar kerja Ep 1: sistem C++, karakter & animasi, level, VFX, audio, UI, data, urutan F0–F2 |
+| 19 | [Rencana Model Aksa](19-rencana-model-aksa.md) | **Usulan.** Iterasi 0–7 membuat model Aksa di Blender (skeleton Mannequin, basis MPFB2) sampai menggantikan MetaHuman di UE |
+| 20 | [Rencana Model Jerangkong](20-rencana-model-jerangkong.md) | **v0.2, terpasang di UE.** Boss Ep 1 + minion kerangka dari model Tripo developer (jalur B): satu model, potongan kaku untuk mekanik rontok/susun ulang |
+| 21 | [Model Sheet Aksa](21-model-sheet-aksa.md) | **Draft.** Design lock Aksa: proporsi terukur (H = 1,75 m), palet, part list, keputusan desain D1–D10 (hasil Iterasi 0) |
+| 22 | [Spesifikasi Material Aksa](22-spesifikasi-material-aksa.md) | **Draft.** Slot, tekstur dasar (BC/N/ORM/SSS/Mask), master & instance UE, pipeline UV (hasil Iterasi 5) |
+| 23 | [Rencana Fase 1](23-rencana-fase-1.md) | **Usulan.** Prototype greybox: 9 iterasi (GAS → combat → minion → raksasa → gedung & meter → boss → playtest), gate, angka awal combat, pertanyaan Q1–Q14 |
+| 24 | [Model Sheet Jerangkong](24-model-sheet-jerangkong.md) | **Dipakai.** Design lock Jerangkong: proporsi terukur (H = 2,2 m), postur bungkuk sedang, palet, potongan, keputusan S1–S12 (hasil Iterasi 0) |
+| 25 | [Rencana Redesign Jayadwara](25-rencana-redesign-jayadwara.md) | **Persiapan.** Jayadwara2 dari model Tripo developer (lebih realistis): intake → spike → pemisahan → rig → tekstur → LOD → UE, keputusan R1–R10; model lama tetap utuh & bisa dikembalikan |
+| 26 | [Rencana Jubah Jayadwara](26-rencana-jubah-jayadwara.md) | **Usulan.** Jubah upacara (K9 docs/14): mesh terpisah ikut pose Jayadwara2, Chaos Cloth, pakai/lepas otomatis; iterasi J0–J5, jadwal F2 |
+
 
 ---
 
@@ -43,11 +55,11 @@ Aksa Jaya Mangkubumi, agen baru sebuah lembaga rahasia penanganan anomali, menya
 | Judul | **JAYADWARA: Guardian of the Seven Gates** |
 | Engine | Unreal Engine **5.6.1**, C++ + Blueprint |
 | Platform | PC (Steam) |
-| Gaya visual | Stylized |
+| Gaya visual | **Stylized semi-realistis**: proporsi mendekati normal, bentuk tegas, detail disederhanakan, material PBR (dikonfirmasi ulang 12 Okt 2026; realistis penuh ditolak karena volume monster, animasi, dan performa). Jayadwara2 & Jerangkong (basis Tripo) berada di level ini: detail lebih banyak, tetap stylized-friendly |
 | Tim | Solo + Claude, sambilan ±10–15 jam/minggu |
 | Struktur | Linear semi-open-world, **50 episode** dalam **5 arc** |
 | Karakter utama | **Aksa Jaya Mangkubumi** ("Aksa"), codename **Lawang** |
-| Wujud raksasa | **Jayadwara** (roh Dwarapala) |
+| Wujud raksasa | **Jayadwara** (roh Dwarapala). **Model aktif sejak 13 Okt 2026: Jayadwara2** (basis Tripo AI developer, dirapikan Claude; [25](25-rencana-redesign-jayadwara.md)). Model lama ([13](13-rencana-model-jayadwara.md)) disimpan sebagai cadangan |
 | Organisasi | **DWARA** — Divisi Warisan dan Riset Anomali |
 | Kota utama | **Arunapura** (kota fiksi di Jawa) |
 | Final boss | **Batara Kala** |

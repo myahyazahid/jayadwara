@@ -7,14 +7,23 @@ public class Jayadwara : ModuleRules
 	public Jayadwara(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
-	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput" });
 
-		PrivateDependencyModuleNames.AddRange(new string[] {  });
+		// Include relatif dari akar modul, mis. #include "Characters/JDHumanCharacter.h" (struktur folder docs/12).
+		PublicIncludePaths.Add(ModuleDirectory);
 
-		// Uncomment if you are using Slate UI
-		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
-		
+		// Daftar modul mengikuti docs/12-technical-design.md (Dependensi module).
+		// EngineCameras = pola camera shake (Perlin) untuk UJDCameraShake_Hit; plugin bawaan, aktif default.
+		// GeometryCollectionEngine = Chaos Destruction (plugin GeometryCollectionPlugin + ChaosEditor/Fracture di .uproject).
+		PublicDependencyModuleNames.AddRange(new string[]
+		{
+			"Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput",
+			"GameplayAbilities", "GameplayTags", "GameplayTasks",
+			"AIModule", "StateTreeModule", "GameplayStateTreeModule",
+			"Niagara", "MotionWarping", "GeometryCollectionEngine", "EngineCameras"
+		});
+
+		PrivateDependencyModuleNames.AddRange(new string[] { "UMG", "Slate", "SlateCore" });
+
 		// Uncomment if you are using online features
 		// PrivateDependencyModuleNames.Add("OnlineSubsystem");
 

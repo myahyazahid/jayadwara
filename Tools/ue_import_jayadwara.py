@@ -1,8 +1,7 @@
 """Import paket Jayadwara (Art/Export) ke Unreal Engine 5.6 — Unreal Editor Python.
 
-STATUS: BELUM DIUJI (ditulis sebelum UE terpasang; Iterasi 5 docs/13). Uji di Iterasi 6, lalu hapus catatan ini.
-Setiap langkah yang API-nya belum pasti di 5.6 dibungkus pengecekan; kalau gagal, skrip mencetak "[MANUAL]"
-berisi langkah pengganti (lihat juga Art/Export/README_IMPORT_UE.md).
+STATUS: teruji di UE 5.6.1 (Iterasi 6, 12 Okt 2026). Langkah yang gagal mencetak "[MANUAL]" berisi langkah pengganti
+(lihat juga Art/Export/README_IMPORT_UE.md). Aset di Mesh/ dihapus dulu (impor ulang bersih; skeleton bisa berubah).
 
 Pakai (Python Editor Script Plugin aktif):
   Output Log -> Python:  py "C:/repository/unreal_engine/jayadwara/Tools/ue_import_jayadwara.py"
@@ -12,6 +11,7 @@ Hasil di /Game/Jayadwara/Characters/Jayadwara/:
   Textures/  T_Jayadwara_<Slot>_<Mask|BC|N|ORM> + T_Jayadwara_Face_Emit (setelan sRGB/kompresi docs/15)
   Materials/ M_Jayadwara_Master + MI_Jayadwara_<Body|Armor|Cloth|Face>
   Mesh/      SK_Jayadwara (LOD0–3), SKEL_Jayadwara, PA_Jayadwara, socket dari SK_Jayadwara_sockets.json
+Skala import 1: FBX sudah setinggi raksasa (45 m, di-bake di Art/Scripts/16_make_lods.py; docs/13 D4 revisi 6b).
 """
 import json
 import os
@@ -26,10 +26,9 @@ ROOT = "/Game/Jayadwara/Characters/Jayadwara"
 MESH_NAME = "SK_Jayadwara"
 SLOTS = ["Body", "Armor", "Cloth", "Face"]
 
-# docs/13 D4: authoring 1,90 m, skala raksasa lewat Import Uniform Scale. Tinggi game ±45 m = PLACEHOLDER (dikunci saat greybox).
-BASE_HEIGHT_M = 1.90
-GIANT_HEIGHT_M = 45.0
-IMPORT_UNIFORM_SCALE = GIANT_HEIGHT_M / BASE_HEIGHT_M          # ≈ 23,68; set 1.0 untuk uji di skala manusia
+# Harus 1. Di UE 5.6.1 Import Uniform Scale skeletal mesh masuk ke SKALA tulang root (tidak di-bake ke posisi tulang).
+# Skala raksasa sudah di-bake di FBX (docs/13 D4, revisi Iterasi 6b); posisi socket di JSON juga sudah berskala raksasa.
+IMPORT_UNIFORM_SCALE = 1.0
 
 LOD_FILES = {1: "SK_Jayadwara_LOD1.fbx", 2: "SK_Jayadwara_LOD2.fbx", 3: "SK_Jayadwara_LOD3.fbx"}
 LOD_SCREEN_SIZE = {0: 1.0, 1: 0.5, 2: 0.25, 3: 0.12}             # titik awal; tuning di level uji (Iterasi 6)
@@ -242,6 +241,14 @@ def fbx_options():
     return ui
 
 
+def clean_mesh_folder():
+    dest = f"{ROOT}/Mesh"
+    if EAL.does_directory_exist(dest):
+        for a in EAL.list_assets(dest, recursive=True, include_folder=False):
+            EAL.delete_asset(a.split(".")[0])
+        log(f"isi {dest} dihapus (impor ulang bersih)")
+
+
 def import_mesh():
     dest = f"{ROOT}/Mesh"
     t = unreal.AssetImportTask()
@@ -284,28 +291,35 @@ def import_lods(mesh):
     finally:
         set_fbx_legacy(False)
     try:                                                         # ukuran layar per LOD
-        infos = mesh.get_editor_property("lod_info")
-        for i, info in enumerate(infos):
+        infos = []
+        for i, info in enumerate(mesh.get_editor_property("lod_info")):
             if i in LOD_SCREEN_SIZE:
                 ss = unreal.PerPlatformFloat()
                 ss.set_editor_property("default", LOD_SCREEN_SIZE[i])
                 info.set_editor_property("screen_size", ss)
+            infos.append(info)
         mesh.set_editor_property("lod_info", infos)
     except Exception as e:  # noqa: BLE001
         manual(f"screen size LOD: set manual {LOD_SCREEN_SIZE} ({e})")
 
 
 def assign_materials(mesh, mis):
-    mats = mesh.get_editor_property("materials")
-    for m in mats:
+    # Elemen array struct dari get_editor_property adalah salinan: ubah lalu kumpulkan ke list baru, baru di-set.
+    out = []
+    for m in mesh.get_editor_property("materials"):
         slot = str(m.get_editor_property("material_slot_name"))
         key = next((s for s in SLOTS if slot.endswith(s) or slot == f"M_Jayadwara_{s}"), None)
         if key:
             m.set_editor_property("material_interface", mis[key])
         else:
             manual(f"slot material tak dikenal: {slot}")
-    mesh.set_editor_property("materials", mats)
-    log("material terpasang: " + ", ".join(str(m.get_editor_property("material_slot_name")) for m in mats))
+        out.append(m)
+    mesh.set_editor_property("materials", out)
+    got = [(str(m.get_editor_property("material_slot_name")), m.get_editor_property("material_interface")) for m in mesh.get_editor_property("materials")]
+    for slot, mi in got:
+        if mi is None:
+            manual(f"slot {slot} kosong — pasang MI_Jayadwara_* manual di Asset Details > Material Slots")
+    log("material terpasang: " + ", ".join(f"{s}={mi.get_name() if mi else None}" for s, mi in got))
 
 
 def rename_companions(mesh):
@@ -337,14 +351,9 @@ def add_sockets(mesh):
     except Exception as e:  # noqa: BLE001
         pose = None
         manual(f"pose referensi tidak terbaca ({e}); socket dibuat tanpa offset")
-    existing = set()
-    try:
-        existing = {str(s.get_editor_property("socket_name")) for s in mesh.get_editor_property("sockets") or []}
-    except Exception:  # noqa: BLE001
-        pass
     for s in data:
         name = s["name"].replace("SOCKET_", "")                 # nama socket UE: hand_r, chest_sun, ...
-        if name in existing:
+        if mesh.find_socket(name) is not None:
             continue
         loc = unreal.Vector(*[c * IMPORT_UNIFORM_SCALE for c in s["ue_component_cm"]])
         rel = loc
@@ -352,14 +361,17 @@ def add_sockets(mesh):
             bt = unreal.AnimPoseExtensions.get_bone_pose(pose, s["bone"], unreal.AnimPoseSpaces.WORLD)
             rel = bt.inverse_transform_location(loc)
         try:
+            # socket_name & bone_name read-only di Python: set_socket_parent mengisi tulang (nama jadi "Socket"),
+            # lalu rename_socket memberi nama akhir.
             sock = unreal.new_object(unreal.SkeletalMeshSocket, outer=mesh)
-            sock.set_editor_property("socket_name", name)
-            sock.set_editor_property("bone_name", s["bone"])
+            sock.set_socket_parent(mesh, s["bone"])
             sock.set_editor_property("relative_location", rel)
-            mesh.add_socket(sock, True)
-            log(f"socket {name} @ {s['bone']} {rel}")
+            mesh.add_socket(sock, False)
+            if not mesh.rename_socket(str(sock.get_editor_property("socket_name")), name):
+                raise RuntimeError("rename_socket gagal")
+            log(f"socket {name} @ {s['bone']} ({rel.x:.1f}, {rel.y:.1f}, {rel.z:.1f})")
         except Exception as e:  # noqa: BLE001
-            manual(f"socket {name}: tambah manual di tulang {s['bone']}, Relative Location {rel} ({e})")
+            manual(f"socket {name}: tambah manual di tulang {s['bone']}, Relative Location ({rel.x:.1f}, {rel.y:.1f}, {rel.z:.1f}) ({e})")
 
 
 # ------------------------------------------------------------------ main
@@ -371,6 +383,7 @@ def main():
     tex = import_textures()
     master = build_master(tex)
     mis = build_instances(master, tex)
+    clean_mesh_folder()
     mesh = import_mesh()
     if mesh is not None:
         import_lods(mesh)
@@ -378,7 +391,7 @@ def main():
         rename_companions(mesh)
         add_sockets(mesh)
     EAL.save_directory(ROOT, only_if_is_dirty=True, recursive=True)
-    log(f"selesai. Skala import {IMPORT_UNIFORM_SCALE:.2f} (tinggi {GIANT_HEIGHT_M} m, placeholder).")
+    log(f"selesai. Skala import {IMPORT_UNIFORM_SCALE:.2f}.")
     if problems:
         unreal.log_warning(f"[Jayadwara] {len(problems)} langkah perlu dikerjakan manual:")
         for p in problems:

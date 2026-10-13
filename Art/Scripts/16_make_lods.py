@@ -5,7 +5,7 @@ tiap LOD dibuat dari SALINAN bagian lewat hook PREP di 05_export_fbx.py.
 
 Keluaran (OUT_DIR, default Art/Export):
   SK_Jayadwara.fbx          LOD0 (penuh)
-  SK_Jayadwara_LOD1..3.fbx  LOD1–3, skeleton & socket sama (diimpor ke slot LOD di UE: Tools/ue_import_jayadwara.py)
+  SK_Jayadwara_LOD1..3.fbx  LOD1–3, skeleton sama (diimpor ke slot LOD di UE: Tools/ue_import_jayadwara.py)
   SK_Jayadwara_sockets.json socket: tulang induk + posisi (Blender m & ruang komponen UE cm) — UE tidak membuat
                             socket skeletal mesh dari empty FBX, jadi skrip UE membacanya dari sini.
 Per LOD, per bagian: decimate COLLAPSE (rasio, dengan minimal tris per bagian) lalu bersihkan bobot (≤4 influence,
@@ -21,6 +21,13 @@ from mathutils import Vector
 SCRIPTS = r"C:\repository\unreal_engine\jayadwara\Art\Scripts"
 OUT_DIR = globals().get("OUT_DIR") or r"C:\repository\unreal_engine\jayadwara\Art\Export"
 MESH_NAME = "SK_Jayadwara"
+# docs/13 D4 (revisi Iterasi 6b): skala raksasa di-BAKE ke FBX supaya komponen mesh di UE berskala 1 (Anim Dynamics tidak
+# mendukung komponen berskala). Model dibuat 1,90 m; tinggi game 45 m = PLACEHOLDER. Ganti GIANT_HEIGHT_M -> jalankan
+# ulang skrip ini, Tools/ue_import_jayadwara.py, ue_setup_retarget.py, ue_setup_giant.py; samakan
+# AJDGiantCharacter::MeshHeightCm.
+BASE_HEIGHT_M = 1.90
+GIANT_HEIGHT_M = globals().get("GIANT_HEIGHT_M") or 45.0
+EXPORT_SCALE = GIANT_HEIGHT_M / BASE_HEIGHT_M                   # ≈ 23,68
 # level: (rasio decimate, minimal tris per bagian, buang bagian dengan diagonal bbox < m)
 LODS = globals().get("LODS") or {
     1: (0.50, 24, 0.0),
@@ -90,7 +97,7 @@ def make_prep(level, stats):
 
 
 def run_export(fbx_out, prep):
-    ns = {"__name__": "__jd_export__", "FBX_OUT": fbx_out, "MESH_NAME": MESH_NAME, "PREP": prep}
+    ns = {"__name__": "__jd_export__", "FBX_OUT": fbx_out, "MESH_NAME": MESH_NAME, "PREP": prep, "BAKE_CM": 100.0 * EXPORT_SCALE}
     exec(compile(open(os.path.join(SCRIPTS, "05_export_fbx.py"), encoding="utf-8").read(), "05_export_fbx.py", "exec"), ns)
 
 
@@ -113,10 +120,11 @@ sockets = []
 for o in sorted((o for o in bpy.data.objects if o.name.startswith("SOCKET_")), key=lambda o: o.name):
     p = o.matrix_world.translation
     sockets.append({"name": o.name, "bone": o.parent_bone, "blender_m": [round(p.x, 5), round(p.y, 5), round(p.z, 5)],
-                    "ue_component_cm": [round(p.x * 100, 3), round(-p.y * 100, 3), round(p.z * 100, 3)]})
+                    "ue_component_cm": [round(v * 100 * EXPORT_SCALE, 3) for v in (p.x, -p.y, p.z)]})
 arm.data.pose_position = prev
 with open(os.path.join(OUT_DIR, f"{MESH_NAME}_sockets.json"), "w", encoding="utf-8") as f:
-    json.dump({"mesh": MESH_NAME, "note": "posisi rest; ue_component_cm mengasumsikan konversi FBX (x, -y, z) x 100 — cek di UE",
+    json.dump({"mesh": MESH_NAME, "export_scale": round(EXPORT_SCALE, 6), "giant_height_m": GIANT_HEIGHT_M,
+               "note": "posisi rest; ue_component_cm = (x, -y, z) x 100 x export_scale (konversi terverifikasi di UE 5.6.1, Iterasi 6)",
                "sockets": sockets}, f, indent=2)
 
 print(f"\n{'LOD':6s} {'tris':>8s} {'% LOD0':>7s} {'bagian dibuang':>15s}")

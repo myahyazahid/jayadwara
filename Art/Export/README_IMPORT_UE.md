@@ -1,20 +1,20 @@
 # Import Jayadwara ke Unreal Engine 5.6
 
-> Hasil **Iterasi 5** ([docs/13](../../docs/13-rencana-model-jayadwara.md)). **Belum diuji di Unreal**: ditulis sebelum UE terpasang. Verifikasi di Iterasi 6 dengan checklist di bagian 5, lalu perbarui dokumen ini.
+> Hasil **Iterasi 5**, **diuji & diperbaiki di Iterasi 6** (UE 5.6.1, 12 Okt 2026; [docs/13](../../docs/13-rencana-model-jayadwara.md)). Mesh diimpor di **skala 1**; skala raksasa ada di `AJDGiantCharacter`. Setelah import: `Tools/ue_setup_retarget.py` lalu `Tools/ue_setup_giant.py`.
 
 ## 1. Isi paket (`Art/Export/`)
 
 | File | Isi |
 |---|---|
-| `SK_Jayadwara.fbx` | LOD0: skeletal mesh tunggal (51.808 tris, 4 slot material) + armature 89 tulang (gaya UE5 Mannequin) + empty socket |
-| `SK_Jayadwara_LOD1.fbx` … `_LOD3.fbx` | LOD1 26.013 · LOD2 11.762 · LOD3 5.365 tris. Skeleton sama. |
+| `SK_Jayadwara.fbx` | LOD0: skeletal mesh tunggal (51.808 tris, 4 slot material) + armature `Armature` 89 tulang (gaya UE5 Mannequin), data dalam cm, **tanpa** empty socket |
+| `SK_Jayadwara_LOD1.fbx` … `_LOD3.fbx` | LOD1 ±26.000 · LOD2 ±11.800 · LOD3 ±5.400 tris. Skeleton sama. |
 | `SK_Jayadwara_sockets.json` | 9 socket: tulang induk + posisi. UE **tidak** membuat socket skeletal mesh dari empty FBX. |
 | `Textures/T_Jayadwara_<Slot>_<Mask\|BC\|N\|ORM>.png` + `T_Jayadwara_Face_Emit.png` | Tekstur 4 slot (spesifikasi: [docs/15](../../docs/15-spesifikasi-material-jayadwara.md)) |
 | `../../Tools/ue_import_jayadwara.py` | Skrip Unreal Python yang menjalankan semua langkah di bawah |
 
-Semua FBX lolos `validate_jayadwara.py` 25/25 (nama/jumlah tulang, 1 root, tinggi 1,99 m, ≤4 influence, bobot ternormalisasi, 0 vertex tanpa bobot, UV 0–1, socket).
+Semua FBX lolos `validate_jayadwara.py` 27/27 (nama/jumlah tulang, 1 root, armature bernama `Armature`, tanpa empty, tinggi 1,99 m, ≤4 influence, bobot ternormalisasi, 0 vertex tanpa bobot, UV 0–1, socket di JSON).
 
-Spesifikasi export: Z-up, depan -Y (Blender), skala 1 m, tanpa leaf bone, tanpa animasi, tulang IK (`ik_foot_*`, `ik_hand_*`) ikut.
+Spesifikasi export (`05_export_fbx.py`, revisi Iterasi 6): Z-up, depan -Y (Blender), salinan armature+mesh diskalakan ×100 lalu di-apply, objek armature bernama `Armature`, `FBX_SCALE_ALL`, tanpa leaf bone, tanpa animasi, tanpa empty, tulang IK (`ik_foot_*`, `ik_hand_*`) ikut. Alasannya di docs/13 Iterasi 6.
 
 ## 2. Prasyarat
 
@@ -36,24 +36,21 @@ Yang dikerjakan skrip:
    - Mask/ORM/Emit: sRGB off, kompresi Masks.
    - N: Normalmap + **Flip Green** (normal dari Blender berformat OpenGL).
 2. Membuat `M_Jayadwara_Master` dan 4 material instance `MI_Jayadwara_<Slot>`. Cloth two-sided; Face `Emissive_Enable = 1`.
-3. Impor `SK_Jayadwara` dengan **Import Uniform Scale ≈ 23,68** (lihat bagian 4) dan physics asset. Material dari FBX tidak diimpor.
+3. Menghapus isi `Mesh/` lalu mengimpor `SK_Jayadwara` di **skala 1** (lihat bagian 4) dengan physics asset. Material dari FBX tidak diimpor.
 4. Impor LOD1–3 ke slot LOD dan set screen size awal 1,0 / 0,5 / 0,25 / 0,12.
 5. Pasang MI ke slot material, rename skeleton → `SKEL_Jayadwara` dan physics asset → `PA_Jayadwara`.
 6. Buat socket dari `SK_Jayadwara_sockets.json`.
 
 Kalau ada langkah gagal, Output Log menampilkan baris **`[Jayadwara][MANUAL]`** berisi langkah penggantinya (lihat opsi B).
 
-**Asumsi yang belum diuji:**
-- UE 5.5+ mengimpor FBX lewat **Interchange**. Skrip mematikannya sementara (`Interchange.FeatureFlags.Import.FBX 0`) supaya opsi FBX lama berlaku. Kalau CVar itu tidak ada, Interchange yang dipakai dan opsi skala/physics mungkin diabaikan: cek hasilnya.
-- Nama API `SkeletalMeshEditorSubsystem.import_lod`, `SkeletalMesh.add_socket`, dan `AnimPoseExtensions` diambil dari UE 5.x. Skrip mengecek keberadaannya dulu.
+**Teruji di 5.6.1:** CVar `Interchange.FeatureFlags.Import.FBX` ada (skrip mematikannya sementara supaya opsi FBX lama berlaku); `SkeletalMeshEditorSubsystem.import_lod`, `SkeletalMesh.add_socket`/`rename_socket`, `AnimPoseExtensions` tersedia. Skrip berjalan tanpa `[MANUAL]`.
 
 ## 4. Skala raksasa
 
-- Model dibuat setinggi manusia: **1,90 m** (tanduk 1,99 m) = 190 cm di UE pada skala 1.
-- docs/13 D4: skala raksasa diterapkan saat import (*Import Uniform Scale*). Tinggi game ±45 m masih **placeholder** sampai greybox, jadi skala = 45 / 1,90 ≈ **23,68**.
-- Untuk menguji di skala manusia (misal retarget dibandingkan dengan Mannequin), set `IMPORT_UNIFORM_SCALE = 1.0` di skrip.
-- Kalau tinggi game berubah, ubah `GIANT_HEIGHT_M` lalu impor ulang. Mesh, LOD, physics asset, dan socket ikut berubah bersama.
-- Alternatif yang belum diputuskan: impor di skala 1, lalu skala di komponen mesh pada BP.
+- Skala raksasa **di-bake di FBX** (`Art/Scripts/16_make_lods.py`, `GIANT_HEIGHT_M` = 45, placeholder): mesh di UE ±47,1 m termasuk tanduk, diimpor di skala 1, komponen mesh `BP_Jayadwara` berskala 1. Posisi di `SK_Jayadwara_sockets.json` sudah berskala sama (`export_scale`).
+- **Jangan pakai Import Uniform Scale** (di UE 5.6.1 masuk ke skala tulang root) dan **jangan menskalakan komponen mesh** (Anim Dynamics rusak). Alasan & uji: docs/13 Iterasi 6.
+- Gerak, kapsul, kamera dihitung di `AJDGiantCharacter` dari `GiantHeightCm` / `AuthoredHeightCm` (190). `MeshHeightCm` harus sama dengan `GIANT_HEIGHT_M` × 100.
+- Ganti tinggi raksasa: ubah `GIANT_HEIGHT_M`, jalankan `16_make_lods.py` (Blender), lalu `ue_import_jayadwara.py` → `ue_setup_retarget.py` → `ue_setup_giant.py`; samakan `GiantHeightCm` & `MeshHeightCm`.
 
 ## 5. Opsi B: manual
 
@@ -66,7 +63,7 @@ Kalau ada langkah gagal, Output Log menampilkan baris **`[Jayadwara][MANUAL]`** 
 | `_Mask`, `_ORM`, `_Emit` | off | Masks | |
 
 **B2. Mesh.** Impor `SK_Jayadwara.fbx` ke `Mesh/`:
-- Skeletal Mesh on; Import Uniform Scale ≈ 23,68 (bagian 4); Convert Scene on.
+- Skeletal Mesh on; Import Uniform Scale **1** (FBX sudah 45 m, bagian 4); Convert Scene on.
 - Create Physics Asset on; Import Animations off; Import Materials/Textures off.
 - Normal Import Method: *Import Normals*.
 
@@ -85,7 +82,7 @@ Kalau ada langkah gagal, Output Log menampilkan baris **`[Jayadwara][MANUAL]`** 
 - Cloth: *Material Property Overrides → Two Sided*. Face: `Emissive_Enable = 1`.
 - Pasang MI ke slot dengan nama yang sama di `SK_Jayadwara`.
 
-**B5. Socket.** Di Skeleton Tree, *Add Socket* pada tulang berikut. Posisi dalam ruang komponen di skala 1 (cm); kalikan dengan skala import. Pindahkan socket ke titik ini dengan gizmo:
+**B5. Socket.** Di Skeleton Tree, *Add Socket* pada tulang berikut. Posisi di tabel dalam cm skala model 1,90 m; kalikan `export_scale` (≈23,68), atau pakai nilai `ue_component_cm` di JSON. Pindahkan socket ke titik ini dengan gizmo:
 
 | Socket | Tulang | Posisi komponen (cm, skala 1) |
 |---|---|---|
@@ -107,14 +104,16 @@ Kalau ada langkah gagal, Output Log menampilkan baris **`[Jayadwara][MANUAL]`** 
 
 ## 7. Checklist verifikasi (Iterasi 6)
 
-- [ ] Karakter berdiri di z=0, menghadap **+Y** di viewport mesh (sama seperti Mannequin), tinggi ≈ 45 m (atau 1,99 m pada skala 1).
-- [ ] 4 LOD ada; batas bawah LOD0 sama dengan LOD1–3 (skala LOD ikut). Pindah LOD tidak membuat posisi meloncat.
-- [ ] 4 slot material terpasang MI yang benar; emas tidak tampak silver; mata & permata dada menyala **konstan** (aturan IP: tidak berkedip, tidak dikaitkan ke meter Sync).
-- [ ] Normal tidak terbalik. Kalau relief kain tampak cekung, matikan Flip Green.
-- [ ] 9 socket di tulang yang benar, posisinya sesuai (tangan di kepalan, `chest_sun` di permata dada).
-- [ ] Physics asset tidak menahan pose; kapsul kain/selendang dimatikan atau disetel.
-- [ ] Retarget animasi jalan/pukul dari Mannequin tanpa tangan menembus badan.
-- [ ] Performa di level uji (gedung, target 60 FPS); screen size LOD disetel.
+Status 12 Okt 2026 (dicek Claude lewat Python + capture; detail di docs/13 Iterasi 6):
+
+- [x] Karakter berdiri di z=0, menghadap **+Y** (sama seperti Mannequin), ±47,1 m (mesh ter-bake).
+- [x] 4 LOD ada, screen size 1,0 / 0,5 / 0,25 / 0,12; tidak meloncat saat pindah LOD (dicek developer).
+- [x] 4 slot material terpasang MI yang benar; emas tidak tampak silver; mata & permata dada menyala konstan (aturan IP).
+- [x] Normal tidak terbalik (Flip Green on).
+- [x] 9 socket di tulang yang benar (posisi dari JSON; konversi (x, −y, z) × 100 terverifikasi).
+- [x] Physics asset dirapikan (20 kapsul, tanpa kain/selendang; `ue_setup_giant.py`).
+- [x] Retarget animasi jalan/pukul dari Mannequin: posisi tulang selisih beberapa cm dari Manny (op Run IK Rig dimatikan); tangan tidak menembus badan (dicek developer).
+- [x] Performa di `Test_GiantScale` 60 FPS (dicek developer).
 
 ## 8. Catatan & keterbatasan
 

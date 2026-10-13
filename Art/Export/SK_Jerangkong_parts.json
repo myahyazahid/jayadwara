@@ -1,0 +1,440 @@
+{
+  "boss_scale": 14.0,
+  "minion_scale": 0.85,
+  "sm_scale": 14.0,
+  "note": "SM berskala boss, pivot = kepala pivot_bone di rest, orientasi identitas (sumbu komponen). Transform SM saat rontok = BoneWorld * inverse(BoneRefComponent) * Translation(pivot_ue_cm). Minion: skala aktor SM = minion_scale / boss_scale.",
+  "parts": [
+    {
+      "piece": "CalfL",
+      "pivot_bone": "calf_l",
+      "detachable": true,
+      "bones": [
+        "calf_l"
+      ],
+      "pivot_model_m": [
+        0.265,
+        -0.09,
+        0.77
+      ],
+      "pivot_ue_cm_boss": [
+        371.0,
+        126.0,
+        1078.0
+      ],
+      "pivot_ue_cm_minion": [
+        22.525,
+        7.65,
+        65.45
+      ],
+      "static_mesh": "SM_Jerangkong_CalfL",
+      "sm_tris": 551
+    },
+    {
+      "piece": "CalfR",
+      "pivot_bone": "calf_r",
+      "detachable": true,
+      "bones": [
+        "calf_r"
+      ],
+      "pivot_model_m": [
+        -0.275,
+        -0.1,
+        0.77
+      ],
+      "pivot_ue_cm_boss": [
+        -385.0,
+        140.0,
+        1078.0
+      ],
+      "pivot_ue_cm_minion": [
+        -23.375,
+        8.5,
+        65.45
+      ],
+      "static_mesh": "SM_Jerangkong_CalfR",
+      "sm_tris": 607
+    },
+    {
+      "piece": "FootL",
+      "pivot_bone": "foot_l",
+      "detachable": true,
+      "bones": [
+        "foot_l"
+      ],
+      "pivot_model_m": [
+        0.31,
+        0.0,
+        0.21
+      ],
+      "pivot_ue_cm_boss": [
+        434.0,
+        -0.0,
+        294.0
+      ],
+      "pivot_ue_cm_minion": [
+        26.35,
+        -0.0,
+        17.85
+      ],
+      "static_mesh": "SM_Jerangkong_FootL",
+      "sm_tris": 952
+    },
+    {
+      "piece": "FootR",
+      "pivot_bone": "foot_r",
+      "detachable": true,
+      "bones": [
+        "foot_r"
+      ],
+      "pivot_model_m": [
+        -0.275,
+        0.01,
+        0.21
+      ],
+      "pivot_ue_cm_boss": [
+        -385.0,
+        -14.0,
+        294.0
+      ],
+      "pivot_ue_cm_minion": [
+        -23.375,
+        -0.85,
+        17.85
+      ],
+      "static_mesh": "SM_Jerangkong_FootR",
+      "sm_tris": 880
+    },
+    {
+      "piece": "HandL",
+      "pivot_bone": "hand_l",
+      "detachable": true,
+      "bones": [
+        "hand_l"
+      ],
+      "pivot_model_m": [
+        0.51,
+        -0.17,
+        0.8
+      ],
+      "pivot_ue_cm_boss": [
+        714.0,
+        238.0,
+        1120.0
+      ],
+      "pivot_ue_cm_minion": [
+        43.35,
+        14.45,
+        68.0
+      ],
+      "static_mesh": "SM_Jerangkong_HandL",
+      "sm_tris": 412
+    },
+    {
+      "piece": "HandR",
+      "pivot_bone": "hand_r",
+      "detachable": true,
+      "bones": [
+        "hand_r"
+      ],
+      "pivot_model_m": [
+        -0.54,
+        -0.13,
+        0.8
+      ],
+      "pivot_ue_cm_boss": [
+        -756.0,
+        182.0,
+        1120.0
+      ],
+      "pivot_ue_cm_minion": [
+        -45.9,
+        11.05,
+        68.0
+      ],
+      "static_mesh": "SM_Jerangkong_HandR",
+      "sm_tris": 394
+    },
+    {
+      "piece": "Jaw",
+      "pivot_bone": "jaw",
+      "detachable": false,
+      "bones": [
+        "jaw"
+      ],
+      "pivot_model_m": [
+        0.0,
+        -0.165,
+        1.955
+      ],
+      "pivot_ue_cm_boss": [
+        0.0,
+        231.0,
+        2737.0
+      ],
+      "pivot_ue_cm_minion": [
+        0.0,
+        14.025,
+        166.175
+      ]
+    },
+    {
+      "piece": "LowerArmL",
+      "pivot_bone": "lowerarm_l",
+      "detachable": true,
+      "bones": [
+        "lowerarm_l"
+      ],
+      "pivot_model_m": [
+        0.435,
+        -0.09,
+        1.335
+      ],
+      "pivot_ue_cm_boss": [
+        609.0,
+        126.0,
+        1869.0
+      ],
+      "pivot_ue_cm_minion": [
+        36.975,
+        7.65,
+        113.475
+      ],
+      "static_mesh": "SM_Jerangkong_LowerArmL",
+      "sm_tris": 384
+    },
+    {
+      "piece": "LowerArmR",
+      "pivot_bone": "lowerarm_r",
+      "detachable": true,
+      "bones": [
+        "lowerarm_r"
+      ],
+      "pivot_model_m": [
+        -0.48,
+        -0.06,
+        1.27
+      ],
+      "pivot_ue_cm_boss": [
+        -672.0,
+        84.0,
+        1778.0
+      ],
+      "pivot_ue_cm_minion": [
+        -40.8,
+        5.1,
+        107.95
+      ],
+      "static_mesh": "SM_Jerangkong_LowerArmR",
+      "sm_tris": 458
+    },
+    {
+      "piece": "Pelvis",
+      "pivot_bone": "pelvis",
+      "detachable": false,
+      "bones": [
+        "pelvis",
+        "cloth_front_01",
+        "cloth_front_02",
+        "cloth_front_03",
+        "cloth_back_01",
+        "cloth_back_02",
+        "cloth_back_03"
+      ],
+      "pivot_model_m": [
+        0.0,
+        0.0,
+        1.27
+      ],
+      "pivot_ue_cm_boss": [
+        0.0,
+        -0.0,
+        1778.0
+      ],
+      "pivot_ue_cm_minion": [
+        0.0,
+        -0.0,
+        107.95
+      ]
+    },
+    {
+      "piece": "Ribs",
+      "pivot_bone": "spine_04",
+      "detachable": true,
+      "bones": [
+        "spine_03",
+        "spine_04",
+        "spine_05",
+        "clavicle_l",
+        "clavicle_r"
+      ],
+      "pivot_model_m": [
+        0.0,
+        0.07,
+        1.65
+      ],
+      "pivot_ue_cm_boss": [
+        0.0,
+        -98.0,
+        2310.0
+      ],
+      "pivot_ue_cm_minion": [
+        0.0,
+        -5.95,
+        140.25
+      ],
+      "static_mesh": "SM_Jerangkong_Ribs",
+      "sm_tris": 3192
+    },
+    {
+      "piece": "Skull",
+      "pivot_bone": "head",
+      "detachable": true,
+      "bones": [
+        "head"
+      ],
+      "pivot_model_m": [
+        0.0,
+        -0.09,
+        1.98
+      ],
+      "pivot_ue_cm_boss": [
+        0.0,
+        126.0,
+        2772.0
+      ],
+      "pivot_ue_cm_minion": [
+        0.0,
+        7.65,
+        168.3
+      ],
+      "static_mesh": "SM_Jerangkong_Skull",
+      "sm_tris": 1402
+    },
+    {
+      "piece": "Spine",
+      "pivot_bone": "spine_02",
+      "detachable": false,
+      "bones": [
+        "spine_01",
+        "spine_02",
+        "neck_01",
+        "neck_02"
+      ],
+      "pivot_model_m": [
+        0.0,
+        0.05,
+        1.46
+      ],
+      "pivot_ue_cm_boss": [
+        0.0,
+        -70.0,
+        2044.0
+      ],
+      "pivot_ue_cm_minion": [
+        0.0,
+        -4.25,
+        124.1
+      ]
+    },
+    {
+      "piece": "ThighL",
+      "pivot_bone": "thigh_l",
+      "detachable": true,
+      "bones": [
+        "thigh_l"
+      ],
+      "pivot_model_m": [
+        0.17,
+        -0.01,
+        1.27
+      ],
+      "pivot_ue_cm_boss": [
+        238.0,
+        14.0,
+        1778.0
+      ],
+      "pivot_ue_cm_minion": [
+        14.45,
+        0.85,
+        107.95
+      ],
+      "static_mesh": "SM_Jerangkong_ThighL",
+      "sm_tris": 332
+    },
+    {
+      "piece": "ThighR",
+      "pivot_bone": "thigh_r",
+      "detachable": true,
+      "bones": [
+        "thigh_r"
+      ],
+      "pivot_model_m": [
+        -0.17,
+        -0.01,
+        1.27
+      ],
+      "pivot_ue_cm_boss": [
+        -238.0,
+        14.0,
+        1778.0
+      ],
+      "pivot_ue_cm_minion": [
+        -14.45,
+        0.85,
+        107.95
+      ],
+      "static_mesh": "SM_Jerangkong_ThighR",
+      "sm_tris": 453
+    },
+    {
+      "piece": "UpperArmL",
+      "pivot_bone": "upperarm_l",
+      "detachable": true,
+      "bones": [
+        "upperarm_l"
+      ],
+      "pivot_model_m": [
+        0.34,
+        -0.04,
+        1.85
+      ],
+      "pivot_ue_cm_boss": [
+        476.0,
+        56.0,
+        2590.0
+      ],
+      "pivot_ue_cm_minion": [
+        28.9,
+        3.4,
+        157.25
+      ],
+      "static_mesh": "SM_Jerangkong_UpperArmL",
+      "sm_tris": 450
+    },
+    {
+      "piece": "UpperArmR",
+      "pivot_bone": "upperarm_r",
+      "detachable": true,
+      "bones": [
+        "upperarm_r"
+      ],
+      "pivot_model_m": [
+        -0.35,
+        -0.03,
+        1.85
+      ],
+      "pivot_ue_cm_boss": [
+        -490.0,
+        42.0,
+        2590.0
+      ],
+      "pivot_ue_cm_minion": [
+        -29.75,
+        2.55,
+        157.25
+      ],
+      "static_mesh": "SM_Jerangkong_UpperArmR",
+      "sm_tris": 692
+    }
+  ]
+}
