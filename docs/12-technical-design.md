@@ -213,7 +213,7 @@ File sumber audio (WAV kandidat, lisensi, pilihan) ada di `Audio/` di root repo,
 - Repo Git sendiri di `C:\repository\unreal_engine\jayadwara` (Git LFS 3.7.1 sudah terpasang).
 - **`.gitattributes`** — LFS untuk: `*.uasset`, `*.umap`, `*.fbx`, `*.obj`, `*.png`, `*.tga`, `*.psd`, `*.wav`, `*.mp3`, `*.ogg`, `*.mp4`, `*.blend`.
 - **`.gitignore`** — abaikan: `Binaries/`, `Intermediate/`, `Saved/`, `DerivedDataCache/`, `.vs/`, `*.sln`, `*.suo`, `*.VC.db`.
-- **Agent lain (Hermes)** — kerja terisolasi di branch `hermes/<topik>` dan sandbox `Content/Hermes/`, `Source/Jayadwara/Hermes/` (prefix class `JDH`), `Hermes/`; tidak menyentuh file/aset yang sudah ada. Hasilnya di-review & dipindah ke struktur proyek oleh Claude atas permintaan developer. Aturan lengkap: [AGENTS.md](../AGENTS.md).
+- **Agent lain (Hermes)** — kerja terisolasi di **git worktree** sendiri (`C:\repository\unreal_engine\jayadwara_hermes`, editor UE sendiri) pada branch `hermes/<topik>`, hanya menulis ke sandbox `Content/Hermes/`, `Source/Jayadwara/Hermes/` (prefix class `JDH`), `Hermes/`; tidak menyentuh file/aset yang sudah ada dan tidak mengimpor ke `SK_Mannequin`. `Tools/hermes_cek_sandbox.py` wajib lulus sebelum commit; `Tools/ue_remote.py` hanya terhubung ke editor dari folder repo yang sama. Hasilnya di-review & dipindah ke struktur proyek oleh Claude atas permintaan developer. Aturan lengkap: [AGENTS.md](../AGENTS.md); tugas model Aksa2: [Hermes/aksa_hermes.md](../Hermes/aksa_hermes.md); alat banding model: `Art/Scripts/audit_karakter.py` + `banding_karakter.py`.
 - Commit minimal setiap sesi kerja; pesan commit jelas (mis. `feat(combat): tambah combo pukulan ringan`).
 - **Branch:**
   - `main`: versi stabil. Diisi merge dari `development` di akhir fase/milestone.

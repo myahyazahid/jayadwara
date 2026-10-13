@@ -1,6 +1,6 @@
 """Validasi FBX Aksa (Iterasi 1+) — Blender headless.
 
-  blender --background --factory-startup --python Art/Scripts/validate_aksa.py -- Art/Export/SK_Aksa_Proxy.fbx [--max-tris 60000] [--require-uv] [--require-morph 8]
+  blender --background --factory-startup --python Art/Scripts/validate_aksa.py -- Art/Export/SK_Aksa_Proxy.fbx [--max-tris 60000] [--require-uv] [--require-morph 8] [--slots A,B]
 
 Dasar: Art/Reference/manny/SKM_Manny_Simple.fbx (impor yang sama) dan manny_rest.json. Cek:
  tulang: semua 88 tulang Manny ada, induknya sama, posisi <=1 mm dan orientasi <=0,5° (ruang dunia, meter); tulang tambahan hanya
@@ -19,7 +19,7 @@ from pathlib import Path
 import bpy
 from mathutils import Matrix, Vector
 
-ROOT = Path(r"C:\repository\unreal_engine\jayadwara")
+ROOT = Path(__file__).resolve().parents[2]          # repo/worktree tempat skrip ini berada
 MANNY = ROOT / "Art" / "Reference" / "manny" / "SKM_Manny_Simple.fbx"
 MANNY_JSON = ROOT / "Art" / "Reference" / "manny" / "manny_rest.json"
 ALLOWED_EXTRA = ("sash_", "jacket_")
@@ -29,6 +29,8 @@ argv = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
 fbx = Path(argv[0])
 max_tris = int(argv[argv.index("--max-tris") + 1]) if "--max-tris" in argv else 60000
 require_uv = "--require-uv" in argv
+if "--slots" in argv:                                 # mis. model Tripo: --slots M_Aksa2_Body,M_Aksa2_Cloth
+    SLOTS = argv[argv.index("--slots") + 1].split(",")
 
 results = []
 
@@ -92,7 +94,7 @@ me = mesh.data
 tris = sum(len(p.vertices) - 2 for p in me.polygons)
 check(f"tris <= {max_tris}", tris <= max_tris, f"{tris}")
 mats = [m.name for m in me.materials]
-check("5 slot material berurutan", [m.split(".")[0] for m in mats] == SLOTS or [m.split(".")[0] for m in mats] == [s.replace("M_", "MI_") for s in SLOTS], f"{mats}")
+check(f"{len(SLOTS)} slot material berurutan", [m.split(".")[0] for m in mats] == SLOTS or [m.split(".")[0] for m in mats] == [s.replace("M_", "MI_") for s in SLOTS], f"{mats}")
 vg_names = {vg.index: vg.name for vg in mesh.vertex_groups}
 bad_groups = [n for n in vg_names.values() if n not in B]
 check("grup vertex hanya ke tulang yang ada", not bad_groups, f"{bad_groups[:5]}")
