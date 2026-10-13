@@ -1,5 +1,7 @@
 # 14 — Model Sheet Jayadwara (Design Lock)
 
+> **13 Okt 2026:** model aktif kini Jayadwara2 ([25](25-rencana-redesign-jayadwara.md)). Identitas desain (palet merah-hitam-emas, faceplate putih, tanduk emas, permata dada statis, kain sisi = selendang K5, batas IP) tetap berlaku; angka proporsi dan part list di sini milik model lama.
+
 > Hasil **Iterasi 0** dari [13-rencana-model-jayadwara.md](13-rencana-model-jayadwara.md). Dokumen ini mengunci proporsi, palet, bagian, dan keputusan desain sebelum modeling.
 > **Status:** draft — menunggu persetujuan developer pada bagian [8](#8-pertanyaan-untuk-developer). Angka diukur dari gambar AI beresolusi rendah (tinggi badan ±360 px) → akurasi ±3 cm, cukup untuk blockout, bukan untuk detail.
 

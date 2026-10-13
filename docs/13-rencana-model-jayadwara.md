@@ -3,7 +3,7 @@
 > Draft v0.1 — 11 Oktober 2026. Rencana membuat model 3D Jayadwara di **Blender 5.2** (dibantu Claude lewat Blender MCP) supaya siap dipakai di Unreal Engine.
 > **Keputusan arah**: model dibuat **dulu**, Unreal Engine dipasang **nanti**. Semua iterasi sebelum integrasi UE harus bisa divalidasi tanpa UE (lewat script di Blender).
 > Acuan desain: [`concept-art/jayadwara_final.webp`](concept-art/jayadwara_final.webp) + [08-requirement-produksi.md](08-requirement-produksi.md#art-direction).
-> **12 Okt 2026:** redesign dari model Tripo developer direncanakan di [25](25-rencana-redesign-jayadwara.md) (Jayadwara2). Model di dokumen ini tetap dipakai di game sampai gate R6 di sana, dan tidak ditimpa.
+> **13 Okt 2026 (R6 docs/25): developer memilih Jayadwara2** (model Tripo) sebagai model aktif. Model di dokumen ini **tidak dipakai lagi di game tetapi disimpan utuh sebagai cadangan** (`Art/Blender/jayadwara_giant_v05_revisi.blend`, `Art/Export/SK_Jayadwara*.fbx`, `/Game/Jayadwara/Characters/Jayadwara/`). Kembali ke model ini: `ACTIVE_GIANT = "Jayadwara"` di `Tools/ue_setup_transform.py`.
 
 ---
 

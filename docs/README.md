@@ -54,11 +54,11 @@ Aksa Jaya Mangkubumi, agen baru sebuah lembaga rahasia penanganan anomali, menya
 | Judul | **JAYADWARA: Guardian of the Seven Gates** |
 | Engine | Unreal Engine **5.6.1**, C++ + Blueprint |
 | Platform | PC (Steam) |
-| Gaya visual | **Stylized semi-realistis**: proporsi mendekati normal, bentuk tegas, detail disederhanakan, material PBR (dikonfirmasi ulang 12 Okt 2026; realistis penuh ditolak karena volume monster, animasi, dan performa) |
+| Gaya visual | **Stylized semi-realistis**: proporsi mendekati normal, bentuk tegas, detail disederhanakan, material PBR (dikonfirmasi ulang 12 Okt 2026; realistis penuh ditolak karena volume monster, animasi, dan performa). Jayadwara2 & Jerangkong (basis Tripo) berada di level ini: detail lebih banyak, tetap stylized-friendly |
 | Tim | Solo + Claude, sambilan ±10–15 jam/minggu |
 | Struktur | Linear semi-open-world, **50 episode** dalam **5 arc** |
 | Karakter utama | **Aksa Jaya Mangkubumi** ("Aksa"), codename **Lawang** |
-| Wujud raksasa | **Jayadwara** (roh Dwarapala) |
+| Wujud raksasa | **Jayadwara** (roh Dwarapala). **Model aktif sejak 13 Okt 2026: Jayadwara2** (basis Tripo AI developer, dirapikan Claude; [25](25-rencana-redesign-jayadwara.md)). Model lama ([13](13-rencana-model-jayadwara.md)) disimpan sebagai cadangan |
 | Organisasi | **DWARA** — Divisi Warisan dan Riset Anomali |
 | Kota utama | **Arunapura** (kota fiksi di Jawa) |
 | Final boss | **Batara Kala** |

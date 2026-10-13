@@ -1,0 +1,38 @@
+{
+  "red": {
+    "texel_share": 0.5313,
+    "ref_luma_linear": 0.0556,
+    "mean_color_linear": [
+      0.2082,
+      0.0142,
+      0.0153
+    ]
+  },
+  "gold": {
+    "texel_share": 0.1563,
+    "ref_luma_linear": 0.223,
+    "mean_color_linear": [
+      0.4051,
+      0.185,
+      0.0638
+    ]
+  },
+  "black": {
+    "texel_share": 0.3106,
+    "ref_luma_linear": 0.0106,
+    "mean_color_linear": [
+      0.0179,
+      0.0087,
+      0.0084
+    ]
+  },
+  "white": {
+    "texel_share": 0.0018,
+    "ref_luma_linear": 0.534,
+    "mean_color_linear": [
+      0.5946,
+      0.5251,
+      0.4437
+    ]
+  }
+}

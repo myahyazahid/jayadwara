@@ -3,7 +3,10 @@
 Membuat / mengisi ulang (aman diulang):
   /Game/Input/Actions/IA_Transform       Input Action boolean
   /Game/Input/IMC_Default                + pemetaan tombol T -> IA_Transform
-  /Game/Jayadwara/Core/BP_JDPlayerController   transform_action, giant_pawn_class = BP_Jayadwara (butuh build C++ terbaru)
+  /Game/Jayadwara/Core/BP_JDPlayerController   transform_action, giant_pawn_class = model raksasa AKTIF (butuh build C++ terbaru)
+  /Game/Jayadwara/Core/BP_JDGameMode_Giant     default_pawn_class = model raksasa AKTIF (level Test_GiantScale)
+Model aktif dipilih lewat ACTIVE_GIANT (docs/25 R6, 13 Okt 2026: developer memilih Jayadwara2). Kembali ke model lama:
+  ubah ACTIVE_GIANT = "Jayadwara" lalu jalankan ulang skrip ini (aset kedua model tetap ada).
 Pakai: python Tools/ue_remote.py Tools/ue_setup_transform.py
 """
 import unreal
@@ -14,7 +17,11 @@ asset_tools = unreal.AssetToolsHelpers.get_asset_tools()
 IA_PATH = "/Game/Input/Actions/IA_Transform"
 IMC_PATH = "/Game/Input/IMC_Default"
 PC_PATH = "/Game/Jayadwara/Core/BP_JDPlayerController"
-GIANT_PATH = "/Game/Jayadwara/Characters/Jayadwara/BP_Jayadwara"
+GIANTS = {"Jayadwara": "/Game/Jayadwara/Characters/Jayadwara/BP_Jayadwara",          # model lama (stylized, skrip) — cadangan
+          "Jayadwara2": "/Game/Jayadwara/Characters/Jayadwara2/BP_Jayadwara2"}     # model Tripo (docs/25) — AKTIF sejak R6
+ACTIVE_GIANT = globals().get("ACTIVE_GIANT", "Jayadwara2")
+GIANT_PATH = GIANTS[ACTIVE_GIANT]
+GM_GIANT_PATH = "/Game/Jayadwara/Core/BP_JDGameMode_Giant"
 KEY = "T"
 
 
@@ -51,7 +58,13 @@ def fill_controller(action):
     d.set_editor_property("giant_pawn_class", giant.generated_class())
     unreal.BlueprintEditorLibrary.compile_blueprint(pc)
     EAL.save_loaded_asset(pc, only_if_is_dirty=False)
-    log("BP_JDPlayerController: transform_action & giant_pawn_class terisi")
+    log(f"BP_JDPlayerController: transform_action & giant_pawn_class = {giant.get_name()}")
+    if EAL.does_asset_exist(GM_GIANT_PATH):
+        gm = EAL.load_asset(GM_GIANT_PATH)
+        unreal.get_default_object(gm.generated_class()).set_editor_property("default_pawn_class", giant.generated_class())
+        unreal.BlueprintEditorLibrary.compile_blueprint(gm)
+        EAL.save_loaded_asset(gm, only_if_is_dirty=False)
+        log(f"BP_JDGameMode_Giant: default_pawn_class = {giant.get_name()}")
 
 
 def main():

@@ -24,6 +24,7 @@ ap.add_argument("--materials", type=int, default=4)
 ap.add_argument("--height", type=float, default=1.99, help="tinggi total termasuk tanduk (m)")
 ap.add_argument("--tol", type=float, default=0.03)
 ap.add_argument("--max-influence", type=int, default=4)
+ap.add_argument("--no-zone", action="store_true", help="lewati cek JD_Zone (model bertekstur Tripo, Jayadwara2: tanpa atribut zona)")
 ap.add_argument("--unit", type=float, default=0.01,
                 help="meter per satuan data FBX; 0,01 = cm (kontrak Iterasi 6, 05_export_fbx.py)")
 ap.add_argument("--export-scale", type=float, default=None,
@@ -155,7 +156,8 @@ bad_parent = [s for s in exp_sockets if s in data and data[s]["bone"] not in got
 check("socket ter-parent ke tulang", not bad_parent, f"{bad_parent}")
 
 # ---- atribut warna (info)
-check("atribut warna JD_Zone ada", "JD_Zone" in me.color_attributes)
+if not args.no_zone:
+    check("atribut warna JD_Zone ada", "JD_Zone" in me.color_attributes)
 
 # ---- laporan
 w = max(len(n) for n, _, _ in results)

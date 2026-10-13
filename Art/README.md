@@ -38,6 +38,21 @@ Dijalankan di Blender (mis. lewat MCP: `exec(open(path).read())`), kecuali yang 
 | `jerangkong_00_setup_scene.py` | Jerangkong Iterasi 0: scene `jerangkong_v00_setup.blend` (collection per kelompok potongan, reference plane, penggaris 2,2 m, landmark `JK_LM_*`, target bungkuk sedang `JK_TGT_*`). Headless: `blender --background --factory-startup --python Art/Scripts/jerangkong_00_setup_scene.py` |
 | `jerangkong_01_import_tripo.py` | Jerangkong jalur B: impor `Source/jerangkong_tripo_v01.glb` (Tripo) → `jerangkong_v01_tripo.blend` (`JK_Source`, menghadap -Y, 2,19 m) |
 | `jayadwara2_01_import_tripo.py` *(headless)* | Redesign Jayadwara (docs/25 R0): impor GLB Tripo developer → `jayadwara2_v01_tripo.blend` (`JD2_Source`) + laporan tris/tekstur/pulau/non-manifold/simetri/arah hadap. Argumen `-- --src --out --top-z --rot-z` |
+| `jd2_skeleton.py` | Jayadwara2: skeleton 89 tulang (nama & hierarki = `jd_skeleton.py`), sendi diukur dari mesh Tripo (landmark `LM`) |
+| `jayadwara2_02_render_views.py` | R0: render ortografis depan/samping/belakang + 3/4 + kepala (Workbench, tekstur apa adanya) → `Export/_jd2/` |
+| `jayadwara2_03_measure.py` / `_04_uv_islands.py` | R0: ukur proporsi, celah pose, warna tekstur, pulau UV |
+| `jayadwara2_10_rig_spike.py` *(headless)* | R1: skeleton + split jahitan sentuh + bobot kapsul bertetangga → `jayadwara2_v02_rig_spike.blend` |
+| `jayadwara2_11_macro_render.py` | R1: peta pembagian bagian berwarna (cek klasifikasi) |
+| `jayadwara2_20_thickness.py` | R2: ketebalan lokal (ray ±normal) → peta lembar tipis `Export/_jd2/_thick.png` |
+| `jayadwara2_21_rig_r2.py` *(headless)* | R2: rig = skeleton + lembar kain via ketebalan + split jahitan + buang sliver + zirah kaku → `jayadwara2_v03_rig_r2.blend` (menggantikan `_10_rig_spike`) |
+| `jayadwara2_22_rig_r3.py` *(headless)* | R3: R2 + bobot twist + sayap/kain ikut paha + zona sendi dilunakkan → `jayadwara2_v05_rig_r3.blend` (menggantikan `_21_rig_r2`; pose uji kini memisahkan badan vs kain) |
+| `jayadwara2_16_make_lods.py` *(headless)* | R5: LOD1–3 (`SK_Jayadwara2_LOD1..3.fbx`, 18,7k/8,6k/3,7k tris) lewat Decimate + grup `LODPROTECT` (invert!) + ekspor kontrak sama; render perbandingan `_lod_*.png` |
+| `jayadwara2_17_walk_head_tests.py` | R3c: uji langkah jalan & kepala miring besar (menangkap bug sayap berserakan, dagu tertinggal) → `_walk_*`, `_tilt_*` |
+| `jd2_atlas.py` / `analyze_atlas_jayadwara2.py` | R4: posisi 3D per texel + zona warna HSV; analisis atlas → `Export/_jd2/_atlas_zones.png` |
+| `make_textures_jayadwara2.py` | R4: BC (snap peralihan, soket mata dari `BC_src`), `T_Jayadwara2_Emit` (permata, mata), `T_Jayadwara2_Mask` (RGBA zona) + `.json` (butuh `_15_dump_uv`) |
+| `jayadwara2_30_materials.py` | R4: material preview Blender meniru UE → `jayadwara2_v04_tex.blend` + render `_bl_*.png` |
+| `jayadwara2_13_pose_tests.py` | R1: 13 pose (pakai `03_pose_tests.py`) + tabel peregangan + contact sheet `Export/_jd2/poses/` |
+| `jayadwara2_14_export.py` | R1: `SK_Jayadwara2.fbx` + `_sockets.json` + `Textures_Jayadwara2/` (validator: `--materials 1 --no-zone --max-tris 100000`) |
 | `jk_skeleton.py`, `jk_segment.py` | Jerangkong: posisi sendi terukur + daftar potongan/socket; segmentasi mesh ke tulang (numpy) |
 | `jerangkong_10_build.py` *(Blender headless)* | Rig + 17 potongan kaku + cap + bobot + socket → `jerangkong_v02_rig.blend`, `Export/_jk_faces.npz` |
 | `make_textures_jerangkong.py` *(sistem)* | Tekstur dari atlas Tripo: BC dibersihkan, Emit (R Kala / G retak / B gelang), N, ORM → `Export/Textures_Jerangkong/` |
