@@ -1,6 +1,6 @@
 # 26 — Rencana Jubah Upacara Jayadwara
 
-> **Status: v0.1 — usulan (13 Okt 2026), menunggu jawaban developer di bagian 4.**
+> **Status: v0.4 — J1 dinilai developer di Play ("sudah bagus, perlu poles") → J1b (poles + tombol Y sementara) selesai dari sisi Claude (13 Okt 2026), menunggu nilai Play.** J-Q1 & J-Q4 dijawab (bagian 4).
 > Desain: K9 di [14](14-model-sheet-jayadwara.md); alur gameplay: [07](07-gameplay-sistem.md#jubah-upacara); konsep: [`concept-art/jayadwara_jubah_upacara.webp`](concept-art/jayadwara_jubah_upacara.webp).
 > Jadwal: masuk **Fase 2** bareng cutscene transformasi ([23](23-rencana-fase-1.md) "Tidak masuk"). J0–J3 (aset) boleh ditarik lebih awal sebagai jalur art paralel kalau developer mau; J4–J5 butuh lock-on (Fase 1 Iterasi 6) dan Sequencer (F2).
 
@@ -27,7 +27,7 @@
 
 ## 3. Arsitektur (usulan)
 
-- **Mesh & skeleton terpisah:** `SK_Jayadwara2_Cape` dengan skeleton sendiri = tulang induk yang sama namanya dengan Jayadwara2 (`root`…`spine_05`, `clavicle_l/r`, `neck_01`) + rantai jubah baru `cape_c/l/r_01…06`. Skeleton badan **tidak diubah** (tidak perlu impor ulang `SK_Jayadwara2`).
+- **Mesh & skeleton terpisah:** `SK_Jayadwara2_Cape` dengan skeleton sendiri `SKEL_Jayadwara2_Cape` = **seluruh 89 tulang Jayadwara2** (nama sama, supaya Copy Pose From Mesh & bobot paha/betis cocok) + rantai jubah baru `cape_{c,l,r,fl,fr}_01…06` (J1: 5 rantai — tengah, sisi, lapel depan). Skeleton badan **tidak diubah** (tidak perlu impor ulang `SK_Jayadwara2`).
 - **Ikut pose:** `ABP_Jayadwara2_Cape` → *Copy Pose From Mesh* dari mesh badan, lalu simulasi di rantai `cape_*`.
 - **Simulasi:** Chaos Cloth di mesh jubah dengan collider kapsul dari Physics Asset badan (paha, betis, pinggul, punggung). Cadangan: Anim Dynamics **berbatas kecil** di rantai `cape_*` (pelajaran R3d).
 - **Rantai emas:** kaku, di-skin ke `spine_05`/`clavicle_*`, tidak disimulasi.
@@ -37,10 +37,10 @@
 
 | # | Pertanyaan | Default |
 |---|---|---|
-| J-Q1 | Bentuk jubah dibuat dari mana? | **Developer buat di Tripo** dari sheet konsep (gaya sama dengan Jayadwara2, pola jalur B). Alternatif: Claude bangun dari skrip Blender (lebih rapi topologinya, gaya lebih kaku) |
+| J-Q1 | Bentuk jubah dibuat dari mana? | ✅ **Dijawab 13 Okt: Tripo.** Developer membuat 3 kandidat (`yahya_design/cape01.glb`, `cap02.glb`, `cape03.glb`), Claude memilih **cap02** (lihat Hasil J0). Usulan awal: **Developer buat di Tripo** dari sheet konsep (gaya sama dengan Jayadwara2, pola jalur B). Alternatif: Claude bangun dari skrip Blender (lebih rapi topologinya, gaya lebih kaku) |
 | J-Q2 | Simulasi kain | **Chaos Cloth**; fallback Anim Dynamics berbatas |
 | J-Q3 | Animasi lepas/pakai | Developer cari/keyframe di editor (Control Rig) dari referensi pose; Claude siapkan notify & montage lewat skrip. Placeholder: lepas = jubah langsung buyar tanpa gerak tangan |
-| J-Q4 | Kapan mulai | **Fase 2** (default). Atau J0–J3 sekarang sebagai jalur art paralel |
+| J-Q4 | Kapan mulai | ✅ **Dijawab 13 Okt: J0–J3 sekarang** sebagai jalur art paralel (developer minta mulai). J4–J5 tetap menunggu lock-on (F1 Iter 6) & Sequencer (F2) |
 | J-Q5 | Panjang jubah | Sesuai konsep (sampai mata kaki), karena tidak dipakai di combat |
 
 ## 5. Iterasi
@@ -68,4 +68,63 @@
 
 ## 7. Hasil iterasi
 
-_(diisi saat iterasi berjalan)_
+| Iterasi | Status | Tanggal | Ringkas |
+|---|---|---|---|
+| J0 Persiapan | ✅ disetujui developer | 13 Okt 2026 | Pilih `cap02`; depan dibuka; kerah 1,60 m / ujung 0,10 m; titik kait diukur; fit lokal = pekerjaan utama J1 |
+| J1 Spike bentuk + rig | ✅ dinilai developer: bagus, perlu poles | 13 Okt 2026 | Fit lokal tanpa tembus (rest), rig 119 tulang, bobot kinematik, validator 27/27, terpasang di `BP_Jayadwara2` (komponen `Cape`) |
+
+### Hasil J0 (13 Okt 2026)
+
+**Pemilihan model** (3 GLB Tripo dari developer, semua 1 material 2048² BC/N/ORM, ±38k tris):
+
+| Kandidat | Isi | Penilaian |
+|---|---|---|
+| `cape01.glb` | Jubah **menyatu dengan badan** karakter lain (bukan Jayadwara2), 99 tepi non-manifold | ❌ Melanggar prinsip "jubah terpisah dari kulit" (bagian 2); jubah tidak bisa dicabut bersih. Tetap berguna sebagai **acuan bentuk bukaan depan** (lapel putih di tepi depan) |
+| **`cap02.glb`** | **Jubah saja**, 37,6k tris, satu lembar utuh, cocok dengan "Cape / Mantle breakdown" konsep (panel putih tengah & sisi, rantai emas berjuntai, ujung runcing bermotif emas) | ✅ **Dipilih.** Kekurangan: mantel **tertutup di depan** (panel depan sampai lutut) → dibuka di J0 |
+| `cape03.glb` | Tripo memodelkan **seluruh sheet konsep** (8 figur + potongan breakdown + swatch palet) jadi satu mesh | ❌ Tidak terpakai |
+
+Sumber disalin ke `Art/Source/jayadwara2_cape_tripo_v01.glb` (asli di `yahya_design/` tidak diubah). Skrip: `Art/Scripts/jayadwara2_cape_01_intake.py` (di atas `jayadwara2_v05_rig_r3.blend`, file itu tidak ditimpa) → `Art/Blender/jayadwara2_cape_v00_intake.blend` (`JD2_Cape_Source` + empty `JD2C_ANCHOR_*`); render `jayadwara2_cape_02_render.py` → `Art/Export/_jd2c/`. Pembanding konsep vs hasil: **`Art/Export/_jd2c/_banding_konsep.png`**.
+
+| Temuan / keputusan | Nilai | Akibat |
+|---|---|---|
+| Arah hadap GLB | Depan di −X | `--rot-z 90` → menghadap −Y |
+| Topologi cap02 | 1 pulau, 85 tepi non-manifold (13 setelah merge jahitan UV), 26k → 18,6k vertex | Bersih, tanpa pemisahan lembar ala R2 |
+| **Bukaan depan** | Tripo membuat mantel tabung tertutup; konsep terbuka memperlihatkan zirah & permata dada | Sektor depan ±55° di bawah pita kerah dibuang (4.766 muka, sisa 32,7k tris). Panel putih sisi jadi "lapel" depan seperti konsep. Tepi potongan masih mentah (tanpa list emas) → J2 |
+| **Tinggi kerah (K9)** | Dagu Jayadwara2 terukur **1,613 m** | Puncak kerah **1,60 m** (≤ dagu ✅). Kerah jubah tertutup kerah leher badan yang lebih tinggi; tidak mekar ke belakang kepala |
+| **Panjang** | Ujung runcing terbawah **0,10 m** (mata kaki, J-Q5) | Skala tinggi ×1,50 dari GLB |
+| Lebar/kedalaman | 3 kandidat dibandingkan visual: seragam (lengan menembus, terlalu ramping), **×1,10 / ×1,25 / +2 cm Y**, ×1,30 / ×1,50 (mengembang) | Kandidat tengah paling mirip proporsi konsep → default `--fit`. Lebar ujung ±0,59 m |
+| **Titik kait** (badan rest) | Tengkuk (0, 0,106, 1,57) · punggung atas/pusat rantai (0, 0,115, 1,45) · bahu di balik pauldron (±0,188, 0,069, 1,52) · dagu (0, −0,117, 1,613) | Dipakai J1 sebagai target lem jubah ke `spine_05`/`clavicle_*` |
+| **Masalah utama untuk J1** | Fit global tidak bisa membebaskan jubah: **puncak jubah tenggelam di pelat punggung & pauldron** (dari belakang, pelat punggung terlihat di atas jubah; konsep: jubah menutup punggung sampai tengkuk). Laporan jarak: kerah 957/1.098 vertex di dalam badan, punggung 952/3.603, pinggul 97, kaki 136 (lengan dikecualikan) | J1: fit **lokal** (dorong keluar per tinggi/sudut + perataan) supaya bahu jubah naik menutup pelat punggung dan masuk di bawah pauldron; jarak bebas ≥2 cm di bawah kerah. Catatan: tanda jarak tidak andal di lembar kain tipis badan (sayap) → cek visual juga |
+| Warna | Merah tua/putih/emas, tanpa silver | ✅ sesuai palet; merah Tripo lebih gelap dari konsep → tuning di MI (J2) |
+| IP (K9) | Kerah ≤ dagu, tanpa kerah mekar, bukan senjata | ✅ |
+
+**Gate J0 (developer):** setujui (1) pilihan `cap02`, (2) bukaan depan 55°, (3) kerah 1,60 m & ujung di mata kaki, (4) proporsi lebar ×1,10 / kedalaman ×1,25. → **Disetujui semua (13 Okt 2026).**
+
+### Hasil J1 (13 Okt 2026)
+
+Pipeline: `jayadwara2_cape_01_intake.py` → `jayadwara2_cape_10_fit_rig.py` (→ `Art/Blender/jayadwara2_cape_v01_rig.blend`) → `jayadwara2_cape_11_pose_tests.py` → `jayadwara2_cape_14_export.py` → `validate_jayadwara.py` (27/27) → UE `Tools/ue_import_jayadwara2_cape.py` → `Tools/ue_setup_jayadwara2_cape.py`; bukti `Tools/ue_capture_jayadwara2_cape.py`. Gambar: `Art/Export/_jd2c/_ue_j1.png` (UE), `_pose_j1.png` dan `poses/j1b_*.png` (Blender), `jd2c_v01_*.png` (rest).
+
+| Langkah | Hasil | Catatan |
+|---|---|---|
+| **Fit lokal** | Badan sebagai *lambung radial* per ketinggian (raycast horizontal dari luar ke sumbu); dorongan radial disamakan dalam 3 cm (sisi dalam/luar lembar) lalu disebar halus. **0 vertex di dalam badan + jarak bebas** (2,5 cm; kerah 1,2 cm); geser rata-rata 1,9 cm | **Lengan & pauldron dikecualikan** dari lambung: tanpa itu kerah terdorong melewati pauldron dan jadi "rak" datar. Kini pauldron duduk DI ATAS jubah seperti konsep, punggung tertutup sampai tengkuk. 130 muka sisa panel depan Tripo di sumbu tubuh (antara kaki) dibuang dulu; kalau ikut didorong radial jadi sirip di pinggul |
+| **Skeleton** | 119 tulang = 89 badan + 30 `cape_*` (5 rantai × 6, induk `spine_05`) | Rantai **berbobot 0** di J1, disiapkan untuk J3 (Anim Dynamics cadangan). Di Blender, tulang bernama sama diberi Copy Transforms ke `JD2_Armature` (meniru Copy Pose From Mesh) |
+| **Bobot (kinematik)** | Bobot kulit badan terdekat (lengan → clavicle, leher/kepala → spine_05, betis/telapak → calf), dilemahkan dengan jarak 3→23 cm ke "bobot jauh" (pelvis 0,9 m → spine_03 1,2 m → spine_05 1,45 m); kaki ≤ 0,6 (pola sayap R3d); dihaluskan topologi + spasial; ≤4 pengaruh | Sebaran: pelvis 45 %, paha/betis 36 %, spine 25 %, clavicle 6 % (dari pauldron: jubah di bawahnya ikut bahu) |
+| **Uji pose** (kapsul paha r≈15 cm, betis r≈10 cm) | Rest/jongkok/putar badan/lengan/kepala rapi. **Jalan: tumit kaki belakang (lutut 30°) menembus ujung jubah** (±500–580 vertex di kapsul betis); lari & tendang 90° menembus paha/betis | Dicoba porsi kaki 0,85/1,0 dan jangkauan 30–40 cm: tembus turun (582 → 214) tapi regangan meledak (p99 76 % → 150 %, maks >1000 % = kain tampak sobek). **Skinning linear tidak bisa dua-duanya** → baseline 0,6 dipertahankan; tembus tumit diselesaikan di **J3** (Chaos Cloth + collider kapsul). Jubah tidak dipakai di combat, jadi lari/tendang bukan target |
+| **Export & validasi** | `SK_Jayadwara2_Cape.fbx` 32.573 tris, 1 material, 119 tulang, validator **27/27** (`--height 1.50 --zmin 0.10 --extra-bone-prefix cape_ --no-sockets`, opsi baru, perilaku bawaan validator tidak berubah: badan tetap 27/27) | Tekstur BC/N/ORM Tripo + Emit hitam & Mask "zona merah penuh" datar (J1: warna = atlas apa adanya, recolor mati) |
+| **UE** | `/Game/Jayadwara/Characters/Jayadwara2/Cape/`: `SK_Jayadwara2_Cape`, `SKEL_Jayadwara2_Cape` (89 tulang cocok nama dengan badan), `MI_Jayadwara2_Cape` (induk `M_Jayadwara2_Master`), `ABP_Jayadwara2_Cape` (**Copy Pose From Mesh, induk attach** → Output Pose). `BP_Jayadwara2` dapat komponen `Cape` (anak `CharacterMesh0`, tanpa tabrakan) | ABP diisi lewat fungsi editor C++ baru `UJDEditorToolsLibrary::SetupCopyPoseAnimBlueprint` (Python UE tidak bisa menyisipkan node anim graph). Tangkapan editor (pose rest): warna merah-putih-emas cerah, pauldron di atas jubah, bukaan depan memperlihatkan zirah |
+
+**Sementara sampai J4:** jubah **selalu terpakai**, juga saat combat (belum ada lepas/pakai). Lepas dari BP: `python Tools/ue_remote.py -c "CAPE=False; exec(open(r'C:/repository/unreal_engine/jayadwara/Tools/ue_setup_jayadwara2_cape.py').read())"`.
+
+**Sisa untuk J2:** tepi potongan depan mentah (belum ada list emas), pita kerah sedikit bergelombang di bahu, Mask zona merah/emas/putih, LOD1–2. **Untuk J3:** tumit/paha menembus saat langkah lebar (collider), rantai `cape_*` bila jalur cadangan Anim Dynamics.
+
+**Gate J1 (developer):** Play di `Test_GiantScale2` (T = transformasi) → nilai siluet jubah di idle & jalan. → **13 Okt: "sudah bagus tapi perlu dipoles"** — (1) dari atas ada tonjolan di leher/bahu, (2) di depan ada bulatan merah yang seharusnya bersih (terbawa dari cap02), (3) minta tombol **Y** sementara untuk melepas jubah dengan animasi. → J1b.
+
+### Hasil J1b (13 Okt 2026) — poles + tombol Y
+
+| Masalah | Penyebab (dibandingkan dengan konsep) | Perbaikan |
+|---|---|---|
+| Bulatan merah di depan | Bagian depan **pita kerah** cap02 (7 cm teratas) sengaja tidak ikut dibuka di J0; setelah fit ia menjuntai melintang di atas zirah dada. Konsep: depan bersih, jubah hanya dari bahu ke belakang | `jayadwara2_cape_10_fit_rig.py`: bukaan depan 55° diteruskan ke pita kerah (z ≥ 1,40 m, 1.076 muka) + buang serpihan rantai yang terputus |
+| Tonjolan leher/bahu (dilihat dari atas) | Pita kerah cap02 berupa **gulungan tebal** (seperti tudung terlipat); fit radial mendorongnya keluar jadi "donat" di sekeliling leher. Konsep: jubah jatuh rapi dari bahu, kerah tipis di belakang leher (detail *back collar*) | Zona bahu/leher 1,25–1,40 m (transisi halus): jarak tiap vertex ke lapisan terdalam lembar di sel (sudut 4°, tinggi 2,5 cm) dikompres **×0,12**, lalu lembar ditempel ke lambung badan + jarak bebas. Gulungan jadi flap datar. Uji pose & validator tidak berubah (27/27) |
+| Tombol Y: lepas jubah dengan animasi | Belum ada aset animasi tangan (J-Q3) | **C++ `UJDCapeComponent`** (`Source/Jayadwara/Characters/JDCapeComponent.*`, dipasang di `AJDGiantCharacter` sebagai `CapeControl`): state Equipped/Removing/Removed/Returning, `SetCapeEquipped(bool, bInstant)`, `ToggleCape()`, event `OnCapeStateChanged` (untuk montage/Niagara J4). Animasi prosedural: jubah naik 6 % & mundur 5 % tinggi badan sambil **buyar jadi cahaya emas dari bawah ke atas** (2,0 s; pakai kembali 1,6 s). Setelah lepas, mesh disembunyikan & tick dimatikan (tanpa biaya). **Y** = `BindKey` sementara di `AJDGiantCharacter::SetupPlayerInputComponent` (diganti pemicu lock-on/aksi combat di J4). Material **`M_Jayadwara2_Cape_Master`** = salinan master badan + Masked: `v = 0,6·noise(posisi lokal) + 0,4·tinggi`, OpacityMask `v − Dissolve + 0,5`, pinggiran `|v − Dissolve| < 0,04` menyala emas (`Dissolve_GlowColor/Intensity/EdgeWidth`, `Dissolve_HeightRef`) |
+
+Bukti: `Art/Export/_jd2c/_ue_j1b.png` (UE, rest), `_ue_j1b_lepas.png` (Dissolve 0 / 0,3 / 0,6 / 0,85). Animasi & tombol belum bisa diuji Claude (tidak ada tick di editor remote) → developer uji di Play: transformasi (T), lalu **Y** lepas, **Y** lagi pakai kembali.

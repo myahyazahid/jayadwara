@@ -1,6 +1,7 @@
 #include "JDEditorToolsLibrary.h"
 
 #include "AnimGraphNode_AnimDynamics.h"
+#include "AnimGraphNode_CopyPoseFromMesh.h"
 #include "AnimGraphNode_ComponentToLocalSpace.h"
 #include "AnimGraphNode_LocalToComponentSpace.h"
 #include "AnimGraphNode_Root.h"
@@ -352,6 +353,69 @@ int32 UJDEditorToolsLibrary::AddAnimDynamicsChains(UAnimBlueprint* AnimBlueprint
 	AnimBlueprint->MarkPackageDirty();
 	UE_LOG(LogJayadwaraEditor, Log, TEXT("AddAnimDynamicsChains: %d rantai di %s"), Added, *AnimBlueprint->GetName());
 	return Added;
+}
+
+bool UJDEditorToolsLibrary::SetupCopyPoseAnimBlueprint(UAnimBlueprint* AnimBlueprint)
+{
+	if (!AnimBlueprint)
+	{
+		return false;
+	}
+	UEdGraph* Graph = nullptr;
+	for (UEdGraph* Candidate : AnimBlueprint->FunctionGraphs)
+	{
+		if (Candidate && Candidate->GetFName() == UEdGraphSchema_K2::GN_AnimGraph)
+		{
+			Graph = Candidate;
+			break;
+		}
+	}
+	UAnimGraphNode_Root* Root = nullptr;
+	if (Graph)
+	{
+		for (UEdGraphNode* Node : Graph->Nodes)
+		{
+			Root = Root ? Root : Cast<UAnimGraphNode_Root>(Node);
+		}
+	}
+	UEdGraphPin* RootIn = Root ? FindPosePin(Root, EGPD_Input) : nullptr;
+	if (!RootIn)
+	{
+		UE_LOG(LogJayadwaraEditor, Error, TEXT("SetupCopyPoseAnimBlueprint: AnimGraph/Output Pose tidak ditemukan di %s"), *AnimBlueprint->GetName());
+		return false;
+	}
+
+	AnimBlueprint->Modify();
+	Graph->Modify();
+	TArray<UEdGraphNode*> Old;
+	for (UEdGraphNode* Node : Graph->Nodes)
+	{
+		if (Node != Root)
+		{
+			Old.Add(Node);
+		}
+	}
+	for (UEdGraphNode* Node : Old)
+	{
+		FBlueprintEditorUtils::RemoveNode(AnimBlueprint, Node, true);
+	}
+	RootIn->BreakAllPinLinks();
+
+	// Tanpa tag GeneratedNodeTag: AddAnimDynamicsChains memperlakukan node ini sebagai sumber pose, bukan node buatannya.
+	FGraphNodeCreator<UAnimGraphNode_CopyPoseFromMesh> Creator(*Graph);
+	UAnimGraphNode_CopyPoseFromMesh* Copy = Creator.CreateNode();
+	Copy->NodePosX = Root->NodePosX - 400;
+	Copy->NodePosY = Root->NodePosY;
+	Copy->Node.bUseAttachedParent = true;
+	Copy->Node.bCopyCurves = true;
+	Creator.Finalize();
+	FindPosePin(Copy, EGPD_Output)->MakeLinkTo(RootIn);
+
+	FBlueprintEditorUtils::MarkBlueprintAsStructurallyModified(AnimBlueprint);
+	FKismetEditorUtilities::CompileBlueprint(AnimBlueprint);
+	AnimBlueprint->MarkPackageDirty();
+	UE_LOG(LogJayadwaraEditor, Log, TEXT("SetupCopyPoseAnimBlueprint: %s = Copy Pose From Mesh (attach parent) -> Output Pose"), *AnimBlueprint->GetName());
+	return AnimBlueprint->Status != BS_Error;
 }
 
 int32 UJDEditorToolsLibrary::BypassAnimGraphNodes(UAnimBlueprint* AnimBlueprint, const FString& ClassNameContains)
