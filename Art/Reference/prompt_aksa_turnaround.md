@@ -1,6 +1,6 @@
 # Prompt referensi Aksa (untuk generator gambar)
 
-> **14 Okt 2026:** gaya proyek beralih ke **realistis**. Prompt di bawah masih versi stylized (arsip). Untuk konsep Aksa realistis, ganti baris `Style:` dengan `realistic game character, realistic anatomy and materials, flat even unlit lighting` dan pakai versi tanpa selendang + lengan 45° dari [`prompt_arc1_karakter.md`](prompt_arc1_karakter.md) bagian 0.
+> **14 Okt 2026:** gaya proyek beralih ke **realistis**. Prompt di bawah masih versi stylized (arsip). Prompt Aksa realistis (tanpa selendang, lengan 45°): [`prompt_karakter/aksa.md`](prompt_karakter/aksa.md).
 
 Dasar: `docs/concept-art/Aksa versi Final.png`, dengan perubahan: **Transformation Device dibuang** (terlalu mirip Mebius Brace, docs/01) dan diganti **kalung pecahan arca**. Tujuannya referensi ortografis untuk modeling, seperti `Art/Reference/` Jayadwara.
 
