@@ -1,5 +1,7 @@
 # Prompt konsep Jerangkong (boss Ep 1)
 
+> **14 Okt 2026:** gaya proyek beralih ke **realistis**. Model Jerangkong yang sudah terpasang tidak diubah; prompt ini arsip versi stylized.
+
 Brief: [docs/05](../../docs/05-daftar-episode-boss.md#arc-1--kebangkitan-ep-110) (kerangka yang terus menyusun ulang dirinya; hancurkan tengkoraknya), [docs/16](../../docs/16-panduan-arc-1.md#26-aturan-skala) (±0,7× tinggi Jayadwara ≈ 31 m), [docs/17](../../docs/17-skenario-arc-1.md#adegan-6--kebangkitan--seq) (bangkit dari galian, energi Kala merah di sela rusuk).
 Gaya: stylized semi-realistis, sama dengan Jayadwara & Aksa. Seram tapi **tanpa gore** (tanpa daging, darah, organ).
 

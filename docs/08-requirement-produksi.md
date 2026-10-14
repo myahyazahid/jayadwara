@@ -2,7 +2,7 @@
 
 ## Art Direction
 
-- **Gaya visual**: *keputusan terbuka* — realistis (Lumen/Nanite) atau stylized (lebih ringan untuk tim kecil).
+- **Gaya visual**: **realistis** (Lumen/Nanite), diputuskan 14 Okt 2026. Ringkasan dan risikonya di [README](README.md#ringkasan-keputusan-yang-sudah-final) dan [09](09-product-brief.md#risiko-utama).
 - **Desain Jayadwara**: hero bergaya **tokusatsu**, berbasis arca Dwarapala; motif ukiran, batik, wayang, candi; helm bermotif Kala-Bhoma.
   - **Concept final**: [`jayadwara_final.webp`](concept-art/jayadwara_final.webp) (turnaround 4 sisi, detail kepala, detail armor, siluet, palet). Gambar AI = brief untuk commission/modeling, bukan aset final. Varian lain di `concept-art/` (v01–v06 dan dua sheet "Jayadwara_ Nusantara ...") hanya arsip eksplorasi, bukan final.
   - **Palet**: merah (utama), hitam, emas, putih (faceplate), merah marun gelap. Tidak ada armor silver.
@@ -76,7 +76,7 @@
 |---|---|
 | Ukuran tim | **Solo** + Claude |
 | Kapasitas kerja | Sambilan, **±10–15 jam/minggu** |
-| Gaya visual | **Stylized** |
+| Gaya visual | **Realistis** (14 Okt 2026; sebelumnya stylized) |
 | Platform | **PC (Steam)** |
 | Engine & bahasa | **UE 5.6.1, C++ + Blueprint** (Claude tidak bisa mengedit `.uasset`) |
 | Isi rilis pertama | **Season 1 = Arc 1 (Ep 1–10)** sebagai Early Access (lihat [roadmap](10-roadmap.md)) |
@@ -90,4 +90,5 @@
 | 2 | **Sumber aset 3D selain Jayadwara** (monster, lingkungan) — modeling sendiri (Blender), commission, Fab, atau campuran? *Aksa sudah diputuskan (12 Okt 2026): dibuat sendiri, MetaHuman sebagai placeholder.* | Bottleneck terbesar, budget |
 | 3 | **Harga & model season berikutnya** — update gratis atau DLC? | Model bisnis |
 | 4 | **Durasi target total game** | Ukuran tiap episode |
+| 5 | **Tokoh manusia realistis lewat MetaHuman?** Aksa saat ini dibuat di Blender (skeleton Manny, [19](19-rencana-model-aksa.md)) dengan konsep bergaya ilustrasi. Untuk gaya realistis, MetaHuman (wajah + rig siap) bisa menggantikan wajah/badan, sementara pakaian dari Tripo/Blender | Kualitas wajah, kerja ulang Aksa, anggota DWARA & warga |
 | 5 | **Pengalaman developer** dengan Unreal / C++ / Blender | Lama Fase 0 dan kebutuhan belajar |

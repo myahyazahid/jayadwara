@@ -1,6 +1,6 @@
 # JAYADWARA: Guardian of the Seven Gates
 
-Game action-adventure kyodai hero (ala Ultraman, tanpa IP Tsuburaya) berbasis mitologi Nusantara. Unreal Engine **5.6.1**, C++ + Blueprint, PC (Steam), stylized. Solo dev + Claude, sambilan ±10–15 jam/minggu.
+Game action-adventure kyodai hero (ala Ultraman, tanpa IP Tsuburaya) berbasis mitologi Nusantara. Unreal Engine **5.6.1**, C++ + Blueprint, PC (Steam), gaya realistis. Solo dev + Claude, sambilan ±10–15 jam/minggu.
 
 ## Sumber kebenaran desain
 Semua keputusan ada di `docs/` — baca `docs/README.md` dulu sebelum mengusulkan perubahan desain.
