@@ -227,7 +227,7 @@ File sumber audio (WAV kandidat, lisensi, pilihan) ada di `Audio/` di root repo,
 | Item | Target |
 |---|---|
 | FPS | 60 FPS di 1080p, PC kelas menengah |
-| Lumen | Diuji saat prototype; siap dimatikan / diturunkan untuk gaya stylized |
+| Lumen | **Dipakai** (gaya realistis). Ukur sejak greybox; siapkan preset kualitas rendah (Lumen software / jarak lebih pendek) untuk PC menengah |
 | Nanite | Untuk gedung & lingkungan statis |
 | Destruction | Pre-fractured, jumlah dibatasi, puing dibersihkan |
 

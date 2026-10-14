@@ -11,7 +11,7 @@
 | **Genre** | Action-adventure episodik, *kyodai hero* (giant hero) |
 | **Engine** | Unreal Engine 5.6.1 (C++ + Blueprint) |
 | **Platform** | **PC — Steam** |
-| **Gaya visual** | **Stylized semi-realistis** (proporsi mendekati normal, bentuk tegas, detail disederhanakan, material PBR) |
+| **Gaya visual** | **Realistis** (game-realistis: anatomi dan material fotorealistis, Lumen + Nanite). Diputuskan 14 Okt 2026, menggantikan stylized semi-realistis |
 | **Bahasa** | Audio/teks Indonesia + subtitle Inggris |
 | **Tim** | **Solo developer** + Claude (C++, dokumen, tooling) |
 | **Kapasitas** | Sambilan, **±10–15 jam / minggu** |
@@ -75,7 +75,8 @@
 | Risiko | Dampak | Mitigasi |
 |---|---|---|
 | **Scope terlalu besar** untuk solo sambilan | Proyek tidak selesai | Rilis per season, mulai dari vertical slice, potong fitur tanpa ragu |
-| **Produksi aset 3D** (karakter, monster) | Bottleneck terbesar solo dev — Claude tidak bisa membuat model 3D | Gaya stylized, aset Fab, pakai ulang rig, commission karakter kunci |
+| **Produksi aset 3D** (karakter, monster) | Bottleneck terbesar solo dev — Claude tidak bisa membuat model 3D | Aset Fab/Megascans untuk lingkungan, basis Tripo untuk monster lalu dibersihkan, pakai ulang rig, commission karakter kunci; pertimbangkan MetaHuman untuk tokoh manusia ([08](08-requirement-produksi.md#keputusan-terbuka) #5) |
+| **Gaya realistis** (dipilih 14 Okt 2026) | Tiap aset lebih mahal: wajah manusia rawan *uncanny*, tekstur Tripo membawa bayangan terpanggang, animasi kasar lebih kelihatan, Lumen berat di 60 FPS | MetaHuman untuk wajah, input Tripo flat-lit + material dibuat ulang, budget performa diuji sejak greybox ([12](12-technical-design.md#target-performa)) |
 | **Animasi silat** | Butuh animasi khusus | Mixamo untuk prototype; video-mocap / commission untuk final |
 | Dianggap "tiruan Ultraman" | Reputasi & legal | Patuhi daftar larangan IP; tonjolkan identitas Nusantara |
 | Sensitivitas budaya | Reaksi negatif komunitas | Ikuti panduan di dokumen 06; review oleh budayawan |

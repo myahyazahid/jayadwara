@@ -55,7 +55,7 @@ Aksa Jaya Mangkubumi, agen baru sebuah lembaga rahasia penanganan anomali, menya
 | Judul | **JAYADWARA: Guardian of the Seven Gates** |
 | Engine | Unreal Engine **5.6.1**, C++ + Blueprint |
 | Platform | PC (Steam) |
-| Gaya visual | **Stylized semi-realistis**: proporsi mendekati normal, bentuk tegas, detail disederhanakan, material PBR (dikonfirmasi ulang 12 Okt 2026; realistis penuh ditolak karena volume monster, animasi, dan performa). Jayadwara2 & Jerangkong (basis Tripo) berada di level ini: detail lebih banyak, tetap stylized-friendly |
+| Gaya visual | **Realistis** (game-realistis, bukan sinematik): proporsi dan anatomi nyata, material PBR fotorealistis, Lumen + Nanite (diputuskan developer 14 Okt 2026, menggantikan stylized semi-realistis 12 Okt). Risiko yang dulu jadi alasan menolak (volume 50 monster, animasi, performa) tetap ada; mitigasinya di [09](09-product-brief.md#risiko-utama). Jayadwara2 & Jerangkong (basis Tripo) sudah dekat ke arah ini |
 | Tim | Solo + Claude, sambilan ±10–15 jam/minggu |
 | Struktur | Linear semi-open-world, **50 episode** dalam **5 arc** |
 | Karakter utama | **Aksa Jaya Mangkubumi** ("Aksa"), codename **Lawang** |
