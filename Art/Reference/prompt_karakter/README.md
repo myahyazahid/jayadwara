@@ -1,10 +1,10 @@
-# Prompt karakter (Ep 1–10)
+# Prompt karakter (Ep 1–20)
 
 Satu file per karakter. Tiap file berisi status, catatan risiko Tripo, dan prompt siap salin.
 
 > **Status: usulan (14 Okt 2026).** Daftar dari [docs/03](../../../docs/03-karakter.md), [docs/05](../../../docs/05-daftar-episode-boss.md#arc-1--kebangkitan-ep-110), [docs/16](../../../docs/16-panduan-arc-1.md) bagian 6–7, dan [docs/18](../../../docs/18-kebutuhan-episode-1.md). Penampilan tokoh yang belum dikunci di docs (anggota DWARA, warga, boss Ep 2–10) adalah **usulan Claude**; ubah bebas, lalu catat keputusan finalnya di docs terkait.
 >
-> **Scope:** yang dibutuhkan sekarang hanya kelompok **A (Ep 1)**. Ep 2–10 diproduksi di Fase 4 ([docs/10](../../../docs/10-roadmap.md)).
+> **Scope:** yang dibutuhkan sekarang hanya kelompok **A (Ep 1)**. Ep 2–10 diproduksi di Fase 4 ([docs/10](../../../docs/10-roadmap.md)). Arc 2 (Ep 11–20) di luar Season 1; belum ada panduan arc seperti [docs/16](../../../docs/16-panduan-arc-1.md), jadi desainnya usulan awal.
 
 ## Daftar
 
@@ -40,6 +40,18 @@ Satu file per karakter. Tiap file berisi status, catatan risiko Tripo, dan promp
 | **D. Minion baru (Fase 4)** | | | | |
 | [`minion_kabel.md`](minion_kabel.md) | Kabel hidup | 3 | Minion | ✅ |
 | [`minion_akar.md`](minion_akar.md) | Akar hidup | 8 | Minion | ✅ |
+| **E. Arc 2, Ep 11–20 (di luar Season 1)** | | | | |
+| [`ebu_gogo.md`](ebu_gogo.md) | Ebu Gogo | 11 | Boss | ✅ |
+| [`palasik.md`](palasik.md) | Palasik | 12 | Boss | ✅ |
+| [`kuyang.md`](kuyang.md) | Kuyang | 13 | Boss | ✅ kepala; tubuh = prop terpisah |
+| [`kuntilanak.md`](kuntilanak.md) | Kuntilanak | 14 | Boss | ✅ |
+| [`poppo.md`](poppo.md) | Poppo | 15 | Boss | ✅ |
+| [`parakang.md`](parakang.md) | Parakang ⚠️ | 16 | Boss | ✅ |
+| [`suanggi.md`](suanggi.md) | Suanggi ⚠️ | 17 | Boss | ✅ |
+| [`harimau_cindaku.md`](harimau_cindaku.md) | Harimau Cindaku | 18 | Boss | ✅ |
+| [`begu_ganjang.md`](begu_ganjang.md) | Begu Ganjang ⚠️ | 19 | Boss | ✅ |
+| [`geunteut.md`](geunteut.md) | Geunteut | 20 | Boss | ✅ |
+| [`warga_regional.md`](warga_regional.md) | Warga regional (6 variasi) | 11–20 | NPC | ✅ |
 | — | Bayang-bayang (Ep 5, 9) | | Minion | ❌ Manny + material siluet gelap |
 | — | Api kecil (Ep 6, 10) | | Minion | ❌ VFX |
 
