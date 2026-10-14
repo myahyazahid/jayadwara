@@ -11,7 +11,7 @@
 | **Genre** | Action-adventure episodik, *kyodai hero* (giant hero) |
 | **Engine** | Unreal Engine 5.6.1 (C++ + Blueprint) |
 | **Platform** | **PC — Steam** |
-| **Gaya visual** | **Realistis** (game-realistis: anatomi dan material fotorealistis, Lumen + Nanite). Diputuskan 14 Okt 2026, menggantikan stylized semi-realistis |
+| **Gaya visual** | **Realistis** (game-realistis: anatomi dan material fotorealistis, Lumen + Nanite). Diputuskan 14 Okt 2026, menggantikan stylized semi-realistis. Model dasar digenerate **Tripo**; Claude membersihkan, memisah bagian, me-rig, dan membawa ke UE |
 | **Bahasa** | Audio/teks Indonesia + subtitle Inggris |
 | **Tim** | **Solo developer** + Claude (C++, dokumen, tooling) |
 | **Kapasitas** | Sambilan, **±10–15 jam / minggu** |
