@@ -353,4 +353,5 @@ Berdasarkan [01](01-konsep-dan-pilar.md#wajib-dihindari), [08](08-requirement-pr
 - Model Aksa (konsep: `concept-art/Aksa versi Final.png`, referensi: `concept-art/aksa_turnaround_v01.webp`; MetaHuman sebagai placeholder, lihat [12](12-technical-design.md#mesh-logika-vs-mesh-visual-aksa)), Jerangkong, minion.
 - Dwarapala Kala & Dwarapala Kembar (varian Jayadwara).
 - Sayap (Ep 38), VFX kekuatan bumi (Ep 44).
+- **Jubah upacara** — rencana iterasi di [26](26-rencana-jubah-jayadwara.md) (K9 [14](14-model-sheet-jayadwara.md), alur [07](07-gameplay-sistem.md#jubah-upacara)): mesh `SK_Jayadwara2_Cape` di skeleton Jayadwara2 (rantai `cloth_back_*` diperpanjang/dipecah), Chaos Cloth (hanya di luar combat), montage lepas ±2 s + versi cepat ±0,5 s + pakai kembali, Niagara buyar jadi cahaya; C++ `SetCapeEquipped` di karakter raksasa. Tombol manual (D-pad atas) opsional.
 - Animasi silat final (Mixamo hanya untuk prototype).

@@ -1,6 +1,8 @@
 #include "Characters/JDGiantCharacter.h"
 
 #include "Camera/CameraComponent.h"
+#include "Characters/JDCapeComponent.h"
+#include "Components/InputComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -35,7 +37,25 @@ AJDGiantCharacter::AJDGiantCharacter()
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
 	FollowCamera->bUsePawnControlRotation = false;
 
+	CapeControl = CreateDefaultSubobject<UJDCapeComponent>(TEXT("CapeControl"));
+
 	ApplyGiantScale();
+}
+
+void AJDGiantCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+{
+	Super::SetupPlayerInputComponent(PlayerInputComponent);
+
+	// SEMENTARA (docs/26 J1b): Y = lepas/pakai jubah, tanpa Input Action. Pemicu final (lock-on, aksi combat) di J4.
+	PlayerInputComponent->BindKey(EKeys::Y, IE_Pressed, this, &AJDGiantCharacter::DebugToggleCape);
+}
+
+void AJDGiantCharacter::DebugToggleCape()
+{
+	if (CapeControl)
+	{
+		CapeControl->ToggleCape();
+	}
 }
 
 void AJDGiantCharacter::OnConstruction(const FTransform& Transform)

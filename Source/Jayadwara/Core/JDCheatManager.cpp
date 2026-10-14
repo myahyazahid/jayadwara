@@ -5,6 +5,8 @@
 #include "Abilities/JDGameplayEffects.h"
 #include "Abilities/JDGameplayTags.h"
 #include "AbilitySystemGlobals.h"
+#include "Characters/JDTrainingDummy.h"
+#include "EngineUtils.h"
 #include "Engine/World.h"
 #include "GameFramework/Pawn.h"
 #include "GameFramework/PlayerController.h"
@@ -110,6 +112,51 @@ namespace
 		FConsoleCommandWithWorldAndArgsDelegate::CreateLambda([](const TArray<FString>&, UWorld* World)
 		{
 			if (UJDCheatManager* C = FindCheatManager(World)) { C->Heal(); }
+		}));
+
+	FAutoConsoleCommandWithWorldAndArgs GJDDummyAttack(TEXT("JD.Dummy.Attack"),
+		TEXT("JD.Dummy.Attack <0|1>: mode menyerang semua training dummy (tanpa argumen = bolak-balik)"),
+		FConsoleCommandWithWorldAndArgsDelegate::CreateLambda([](const TArray<FString>& Args, UWorld* World)
+		{
+			if (!World)
+			{
+				return;
+			}
+			int32 Count = 0;
+			bool bEnable = Args.Num() > 0 && FCString::Atoi(*Args[0]) != 0;
+			for (TActorIterator<AJDTrainingDummy> It(World); It; ++It)
+			{
+				if (Args.IsEmpty() && Count == 0)
+				{
+					bEnable = !It->IsAttackMode();
+				}
+				It->SetAttackMode(bEnable);
+				++Count;
+			}
+			UE_LOG(LogJayadwara, Display, TEXT("JD.Dummy.Attack %d -> %d dummy"), bEnable ? 1 : 0, Count);
+		}));
+
+	FAutoConsoleCommandWithWorldAndArgs GJDInput(TEXT("JD.Input"),
+		TEXT("JD.Input <Input.tag> <1|0>: tekan (1) / lepas (0) input tag pawn pemain tanpa perangkat (uji otomatis)"),
+		FConsoleCommandWithWorldAndArgsDelegate::CreateLambda([](const TArray<FString>& Args, UWorld* World)
+		{
+			APlayerController* PC = World ? World->GetFirstPlayerController() : nullptr;
+			UJDAbilitySystemComponent* ASC = Cast<UJDAbilitySystemComponent>(
+				UAbilitySystemGlobals::GetAbilitySystemComponentFromActor(PC ? PC->GetPawn() : nullptr));
+			const FGameplayTag Tag = Args.Num() > 0 ? FGameplayTag::RequestGameplayTag(FName(*Args[0]), false) : FGameplayTag();
+			if (!ASC || !Tag.IsValid())
+			{
+				UE_LOG(LogJayadwara, Warning, TEXT("JD.Input: pawn tanpa ASC atau tag tidak dikenal"));
+				return;
+			}
+			if (Args.Num() < 2 || FCString::Atoi(*Args[1]) != 0)
+			{
+				ASC->AbilityInputTagPressed(Tag);
+			}
+			else
+			{
+				ASC->AbilityInputTagReleased(Tag);
+			}
 		}));
 
 	FAutoConsoleCommandWithWorldAndArgs GJDStamina(TEXT("JD.Stamina"), TEXT("JD.Stamina <n>: kurangi stamina n (default 30), regen mulai setelah jeda"),

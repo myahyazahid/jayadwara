@@ -40,12 +40,28 @@ Pengganti timer transformasi.
 
 - **Syarat transformasi**: **energi transformasi** penuh (bar di HUD manusia; keputusan 12 Okt 2026). Transformasi pertama tiap episode boleh dipicu cerita.
 - **Kalah sebagai Jayadwara** (Health habis atau meter sinkronisasi habis): kembali jadi Aksa **di tempat**, pertarungan berlanjut; Aksa menghindar sampai energi penuh lagi lalu berubah lagi. Aksa mati = ulang checkpoint. Detail: [23](23-rencana-fase-1.md#45-kalah-sebagai-jayadwara--energi-transformasi-q15).
+- **Jubah upacara** — lihat bagian [Jubah upacara](#jubah-upacara) di bawah.
 - **Upgrade**:
   - Skill tree silat (berlaku di dua skala).
   - Upgrade scanner Netra.
   - "Ingatan" sang penjaga → membuka jurus baru Jayadwara.
   - Kekuatan dari ujian: **sayap** (Lembuswana, Ep 38), **kekuatan bumi** (Antaboga, Ep 44).
 - **Kondisi kalah & checkpoint** untuk kedua mode.
+
+### Jubah upacara
+
+Keputusan 13 Okt 2026. Desain: K9 di [14](14-model-sheet-jayadwara.md); rencana iterasi: [26](26-rencana-jubah-jayadwara.md). Jayadwara memakai jubah panjang **hanya di luar combat**; saat bertarung tanpa jubah (kaki & siluet tetap terbaca dari kamera belakang, tanpa simulasi kain di combat).
+
+| Kejadian | Jubah | Pemicu |
+|---|---|---|
+| Transformasi | Muncul **berjubah** (animasi kedatangan) | Tombol transformasi (T / L1+R1) |
+| Lock-on ke boss pertama kali | Animasi **lepas jubah** ±2 s; jubah buyar jadi cahaya/serpihan emas ("kembali ke kalung"), tidak jatuh ke tanah. Boss sedang animasi intro supaya pemain tidak dipukul | Otomatis dari lock-on (Q / R3) |
+| Menyerang/dodge sebelum lock-on | Lepas **versi cepat** (dikibas ±0,5 s), input serangan tidak hilang | Otomatis |
+| Boss kalah | Jubah **kembali** di pose menang/kepergian | Otomatis / cutscene |
+| Cutscene | Diatur per adegan | Sequencer |
+
+- Animasi lepas pendek dan bisa di-skip (terlihat tiap episode).
+- Tanpa tombol khusus. Tombol manual (pamer/foto, usulan D-pad atas) → backlog.
 
 ---
 

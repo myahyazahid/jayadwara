@@ -19,7 +19,7 @@ public class Jayadwara : ModuleRules
 			"Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput",
 			"GameplayAbilities", "GameplayTags", "GameplayTasks",
 			"AIModule", "StateTreeModule", "GameplayStateTreeModule",
-			"Niagara", "MotionWarping", "GeometryCollectionEngine", "EngineCameras"
+			"Niagara", "MotionWarping", "GeometryCollectionEngine", "EngineCameras", "AnimGraphRuntime"
 		});
 
 		PrivateDependencyModuleNames.AddRange(new string[] { "UMG", "Slate", "SlateCore" });

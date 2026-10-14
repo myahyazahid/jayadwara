@@ -3,6 +3,7 @@
 Jalankan di Blender headless (proses terpisah, scene kosong):
   blender --background --factory-startup --python Art/Scripts/validate_jayadwara.py -- <file.fbx>
         [--max-tris N] [--materials N] [--height M] [--bones jd_skeleton]
+        jubah Jayadwara2: --materials 1 --no-zone --max-tris 60000 --height 1.50 --zmin 0.10 --extra-bone-prefix cape_ --no-sockets
 Exit code 0 = semua PASS, 1 = ada FAIL.
 """
 import argparse
@@ -23,6 +24,9 @@ ap.add_argument("--max-tris", type=int, default=12000)
 ap.add_argument("--materials", type=int, default=4)
 ap.add_argument("--height", type=float, default=1.99, help="tinggi total termasuk tanduk (m)")
 ap.add_argument("--tol", type=float, default=0.03)
+ap.add_argument("--zmin", type=float, default=0.0, help="z terbawah harapan (m, skala authoring); jubah: 0,10")
+ap.add_argument("--extra-bone-prefix", default="", help="tulang tambahan berawalan ini diizinkan (jubah: cape_)")
+ap.add_argument("--no-sockets", action="store_true", help="lewati cek socket (mesh pengikut, mis. jubah)")
 ap.add_argument("--max-influence", type=int, default=4)
 ap.add_argument("--no-zone", action="store_true", help="lewati cek JD_Zone (model bertekstur Tripo, Jayadwara2: tanpa atribut zona)")
 ap.add_argument("--unit", type=float, default=0.01,
@@ -64,6 +68,8 @@ arm, mesh = arms[0], meshes[0]
 # ---- tulang
 expected = [b[0] for b in SK.build_bones()]
 got = [b.name for b in arm.data.bones]
+if args.extra_bone_prefix:
+    expected += [n for n in got if n.startswith(args.extra_bone_prefix)]
 roots = [b.name for b in arm.data.bones if b.parent is None]
 check("nama tulang = spesifikasi skeleton", set(got) == set(expected),
       f"kurang={sorted(set(expected) - set(got))[:6]} lebih={sorted(set(got) - set(expected))[:6]}")
@@ -88,7 +94,7 @@ if export_scale is None:
 # ukuran dicek di skala authoring (1,90 m): data FBX = cm x export_scale
 zmin, zmax = zmin * args.unit / export_scale, zmax * args.unit / export_scale
 check(f"export_scale tercatat ({export_scale:.3f})", export_scale > 0)
-check("telapak kaki di z≈0", abs(zmin) <= args.tol, f"zmin={zmin:.3f} m")
+check(f"titik terbawah di z≈{args.zmin}", abs(zmin - args.zmin) <= args.tol, f"zmin={zmin:.3f} m")
 check(f"tinggi total ≈ {args.height} m", abs((zmax - zmin) - args.height) <= args.tol, f"{zmax - zmin:.3f} m")
 check("objek armature bernama 'Armature' (UE tidak membuat tulang root tambahan)", arm.name == "Armature", arm.name)
 check("skala armature seragam ≈ 1", all(abs(v - 1) < 1e-3 for v in arm.scale), f"scale={tuple(round(v, 4) for v in arm.scale)}")
@@ -144,14 +150,14 @@ import json  # noqa: E402
 import re  # noqa: E402
 
 check("tidak ada empty di FBX (jadi tulang di UE)", not empties, str([o.name for o in empties][:6]))
-exp_sockets = list(SK.build_sockets().keys())
+exp_sockets = [] if args.no_sockets else list(SK.build_sockets().keys())
 sj = re.sub(r"_LOD\d+$", "", os.path.splitext(fbx)[0]) + "_sockets.json"
 data = {}
 if os.path.exists(sj):
     with open(sj, encoding="utf-8") as f:
         data = {s["name"]: s for s in json.load(f)["sockets"]}
 missing = [s for s in exp_sockets if s not in data]
-check("semua socket ada di _sockets.json", os.path.exists(sj) and not missing, f"hilang: {missing}" if os.path.exists(sj) else f"tidak ada: {sj}")
+check("semua socket ada di _sockets.json", (args.no_sockets or os.path.exists(sj)) and not missing, f"hilang: {missing}" if os.path.exists(sj) else f"tidak ada: {sj}")
 bad_parent = [s for s in exp_sockets if s in data and data[s]["bone"] not in got]
 check("socket ter-parent ke tulang", not bad_parent, f"{bad_parent}")
 

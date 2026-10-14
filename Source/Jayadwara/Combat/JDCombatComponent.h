@@ -7,6 +7,21 @@
 
 class UJDCombatProfile;
 
+/** Hasil serangan yang mengenai karakter yang bertahan (docs/23 Iterasi 3). */
+UENUM(BlueprintType)
+enum class EJDHitOutcome : uint8
+{
+	Hit,
+	/** Kena i-frame dodge: tanpa damage. */
+	Dodged,
+	/** Ditangkis: damage dikurangi, stamina penangkis berkurang. */
+	Blocked,
+	/** Ditangkis tapi stamina habis: penangkis stagger. */
+	GuardBreak,
+	/** Parry: tanpa damage, penyerang stagger. */
+	Parried
+};
+
 /** Pukulan kena: korban, titik kena, langkah serangan. */
 DECLARE_MULTICAST_DELEGATE_ThreeParams(FJDHitLandedEvent, AActor* /*Victim*/, const FHitResult& /*Hit*/, const FJDAttackStep& /*Attack*/);
 
@@ -17,6 +32,11 @@ DECLARE_MULTICAST_DELEGATE_ThreeParams(FJDHitLandedEvent, AActor* /*Victim*/, co
  * JD Hit Window di montage memanggil Begin/Update/EndHitWindow -> sphere sweep dari socket antar-frame -> korban
  * ber-ASC yang belum kena di serangan ini menerima UJDGE_Damage, Gameplay Event Event.Hit, Gameplay Cue, hit-stop,
  * dan pemain mendapat camera shake. Satu korban maksimal satu kali per serangan.
+ *
+ * Bertahan (Iterasi 3): komponen milik korban memutuskan hasilnya (ResolveIncomingHit) dari tag ASC-nya:
+ * State.Invulnerable -> Dodged, State.ParryWindow -> Parried (penyerang stagger), State.Blocking -> Blocked/GuardBreak.
+ * Tangkis & parry hanya berlaku untuk serangan dari depan (BlockAngle). Stagger sementara (ApplyStagger) membatalkan
+ * ability combat, memasang State.Stagger, dan menahan gerak; reaksi lengkap (poise, knockdown) di Iterasi 4.
  */
 UCLASS(ClassGroup = (Jayadwara), meta = (BlueprintSpawnableComponent))
 class JAYADWARA_API UJDCombatComponent : public UActorComponent
@@ -37,6 +57,17 @@ public:
 
 	bool IsAttacking() const { return bAttackActive; }
 
+	/** Serangan berjalan tapi jendela hit sudah lewat: boleh dibatalkan dodge/tangkis (docs/23 bagian 5). */
+	bool IsInAttackRecovery() const { return bAttackActive && bHitWindowDone; }
+
+	/** Dipanggil komponen penyerang saat pukulannya mengenai pemilik komponen ini. Mengurangi stamina kalau ditangkis. */
+	EJDHitOutcome ResolveIncomingHit(const AActor* Attacker);
+
+	/** Stagger selama Duration detik (dibatalkan ability combat, gerak ditahan, StaggerMontage profil diputar). */
+	void ApplyStagger(float Duration);
+
+	bool IsStaggered() const;
+
 	void BeginHitWindow(FName SocketName, float RadiusOverride);
 	void UpdateHitWindow();
 	void EndHitWindow();
@@ -54,13 +85,16 @@ private:
 	USkeletalMeshComponent* GetOwnerMesh() const;
 	FVector GetSocketLocation() const;
 	void ProcessHit(const FHitResult& Hit);
-	void StartHitStop(AActor* Victim);
+	void StartHitStop(AActor* Victim, float DurationScale = 1.0f);
 	void EndHitStop();
+	void EndStagger();
+	void ShowDebugMessage(const FString& Message, const FColor& Color) const;
 
 	FJDAttackStep CurrentAttack;
 	bool bAttackActive = false;
 
 	bool bHitWindowOpen = false;
+	bool bHitWindowDone = false;
 	FName HitSocket;
 	float HitRadius = 30.0f;
 	FVector LastSocketLocation = FVector::ZeroVector;
@@ -70,4 +104,6 @@ private:
 
 	TArray<TWeakObjectPtr<AActor>> HitStopActors;
 	FTimerHandle HitStopTimer;
+
+	FTimerHandle StaggerTimer;
 };

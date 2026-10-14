@@ -148,6 +148,12 @@ void AJDCharacterBase::Move(const FInputActionValue& Value)
 	{
 		return;
 	}
+	// Stagger (guard break, di-parry) dan mati menahan gerak.
+	if (AbilitySystemComponent && (AbilitySystemComponent->HasMatchingGameplayTag(JDGameplayTags::State_Stagger)
+		|| AbilitySystemComponent->HasMatchingGameplayTag(JDGameplayTags::State_Dead)))
+	{
+		return;
+	}
 
 	// Maju/samping relatif terhadap arah kamera (yaw saja).
 	const FVector2D Axis = Value.Get<FVector2D>();

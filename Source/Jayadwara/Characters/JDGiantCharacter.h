@@ -5,6 +5,7 @@
 #include "JDGiantCharacter.generated.h"
 
 class UCameraComponent;
+class UJDCapeComponent;
 class USpringArmComponent;
 
 /**
@@ -44,6 +45,9 @@ public:
 	UFUNCTION(BlueprintPure, Category = "Giant")
 	bool IsScaleTransitioning() const { return bScaleTransitioning; }
 
+	UFUNCTION(BlueprintPure, Category = "Giant")
+	UJDCapeComponent* GetCapeComponent() const { return CapeControl; }
+
 	/**
 	 * Efek transformasi sederhana: skala aktor tumbuh dari setinggi manusia ke penuh (bGrow) atau sebaliknya, kaki tetap
 	 * menapak, kamera ikut. Gerak dimatikan selama efek; OnFinished dipanggil setelah selesai (skala akhir pas 1 atau skala
@@ -52,6 +56,8 @@ public:
 	void BeginScaleTransition(bool bGrow, float Duration, TFunction<void()> OnFinished = nullptr);
 
 protected:
+	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
+
 	/** Tinggi raksasa di game (cm). Placeholder ±45 m sampai greybox Fase 1 (docs/13 D4). */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Giant", meta = (ClampMin = "100"))
 	float GiantHeightCm = 4500.0f;
@@ -94,6 +100,10 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
 	TObjectPtr<UCameraComponent> FollowCamera;
 
+	/** Pakai/lepas jubah upacara (docs/26); diam kalau Blueprint tidak punya komponen mesh "Cape". */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Cape")
+	TObjectPtr<UJDCapeComponent> CapeControl;
+
 private:
 	void ApplyGiantScale();
 
@@ -101,6 +111,9 @@ private:
 	void ApplyCameraScale(float EffectiveScale);
 
 	void FinishScaleTransition();
+
+	/** SEMENTARA (docs/26 J1b): tombol Y = lepas/pakai jubah. Diganti pemicu lock-on & aksi combat pertama di J4. */
+	void DebugToggleCape();
 
 	bool bScaleTransitioning = false;
 	bool bTransitionGrow = true;

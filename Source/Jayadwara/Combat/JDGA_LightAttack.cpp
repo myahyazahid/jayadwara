@@ -18,17 +18,12 @@ UJDGA_LightAttack::UJDGA_LightAttack()
 	SetAssetTags(AssetTags);
 
 	ActivationOwnedTags.AddTag(JDGameplayTags::State_Attacking);
+	ActivationBlockedTags.AddTag(JDGameplayTags::State_Attacking);
 	ActivationBlockedTags.AddTag(JDGameplayTags::State_Dead);
 	ActivationBlockedTags.AddTag(JDGameplayTags::State_Stagger);
 	ActivationBlockedTags.AddTag(JDGameplayTags::State_Knockdown);
 	ActivationBlockedTags.AddTag(JDGameplayTags::State_Dodging);
 	ActivationBlockedTags.AddTag(JDGameplayTags::State_Blocking);
-}
-
-UJDCombatComponent* UJDGA_LightAttack::GetCombat() const
-{
-	const AActor* Avatar = GetAvatarActorFromActorInfo();
-	return Avatar ? Avatar->FindComponentByClass<UJDCombatComponent>() : nullptr;
 }
 
 bool UJDGA_LightAttack::CanActivateAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo,
@@ -38,9 +33,7 @@ bool UJDGA_LightAttack::CanActivateAbility(const FGameplayAbilitySpecHandle Hand
 	{
 		return false;
 	}
-	const AActor* Avatar = ActorInfo ? ActorInfo->AvatarActor.Get() : nullptr;
-	const UJDCombatComponent* Combat = Avatar ? Avatar->FindComponentByClass<UJDCombatComponent>() : nullptr;
-	const UJDCombatProfile* Profile = Combat ? Combat->GetCombatProfile() : nullptr;
+	const UJDCombatProfile* Profile = GetCombatProfile(ActorInfo);
 	return Profile && !Profile->LightCombo.IsEmpty() && Profile->LightCombo[0].Montage;
 }
 
@@ -94,7 +87,7 @@ void UJDGA_LightAttack::PlayStep(int32 Index)
 	FaceInputDirection();
 	Combat->BeginAttack(Step);
 
-	MontageTask = UAbilityTask_PlayMontageAndWait::CreatePlayMontageAndWaitProxy(this, NAME_None, Step.Montage, Profile->MontagePlayRate);
+	MontageTask = UAbilityTask_PlayMontageAndWait::CreatePlayMontageAndWaitProxy(this, NAME_None, Step.Montage, GetMontageRate(Step.PlayRate));
 	MontageTask->OnBlendOut.AddDynamic(this, &UJDGA_LightAttack::OnMontageFinished);
 	MontageTask->OnCompleted.AddDynamic(this, &UJDGA_LightAttack::OnMontageFinished);
 	MontageTask->OnInterrupted.AddDynamic(this, &UJDGA_LightAttack::OnMontageInterrupted);
@@ -153,25 +146,6 @@ void UJDGA_LightAttack::TryAdvanceCombo()
 
 	LastPressTime = -1000.0;
 	PlayStep(++ComboIndex);
-}
-
-void UJDGA_LightAttack::FaceInputDirection() const
-{
-	ACharacter* Character = Cast<ACharacter>(GetAvatarActorFromActorInfo());
-	if (!Character)
-	{
-		return;
-	}
-	FVector Direction = Character->GetPendingMovementInputVector();
-	if (Direction.IsNearlyZero())
-	{
-		Direction = Character->GetLastMovementInputVector();
-	}
-	Direction.Z = 0.0f;
-	if (Direction.SizeSquared() > 0.01f)
-	{
-		Character->SetActorRotation(FRotator(0.0f, Direction.Rotation().Yaw, 0.0f));
-	}
 }
 
 void UJDGA_LightAttack::OnMontageFinished()
