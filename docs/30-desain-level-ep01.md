@@ -3,6 +3,8 @@
 > **Status: USULAN v0.1 (15 Okt 2026)**, menunggu persetujuan developer. Rincian dari pola di [28](28-struktur-level-episode.md#ep-1--ep01_lawangsapta--sore--senja-merah--awal-malam).
 > Sumber: [17](17-skenario-arc-1.md#episode-1--gerbang-yang-retak) (adegan), [18](18-kebutuhan-episode-1.md#c-lingkungan--level) (zona & aset), [11](11-vertical-slice-spec.md) (scope), [23](23-rencana-fase-1.md) (angka combat & level uji). Kalau bertentangan, dokumen sumber yang berlaku.
 
+**Visual:** denah berlapis, potongan bukit berskala, perbandingan tinggi, dan linimasa cahaya ada di [`visual/ep01-lawang-sapta.html`](visual/ep01-lawang-sapta.html) (buka di browser).
+
 **Posisi di roadmap:** greybox di akhir Fase 1 (setelah Iterasi 7–8 memberi angka arena dan FPS), level art di Fase 2 (Jun–Jul 2027, [10](10-roadmap.md#fase-2--vertical-slice-episode-1-gerbang-yang-retak-apr--des-2027)). Semua angka di dokumen ini **titik awal greybox**, bukan final.
 
 ---
