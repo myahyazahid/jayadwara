@@ -120,4 +120,4 @@ Status 12 Okt 2026 (dicek Claude lewat Python + capture; detail di docs/13 Itera
 - Pose lengan terangkat penuh: tutup pauldron sebagian masuk ke badan dan menempel ke kerah. Kandidat perbaikan: tulang bantu bahu atau corrective, setelah dilihat dengan animasi sungguhan (docs/13).
 - LOD3 sedikit belang di paha karena normal halus ikut di-decimate. Masih wajar untuk jarak jauh.
 - Tekstur masih versi otomatis (hand-paint belum).
-- File Blender sumber: `Art/Blender/jayadwara_giant_v05_revisi.blend`. Untuk membangun ulang paket: `Art/Scripts/16_make_lods.py` (urutan lengkap di `Art/README.md`).
+- File Blender sumber: `Art/Blender/jayadwara/jayadwara_giant_v05_revisi.blend`. Untuk membangun ulang paket: `Art/Scripts/16_make_lods.py` (urutan lengkap di `Art/README.md`).

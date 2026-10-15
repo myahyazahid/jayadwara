@@ -29,7 +29,7 @@ for m in (C, K, HR):
     importlib.reload(m)
 
 assert any(k in bpy.data.filepath for k in ("aksa_v03", "aksa_v04")), "buka aksa_v03_mpfb.blend atau aksa_v04_outfit.blend"
-OUT = C.ART / "Blender" / "aksa_v04_outfit.blend"
+OUT = C.ART / "Blender" / "aksa" / "aksa_v04_outfit.blend"
 SY = C.BODY_SHIFT_Y
 arm = C.get_arm()
 bh = lambda n: C.bone_head(arm, n)  # noqa: E731

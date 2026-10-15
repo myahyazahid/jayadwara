@@ -25,7 +25,7 @@ for m in (C, HD, HA, HR):
     importlib.reload(m)
 
 assert "aksa_v01" in bpy.data.filepath or "aksa_v02" in bpy.data.filepath, "buka aksa_v01_proxy.blend atau aksa_v02_head.blend"
-OUT = C.ART / "Blender" / "aksa_v02_head.blend"
+OUT = C.ART / "Blender" / "aksa" / "aksa_v02_head.blend"
 arm = C.get_arm()
 SEG = C.bone_segments(arm)
 

@@ -121,15 +121,15 @@ Hierarki & nama Mannequin (tanpa twist bone; tulang kaku tidak butuh) + `jaw` + 
 **Total ±40–50 jam**, kira-kira setengah dari Jayadwara/Aksa karena tidak ada skinning badan.
 
 ### Iterasi 0 — Design lock & model sheet
-- **Claude:** normalisasi depan/samping/belakang dari `jerangkong_v01.webp` jadi reference plane (`make_reference_planes.py`, 1000 px = 2,2 m) dengan **postur bungkuk sedang** sebagai acuan (view samping konsep dikoreksi); isi bagian 9 (proporsi, palet hex, ukuran potongan); scene `Art/Blender/jerangkong_v00_setup.blend`.
+- **Claude:** normalisasi depan/samping/belakang dari `jerangkong_v01.webp` jadi reference plane (`make_reference_planes.py`, 1000 px = 2,2 m) dengan **postur bungkuk sedang** sebagai acuan (view samping konsep dikoreksi); isi bagian 9 (proporsi, palet hex, ukuran potongan); scene `Art/Blender/jerangkong/jerangkong_v00_setup.blend`.
 - **Developer:** menyetujui model sheet & J1–J9.
 - **Gate:** reference plane sejajar; model sheet disetujui.
 
-**Status (12 Okt 2026): selesai dari sisi Claude, menunggu persetujuan developer.** Atas permintaan "siapkan untuk modeling jerangkong" (dibaca sebagai J9 = mulai sekarang, jalur art paralel). Artefak: `Art/Reference/jk_*.png` (`make_reference_planes_jerangkong.py`), scene `Art/Blender/jerangkong_v00_setup.blend` (`jerangkong_00_setup_scene.py`; plane dicek sejajar lewat render ortografis), model sheet [24](24-model-sheet-jerangkong.md). Temuan: tampak samping konsep bungkuk berlebihan (tengkorak 0,43 m di depan pergelangan kaki) → target bungkuk sedang ditandai `JK_TGT_*` di scene (S2), dan pose rest diusulkan sudah bungkuk agar retarget otomatis bungkuk (S3).
+**Status (12 Okt 2026): selesai dari sisi Claude, menunggu persetujuan developer.** Atas permintaan "siapkan untuk modeling jerangkong" (dibaca sebagai J9 = mulai sekarang, jalur art paralel). Artefak: `Art/Reference/jk_*.png` (`make_reference_planes_jerangkong.py`), scene `Art/Blender/jerangkong/jerangkong_v00_setup.blend` (`jerangkong_00_setup_scene.py`; plane dicek sejajar lewat render ortografis), model sheet [24](24-model-sheet-jerangkong.md). Temuan: tampak samping konsep bungkuk berlebihan (tengkorak 0,43 m di depan pergelangan kaki) → target bungkuk sedang ditandai `JK_TGT_*` di scene (S2), dan pose rest diusulkan sudah bungkuk agar retarget otomatis bungkuk (S3).
 
 ### Jalur B — basis model developer (Tripo AI), 12 Okt 2026
 
-Developer membuat model awal dengan Tripo AI dari konsep: `Art/Source/jerangkong_tripo_v01.glb` (asli: `yahya_design/rKHD3GD0eELe7BHA74wR.glb`). Diimpor oleh `Art/Scripts/jerangkong_01_import_tripo.py` → `Art/Blender/jerangkong_v01_tripo.blend` (objek `JK_Source`, menghadap -Y, puncak tengkorak 2,19 m, vertex jahitan UV digabung).
+Developer membuat model awal dengan Tripo AI dari konsep: `Art/Source/jerangkong_tripo_v01.glb` (asli: `yahya_design/rKHD3GD0eELe7BHA74wR.glb`). Diimpor oleh `Art/Scripts/jerangkong_01_import_tripo.py` → `Art/Blender/jerangkong/jerangkong_v01_tripo.blend` (objek `JK_Source`, menghadap -Y, puncak tengkorak 2,19 m, vertex jahitan UV digabung).
 
 | Temuan | Nilai | Akibat |
 |---|---|---|

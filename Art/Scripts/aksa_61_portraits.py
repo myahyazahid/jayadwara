@@ -1,6 +1,6 @@
 """Aksa Iterasi 6 — potret dialog (netral, senyum, marah) untuk UI vertical slice (docs/18 bagian F, dialog = teks + potret).
 
-Headless (file tidak disimpan): blender --background Art/Blender/aksa_v05_tex.blend --python Art/Scripts/aksa_61_portraits.py
+Headless (file tidak disimpan): blender --background Art/Blender/aksa/aksa_v05_tex.blend --python Art/Scripts/aksa_61_portraits.py
 Keluaran: Art/Export/Portraits/T_Aksa_Portrait_{Neutral,Smile,Angry}.png (1024², latar transparan, kepala-bahu 3/4 kiri).
 Ekspresi = morph target yang sama dengan di game (ak_smile, ak_angry), jadi potret konsisten dengan model.
 """

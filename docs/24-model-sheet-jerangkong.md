@@ -10,7 +10,7 @@
 
 Sumber tunggal modeling: [`concept-art/jerangkong_v01.webp`](concept-art/jerangkong_v01.webp) (1774×887: depan, samping hadap kiri, belakang, tengkorak 3/4, chart skala). Prompt: [`Art/Reference/prompt_jerangkong.md`](../Art/Reference/prompt_jerangkong.md).
 
-Semua file turunan dibuat ulang oleh `python -I Art/Scripts/make_reference_planes_jerangkong.py`. Scene: `Art/Blender/jerangkong_v00_setup.blend` (`Art/Scripts/jerangkong_00_setup_scene.py`).
+Semua file turunan dibuat ulang oleh `python -I Art/Scripts/make_reference_planes_jerangkong.py`. Scene: `Art/Blender/jerangkong/jerangkong_v00_setup.blend` (`Art/Scripts/jerangkong_00_setup_scene.py`).
 
 | File (`Art/Reference/`) | Isi | Pemakaian |
 |---|---|---|

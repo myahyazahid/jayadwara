@@ -1,6 +1,6 @@
 """Aksa — render badan penuh Eevee (3/4 depan, 3/4 belakang, close-up tangan & boots) untuk review pakaian.
 
-Headless: blender --background Art/Blender/aksa_v04_outfit.blend --python Art/Scripts/aksa_31_render_body.py -- <outdir>
+Headless: blender --background Art/Blender/aksa/aksa_v04_outfit.blend --python Art/Scripts/aksa_31_render_body.py -- <outdir>
 Output: body_q34.png, body_back.png, detail_hand.png, detail_boot.png, lalu body_sheet.png (gabungan).
 """
 import math

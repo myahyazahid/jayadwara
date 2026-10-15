@@ -87,7 +87,7 @@
 | **`cap02.glb`** | **Jubah saja**, 37,6k tris, satu lembar utuh, cocok dengan "Cape / Mantle breakdown" konsep (panel putih tengah & sisi, rantai emas berjuntai, ujung runcing bermotif emas) | ✅ **Dipilih.** Kekurangan: mantel **tertutup di depan** (panel depan sampai lutut) → dibuka di J0 |
 | `cape03.glb` | Tripo memodelkan **seluruh sheet konsep** (8 figur + potongan breakdown + swatch palet) jadi satu mesh | ❌ Tidak terpakai |
 
-Sumber disalin ke `Art/Source/jayadwara2_cape_tripo_v01.glb` (asli di `yahya_design/` tidak diubah). Skrip: `Art/Scripts/jayadwara2_cape_01_intake.py` (di atas `jayadwara2_v05_rig_r3.blend`, file itu tidak ditimpa) → `Art/Blender/jayadwara2_cape_v00_intake.blend` (`JD2_Cape_Source` + empty `JD2C_ANCHOR_*`); render `jayadwara2_cape_02_render.py` → `Art/Export/_jd2c/`. Pembanding konsep vs hasil: **`Art/Export/_jd2c/_banding_konsep.png`**.
+Sumber disalin ke `Art/Source/jayadwara2_cape_tripo_v01.glb` (asli di `yahya_design/` tidak diubah). Skrip: `Art/Scripts/jayadwara2_cape_01_intake.py` (di atas `jayadwara2_v05_rig_r3.blend`, file itu tidak ditimpa) → `Art/Blender/jayadwara2/jayadwara2_cape_v00_intake.blend` (`JD2_Cape_Source` + empty `JD2C_ANCHOR_*`); render `jayadwara2_cape_02_render.py` → `Art/Export/_jd2c/`. Pembanding konsep vs hasil: **`Art/Export/_jd2c/_banding_konsep.png`**.
 
 | Temuan / keputusan | Nilai | Akibat |
 |---|---|---|
@@ -106,7 +106,7 @@ Sumber disalin ke `Art/Source/jayadwara2_cape_tripo_v01.glb` (asli di `yahya_des
 
 ### Hasil J1 (13 Okt 2026)
 
-Pipeline: `jayadwara2_cape_01_intake.py` → `jayadwara2_cape_10_fit_rig.py` (→ `Art/Blender/jayadwara2_cape_v01_rig.blend`) → `jayadwara2_cape_11_pose_tests.py` → `jayadwara2_cape_14_export.py` → `validate_jayadwara.py` (27/27) → UE `Tools/ue_import_jayadwara2_cape.py` → `Tools/ue_setup_jayadwara2_cape.py`; bukti `Tools/ue_capture_jayadwara2_cape.py`. Gambar: `Art/Export/_jd2c/_ue_j1.png` (UE), `_pose_j1.png` dan `poses/j1b_*.png` (Blender), `jd2c_v01_*.png` (rest).
+Pipeline: `jayadwara2_cape_01_intake.py` → `jayadwara2_cape_10_fit_rig.py` (→ `Art/Blender/jayadwara2/jayadwara2_cape_v01_rig.blend`) → `jayadwara2_cape_11_pose_tests.py` → `jayadwara2_cape_14_export.py` → `validate_jayadwara.py` (27/27) → UE `Tools/ue_import_jayadwara2_cape.py` → `Tools/ue_setup_jayadwara2_cape.py`; bukti `Tools/ue_capture_jayadwara2_cape.py`. Gambar: `Art/Export/_jd2c/_ue_j1.png` (UE), `_pose_j1.png` dan `poses/j1b_*.png` (Blender), `jd2c_v01_*.png` (rest).
 
 | Langkah | Hasil | Catatan |
 |---|---|---|

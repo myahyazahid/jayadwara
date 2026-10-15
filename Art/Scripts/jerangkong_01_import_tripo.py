@@ -1,8 +1,8 @@
 """Jerangkong — impor model awal developer (Tripo AI, GLB) ke scene setup, sebagai basis Iterasi 1 (docs/20 jalur B).
 
 Jalankan headless dari scene setup:
-  blender --background Art/Blender/jerangkong_v00_setup.blend --python Art/Scripts/jerangkong_01_import_tripo.py
-Hasil: Art/Blender/jerangkong_v01_tripo.blend (objek `JK_Source` di collection `01_Source`; tekstur di-pack).
+  blender --background Art/Blender/jerangkong/jerangkong_v00_setup.blend --python Art/Scripts/jerangkong_01_import_tripo.py
+Hasil: Art/Blender/jerangkong/jerangkong_v01_tripo.blend (objek `JK_Source` di collection `01_Source`; tekstur di-pack).
 
 Normalisasi:
 - GLB Tripo: tinggi 1,0, menghadap +X (Blender) -> diputar -90° di Z supaya menghadap -Y (kontrak Jayadwara/Aksa).
@@ -21,7 +21,7 @@ from mathutils import Matrix, Vector
 
 ROOT = Path(r"C:\repository\unreal_engine\jayadwara")
 SRC = ROOT / "Art" / "Source" / "jerangkong_tripo_v01.glb"
-OUT = ROOT / "Art" / "Blender" / "jerangkong_v01_tripo.blend"
+OUT = ROOT / "Art" / "Blender" / "jerangkong" / "jerangkong_v01_tripo.blend"
 TOP_Z = 2.19
 MERGE_DIST = 0.0005            # m (setelah skala)
 

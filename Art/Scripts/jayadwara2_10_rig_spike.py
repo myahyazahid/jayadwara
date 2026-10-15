@@ -1,8 +1,8 @@
 """Jayadwara2 R1 — spike rig: skeleton (jd2_skeleton) + pemisahan jahitan sentuh + bobot kulit untuk mesh Tripo satu badan.
 
 Jalankan headless dari hasil R0:
-  blender --background Art/Blender/jayadwara2_v01_tripo.blend --python Art/Scripts/jayadwara2_10_rig_spike.py
-Hasil: Art/Blender/jayadwara2_v02_rig_spike.blend  (objek `JD2_Body` ter-skin ke `JD2_Armature`, 9 socket; `JD2_Source` disembunyikan).
+  blender --background Art/Blender/jayadwara2/jayadwara2_v01_tripo.blend --python Art/Scripts/jayadwara2_10_rig_spike.py
+Hasil: Art/Blender/jayadwara2/jayadwara2_v02_rig_spike.blend  (objek `JD2_Body` ter-skin ke `JD2_Armature`, 9 socket; `JD2_Source` disembunyikan).
 
 Temuan R1: mesh Tripo satu pulau; kepalan menyentuh/menyatu dengan sayap kain & paha, lengan dengan rusuk. Bobot apa pun
 menarik "jembatan" antar bagian jadi balok panjang saat pose. Jadi:
@@ -26,7 +26,7 @@ if SCRIPTS not in sys.path:
     sys.path.insert(0, SCRIPTS)
 import jd2_skeleton as SK
 
-OUT = globals().get("RIG_OUT") or r"C:\repository\unreal_engine\jayadwara\Art\Blender\jayadwara2_v02_rig_spike.blend"
+OUT = globals().get("RIG_OUT") or r"C:\repository\unreal_engine\jayadwara\Art\Blender\jayadwara2\jayadwara2_v02_rig_spike.blend"
 ARM_NAME, BODY_NAME = "JD2_Armature", "JD2_Body"
 MAX_INFLUENCE = 4
 

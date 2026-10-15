@@ -290,5 +290,5 @@ np.savez(NPZ, uv=np.array(rec["uv"], np.float32), col=np.array(rec["col"], np.fl
          mat=np.array(rec["mat"], np.int8), zone=np.array(rec["zone"], np.int8), part=np.array(rec["part"], np.int16),
          area=np.array(rec["area"], np.float32), part_names=np.array(part_names), slots=np.array(C.SLOTS), zones=np.array(ZONES))
 print("NPZ:", NPZ, "| segitiga:", len(rec["uv"]))
-bpy.ops.wm.save_as_mainfile(filepath=str(C.ART / "Blender" / "aksa_v05_tex.blend"), relative_remap=True)
+bpy.ops.wm.save_as_mainfile(filepath=str(C.ART / "Blender" / "aksa" / "aksa_v05_tex.blend"), relative_remap=True)
 print("Disimpan:", bpy.data.filepath)

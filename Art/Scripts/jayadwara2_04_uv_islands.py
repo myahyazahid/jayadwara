@@ -1,5 +1,5 @@
 """Jayadwara2 R1/R2 — pulau UV atlas Tripo sebagai petunjuk segmentasi bagian (headless).
-  blender --background Art/Blender/jayadwara2_v01_tripo.blend --python Art/Scripts/jayadwara2_04_uv_islands.py
+  blender --background Art/Blender/jayadwara2/jayadwara2_v01_tripo.blend --python Art/Scripts/jayadwara2_04_uv_islands.py
 Mencetak jumlah pulau & statistik (tris, bbox 3D) dan menyimpan Art/Export/_jd2/_uv_islands.npz (label per segitiga)."""
 import numpy as np
 import bmesh

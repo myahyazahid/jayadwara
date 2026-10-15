@@ -1,6 +1,6 @@
 """Jubah Jayadwara2 J0 — render badan + jubah (depan/samping/belakang/3/4) dengan titik kait & garis bantu.
 
-  blender --background Art/Blender/jayadwara2_cape_v00_intake.blend --python Art/Scripts/jayadwara2_cape_02_render.py -- \
+  blender --background Art/Blender/jayadwara2/jayadwara2_cape_v00_intake.blend --python Art/Scripts/jayadwara2_cape_02_render.py -- \
       [outdir] [--cape JD2_Cape_Source] [--no-cape] [--tag v00]
 Panel ortografis sama skalanya dengan render R0 (tinggi 1200 px = 2,28 m). Titik kait = bola kuning,
 garis dagu (batas kerah K9) = garis biru, garis mata kaki = garis hijau. Keluaran: jd2c_<tag>_<view>.png

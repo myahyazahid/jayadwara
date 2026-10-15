@@ -1,7 +1,7 @@
 """Jubah Jayadwara2 J1 — fit lokal (bebas dari badan), skeleton jubah, bobot kinematik (docs/26 J1).
 
-  blender --background Art/Blender/jayadwara2_cape_v00_intake.blend --python Art/Scripts/jayadwara2_cape_10_fit_rig.py -- \
-      [--out Art/Blender/jayadwara2_cape_v01_rig.blend] [--clear 0.025] [--collar-clear 0.012]
+  blender --background Art/Blender/jayadwara2/jayadwara2_cape_v00_intake.blend --python Art/Scripts/jayadwara2_cape_10_fit_rig.py -- \
+      [--out Art/Blender/jayadwara2/jayadwara2_cape_v01_rig.blend] [--clear 0.025] [--collar-clear 0.012]
 Hasil (collection `10_Cape`): `JD2_Cape` (mesh ter-fit + bobot), `JD2C_Armature` (salinan skeleton Jayadwara2, nama tulang SAMA
 supaya Copy Pose From Mesh di UE cocok, + rantai `cape_{c,l,r,fl,fr}_01..06` berbobot 0 untuk J3). Tiap tulang JD2C yang
 namanya ada di JD2_Armature diberi constraint Copy Transforms -> pose badan di Blender langsung menggerakkan jubah (meniru UE).
@@ -28,7 +28,7 @@ from mathutils.kdtree import KDTree
 ROOT = Path(r"C:\repository\unreal_engine\jayadwara")
 argv = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
 ap = argparse.ArgumentParser()
-ap.add_argument("--out", default=str(ROOT / "Art" / "Blender" / "jayadwara2_cape_v01_rig.blend"))
+ap.add_argument("--out", default=str(ROOT / "Art" / "Blender" / "jayadwara2" / "jayadwara2_cape_v01_rig.blend"))
 ap.add_argument("--clear", type=float, default=0.025, help="m, jarak bebas jubah ke badan di bawah kerah")
 ap.add_argument("--no-calf", action="store_true", help="betis dipetakan ke paha (bukan calf_*)")
 ap.add_argument("--leg-max", type=float, default=0.6)

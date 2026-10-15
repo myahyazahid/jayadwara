@@ -1,5 +1,5 @@
 """Jayadwara2 R0 — ukur pose/proporsi/warna dari model terimpor (Blender headless).
-  blender --background Art/Blender/jayadwara2_v01_tripo.blend --python Art/Scripts/jayadwara2_03_measure.py
+  blender --background Art/Blender/jayadwara2/jayadwara2_v01_tripo.blend --python Art/Scripts/jayadwara2_03_measure.py
 """
 import colorsys
 import numpy as np

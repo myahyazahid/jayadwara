@@ -1,6 +1,6 @@
 """Jubah Jayadwara2 J1 — export SK_Jayadwara2_Cape(.fbx) + tekstur + JSON skala (kontrak sama dengan jayadwara2_14_export.py).
 
-  blender --background Art/Blender/jayadwara2_cape_v01_rig.blend --python Art/Scripts/jayadwara2_cape_14_export.py
+  blender --background Art/Blender/jayadwara2/jayadwara2_cape_v01_rig.blend --python Art/Scripts/jayadwara2_cape_14_export.py
 lalu validasi:
   blender --background --factory-startup --python Art/Scripts/validate_jayadwara.py -- Art/Export/SK_Jayadwara2_Cape.fbx \
       --materials 1 --no-zone --max-tris 60000 --height 1.50 --zmin 0.10 --extra-bone-prefix cape_ --no-sockets

@@ -1,6 +1,6 @@
 """Jayadwara2 R5 — LOD1–3 (FBX terpisah, skeleton sama) dari `JD2_Body` (LOD0 = hasil R3, 37,4k tris).
 
-  blender --background Art/Blender/jayadwara2_v05_rig_r3.blend --python Art/Scripts/jayadwara2_16_make_lods.py
+  blender --background Art/Blender/jayadwara2/jayadwara2_v05_rig_r3.blend --python Art/Scripts/jayadwara2_16_make_lods.py
 Per LOD: salinan JD2_Body, Armature dilepas, Decimate COLLAPSE (rasio LODS) dengan grup `LODPROTECT` (kepala depan: helm/wajah/mata, dan zona permata dada)
 dilindungi, lalu bobot dibersihkan (<= 4 influence, dinormalisasi), buang vertex/edge lepas; Armature dipasang lagi; diekspor lewat jayadwara2_14_export.py
 (kontrak sama: Armature, cm, skala raksasa ter-bake) sebagai SK_Jayadwara2_LOD<n>.fbx. Scene asli tidak berubah (tidak disimpan).
