@@ -1,0 +1,435 @@
+{
+ "fbx": "C:\\repository\\unreal_engine\\jayadwara_hermes\\Art\\Export\\SK_Aksa_LOD3.fbx",
+ "profil": "manny",
+ "kamera_dekat": "bawah",
+ "kanvas_tinggi_m": 1.806,
+ "tinggi_m": 1.7914,
+ "tris": 3067,
+ "jumlah_tulang": 99,
+ "jumlah_mesh": 1,
+ "slot_material": [
+  "M_Aksa_Skin",
+  "M_Aksa_Eyes",
+  "M_Aksa_Hair",
+  "M_Aksa_Cloth",
+  "M_Aksa_Gear"
+ ],
+ "tepi_terbuka": 469,
+ "tepi_terbuka_per_tulang": [
+  [
+   "thigh_r",
+   64
+  ],
+  [
+   "thigh_l",
+   62
+  ],
+  [
+   "calf_r",
+   38
+  ],
+  [
+   "calf_l",
+   36
+  ],
+  [
+   "head",
+   36
+  ],
+  [
+   "spine_05",
+   32
+  ],
+  [
+   "spine_04",
+   28
+  ],
+  [
+   "neck_01",
+   26
+  ]
+ ],
+ "pose": {
+  "rest": {
+   "peregangan_maks_cm": 0.0,
+   "regangan_p99_persen": 0.0,
+   "regangan_maks_persen": 0.0,
+   "terburuk": []
+  },
+  "kuda_kuda": {
+   "peregangan_maks_cm": 7.06,
+   "regangan_p99_persen": 16.5,
+   "regangan_maks_persen": 36.1,
+   "terburuk": [
+    [
+     "thigh_r",
+     7.06
+    ],
+    [
+     "spine_02",
+     6.2
+    ],
+    [
+     "thigh_twist_02_r",
+     5.25
+    ]
+   ]
+  },
+  "pukul": {
+   "peregangan_maks_cm": 7.76,
+   "regangan_p99_persen": 19.0,
+   "regangan_maks_persen": 43.1,
+   "terburuk": [
+    [
+     "upperarm_l",
+     7.76
+    ],
+    [
+     "spine_01",
+     5.17
+    ],
+    [
+     "jacket_l_02",
+     5.07
+    ]
+   ]
+  },
+  "tendang_tinggi": {
+   "peregangan_maks_cm": 12.63,
+   "regangan_p99_persen": 15.3,
+   "regangan_maks_persen": 54.6,
+   "terburuk": [
+    [
+     "thigh_r",
+     12.63
+    ],
+    [
+     "pelvis",
+     9.22
+    ],
+    [
+     "calf_r",
+     8.73
+    ]
+   ]
+  },
+  "dodge": {
+   "peregangan_maks_cm": 7.27,
+   "regangan_p99_persen": 14.2,
+   "regangan_maks_persen": 30.1,
+   "terburuk": [
+    [
+     "spine_04",
+     7.27
+    ],
+    [
+     "spine_01",
+     7.25
+    ],
+    [
+     "clavicle_l",
+     6.39
+    ]
+   ]
+  },
+  "jongkok": {
+   "peregangan_maks_cm": 31.93,
+   "regangan_p99_persen": 18.6,
+   "regangan_maks_persen": 49.8,
+   "terburuk": [
+    [
+     "calf_twist_02_l",
+     31.93
+    ],
+    [
+     "thigh_l",
+     30.93
+    ],
+    [
+     "pelvis",
+     25.84
+    ]
+   ]
+  },
+  "lari": {
+   "peregangan_maks_cm": 14.62,
+   "regangan_p99_persen": 16.3,
+   "regangan_maks_persen": 38.0,
+   "terburuk": [
+    [
+     "calf_twist_02_l",
+     14.62
+    ],
+    [
+     "thigh_l",
+     13.88
+    ],
+    [
+     "pelvis",
+     10.75
+    ]
+   ]
+  },
+  "lompat": {
+   "peregangan_maks_cm": 11.86,
+   "regangan_p99_persen": 19.5,
+   "regangan_maks_persen": 64.4,
+   "terburuk": [
+    [
+     "calf_twist_02_l",
+     11.86
+    ],
+    [
+     "thigh_l",
+     11.1
+    ],
+    [
+     "thigh_twist_02_l",
+     9.75
+    ]
+   ]
+  },
+  "tendang_samping": {
+   "peregangan_maks_cm": 12.11,
+   "regangan_p99_persen": 11.4,
+   "regangan_maks_persen": 56.6,
+   "terburuk": [
+    [
+     "thigh_r",
+     12.11
+    ],
+    [
+     "thigh_twist_02_r",
+     9.18
+    ],
+    [
+     "thigh_l",
+     9.01
+    ]
+   ]
+  },
+  "tangkis": {
+   "peregangan_maks_cm": 6.43,
+   "regangan_p99_persen": 17.4,
+   "regangan_maks_persen": 38.2,
+   "terburuk": [
+    [
+     "upperarm_l",
+     6.43
+    ],
+    [
+     "lowerarm_r",
+     5.98
+    ],
+    [
+     "lowerarm_l",
+     5.28
+    ]
+   ]
+  },
+  "putar_badan": {
+   "peregangan_maks_cm": 9.32,
+   "regangan_p99_persen": 19.0,
+   "regangan_maks_persen": 85.4,
+   "terburuk": [
+    [
+     "jacket_l_02",
+     9.32
+    ],
+    [
+     "spine_01",
+     9.29
+    ],
+    [
+     "jacket_r_02",
+     7.15
+    ]
+   ]
+  },
+  "lunge": {
+   "peregangan_maks_cm": 18.42,
+   "regangan_p99_persen": 13.0,
+   "regangan_maks_persen": 40.9,
+   "terburuk": [
+    [
+     "calf_twist_02_l",
+     18.42
+    ],
+    [
+     "thigh_l",
+     17.64
+    ],
+    [
+     "pelvis",
+     13.84
+    ]
+   ]
+  },
+  "bungkuk": {
+   "peregangan_maks_cm": 9.43,
+   "regangan_p99_persen": 16.4,
+   "regangan_maks_persen": 57.0,
+   "terburuk": [
+    [
+     "spine_04",
+     9.43
+    ],
+    [
+     "spine_01",
+     9.41
+    ],
+    [
+     "clavicle_r",
+     8.56
+    ]
+   ]
+  },
+  "tangan_terangkat": {
+   "peregangan_maks_cm": 7.25,
+   "regangan_p99_persen": 24.3,
+   "regangan_maks_persen": 81.9,
+   "terburuk": [
+    [
+     "clavicle_l",
+     7.25
+    ],
+    [
+     "clavicle_r",
+     6.79
+    ],
+    [
+     "upperarm_r",
+     6.68
+    ]
+   ]
+  },
+  "lengan_depan_90": {
+   "peregangan_maks_cm": 3.87,
+   "regangan_p99_persen": 11.9,
+   "regangan_maks_persen": 52.0,
+   "terburuk": [
+    [
+     "clavicle_r",
+     3.87
+    ],
+    [
+     "clavicle_l",
+     3.77
+    ],
+    [
+     "upperarm_r",
+     3.58
+    ]
+   ]
+  },
+  "lengan_depan_atas": {
+   "peregangan_maks_cm": 6.41,
+   "regangan_p99_persen": 14.7,
+   "regangan_maks_persen": 66.0,
+   "terburuk": [
+    [
+     "upperarm_l",
+     6.41
+    ],
+    [
+     "clavicle_r",
+     6.19
+    ],
+    [
+     "clavicle_l",
+     4.45
+    ]
+   ]
+  },
+  "lengan_samping_90": {
+   "peregangan_maks_cm": 4.51,
+   "regangan_p99_persen": 11.7,
+   "regangan_maks_persen": 24.8,
+   "terburuk": [
+    [
+     "upperarm_r",
+     4.51
+    ],
+    [
+     "lowerarm_l",
+     4.04
+    ],
+    [
+     "upperarm_l",
+     3.87
+    ]
+   ]
+  },
+  "lengan_guard": {
+   "peregangan_maks_cm": 5.22,
+   "regangan_p99_persen": 12.8,
+   "regangan_maks_persen": 34.2,
+   "terburuk": [
+    [
+     "lowerarm_r",
+     5.22
+    ],
+    [
+     "upperarm_l",
+     4.39
+    ],
+    [
+     "clavicle_r",
+     4.37
+    ]
+   ]
+  }
+ },
+ "cek": [
+  {
+   "cek": "tinggi 1.806 m -6/+2 cm",
+   "lulus": true,
+   "detail": "1.791 m"
+  },
+  {
+   "cek": "telapak di z≈0 (±1 cm)",
+   "lulus": true,
+   "detail": "-0.0007 m"
+  },
+  {
+   "cek": "tulang wajib profil 'manny' ada",
+   "lulus": true,
+   "detail": "99 tulang"
+  },
+  {
+   "cek": "semua tulang di pose profil ada",
+   "lulus": true,
+   "detail": ""
+  },
+  {
+   "cek": "menghadap -Y (foot_l -> ball_l)",
+   "lulus": true,
+   "detail": "vektor (0.017, -0.149, -0.075)"
+  },
+  {
+   "cek": "menghadap -Y (foot_r -> ball_r)",
+   "lulus": true,
+   "detail": "vektor (-0.017, -0.149, -0.075)"
+  },
+  {
+   "cek": "kiri karakter = +X (thigh_r -> thigh_l)",
+   "lulus": true,
+   "detail": "vektor (0.199, 0.0, -0.0)"
+  },
+  {
+   "cek": "atas = +Z (pelvis -> head)",
+   "lulus": true,
+   "detail": "vektor (-0.0, 0.016, 0.667)"
+  },
+  {
+   "cek": "0 vertex tanpa bobot",
+   "lulus": true,
+   "detail": "0"
+  },
+  {
+   "cek": "regangan p99 <= 40.0% di semua pose",
+   "lulus": true,
+   "detail": "24.3% di tangan_terangkat"
+  }
+ ]
+}
