@@ -5,6 +5,14 @@
 
 **Visual:** denah berlapis, potongan bukit berskala, perbandingan tinggi, dan linimasa cahaya ada di [`visual/ep01-lawang-sapta.html`](visual/ep01-lawang-sapta.html) (buka di browser).
 
+**Konsep realistis (acuan tata letak, 15 Okt 2026):** gambar AI dari developer, dipilih dari tiga variasi sebagai acuan suasana dan tata letak (desa di barat daya dekat kali, sawah di selatan–tenggara, galian terbuka ke selatan). Anotasi skala, zona, rute, dan siluet berskala dibuat Claude di atasnya. Angka di anotasi adalah perkiraan; yang mengikat tetap tabel koordinat bagian 2.
+
+![Konsep Ep 1](concept-art/ep01_lawangsapta_konsep_v01.webp)
+
+![Skala dan denah di atas konsep](visual/ep01_denah_skala_v01.jpg)
+
+Koreksi terhadap gambar konsep saat greybox: plato diperlebar dari ±100 m ke ±120 m; desa digeser ±50 m ke barat daya supaya jaraknya ≥150 m dari bibir galian; candi sedikit lebih kecil dari yang tergambar.
+
 **Posisi di roadmap:** greybox di akhir Fase 1 (setelah Iterasi 7–8 memberi angka arena dan FPS), level art di Fase 2 (Jun–Jul 2027, [10](10-roadmap.md#fase-2--vertical-slice-episode-1-gerbang-yang-retak-apr--des-2027)). Semua angka di dokumen ini **titik awal greybox**, bukan final.
 
 ---
@@ -43,17 +51,14 @@ Utara = arah candi. Angka = ketinggian tanah relatif terhadap desa (m).
         │                 │   dasar galian (+15) ★2     │                    ║ │
         │                 │   (titik bangkit Jerangkong)│      ● garis polisi║ │
         │                 └────────────┬───────────────┘        mobil DWARA ║ │
-        │                     lereng (+25 → +5)          ◇ batu latihan    ║ │
-        │                              │                   ═══ JALAN AKSES ═╝ │
-        │        ┌──── SAWAH (+0 … +3) ───────────┐       (punggung bukit,     │
-        │        │  pematang, gubuk, saluran air  │        dari timur) ──► ke  │
-        │        └───────────────┬────────────────┘        kota (latar)        │
-        │        ┌──── DESA (+0) ────────────────────────────┐                 │
-        │        │ ⌂⌂ rumah ×4  ▤ warung ×2  ┃ menara air     │                 │
-        │        │ ⌑ gardu ronda   ☪ musala (tidak hancur)   │                 │
-        │        │ lapangan desa (titik kumpul warga)        │                 │
-        │        └───────────────────────────────────────────┘                 │
-        └───────── sawah melebar → kota kecil di kejauhan (latar jauh) ────────┘
+        │       kebun / lereng       lereng (+25 → +5)    ◇ batu latihan    ║ │
+        │       (penyangga ≥150 m)          │              ═══ JALAN AKSES ═╝ │
+        │ ┌─ DESA (+0) ──────────┐  ┌──── SAWAH (+0 … +3) ───────────────┐      │
+        │ │ ⌂⌂ rumah ×4 ▤ warung×2│  │ pematang, gubuk, saluran air,      │      │
+        │ │ ┃ menara air ⌑ gardu  │  │ lapangan bola                      │      │
+        │ │ ☪ musala + lapangan   │  │ ZONA AMAN                          │      │
+        │ └──────────────────────┘  └────────────────────────────────────┘      │
+        └──────── sawah melebar → kota kecil di kejauhan (latar jauh) ──────────┘
                                          S
 ```
 
@@ -65,16 +70,17 @@ Utara = arah candi. Angka = ketinggian tanah relatif terhadap desa (m).
 | Candi induk | (0, +195) | alas 18 × 18, tinggi ±20 | +35 | Lebih pendek dari Jerangkong (31 m), sengaja |
 | Gerbang + arca | (0, +125) | gerbang lebar 8, arca ±4 m di alas 1 m | +35 | Prasasti di antara dua alas |
 | Tangga candi | (0, +100) | lebar 10, panjang 25 | +28 → +35 | Satu-satunya jalan manusia ke plato dari galian |
-| Galian | (0, 0) | ±140 × 120 | bibir +25, dasar +15 | 4 undakan × 2,5 m dengan ram di sisi timur |
+| Galian | (0, 0) | ±140 × 120 | bibir +25, dasar +15 | 4 undakan × 2,5 m dengan ram di sisi timur; **berbentuk tapal kuda, terbuka ke selatan** (konsep), bentuk tidak beraturan |
 | Dasar galian | (0, 0) | diameter ±50 | +15 | Titik bangkit Jerangkong |
 | Garis polisi + mobil DWARA | (+140, −20) | — | +25 | Titik mulai pemain |
 | Jalan akses | dari (+400, −40) ke (+140, −20) | lebar 7 | +25 | Mengikuti punggung bukit dari timur |
 | Jalan proyek | dari (+60, +150) ke (+170, −10) | lebar 8 | +35 → +25 | Truk derek parkir di ujung plato, keluar lewat sini di adegan 6 |
-| Batu latihan | (+110, −60) | — | +24 | Menghadap desa (interaksi opsional) |
-| Sawah | (−40, −180) | ±250 × 120 | +0 … +3 | Area terbuka antara bukit dan desa |
-| Desa | (−60, −320) | ±220 × 140 | 0 | 6–10 bangunan hancur + musala |
+| Batu latihan | (+110, −60) | — | +24 | Menghadap sawah dan desa (interaksi opsional) |
+| Kebun / lereng penyangga | (−110, −120) | — | +20 → +2 | Pemisah galian–desa; jarak bibir galian → rumah terdekat **≥150 m** |
+| Sawah | (+60, −190) | ±300 × 160 | +0 … +3 | Selatan–tenggara galian; zona aman; ada lapangan bola (konsep) |
+| Desa | (−170, −260) | ±180 × 130 | 0 | **Barat daya, dekat kali** (konsep, 15 Okt 2026); 8 bangunan hancur + musala |
 
-Kemiringan lereng plato → desa: ±35 m turun dalam ±300 m, **±7°**. Untuk Aksa ini bukit; untuk Jayadwara hampir datar. Undakan galian 2,5 m: tinggi bagi Aksa (pakai ram/tangga kayu), setinggi mata kaki bagi Jayadwara.
+Kemiringan lereng plato → sawah: ±35 m turun dalam ±300 m, **±7°**. Untuk Aksa ini bukit; untuk Jayadwara hampir datar. Undakan galian 2,5 m: tinggi bagi Aksa (pakai ram/tangga kayu), setinggi mata kaki bagi Jayadwara.
 
 ---
 
@@ -120,7 +126,7 @@ Setelah prasasti dibaca, tanah bergetar. Bagas memerintahkan mundur ke mobil, ta
 - Transformasi di alas arca kiri. Jayadwara berdiri di plato (+35) dan menahan kaki Jerangkong.
 
 ### E. Arena raksasa · adegan 7 · ±6–8 menit · awal malam
-Arena = **plato + galian + lereng + sawah + desa**, ±450 × 550 m.
+Arena = **plato + galian + lereng + sawah + desa**, ±530 × 550 m (desa di barat daya, sawah di selatan–tenggara).
 
 | Bagian arena | Fungsi | Meter sinkronisasi |
 |---|---|---|
@@ -130,8 +136,8 @@ Arena = **plato + galian + lereng + sawah + desa**, ±450 × 550 m.
 | Desa | Fase 2: Jerangkong mendekat dan melempar puing ke desa | **Penalti**: gedung hancur dan warga terkena |
 
 - **Fase 1** (galian + plato): sapuan, hantaman, lemparan tulang; lengan/kaki rontok merayap balik ke dasar galian. Setelah susun ulang ke-2 → fase 2.
-- **Fase 2** (lereng → desa): Jerangkong lebih agresif dan bergerak turun ke arah desa; tengkorak ditandai HUD (prasasti). Puing yang dilempar ke desa bisa **ditangkis**.
-- **Pilihan pemain:** menahan Jerangkong di sawah (aman untuk meter, butuh dorongan/serangan berat) atau mengejarnya ke desa (cepat, tapi meter berisiko). Ini pelajaran meter pertama tanpa perlu dijelaskan panjang.
+- **Fase 2** (lereng → desa di barat daya): Jerangkong lebih agresif dan bergerak turun ke arah desa; tengkorak ditandai HUD (prasasti). Puing yang dilempar ke desa bisa **ditangkis**.
+- **Pilihan pemain:** galian terbuka ke selatan, jadi dari mulut galian ada dua arah yang jelas: **kiri ke desa** (penalti) atau **kanan ke sawah** (aman). Pemain mendorong Jerangkong ke sawah (butuh dorongan/serangan berat) atau membiarkannya turun ke desa (cepat, tapi meter berisiko). Ini pelajaran meter pertama tanpa perlu dijelaskan panjang.
 - **Kalah sebagai Jayadwara** ([23 bagian 4.5](23-rencana-fase-1.md#45-kalah-sebagai-jayadwara--energi-transformasi-q15)): Aksa muncul di tempat dan harus menghindar sampai energi transformasi penuh. Karena itu sawah dan lereng diberi **perlindungan skala manusia** (gubuk, pematang, saluran air, batu besar) supaya Aksa bisa bersembunyi dari injakan dan puing.
 - **Checkpoint:** awal fase 1, awal fase 2.
 
@@ -188,7 +194,7 @@ Pagar seng, ekskavator, buldoser, truk derek, kantor kontainer (pos mandor), lam
 | Utara | Hutan lebat dan bukit lebih tinggi di belakang candi | Menutup arena; bukit lebih tinggi dari Jayadwara memberi skala |
 | Barat | Jurang dan kali | Batas alami; cahaya matahari sore |
 | Timur | Punggung bukit + jalan akses + **pilar tol setengah jadi** di kejauhan | Cerita Adikara; pembanding skala |
-| Selatan | Sawah melebar → kota kecil di kejauhan | Rasa "ini dekat dengan kehidupan biasa" |
+| Selatan | Desa (barat daya) dan sawah (tenggara) melebar → kota kecil di kejauhan | Rasa "ini dekat dengan kehidupan biasa" |
 
 - Pemain dibatasi `BlockingVolume` di balik batas alami. Jatuh ke jurang → respawn di titik terdekat.
 - Latar jauh = mesh murah / HLOD / kartu matte; tidak bisa didatangi.
