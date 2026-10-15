@@ -22,7 +22,7 @@ importlib.reload(C)
 
 scene = bpy.context.scene
 assert "aksa_v00" in bpy.data.filepath or "aksa_v01" in bpy.data.filepath, "buka aksa_v00_setup.blend dulu"
-OUT = C.ART / "Blender" / "aksa_v01_proxy.blend"
+OUT = C.ART / "Blender" / "aksa" / "aksa_v01_proxy.blend"
 
 # ---- 1. skala referensi
 for ob in bpy.data.objects:

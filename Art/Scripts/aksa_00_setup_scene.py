@@ -14,7 +14,7 @@ import bpy
 
 ROOT = Path(r"C:\repository\unreal_engine\jayadwara")
 REF = ROOT / "Art" / "Reference"
-OUT = ROOT / "Art" / "Blender" / "aksa_v00_setup.blend"
+OUT = ROOT / "Art" / "Blender" / "aksa" / "aksa_v00_setup.blend"
 
 H = 1.75                       # tinggi badan (m), telapak sepatu -> ujung rambut tertinggi
 CANVAS_PX = (760, 1200)        # ukuran reference plane (px); 1000 px = 1,75 m

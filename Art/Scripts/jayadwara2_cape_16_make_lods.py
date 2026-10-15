@@ -1,6 +1,6 @@
 """Jubah Jayadwara2 J2 — LOD1–2 (FBX terpisah, skeleton sama) dari `JD2_Cape` (pola jayadwara2_16_make_lods.py).
 
-  blender --background Art/Blender/jayadwara2_cape_v01_rig.blend --python Art/Scripts/jayadwara2_cape_16_make_lods.py
+  blender --background Art/Blender/jayadwara2/jayadwara2_cape_v01_rig.blend --python Art/Scripts/jayadwara2_cape_16_make_lods.py
 Per LOD: salinan JD2_Cape, Armature dilepas, Decimate COLLAPSE (rasio LODS), bobot dibersihkan (<= 4 influence,
 dinormalisasi), vertex lepas dibuang, Armature dipasang lagi; diekspor lewat jayadwara2_cape_14_export.py (kontrak sama)
 sebagai SK_Jayadwara2_Cape_LOD<n>.fbx. Scene asli tidak disimpan. Anggaran (docs/26 J2): LOD1 <= 16k, LOD2 <= 8k tris.

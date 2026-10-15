@@ -1,5 +1,5 @@
 """Jayadwara2 R3c — uji pose tambahan dari bug nyata Play (13 Okt 2026): LANGKAH JALAN (paha ±28°, lutut menekuk) lalu KEPALA MIRING BESAR (±36°).
-  blender --background Art/Blender/jayadwara2_v05_rig_r3.blend --python Art/Scripts/jayadwara2_17_walk_head_tests.py -- <tag>
+  blender --background Art/Blender/jayadwara2/jayadwara2_v05_rig_r3.blend --python Art/Scripts/jayadwara2_17_walk_head_tests.py -- <tag>
 Keluaran: Art/Export/_jd2/_walk_<tag>_{samping,belakang34,depan34}.png dan _tilt_<tag>_{samping,depan34}.png.
 Periksa: sayap/kain pecah jadi serpihan? paha berlubang? dagu/leher tertinggal? (bug yang lolos dari 13 pose uji)."""
 import bpy, math, sys

@@ -1,8 +1,8 @@
 """Jayadwara2 R4 — material preview Blender yang meniru M_Jayadwara2_Master di UE (BC x AO, metalik x MetallicScale, kekasaran max RoughnessMin,
 normal x NormalStrength, emissive permata/mata konstan). Zona recolor TIDAK dimodelkan di sini (hanya di UE).
 
-  blender --background Art/Blender/jayadwara2_v03_rig_r2.blend --python Art/Scripts/jayadwara2_30_materials.py
-Hasil: Art/Blender/jayadwara2_v04_tex.blend (file kerja R4) + render Art/Export/_jd2/_bl_depan.png / _bl_kepala.png (EEVEE bila ada, jika tidak Workbench)."""
+  blender --background Art/Blender/jayadwara2/jayadwara2_v03_rig_r2.blend --python Art/Scripts/jayadwara2_30_materials.py
+Hasil: Art/Blender/jayadwara2/jayadwara2_v04_tex.blend (file kerja R4) + render Art/Export/_jd2/_bl_depan.png / _bl_kepala.png (EEVEE bila ada, jika tidak Workbench)."""
 import os
 
 import bpy
@@ -10,7 +10,7 @@ from mathutils import Vector
 
 ROOT = r"C:\repository\unreal_engine\jayadwara"
 TEX = os.path.join(ROOT, "Art", "Export", "Textures_Jayadwara2")
-OUT = os.path.join(ROOT, "Art", "Blender", "jayadwara2_v04_tex.blend")
+OUT = os.path.join(ROOT, "Art", "Blender", "jayadwara2", "jayadwara2_v04_tex.blend")
 PARAM = dict(MetallicScale=0.35, RoughnessMin=0.55, NormalStrength=0.5, Intensity=3.0, EyeScale=0.45)
 GEM, EYE = "#FFC86B", "#FFF1C8"
 

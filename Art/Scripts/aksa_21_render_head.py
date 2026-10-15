@@ -1,6 +1,6 @@
 """Aksa Iterasi 2 — render kepala (depan, samping, 3/4) berbingkai sama dengan Art/Reference/ak_head_{front,side}.png.
 
-Headless: blender --background Art/Blender/aksa_v02_head.blend --python Art/Scripts/aksa_21_render_head.py -- <outdir>
+Headless: blender --background Art/Blender/aksa/aksa_v02_head.blend --python Art/Scripts/aksa_21_render_head.py -- <outdir>
 Output: <outdir>/head_front.png (642x970), head_side.png (610x900), head_q34.png (900x1100, perspektif, miring kiri-atas).
 Skala referensi: 1 px = 0,78 mm; front: tengah (x=0, z=1,625), side: tengah (y=-0,0177, z=1,642). Eevee, 2 sun + dunia abu.
 Lanjut: python -I Art/Scripts/aksa_21_head_sheet.py <outdir>

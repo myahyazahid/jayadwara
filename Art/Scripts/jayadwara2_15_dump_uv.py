@@ -1,5 +1,5 @@
 """Jayadwara2 R4 — simpan geometri (posisi rest per segitiga + UV) untuk make_textures_jayadwara2.py (Python luar Blender, ada PIL).
-  blender --background Art/Blender/jayadwara2_v03_rig_r2.blend --python Art/Scripts/jayadwara2_15_dump_uv.py
+  blender --background Art/Blender/jayadwara2/jayadwara2_v03_rig_r2.blend --python Art/Scripts/jayadwara2_15_dump_uv.py
 Hasil: Art/Export/_jd2/_mesh_uv.npz  (tri_pos [N,3,3] meter, tri_uv [N,3,2])."""
 import bpy
 import numpy as np

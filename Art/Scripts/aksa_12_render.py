@@ -1,6 +1,6 @@
 """Aksa Iterasi 1 — render ortografis depan/samping/belakang (warna + siluet) untuk dibandingkan dengan konsep.
 
-Headless: blender --background Art/Blender/aksa_v01_proxy.blend --python Art/Scripts/aksa_12_render.py -- <outdir> [pose]
+Headless: blender --background Art/Blender/aksa/aksa_v01_proxy.blend --python Art/Scripts/aksa_12_render.py -- <outdir> [pose]
 Kanvas 760x1200 dengan skala sama seperti Art/Reference/ak_ref_*.png (1000 px = tinggi badan, telapak di y=1100, tengah di x=380),
 jadi konsep (1,75 m) dan proxy (1,806 m) bisa ditumpuk langsung. Output: <outdir>/<view>_color.png, <view>_mask.png.
 `pose` (opsional): nama pose di action AK_PoseTest (aksa_13_pose_tests.py) yang dirender; default pose rest.

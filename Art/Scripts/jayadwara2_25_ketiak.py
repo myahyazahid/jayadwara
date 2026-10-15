@@ -1,7 +1,7 @@
 """Jayadwara2 R8 — tutup lubang ketiak (temuan developer 13 Okt 2026: ketiak robek/bolong saat memukul di UE).
 
-  blender --background Art/Blender/jayadwara2_v06_revisi.blend --python Art/Scripts/jayadwara2_25_ketiak.py -- [--out PATH] [--rows N]
-Hasil: Art/Blender/jayadwara2_v07_ketiak.blend (v06 tidak ditimpa). Ukur/render: jayadwara2_24_armpit_audit.py di file hasil.
+  blender --background Art/Blender/jayadwara2/jayadwara2_v06_revisi.blend --python Art/Scripts/jayadwara2_25_ketiak.py -- [--out PATH] [--rows N]
+Hasil: Art/Blender/jayadwara2/jayadwara2_v07_ketiak.blend (v06 tidak ditimpa). Ukur/render: jayadwara2_24_armpit_audit.py di file hasil.
 
 Penyebab: tiap ketiak punya SATU lubang tertutup (±5 x 13 x 11 cm, z 1,28–1,41) yang setengah tepinya makro ARM, setengah
 TORSO — sisa pemisahan jahitan lengan–rusuk (R1–R3, docs/25). Di pose rest tersembunyi; lengan terangkat menarik tepi lengan
@@ -26,7 +26,7 @@ def arg(name, default):
     return type(default)(argv[argv.index(name) + 1]) if name in argv else default
 
 
-OUT = arg("--out", r"C:\repository\unreal_engine\jayadwara\Art\Blender\jayadwara2_v07_ketiak.blend")
+OUT = arg("--out", r"C:\repository\unreal_engine\jayadwara\Art\Blender\jayadwara2\jayadwara2_v07_ketiak.blend")
 ROWS = arg("--rows", 4)           # baris di antara rel lengan dan rel badan
 RING = arg("--ring", 0.05)        # m, radius cincin bobot yang dihaluskan di sekitar lubang
 SMOOTH_IT = arg("--smooth", 6)

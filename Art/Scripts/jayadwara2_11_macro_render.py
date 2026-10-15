@@ -1,5 +1,5 @@
 """Jayadwara2 R1/R2 — render peta makro (hasil jayadwara2_10_rig_spike) berwarna: depan / samping / belakang.
-  blender --background Art/Blender/jayadwara2_v02_rig_spike.blend --python Art/Scripts/jayadwara2_11_macro_render.py -- [out.png]
+  blender --background Art/Blender/jayadwara2/jayadwara2_v02_rig_spike.blend --python Art/Scripts/jayadwara2_11_macro_render.py -- [out.png]
 Hasil: <out>_front/_side/_back.png (gabungkan dengan PIL di luar Blender).
 """
 import json, sys

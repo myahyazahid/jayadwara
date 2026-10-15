@@ -1,6 +1,6 @@
 """Jayadwara2 R2 — ketebalan lokal mesh (deteksi lembar tipis: sayap kain, kain depan) lewat ray cast ke arah -normal.
 
-  blender --background Art/Blender/jayadwara2_v01_tripo.blend --python Art/Scripts/jayadwara2_20_thickness.py
+  blender --background Art/Blender/jayadwara2/jayadwara2_v01_tripo.blend --python Art/Scripts/jayadwara2_20_thickness.py
 Per vertex: jarak ke permukaan berikutnya di sisi dalam (maks 0,15 m); tak kena = volume/terbuka. Lembar tipis = ketebalan < SHEET_MAX.
 Hasil: Art/Export/_jd2/_thickness.npz (vertex, thick) + render peta warna depan/samping/belakang (_thick_*.png)."""
 import numpy as np
