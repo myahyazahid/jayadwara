@@ -103,6 +103,7 @@ Format: **Map** · **Suasana** · alur zona A → E · elemen RE4 · arena raksa
 - **E. Arena:** tepi sungai + kampung padat + jalan raya di seberang (mobil, gerobak untuk dicuri boss). Batas: sungai lebar, rel kereta, gedung tinggi di kejauhan. Rumah sangat rapat = meter mudah turun.
 - **Elemen RE4:** rute atap yang terbuka bertahap; jalan pintas jembatan bambu.
 - **Pakai ulang:** membangun kit **Kampung Kali**.
+- **Rincian:** [31](31-desain-level-ep02.md).
 
 ### Ep 3 — `Ep03_Adikara` · malam (lampu kota padam bertahap)
 - **A. Plaza depan gedung Adikara:** keamanan sudah dievakuasi; lampu berkedip.
