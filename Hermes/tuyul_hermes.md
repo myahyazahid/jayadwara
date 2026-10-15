@@ -10,7 +10,7 @@
 
 ## 0. Ringkasan
 
-**Tuyul** = boss Ep 2 "Tangan-Tangan Kecil" (`docs/05`, `docs/16` kartu Ep 2). Satu model, tiga ukuran:
+**Tuyul** = boss Ep 2 "Tangan-Tangan Kecil" (`docs/05`, `docs/16` kartu Ep 2). **Satu model saja**: desain boss (besar dan seram) dipakai juga untuk kawanan kecil, bedanya hanya ukuran (keputusan developer 15 Okt 2026, supaya tidak mengerjakan dua kali). Jadi tiga ukuran dari satu model:
 
 | Aset | Ukuran | Dipakai untuk |
 |---|---|---|
@@ -35,10 +35,11 @@ Sumber model: GLB **Tripo** dari developer (realistis, `docs/README` 14 Okt 2026
 | `Art/Scripts/pose_profil/manny.json` | Profil pose (default, jenis B) |
 
 ### Arahan desain (dari developer + docs)
-- Kerdil, **kepala besar** (±3 kepala), perut buncit, lengan cekatan, kaki kecil lincah. Siluet terbaca dari kamera raksasa.
-- **Bukan anak manusia**: kulit abu-abu pucat kehijauan, telinga runcing, mata besar tanpa pupil manusia, gigi kecil runcing. Pemain memukul makhluk ini; tidak boleh terbaca sebagai anak sungguhan.
-- Jahil dan lincah, **bukan horor**; seram tipis. Cawat kain lusuh, kantong kecil, uang kertas/koin tersangkut di badan.
-- Energi Kala **merah gelap emissive** (mata, urat dada/lengan, bercak di ubun-ubun). Tanpa biru/silver. **Tanpa gore.**
+- **Desain boss**: bungkuk dan bulky, tempurung kepala botak besar berjaring retak merah menyala, telinga runcing panjang, mata merah menyala di bawah alis tebal, rahang lebar bergigi kecil runcing dengan celah bibir, perut buncit berurat menyala, lengan sangat panjang (melewati lutut) bercakar, kaki pendek kekar. Siluet terbaca dari kamera raksasa.
+- Satu model dipakai di 1 m (kawanan), 27 m, dan 45 m: **jangan** menambah detail yang hanya masuk akal di satu ukuran (mis. banyak kepala/tangan tambahan; varian "kawanan menyatu" dibatalkan karena tidak bisa dipakai untuk kawanan kecil).
+- **Bukan anak manusia, bukan goblin/Gollum**: kulit abu-abu pucat kehijauan, telinga runcing, mata tanpa pupil manusia. Pemain memukul makhluk ini; tidak boleh terbaca sebagai anak sungguhan.
+- Seram dan mengancam, tetapi **bukan horor**; ada nada jahil-kejam (pencuri serakah yang membesar). Cawat dari karung lusuh, kantong di punggung, untaian koin berkarat dan uang kertas tersangkut di badan.
+- Energi Kala **merah gelap emissive** (retak tempurung, mata, urat dada/lengan, retak perut). Tanpa biru/silver. **Tanpa gore.**
 - Fase 2: tiga tuyul besar **identik secara bentuk**. Penanda "yang asli" datang dari clue CCTV lewat parameter material `RealPulse` (denyut halus di ubun-ubun), bukan dari bentuk.
 
 ---
@@ -96,11 +97,11 @@ Ikuti **`aksa_hermes.md` §2** apa adanya (berlaku untuk semua model), dengan du
 - Sumber desain: docs/05 baris Ep 2, docs/06 (aman diadaptasi), docs/16 kartu Ep 2, docs/02 (energi Kala)
 - Konsep/referensi dari developer: Hermes/Art/tuyul/Reference/... (tulis path; belum ada → tulis "tidak ada, hanya GLB")
 - Mekanik yang butuh geometri/tulang khusus: kawanan kecil yang berlari/melompat di atap; boss mengangkat dan melempar properti (mobil, gerobak) → socket carry; ubun-ubun menyala saat clue aktif (RealPulse); mulut menyeringai/berteriak
-- Tinggi authoring: 1,0 m | skala bake: kecil 1,0 m, besar 27 m (0,6× Jayadwara), raksasa 45 m (1,0× Jayadwara, arahan developer 15 Okt)
+- Tinggi authoring: 1,0 m (tinggi berdiri bungkuk; model sama untuk ketiga ukuran) | skala bake: kecil 1,0 m, besar 27 m (0,6× Jayadwara), raksasa 45 m (1,0× Jayadwara, arahan developer 15 Okt)
 - Skeleton: sendiri (nama Mannequin) + tulang tambahan `jaw` (hanya kalau mulut punya celah, cek di K0) + tulang telinga TIDAK ditambah
 - Profil pose: Art/Scripts/pose_profil/manny.json
 - Pembanding (--lama): Art/Export/SK_Jerangkong.fbx (monster biped terdekat, kaku) + Art/Export/SK_Aksa.fbx (regangan/bobot lunak saja)
-- Anggaran tris LOD0/1/2/3: SK_Tuyul 60k/25k/10k/4k (kawanan 5 ekor: di UE mulai dari LOD1); SK_TuyulBesar & SK_TuyulRaksasa 100k/30k/14k/6k. Terlampaui → LAPORKAN angkanya, jangan decimate agresif
+- Anggaran tris LOD0/1/2/3: 100k/30k/14k/6k untuk ketiga ukuran (satu model, LOD sama; boss raksasa seperti Jayadwara2). Kawanan 5 ekor (`SK_Tuyul`) di UE mulai dari LOD1. Terlampaui → LAPORKAN angkanya, jangan decimate agresif
 - Gaya: realistis (docs/README 14 Okt). Baca panduan_kerja_claude.md §8
 - Slot material: ikut atlas Tripo (target 1–2). Mask emissive T_Tuyul_Emit: R = energi Kala, G = RealPulse (ubun-ubun), B = uang/ornamen
 - Socket: hand_l_hit (hand_l), hand_r_hit (hand_r), foot_l_hit (foot_l), foot_r_hit (foot_r), head_top (head, penanda RealPulse & HUD), carry_l (hand_l), carry_r (hand_r), mouth_fx (head/jaw)

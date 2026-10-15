@@ -12,6 +12,7 @@
 | `SK_TuyulBesar` | 27 m (0,6× Jayadwara) | Fase 2: tiga tuyul besar, hanya satu yang asli |
 | `SK_TuyulRaksasa` | 45 m (1,0× Jayadwara) | Fase 1: kawanan bergabung, lari dan mencuri properti |
 
+- **Satu model saja** (keputusan developer 15 Okt 2026, supaya tidak mengerjakan dua kali): desain boss (besar dan seram) dipakai juga untuk kawanan kecil; bedanya hanya ukuran. Konsekuensi: tidak ada varian dengan banyak kepala/tangan tambahan (tidak masuk akal di 1 m), dan kawanan terbaca seram-jahil, bukan lucu.
 - Skala **di-bake saat export** (pola Jerangkong J2), bukan skala actor di UE.
 - Badan **di-skin lunak** (Tuyul tidak rontok/susun ulang seperti Jerangkong), jadi tidak ada potongan kaku atau `SM_` per bagian.
 - **Ukuran boss 1,0×** adalah arahan developer (15 Okt 2026: boss sama atau lebih besar dari Jayadwara, seperti kaiju Ultraman). Ini **bertentangan** dengan [16 bagian 2.6](16-panduan-arc-1.md#26-aturan-skala) (Arc 1 = 0,5–0,8×; Tuyul 0,5×). Selama aturan skala belum diperbarui, `Hermes/tuyul_hermes.md` yang berlaku untuk Tuyul; Jerangkong (0,7×, sudah jadi) belum diubah.
@@ -22,11 +23,11 @@ Dari [02](02-setting-dunia.md) (energi Kala membesarkan hantu kecil), [06](06-re
 
 | Hal | Arahan |
 |---|---|
-| Siluet | Kerdil, kepala besar (±3 kepala), perut buncit, lengan cekatan, kaki kecil lincah |
-| Bukan anak manusia | Kulit abu-abu pucat kehijauan, telinga runcing, mata besar tanpa pupil manusia, gigi kecil runcing. Pemain memukul makhluk ini, jadi tidak boleh terbaca sebagai anak sungguhan |
-| Nada | Jahil dan lincah, seram tipis, bukan horor |
-| Pesugihan | Cawat lusuh, kantong kecil, uang kertas/koin tersangkut |
-| Energi Kala | Merah gelap **emissive** (mata, urat dada/lengan, bercak ubun-ubun); tanpa biru/silver; tanpa gore |
+| Siluet | Bungkuk dan bulky, tempurung kepala botak besar berjaring retak menyala, telinga runcing panjang, perut buncit, lengan sangat panjang bercakar, kaki pendek kekar |
+| Bukan anak manusia | Kulit abu-abu pucat kehijauan, telinga runcing, mata tanpa pupil manusia; bukan goblin/Gollum. Pemain memukul makhluk ini, jadi tidak boleh terbaca sebagai anak sungguhan |
+| Nada | Seram dan mengancam, tetapi bukan horor; pencuri serakah yang membesar |
+| Pesugihan | Cawat dari karung, kantong di punggung, untaian koin berkarat, uang kertas tersangkut |
+| Energi Kala | Merah gelap **emissive** (retak tempurung, mata, urat dada/lengan, retak perut); tanpa biru/silver; tanpa gore |
 | Fase 2 | Tiga tuyul besar identik; penanda "yang asli" = parameter material `RealPulse` (ubun-ubun) saat clue CCTV aktif |
 
 ## 3. Alur tiga tahap
@@ -101,7 +102,8 @@ Sesuai `CLAUDE.md` bagian "Hasil kerja Hermes", dimulai setelah developer bilang
 | GLB Tripo: mata/mulut dilukis, jari menempel (pelajaran Aksa2 H3b, Jerangkong) | Tips Tripo di file prompt; K0 mencatat, GATE sebelum rig |
 | Terbaca "anak manusia yang dipukul" | Arahan bagian 2 + penilaian K0 + C0 |
 | Skinning lunak di perut buncit/leher pendek melar atau bolong | Banding terhadap `SK_Aksa` untuk regangan; ketiak dari bawah; C1 tersedia |
-| Kepala besar membuat animasi manusia terlihat aneh | Pose retarget di `RTG` + animasi kustom lari/lompat |
+| Kepala besar dan lengan panjang membuat animasi manusia terlihat aneh | Pose retarget di `RTG` + animasi kustom lari/lompat |
+| Desain seram dipakai di 1 m: kawanan terbaca terlalu mengancam atau tidak lucu | Disengaja (satu model); nada jahil-kejam diatur lewat animasi dan SFX, bukan model kedua |
 | Boss 45 m berproporsi kecil-kepala-besar tidak terbaca dari kamera | K6 membandingkan tiga skala dengan `SK_Jayadwara2`; ukuran bisa diubah tanpa model ulang |
 | Kawanan 5 ekor + boss berat | Kawanan mulai LOD1; uji FPS di C3 |
 | Aturan skala [16](16-panduan-arc-1.md#26-aturan-skala) belum diperbarui | Keputusan Jerangkong/Ep 20 ada di developer; sampai itu, `tuyul_hermes.md` menang untuk Tuyul |
