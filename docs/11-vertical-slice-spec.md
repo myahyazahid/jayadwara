@@ -15,7 +15,7 @@
 |---|---|---|---|
 | 1 | **Pembuka wayang** | Ki Sastro menarasikan legenda Dwarapala & Kala (wayang kulit, gambar 2D dengan parallax) | 1–2 mnt |
 | 2 | **Briefing** | Kol. Bagas memberi misi lewat panggilan video; Sekar sebagai operator | 1–2 mnt |
-| 3 | **Investigasi** | Aksa tiba di area penggalian Adikara dekat Candi Lawang Sapta. Scan 3 petunjuk dengan Netra (jejak energi, tulang pekerja, prasasti retak) | 5–8 mnt |
+| 3 | **Investigasi** | Aksa tiba di area penggalian Adikara dekat Candi Lawang Sapta. Scan 3 petunjuk dengan Netra (jejak energi, tulang kuno di lokasi pekerja meninggal, prasasti retak) | 5–8 mnt |
 | 4 | **Konfrontasi manusia** | Kerangka-kerangka kecil (minion) menyerang; tutorial combat silat | 4–6 mnt |
 | 5 | **Kebangkitan** | Jerangkong bangkit dan membesar; Aksa hampir mati; arca Dwarapala hancur dan menyatu dengannya (cutscene). Arca kedua terlihat diangkut truk Adikara di latar | 1–2 mnt |
 | 6 | **Boss raksasa** | Jayadwara vs Jerangkong di area candi + blok kota kecil, dengan meter sinkronisasi | 6–8 mnt |
@@ -48,6 +48,7 @@
 
 ### Narasi & Presentasi
 - [ ] Pembuka wayang (2D)
+- [ ] Stinger arca kedua + Gunadi Adikara: **gambar diam** (keputusan S4 [17](17-skenario-arc-1.md#keputusan-untuk-developer-ep-1), 15 Okt 2026)
 - [ ] Briefing & debrief (dialog teks + potret karakter)
 - [ ] HUD: health, stamina, meter sinkronisasi, penanda petunjuk
 - [ ] Menu utama sederhana, pause, pengaturan grafis dasar

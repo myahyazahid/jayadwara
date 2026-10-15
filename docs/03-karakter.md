@@ -11,7 +11,7 @@
 | **Latar** | Mantan atlet **pencak silat** nasional; keluar dari timnas setelah sebuah insiden yang belum ia ceritakan |
 | **Status awal** | Agen baru DWARA — Episode 1 adalah misi lapangan pertamanya |
 | **Desain visual** | Konsep: [`Aksa versi Final.png`](concept-art/Aksa%20versi%20Final.png); referensi modeling: [`aksa_turnaround_v01.webp`](concept-art/aksa_turnaround_v01.webp) (A-pose depan/samping/belakang + kepala). Jaket navy berkerah batik, kaos hitam, kargo, boots, sarung tangan tanpa jari, selendang batik di pinggang kiri |
-| **Penghubung ke Dwarapala** | **Kalung pecahan batu arca berbingkai emas** (peninggalan Ki Zahid). **Tidak ada alat transformasi di lengan**: "Transformation Device" berbentuk gauntlet di konsep dibuang karena terlalu mirip Mebius Brace ([01](01-konsep-dan-pilar.md#wajib-dihindari)). Gestur transformasi: telapak tangan menekan bumi (usulan S1 di [17](17-skenario-arc-1.md)) (keputusan 12 Okt 2026) |
+| **Penghubung ke Dwarapala** | **Kalung pecahan batu arca berbentuk belah ketupat (diamond), berbingkai emas** (peninggalan Ki Zahid) = **inti kekuatan** transformasi. **Tidak ada alat transformasi di lengan**: "Transformation Device" berbentuk gauntlet di konsep dibuang karena terlalu mirip Mebius Brace ([01](01-konsep-dan-pilar.md#wajib-dihindari)). Gestur transformasi: **"Lawang Terbuka"**: kalung digenggam di dada, lengan dibuka ke samping seperti pintu gerbang, gerbang paduraksa cahaya terbentuk di belakangnya (keputusan S1 di [17](17-skenario-arc-1.md#keputusan-untuk-developer-ep-1), 15 Okt 2026) |
 
 **Arti nama**
 - **Aksa** = mata / penglihatan → selaras dengan gameplay investigasi & scanner Netra.

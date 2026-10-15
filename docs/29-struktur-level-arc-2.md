@@ -12,7 +12,7 @@
 | **Cerita** | DWARA membuka operasi regional. Di tiap titik gerbang **selalu ada proyek Adikara**; Sekar mulai menemukan polanya ([04](04-skenario-cerita.md#arc-2--gelombang-nusantara-ep-1120)) |
 | **Wilayah** | Lima gerbang dari Sapta Dwara ([02](02-setting-dunia.md#lore-inti-sapta-dwara-tujuh-gerbang)): Tenggara (Flores), Barat (Sumatra), Utara (Kalimantan), Timur Laut (Sulawesi), Timur (Maluku–Papua) |
 | **Perbedaan dari Arc 1** | Keluar dari Arunapura. Setiap wilayah butuh kit baru, jadi **pembagian kit** (bagian 3) adalah kunci anggaran |
-| **Ukuran boss** | Mendekati Jayadwara: **0,8–1×**. Ep 20 Geunteut = **raksasa setara pertama** ([16 bagian 2.6](16-panduan-arc-1.md#26-aturan-skala)) |
+| **Ukuran boss** | **0,8–1×** Jayadwara. Sejak 15 Okt 2026 boss Arc 1 pun boleh 1× (aturan skala baru di [16 bagian 2.6](16-panduan-arc-1.md#26-aturan-skala)); Ep 20 Geunteut = **lawan setara pertama dalam tenaga dan teknik**, bukan sekadar tinggi |
 | **Ukuran arena** | Lebih besar dari Arc 1 karena boss makin besar: **±450×450 m**, Ep 20 ±600×600 m (angka akhir mengikuti hasil uji L2 di [28](28-struktur-level-episode.md#8-keputusan-yang-perlu-dijawab-developer)) |
 | **Penanda berulang** | **Lokasi proyek Adikara** di tiap map (pagar seng, alat berat, kantor kontainer, papan proyek). Kit-nya dipakai ulang dari Ep 1. Pemain akan mengenali polanya sebelum Sekar menyebutkannya |
 
@@ -138,7 +138,7 @@ Format sama seperti [28 bagian 4](28-struktur-level-episode.md#4-rancangan-map-p
 - **A.** Pelabuhan dan kota pesisir; **operasi gabungan militer** (Kol. Bagas memimpin). Pos lapangan DWARA terbesar di Arc 2.
 - **B. Kota pesisir + hutan:** ★ jejak kaki raksasa di hutan (ukuran setara Jayadwara), ★ catatan proyek Adikara terbesar di Arc 2 (Sekar menyatukan pola 5 gerbang), ○ hikayat geunteut dari tetua.
 - **C.** Evakuasi kota bersama tentara; minion gabungan Arc 2. Bagas memilih antara perintah atasan dan melindungi "Entitas D".
-- **E. Arena terbesar Arc 2 (±600×600 m):** kota pesisir + pelabuhan + hutan + bukit. **Geunteut 1×**: raksasa setara pertama; pertarungan grapple dan dorong-dorongan (fokus duel, bukan monster yang lebih kecil). Meunasah dan masjid = zona larangan rusak. 2 fase berpindah: kota → hutan/bukit (agar kota tidak hancur total).
+- **E. Arena terbesar Arc 2 (±600×600 m):** kota pesisir + pelabuhan + hutan + bukit. **Geunteut 1×**: lawan setara pertama dalam tenaga dan teknik; pertarungan grapple dan dorong-dorongan (fokus duel, bukan monster yang lebih kecil). Meunasah dan masjid = zona larangan rusak. 2 fase berpindah: kota → hutan/bukit (agar kota tidak hancur total).
 - **Penutup:** setelah menang, tubuh Aksa menyerap terlalu banyak energi Kala ([04](04-skenario-cerita.md#arc-2--gelombang-nusantara-ep-1120)), sebagai set-up Arc 3 dan Ep 30.
 
 ---
@@ -156,7 +156,7 @@ Format sama seperti [28 bagian 4](28-struktur-level-episode.md#4-rancangan-map-p
 | 17 | `Ep17_TelukTimur` | Maluku–Papua · Timur | Suanggi ⚠️ (0,9×) | Desa + hutan sagu | Zona pembalik kontrol | Teluk + 3 sumber kutukan | Kontrol terbalik |
 | 18 | `Ep18_HutanKerinci` | Kerinci · Barat | Harimau Cindaku (0,85×) | Desa kebun teh | Diburu di hutan | Hutan + kebun + danau | Pandangan terhalang pohon |
 | 19 | `Ep19_TepiDanau` | Toba · Barat | Begu Ganjang ⚠️ (0,8→1,2×) | Desa tepi danau | Lawan lewat cermin | Danau sebagai cermin | Pantulan |
-| 20 | `Ep20_PesisirAceh` | Aceh · Barat | Geunteut (1×) | Kota pesisir + hutan | Evakuasi bersama militer | Arena terbesar, 2 zona | Raksasa setara |
+| 20 | `Ep20_PesisirAceh` | Aceh · Barat | Geunteut (1×) | Kota pesisir + hutan | Evakuasi bersama militer | Arena terbesar, 2 zona | Lawan setara (teknik) |
 
 **Pakai ulang antarepisode di Arc 2:** 13↔14 (kota sungai), 15↔16 (pesisir Bugis), 12↔18↔19 (dataran tinggi Sumatra). Episode tanpa kit inti baru: 14, 16, 18, 19, 20, jadi lebih ringan.
 
@@ -192,5 +192,5 @@ Sistem paling berisiko untuk level: **pantulan Ep 19** (render target + Lumen di
 | **M3** | Nama tempat nyata atau fiktif? | **Wilayah nyata, desa/kota fiktif** (seperti Arunapura) |
 | **M4** | Ep 20 di Aceh: hindari citra gelombang besar? | **Ya**. Badai tanpa ombak besar, arena bergeser ke hutan/bukit di fase 2 |
 | **M5** | Pos lapangan DWARA di tiap map sebagai checkpoint/save ala *typewriter* RE4? | **Ya**, satu set prop untuk semua map Arc 2 |
-| **M6** | Ukuran boss Arc 2 (0,8–1×) seperti tabel bagian 6? | Ya, sebagai titik awal; Ep 20 tetap satu-satunya yang 1× |
+| **M6** | Ukuran boss Arc 2 (0,8–1×) seperti tabel bagian 6? | Ya, sebagai titik awal. Ep 20 dibedakan lewat tenaga dan teknik (duel), bukan ukuran (aturan skala baru 15 Okt 2026) |
 | **M7** | Urutan episode tetap melompat-lompat wilayah (Flores → Sumatra → Kalimantan → ...)? | Ikuti [05](05-daftar-episode-boss.md#arc-2--gelombang-nusantara-ep-1120) untuk cerita. Untuk produksi, map boleh dikerjakan **per kit** (13+14, 15+16, 12+18+19) supaya kit dibangun sekali |

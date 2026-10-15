@@ -1,6 +1,6 @@
 # 28 — Struktur Level per Episode (pola ala Resident Evil 4)
 
-> **Status: USULAN v0.1 (15 Okt 2026)**, menunggu persetujuan developer. Developer memilih arah "disusun seperti Resident Evil 4, tapi lebih luas" (15 Okt 2026). Konsep lama "satu map Arunapura" **diarsipkan**, tidak dibuang (bagian 9).
+> **Status: DISETUJUI v0.2 (15 Okt 2026)**: L1–L6 dijawab developer sesuai usulan (bagian 8). Developer memilih arah "disusun seperti Resident Evil 4, tapi lebih luas" (15 Okt 2026). Konsep lama "satu map Arunapura" **diarsipkan**, tidak dibuang (bagian 9).
 > Sumber: [02](02-setting-dunia.md) (distrik), [16](16-panduan-arc-1.md) (kartu episode Arc 1), [17](17-skenario-arc-1.md) (adegan Ep 1), [18](18-kebutuhan-episode-1.md#c-lingkungan--level) (zona Ep 1), [12](12-technical-design.md) (teknis). Kalau bertentangan, dokumen sumber yang berlaku sampai keputusannya diperbarui.
 
 **Posisi di roadmap:** tidak memajukan jadwal. Ep 1 tetap Fase 2 (greybox level di akhir Fase 1), Ep 2–10 tetap Fase 4. Dokumen ini hanya menetapkan **bentuk** map supaya level Ep 1 dibangun dengan cara yang bisa dipakai ulang.
@@ -204,9 +204,9 @@ Pola yang sama dipakai untuk peta regional ([02](02-setting-dunia.md#peta-misi-r
 
 ---
 
-## 8. Keputusan yang perlu dijawab developer
+## 8. Keputusan (dijawab developer 15 Okt 2026)
 
-| # | Pertanyaan | Usulan Claude |
+| # | Pertanyaan | Keputusan ✅ |
 |---|---|---|
 | **L1** | Setuju pola satu map per episode (ala RE4) untuk Season 1? | **Ya.** Konsep satu map Arunapura diarsipkan (bagian 9) |
 | **L2** | Ukuran arena raksasa | Mulai **±400×400 m**, disesuaikan setelah uji Iterasi 7–8 |

@@ -1,6 +1,6 @@
 # 16 — Panduan Arc 1 "Kebangkitan" (Ep 1–10)
 
-> **Status: USULAN v0.1 (12 Okt 2026)**, menunggu persetujuan developer. Setelah disetujui, dokumen ini menjadi acuan Claude saat membangun episode Arc 1.
+> **Status: DISETUJUI v0.2 (15 Okt 2026)**: keputusan D1–D6 dijawab developer (bagian 9), aturan skala diperbarui (bagian 2.6, keputusan F1 di [31](31-desain-level-ep02.md#9-keputusan-dijawab-developer-15-okt-2026)). Dokumen ini menjadi acuan Claude saat membangun episode Arc 1.
 > Sumber: [04](04-skenario-cerita.md#arc-1--kebangkitan-ep-110) (cerita), [05](05-daftar-episode-boss.md#arc-1--kebangkitan-ep-110) (boss), [07](07-gameplay-sistem.md) (sistem), [11](11-vertical-slice-spec.md) (Ep 1), [12](12-technical-design.md) (arsitektur). Kalau dokumen ini bertentangan dengan dokumen sumber, dokumen sumber yang berlaku sampai keputusannya diperbarui.
 
 **Posisi di roadmap:** Ep 1 = vertical slice (Fase 2, Apr–Des 2027). Ep 2–10 = produksi Season 1 (Fase 4, mulai Apr 2028). Dokumen ini **tidak memajukan jadwal**. Tujuannya supaya sistem yang dibuat untuk Ep 1 sudah disiapkan untuk dipakai ulang di Ep 2–10, dan supaya setiap episode punya arahan yang konsisten.
@@ -75,11 +75,11 @@ Lore: makhluk yang menyerap energi Kala membesar menjadi raksasa ([02](02-settin
 | Mode | Musuh | Ukuran |
 |---|---|---|
 | Manusia (Aksa) | Minion + **wujud awal** makhluknya sebelum membesar | Skala manusia (±1–3 m) |
-| Raksasa (Jayadwara ±45 m) | Boss setelah membesar | Raksasa, **di bawah ukuran Jayadwara** |
+| Raksasa (Jayadwara ±45 m) | Boss setelah membesar | Raksasa, **0,5–1,0× Jayadwara** (lihat di bawah) |
 
-- **Boss Arc 1 = 0,5–0,8× tinggi Jayadwara** (±22–36 m); finale Ep 10 boleh sampai 0,9×. Ukuran per boss ada di tabel 3.
+- **Boss Arc 1 = 0,5–1,0× tinggi Jayadwara** (±22–45 m), ditentukan per boss sesuai cerita. Diperbarui 15 Okt 2026 (keputusan F1): developer ingin boss bisa sama besar dengan Jayadwara, seperti kaiju di serial Ultraman; contoh pertama tuyul raksasa Ep 2 (45 m). Ukuran per boss ada di tabel 3.
 - **Batas bawah 0,5×**: di bawah itu Jayadwara terus memukul ke bawah (kamera sulit, butuh animasi khusus, gedung lebih mudah kena). Boss yang rendah tapi panjang (mis. Babi Ngepet) butuh serangan bawah sebagai pengecualian.
-- **Progresi ukuran antar-arc**: Arc 1 di bawah Jayadwara → Arc 2 mendekati 1× → **Ep 20 Geunteut = raksasa setara pertama** ([05](05-daftar-episode-boss.md#arc-2--gelombang-nusantara-ep-1120)) → Arc 5 lebih besar (Bedawang Nala, Batara Kala). Boss Arc 1 **tidak boleh** setara Jayadwara supaya momen Ep 20 tetap bermakna.
+- **Progresi antar-arc** (diperbarui 15 Okt 2026): yang naik bertahap adalah **kekuatan dan teknik**, bukan hanya tinggi. Boss Arc 1 boleh setinggi Jayadwara tapi bertarung liar/tanpa teknik; **Ep 20 Geunteut = lawan setara pertama**: raksasa humanoid yang menyamai Jayadwara dalam tenaga dan teknik, duel grapple dan dorong-dorongan ([05](05-daftar-episode-boss.md#arc-2--gelombang-nusantara-ep-1120)). Arc 5 lebih besar dari Jayadwara (Bedawang Nala, Batara Kala).
 - Ukuran ditulis relatif ke Jayadwara karena skala final Jayadwara masih placeholder (D4 di [13](13-rencana-model-jayadwara.md), 45 m).
 
 ### 2.7 Aturan konten
@@ -95,7 +95,7 @@ Lore: makhluk yang menyerap energi Kala membesar menjadi raksasa ([02](02-settin
 | Ep | Judul (usulan) | Boss | Ukuran boss | Lokasi | Fokus | **Mekanik baru** | Unlock debrief |
 |---|---|---|---|---|---|---|---|
 | 1 | Gerbang yang Retak | Jerangkong | 0,7× | Situs Lawang Sapta | Aksa | Semua dasar: gerak, silat, scanner, transformasi, combat raksasa, meter (versi dasar) | Jurus spesial #1 |
-| 2 | Tangan-Tangan Kecil | Tuyul | 0,5× | Kampung Kali | Sekar | **Kejar-kejaran + kawanan musuh** | Scanner: jangkauan +50% |
+| 2 | Tangan-Tangan Kecil | Tuyul | 1,0× (fase 1), 0,6× ×3 (fase 2) | Kampung Kali | Sekar | **Kejar-kejaran + kawanan musuh** | Scanner: jangkauan +50% |
 | 3 | Lapar Listrik | Jenglot | 0,55× → 0,8× | Distrik Adikara | Nadia | **Objektif lingkungan saat boss** (putus sumber energi) + boss yang makin kuat | Jurus spesial #2 |
 | 4 | Lilin di Pasar Malam | Babi Ngepet | 0,5× (badan panjang) | Kampung Kali (pasar) | Sekar | **Investigasi warga / dialog** (wawancara sebagai petunjuk) | Silat manusia: finisher baru |
 | 5 | Tali yang Belum Dilepas | Pocong ⚠️ | 0,75× | Kota Lama (makam tua) | Ki Sastro | **Serangan area bertelegraf + bidik bagian tubuh** | Scanner: tandai titik lemah dari jauh |
@@ -282,9 +282,11 @@ Mengikuti arsitektur [12](12-technical-design.md):
 
 ---
 
-## 9. Keputusan yang Perlu Dijawab Developer
+## 9. Keputusan (dijawab developer 15 Okt 2026)
 
-| # | Pertanyaan | Usulan Claude |
+Semua dijawab developer 15 Okt 2026 sesuai usulan.
+
+| # | Pertanyaan | Keputusan ✅ |
 |---|---|---|
 | **D1** | Syarat transformasi ([08 keputusan terbuka #1](08-requirement-produksi.md#keputusan-terbuka)) untuk Arc 1? | **Terjadi di momen cerita** (setelah konfrontasi manusia). Paling mudah diatur untuk arc tutorial; transformasi bebas dipertimbangkan di Arc 2 |
 | **D2** | Meter di Ep 1 versus tutorial meter di Ep 6? | Ep 1 = versi dasar (**hanya turun**, sesuai [11](11-vertical-slice-spec.md)); Ep 6 = mekanik naik + api menyebar |

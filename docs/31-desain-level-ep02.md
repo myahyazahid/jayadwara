@@ -1,6 +1,6 @@
 # 31 — Desain Level Ep 2: `Ep02_KampungKali`
 
-> **Status: USULAN v0.1 (15 Okt 2026)**, menunggu persetujuan developer. Rincian dari pola di [28](28-struktur-level-episode.md#ep-2--ep02_kampungkali--siang--sore), format sama dengan [30](30-desain-level-ep01.md) (Ep 1).
+> **Status: DISETUJUI v0.2 (15 Okt 2026)**: F1–F7 dijawab developer sesuai usulan (bagian 9). Rincian dari pola di [28](28-struktur-level-episode.md#ep-2--ep02_kampungkali--siang--sore), format sama dengan [30](30-desain-level-ep01.md) (Ep 1).
 > Sumber: [16 kartu Ep 2](16-panduan-arc-1.md#ep-2--tangan-tangan-kecil--tuyul) (isi episode), [27](27-rencana-model-tuyul.md) (ukuran Tuyul), [02](02-setting-dunia.md) (Kampung Kali). Skenario adegan Ep 2 belum ada ([17](17-skenario-arc-1.md#episode-210)), jadi urutan di sini juga jadi kerangka skenarionya.
 
 **Visual:** [`visual/ep02-kampung-kali.html`](visual/ep02-kampung-kali.html) (buka di browser).
@@ -120,7 +120,7 @@ Setelah ★1 dan ★2 ditemukan, kawanan mencuri **kotak uang kas RT** di pos RT
 
 ### D. Gabung + transformasi · ±1 menit (sequence)
 - Kawanan (yang tertangkap maupun yang lolos) tersedot energi Kala dan **bergabung** di lapangan tepi kali menjadi **tuyul raksasa**, lalu mengangkat sebuah mobil dari jalan raya.
-- Aksa transformasi di lapangan (gestur telapak ke tanah, [17 S1](17-skenario-arc-1.md#keputusan-untuk-developer-ep-1)). Jayadwara berdiri **di dalam kali**: sengaja, supaya langkah pertamanya tidak menginjak rumah.
+- Aksa transformasi di lapangan (gestur **Lawang Terbuka** versi pendek, [17 S1](17-skenario-arc-1.md#keputusan-untuk-developer-ep-1)). Jayadwara berdiri **di dalam kali**: sengaja, supaya langkah pertamanya tidak menginjak rumah.
 
 ### E. Arena raksasa · ±6–8 menit
 Arena = jalan raya + kampung + kali + kampung seberang, **±500 × 380 m**.
@@ -214,11 +214,11 @@ Transisi lewat Data Layer pencahayaan ([28](28-struktur-level-episode.md#teknis-
 
 ---
 
-## 9. Keputusan yang perlu dijawab developer
+## 9. Keputusan (dijawab developer 15 Okt 2026)
 
-| # | Pertanyaan | Usulan Claude |
+| # | Pertanyaan | Keputusan ✅ |
 |---|---|---|
-| **F1** | Ukuran boss: tuyul raksasa **45 m (1,0×)** sesuai arahan developer di [27](27-rencana-model-tuyul.md#1-satu-model-tiga-ukuran), atau **0,5–0,8×** sesuai aturan skala [16 bagian 2.6](16-panduan-arc-1.md#26-aturan-skala)? | **45 m** mengikuti arahan terbaru developer; arena di dokumen ini sudah dihitung untuk 45 m. Kalau dipilih, aturan skala di [16](16-panduan-arc-1.md#26-aturan-skala) perlu diperbarui (Ep 20 tidak lagi "raksasa setara pertama") |
+| **F1** | Ukuran boss: tuyul raksasa **45 m (1,0×)** sesuai arahan developer di [27](27-rencana-model-tuyul.md#1-satu-model-tiga-ukuran), atau **0,5–0,8×** sesuai aturan skala [16 bagian 2.6](16-panduan-arc-1.md#26-aturan-skala)? | **45 m.** Aturan skala [16 bagian 2.6](16-panduan-arc-1.md#26-aturan-skala) diperbarui: boss Arc 1 boleh 0,5–1,0×; Ep 20 jadi lawan setara pertama dalam tenaga dan teknik |
 | **F2** | Kerusakan kampung: 8 blok Chaos + rumah tukar puing? | **Ya**. Satu-satunya cara kampung padat terasa rapuh tanpa melewati anggaran FPS |
 | **F3** | Kali + bantaran + lapangan sebagai zona aman? | **Ya**, sama dengan sawah di Ep 1 |
 | **F4** | Pasar ditutup di Ep 2, dibuka di Ep 4? | **Ya** (kit sama, cerita berbeda) |

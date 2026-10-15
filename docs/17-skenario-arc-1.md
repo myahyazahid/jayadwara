@@ -1,6 +1,6 @@
 # 17 — Skenario Arc 1 "Kebangkitan"
 
-> **Status: USULAN v0.1 (12 Okt 2026)**, menunggu review developer.
+> **Status: Ep 1 DISETUJUI v0.2 (15 Okt 2026)**: S1–S6 dijawab developer (lihat "Keputusan untuk Developer (Ep 1)"); gestur transformasi = **Lawang Terbuka**.
 > Isi: skenario per episode Arc 1. Ep 1 ditulis lengkap (vertical slice); Ep 2–10 menyusul sebagai outline.
 > Aturan desain (struktur episode, skala, penyegelan, mekanik) ada di [16-panduan-arc-1.md](16-panduan-arc-1.md). Batas scope Ep 1 tetap [11-vertical-slice-spec.md](11-vertical-slice-spec.md): adegan di sini tidak menambah sistem di luar daftar "Masuk Scope", kecuali yang ditandai **[opsional]**.
 
@@ -204,16 +204,16 @@ Senja merah. Semua sisa tulang di galian tersedot ke tengah lubang. Tanah mereka
 >
 > **SANG PENJAGA:** Kau masih mau menjaga?
 >
-> *(Jerangkong mengangkat kaki di atas Aksa. Tangan kanan Aksa menekan tanah di kaki arca.)*
+> *(Jerangkong mengangkat kaki di atas Aksa. Aksa bangkit berlutut bersandar pada arca, menggenggam kalungnya.)*
 >
 > **AKSA:** ...Iya.
 
-4. **Transformasi:** arca pecah. Pecahan batunya melayang dan berputar mengelilingi Aksa, lalu retakan cahaya emas merambat dari telapak tangannya yang menempel di tanah. Pecahan batu menjadi zirah. **Jayadwara** berdiri dan menahan kaki Jerangkong dengan satu tangan.
+4. **Transformasi, gestur "Lawang Terbuka":** Aksa berdiri. Kalung belah ketupat digenggam di depan dada, kedua lengan bersilang; kalung menyala di sela jari. Arca pecah, pecahan batunya melayang dan berputar mengelilingi Aksa. Aksa **membuka kedua lengan perlahan ke samping seperti daun pintu gerbang** (setinggi bahu). Pecahan batu tersusun menjadi **gerbang paduraksa bercahaya emas** di belakangnya; Aksa melangkah mundur masuk ke gerbang, cahaya menelan tubuhnya, dan pecahan batu menjadi zirah. **Jayadwara** berdiri dan menahan kaki Jerangkong dengan satu tangan.
 5. Pose kuda-kuda silat. Judul muncul: **JAYADWARA**.
 
 **Catatan:**
-- **Gestur transformasi = telapak tangan menekan bumi**, terkait nama *Mangkubumi* ("yang memangku bumi"). Usulan ini menggantikan "item transformasi" dan jauh dari gestur Ultra (mengangkat alat ke langit). Perlu persetujuan (keputusan S1).
-- Tidak ada gelang atau alat. Tidak ada cahaya dari langit. Kekuatan datang dari **tanah dan batu arca**.
+- **Gestur transformasi = "Lawang Terbuka"** (keputusan S1, 15 Okt 2026): kalung di dada → lengan dibuka ke samping seperti pintu gerbang → gerbang paduraksa cahaya. Terkait codename **Lawang** (pintu) dan Dwarapala sebagai penjaga gerbang. **Versi panjang hanya di Ep 1**; episode lain versi pendek ±2–3 detik (langsung buka lengan, gerbang menyala, masuk). Tangan tidak pernah diangkat di atas bahu dan tidak ada alat yang diacungkan ke langit (aturan IP [01](01-konsep-dan-pilar.md#wajib-dihindari)).
+- Tidak ada gelang atau alat di lengan. Tidak ada cahaya dari langit. **Inti kekuatan = kalung pecahan arca berbentuk belah ketupat** (diamond) berbingkai emas, peninggalan Ki Zahid ([03](03-karakter.md#aksa-jaya-mangkubumi-aksa)); kalung hanya digenggam di dada, tidak diangkat.
 - Truk di latar (poin 2) sesuai [11](11-vertical-slice-spec.md#alur-episode-2030-menit).
 
 ---
@@ -294,7 +294,7 @@ Malam, lampu sorot tim DWARA. Aksa duduk di alas arca yang kosong, berselimut, d
 
 ---
 
-### Adegan 10 — Stinger: arca kedua · SEQ / gambar diam **[opsional]**
+### Adegan 10 — Stinger: arca kedua · gambar diam
 
 Gudang gelap milik Adikara. Terpal ditarik dari arca Dwarapala kanan. **Gunadi Adikara** menatapnya, lalu menatap tablet yang menampilkan rekaman Jayadwara.
 
@@ -302,7 +302,7 @@ Gudang gelap milik Adikara. Terpal ditarik dari arca Dwarapala kanan. **Gunadi A
 >
 > **GUNADI ADIKARA:** Yang ini... punya kita.
 
-**Catatan:** stinger **tidak ada** di daftar scope [11](11-vertical-slice-spec.md). Kalau disetujui, pakai versi paling murah (1 shot statis atau gambar ilustrasi). Kalau tidak, informasi arca kedua sudah cukup dari adegan 6 dan 9.
+**Catatan:** disetujui sebagai **gambar diam** (S4, 15 Okt 2026): 1 ilustrasi atau shot statis dengan teks dialog, tanpa model Gunadi atau set gudang 3D.
 
 ---
 
@@ -342,7 +342,7 @@ Aksa, Kol. Bagas, Sekar, Dr. Nadia, Prof. Yahyo, Ki Sastro, mandor (NPC), Sang P
 
 ## Cek IP & Budaya Ep 1
 
-- [x] Tanpa item transformasi berbentuk gelang; gestur = telapak ke tanah, bukan mengangkat alat ke langit.
+- [x] Tanpa item transformasi berbentuk gelang; gestur "Lawang Terbuka": kalung digenggam di dada, lengan dibuka ke samping setinggi bahu, tidak ada alat diangkat ke langit.
 - [x] Tanpa timer; meter dijelaskan sebagai "ikatan", habis = kembali jadi manusia.
 - [x] Penyegelan: kedipan merah hanya di mata, permata dada statis.
 - [x] Tanpa gore: jasad pekerja tidak ditampilkan; tulang = tulang kuno.
@@ -354,13 +354,15 @@ Aksa, Kol. Bagas, Sekar, Dr. Nadia, Prof. Yahyo, Ki Sastro, mandor (NPC), Sang P
 
 ## Keputusan untuk Developer (Ep 1)
 
-| # | Pertanyaan | Usulan Claude |
+Semua dijawab developer 15 Okt 2026.
+
+| # | Pertanyaan | Keputusan ✅ |
 |---|---|---|
-| **S1** | Gestur transformasi: telapak tangan menekan bumi? | **Ya**, terkait nama Mangkubumi dan jauh dari gestur Ultra. Di episode lain Aksa memakai gestur yang sama. Kalung pecahan arca Aksa ([03](03-karakter.md#aksa-jaya-mangkubumi-aksa)) menyala samar saat gestur, bukan alat yang diangkat |
+| **S1** | Gestur transformasi? | **"Lawang Terbuka"** (dipilih developer dari 4 opsi: Sembah Bumi, Mangkubumi, Lawang Terbuka, Kuda-kuda Dwarapala). Inti kekuatan tetap kalung belah ketupat Aksa. Versi panjang Ep 1, versi pendek episode lain |
 | **S2** | Sang Penjaga berbicara langsung ke Aksa? | **Ya**, suara saja, kalimat pendek, netral/ambigu. Memberi alasan naratif untuk meter di Ep 1 |
 | **S3** | Kol. Bagas sudah tahu latar keluarga Aksa? | **Ya**, sedikit ("Makanya kamu yang saya kirim"), tanpa dijelaskan. Bisa dibayar di arc berikutnya |
-| **S4** | Stinger Gunadi + arca kedua masuk vertical slice? | **Opsional**, versi gambar diam. Di luar scope [11](11-vertical-slice-spec.md) sampai disetujui |
-| **S5** | "Tulang pekerja" (docs/11) → tulang kuno? | **Ya**, demi rating remaja; docs/11 diperbarui kalau disetujui |
+| **S4** | Stinger Gunadi + arca kedua masuk vertical slice? | **Ya, versi gambar diam** (1 ilustrasi/shot statis); ditambahkan ke scope [11](11-vertical-slice-spec.md#narasi--presentasi) |
+| **S5** | "Tulang pekerja" (docs/11) → tulang kuno? | **Ya**, demi rating remaja; docs/11 sudah diperbarui |
 | **S6** | Ketiga petunjuk di jalur utama (pengecualian aturan 2.1 docs/16)? | **Ya**, khusus Ep 1 sebagai tutorial |
 
 ---

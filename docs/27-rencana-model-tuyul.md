@@ -15,7 +15,7 @@
 - **Satu model saja** (keputusan developer 15 Okt 2026, supaya tidak mengerjakan dua kali): desain boss (besar dan seram) dipakai juga untuk kawanan kecil; bedanya hanya ukuran. Konsekuensi: tidak ada varian dengan banyak kepala/tangan tambahan (tidak masuk akal di 1 m), dan kawanan terbaca seram-jahil, bukan lucu.
 - Skala **di-bake saat export** (pola Jerangkong J2), bukan skala actor di UE.
 - Badan **di-skin lunak** (Tuyul tidak rontok/susun ulang seperti Jerangkong), jadi tidak ada potongan kaku atau `SM_` per bagian.
-- **Ukuran boss 1,0×** adalah arahan developer (15 Okt 2026: boss sama atau lebih besar dari Jayadwara, seperti kaiju Ultraman). Ini **bertentangan** dengan [16 bagian 2.6](16-panduan-arc-1.md#26-aturan-skala) (Arc 1 = 0,5–0,8×; Tuyul 0,5×). Selama aturan skala belum diperbarui, `Hermes/tuyul_hermes.md` yang berlaku untuk Tuyul; Jerangkong (0,7×, sudah jadi) belum diubah.
+- **Ukuran boss 1,0×** adalah arahan developer (15 Okt 2026: boss sama atau lebih besar dari Jayadwara, seperti kaiju Ultraman). Konflik dengan aturan skala lama **sudah diselesaikan** (keputusan F1, 15 Okt 2026): [16 bagian 2.6](16-panduan-arc-1.md#26-aturan-skala) sekarang membolehkan boss Arc 1 sampai 1,0×. Jerangkong tetap 0,7×.
 
 ## 2. Arahan desain (usulan)
 

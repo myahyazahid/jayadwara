@@ -168,7 +168,7 @@
 | Debu langkah raksasa | 7 | F2 |
 | Tulang merayap & menyusun ulang | 5, 7 | F2 |
 | Cahaya Kala di rusuk & rongga mata Jerangkong | 6, 7 | F2 |
-| Transformasi: pecahan batu berputar + retakan emas dari telapak | 6 | F2 |
+| Transformasi "Lawang Terbuka": kalung menyala, pecahan batu berputar lalu tersusun jadi gerbang paduraksa cahaya emas | 6 | F2 |
 | Highlight titik lemah tengkorak | 7 | F2 |
 | Debu runtuhan gedung | 7 | F1 → F2 |
 | Penyegelan: energi tersedot ke telapak | 8 | F2 |
