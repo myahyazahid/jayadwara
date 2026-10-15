@@ -46,6 +46,7 @@ Aksa Jaya Mangkubumi, agen baru sebuah lembaga rahasia penanganan anomali, menya
 | 26 | [Rencana Jubah Jayadwara](26-rencana-jubah-jayadwara.md) | **J1 disetujui; J2 selesai (13 Okt 2026), menunggu developer**: jubah cap02 menempel tubuh sampai kerah, Mask zona + LOD0–2, simulasi rantai (J3 sebagian), tombol Y lepas (J4 sebagian). J5 belum. Jubah upacara (K9 docs/14): mesh terpisah ikut pose Jayadwara2, Chaos Cloth, pakai/lepas otomatis; basis Tripo `cap02`; J0–J3 ditarik sekarang sebagai jalur art paralel, J4–J5 tetap F2 |
 | 27 | [Rencana Model Tuyul](27-rencana-model-tuyul.md) | **Usulan (backlog Fase 4).** Boss Ep 2 + kawanan: alur developer (konsep + GLB Tripo) → Hermes (K0–K7, [`Hermes/tuyul_hermes.md`](../Hermes/tuyul_hermes.md)) → Claude Code (review, perbaikan, integrasi, polish). Tiga ukuran ter-bake (1 m / 27 m / 45 m), keputusan T1–T9 |
 | 28 | [Struktur Level per Episode](28-struktur-level-episode.md) | **Usulan.** Satu map per episode ala Resident Evil 4 (zona kedatangan → investigasi → konfrontasi → transformasi → arena raksasa), kit distrik Level Instance, rancangan map Ep 1–10 + hub, keputusan L1–L6. Konsep satu map Arunapura diarsipkan di sini |
+| 29 | [Struktur Level Arc 2](29-struktur-level-arc-2.md) | **Usulan (backlog Season 2).** Map Ep 11–20 ala RE4 di 5 gerbang regional: kit inti + paket identitas, aturan budaya (rumah adat/ibadah tidak hancur), pos lapangan DWARA, sistem per episode, keputusan M1–M7 |
 
 
 ---

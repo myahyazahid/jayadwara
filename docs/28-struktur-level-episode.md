@@ -187,7 +187,7 @@ Kit baru per episode: Ep 1 (2), Ep 2, 3, 5, 6, 9 (1 masing-masing), sisanya 0. E
 
 ## 6. Arc 2–5 (garis besar)
 
-Pola yang sama dipakai untuk peta regional ([02](02-setting-dunia.md#peta-misi-regional)): **satu map per episode, kit per wilayah** (Sumatra, Kalimantan, Sulawesi, Nusa Tenggara, Maluku–Papua, Jawa Timur, Bali). Episode yang kembali ke Arunapura (mis. Ep 21–25, 31, 33, 36) memakai kit Arc 1. Rincian dibuat saat arc tersebut masuk produksi.
+Pola yang sama dipakai untuk peta regional ([02](02-setting-dunia.md#peta-misi-regional)): **satu map per episode, kit per wilayah** (Sumatra, Kalimantan, Sulawesi, Nusa Tenggara, Maluku–Papua, Jawa Timur, Bali). Episode yang kembali ke Arunapura (mis. Ep 21–25, 31, 33, 36) memakai kit Arc 1. Rincian Arc 2 (Ep 11–20) sudah disiapkan di [29](29-struktur-level-arc-2.md); Arc 3–5 dibuat saat arc tersebut mendekati produksi.
 
 ---
 
