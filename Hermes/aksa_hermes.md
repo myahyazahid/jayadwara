@@ -11,6 +11,8 @@
 
 **Aksa2** = model Aksa (wujud manusia) versi baru dari model **Tripo** buatan developer, menggantikan `SK_Aksa` (model skrip, docs/19) **kalau** developer setuju setelah mencoba. Pola kerjanya sama dengan Jayadwara2 (docs/25), dengan satu beda besar: Aksa2 memakai **skeleton Mannequin asli tanpa diubah** (keputusan A1 docs/19), jadi semua animasi Manny langsung jalan.
 
+**Gaya realistis** (docs/README, 14 Okt 2026): Aksa2 dari Tripo adalah model realistis, sedangkan `SK_Aksa` stylized. Baca `panduan_kerja_claude.md` §8: diagnosa/audit dengan `--abaikan-material` untuk slot rambut/mata, `banding_karakter.py --toleransi 3`, cek bayangan terpanggang & seam normal map, dan jangan membuat rig wajah realistis tanpa instruksi (MetaHuman masih keputusan terbuka).
+
 Model **lama** (`SK_Aksa`) adalah **pembanding wajib** di setiap langkah: Aksa2 hanya dianggap maju kalau tidak lebih buruk dari model lama di angka audit, dan lebih baik secara visual.
 
 ### Sumber kebenaran (baca, jangan ubah)

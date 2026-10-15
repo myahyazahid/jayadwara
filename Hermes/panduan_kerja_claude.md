@@ -2,7 +2,7 @@
 
 > Dari Claude, untuk Hermes. **Read-only bagimu.** Wajib dibaca sebelum tugas model 3D, rig, tekstur, atau **perbaikan** ("lengan robek", "ketiak bolong", "wajah meleh", "kain tembus").
 > Urutan berlaku: `AGENTS.md` > instruksi khusus `Hermes/<model>_hermes.md` > `Hermes/panduan_model_3d.md` > file ini.
-> Versi: 15 Okt 2026. Semua resep dan angka di sini sudah diuji Claude pada kerusakan buatan di `SK_Aksa` (lihat §7).
+> Versi: 15 Okt 2026 (+ §8 model realistis). Semua resep dan angka di sini sudah diuji Claude pada kerusakan buatan di `SK_Aksa` (lihat §7).
 
 ---
 
@@ -140,7 +140,22 @@ Kerusakan buatan pada `SK_Aksa`, pembanding = `SK_Aksa` asli.
 
 Pelajaran yang sudah ada di resep: radius perbaikan harus mencakup seluruh kerusakan; "angka penyebab turun" belum berarti berhasil; jangan menutup semua loop.
 
-## 8. Template laporan perbaikan
+## 8. Model realistis (gaya proyek sejak 14 Okt 2026)
+
+Gaya visual proyek sekarang **realistis** (docs/README, docs/09): geometri & tekstur dasar dari **Tripo**, lalu dibersihkan, dipisah, di-rig, dan dibawa ke UE. Jayadwara2 dan Jerangkong sudah lewat jalur ini, dan sebagian besar resep di atas (docs/25 R2–R8) **berasal dari model Tripo itu**. Alur, alat, dan resep tetap berlaku. Yang berubah:
+
+| Hal | Stylized (dulu) | Realistis (sekarang) | Yang dilakukan |
+|---|---|---|---|
+| Rambut, bulu mata, mata | Gumpalan/cangkang tertutup | **Kartu rambut** & lembar tipis bertepi terbuka, saling tumpang-tindih | Diagnosa dengan `--abaikan-material Hair,Lash,Brow,Eye` (sesuaikan nama slot). Tanpa itu: ratusan "lubang" palsu (kepala `SK_Aksa`: 267 loop → 3 setelah diabaikan) |
+| Toleransi regangan | Tekstur polos, melar tidak kelihatan | Pori kulit, serat kain, ukiran di tekstur **ikut melar** dan terlihat | `banding_karakter.py --toleransi 3` (bukan 5) untuk karakter yang dilihat dekat (manusia, wajah, tangan) |
+| Pembanding | `SK_Aksa` (skrip, stylized) | Model realistis pertama yang disetujui | Sebelum ada model realistis yang disetujui: pakai `SK_Aksa` **hanya untuk regangan/bobot** (kualitas rig). Tepi terbuka, normal, dan tembus antar-gaya tidak bisa dibandingkan, jadi nilai lewat gambar. Monster: `SK_Jerangkong`; raksasa berzirah: `SK_Jayadwara2` (sudah Tripo/realistis) |
+| Tekstur | Dibuat skrip dari palet | Atlas Tripo membawa **bayangan terpanggang** (docs/09 risiko) | Render tekstur dengan cahaya datar (Workbench, warna TEXTURE): gelap permanen di ketiak/dagu/lipatan yang tidak ikut berubah saat pose = bayangan terpanggang. Laporkan; perbaikan (Tripo flat-lit, delighting, material dibuat ulang) diputuskan developer |
+| Normal map & seam | Hampir datar | Detail di normal map; seam UV terlihat di bawah Lumen | Cek di UE level Hermes dengan Lumen: garis terang/gelap di seam = tangent tidak cocok (resep F8: impor normal map dengan basis MikkTSpace, jangan "Recompute" sembarangan) |
+| Kerapatan mesh | Puluhan ribu tris | Tripo bisa ratusan ribu sebelum LOD | Diagnosa/audit lebih lama: batasi `--pose` ke pose keluhan saat iterasi, jalankan semua pose hanya di regresi akhir |
+| Wajah manusia | Morph target skrip | Rawan *uncanny*; MetaHuman masih **keputusan terbuka** (docs/08 #5) | Hermes **tidak** membuat rig/morph wajah realistis atau memakai MetaHuman tanpa instruksi khusus. Tulis temuan di laporan |
+| Anggaran poligon | docs/19 A8 (LOD0 60k manusia) | Belum ditetapkan ulang untuk realistis | Pakai angka di docs sampai developer memutuskan. Model melebihi anggaran: **laporkan angkanya**, jangan decimate agresif sampai detail realistisnya hilang |
+
+## 9. Template laporan perbaikan
 
 ```markdown
 ## Perbaikan: <keluhan persis dari developer>

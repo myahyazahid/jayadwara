@@ -27,6 +27,8 @@ blender --background --factory-startup --python Art/Scripts/audit_karakter.py --
 python -I Art/Scripts/banding_karakter.py --lama Hermes/Art/<topik>/Audit/lama --baru Hermes/Art/<topik>/Audit/<langkah> --out Hermes/Art/<topik>/Banding/<langkah> --ref <ak | "path/ref_{v}.png" | none>
 ```
 
+Gaya proyek **realistis**: untuk karakter yang dilihat dekat (manusia, wajah, tangan) pakai `--toleransi 3`. Pembanding beda gaya (stylized `SK_Aksa` vs Aksa2 realistis): yang dibandingkan regangan; tepi terbuka/IoU dinilai lewat gambar. Cek juga bayangan terpanggang di tekstur dan seam normal map di UE (`Hermes/panduan_kerja_claude.md` §8).
+
 ## 4. Membaca hasil (bagian yang paling sering dilewati)
 1. `banding.md` ditempel utuh ke laporan. **VONIS GAGAL tidak boleh dilewati** dengan mengubah toleransi atau skrip.
 2. `banding_ortho.png`: kolom lama vs baru vs konsep. Merah = ada di konsep tapi tidak di model, cyan = sebaliknya. Lengan wajar beda (pose rest Manny), yang dinilai badan, kepala, kaki.

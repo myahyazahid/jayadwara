@@ -2,7 +2,7 @@
 
 > Dari Claude, untuk Hermes. **Read-only bagimu.** Berlaku untuk **setiap** tugas model 3D: NPC manusia (mis. Ki Sastro, Kol. Bagas Suryo, warga, agen DWARA), monster/boss (Tuyul, Jenglot, Babi Ngepet, Pocong, ...), dan varian.
 > Aturan dasar tetap `AGENTS.md` (worktree, sandbox, §0 cara kerja). Contoh yang sudah terisi lengkap: [`aksa_hermes.md`](aksa_hermes.md) (Aksa2). Kalau ada beda, **instruksi khusus model** (`<model>_hermes.md`) menang atas panduan ini, dan `AGENTS.md` menang atas keduanya.
-> Versi: 14 Okt 2026.
+> Versi: 14 Okt 2026, diperbarui 15 Okt 2026 untuk gaya realistis (lihat `panduan_kerja_claude.md` §8).
 
 ---
 
@@ -36,7 +36,8 @@ Tulis di laporan, isi dari dokumen, bukan dari ingatan:
 - Skeleton: Manny asli / sendiri (nama Manny) / sendiri (non-biped)
 - Profil pose: Art/Scripts/pose_profil/manny.json / Hermes/Tools/pose_<topik>.json
 - Pembanding (--lama): <path FBX> — alasan
-- Anggaran tris LOD0/1/2/3: (manusia: 60k/25k/10k/4k; boss raksasa: ≤100k/30k/14k/6k seperti Jayadwara2)
+- Anggaran tris LOD0/1/2/3: (angka di docs: manusia 60k/25k/10k/4k docs/19 A8; boss raksasa ≤100k/30k/14k/6k seperti Jayadwara2. Angka manusia ditulis saat gaya masih stylized; sampai developer menetapkan ulang untuk realistis, pakai angka ini dan **laporkan** kalau terlampaui)
+- Gaya: **realistis** (docs/README, 14 Okt 2026). Baca `panduan_kerja_claude.md` §8: rambut kartu, toleransi 3, bayangan terpanggang, seam normal map, wajah/MetaHuman
 - Slot material:
 - Socket: (manusia: 7 socket SK_Aksa_sockets.json; monster: titik pukul + titik lemah + VFX, sebut nama & tulang)
 - Checklist IP/budaya: (docs/01 wajib dihindari, docs/06 sensitivitas; Pocong ⚠️: jangan mengolok-olok pemakaman)

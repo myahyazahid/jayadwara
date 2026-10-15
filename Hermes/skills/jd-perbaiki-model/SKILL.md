@@ -24,6 +24,7 @@ blender --background --factory-startup --python Art/Scripts/diagnosa_mesh.py -- 
 blender --background --factory-startup --python Art/Scripts/diagnosa_mesh.py -- <FBX model> --tulang <t> --out Hermes/Art/<topik>/Diagnosa/vNN_<wilayah> --pembanding-hasil Hermes/Art/<topik>/Diagnosa/sehat_<wilayah>
 ```
 Raksasa/monster: tambah `--height <m>` (dan `--profil <json>`), nilai sama dengan audit.
+Model realistis dengan rambut kartu/bulu mata/mata: tambah `--abaikan-material Hair,Lash,Brow,Eye` (sesuaikan nama slot, sama untuk pembanding). Tanpa itu muncul ratusan "lubang" palsu.
 - Baca `diagnosa.md`: dugaan #1 dikerjakan dulu. Keterangan "akibatnya" = hilang sendiri setelah penyebab diperbaiki.
 - Buka `diagnosa_sheet.png`. Warna (merah lubang, magenta bobot jauh, kuning jahitan, oranye bobot tajam, biru tembus) **harus ada di tempat keluhan**. Kalau tidak: tulang/wilayah salah, kembali ke langkah 2.
 - "Tidak ada temuan": coba `--pose <pose keluhan>`; masalah hanya di UE → F8; tulis kesimpulanmu.

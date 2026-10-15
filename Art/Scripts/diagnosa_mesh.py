@@ -5,6 +5,8 @@ Headless (tidak menyimpan .blend apa pun):
         --out <dir> [--pose semua|<nama>[,<nama>]] [--height 1.806] [--profil Art/Scripts/pose_profil/manny.json]
         [--radius 0.12] [--sebelum <dir diagnosa sebelumnya>] [--res 420]
         [--pembanding <fbx model sehat> [--height-pembanding M] | --pembanding-hasil <dir diagnosa model sehat>] [--tanpa-render]
+        [--abaikan-material Hair,Lash,Brow,Eye]   (model realistis: rambut kartu/bulu mata/mata = tepi terbuka & tumpang-tindih
+                                                   yang disengaja; tanpa ini terbaca sebagai ratusan "lubang")
 Wilayah = vertex yang SECARA FISIK dekat ruas tulang --tulang (jarak <= --radius m pada tinggi 1,806, diskalakan --height),
 apa pun bobotnya, supaya vertex yang salah dibobot tetap tertangkap. Untuk "lengan kanan robek": --tulang upperarm_r,lowerarm_r;
 ketiak: --tulang upperarm_r,clavicle_r; leher: --tulang neck_01,neck_02,head; paha: --tulang thigh_l,calf_l.
@@ -61,6 +63,7 @@ SEBELUM = opt("--sebelum", "")
 PEMBANDING_FBX = opt("--pembanding", "")
 PEMBANDING_DIR = opt("--pembanding-hasil", "")
 TANPA_RENDER = "--tanpa-render" in argv
+ABAIKAN = [x.strip().lower() for x in opt("--abaikan-material", "").split(",") if x.strip()]   # mis. Hair,Lash,Brow,Eye
 OUT.mkdir(parents=True, exist_ok=True)
 
 # ---------------------------------------------------------------- impor
@@ -202,6 +205,14 @@ for o in meshes:
     W = [{names[g.group]: g.weight for g in v.groups if g.weight > 1e-4 and g.group in names} for v in me.vertices]
     near = [min(dist_seg(p, a, b) for a, b in region_seg) for p in co]
     reg = {i for i, d in enumerate(near) if d <= RADIUS}
+    if ABAIKAN:                                   # rambut kartu, bulu mata, mata: tepi terbuka & tumpang-tindih memang desain
+        mats = [(m.name.lower() if m else "") for m in me.materials]
+        abaikan_f = [f for f in me.polygons if f.material_index < len(mats) and any(a in mats[f.material_index] for a in ABAIKAN)]
+        lain = {v for f in me.polygons if f not in abaikan_f for v in f.vertices} if abaikan_f else None
+        if abaikan_f:
+            buang = {v for f in abaikan_f for v in f.vertices} - lain
+            reg -= buang
+            print(f"  {o.name}: {len(abaikan_f)} muka material {ABAIKAN} diabaikan ({len(buang)} vertex)")
     info[o.name] = {"co": co, "W": W, "reg": reg}
 # tulang pembanding "terdekat" = hanya tulang yang benar-benar dipakai sebagai bobot dominan (rantai kosong, mis. sash_* tanpa
 # mesh, tidak dihitung)
@@ -213,7 +224,7 @@ if n_reg == 0:
     print("GAGAL: tidak ada vertex di wilayah; periksa --tulang / --radius / --height")
     sys.exit(2)
 
-hasil = {"fbx": str(FBX), "tulang": TULANG, "radius_m": RADIUS, "vertex_wilayah": n_reg}
+hasil = {"fbx": str(FBX), "tulang": TULANG, "radius_m": RADIUS, "vertex_wilayah": n_reg, "abaikan_material": ABAIKAN}
 mark = {o.name: {} for o in meshes}           # vertex -> warna
 
 
@@ -356,8 +367,11 @@ hasil["normal_terbalik"] = {"muka": balik, "dari": total_f, "persen": round(100 
 
 # ---------------------------------------------------------------- per pose: regangan, lubang melebar, jahitan terpisah, tembus
 def tri_list(o, coords, verts_ok):
-    tris, owners = [], []
+    tris = []
+    mats = [(m.name.lower() if m else "") for m in o.data.materials]
     for f in o.data.polygons:
+        if ABAIKAN and f.material_index < len(mats) and any(a in mats[f.material_index] for a in ABAIKAN):
+            continue
         if any(v in verts_ok for v in f.vertices):
             vs = list(f.vertices)
             for k in range(1, len(vs) - 1):
@@ -462,6 +476,8 @@ if PEMBANDING_FBX and not PEMBANDING_DIR:
            opt("--height-pembanding", str(H)), "--radius", str(RADIUS / SC), "--tanpa-render"]
     if "--profil" in argv:
         cmd += ["--profil", opt("--profil", "")]
+    if ABAIKAN:
+        cmd += ["--abaikan-material", ",".join(ABAIKAN)]
     print("pembanding:", " ".join(cmd))
     subprocess.run(cmd, check=False)
 if PEMBANDING_DIR:
