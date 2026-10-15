@@ -1,5 +1,5 @@
 """Aksa2 — Ekspor SK_Aksa2.fbx dari file blend hasil perbaikan.
-Default input: Art/Blender/aksa2_v06_F4.blend
+Default input: Art/Blender/aksa2/aksa2_v07_morph.blend (shape key morph ikut diekspor)
 Default output: Art/Export/SK_Aksa2.fbx
 """
 import json
@@ -12,7 +12,7 @@ from mathutils import Matrix, Vector
 
 ROOT = Path(__file__).resolve().parents[1].parent
 argv = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
-BLEND_IN = Path(argv[0]) if argv else ROOT / "Art" / "Blender" / "aksa2_v06_F4.blend"
+BLEND_IN = Path(argv[0]) if argv else ROOT / "Art" / "Blender" / "aksa2" / "aksa2_v07_morph.blend"
 FBX_OUT = ROOT / "Art" / "Export" / "SK_Aksa2.fbx"
 SOCK_OUT = ROOT / "Art" / "Export" / "SK_Aksa2_sockets.json"
 

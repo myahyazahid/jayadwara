@@ -103,12 +103,16 @@ def import_textures():
 def ensure_material(tex):
     master = EAL.load_asset(MASTER)
     assert master, f"{MASTER} tidak ada"
-    if not master.get_editor_property("used_with_skeletal_mesh"):
-        # Tanpa flag ini mesh skeletal memakai material DEFAULT (abu-abu) di Play (peringatan "missing bUsedWithSkeletalMesh").
-        master.set_editor_property("used_with_skeletal_mesh", True)
+    changed = []
+    # Tanpa used_with_skeletal_mesh mesh skeletal memakai material DEFAULT (abu-abu) di Play; used_with_morph_targets perlu di build cook.
+    for flag in ("used_with_skeletal_mesh", "used_with_morph_targets"):
+        if not master.get_editor_property(flag):
+            master.set_editor_property(flag, True)
+            changed.append(flag)
+    if changed:
         MEL.recompile_material(master)
         EAL.save_loaded_asset(master, False)
-        log("M_Aksa2_Master: Used With Skeletal Mesh dinyalakan")
+        log("M_Aksa2_Master: flag dinyalakan: " + ", ".join(changed))
     if EAL.does_asset_exist(MI):
         mi = EAL.load_asset(MI)
     else:
@@ -136,9 +140,13 @@ def import_mesh(skeleton):
     d = ui.get_editor_property("skeletal_mesh_import_data")
     d.set_editor_property("import_uniform_scale", 1.0)
     d.set_editor_property("convert_scene", True)
-    d.set_editor_property("import_morph_targets", False)     # morph wajah menyusul (H3b → Claude)
+    d.set_editor_property("import_morph_targets", True)      # 8 morph wajah (ak_*), hanya LOD0
     d.set_editor_property("use_t0_as_ref_pose", False)
     d.set_editor_property("normal_import_method", unreal.FBXNormalImportMethod.FBXNIM_IMPORT_NORMALS)
+    old = EAL.load_asset(f"{MESH_DIR}/{MESH_NAME}") if EAL.does_asset_exist(f"{MESH_DIR}/{MESH_NAME}") else None
+    if old is not None:
+        # Re-import memakai pengaturan yang tersimpan di aset lama (import_morph_targets=False dari impor pertama): setel ulang
+        old.get_editor_property("asset_import_data").set_editor_property("import_morph_targets", True)
     t = unreal.AssetImportTask()
     t.set_editor_property("filename", os.path.join(EXPORT, "SK_Aksa2.fbx"))
     t.set_editor_property("destination_path", MESH_DIR)
@@ -200,6 +208,12 @@ def sockets(mesh):
         log(f"socket {s['name']} @ {s['bone']} rel=({rel.x:.1f}, {rel.y:.1f}, {rel.z:.1f})")
 
 
+def morphs(mesh, tag):
+    names = [str(n) for n in mesh.get_all_morph_target_names()]
+    log(f"morph ({tag}): {len(names)} {names}")
+    return names
+
+
 def main():
     if unreal.EditorLevelLibrary.get_pie_worlds(False):
         raise RuntimeError("Editor sedang Play (PIE), hentikan dulu")
@@ -208,13 +222,17 @@ def main():
     tex = import_textures()
     mi = ensure_material(tex)
     mesh = import_mesh(skeleton)
+    morphs(mesh, "setelah impor LOD0")
     assign_material(mesh, mi)
+    morphs(mesh, "setelah material")
     import_lods(mesh)
+    morphs(mesh, "setelah LOD1-3")
     assign_material(mesh, mi)                     # import_lod bisa mengembalikan slot
     pa = EAL.load_asset(PHYSICS)
     if pa:
         mesh.set_editor_property("physics_asset", pa)
     sockets(mesh)
+    morphs(mesh, "setelah socket")
     EAL.save_loaded_asset(mesh, False)
     b = mesh.get_bounds()
     log(f"bounds: extent=({b.box_extent.x:.1f}, {b.box_extent.y:.1f}, {b.box_extent.z:.1f}) cm "

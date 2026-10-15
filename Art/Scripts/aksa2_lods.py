@@ -1,5 +1,5 @@
 """Aksa2 H5 — Pembuatan & Ekspor LOD1, LOD2, dan LOD3 Ber-rig Tervalidasi.
-Input : Art/Blender/aksa2_v06_F4.blend
+Input : Art/Blender/aksa2/aksa2_v07_morph.blend (shape key morph dibuang di LOD1-3: UE hanya memakai morph LOD0)
 Output:
   - Art/Export/SK_Aksa2_LOD1.fbx (pagu <= 25k tris)
   - Art/Export/SK_Aksa2_LOD2.fbx (pagu <= 10k tris)
@@ -14,7 +14,7 @@ import bpy
 from mathutils import Matrix, Vector
 
 ROOT = Path(__file__).resolve().parents[1].parent
-BLEND_IN = ROOT / "Art" / "Blender" / "aksa2_v06_F4.blend"
+BLEND_IN = ROOT / "Art" / "Blender" / "aksa2" / "aksa2_v07_morph.blend"
 OUT_DIR = ROOT / "Art" / "Export"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -124,7 +124,7 @@ def export_fbx(mesh_obj, arm_obj, fbx_path):
 LOD_SPECS = [
     # (level, ratio, use_protect, vg_factor, max_tris)
     (1, 0.55, True, 0.60, 25000),
-    (2, 0.22, True, 0.50, 10000),
+    (2, 0.23, True, 0.50, 10000),
     (3, 0.09, False, 0.0, 4000),
 ]
 
@@ -139,6 +139,9 @@ for lv, ratio, use_protect, vg_fac, max_tris in LOD_SPECS:
     bpy.context.view_layer.objects.active = ob
     ob.select_set(True)
     
+    if ob.data.shape_keys:                                   # decimate tidak bisa pada mesh ber-shape-key
+        with bpy.context.temp_override(object=ob, active_object=ob):
+            bpy.ops.object.shape_key_remove(all=True)
     mod = ob.modifiers.new("Decimate", "DECIMATE")
     mod.decimate_type = "COLLAPSE"
     mod.ratio = ratio
