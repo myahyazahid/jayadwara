@@ -45,7 +45,7 @@ Roadmap memberi ±2 bulan per episode ([10](10-roadmap.md#fase-4--produksi-seaso
 - **Maksimal 1 sistem C++ baru** per episode (kolom "Mekanik baru" di tabel 3). Sisanya data/konten.
 - **1 boss baru** (class turunan `AJDBossBase` + StateTree + DataAsset).
 - **Maksimal 1 tipe minion baru**; minion lama boleh dipakai ulang.
-- **Distrik dipakai ulang.** Episode menambah layout/prop lewat Data Layer, tidak membangun distrik baru dari nol (kecuali distrik itu muncul pertama kali).
+- **Distrik dipakai ulang.** Kit distrik (Level Instance) dirangkai ulang di map episode baru, tidak membangun distrik baru dari nol (kecuali distrik itu muncul pertama kali). Lihat [28 bagian 3](28-struktur-level-episode.md#3-kit-distrik-dibangun-sekali-dipakai-ulang).
 - Kalau satu episode butuh lebih dari itu, potong fiturnya atau pindahkan ke backlog.
 
 ### 2.3 Penyegelan (ritual penutup tiap boss)
@@ -276,7 +276,7 @@ Mengikuti arsitektur [12](12-technical-design.md):
 - **Satu episode = satu `UJDEpisodeData`** (`DA_Ep02_Tuyul`, dst.): ID, judul, boss class, daftar clue (`Clue.Ep02.*`), DataTable dialog (`DT_Dialogue_Ep02`), sequence, unlock.
 - **Boss:** `AJDBoss_<Nama>` turunan `AJDBossBase` + StateTree `ST_Boss_<Nama>`. Fase dan transisi didefinisikan di data, bukan hardcode.
 - **Mekanik baru per episode** = komponen atau subsystem generik yang bisa dipakai episode lain (mis. `UJDFireSpreadSubsystem`, `UJDBodyZoneComponent`, `UJDEnvironmentObjective`), **bukan** logic khusus satu boss.
-- **Map:** Ep 1 = `Ep01_LawangSapta` (vertical slice). Ep 2–10 diusulkan memakai satu map `Arunapura` (World Partition) dengan **Data Layer per episode** (`DL_Ep02`, ...). Ini diputuskan saat Fase 4 dimulai, setelah uji performa.
+- **Map:** satu map per episode (`Ep01_LawangSapta`, `Ep02_KampungKali`, ...) ala Resident Evil 4, distrik dipakai ulang sebagai kit Level Instance; rincian per episode di [28](28-struktur-level-episode.md) (usulan 15 Okt 2026). Usulan lama satu map `Arunapura` (World Partition + Data Layer per episode) **diarsipkan** di [28 bagian 9](28-struktur-level-episode.md#9-arsip-konsep-satu-map-arunapura).
 - **Tag & penamaan:** `Clue.EpNN.<Nama>`, `Boss.EpNN`, `Unlock.<Jalur>.<Nama>`.
 - **Definisi selesai per episode:** bisa dimainkan dari briefing sampai debrief; semua petunjuk ★ bisa ditemukan; boss bisa dikalahkan dengan **dan** tanpa kelemahan; checklist IP & budaya dicek; tidak ada crash dalam satu playthrough.
 

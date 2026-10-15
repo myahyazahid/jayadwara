@@ -4,7 +4,9 @@
 
 Kota metropolitan **fiksi** di Jawa, dibangun di atas reruntuhan kerajaan kuno. *Aruna* berarti **fajar** — sengaja kontras dengan tema gerhana dan Kala di klimaks cerita.
 
-Kota fiksi dipilih agar bebas dihancurkan dan tidak perlu meniru tata letak kota nyata. Arunapura menjadi **hub semi-open-world utama**.
+Kota fiksi dipilih agar bebas dihancurkan dan tidak perlu meniru tata letak kota nyata.
+
+**Struktur level (usulan 15 Okt 2026):** Arunapura tidak dibangun sebagai satu map yang dijelajah bebas. Tiap episode punya map sendiri ala Resident Evil 4 yang dirangkai dari kit distrik di bawah, dengan Markas DWARA sebagai hub. Lihat [28](28-struktur-level-episode.md). Konsep lama "Arunapura sebagai hub semi-open-world" **diarsipkan** di [28 bagian 9](28-struktur-level-episode.md#9-arsip-konsep-satu-map-arunapura) untuk Season 2+.
 
 | Distrik | Suasana | Fungsi di Game |
 |---|---|---|

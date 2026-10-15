@@ -118,10 +118,10 @@
 #### B1. Model
 | Karakter | Kebutuhan | Sumber | Oleh | Fase |
 |---|---|---|---|---|
-| **Aksa** | Mesh manusia stylized, skeleton kompatibel Mannequin | **Dibuat sendiri** (Blender, Claude + developer; rencana [19](19-rencana-model-aksa.md)). Sementara: **MetaHuman** sebagai mesh visual di atas Manny tersembunyi ([12](12-technical-design.md#mesh-logika-vs-mesh-visual-aksa)) | C + D | F1 placeholder → F2 final |
+| **Aksa** | Mesh manusia realistis (Aksa2, basis Tripo; [19 bagian 12](19-rencana-model-aksa.md#12-aksa2--model-tripo-realistis-15-okt-2026)), skeleton kompatibel Mannequin | **Dibuat sendiri** (Blender, Claude + developer; rencana [19](19-rencana-model-aksa.md)). Sementara: **MetaHuman** sebagai mesh visual di atas Manny tersembunyi ([12](12-technical-design.md#mesh-logika-vs-mesh-visual-aksa)) | C + D | F1 placeholder → F2 final |
 | **Jayadwara** | Sudah ada | Blender (Claude) | C | ✅ |
 | **Jerangkong** (boss ±31 m) + **kerangka kecil** (minion) | **Satu model dan rig untuk keduanya**; tulang sebagai potongan kaku; skeleton sendiri bernama Mannequin + retarget (proporsi bungkuk/lengan panjang). Konsep: [`jerangkong_v01.webp`](concept-art/jerangkong_v01.webp); rencana: [20](20-rencana-model-jerangkong.md) | Blender (Claude) | C | F1 proxy → F2 hero |
-| Warga desa (2–3 variasi) + mandor | Skeleton Mannequin | Fab / kit stylized | B + D | F2 |
+| Warga desa (2–3 variasi) + mandor | Skeleton Mannequin | Fab / kit realistis | B + D | F2 |
 | Arca Dwarapala ×2 | Arca batu (kiri: utuh → retak → hancur; kanan: dililit tali + versi berterpal) | Blender (Claude) atau Fab | C / B | F2 |
 | Truk Adikara | Prop untuk adegan 6 | Fab | B | F2 |
 
@@ -152,12 +152,12 @@
 
 | Item | Isi | Oleh | Fase |
 |---|---|---|---|
-| Kit candi stylized | Batu candi modular, tangga, gerbang, relief | Fab + kustom | F2 |
-| Kit desa/kota stylized | Rumah, warung, tiang listrik, kendaraan kecil (pembanding skala) | Fab | F2 |
+| Kit candi realistis | Batu candi modular, tangga, gerbang, relief | Fab + kustom | F2 |
+| Kit desa/kota realistis | Rumah, warung, tiang listrik, kendaraan kecil (pembanding skala) | Fab | F2 |
 | Gedung hancur | 3–4 mesh dasar → 6–10 varian, di-fracture jadi Geometry Collection | D (C skrip bantu) | F1 uji → F2 |
 | Pencahayaan waktu | Sore (adegan 3–5) → senja merah (6) → awal malam (7–9); transisi saat cutscene | D | F2 |
 | Fog & skala | Fog jarak, kabut lembah, partikel debu | D | F2 |
-| Greybox level | Tata letak kotak-kotak dulu, uji alur & ukuran arena | C (skrip) + D | F1 akhir |
+| Greybox level | Tata letak kotak-kotak dulu, uji alur & ukuran arena; zona A–E mengikuti [28](28-struktur-level-episode.md#ep-1--ep01_lawangsapta--sore--senja-merah--awal-malam) | C (skrip) + D | F1 akhir |
 
 ### D. VFX (Niagara)
 | Efek | Adegan | Fase |

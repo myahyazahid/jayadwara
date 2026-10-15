@@ -92,6 +92,7 @@ Lihat spesifikasi lengkap di [11-vertical-slice-spec.md](11-vertical-slice-spec.
 | Ep 10 (Banaspati) | Kota terbakar skala besar |
 
 - Markas DWARA (hub) dan sistem upgrade dibangun di fase ini.
+- Level: satu map per episode ala Resident Evil 4, dari kit distrik yang dipakai ulang ([28](28-struktur-level-episode.md)).
 
 ## Fase 5 — Early Access Season 1 (±Akhir 2029)
 
