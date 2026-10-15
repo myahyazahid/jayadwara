@@ -118,6 +118,9 @@ Urutan: `aksa_00_setup_scene.py` (headless, `aksa_v00_setup.blend`) → buka v00
 Impor ke Unreal (editor terbuka, **tidak sedang Play**): `python Tools/ue_remote.py Tools/ue_import_aksa.py` (mesh + LOD1–3 ke skeleton `SK_Mannequin` asli; tulang `sash_*`/`jacket_*` tergabung ke skeleton itu), lalu `python Tools/ue_remote.py Tools/ue_setup_aksa.py` (PA_Aksa, ABP_Aksa + Anim Dynamics jaket, BP_Aksa memakai SK_Aksa, potret dialog) lalu cek visual `python Tools/ue_remote.py Tools/ue_check_aksa.py` (hapus actor uji + pulihkan kamera: `-c "CLEAN=True; exec(open(r'<path ue_check_aksa.py>').read())"`).
 Spike skeleton (hanya perlu diulang kalau Manny/UE berubah): `Tools/ue_export_manny.py` → `aksa_spike_analyze_manny.py` → `aksa_spike_roundtrip.py` → `Tools/ue_spike_aksa_import.py` → `aksa_spike_compare.py`.
 
+## Aksa2 (model Tripo, 15 Okt 2026)
+Sumber `Source/aksa2_tripo_v01.glb`, file kerja final `Blender/aksa2_v06_F4.blend`. Ekspor ulang: `blender --background Blender/aksa2_v06_F4.blend --python Scripts/aksa2_export.py` (LOD0, `BAKE_CM=100`) lalu `... --python Scripts/aksa2_lods.py` (LOD1–3), validasi `validate_aksa.py -- <fbx> --slots M_Aksa2_Body --require-uv --max-tris 60000|25000|10000|4000`, impor UE `python Tools/ue_remote.py Tools/ue_import_aksa2.py`. Detail, vonis banding, dan jebakan impor: `docs/19` §12.
+
 ## Asal aset pihak ketiga
 | Aset | Sumber | Lisensi | Dipakai untuk |
 |---|---|---|---|
