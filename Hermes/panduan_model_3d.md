@@ -2,7 +2,7 @@
 
 > Dari Claude, untuk Hermes. **Read-only bagimu.** Berlaku untuk **setiap** tugas model 3D: NPC manusia (mis. Ki Sastro, Kol. Bagas Suryo, warga, agen DWARA), monster/boss (Tuyul, Jenglot, Babi Ngepet, Pocong, ...), dan varian.
 > Aturan dasar tetap `AGENTS.md` (worktree, sandbox, §0 cara kerja). Contoh yang sudah terisi lengkap: [`aksa_hermes.md`](aksa_hermes.md) (Aksa2). Kalau ada beda, **instruksi khusus model** (`<model>_hermes.md`) menang atas panduan ini, dan `AGENTS.md` menang atas keduanya.
-> Versi: 14 Okt 2026.
+> Versi: 14 Okt 2026, diperbarui 15 Okt 2026 untuk gaya realistis (lihat `panduan_kerja_claude.md` §8).
 
 ---
 
@@ -36,9 +36,11 @@ Tulis di laporan, isi dari dokumen, bukan dari ingatan:
 - Skeleton: Manny asli / sendiri (nama Manny) / sendiri (non-biped)
 - Profil pose: Art/Scripts/pose_profil/manny.json / Hermes/Tools/pose_<topik>.json
 - Pembanding (--lama): <path FBX> — alasan
-- Anggaran tris LOD0/1/2/3: (manusia: 60k/25k/10k/4k; boss raksasa: ≤100k/30k/14k/6k seperti Jayadwara2)
+- Anggaran tris LOD0/1/2/3: (angka di docs: manusia 60k/25k/10k/4k docs/19 A8; boss raksasa ≤100k/30k/14k/6k seperti Jayadwara2. Angka manusia ditulis saat gaya masih stylized; sampai developer menetapkan ulang untuk realistis, pakai angka ini dan **laporkan** kalau terlampaui)
+- Gaya: **realistis** (docs/README, 14 Okt 2026). Baca `panduan_kerja_claude.md` §8: rambut kartu, toleransi 3, bayangan terpanggang, seam normal map, wajah/MetaHuman
 - Slot material:
 - Socket: (manusia: 7 socket SK_Aksa_sockets.json; monster: titik pukul + titik lemah + VFX, sebut nama & tulang)
+- Ekspresi wajah: (manusia yang tampil di dialog/potret: 8 morph target dengan nama sama dengan `SK_Aksa`, cara di `aksa_hermes.md` H3b; warga/minion: tanpa; monster: sebut kalau mekanik butuh, mis. mulut membuka saat serangan)
 - Checklist IP/budaya: (docs/01 wajib dihindari, docs/06 sensitivitas; Pocong ⚠️: jangan mengolok-olok pemakaman)
 - Nama: objek Blender <PREFIX>_, aset SK_<Nama>, UE /Game/Hermes/<Nama>/
 ```
@@ -72,6 +74,8 @@ python -I Art/Scripts/banding_karakter.py --lama Hermes/Art/<topik>/Audit/lama -
 - `--ref`: `ak` untuk Aksa; model lain: buat reference plane berkanvas sama (pola `Art/Scripts/make_reference_planes_aksa.py` → `Hermes/Art/<topik>/Reference/<topik>_ref_{front,side,back}.png`) lalu `--ref "Hermes/Art/<topik>/Reference/<topik>_ref_{v}.png"`; tidak ada konsep tampak depan/samping/belakang → `--ref none` dan tulis di laporan.
 - Pembanding dengan bentuk lain (mis. Tuyul vs Jerangkong): IoU tidak dibandingkan antar-model; yang dibandingkan regangan per pose (kualitas rig) dan gambar.
 - Model kaku (potongan, pola Jerangkong) wajar regangan ≈ 0 %; kalau ada pose dengan regangan tinggi, itu bagian yang dibobot ke dua tulang dan harus diperiksa.
+
+Ada masalah (audit/banding GAGAL, atau keluhan developer)? Jangan langsung mengedit: ikuti [`panduan_kerja_claude.md`](panduan_kerja_claude.md) §3 (diagnosa_mesh → perbaiki_mesh → diagnosa ulang).
 
 Cara membaca hasil: `aksa_hermes.md` §2 (berlaku untuk semua model). Ringkasnya: `banding.md` ditempel utuh; setiap pose dideskripsikan per bagian; lubang, melar, ikut tulang salah, kaku/lentur salah tempat, kiri-kanan beda. **Tidak bisa melihat gambar → tulis itu, jangan menebak.**
 

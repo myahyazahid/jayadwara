@@ -6,6 +6,10 @@ Repo ini adalah game **JAYADWARA: Guardian of the Seven Gates** (Unreal Engine *
 
 Kalau ragu sebuah tindakan melanggar aturan ini, **jangan lakukan**. Tulis di laporan sebagai usulan.
 
+**Skill Hermes** ada di [`Hermes/skills/`](Hermes/skills/README.md) (format `SKILL.md`): `jd-mulai-tugas` (awal SETIAP tugas), `jd-perbaiki-model`, `jd-audit-model`, `jd-blender-skrip`, `jd-unreal-sandbox`, `jd-selesai-tugas` (sebelum commit/lapor). Kalau skill tidak terpasang otomatis, baca file `SKILL.md`-nya langsung sesuai situasi.
+
+**Cara kerja & perbaikan model** ("lengan robek", "ketiak bolong", dll.): baca dan ikuti [`Hermes/panduan_kerja_claude.md`](Hermes/panduan_kerja_claude.md) **sebelum** menyentuh file. Perbaikan model **wajib** lewat `Art/Scripts/diagnosa_mesh.py` → `Art/Scripts/perbaiki_mesh.py` → diagnosa ulang `--sebelum`, bukan edit manual.
+
 **Tugas model 3D apa pun** (NPC, monster, boss, varian): ikuti [`Hermes/panduan_model_3d.md`](Hermes/panduan_model_3d.md). Kalau ada instruksi khusus model `Hermes/<model>_hermes.md` (mis. [`aksa_hermes.md`](Hermes/aksa_hermes.md) untuk Aksa2), ikuti itu langkah demi langkah. Aturan di file ini menang atas keduanya.
 
 ---
@@ -22,6 +26,7 @@ Kamu sering salah di model 3D dan rigging, dan salahnya baru ketahuan saat devel
 6. **Jangan improvisasi di luar instruksi.** Kalau langkah di instruksi tidak jelas atau tidak cocok dengan kondisi file, tanya developer atau tulis di laporan. Jangan mengarang nama tulang, nama aset, path, atau angka.
 7. **Pakai path persis** seperti di instruksi. Salah satu huruf (mis. `aksa2` vs `Aksa2`) = file baru di tempat lain.
 8. **Catat semuanya di laporan saat itu juga** (§8), bukan dari ingatan di akhir.
+9. **Diminta memperbaiki sesuatu yang rusak?** Jangan langsung mengedit. Ikuti `Hermes/panduan_kerja_claude.md` §3: reproduksi → diagnosa dengan pembanding sehat → satu resep → diagnosa ulang `--sebelum` → regresi.
 
 ## 1. Git: worktree & branch sendiri
 

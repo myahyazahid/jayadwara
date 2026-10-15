@@ -61,6 +61,9 @@ def check(name, ok, detail=""):
 
 
 # ---------------------------------------------------------------- impor & satuan
+if FBX.is_file() and FBX.stat().st_size < 1024 and FBX.read_bytes().startswith(b"version https://git-lfs"):
+    print(f"GAGAL: {FBX} masih pointer Git LFS (file asli belum diunduh). Jalankan: git lfs pull --include=\"{FBX.name}\"")
+    sys.exit(2)
 for ob in list(bpy.data.objects):
     bpy.data.objects.remove(ob, do_unlink=True)
 bpy.ops.import_scene.fbx(filepath=str(FBX))
@@ -161,11 +164,22 @@ def apply_ops(ops):
             set_world(pb, Matrix.Translation(h) @ Matrix.Rotation(math.radians(val), 4, AX[axis]) @ Matrix.Translation(-h) @ W)
 
 
+def ujung(pb):
+    """Ujung anatomis tulang (dunia): kepala anak utama (bukan twist/ik), kalau ada; selain itu ekor. Ekor tulang hasil impor
+    FBX tidak sejajar anggota badan (mis. lowerarm Manny), jadi tidak dipakai untuk arah."""
+    anak = [c for c in pb.children if "twist" not in c.name and not c.name.startswith("ik_")]
+    if anak:
+        c = max(anak, key=lambda c: (c.head - pb.head).length)
+        if (c.head - pb.head).length > 1e-6:
+            return arm.matrix_world @ c.head
+    return arm.matrix_world @ pb.tail
+
+
 def aim(name, direction):
     pb = bones[name]
     W = arm.matrix_world @ pb.matrix
     h = arm.matrix_world @ pb.head
-    cur = (arm.matrix_world @ pb.tail - h).normalized()
+    cur = (ujung(pb) - h).normalized()
     R = cur.rotation_difference(Vector(direction).normalized()).to_matrix().to_4x4()
     set_world(pb, Matrix.Translation(h) @ R @ Matrix.Translation(-h) @ W)
 
