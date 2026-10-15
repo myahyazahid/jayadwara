@@ -73,6 +73,8 @@ python -I Art/Scripts/banding_karakter.py --lama Hermes/Art/<topik>/Audit/lama -
 - Pembanding dengan bentuk lain (mis. Tuyul vs Jerangkong): IoU tidak dibandingkan antar-model; yang dibandingkan regangan per pose (kualitas rig) dan gambar.
 - Model kaku (potongan, pola Jerangkong) wajar regangan ≈ 0 %; kalau ada pose dengan regangan tinggi, itu bagian yang dibobot ke dua tulang dan harus diperiksa.
 
+Ada masalah (audit/banding GAGAL, atau keluhan developer)? Jangan langsung mengedit: ikuti [`panduan_kerja_claude.md`](panduan_kerja_claude.md) §3 (diagnosa_mesh → perbaiki_mesh → diagnosa ulang).
+
 Cara membaca hasil: `aksa_hermes.md` §2 (berlaku untuk semua model). Ringkasnya: `banding.md` ditempel utuh; setiap pose dideskripsikan per bagian; lubang, melar, ikut tulang salah, kaku/lentur salah tempat, kiri-kanan beda. **Tidak bisa melihat gambar → tulis itu, jangan menebak.**
 
 ### Menulis profil pose sendiri (jenis C)

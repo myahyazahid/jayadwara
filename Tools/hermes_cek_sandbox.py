@@ -12,10 +12,10 @@ import subprocess
 import sys
 
 SANDBOX = ("Content/Hermes/", "Source/Jayadwara/Hermes/", "Hermes/")
-INSTRUKSI = ("Hermes/aksa_hermes.md", "Hermes/panduan_model_3d.md")   # di dalam sandbox tapi milik Claude: read-only
+INSTRUKSI = ("Hermes/aksa_hermes.md", "Hermes/panduan_model_3d.md", "Hermes/panduan_kerja_claude.md")   # di dalam sandbox tapi milik Claude: read-only
 # instruksi khusus model lain dari Claude juga read-only: Hermes/<model>_hermes.md
 # aset rawan: kalau berubah, hampir pasti merusak proyek (insiden SK_Mannequin 13-14 Okt 2026, docs/25 R7)
-RAWAN = ("Hermes/aksa_hermes.md", "Hermes/panduan_model_3d.md", "Content/Characters/Mannequins/", "Content/Jayadwara/", "Config/", "Jayadwara.uproject", "Source/Jayadwara/",
+RAWAN = ("Hermes/aksa_hermes.md", "Hermes/panduan_model_3d.md", "Hermes/panduan_kerja_claude.md", "Content/Characters/Mannequins/", "Content/Jayadwara/", "Config/", "Jayadwara.uproject", "Source/Jayadwara/",
          "Source/JayadwaraEditor/", "Art/Blender/", "Art/Export/", "docs/", ".gitattributes", ".gitignore")
 
 
