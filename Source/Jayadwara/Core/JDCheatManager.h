@@ -11,7 +11,9 @@ class UJDAbilitySystemComponent;
  * (nama UFUNCTION Exec tidak boleh bertitik) dan diteruskan ke fungsi di sini. Hanya di build non-Shipping;
  * cheat aktif otomatis di PIE dan Standalone (AGameModeBase::AllowCheats).
  *
- * Iterasi 1: JD.God, JD.Damage <n>, JD.Heal, JD.Stamina <n>. Perintah lain ditambahkan per iterasi.
+ * Iterasi 1: JD.God, JD.Damage <n>, JD.Heal, JD.Stamina <n>. Iterasi 3: JD.Dummy.Attack <0|1>, JD.Input <tag> <1|0>
+ * (keduanya tanpa cheat manager).
+ * Perintah lain ditambahkan per iterasi.
  */
 UCLASS()
 class JAYADWARA_API UJDCheatManager : public UCheatManager

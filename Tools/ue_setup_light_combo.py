@@ -217,7 +217,10 @@ def setup_aksa(prof):
         entry = unreal.JDAbilitySet_Ability()
         entry.set_editor_property("ability", unreal.JDGA_LightAttack.static_class())
         entry.set_editor_property("input_tag", tag("Input.Attack.Light"))
-        aset.set_editor_property("abilities", [entry])
+        # Ability lain (berat/dodge/tangkis dari ue_setup_defense.py) dipertahankan.
+        others = [e for e in aset.get_editor_property("abilities")
+                  if e.get_editor_property("ability") != unreal.JDGA_LightAttack.static_class()]
+        aset.set_editor_property("abilities", [entry] + others)
         EAL.save_loaded_asset(aset, only_if_is_dirty=False)
         log("DA_AbilitySet_Aksa: JDGA_LightAttack -> Input.Attack.Light")
     aksa = load("/Game/Jayadwara/Characters/Aksa/BP_Aksa")

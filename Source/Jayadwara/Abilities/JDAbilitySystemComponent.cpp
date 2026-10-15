@@ -134,8 +134,9 @@ void UJDAbilitySystemComponent::ProcessAbilityInput(float DeltaTime, bool bGameP
 		{
 			AbilitySpecInputPressed(*Spec);
 		}
-		else if (GetPolicy(*Spec) == EJDAbilityActivationPolicy::OnInputTriggered)
+		else if (GetPolicy(*Spec) != EJDAbilityActivationPolicy::OnSpawn)
 		{
+			// WhileInputActive juga: tekan & lepas di frame yang sama (FPS rendah) tetap mengaktifkan, mis. parry sekali tekan.
 			ToActivate.AddUnique(Handle);
 		}
 	}

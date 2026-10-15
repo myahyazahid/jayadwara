@@ -61,7 +61,7 @@ Lihat spesifikasi lengkap di [11-vertical-slice-spec.md](11-vertical-slice-spec.
 
 | Periode | Target |
 |---|---|
-| Apr – Mei 2027 | Art direction final (stylized), art bible ringkas; pengadaan/commission model Aksa, Jayadwara, Jerangkong |
+| Apr – Mei 2027 | Art direction final (realistis), art bible ringkas; pengadaan/commission model Aksa, Jayadwara, Jerangkong |
 | Jun – Jul 2027 | Level Situs Lawang Sapta + blok kota kecil; scanner Netra + 3 petunjuk |
 | Agu – Sep 2027 | Boss Jerangkong final; animasi silat; VFX transformasi |
 | Okt – Nov 2027 | Pembuka wayang, briefing, UI/HUD, audio placeholder → audio final |
@@ -106,7 +106,7 @@ Lihat spesifikasi lengkap di [11-vertical-slice-spec.md](11-vertical-slice-spec.
 |---|---|
 | **Season 1 diperkecil** jadi Ep 1–5 | Rilis ±1 tahun lebih cepat |
 | **Beli / commission aset 3D** karakter dan monster | Memangkas bottleneck terbesar |
-| Pakai aset kota stylized dari Fab | Level jauh lebih cepat |
+| Pakai aset kota realistis dari Fab / Megascans | Level jauh lebih cepat |
 | Menambah jam kerja / merekrut 1 artis | Pengaruh terbesar pada timeline |
 
 ## Aturan Kerja

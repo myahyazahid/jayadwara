@@ -86,7 +86,7 @@ Mengikuti [12](12-technical-design.md#arsitektur-inti). Tambahan dan penegasan:
 | | `UJDCombatProfile` (DataAsset) | Per skala: play rate montage, radius trace, damage, poise damage, shake, hit-stop, jarak warp | 2 |
 | | `UJDAnimNotifyState_HitWindow` | Trace sphere/capsule dari socket selama jendela aktif | 2 |
 | | `UJDAnimNotifyState_ComboWindow` | Pasang `State.Combat.ComboWindow` | 2 |
-| | `UJDAnimNotifyState_Invulnerable` | i-frame dodge | 3 |
+| | ~~`UJDAnimNotifyState_Invulnerable`~~ | i-frame dodge. **Diganti** (Iterasi 3): jendela waktu di `UJDCombatProfile` (`DodgeIFrameStart/Duration`), karena dodge harus jalan tanpa animasi; notify bisa ditambah kalau animasi final butuh | 3 |
 | | `UJDGA_LightAttack`, `UJDGA_HeavyAttack`, `UJDGA_Dodge`, `UJDGA_Block` (+ parry) | Ability combat bersama dua skala | 2–3 |
 | | `UJDGA_HitReact` | Dipicu event hit: reaksi ringan, stagger, knockdown | 4 |
 | | `UJDGA_Finisher` *(versi greybox)* | Pukulan berat ke minion yang roboh → tengkorak hancur, tidak bangkit lagi; animasi pukulan berat biasa (Q6). Versi dengan animasi khusus di F2 | 5 |
@@ -287,6 +287,9 @@ Semua lewat `UJDCheatManager` (konsol `~`) dan CVar, hanya di build dev.
 | `JD.Debug.AI 1` | State StateTree + token di atas musuh |
 | `JD.SpawnWave <n>`, `JD.KillAll` | Gelombang |
 | `JD.Sync <n>` | Set meter |
+| `JD.Dummy.Attack <0\|1>` | Mode menyerang semua training dummy (tanpa argumen = bolak-balik) |
+| `JD.Input <tag> <1\|0>` | Tekan/lepas input tag pawn pemain tanpa perangkat (uji otomatis, mis. `JD.Input Input.Block 1`) |
+| `JD.Debug.Combat 1` | (bawaan nyala) Tulis hasil serangan yang melibatkan pemain di layar: PARRY!, Ditangkis, GUARD BREAK, Menghindar, Kena |
 | `JD.Weakness 1` | Paksa kelemahan boss terbuka (pengganti investigasi) |
 | `JD.BossPhase <n>` | Lompat ke fase boss |
 | `JD.Checkpoint` | Muat ulang checkpoint terakhir |
@@ -342,11 +345,11 @@ PR dibuat kecil (satu iterasi atau setengahnya) karena Claude tidak bisa build U
 | Iter | Status | Tanggal | Catatan |
 |---|---|---|---|
 | 1 | ✅ (KB/M) | 12 Okt 2026 | Build + `ue_setup_combat.py` selesai. Uji otomatis PIE lulus (atribut awal, `JD.Damage`, `JD.God`, `JD.Heal`, regen stamina ±25/s setelah jeda). Uji tangan developer KB/M lulus: HUD tampil (kiri bawah), LMB/E/RMB/Shift/Q terbaca sebagai input tag. **Menyusul:** gamepad lewat x360ce (Q16), `showdebug abilitysystem` |
-| 2 | 🟡 | 12 Okt 2026 | `ue_setup_light_combo.py` selesai: montage + notify, `GC_Hit_Light/Heavy` (SFX Kenney k1, **pilihan sementara** slot 01–02), `DA_CombatProfile_Human`, `BP_TrainingDummy` di `Test_Combat`. Uji otomatis: pukulan 1 ke dummy -10 HP. Fix 13 Okt: tendangan (langkah 3) tertahan foot IK Control Rig `ABP_Aksa` → node dilepas (kaki kanan 29 → 113 cm pada 0,33 s); telapak tidak menyesuaikan tangga/miring sampai foot IK versi F2 (curve `DisableLegIK` sudah ada di `A_Aksa_Attack_*`). Sisa: uji tangan combo 3 pukulan, rasa hit-stop/shake/suara |
-| 3 | ⬜ | | |
+| 2 | ✅ | 13 Okt 2026 | `ue_setup_light_combo.py` selesai: montage + notify, `GC_Hit_Light/Heavy` (SFX Kenney k1, **pilihan sementara** slot 01–02), `DA_CombatProfile_Human`, `BP_TrainingDummy` di `Test_Combat`. Uji otomatis: pukulan 1 ke dummy -10 HP. Fix 13 Okt: tendangan (langkah 3) tertahan foot IK Control Rig `ABP_Aksa` → node dilepas (kaki kanan 29 → 113 cm pada 0,33 s); telapak tidak menyesuaikan tangga/miring sampai foot IK versi F2 (curve `DisableLegIK` sudah ada di `A_Aksa_Attack_*`). **13 Okt: uji tangan developer lulus** (combo 3 pukulan Aksa sesuai harapan) |
+| 3 | 🟡 | 13 Okt 2026 | C++: `UJDGA_HeavyAttack` (dari diam/jendela combo/recovery), `UJDGA_Dodge` (root motion source, hadap tetap, montage 4 arah opsional, i-frame `State.Invulnerable`), `UJDGA_Block` (tahan; tiap tekan buka `State.ParryWindow`, anti spam `ParryLockout` 0,5 s; jalan ×0,4), `UJDCombatComponent::ResolveIncomingHit` (dodge/parry/tangkis hanya dari depan 140°/guard break) + `ApplyStagger` (sementara sampai Iterasi 4), `AJDTrainingDummy` mode menyerang (aba-aba "!" merah berkedip 0,5 s, tiap 2,5 s, jarak 2,5 m). Skrip `Tools/ue_setup_defense.py` (Aksa + dummy; `Dummy_Attacker` di `Test_Combat`) dan `ue_setup_giant_combo.py` (Jayadwara2). Animasi placeholder: berat & pose tangkis dari `A_Aksa_Attack_02` (berat diputar 0,75×, tangkis = frame 0,75 s ditahan), stagger dari `MM_HitReact_Front_Hvy_01` (Rifle), **dodge tanpa animasi**. SFX **pilihan sementara**: tangkis k1, parry k2, dodge k1. Uji otomatis PIE: berat −30 HP/−25 stamina; dodge mundur 404 cm/−20 stamina, i-frame aktif lalu lepas; tangkis −2 HP/−15 stamina, jalan 200; guard break → stagger; parry → tanpa damage, dummy stagger (raksasa: berat −30, dodge ±56 m). Sisa: uji tangan gate (parry ≥ 7/10), animasi Mixamo (berat, dodge 4 arah, tangkis) |
 | 4 | ⬜ | | |
 | 5 | ⬜ | | |
-| 6 | ⬜ | | Transformasi tombol T sudah ada sejak Iterasi 6 Jayadwara |
+| 6 | 🟡 | 13 Okt 2026 | Transformasi tombol T sudah ada sejak Iterasi 6 Jayadwara. **Dimajukan (permintaan developer):** combo ringan Jayadwara2 lewat `Tools/ue_setup_giant_combo.py` — `AM_JD2_Light_01..03` (salinan `MM_Attack_0x_JD2`, notify sama dengan Aksa), `DA_CombatProfile_Giant` (laju terlihat 0,55, radius hit 711 cm, hit-stop 0,12 s, shake ×2,5, cue `Hit.Heavy`), `DA_AbilitySet_Jayadwara` (Sync 100, buffer 0,3 s), `BP_Jayadwara2` memakai `DA_InputConfig_Human`, `Dummy_Giant` (BP_TrainingDummy ×20) di `Test_GiantScale`. C++: `JDGA_LightAttack` membagi laju montage dengan `GlobalAnimRateScale` mesh (raksasa ±0,205) supaya `MontagePlayRate` = laju terlihat. Uji otomatis PIE: pukulan 1 ke `Dummy_Giant` −10 HP. Iterasi 3 ikut dipasang (berat, dodge 55 m/0,64 s, tangkis, parry 0,25 s; `AM_JD2_Heavy/Block`). Sisa Iterasi 6: uji tangan & tuning, `IMC_Giant`, rig kamera + lock-on, syarat transformasi, kalah → Aksa |
 | 7 | ⬜ | | |
 | 8 | ⬜ | | |
 | 9 | ⬜ | | |

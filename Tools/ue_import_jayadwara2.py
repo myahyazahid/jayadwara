@@ -344,6 +344,9 @@ def add_sockets(mesh):
 
 
 def main():
+    if unreal.EditorLevelLibrary.get_pie_worlds(False):      # 13 Okt: impor saat Play menghapus Mesh/ lalu gagal
+        unreal.log_error("[Jayadwara2] PIE sedang jalan — hentikan Play dulu")
+        return
     if globals().get("ONLY_MATERIAL"):                                   # bangun ulang material saja (tanpa impor ulang mesh)
         tex = import_textures()
         build_material(tex)

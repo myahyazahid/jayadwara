@@ -6,7 +6,7 @@
 ## Tujuan
 
 1. Membuktikan loop utama: **investigasi → konfrontasi manusia → transformasi → boss raksasa**.
-2. Menetapkan standar kualitas visual stylized, combat, dan rasa skala.
+2. Menetapkan standar kualitas visual realistis, combat, dan rasa skala.
 3. Menghasilkan materi trailer dan demo Steam.
 
 ## Alur Episode (±20–30 menit)
@@ -60,8 +60,8 @@
 | Aksa (manusia) | **Dibuat sendiri** (Blender, bersama Claude). Sementara memakai **MetaHuman** sebagai placeholder visual, lihat [12](12-technical-design.md#mesh-logika-vs-mesh-visual-aksa) (keputusan 12 Okt 2026) |
 | Jayadwara | Blender, dibuat bersama Claude ([rencana](13-rencana-model-jayadwara.md)); commission opsional untuk polish final (aset paling penting secara visual) |
 | Jerangkong + minion kerangka | Commission / Fab + modifikasi |
-| Candi Lawang Sapta + area penggalian | Kit modular stylized (Fab) + kustom |
-| Blok kota kecil | Kit kota stylized (Fab) |
+| Candi Lawang Sapta + area penggalian | Kit modular realistis (Fab / Megascans) + kustom |
+| Blok kota kecil | Kit kota realistis (Fab / Megascans) |
 | Animasi | Mixamo (prototype) → video-mocap / commission untuk silat final |
 
 ## Di Luar Scope (jangan dikerjakan di fase ini)

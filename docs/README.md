@@ -43,7 +43,7 @@ Aksa Jaya Mangkubumi, agen baru sebuah lembaga rahasia penanganan anomali, menya
 | 23 | [Rencana Fase 1](23-rencana-fase-1.md) | **Usulan.** Prototype greybox: 9 iterasi (GAS → combat → minion → raksasa → gedung & meter → boss → playtest), gate, angka awal combat, pertanyaan Q1–Q14 |
 | 24 | [Model Sheet Jerangkong](24-model-sheet-jerangkong.md) | **Dipakai.** Design lock Jerangkong: proporsi terukur (H = 2,2 m), postur bungkuk sedang, palet, potongan, keputusan S1–S12 (hasil Iterasi 0) |
 | 25 | [Rencana Redesign Jayadwara](25-rencana-redesign-jayadwara.md) | **Persiapan.** Jayadwara2 dari model Tripo developer (lebih realistis): intake → spike → pemisahan → rig → tekstur → LOD → UE, keputusan R1–R10; model lama tetap utuh & bisa dikembalikan |
-| 26 | [Rencana Jubah Jayadwara](26-rencana-jubah-jayadwara.md) | **Usulan.** Jubah upacara (K9 docs/14): mesh terpisah ikut pose Jayadwara2, Chaos Cloth, pakai/lepas otomatis; iterasi J0–J5, jadwal F2 |
+| 26 | [Rencana Jubah Jayadwara](26-rencana-jubah-jayadwara.md) | **J1 disetujui; J2 selesai (13 Okt 2026), menunggu developer**: jubah cap02 menempel tubuh sampai kerah, Mask zona + LOD0–2, simulasi rantai (J3 sebagian), tombol Y lepas (J4 sebagian). J5 belum. Jubah upacara (K9 docs/14): mesh terpisah ikut pose Jayadwara2, Chaos Cloth, pakai/lepas otomatis; basis Tripo `cap02`; J0–J3 ditarik sekarang sebagai jalur art paralel, J4–J5 tetap F2 |
 
 
 ---
@@ -55,7 +55,7 @@ Aksa Jaya Mangkubumi, agen baru sebuah lembaga rahasia penanganan anomali, menya
 | Judul | **JAYADWARA: Guardian of the Seven Gates** |
 | Engine | Unreal Engine **5.6.1**, C++ + Blueprint |
 | Platform | PC (Steam) |
-| Gaya visual | **Stylized semi-realistis**: proporsi mendekati normal, bentuk tegas, detail disederhanakan, material PBR (dikonfirmasi ulang 12 Okt 2026; realistis penuh ditolak karena volume monster, animasi, dan performa). Jayadwara2 & Jerangkong (basis Tripo) berada di level ini: detail lebih banyak, tetap stylized-friendly |
+| Gaya visual | **Realistis** (game-realistis, bukan sinematik): proporsi dan anatomi nyata, material PBR fotorealistis, Lumen + Nanite (diputuskan developer 14 Okt 2026, menggantikan stylized semi-realistis 12 Okt). **Alasan:** stylized dipilih karena model yang dibangun Claude secara prosedural di Blender mentok di level itu; sekarang **geometri & tekstur dasar digenerate Tripo** (realismenya datang dari Tripo), Claude mengerjakan pembersihan, pemisahan, rig, dan pipeline ke UE. Risiko lain (volume 50 monster, animasi, performa) tetap ada; mitigasinya di [09](09-product-brief.md#risiko-utama). Jayadwara2 & Jerangkong sudah memakai jalur ini |
 | Tim | Solo + Claude, sambilan ±10–15 jam/minggu |
 | Struktur | Linear semi-open-world, **50 episode** dalam **5 arc** |
 | Karakter utama | **Aksa Jaya Mangkubumi** ("Aksa"), codename **Lawang** |
