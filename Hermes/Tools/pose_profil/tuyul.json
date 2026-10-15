@@ -1,0 +1,212 @@
+{
+ "nama": "tuyul",
+ "catatan": "Profil pose audit_karakter.py untuk Tuyul (Hermes/tuyul_hermes.md K3). Karakter biped 1,0 m, bungkuk, lengan panjang; tulang nama Mannequin + jaw. Sumbu DUNIA: menghadap -Y, kiri karakter = +X, atas = +Z. 'pose': [tulang, sumbu x|y|z, derajat] atau [tulang, 'down', meter pada --height 1,806 (diskalakan SC=H/1.806)]. 'arah': tulang -> arah ujung tulang (dunia). tulang_wajib sengaja hanya inti Mannequin supaya model pembanding (SK_Jerangkong, SK_Aksa) bisa diaudit dengan profil yang sama.",
+ "tulang_wajib": [
+  "pelvis",
+  "spine_01",
+  "spine_02",
+  "spine_03",
+  "neck_01",
+  "head",
+  "clavicle_l",
+  "clavicle_r",
+  "upperarm_l",
+  "upperarm_r",
+  "lowerarm_l",
+  "lowerarm_r",
+  "hand_l",
+  "hand_r",
+  "thigh_l",
+  "thigh_r",
+  "calf_l",
+  "calf_r",
+  "foot_l",
+  "foot_r",
+  "ball_l",
+  "ball_r"
+ ],
+ "orientasi": {
+  "depan": [
+   ["foot_l", "ball_l"],
+   ["foot_r", "ball_r"]
+  ],
+  "kiri": [
+   ["thigh_r", "thigh_l"]
+  ],
+  "atas": [
+   ["pelvis", "head"]
+  ]
+ },
+ "kamera": {
+  "tengah": ["pelvis", "neck_01"],
+  "dekat": {
+   "tulang": "upperarm_r",
+   "nama": "bawah",
+   "keterangan": "ketiak kanan dari bawah-samping"
+  }
+ },
+ "pose": {
+  "rest": [],
+  "kuda_kuda": [
+   ["pelvis", "down", 0.06],
+   ["thigh_l", "y", -45],
+   ["thigh_r", "y", 45],
+   ["calf_l", "y", 30],
+   ["calf_r", "y", -30],
+   ["upperarm_l", "x", -45],
+   ["upperarm_r", "x", -45],
+   ["lowerarm_l", "x", -60],
+   ["lowerarm_r", "x", -60],
+   ["foot_l", "y", 10],
+   ["foot_r", "y", -10]
+  ],
+  "pukul": [
+   ["spine_02", "z", 18],
+   ["spine_03", "z", 14],
+   ["upperarm_r", "x", -80],
+   ["lowerarm_r", "x", -8],
+   ["upperarm_l", "x", -60],
+   ["lowerarm_l", "x", -95],
+   ["thigh_l", "x", -18],
+   ["calf_l", "x", 22],
+   ["thigh_r", "x", 10]
+  ],
+  "tendang_tinggi": [
+   ["spine_02", "x", 12],
+   ["spine_03", "x", 10],
+   ["thigh_r", "x", -95],
+   ["calf_r", "x", 8],
+   ["foot_r", "x", -22],
+   ["upperarm_l", "y", -30],
+   ["upperarm_r", "y", 55],
+   ["lowerarm_r", "x", -40],
+   ["pelvis", "down", 0.02]
+  ],
+  "dodge": [
+   ["spine_01", "x", 12],
+   ["spine_02", "x", 14],
+   ["spine_03", "x", 14],
+   ["neck_01", "x", 8],
+   ["pelvis", "down", 0.03],
+   ["thigh_l", "x", -22],
+   ["calf_l", "x", 30],
+   ["thigh_r", "x", 16],
+   ["upperarm_l", "x", -40],
+   ["upperarm_r", "x", -40],
+   ["lowerarm_l", "x", -70],
+   ["lowerarm_r", "x", -70]
+  ],
+  "jongkok": [
+   ["pelvis", "down", 0.16],
+   ["spine_01", "x", -12],
+   ["spine_02", "x", -14],
+   ["thigh_l", "x", -95],
+   ["thigh_r", "x", -95],
+   ["calf_l", "x", 112],
+   ["calf_r", "x", 112],
+   ["foot_l", "x", -18],
+   ["foot_r", "x", -18],
+   ["upperarm_l", "x", -45],
+   ["upperarm_r", "x", -45]
+  ],
+  "lari": [
+   ["thigh_l", "x", -60],
+   ["calf_l", "x", 70],
+   ["foot_l", "x", -14],
+   ["thigh_r", "x", 22],
+   ["calf_r", "x", 28],
+   ["upperarm_l", "x", 45],
+   ["lowerarm_l", "x", -80],
+   ["upperarm_r", "x", -55],
+   ["lowerarm_r", "x", -85],
+   ["spine_02", "z", -12],
+   ["spine_03", "x", -8]
+  ],
+  "lompat": [
+   ["pelvis", "down", 0.02],
+   ["thigh_l", "x", -45],
+   ["calf_l", "x", 65],
+   ["thigh_r", "x", -32],
+   ["calf_r", "x", 55],
+   ["upperarm_l", "y", -100],
+   ["upperarm_r", "y", 100]
+  ],
+  "tendang_samping": [
+   ["spine_02", "y", -14],
+   ["thigh_r", "y", 80],
+   ["calf_r", "y", 5],
+   ["upperarm_l", "y", -40],
+   ["upperarm_r", "y", 60],
+   ["pelvis", "down", 0.02]
+  ],
+  "tangkis": [
+   ["upperarm_l", "x", -70],
+   ["lowerarm_l", "x", -105],
+   ["upperarm_r", "x", -75],
+   ["lowerarm_r", "x", -100],
+   ["spine_02", "x", -8]
+  ],
+  "putar_badan": [
+   ["spine_01", "z", 22],
+   ["spine_02", "z", 22],
+   ["spine_03", "z", 22],
+   ["neck_01", "z", -25],
+   ["upperarm_l", "x", -30],
+   ["upperarm_r", "x", -30]
+  ],
+  "lunge": [
+   ["pelvis", "down", 0.07],
+   ["thigh_l", "x", -70],
+   ["calf_l", "x", 80],
+   ["thigh_r", "x", 32],
+   ["calf_r", "x", 5],
+   ["spine_02", "x", -10],
+   ["upperarm_l", "x", -50],
+   ["lowerarm_l", "x", -70]
+  ],
+  "bungkuk": [
+   ["spine_01", "x", -25],
+   ["spine_02", "x", -25],
+   ["spine_03", "x", -20],
+   ["neck_01", "x", 20],
+   ["upperarm_l", "x", -20],
+   ["upperarm_r", "x", -20],
+   ["thigh_l", "x", -15],
+   ["thigh_r", "x", -15]
+  ],
+  "tangan_terangkat": [
+   ["clavicle_l", "y", -12],
+   ["clavicle_r", "y", 12],
+   ["upperarm_l", "y", -150],
+   ["upperarm_r", "y", 150],
+   ["lowerarm_l", "y", -10],
+   ["lowerarm_r", "y", 10]
+  ]
+ },
+ "arah": {
+  "lengan_depan_90": {
+   "upperarm_r": [0.0, -1.0, 0.0],
+   "lowerarm_r": [0.0, -1.0, 0.0],
+   "upperarm_l": [-0.0, -1.0, 0.0],
+   "lowerarm_l": [-0.0, -1.0, 0.0]
+  },
+  "lengan_depan_atas": {
+   "upperarm_r": [-0.1498, -0.6991, 0.6991],
+   "lowerarm_r": [0.1009, -0.5044, 0.8575],
+   "upperarm_l": [0.1498, -0.6991, 0.6991],
+   "lowerarm_l": [-0.1009, -0.5044, 0.8575]
+  },
+  "lengan_samping_90": {
+   "upperarm_r": [-1.0, 0.0, 0.0],
+   "lowerarm_r": [-1.0, 0.0, 0.0],
+   "upperarm_l": [1.0, 0.0, 0.0],
+   "lowerarm_l": [1.0, 0.0, 0.0]
+  },
+  "lengan_guard": {
+   "upperarm_r": [-0.3605, -0.9013, -0.2403],
+   "lowerarm_r": [0.3015, -0.3015, 0.9045],
+   "upperarm_l": [0.3605, -0.9013, -0.2403],
+   "lowerarm_l": [-0.3015, -0.3015, 0.9045]
+  }
+ }
+}

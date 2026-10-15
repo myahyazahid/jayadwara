@@ -1,0 +1,22 @@
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:37:04)
+FBX version: 7400
+PASS 52 tulang tuyul_skeleton ada
+PASS tidak ada tulang tambahan  [[]]
+PASS satu akar bernama root  [['root']]
+PASS hierarki sama dengan tuyul_skeleton  [[]]
+PASS posisi tulang = tuyul_skeleton (<= 1 mm, ruang model)  [terburuk 0.001 mm]
+PASS tidak ada empty
+PASS tepat 1 objek mesh  [1]
+PASS tris LOD0 <= 100000  [38090]
+PASS 1-2 slot material (atlas Tripo)  [['M_Tuyul']]
+PASS grup vertex hanya ke tulang yang ada
+PASS <= 4 influence per vertex  [maks 4]
+PASS 0 vertex tanpa bobot  [0]
+PASS bobot ternormalisasi (±0,01)  [0]
+PASS bobot lunak: tidak ada vertex 1-tulang-kaku wajib  [profil Tuyul tidak memakai cek potongan kaku]
+PASS tinggi model 1.00 m (±1%) setelah dibagi skala  [1.000 m / skala 1.0 = 1.00 m]
+PASS telapak di z≈0  [0.0000 m]
+PASS UV 0-1
+PASS socket JSON: tulang induk ada (>= 8)  [8 socket]
+
+HASIL: 18/18 lulus — SK_Tuyul.fbx

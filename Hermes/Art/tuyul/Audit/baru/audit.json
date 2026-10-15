@@ -1,0 +1,398 @@
+{
+ "fbx": "C:\\repository\\unreal_engine\\jayadwara_hermes_tuyul\\Hermes\\Art\\tuyul\\Export\\SK_Tuyul.fbx",
+ "profil": "tuyul",
+ "kamera_dekat": "bawah",
+ "kanvas_tinggi_m": 1.0,
+ "tinggi_m": 1.0,
+ "tris": 38090,
+ "jumlah_tulang": 52,
+ "jumlah_mesh": 1,
+ "slot_material": [
+  "M_Tuyul"
+ ],
+ "tepi_terbuka": 0,
+ "tepi_terbuka_per_tulang": [],
+ "pose": {
+  "rest": {
+   "peregangan_maks_cm": 0.0,
+   "regangan_p99_persen": 0.0,
+   "regangan_maks_persen": 0.0,
+   "terburuk": []
+  },
+  "kuda_kuda": {
+   "peregangan_maks_cm": 2.13,
+   "regangan_p99_persen": 42.9,
+   "regangan_maks_persen": 629.9,
+   "terburuk": [
+    [
+     "head",
+     2.13
+    ],
+    [
+     "clavicle_l",
+     1.97
+    ],
+    [
+     "clavicle_r",
+     1.84
+    ]
+   ]
+  },
+  "pukul": {
+   "peregangan_maks_cm": 2.94,
+   "regangan_p99_persen": 47.4,
+   "regangan_maks_persen": 1134.1,
+   "terburuk": [
+    [
+     "clavicle_r",
+     2.94
+    ],
+    [
+     "head",
+     2.85
+    ],
+    [
+     "clavicle_l",
+     2.79
+    ]
+   ]
+  },
+  "tendang_tinggi": {
+   "peregangan_maks_cm": 2.94,
+   "regangan_p99_persen": 50.9,
+   "regangan_maks_persen": 1071.3,
+   "terburuk": [
+    [
+     "spine_01",
+     2.94
+    ],
+    [
+     "thigh_r",
+     2.76
+    ],
+    [
+     "clavicle_r",
+     1.92
+    ]
+   ]
+  },
+  "dodge": {
+   "peregangan_maks_cm": 2.26,
+   "regangan_p99_persen": 42.7,
+   "regangan_maks_persen": 662.3,
+   "terburuk": [
+    [
+     "head",
+     2.26
+    ],
+    [
+     "clavicle_l",
+     2.09
+    ],
+    [
+     "clavicle_r",
+     1.93
+    ]
+   ]
+  },
+  "jongkok": {
+   "peregangan_maks_cm": 3.13,
+   "regangan_p99_persen": 74.2,
+   "regangan_maks_persen": 1081.8,
+   "terburuk": [
+    [
+     "thigh_l",
+     3.13
+    ],
+    [
+     "spine_01",
+     2.75
+    ],
+    [
+     "thigh_r",
+     2.61
+    ]
+   ]
+  },
+  "lari": {
+   "peregangan_maks_cm": 2.22,
+   "regangan_p99_persen": 54.4,
+   "regangan_maks_persen": 747.7,
+   "terburuk": [
+    [
+     "clavicle_r",
+     2.22
+    ],
+    [
+     "thigh_l",
+     2.16
+    ],
+    [
+     "spine_01",
+     2.11
+    ]
+   ]
+  },
+  "lompat": {
+   "peregangan_maks_cm": 3.72,
+   "regangan_p99_persen": 58.7,
+   "regangan_maks_persen": 1244.9,
+   "terburuk": [
+    [
+     "clavicle_r",
+     3.72
+    ],
+    [
+     "head",
+     3.71
+    ],
+    [
+     "clavicle_l",
+     3.69
+    ]
+   ]
+  },
+  "tendang_samping": {
+   "peregangan_maks_cm": 2.37,
+   "regangan_p99_persen": 39.8,
+   "regangan_maks_persen": 814.9,
+   "terburuk": [
+    [
+     "clavicle_r",
+     2.37
+    ],
+    [
+     "spine_01",
+     2.21
+    ],
+    [
+     "jaw",
+     2.11
+    ]
+   ]
+  },
+  "tangkis": {
+   "peregangan_maks_cm": 3.14,
+   "regangan_p99_persen": 52.9,
+   "regangan_maks_persen": 1043.1,
+   "terburuk": [
+    [
+     "head",
+     3.14
+    ],
+    [
+     "clavicle_l",
+     2.99
+    ],
+    [
+     "clavicle_r",
+     2.9
+    ]
+   ]
+  },
+  "putar_badan": {
+   "peregangan_maks_cm": 2.39,
+   "regangan_p99_persen": 48.1,
+   "regangan_maks_persen": 543.8,
+   "terburuk": [
+    [
+     "clavicle_l",
+     2.39
+    ],
+    [
+     "head",
+     2.3
+    ],
+    [
+     "jaw",
+     1.69
+    ]
+   ]
+  },
+  "lunge": {
+   "peregangan_maks_cm": 2.53,
+   "regangan_p99_persen": 50.2,
+   "regangan_maks_persen": 489.5,
+   "terburuk": [
+    [
+     "thigh_l",
+     2.53
+    ],
+    [
+     "head",
+     2.34
+    ],
+    [
+     "clavicle_l",
+     2.18
+    ]
+   ]
+  },
+  "bungkuk": {
+   "peregangan_maks_cm": 1.92,
+   "regangan_p99_persen": 51.4,
+   "regangan_maks_persen": 527.1,
+   "terburuk": [
+    [
+     "head",
+     1.92
+    ],
+    [
+     "spine_02",
+     1.87
+    ],
+    [
+     "clavicle_l",
+     1.72
+    ]
+   ]
+  },
+  "tangan_terangkat": {
+   "peregangan_maks_cm": 5.49,
+   "regangan_p99_persen": 72.5,
+   "regangan_maks_persen": 1410.1,
+   "terburuk": [
+    [
+     "clavicle_l",
+     5.49
+    ],
+    [
+     "spine_03",
+     4.98
+    ],
+    [
+     "head",
+     4.47
+    ]
+   ]
+  },
+  "lengan_depan_90": {
+   "peregangan_maks_cm": 3.71,
+   "regangan_p99_persen": 56.5,
+   "regangan_maks_persen": 1103.4,
+   "terburuk": [
+    [
+     "head",
+     3.71
+    ],
+    [
+     "clavicle_l",
+     3.57
+    ],
+    [
+     "clavicle_r",
+     3.18
+    ]
+   ]
+  },
+  "lengan_depan_atas": {
+   "peregangan_maks_cm": 4.73,
+   "regangan_p99_persen": 73.2,
+   "regangan_maks_persen": 1567.2,
+   "terburuk": [
+    [
+     "head",
+     4.73
+    ],
+    [
+     "clavicle_l",
+     4.68
+    ],
+    [
+     "spine_03",
+     4.58
+    ]
+   ]
+  },
+  "lengan_samping_90": {
+   "peregangan_maks_cm": 2.87,
+   "regangan_p99_persen": 35.4,
+   "regangan_maks_persen": 945.3,
+   "terburuk": [
+    [
+     "clavicle_r",
+     2.87
+    ],
+    [
+     "head",
+     2.79
+    ],
+    [
+     "clavicle_l",
+     2.79
+    ]
+   ]
+  },
+  "lengan_guard": {
+   "peregangan_maks_cm": 3.13,
+   "regangan_p99_persen": 48.8,
+   "regangan_maks_persen": 947.6,
+   "terburuk": [
+    [
+     "head",
+     3.13
+    ],
+    [
+     "clavicle_l",
+     2.83
+    ],
+    [
+     "clavicle_r",
+     2.58
+    ]
+   ]
+  }
+ },
+ "cek": [
+  {
+   "cek": "tinggi 1.000 m -6/+2 cm",
+   "lulus": true,
+   "detail": "1.000 m"
+  },
+  {
+   "cek": "telapak di z≈0 (±1 cm)",
+   "lulus": true,
+   "detail": "0.0000 m"
+  },
+  {
+   "cek": "tulang wajib profil 'tuyul' ada",
+   "lulus": true,
+   "detail": "52 tulang"
+  },
+  {
+   "cek": "semua tulang di pose profil ada",
+   "lulus": true,
+   "detail": ""
+  },
+  {
+   "cek": "menghadap -Y (foot_l -> ball_l)",
+   "lulus": true,
+   "detail": "vektor (0.01, -0.08, -0.04)"
+  },
+  {
+   "cek": "menghadap -Y (foot_r -> ball_r)",
+   "lulus": true,
+   "detail": "vektor (-0.01, -0.08, -0.04)"
+  },
+  {
+   "cek": "kiri karakter = +X (thigh_r -> thigh_l)",
+   "lulus": true,
+   "detail": "vektor (0.2, 0.0, 0.0)"
+  },
+  {
+   "cek": "atas = +Z (pelvis -> head)",
+   "lulus": true,
+   "detail": "vektor (0.0, -0.02, 0.595)"
+  },
+  {
+   "cek": "0 vertex tanpa bobot",
+   "lulus": true,
+   "detail": "0"
+  },
+  {
+   "cek": "regangan p99 <= 40.0% di semua pose",
+   "lulus": false,
+   "detail": "74.2% di jongkok"
+  }
+ ]
+}
