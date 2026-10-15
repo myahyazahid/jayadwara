@@ -1,0 +1,327 @@
+{
+ "fbx": "C:\\repository\\unreal_engine\\jayadwara_hermes\\Hermes\\Art\\aksa2\\Export\\SK_Aksa2.fbx",
+ "tulang": [
+  "head",
+  "neck_01",
+  "spine_05"
+ ],
+ "radius_m": 0.12,
+ "vertex_wilayah": 2144,
+ "abaikan_material": [],
+ "bobot_rusak": {
+  "tanpa_bobot": 0,
+  "lebih_4_influence": 0,
+  "tidak_normal": 0
+ },
+ "bobot_jauh": {
+  "vertex": 0,
+  "per_tulang": []
+ },
+ "bobot_tajam": {
+  "tepi": 0,
+  "per_tulang": []
+ },
+ "jahitan_terbelah": {
+  "pasangan_kembar": 0,
+  "bobot_beda": 0
+ },
+ "normal_terbalik": {
+  "muka": 650,
+  "dari": 4042,
+  "persen": 16.1
+ },
+ "pose": {
+  "kuda_kuda": {
+   "regangan_p99_persen": 10.2,
+   "regangan_maks_cm": 0.8,
+   "lokasi_maks": [
+    [
+     0.099,
+     -0.059,
+     1.377
+    ],
+    "clavicle_l"
+   ],
+   "lubang_melebar_x": 1.0,
+   "jahitan_terpisah_cm": 0.0,
+   "tembus_baru": 1
+  },
+  "pukul": {
+   "regangan_p99_persen": 12.4,
+   "regangan_maks_cm": 1.2,
+   "lokasi_maks": [
+    [
+     0.099,
+     -0.059,
+     1.377
+    ],
+    "clavicle_l"
+   ],
+   "lubang_melebar_x": 1.0,
+   "jahitan_terpisah_cm": 0.0,
+   "tembus_baru": 1
+  },
+  "tendang_tinggi": {
+   "regangan_p99_persen": 14.2,
+   "regangan_maks_cm": 0.79,
+   "lokasi_maks": [
+    [
+     -0.097,
+     -0.055,
+     1.375
+    ],
+    "clavicle_r"
+   ],
+   "lubang_melebar_x": 0.78,
+   "jahitan_terpisah_cm": 0.0,
+   "tembus_baru": 0
+  },
+  "dodge": {
+   "regangan_p99_persen": 13.3,
+   "regangan_maks_cm": 0.59,
+   "lokasi_maks": [
+    [
+     -0.101,
+     -0.058,
+     1.372
+    ],
+    "clavicle_r"
+   ],
+   "lubang_melebar_x": 1.04,
+   "jahitan_terpisah_cm": 0.0,
+   "tembus_baru": 0
+  },
+  "jongkok": {
+   "regangan_p99_persen": 8.1,
+   "regangan_maks_cm": 0.66,
+   "lokasi_maks": [
+    [
+     -0.101,
+     -0.058,
+     1.372
+    ],
+    "clavicle_r"
+   ],
+   "lubang_melebar_x": 1.09,
+   "jahitan_terpisah_cm": 0.0,
+   "tembus_baru": 0
+  },
+  "lari": {
+   "regangan_p99_persen": 8.9,
+   "regangan_maks_cm": 0.89,
+   "lokasi_maks": [
+    [
+     -0.101,
+     -0.058,
+     1.372
+    ],
+    "clavicle_r"
+   ],
+   "lubang_melebar_x": 1.03,
+   "jahitan_terpisah_cm": 0.0,
+   "tembus_baru": 2
+  },
+  "lompat": {
+   "regangan_p99_persen": 31.6,
+   "regangan_maks_cm": 1.67,
+   "lokasi_maks": [
+    [
+     0.099,
+     -0.059,
+     1.377
+    ],
+    "clavicle_l"
+   ],
+   "lubang_melebar_x": 1.0,
+   "jahitan_terpisah_cm": 0.0,
+   "tembus_baru": 5
+  },
+  "tendang_samping": {
+   "regangan_p99_persen": 16.3,
+   "regangan_maks_cm": 0.67,
+   "lokasi_maks": [
+    [
+     -0.097,
+     -0.055,
+     1.375
+    ],
+    "clavicle_r"
+   ],
+   "lubang_melebar_x": 0.98,
+   "jahitan_terpisah_cm": 0.0,
+   "tembus_baru": 5
+  },
+  "tangkis": {
+   "regangan_p99_persen": 13.9,
+   "regangan_maks_cm": 1.03,
+   "lokasi_maks": [
+    [
+     0.099,
+     -0.059,
+     1.377
+    ],
+    "clavicle_l"
+   ],
+   "lubang_melebar_x": 1.05,
+   "jahitan_terpisah_cm": 0.0,
+   "tembus_baru": 2
+  },
+  "putar_badan": {
+   "regangan_p99_persen": 29.8,
+   "regangan_maks_cm": 0.75,
+   "lokasi_maks": [
+    [
+     0.073,
+     0.091,
+     1.584
+    ],
+    "head"
+   ],
+   "lubang_melebar_x": 1.0,
+   "jahitan_terpisah_cm": 0.0,
+   "tembus_baru": 3
+  },
+  "lunge": {
+   "regangan_p99_persen": 4.9,
+   "regangan_maks_cm": 0.72,
+   "lokasi_maks": [
+    [
+     0.099,
+     -0.059,
+     1.377
+    ],
+    "clavicle_l"
+   ],
+   "lubang_melebar_x": 1.06,
+   "jahitan_terpisah_cm": 0.0,
+   "tembus_baru": 0
+  },
+  "bungkuk": {
+   "regangan_p99_persen": 24.0,
+   "regangan_maks_cm": 0.73,
+   "lokasi_maks": [
+    [
+     -0.022,
+     0.122,
+     1.601
+    ],
+    "head"
+   ],
+   "lubang_melebar_x": 0.98,
+   "jahitan_terpisah_cm": 0.0,
+   "tembus_baru": 0
+  },
+  "tangan_terangkat": {
+   "regangan_p99_persen": 46.7,
+   "regangan_maks_cm": 2.47,
+   "lokasi_maks": [
+    [
+     0.09,
+     -0.044,
+     1.398
+    ],
+    "clavicle_l"
+   ],
+   "lubang_melebar_x": 1.0,
+   "jahitan_terpisah_cm": 0.0,
+   "tembus_baru": 0
+  },
+  "lengan_depan_90": {
+   "regangan_p99_persen": 21.9,
+   "regangan_maks_cm": 1.02,
+   "lokasi_maks": [
+    [
+     0.099,
+     -0.059,
+     1.377
+    ],
+    "clavicle_l"
+   ],
+   "lubang_melebar_x": 1.0,
+   "jahitan_terpisah_cm": 0.0,
+   "tembus_baru": 9
+  },
+  "lengan_depan_atas": {
+   "regangan_p99_persen": 14.4,
+   "regangan_maks_cm": 0.41,
+   "lokasi_maks": [
+    [
+     0.124,
+     -0.048,
+     1.389
+    ],
+    "clavicle_l"
+   ],
+   "lubang_melebar_x": 1.0,
+   "jahitan_terpisah_cm": 0.0,
+   "tembus_baru": 4
+  },
+  "lengan_samping_90": {
+   "regangan_p99_persen": 18.2,
+   "regangan_maks_cm": 0.85,
+   "lokasi_maks": [
+    [
+     0.099,
+     -0.056,
+     1.383
+    ],
+    "clavicle_l"
+   ],
+   "lubang_melebar_x": 1.0,
+   "jahitan_terpisah_cm": 0.0,
+   "tembus_baru": 5
+  },
+  "lengan_guard": {
+   "regangan_p99_persen": 13.8,
+   "regangan_maks_cm": 0.57,
+   "lokasi_maks": [
+    [
+     0.099,
+     -0.059,
+     1.377
+    ],
+    "clavicle_l"
+   ],
+   "lubang_melebar_x": 1.0,
+   "jahitan_terpisah_cm": 0.0,
+   "tembus_baru": 4
+  }
+ },
+ "pose_terburuk": "tangan_terangkat",
+ "segitiga_wilayah": 7455,
+ "loop_daftar": [
+  {
+   "tepi": 2,
+   "pusat": [
+    0.052,
+    -0.041,
+    1.669
+   ],
+   "tulang": "head",
+   "ukuran_cm": 0.5,
+   "akibat": false
+  }
+ ],
+ "lubang": {
+  "loop_akibat_bobot_atau_jahitan": 0,
+  "loop": 1,
+  "loop_besar_>=6": 0,
+  "vertex_tepi": 2,
+  "melebar_maks_x": 1.09
+ },
+ "dugaan": [
+  {
+   "skor": 50,
+   "masalah": "MELAR",
+   "bukti": "p99 46.7% di tangan_terangkat, maks 2.47 cm di ((0.09, -0.044, 1.398), 'clavicle_l')",
+   "resep": "F5"
+  },
+  {
+   "skor": 30,
+   "masalah": "NORMAL TERBALIK? (ulangi dengan --pembanding)",
+   "bukti": "16.1% muka menghadap ke dalam",
+   "resep": "F7"
+  }
+ ],
+ "gambar": []
+}
