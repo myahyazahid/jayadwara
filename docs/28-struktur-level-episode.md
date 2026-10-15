@@ -93,6 +93,7 @@ Format: **Map** · **Suasana** · alur zona A → E · elemen RE4 · arena raksa
 - **E. Arena:** halaman candi + galian + **desa di bawah bukit** (6–10 gedung hancur, musala tidak bisa hancur). Batas: punggung bukit, hutan, jurang. Truk Adikara pergi lewat jalan akses (latar).
 - **Elemen RE4:** gerbang cerita (prasasti dibaca → tanah bergetar); dari puncak candi, desa yang nanti jadi arena terlihat sejak zona A.
 - **Pakai ulang:** membangun kit **Situs & candi** + **Desa bukit**.
+- **Rincian (denah, koordinat greybox, gelombang, arena, cahaya, anggaran):** [30](30-desain-level-ep01.md).
 
 ### Ep 2 — `Ep02_KampungKali` · siang → sore
 - **A. Ujung jalan kampung:** mobil DWARA berhenti di mulut gang (jalan terlalu sempit). Sungai dan jembatan terlihat.
