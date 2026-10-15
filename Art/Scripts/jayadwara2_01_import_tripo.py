@@ -2,7 +2,7 @@
 
 Jalankan headless (scene kosong):
   blender --background --factory-startup --python Art/Scripts/jayadwara2_01_import_tripo.py -- \
-      [--src Art/Source/jayadwara_tripo_v01.glb] [--out Art/Blender/jayadwara2_v01_tripo.blend] \
+      [--src Art/Source/jayadwara_tripo_v01.glb] [--out Art/Blender/jayadwara2/jayadwara2_v01_tripo.blend] \
       [--top-z 1.99] [--rot-z -90] [--no-merge]
 Hasil: objek `JD2_Source` (semua mesh GLB digabung) di collection `JD2_Jayadwara/01_Source`, tekstur di-pack.
 
@@ -29,7 +29,7 @@ ROOT = Path(r"C:\repository\unreal_engine\jayadwara")
 argv = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
 ap = argparse.ArgumentParser()
 ap.add_argument("--src", default=str(ROOT / "Art" / "Source" / "jayadwara_tripo_v01.glb"))
-ap.add_argument("--out", default=str(ROOT / "Art" / "Blender" / "jayadwara2_v01_tripo.blend"))
+ap.add_argument("--out", default=str(ROOT / "Art" / "Blender" / "jayadwara2" / "jayadwara2_v01_tripo.blend"))
 ap.add_argument("--top-z", type=float, default=1.99)
 ap.add_argument("--rot-z", type=float, default=-90.0)
 ap.add_argument("--merge-dist", type=float, default=0.0005, help="m, setelah skala")

@@ -1,6 +1,6 @@
 """Jerangkong (jalur B) — paket export UE: SK boss & minion (LOD0–3), 14 SM potongan, parts.json, sockets.json.
 
-Headless: blender --background Art/Blender/jerangkong_v02_rig.blend --python Art/Scripts/jerangkong_14_export.py
+Headless: blender --background Art/Blender/jerangkong/jerangkong_v02_rig.blend --python Art/Scripts/jerangkong_14_export.py
 Scene tidak diubah (semua lewat salinan). Kontrak export = Jayadwara pasca-Iterasi 6 (docs/13): armature bernama
 "Armature", data cm & skala di-bake lalu di-apply, FBX_SCALE_ALL, tanpa empty, tanpa animasi, LOD file terpisah.
 

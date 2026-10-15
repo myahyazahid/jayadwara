@@ -1,6 +1,6 @@
 """Jayadwara2 R1/R5 — export paket UE: SK_Jayadwara2(.fbx) + socket JSON + tekstur PNG (kontrak sama dengan 05_export_fbx.py).
 
-  blender --background Art/Blender/jayadwara2_v03_rig_r2.blend --python Art/Scripts/jayadwara2_14_export.py   (R1: jayadwara2_v02_rig_spike.blend)
+  blender --background Art/Blender/jayadwara2/jayadwara2_v03_rig_r2.blend --python Art/Scripts/jayadwara2_14_export.py   (R1: jayadwara2_v02_rig_spike.blend)
   lalu: jayadwara2_15_dump_uv.py (blend yang sama) -> python -I make_textures_jayadwara2.py (menulis BC + Emit)
 Variabel opsional (--python-expr + exec): OUT_DIR, MESH_NAME, GIANT_HEIGHT_M (default 45), FBX_NAME.
 Kontrak (diuji di UE 5.6.1, docs/13 Iterasi 6): salinan armature bernama `Armature`; armature + mesh diskalakan

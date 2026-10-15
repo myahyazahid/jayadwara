@@ -1,8 +1,8 @@
 """Jayadwara2 — revisi badan 14 Okt 2026 (feedback developer): kaki sedikit lebih pendek / badan lebih panjang (tinggi tetap),
 dan satu helai kain tengah BELAKANG supaya bokong tidak terekspos.
 
-  blender --background Art/Blender/jayadwara2_v05_rig_r3.blend --python Art/Scripts/jayadwara2_23_revisi_badan.py -- \
-      [--out Art/Blender/jayadwara2_v06_revisi.blend] [--leg-cut 0.045] [--no-back]
+  blender --background Art/Blender/jayadwara2/jayadwara2_v05_rig_r3.blend --python Art/Scripts/jayadwara2_23_revisi_badan.py -- \
+      [--out Art/Blender/jayadwara2/jayadwara2_v06_revisi.blend] [--leg-cut 0.045] [--no-back]
 File v05 tidak ditimpa. Sesudahnya: jayadwara2_14_export.py & jayadwara2_16_make_lods.py pada v06, lalu UE
 (ue_import_jayadwara2.py, ue_setup_jayadwara2.py) dan jubah (jayadwara2_cape_01_intake --body v06 ... ).
 
@@ -28,7 +28,7 @@ from mathutils.bvhtree import BVHTree
 ROOT = Path(r"C:\repository\unreal_engine\jayadwara")
 argv = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
 ap = argparse.ArgumentParser()
-ap.add_argument("--out", default=str(ROOT / "Art" / "Blender" / "jayadwara2_v06_revisi.blend"))
+ap.add_argument("--out", default=str(ROOT / "Art" / "Blender" / "jayadwara2" / "jayadwara2_v06_revisi.blend"))
 ap.add_argument("--leg-cut", type=float, default=0.045, help="m, kaki memendek sebanyak ini (di sendi pinggul)")
 ap.add_argument("--no-back", action="store_true")
 args = ap.parse_args(argv)

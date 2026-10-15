@@ -1,8 +1,8 @@
 """Jubah Jayadwara2 J0 — impor jubah Tripo, normalisasi, fit kasar ke badan, ukur titik kait (docs/26 J0).
 
 Jalankan headless di atas file rig final (file itu TIDAK ditimpa):
-  blender --background Art/Blender/jayadwara2_v05_rig_r3.blend --python Art/Scripts/jayadwara2_cape_01_intake.py -- \
-      [--src Art/Source/jayadwara2_cape_tripo_v01.glb] [--out Art/Blender/jayadwara2_cape_v00_intake.blend] \
+  blender --background Art/Blender/jayadwara2/jayadwara2_v05_rig_r3.blend --python Art/Scripts/jayadwara2_cape_01_intake.py -- \
+      [--src Art/Source/jayadwara2_cape_tripo_v01.glb] [--out Art/Blender/jayadwara2/jayadwara2_cape_v00_intake.blend] \
       [--collar-z 1.60] [--hem-z 0.10] [--rot-z 90] [--clear 0.02]
 Hasil: collection `10_Cape` berisi `JD2_Cape_Source` (jubah ter-fit) + empty `JD2C_ANCHOR_*` (titik kait).
 
@@ -29,7 +29,7 @@ ROOT = Path(r"C:\repository\unreal_engine\jayadwara")
 argv = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
 ap = argparse.ArgumentParser()
 ap.add_argument("--src", default=str(ROOT / "Art" / "Source" / "jayadwara2_cape_tripo_v01.glb"))
-ap.add_argument("--out", default=str(ROOT / "Art" / "Blender" / "jayadwara2_cape_v00_intake.blend"))
+ap.add_argument("--out", default=str(ROOT / "Art" / "Blender" / "jayadwara2" / "jayadwara2_cape_v00_intake.blend"))
 ap.add_argument("--collar-z", type=float, default=1.60)
 ap.add_argument("--hem-z", type=float, default=0.10)
 ap.add_argument("--rot-z", type=float, default=90.0)

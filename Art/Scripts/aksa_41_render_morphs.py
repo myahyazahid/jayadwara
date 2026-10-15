@@ -1,6 +1,6 @@
 """Aksa Iterasi 4 — render semua morph target wajah (nilai 1.0) berdampingan dengan netral.
 
-Headless: blender --background Art/Blender/aksa_v04_outfit.blend --python Art/Scripts/aksa_41_render_morphs.py -- <outdir>
+Headless: blender --background Art/Blender/aksa/aksa_v04_outfit.blend --python Art/Scripts/aksa_41_render_morphs.py -- <outdir>
 Output: <outdir>/morph_<nama>.png; grid: python -I Art/Scripts/aksa_41_morph_sheet.py <outdir>.
 Kamera ortografis depan memotong wajah (skala sama dengan aksa_21_render_head.py).
 """

@@ -1,6 +1,6 @@
 """Jerangkong (jalur B) — uji pose potongan kaku (docs/20 Iterasi 1/3) + render lembar pose.
 
-Headless: blender --background Art/Blender/jerangkong_v02_rig.blend --python Art/Scripts/jerangkong_13_pose_tests.py -- <outdir>
+Headless: blender --background Art/Blender/jerangkong/jerangkong_v02_rig.blend --python Art/Scripts/jerangkong_13_pose_tests.py -- <outdir>
 Membuat aksi JK_PoseTest (frame 1..N, satu pose per frame) di JK_Armature, merender tiap pose (Eevee, 3/4 depan)
 ke <outdir>/jk_pose_<n>_<nama>.png. File .blend TIDAK disimpan.
 Rotasi ditulis sebagai (sumbu dunia, derajat) dan diubah ke ruang lokal tiap tulang terhadap pose rest.

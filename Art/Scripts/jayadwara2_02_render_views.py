@@ -1,6 +1,6 @@
 """Jayadwara2 R0 — render ortografis depan/samping/belakang + 3/4 + close-up kepala (Workbench, tekstur apa adanya).
 
-  blender --background Art/Blender/jayadwara2_v01_tripo.blend --python Art/Scripts/jayadwara2_02_render_views.py -- [outdir]
+  blender --background Art/Blender/jayadwara2/jayadwara2_v01_tripo.blend --python Art/Scripts/jayadwara2_02_render_views.py -- [outdir]
 Skala sama dengan reference plane Jayadwara (1000 px = 1,9 m) untuk panel ortografis; keluaran PNG per view.
 """
 import math

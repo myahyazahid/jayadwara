@@ -1,6 +1,6 @@
 """Jayadwara2 — audit ketiak (lengan terangkat). Laporan tepi terbuka di zona ketiak + render close-up per pose.
 
-  blender --background Art/Blender/jayadwara2_v06_revisi.blend --python Art/Scripts/jayadwara2_24_armpit_audit.py -- [outdir]
+  blender --background Art/Blender/jayadwara2/jayadwara2_v06_revisi.blend --python Art/Scripts/jayadwara2_24_armpit_audit.py -- [outdir]
 Temuan developer (13 Okt 2026, Play UE): saat memukul (lengan ke depan-atas, retarget MM_Attack_*) ketiak robek/bolong.
 Pose didefinisikan lewat arah tulang (ruang dunia; karakter menghadap -Y, kiri karakter = +X), lengan kanan (-X).
 Hasil: PNG per pose + `_sheet.png` di outdir (default Art/Export/_jd2/armpit), tabel celah di stdout.

@@ -1,9 +1,9 @@
 """Jerangkong Iterasi 1 (jalur B, docs/20) — armature + potongan kaku dari mesh Tripo + bobot + socket.
 
 Jalankan headless dari hasil impor:
-  blender --background Art/Blender/jerangkong_v01_tripo.blend --python Art/Scripts/jerangkong_10_build.py
+  blender --background Art/Blender/jerangkong/jerangkong_v01_tripo.blend --python Art/Scripts/jerangkong_10_build.py
 Hasil:
-  Art/Blender/jerangkong_v02_rig.blend   JK_Armature (Mannequin + jaw + cloth_*), 17 objek JK_P_<Potongan> ber-Armature
+  Art/Blender/jerangkong/jerangkong_v02_rig.blend   JK_Armature (Mannequin + jaw + cloth_*), 17 objek JK_P_<Potongan> ber-Armature
                                          modifier, socket SOCKET_*; JK_Source disembunyikan (acuan)
   Art/Export/_jk_faces.npz               per segitiga JK_Source: label tulang + UV (input make_textures_jerangkong.py)
 
@@ -32,7 +32,7 @@ importlib.reload(SK)
 importlib.reload(G)
 
 ROOT = r"C:\repository\unreal_engine\jayadwara"
-OUT = os.path.join(ROOT, "Art", "Blender", "jerangkong_v02_rig.blend")
+OUT = os.path.join(ROOT, "Art", "Blender", "jerangkong", "jerangkong_v02_rig.blend")
 FACES_NPZ = os.path.join(ROOT, "Art", "Export", "_jk_faces.npz")
 ARM_NAME = "JK_Armature"
 TRI_BUDGET = 34000

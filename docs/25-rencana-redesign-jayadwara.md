@@ -23,7 +23,7 @@ Jayadwara versi baru (**Jayadwara2**) dianggap siap menggantikan model lama kala
 
 | Item | Kondisi |
 |---|---|
-| Model lama | `Art/Blender/jayadwara_giant_v05_revisi.blend`, `Art/Export/SK_Jayadwara*.fbx` (LOD0 51,8k tris, 89 tulang, 4 slot material), UE `/Game/Jayadwara/Characters/Jayadwara/` (`SK_`, `SKEL_`, `PA_`, `IK_`, `RTG_`, `ABP_`, `BP_Jayadwara`). Dipakai `BP_JDPlayerController.giant_pawn_class` (transformasi tombol T) |
+| Model lama | `Art/Blender/jayadwara/jayadwara_giant_v05_revisi.blend`, `Art/Export/SK_Jayadwara*.fbx` (LOD0 51,8k tris, 89 tulang, 4 slot material), UE `/Game/Jayadwara/Characters/Jayadwara/` (`SK_`, `SKEL_`, `PA_`, `IK_`, `RTG_`, `ABP_`, `BP_Jayadwara`). Dipakai `BP_JDPlayerController.giant_pawn_class` (transformasi tombol T) |
 | Model baru | Belum diterima. Di `yahya_design/` sudah ada `jayadwara.glb` (4,3 MB, 12 Okt 23:15) — **belum dibuka**, menunggu konfirmasi developer bahwa itu file yang dimaksud |
 | Pipeline yang bisa dipakai ulang | Impor Tripo (`jerangkong_01_import_tripo.py`), skeleton (`jd_skeleton.py`, sendi diukur dari mesh seperti `jk_skeleton.py`), export kontrak cm + bake 45 m (`05_export_fbx.py`, `16_make_lods.py`), validator (`validate_jayadwara.py`), render pembanding (`render_compare.py` + `compare_sheet.py`), skrip UE (`ue_import_jayadwara.py`, `ue_setup_retarget.py`, `ue_setup_giant.py`, `ue_setup_transform.py`) |
 | Pelajaran dari Jerangkong jalur B | Tripo = 1 mesh menyatu, geometri lunak, detail di tekstur, ±13k tepi non-manifold, atlas tunggal 2048² yang melukis warna di tempat yang salah; capture editor UE kadang tidak men-tick animasi |
@@ -60,7 +60,7 @@ Jayadwara versi baru (**Jayadwara2**) dianggap siap menggantikan model lama kala
 ### R0 — Intake & penilaian *(±1–2 jam)*
 - **Claude:**
   - Salin GLB ke `Art/Source/jayadwara_tripo_v01.glb` (sumber asli di `yahya_design/` tidak diubah).
-  - `jayadwara2_01_import_tripo.py` (headless): rotasi menghadap -Y, skala ke tinggi R5, telapak di z=0, vertex jahitan UV digabung, tekstur di-pack → `Art/Blender/jayadwara2_v01_tripo.blend` (objek `JD2_Source`). Laporan: tris, vertex, material, ukuran tekstur, pulau mesh terpisah, tepi non-manifold, simetri kiri-kanan, bbox.
+  - `jayadwara2_01_import_tripo.py` (headless): rotasi menghadap -Y, skala ke tinggi R5, telapak di z=0, vertex jahitan UV digabung, tekstur di-pack → `Art/Blender/jayadwara2/jayadwara2_v01_tripo.blend` (objek `JD2_Source`). Laporan: tris, vertex, material, ukuran tekstur, pulau mesh terpisah, tepi non-manifold, simetri kiri-kanan, bbox.
   - Render ortografis depan/samping/belakang + close-up kepala 3/4, berdampingan dengan **konsep** dan **model lama** (`render_compare.py` + `compare_sheet.py`); IoU siluet depan.
   - Cek IP awal (bagian 7) dan cek warna emas vs silver di atlas.
 - **Developer:** jawab R1–R10 yang belum cocok; konfirmasi lisensi.
@@ -146,7 +146,7 @@ Supaya R1–R3 jauh lebih ringan:
 
 ### Hasil R0 (13 Okt 2026) — `yahya_design/jayadwara.glb`
 
-Sumber disalin ke `Art/Source/jayadwara_tripo_v01.glb` (asli tidak diubah). `Art/Scripts/jayadwara2_01_import_tripo.py` → `Art/Blender/jayadwara2_v01_tripo.blend` (`JD2_Source`); render: `jayadwara2_02_render_views.py` → `Art/Export/_jd2/`; ukur: `jayadwara2_03_measure.py`. Perbandingan konsep | model lama | model baru: `Art/Export/_jd2/_banding_front.png`.
+Sumber disalin ke `Art/Source/jayadwara_tripo_v01.glb` (asli tidak diubah). `Art/Scripts/jayadwara2_01_import_tripo.py` → `Art/Blender/jayadwara2/jayadwara2_v01_tripo.blend` (`JD2_Source`); render: `jayadwara2_02_render_views.py` → `Art/Export/_jd2/`; ukur: `jayadwara2_03_measure.py`. Perbandingan konsep | model lama | model baru: `Art/Export/_jd2/_banding_front.png`.
 
 | Temuan | Nilai | Akibat |
 |---|---|---|
@@ -164,7 +164,7 @@ Sumber disalin ke `Art/Source/jayadwara_tripo_v01.glb` (asli tidak diubah). `Art
 
 ### Hasil R1 (13 Okt 2026) — spike rig, sisi Blender
 
-Artefak: `Art/Blender/jayadwara2_v02_rig_spike.blend` (`JD2_Body` + `JD2_Armature` 89 tulang + 9 socket), `Art/Export/SK_Jayadwara2.fbx` (LOD0, 37.690 tris, ter-bake ukuran 45 m), `SK_Jayadwara2_sockets.json`, `Textures_Jayadwara2/T_Jayadwara2_{BC,N,ORM}.png`. Validator `validate_jayadwara.py --max-tris 100000 --materials 1 --no-zone`: **27/27 PASS**. Bukti visual: 13 pose di `Art/Export/_jd2/poses/_sheet_q.png`, peta pembagian bagian `Art/Export/_jd2/_macro.png`.
+Artefak: `Art/Blender/jayadwara2/jayadwara2_v02_rig_spike.blend` (`JD2_Body` + `JD2_Armature` 89 tulang + 9 socket), `Art/Export/SK_Jayadwara2.fbx` (LOD0, 37.690 tris, ter-bake ukuran 45 m), `SK_Jayadwara2_sockets.json`, `Textures_Jayadwara2/T_Jayadwara2_{BC,N,ORM}.png`. Validator `validate_jayadwara.py --max-tris 100000 --materials 1 --no-zone`: **27/27 PASS**. Bukti visual: 13 pose di `Art/Export/_jd2/poses/_sheet_q.png`, peta pembagian bagian `Art/Export/_jd2/_macro.png`.
 
 Skrip: `jd2_skeleton.py` (nama & hierarki = model lama, sendi diukur dari mesh) → `jayadwara2_10_rig_spike.py` → `jayadwara2_13_pose_tests.py` (13 pose yang sama dengan model lama) → `jayadwara2_14_export.py`; bantu: `jayadwara2_11_macro_render.py`, `jayadwara2_04_uv_islands.py`.
 
@@ -238,7 +238,7 @@ Umpan balik: mata harus memanjang sedikit ke belakang seperti Jayadwara lama, bu
 
 ### Hasil R2 (13 Okt 2026) — pemisahan lembar kain, zirah kaku
 
-Skrip baru `jayadwara2_21_rig_r2.py` (menggantikan `jayadwara2_10_rig_spike.py` yang tetap disimpan) → `Art/Blender/jayadwara2_v03_rig_r2.blend` (v02 spike tetap utuh). Pipeline: `21` → `13_pose_tests` → `14_export` → `15_dump_uv` → `make_textures_jayadwara2.py` → `ue_import_jayadwara2.py` → `ue_setup_jayadwara2.py`. FBX R1 diamankan sebagai `Art/Export/SK_Jayadwara2_R1spike.fbx`.
+Skrip baru `jayadwara2_21_rig_r2.py` (menggantikan `jayadwara2_10_rig_spike.py` yang tetap disimpan) → `Art/Blender/jayadwara2/jayadwara2_v03_rig_r2.blend` (v02 spike tetap utuh). Pipeline: `21` → `13_pose_tests` → `14_export` → `15_dump_uv` → `make_textures_jayadwara2.py` → `ue_import_jayadwara2.py` → `ue_setup_jayadwara2.py`. FBX R1 diamankan sebagai `Art/Export/SK_Jayadwara2_R1spike.fbx`.
 
 | Masalah R1 | Penyebab | Perbaikan R2 |
 |---|---|---|
@@ -273,7 +273,7 @@ Modul/skrip: `jd2_atlas.py` (posisi 3D per texel + klasifikasi zona HSV), `analy
 
 ### Hasil R3 (13 Okt 2026) — rig final & skinning
 
-Skrip `jayadwara2_22_rig_r3.py` (R2 + 3 perubahan) → `Art/Blender/jayadwara2_v05_rig_r3.blend`; FBX R2 diamankan `SK_Jayadwara2_R2.fbx`; terpasang di UE (validator 27/27, import + setup diulang, idle dan postur tetap sesuai target).
+Skrip `jayadwara2_22_rig_r3.py` (R2 + 3 perubahan) → `Art/Blender/jayadwara2/jayadwara2_v05_rig_r3.blend`; FBX R2 diamankan `SK_Jayadwara2_R2.fbx`; terpasang di UE (validator 27/27, import + setup diulang, idle dan postur tetap sesuai target).
 
 | Perubahan | Isi |
 |---|---|
@@ -358,7 +358,7 @@ Permintaan: (1) kaki jangan terlalu lebar saat idle — samakan dengan Jayadwara
 | 2 Kain belakang | Hanya dua kain samping di belakang | **Satu helai tengah belakang**: kain tengah depan dicerminkan ke belakang (bobot ikut), diletakkan di permukaan bokong + 1,5 cm (sinar yang lolos di antara kaki diabaikan) lalu menggantung lurus |
 | 3 Proporsi | Sendi pinggul v05 0,98 m vs model lama 0,91 (kaki 0,84 vs 0,79 m) | Remap tinggi rest: di bawah sendi pinggul ×0,954 (kaki −4,5 cm), pinggul→dada (0,98–1,40 m) ×1,107, di atas 1,40 m tetap → tinggi total sama. Lengan (bobot lengan) & clavicle tidak ikut. Sendi pinggul kini 0,935, lutut 0,573, pelvis 0,887 |
 
-Skrip: `Art/Scripts/jayadwara2_23_revisi_badan.py` (v05 → **`Art/Blender/jayadwara2_v06_revisi.blend`**, v05 utuh). Export `jayadwara2_14_export.py` + `jayadwara2_16_make_lods.py` pada v06: 39.256 / 19.627 / 9.028 / 3.925 tris, validator 27/27 ×4. UE: `ue_import_jayadwara2.py` → `ue_setup_jayadwara2.py`. Jubah dibangun ulang di atas v06 (docs/26). Pembanding: `Art/Export/_jd2/_revisi_v06_banding.png`.
+Skrip: `Art/Scripts/jayadwara2_23_revisi_badan.py` (v05 → **`Art/Blender/jayadwara2/jayadwara2_v06_revisi.blend`**, v05 utuh). Export `jayadwara2_14_export.py` + `jayadwara2_16_make_lods.py` pada v06: 39.256 / 19.627 / 9.028 / 3.925 tris, validator 27/27 ×4. UE: `ue_import_jayadwara2.py` → `ue_setup_jayadwara2.py`. Jubah dibangun ulang di atas v06 (docs/26). Pembanding: `Art/Export/_jd2/_revisi_v06_banding.png`.
 
 **Insiden 13–14 Okt:** batch retarget crash berulang karena `SK_Mannequin` tersimpan dengan tulang terbuang (92 vs 171) oleh pekerjaan Aksa2 paralel (agen Hermes); setup yang crash sempat menghapus `Jayadwara2/Anims`. Dipulihkan dari commit (atas persetujuan developer): `SK_Mannequin`, animasi `Mannequins/Anims/Unarmed/*`, `A_Aksa_Attack_01..03`, `Jayadwara2/Anims`, `IK/RTG_Jayadwara2`; pesan untuk Hermes di `C:\repository\unreal_engine\explorasi\PESAN_UNTUK_HERMES_dari_Claude.md`.
 

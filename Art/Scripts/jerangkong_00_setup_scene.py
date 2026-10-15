@@ -16,7 +16,7 @@ import bpy
 
 ROOT = Path(r"C:\repository\unreal_engine\jayadwara")
 REF = ROOT / "Art" / "Reference"
-OUT = ROOT / "Art" / "Blender" / "jerangkong_v00_setup.blend"
+OUT = ROOT / "Art" / "Blender" / "jerangkong" / "jerangkong_v00_setup.blend"
 
 H = 2.2                        # tinggi konsep (m), telapak -> puncak tengkorak (tampak depan)
 CANVAS_PX = (900, 1200)        # ukuran reference plane (px); 1000 px = 2,2 m

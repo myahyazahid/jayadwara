@@ -37,7 +37,7 @@ from bl_ext.user_default.mpfb.services.locationservice import LocationService  #
 from bl_ext.user_default.mpfb.services.targetservice import TargetService  # noqa: E402
 
 assert any(k in bpy.data.filepath for k in ("aksa_v02", "aksa_v03", "aksa_v04", "aksa_v05")), "buka aksa_v03..v05"
-OUT = Path(bpy.data.filepath) if any(k in bpy.data.filepath for k in ("aksa_v04", "aksa_v05")) else C.ART / "Blender" / "aksa_v03_mpfb.blend"
+OUT = Path(bpy.data.filepath) if any(k in bpy.data.filepath for k in ("aksa_v04", "aksa_v05")) else C.ART / "Blender" / "aksa" / "aksa_v03_mpfb.blend"
 
 MACRO = {"gender": 1.0, "age": 0.5, "muscle": 0.78, "weight": 0.46, "proportions": 0.80, "height": 0.6,
          "cupsize": 0.5, "firmness": 0.5, "race": {"asian": 0.45, "caucasian": 0.30, "african": 0.25}}

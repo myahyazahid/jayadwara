@@ -1,6 +1,6 @@
 """Jubah Jayadwara2 J1 — uji pose: jubah mengikuti JD2_Armature (constraint Copy Transforms = Copy Pose From Mesh di UE).
 
-  blender --background Art/Blender/jayadwara2_cape_v01_rig.blend --python Art/Scripts/jayadwara2_cape_11_pose_tests.py -- [tag]
+  blender --background Art/Blender/jayadwara2/jayadwara2_cape_v01_rig.blend --python Art/Scripts/jayadwara2_cape_11_pose_tests.py -- [tag]
 Pose: rest, jalan kiri/kanan (sama dengan jayadwara2_17: paha ±28°/18°, lutut 30°), lari (paha 45°/-30°, lutut 70°),
 tendang depan 90°, jongkok/lompat, badan berputar 25°, lengan terangkat depan, kepala miring.
 Ukur: vertex jubah di dalam kapsul paha/betis (radius = p80 jarak kulit kaki ke tulang) dan regangan tepi jubah (maks/p99).

@@ -1,6 +1,6 @@
 """Jayadwara2 R1/R3 — 13 pose uji (pose sama dengan model lama, 03_pose_tests.py) + peregangan + contact sheet.
 
-  blender --background Art/Blender/jayadwara2_v02_rig_spike.blend --python Art/Scripts/jayadwara2_13_pose_tests.py -- [outdir]
+  blender --background Art/Blender/jayadwara2/jayadwara2_v02_rig_spike.blend --python Art/Scripts/jayadwara2_13_pose_tests.py -- [outdir]
 Pose didefinisikan lewat ARAH tulang (ruang dunia), jadi bisa dipakai ulang di rest berbeda. Hasil: Action `JD_PoseTest`
 (disimpan ke .blend), PNG per pose + `_sheet.png` di outdir (default Art/Export/_jd2/poses), tabel peregangan di stdout.
 """
