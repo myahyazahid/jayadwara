@@ -116,7 +116,11 @@ smd.set_editor_property("convert_scene", True)
 smd.set_editor_property("normal_import_method", unreal.FBXNormalImportMethod.FBXNIM_IMPORT_NORMALS)
 
 task.set_editor_property("options", ui)
-asset_tools.import_asset_tasks([task])
+unreal.SystemLibrary.execute_console_command(None, "Interchange.FeatureFlags.Import.FBX 0")
+try:
+    asset_tools.import_asset_tasks([task])
+finally:
+    unreal.SystemLibrary.execute_console_command(None, "Interchange.FeatureFlags.Import.FBX 1")
 
 sk_obj = EAL.load_asset(mesh_dst)
 assert sk_obj is not None, f"Gagal memuat skeletal mesh: {mesh_dst}"

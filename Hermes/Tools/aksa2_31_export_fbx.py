@@ -29,7 +29,7 @@ if mesh.data.materials:
     mesh.data.materials[0].name = "M_Aksa2_Body"
 
 # Ekspor FBX
-BAKE_CM = 1.0
+BAKE_CM = 100.0
 ARM_EXPORT_NAME = "Armature"
 MESH_NAME = "SK_Aksa2"
 
