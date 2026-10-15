@@ -24,7 +24,7 @@ mesh = bpy.data.objects.get("AK2_Source")
 arm = bpy.data.objects.get("AK2_Armature")
 assert mesh is not None and arm is not None, "AK2_Source atau AK2_Armature tidak ditemukan"
 
-BAKE_CM = 100.0
+BAKE_CM = 1.0
 MAX_INF = 4
 
 def get_tris(ob):
