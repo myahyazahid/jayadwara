@@ -1,0 +1,332 @@
+{
+ "fbx": "C:\\repository\\unreal_engine\\jayadwara_hermes\\Hermes\\Art\\aksa2\\Export\\SK_Aksa2.fbx",
+ "tulang": [
+  "upperarm_r",
+  "clavicle_r"
+ ],
+ "radius_m": 0.12,
+ "vertex_wilayah": 2319,
+ "abaikan_material": [],
+ "bobot_rusak": {
+  "tanpa_bobot": 0,
+  "lebih_4_influence": 0,
+  "tidak_normal": 0
+ },
+ "bobot_jauh": {
+  "vertex": 0,
+  "per_tulang": []
+ },
+ "bobot_tajam": {
+  "tepi": 135,
+  "per_tulang": [
+   [
+    "clavicle_l",
+    62
+   ],
+   [
+    "clavicle_r",
+    52
+   ],
+   [
+    "spine_05",
+    19
+   ],
+   [
+    "head",
+    2
+   ]
+  ]
+ },
+ "jahitan_terbelah": {
+  "pasangan_kembar": 0,
+  "bobot_beda": 0
+ },
+ "normal_terbalik": {
+  "muka": 360,
+  "dari": 4388,
+  "persen": 8.2
+ },
+ "pose": {
+  "kuda_kuda": {
+   "regangan_p99_persen": 240.1,
+   "regangan_maks_cm": 10.85,
+   "lokasi_maks": [
+    [
+     -0.234,
+     0.02,
+     1.262
+    ],
+    "upperarm_twist_01_r"
+   ],
+   "lubang_melebar_x": 1.0,
+   "jahitan_terpisah_cm": 0.0,
+   "tembus_baru": 186
+  },
+  "pukul": {
+   "regangan_p99_persen": 337.3,
+   "regangan_maks_cm": 15.72,
+   "lokasi_maks": [
+    [
+     -0.234,
+     0.02,
+     1.262
+    ],
+    "upperarm_twist_01_r"
+   ],
+   "lubang_melebar_x": 1.0,
+   "jahitan_terpisah_cm": 0.0,
+   "tembus_baru": 29
+  },
+  "tendang_tinggi": {
+   "regangan_p99_persen": 221.2,
+   "regangan_maks_cm": 10.29,
+   "lokasi_maks": [
+    [
+     -0.234,
+     0.02,
+     1.262
+    ],
+    "upperarm_twist_01_r"
+   ],
+   "lubang_melebar_x": 1.0,
+   "jahitan_terpisah_cm": 0.0,
+   "tembus_baru": 66
+  },
+  "dodge": {
+   "regangan_p99_persen": 162.6,
+   "regangan_maks_cm": 7.91,
+   "lokasi_maks": [
+    [
+     -0.234,
+     0.02,
+     1.262
+    ],
+    "upperarm_twist_01_r"
+   ],
+   "lubang_melebar_x": 1.0,
+   "jahitan_terpisah_cm": 0.0,
+   "tembus_baru": 99
+  },
+  "jongkok": {
+   "regangan_p99_persen": 188.3,
+   "regangan_maks_cm": 8.91,
+   "lokasi_maks": [
+    [
+     -0.234,
+     0.02,
+     1.262
+    ],
+    "upperarm_twist_01_r"
+   ],
+   "lubang_melebar_x": 1.0,
+   "jahitan_terpisah_cm": 0.0,
+   "tembus_baru": 56
+  },
+  "lari": {
+   "regangan_p99_persen": 239.7,
+   "regangan_maks_cm": 10.63,
+   "lokasi_maks": [
+    [
+     -0.234,
+     0.02,
+     1.262
+    ],
+    "upperarm_twist_01_r"
+   ],
+   "lubang_melebar_x": 1.0,
+   "jahitan_terpisah_cm": 0.0,
+   "tembus_baru": 315
+  },
+  "lompat": {
+   "regangan_p99_persen": 452.1,
+   "regangan_maks_cm": 20.22,
+   "lokasi_maks": [
+    [
+     -0.234,
+     0.091,
+     1.264
+    ],
+    "upperarm_twist_01_r"
+   ],
+   "lubang_melebar_x": 1.0,
+   "jahitan_terpisah_cm": 0.0,
+   "tembus_baru": 143
+  },
+  "tendang_samping": {
+   "regangan_p99_persen": 255.3,
+   "regangan_maks_cm": 12.25,
+   "lokasi_maks": [
+    [
+     -0.234,
+     0.091,
+     1.264
+    ],
+    "upperarm_twist_01_r"
+   ],
+   "lubang_melebar_x": 1.0,
+   "jahitan_terpisah_cm": 0.0,
+   "tembus_baru": 57
+  },
+  "tangkis": {
+   "regangan_p99_persen": 327.3,
+   "regangan_maks_cm": 14.45,
+   "lokasi_maks": [
+    [
+     -0.234,
+     0.02,
+     1.262
+    ],
+    "upperarm_twist_01_r"
+   ],
+   "lubang_melebar_x": 1.0,
+   "jahitan_terpisah_cm": 0.0,
+   "tembus_baru": 301
+  },
+  "putar_badan": {
+   "regangan_p99_persen": 128.6,
+   "regangan_maks_cm": 6.34,
+   "lokasi_maks": [
+    [
+     -0.234,
+     0.02,
+     1.262
+    ],
+    "upperarm_twist_01_r"
+   ],
+   "lubang_melebar_x": 1.0,
+   "jahitan_terpisah_cm": 0.0,
+   "tembus_baru": 58
+  },
+  "lunge": {
+   "regangan_p99_persen": 5.0,
+   "regangan_maks_cm": 0.52,
+   "lokasi_maks": [
+    [
+     0.084,
+     -0.027,
+     1.415
+    ],
+    "clavicle_l"
+   ],
+   "lubang_melebar_x": 1.0,
+   "jahitan_terpisah_cm": 0.0,
+   "tembus_baru": 1
+  },
+  "bungkuk": {
+   "regangan_p99_persen": 71.1,
+   "regangan_maks_cm": 3.78,
+   "lokasi_maks": [
+    [
+     -0.234,
+     0.02,
+     1.262
+    ],
+    "upperarm_twist_01_r"
+   ],
+   "lubang_melebar_x": 1.0,
+   "jahitan_terpisah_cm": 0.0,
+   "tembus_baru": 32
+  },
+  "tangan_terangkat": {
+   "regangan_p99_persen": 565.9,
+   "regangan_maks_cm": 25.33,
+   "lokasi_maks": [
+    [
+     -0.234,
+     0.091,
+     1.264
+    ],
+    "upperarm_twist_01_r"
+   ],
+   "lubang_melebar_x": 1.0,
+   "jahitan_terpisah_cm": 0.0,
+   "tembus_baru": 467
+  },
+  "lengan_depan_90": {
+   "regangan_p99_persen": 353.7,
+   "regangan_maks_cm": 16.18,
+   "lokasi_maks": [
+    [
+     -0.234,
+     0.091,
+     1.264
+    ],
+    "upperarm_twist_01_r"
+   ],
+   "lubang_melebar_x": 1.0,
+   "jahitan_terpisah_cm": 0.0,
+   "tembus_baru": 141
+  },
+  "lengan_depan_atas": {
+   "regangan_p99_persen": 448.6,
+   "regangan_maks_cm": 22.03,
+   "lokasi_maks": [
+    [
+     -0.234,
+     0.091,
+     1.264
+    ],
+    "upperarm_twist_01_r"
+   ],
+   "lubang_melebar_x": 1.0,
+   "jahitan_terpisah_cm": 0.0,
+   "tembus_baru": 83
+  },
+  "lengan_samping_90": {
+   "regangan_p99_persen": 230.8,
+   "regangan_maks_cm": 11.16,
+   "lokasi_maks": [
+    [
+     -0.234,
+     0.02,
+     1.262
+    ],
+    "upperarm_twist_01_r"
+   ],
+   "lubang_melebar_x": 1.0,
+   "jahitan_terpisah_cm": 0.0,
+   "tembus_baru": 54
+  },
+  "lengan_guard": {
+   "regangan_p99_persen": 261.6,
+   "regangan_maks_cm": 12.43,
+   "lokasi_maks": [
+    [
+     -0.234,
+     0.091,
+     1.264
+    ],
+    "upperarm_twist_01_r"
+   ],
+   "lubang_melebar_x": 1.0,
+   "jahitan_terpisah_cm": 0.0,
+   "tembus_baru": 88
+  }
+ },
+ "pose_terburuk": "tangan_terangkat",
+ "segitiga_wilayah": 7818,
+ "loop_daftar": [],
+ "lubang": {
+  "loop_akibat_bobot_atau_jahitan": 0,
+  "loop": 0,
+  "loop_besar_>=6": 0,
+  "vertex_tepi": 0,
+  "melebar_maks_x": 1.0
+ },
+ "pembanding": "C:\\repository\\unreal_engine\\jayadwara_hermes\\Art\\Export\\SK_Aksa.fbx",
+ "dugaan": [
+  {
+   "skor": 60,
+   "masalah": "BOBOT TAJAM",
+   "bukti": "135 tepi lompatan bobot > 0,6: [('clavicle_l', 62), ('clavicle_r', 52), ('spine_05', 19)] (pembanding 0)",
+   "resep": "F4"
+  },
+  {
+   "skor": 50,
+   "masalah": "MELAR",
+   "bukti": "p99 565.9% di tangan_terangkat vs pembanding 62.4%, maks 25.33 cm di ((-0.234, 0.091, 1.264), 'upperarm_twist_01_r')",
+   "resep": "F5"
+  }
+ ],
+ "gambar": []
+}
