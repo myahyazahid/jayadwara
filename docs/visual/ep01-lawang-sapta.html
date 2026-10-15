@@ -71,7 +71,7 @@ text{font-family:var(--f-body)}
 <header>
   <div class="eyebrow">JAYADWARA · Episode 1 · Desain level v0.1 · docs/30</div>
   <h1>Ep01_LawangSapta<br><em>Gerbang yang Retak</em></h1>
-  <p class="lede">Bukit candi yang sedang digali untuk proyek tol Adikara. Candi di puncak, galian di lereng, desa di kaki bukit. Jalur yang Aksa lalui selama ±15 menit menjadi panggung raksasa saat Jayadwara bangkit. Semua angka adalah titik awal greybox.</p>
+  <p class="lede">Bukit candi yang sedang digali untuk proyek tol Adikara. Candi di puncak, galian di lereng (terbuka ke selatan), sawah di selatan–tenggara, desa di barat daya dekat kali. Jalur yang Aksa lalui selama ±15 menit menjadi panggung raksasa saat Jayadwara bangkit. Semua angka adalah titik awal greybox.</p>
   <div class="stats"><span>Area <b>±800 × 800 m</b></span><span>Arena raksasa <b>±450 × 550 m</b></span><span>Durasi <b>±20–25 mnt</b></span><span>Aksa <b>1,75 m</b> · Jerangkong <b>31 m</b> · Jayadwara <b>45 m</b></span></div>
 </header>
 
@@ -116,7 +116,7 @@ text{font-family:var(--f-body)}
       <button type="button" id="ex3" aria-pressed="true">Vertikal ×3</button>
     </div>
   </div>
-  <p class="note">Irisan selatan → utara lewat desa, sawah, galian, dan candi. Pada skala asli bukitnya hampir rata: itulah yang dirasakan Jayadwara. Pada ×3 terlihat seperti yang dirasakan Aksa.</p>
+  <p class="note">Irisan selatan → utara lewat sawah, lereng, galian, dan candi (desa di barat daya diproyeksikan ke garis irisan). Pada skala asli bukitnya hampir rata: itulah yang dirasakan Jayadwara. Pada ×3 terlihat seperti yang dirasakan Aksa.</p>
   <div class="card scroll"><svg id="prof" viewBox="0 0 900 330" width="100%" style="min-width:640px" role="img" aria-label="Potongan melintang bukit dengan figur berskala"></svg></div>
 </section>
 
@@ -190,27 +190,28 @@ lbl(base,200,-412,"sawah melebar → kota kecil di kejauhan (latar)",{fs:9.5,c:V
 
 // lereng
 el("path",{d:`M${X(-110)} ${Y(-60)} L${X(110)} ${Y(-60)} L${X(120)} ${Y(-120)} L${X(-165)} ${Y(-120)} Z`,css:`fill:${V("tanah")};opacity:.22`},base);
-lbl(base,-110,-95,"lereng +25 → +5",{fs:10,c:V("muted"),w:600});
+lbl(base,-150,-95,"kebun / lereng penyangga ≥150 m",{fs:10,c:V("muted"),w:600});
 // sawah
-const saw=rectM(base,-40,-180,250,120,`fill:${V("sawah")};opacity:.8`);
+const saw=rectM(base,60,-190,300,160,`fill:${V("sawah")};opacity:.8`);
 const sawG=el("g",{css:`stroke:${V("bg")};stroke-width:1;opacity:.6`},base);
-for(let x=-150;x<=80;x+=26)el("line",{x1:X(x),y1:Y(-120),x2:X(x),y2:Y(-240)},sawG);
-for(let y=-140;y>=-230;y-=22)el("line",{x1:X(-165),y1:Y(y),x2:X(85),y2:Y(y)},sawG);
-lbl(base,-40,-175,"SAWAH",{fs:14,c:"#fff",w:700});
+for(let x=-80;x<=200;x+=28)el("line",{x1:X(x),y1:Y(-110),x2:X(x),y2:Y(-270)},sawG);
+for(let y=-132;y>=-260;y-=24)el("line",{x1:X(-90),y1:Y(y),x2:X(210),y2:Y(y)},sawG);
+rectM(base,160,-135,30,18,`fill:${V("sawah")};stroke:#fff;stroke-width:1`);lbl(base,160,-152,"lapangan bola",{fs:8.5,c:"#fff",w:500});
+lbl(base,60,-195,"SAWAH",{fs:14,c:"#fff",w:700});
 // gubuk + batu (perlindungan skala manusia)
-[[-120,-150],[30,-205],[-60,-225]].forEach(p=>el("rect",{x:X(p[0])-3,y:Y(p[1])-3,width:6,height:6,css:`fill:${V("desa")};stroke:${V("ink")};stroke-width:.6`},base));
+[[0,-150],[120,-215],[40,-245]].forEach(p=>el("rect",{x:X(p[0])-3,y:Y(p[1])-3,width:6,height:6,css:`fill:${V("desa")};stroke:${V("ink")};stroke-width:.6`},base));
 // desa
-rectM(base,-60,-320,220,140,`fill:${V("desa")};opacity:.45`);
-lbl(base,-150,-262,"DESA",{fs:14,w:700,a:"start"});
+rectM(base,-170,-260,170,130,`fill:${V("desa")};opacity:.45`);
+lbl(base,-250,-206,"DESA",{fs:14,w:700,a:"start"});
 const desa=el("g",{},base);
-const bld=[["D1",-140,-288,10,8],["D2",-108,-300,10,8],["D3",-62,-276,10,8],["D4",-22,-300,10,8],["D5",-92,-342,6,5],["D6",2,-338,6,5],["D7",22,-276,5,5],["D8",-132,-362,4,4]];
+const bld=[["D1",-232,-230,10,8],["D2",-207,-241,10,8],["D3",-172,-219,10,8],["D4",-141,-241,10,8],["D5",-195,-280,6,5],["D6",-122,-277,6,5],["D7",-107,-219,5,5],["D8",-225,-299,4,4]];
 bld.forEach(b=>{rectM(desa,b[1],b[2],b[3]*1.6,b[4]*1.6,`fill:${V("tanah")};stroke:${V("ink")};stroke-width:.8`);lbl(desa,b[1],b[2]-14,b[0],{fs:9,w:700});});
-[["D9",-160,-325],["D10",32,-368]].forEach(b=>{rectM(desa,b[1],b[2],16,13,`fill:none;stroke:${V("ink")};stroke-width:.8;stroke-dasharray:3 2`);lbl(desa,b[1],b[2]-15,b[0],{fs:9,c:V("muted")});});
+[["D9",-247,-265],["D10",-99,-305]].forEach(b=>{rectM(desa,b[1],b[2],16,13,`fill:none;stroke:${V("ink")};stroke-width:.8;stroke-dasharray:3 2`);lbl(desa,b[1],b[2]-15,b[0],{fs:9,c:V("muted")});});
 // musala + lapangan
-rectM(desa,-45,-372,14,14,`fill:${V("ink")}`);lbl(desa,-45,-390,"musala",{fs:9.5});
-rectM(desa,-2,-374,44,22,`fill:${V("sawah")};opacity:.55;stroke:${V("ink")};stroke-width:.6`);lbl(desa,-2,-377,"lapangan",{fs:9,w:600});
+rectM(desa,-158,-308,14,14,`fill:${V("ink")}`);lbl(desa,-158,-326,"musala",{fs:9.5});
+rectM(desa,-125,-310,36,20,`fill:${V("sawah")};opacity:.55;stroke:${V("ink")};stroke-width:.6`);lbl(desa,-125,-313,"lapangan",{fs:9,w:600});
 // tiang listrik
-for(let x=-160;x<=50;x+=30)el("circle",{cx:X(x),cy:Y(-252),r:1.6,css:`fill:${V("ink")}`},desa);
+for(let x=-245;x<=-95;x+=25)el("circle",{cx:X(x),cy:Y(-200),r:1.6,css:`fill:${V("ink")}`},desa);
 
 // jalan akses + jalan proyek
 pathM(base,[[440,-48],[340,-32],[250,-28],[175,-22],[140,-20]],`fill:none;stroke:${V("andesit")};stroke-width:8;stroke-linecap:round;opacity:.9`);
@@ -256,12 +257,12 @@ lbl(base,12,98,"tangga +28→+35",{fs:9,a:"start",c:V("ink"),w:500});
 
 // ----- lapisan: arena -----
 const arena=el("g",{id:"g-arena"},map);
-el("rect",{x:X(-190),y:Y(225),width:450,height:615,rx:6,css:`fill:none;stroke:${V("kala")};stroke-width:2;stroke-dasharray:8 5`},arena);
-lbl(arena,255,212,"BATAS ARENA ±450 × 550–600 m",{fs:10,c:V("kala"),a:"end",w:700});
-rectM(arena,-40,-180,250,120,`fill:${V("safe")};opacity:.35`);
-lbl(arena,-40,-200,"ZONA AMAN · tanpa penalti",{fs:10.5,c:"#fff",w:700});
-rectM(arena,-60,-320,220,140,`fill:${V("kala")};opacity:.22`);
-lbl(arena,-60,-252,"PENALTI METER · gedung & warga",{fs:10,c:V("kala"),w:700});
+el("rect",{x:X(-268),y:Y(225),width:530,height:555,rx:6,css:`fill:none;stroke:${V("kala")};stroke-width:2;stroke-dasharray:8 5`},arena);
+lbl(arena,255,212,"BATAS ARENA ±530 × 550 m",{fs:10,c:V("kala"),a:"end",w:700});
+rectM(arena,60,-190,300,160,`fill:${V("safe")};opacity:.35`);
+lbl(arena,60,-212,"ZONA AMAN · tanpa penalti",{fs:10.5,c:"#fff",w:700});
+rectM(arena,-170,-260,170,130,`fill:${V("kala")};opacity:.22`);
+lbl(arena,-170,-334,"PENALTI METER · gedung & warga",{fs:10,c:V("kala"),w:700});
 el("ellipse",{cx:X(0),cy:Y(0),rx:72,ry:62,css:`fill:none;stroke:${V("kala")};stroke-width:1.5`},arena);
 el("circle",{cx:X(0),cy:Y(0),r:9,class:"pulse",css:`fill:${V("kala")}`},arena);
 lbl(arena,40,-30,"Jerangkong bangkit (31 m)",{fs:10,c:V("kala"),a:"start",w:700});
@@ -270,9 +271,10 @@ lbl(arena,-14,140,"Jayadwara (45 m)",{fs:10,c:"#fff",a:"end",w:700});
 // fase
 el("path",{d:`M${X(-70)} ${Y(110)} Q${X(-110)} ${Y(30)} ${X(-80)} ${Y(-55)}`,css:`fill:none;stroke:${V("ink")};stroke-width:1.2;stroke-dasharray:4 3`},arena);
 lbl(arena,-125,60,"FASE 1",{fs:11,w:800});lbl(arena,-125,47,"galian + plato",{fs:9,w:500});
-el("path",{d:`M${X(30)} ${Y(-70)} Q${X(40)} ${Y(-170)} ${X(-30)} ${Y(-250)}`,css:`fill:none;stroke:${V("kala")};stroke-width:2;marker-end:url(#arrK)`},arena);
-lbl(arena,125,-150,"FASE 2",{fs:11,w:800,c:V("kala")});lbl(arena,125,-163,"turun ke desa, lempar puing",{fs:9,w:500});
-lbl(arena,-45,-404,"warga lari ke lapangan →",{fs:9,c:V("muted"),w:500});
+el("path",{d:`M${X(-30)} ${Y(-65)} Q${X(-80)} ${Y(-120)} ${X(-130)} ${Y(-190)}`,css:`fill:none;stroke:${V("kala")};stroke-width:2;marker-end:url(#arrK)`},arena);
+lbl(arena,-60,-150,"FASE 2",{fs:11,w:800,c:V("kala"),a:"start"});lbl(arena,-60,-163,"turun ke desa (kiri) atau didorong ke sawah (kanan)",{fs:9,w:500,a:"start"});
+el("path",{d:`M${X(30)} ${Y(-65)} Q${X(50)} ${Y(-110)} ${X(80)} ${Y(-160)}`,css:`fill:none;stroke:${V("safe")};stroke-width:2;stroke-dasharray:6 4;marker-end:url(#arr)`},arena);
+lbl(arena,-170,-350,"warga lari ke lapangan dekat musala",{fs:9,c:V("muted"),w:500});
 
 // ----- lapisan: jalur -----
 const route=el("g",{id:"g-route"},map);
@@ -340,16 +342,16 @@ function drawProf(ex){
   el("path",{d:d2,css:`fill:none;stroke:${V("ink")};stroke-width:1.2`},prof);
   // pewarnaan zona di permukaan
   const band=(a,b,c)=>el("rect",{x:px(a),y:B+2,width:px(b)-px(a),height:8,css:`fill:${V(c)}`},prof);
-  band(-400,-250,"desa");band(-250,-120,"sawah");band(-120,-60,"tanah");band(-60,60,"tanah");band(60,112.5,"desa");band(112.5,225,"andesit");band(225,275,"hutan");
+  band(-400,-270,"sawah");band(-270,-110,"sawah");band(-110,-60,"tanah");band(-60,60,"tanah");band(60,112.5,"desa");band(112.5,225,"andesit");band(225,275,"hutan");
   const zl=(y,t)=>el("text",{x:px(y),y:B+24,"font-size":10,"text-anchor":"middle",css:`fill:${V("muted")};font-weight:600`,text:t},prof);
-  zl(-325,"DESA");zl(-185,"SAWAH");zl(-90,"LERENG");zl(0,"GALIAN");zl(86,"TANGGA");zl(168,"PLATO CANDI");zl(250,"HUTAN");
+  zl(-335,"SAWAH LANJUT");zl(-190,"SAWAH");zl(-85,"LERENG");zl(0,"GALIAN");zl(86,"TANGGA");zl(168,"PLATO CANDI");zl(250,"HUTAN");
   // figur
   const fig=(y,h,c,label,o={})=>{const g=el("g",{},prof);const z0=elev(y),bx=px(y),by=pz(z0),top=pz(z0+h);const w=Math.max(1.2,(o.w||h*.28)*sx);
     if(o.kind==="bld"){el("rect",{x:bx-w/2,y:top,width:w,height:by-top,css:`fill:${V(c)};stroke:${V("ink")};stroke-width:.6`},g);}
     else{const hr=Math.max(.8,(by-top)*.09);el("rect",{x:bx-w/2,y:top+hr*2,width:w,height:by-top-hr*2,rx:Math.min(w/2,3),css:`fill:${V(c)}`},g);el("circle",{cx:bx,cy:top+hr,r:hr,css:`fill:${V(c)}`},g);}
     if(label){const ly=Math.min(top-6,by-14);el("line",{x1:bx,y1:ly+2,x2:bx,y2:top,css:`stroke:${V("muted")};stroke-width:.5`},g);el("text",{x:bx+(o.dx||0),y:ly,"font-size":10,"text-anchor":o.a||"middle",css:`fill:${V(o.lc||"ink")};font-weight:700`,text:label},g);}
     return g;};
-  fig(-330,6,"desa","rumah 6 m",{kind:"bld",w:10});
+  fig(-330,6,"desa","rumah 6 m (desa, diproyeksikan)",{kind:"bld",w:10});
   fig(-276,15,"andesit","menara air 15 m",{kind:"bld",w:4,a:"start",dx:4});
   fig(0,31,"desa","Jerangkong 31 m",{w:7,lc:"kala"});
   fig(195,20,"ink","candi induk 20 m",{kind:"bld",w:18});
@@ -359,7 +361,7 @@ function drawProf(ex){
   el("text",{x:px(70)+6,y:ay-4,"font-size":10,css:`fill:${V("ink")};font-weight:700`,text:"Aksa 1,75 m"},prof);
   el("circle",{cx:px(70),cy:ay,r:3.2,css:`fill:none;stroke:${V("emas")};stroke-width:1.4`},prof);
   // kemiringan
-  el("text",{x:px(-200),y:pz(40)<20?28:pz(40),"font-size":10,"text-anchor":"middle",css:`fill:${V("muted")};font-family:var(--f-mono)`,text:"desa → plato: ±35 m dalam ±300 m (±7°)"},prof);
+  el("text",{x:px(-200),y:pz(40)<20?28:pz(40),"font-size":10,"text-anchor":"middle",css:`fill:${V("muted")};font-family:var(--f-mono)`,text:"sawah → plato: ±35 m dalam ±300 m (±7°)"},prof);
   el("text",{x:R,y:16,"font-size":10,"text-anchor":"end",css:`fill:${V("muted")};font-family:var(--f-mono)`,text:ex===1?"skala asli (1:1)":"vertikal dibesarkan ×3"},prof);
   el("text",{x:L,y:16,"font-size":10,css:`fill:${V("muted")};font-family:var(--f-mono)`,text:"← selatan"},prof);
   el("text",{x:R-120,y:B+24,"font-size":10,"text-anchor":"end",css:`fill:${V("muted")};font-family:var(--f-mono)`,text:""},prof);
