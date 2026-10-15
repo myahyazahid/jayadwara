@@ -13,9 +13,9 @@ import sys
 
 SANDBOX = ("Content/Hermes/", "Source/Jayadwara/Hermes/", "Hermes/")
 INSTRUKSI = ("Hermes/aksa_hermes.md", "Hermes/panduan_model_3d.md", "Hermes/panduan_kerja_claude.md")   # di dalam sandbox tapi milik Claude: read-only
-# instruksi khusus model lain dari Claude juga read-only: Hermes/<model>_hermes.md
+# instruksi khusus model lain dari Claude juga read-only: Hermes/<model>_hermes.md, dan semua skill di Hermes/skills/
 # aset rawan: kalau berubah, hampir pasti merusak proyek (insiden SK_Mannequin 13-14 Okt 2026, docs/25 R7)
-RAWAN = ("Hermes/aksa_hermes.md", "Hermes/panduan_model_3d.md", "Hermes/panduan_kerja_claude.md", "Content/Characters/Mannequins/", "Content/Jayadwara/", "Config/", "Jayadwara.uproject", "Source/Jayadwara/",
+RAWAN = ("Hermes/skills/", "Hermes/aksa_hermes.md", "Hermes/panduan_model_3d.md", "Hermes/panduan_kerja_claude.md", "Content/Characters/Mannequins/", "Content/Jayadwara/", "Config/", "Jayadwara.uproject", "Source/Jayadwara/",
          "Source/JayadwaraEditor/", "Art/Blender/", "Art/Export/", "docs/", ".gitattributes", ".gitignore")
 
 
@@ -47,7 +47,8 @@ def main():
     for p in git("ls-files", "--others", "--exclude-standard"):
         changed.setdefault(p, "untracked")
 
-    luar = sorted((p, s) for p, s in changed.items() if not p.startswith(SANDBOX) or p in INSTRUKSI or (p.startswith("Hermes/") and p.count("/") == 1 and p.endswith("_hermes.md")))
+    luar = sorted((p, s) for p, s in changed.items() if not p.startswith(SANDBOX) or p in INSTRUKSI or p.startswith("Hermes/skills/")
+                  or (p.startswith("Hermes/") and p.count("/") == 1 and p.endswith("_hermes.md")))
     print(f"branch {branch}, base {a.base}: {len(changed)} file berubah, {len(luar)} di luar sandbox")
     for p, s in luar:
         tanda = "  !! RAWAN" if p.startswith(RAWAN) else ""

@@ -6,6 +6,8 @@ Repo ini adalah game **JAYADWARA: Guardian of the Seven Gates** (Unreal Engine *
 
 Kalau ragu sebuah tindakan melanggar aturan ini, **jangan lakukan**. Tulis di laporan sebagai usulan.
 
+**Skill Hermes** ada di [`Hermes/skills/`](Hermes/skills/README.md) (format `SKILL.md`): `jd-mulai-tugas` (awal SETIAP tugas), `jd-perbaiki-model`, `jd-audit-model`, `jd-blender-skrip`, `jd-unreal-sandbox`, `jd-selesai-tugas` (sebelum commit/lapor). Kalau skill tidak terpasang otomatis, baca file `SKILL.md`-nya langsung sesuai situasi.
+
 **Cara kerja & perbaikan model** ("lengan robek", "ketiak bolong", dll.): baca dan ikuti [`Hermes/panduan_kerja_claude.md`](Hermes/panduan_kerja_claude.md) **sebelum** menyentuh file. Perbaikan model **wajib** lewat `Art/Scripts/diagnosa_mesh.py` → `Art/Scripts/perbaiki_mesh.py` → diagnosa ulang `--sebelum`, bukan edit manual.
 
 **Tugas model 3D apa pun** (NPC, monster, boss, varian): ikuti [`Hermes/panduan_model_3d.md`](Hermes/panduan_model_3d.md). Kalau ada instruksi khusus model `Hermes/<model>_hermes.md` (mis. [`aksa_hermes.md`](Hermes/aksa_hermes.md) untuk Aksa2), ikuti itu langkah demi langkah. Aturan di file ini menang atas keduanya.
