@@ -1,6 +1,6 @@
 # 30 — Desain Level Ep 1: `Ep01_LawangSapta`
 
-> **Status: USULAN v0.1 (15 Okt 2026)**, menunggu persetujuan developer. Rincian dari pola di [28](28-struktur-level-episode.md#ep-1--ep01_lawangsapta--sore--senja-merah--awal-malam).
+> **Status: DISETUJUI v0.2 (15 Okt 2026)**: keputusan E1–E7 dijawab developer (semua sesuai usulan, bagian 9). Blockout 3D Blender didokumentasikan dulu, eksekusi nanti (bagian 10). Rincian dari pola di [28](28-struktur-level-episode.md#ep-1--ep01_lawangsapta--sore--senja-merah--awal-malam).
 > Sumber: [17](17-skenario-arc-1.md#episode-1--gerbang-yang-retak) (adegan), [18](18-kebutuhan-episode-1.md#c-lingkungan--level) (zona & aset), [11](11-vertical-slice-spec.md) (scope), [23](23-rencana-fase-1.md) (angka combat & level uji). Kalau bertentangan, dokumen sumber yang berlaku.
 
 **Visual:** denah berlapis, potongan bukit berskala, perbandingan tinggi, dan linimasa cahaya ada di [`visual/ep01-lawang-sapta.html`](visual/ep01-lawang-sapta.html) (buka di browser).
@@ -224,9 +224,11 @@ Greybox dibuat dengan skrip Python (`Tools/ue_greybox_ep01.py`, belum dibuat) su
 
 ---
 
-## 9. Keputusan yang perlu dijawab developer
+## 9. Keputusan (dijawab developer 15 Okt 2026)
 
-| # | Pertanyaan | Usulan Claude |
+Semua keputusan disetujui sesuai usulan Claude.
+
+| # | Pertanyaan | Keputusan ✅ |
 |---|---|---|
 | **E1** | Tata letak bukit: candi di puncak, galian di lereng, desa di kaki bukit, jalan dari timur? | **Ya**, sesuai adegan 3 dan 6 |
 | **E2** | Arah gelombang: pemain terdesak **naik** dari galian ke halaman candi? | **Ya**. Cocok dengan dialog "mobilnya di belakang mereka" dan berakhir di arca untuk adegan 6 |
@@ -235,3 +237,49 @@ Greybox dibuat dengan skrip Python (`Tools/ue_greybox_ep01.py`, belum dibuat) su
 | **E5** | Jalan proyek terpisah untuk truk derek (terlihat dari gerbang)? | **Ya**, supaya wide shot adegan 6 terbaca |
 | **E6** | Pilar tol setengah jadi di latar: hanya latar, atau bisa dihancurkan tanpa penalti? | **Latar saja** di vertical slice; versi bisa hancur → backlog |
 | **E7** | Jumlah gedung hancur 8 atau 10? | **8**, naik ke 10 kalau uji FPS Iterasi 7 lulus |
+
+---
+
+## 10. Rencana blockout 3D di Blender (didokumentasikan 15 Okt 2026, eksekusi nanti)
+
+Tujuan: melihat bukit, galian, candi, dan desa dalam 3D **sebelum** greybox UE, terutama rasa skala dan garis pandang. Developer memilih "dokumentasi dulu, eksekusi nanti", dengan opsi teknis diserahkan ke Claude. Pilihan Claude:
+
+### 10.1 Satu sumber data untuk Blender dan UE
+- **`Art/Level/ep01_layout.json`** menjadi sumber kebenaran tata letak: medan (profil ketinggian bagian 2), semua objek dengan posisi/ukuran/rotasi dari tabel koordinat, titik gameplay (START, ★1–★3, W1–W3, checkpoint, titik bangkit boss, titik transformasi, lapangan), dan kamera.
+- Skrip Blender dan skrip greybox UE (`Tools/ue_greybox_ep01.py`, bagian 8) **sama-sama membaca file ini**, jadi tata letak cukup diubah di satu tempat dan kedua alat tidak pernah berbeda.
+- Satuan: meter di JSON; Blender 1 unit = 1 m; UE dikali 100 (cm). Sumbu: X timur, Y utara, Z atas, titik nol tengah dasar galian (sama dengan bagian 2).
+
+### 10.2 Skrip dan file
+| File | Isi |
+|---|---|
+| `Art/Level/ep01_layout.json` | Data tata letak (10.1) |
+| `Art/Scripts/lv_ep01_blockout.py` | Membangun scene dari JSON; bisa lewat MCP Blender atau headless (`blender --background --factory-startup --python ...`) |
+| `Art/Blender/level/ep01_blockout_v01.blend` | Hasil scene (LFS) |
+| `docs/visual/ep01_blockout_C1.png` … `C6.png` | Render kamera (LFS), ditautkan dari dokumen ini |
+
+### 10.3 Isi scene
+- **Medan:** grid ±800 × 800 m (sel 5 m) yang ditinggikan mengikuti profil bagian 2; galian dibuat sebagai 4 undakan tegas (2,5 m) dan dasar datar; tangga sebagai anak tangga kotak.
+- **Bangunan kotak** dengan ukuran tabel bagian 4: candi induk (bentuk bertingkat sederhana), gerbang, alas + arca, rumah D1–D4, warung D5–D6, menara air D7, gardu D8, cadangan D9–D10 (wireframe), musala, pos mandor, alat berat, truk derek.
+- **Figur berskala:** pakai model asli dari `Art/Export/` (`SK_Aksa2`, `SK_Jayadwara2`, Jerangkong) di posisi adegan; kalau gagal impor, kapsul dengan tinggi yang sama (1,75 / 31 / 45 m).
+- **Penanda gameplay:** bola warna untuk ★, W, checkpoint; garis putus untuk jalur Aksa dan garis pandang (warna sama dengan [visual](visual/ep01-lawang-sapta.html)).
+- **Material datar** (warna token visual: andesit, tanah merah, sawah, desa, hutan) supaya terbaca sebagai blockout, bukan art final.
+- **Latar:** bukit utara, jurang barat, pilar tol timur, sawah melebar ke selatan sebagai kotak/bidang sederhana.
+
+### 10.4 Kamera render (Eevee, 1600 × 900)
+| # | Kamera | Posisi / arah | Yang dicek |
+|---|---|---|---|
+| C1 | Mata Aksa di START | (140, −20, +25 m) tinggi 1,6 m, ke gerbang | Gerbang terbaca sebagai landmark (adegan 3) |
+| C2 | Bibir galian | (64, 14, +25 m) tinggi 1,6 m, ke dasar galian | Jalur U dan kedalaman undakan terbaca |
+| C3 | Gerbang ke timur | (0, 125, +35 m) tinggi 1,6 m, ke jalan proyek | Wide shot adegan 6: Jerangkong + truk di belakangnya |
+| C4 | Mata Jayadwara | (0, 138, +35 m) tinggi 42 m, ke selatan | Desa dan sawah dari 45 m: skala dan pilihan sawah vs desa |
+| C5 | Tampak atas ortografis | di atas (0, −80) | Cocok dengan denah bagian 2 |
+| C6 | Sinematik sawah | (−60, −160) tinggi 3 m, menghadap utara | Dua raksasa di siluet senja (adegan 7) |
+
+- Pencahayaan: **sore** (matahari dari barat, elevasi ±12°) untuk C1–C3 dan C5; **senja merah** untuk C4 dan C6.
+
+### 10.5 Kapan dan siapa
+- **Kapan:** saat developer siap membuka Blender. Tidak mengganggu urutan Fase 1; boleh dikerjakan kapan saja sebelum greybox UE.
+- **Claude:** menulis JSON + skrip, menjalankan lewat MCP Blender (scene baru, file developer tidak disentuh), render C1–C6, commit.
+- **Developer:** membuka Blender, menilai render, mencatat koreksi (ukuran arena, posisi, garis pandang) → JSON diperbarui → render ulang.
+- **Selesai jika:** keenam render ada di `docs/visual/`, developer setuju skala dan garis pandangnya, dan JSON siap dipakai `Tools/ue_greybox_ep01.py`.
+
