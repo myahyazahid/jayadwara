@@ -29,7 +29,7 @@ if mesh.data.materials:
     mesh.data.materials[0].name = "M_Aksa2_Body"
 
 # Ekspor FBX
-BAKE_CM = 100.0
+BAKE_CM = 100.0  # kontrak docs/19 §6.4: data dalam cm, skala di-apply (sama dengan aksa_14_export.py)
 ARM_EXPORT_NAME = "Armature"
 MESH_NAME = "SK_Aksa2"
 
