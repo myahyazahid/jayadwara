@@ -40,7 +40,7 @@ Tulis di laporan, isi dari dokumen, bukan dari ingatan:
 - Gaya: **realistis** (docs/README, 14 Okt 2026). Baca `panduan_kerja_claude.md` §8: rambut kartu, toleransi 3, bayangan terpanggang, seam normal map, wajah/MetaHuman
 - Slot material:
 - Socket: (manusia: 7 socket SK_Aksa_sockets.json; monster: titik pukul + titik lemah + VFX, sebut nama & tulang)
-- Ekspresi wajah: (manusia yang tampil di dialog/potret: 8 morph target dengan nama sama dengan `SK_Aksa`, cara di `aksa_hermes.md` H3b; warga/minion: tanpa; monster: sebut kalau mekanik butuh, mis. mulut membuka saat serangan)
+- Ekspresi wajah: **tidak dikerjakan Hermes** (keputusan developer 15 Okt 2026). Manusia yang butuh ekspresi: Claude yang menambahkan morph target setelah serah terima; Hermes menyerahkan mesh tanpa shape key dan tanpa geometri wajah tambahan. Monster: sebut di laporan kalau mekanik butuh (mis. mulut membuka saat serangan), jangan dibuat.
 - Checklist IP/budaya: (docs/01 wajib dihindari, docs/06 sensitivitas; Pocong ⚠️: jangan mengolok-olok pemakaman)
 - Nama: objek Blender <PREFIX>_, aset SK_<Nama>, UE /Game/Hermes/<Nama>/
 ```

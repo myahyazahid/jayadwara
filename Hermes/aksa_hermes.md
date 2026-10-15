@@ -11,7 +11,7 @@
 
 **Aksa2** = model Aksa (wujud manusia) versi baru dari model **Tripo** buatan developer, menggantikan `SK_Aksa` (model skrip, docs/19) **kalau** developer setuju setelah mencoba. Pola kerjanya sama dengan Jayadwara2 (docs/25), dengan satu beda besar: Aksa2 memakai **skeleton Mannequin asli tanpa diubah** (keputusan A1 docs/19), jadi semua animasi Manny langsung jalan.
 
-**Gaya realistis** (docs/README, 14 Okt 2026): Aksa2 dari Tripo adalah model realistis, sedangkan `SK_Aksa` stylized. Baca `panduan_kerja_claude.md` §8: diagnosa/audit dengan `--abaikan-material` untuk slot rambut/mata, `banding_karakter.py --toleransi 3`, cek bayangan terpanggang & seam normal map, **Wajah (keputusan developer 15 Okt 2026):** wajah Tripo + **8 morph target sederhana** dengan nama sama seperti `SK_Aksa` (iterasi H3b). Tanpa MetaHuman, tanpa rig wajah penuh / lip-sync.
+**Gaya realistis** (docs/README, 14 Okt 2026): Aksa2 dari Tripo adalah model realistis, sedangkan `SK_Aksa` stylized. Baca `panduan_kerja_claude.md` §8: diagnosa/audit dengan `--abaikan-material` untuk slot rambut/mata, `banding_karakter.py --toleransi 3`, cek bayangan terpanggang & seam normal map, **Wajah:** wajah Tripo + 8 morph target (keputusan developer 15 Okt 2026), tetapi **ekspresi wajah bukan tugas Hermes** (keputusan developer 15 Okt 2026, setelah percobaan H3b gagal): dikerjakan Claude. Hermes menyerahkan mesh **tanpa shape key** dan tidak menambah geometri wajah (kelopak, bola mata, celah mulut). Lihat H3b.
 
 Model **lama** (`SK_Aksa`) adalah **pembanding wajib** di setiap langkah: Aksa2 hanya dianggap maju kalau tidak lebih buruk dari model lama di angka audit, dan lebih baik secara visual.
 
@@ -139,28 +139,16 @@ Bagian paling sering salah. Kerjakan pelan.
 - Gagal 3× → berhenti, laporkan (AGENTS.md §0.5).
 - **GATE:** developer melihat `banding_pose.png` dan bilang lanjut.
 
-### H3b — Ekspresi wajah: 8 morph target · **GATE**
-Keputusan developer 15 Okt 2026 (docs/08 #5, docs/19 A4): wajah Tripo tetap dipakai, ditambah 8 ekspresi sederhana untuk kedip, potret dialog, dan reaksi. Nama **wajib sama** dengan `SK_Aksa`: `ak_blink_L`, `ak_blink_R`, `ak_smile`, `ak_angry`, `ak_mouth_open`, `ak_brow_up`, `ak_wince`, `ak_sad` (dipakai skrip potret & ABP).
-1. **Cek geometri dulu (spike, belum mengubah apa pun).** Render close-up kepala depan, samping, dan 3/4 dari file H3, lalu jawab di laporan:
-   - Apakah ada **kelopak mata** yang bisa turun menutup mata, atau mata hanya dilukis di tekstur pada permukaan rata?
-   - Apakah **bola mata** objek/pulau terpisah?
-   - Apakah **mulut** punya celah antar bibir, atau bibir atas-bawah menyatu jadi satu permukaan?
-   - Berapa vertex di wilayah kepala, dan apakah topologi di sekitar mata dan mulut cukup rapat (bukan segitiga besar)?
-   Kalau mata hanya lukisan atau mulut menyatu: **berhenti, GATE**. Tulis temuan dan tunggu developer (pilihan: generate ulang kepala di Tripo dengan mata/mulut terbuka, sculpt manual oleh developer, atau kedip lewat tekstur). Jangan mengarang geometri kelopak.
-2. **Metode utama: transfer dari `SK_Aksa`.** Kepala `SK_Aksa` sudah punya 8 shape key yang lulus (docs/19 Iterasi 4).
-   - Impor `Art/Export/SK_Aksa.fbx` ke file kerja, ambil hanya mesh-nya (objek sumber), sejajarkan ke kepala Aksa2 dengan **satu skala seragam + geser** berdasarkan landmark (sudut mata kiri-kanan, ujung hidung, sudut mulut, dagu). Tulis jarak tiap landmark sesudah penyejajaran (target ≤ 5 mm).
-   - Buat grup vertex `AK2_Wajah` (wajah depan di atas dagu, tanpa rambut & leher).
-   - Pasang modifier **Surface Deform** di mesh Aksa2: target = mesh `SK_Aksa`, vertex group = `AK2_Wajah`, lalu **Bind**.
-   - Untuk tiap ekspresi: set nilai shape key itu di sumber = 1, jalankan `bpy.ops.object.modifier_apply_as_shapekey(keep_modifier=True, modifier=<nama>)`, ganti nama shape key baru dengan nama ekspresinya, lalu kembalikan sumber ke 0.
-   - Hapus modifier dan objek sumber. Simpan ke `aksa2_vNN_morph.blend`.
-   - Metode ini belum pernah diuji pada wajah Tripo. Kalau hasilnya cacat (wajah berpindah, kelopak menembus bola mata, bibir robek), catat angka & gambar lalu GATE; jangan menambal manual lebih dari 3 putaran.
-3. **Export** dengan shape key ikut (kontrak docs/19 §6.4, `use_shape_keys`; mesh kepala jadi objek aktif saat join supaya shape key tidak hilang, docs/19 Iterasi 4).
-4. **Cek**, berurutan:
-   - `validate_aksa.py ... --require-morph 8`: semua PASS. Validator memastikan ada 8 morph, tiap morph benar-benar menggeser vertex, dan **tidak ada vertex di bawah leher (z < 1,45 m) yang ikut bergeser**.
-   - Lembar ekspresi: salin `Art/Scripts/aksa_41_render_morphs.py` ke `Hermes/Tools/aksa2_41_render_morphs.py` (ganti nama objek & path), render 8 ekspresi + netral, dan letakkan berdampingan dengan `Art/Export/_aksa_morphs.png` (lama).
-   - Deskripsikan tiap ekspresi: kedip menutup penuh tanpa bola mata menembus kelopak; mulut terbuka tanpa robek/lubang menembus kepala; senyum/marah/sedih terbaca jelas; kiri-kanan simetris kecuali kedip satu sisi.
-- **Lulus H3b:** validator PASS dengan `--require-morph 8` + lembar ekspresi tanpa cacat di deskripsi.
-- **GATE:** developer menilai lembar ekspresi.
+### H3b — Ekspresi wajah: **DIBATALKAN untuk Hermes, rollback**
+Keputusan developer 15 Okt 2026: percobaan transfer 8 morph dari `SK_Aksa` lewat Surface Deform gagal (poni ikut tertarik ke wajah, kedip tidak terlihat karena mata hanya lukisan tekstur, mulut menyatu, dan di UE muncul "paku" dari dahi ke dada + bola mata lepas di bahu/dada = vertex tanpa bobot & objek tidak ter-parent). **Ekspresi wajah dikerjakan Claude**, bukan Hermes.
+
+Yang dilakukan Hermes:
+1. **Rollback** ke file H3 terakhir yang lulus (sebelum morph). Jangan menambal versi morph.
+2. Pastikan di file itu: **tidak ada shape key**, tidak ada objek atau geometri wajah tambahan (bola mata, kelopak, gigi), **0 vertex tanpa bobot**, dan semua objek mesh ter-parent ke `Armature`. Tulis angkanya di laporan (`diagnosa_mesh.py`).
+3. Export ulang LOD0 dan jalankan cek H3 (`validate_aksa.py` **tanpa** `--require-morph`, `audit_karakter.py`, `banding_karakter.py`). Hasilnya harus sama dengan H3 yang sudah lulus.
+4. Tulis di laporan, **hanya sebagai informasi untuk Claude** (jangan mengubah mesh): apakah ada kelopak mata sungguhan atau mata hanya lukisan, apakah bola mata pulau terpisah, apakah mulut punya celah antar bibir, dan jumlah vertex di kepala. Sertakan render close-up kepala depan, samping, 3/4.
+5. Hapus file/skrip morph dari sandbox (`aksa2_vNN_morph.blend`, `aksa2_41_render_morphs.py`) atau pindahkan ke `Hermes/Arsip/`.
+- **Lulus H3b:** poin 2 dan 3 terpenuhi; lanjut ke H4.
 
 ### H4 — Tekstur & material
 1. Atlas Tripo dipertahankan. Perbaiki: warna di zona salah, emas pucat/silver → emas `#D6A33A` matte (D8), biru menyala → hilang (IP). Turunkan `T_Aksa2_N`, `T_Aksa2_ORM` (R=AO, G=roughness, B=metallic; emas metallic rendah, D8) dan `T_Aksa2_Mask` bila perlu (docs/22 §2). Simpan ke `Hermes/Art/aksa2/Export/Textures/`.
@@ -179,7 +167,7 @@ Buka editor dari `WORKTREE\Jayadwara.uproject`. Semua skrip lewat `python Tools/
    - `EditorAssetLibrary.duplicate_asset("/Game/Characters/Mannequins/Meshes/SK_Mannequin", "/Game/Hermes/Aksa2/Rig/SKEL_Aksa2")`;
    - cetak jumlah tulang salinan (`AnimPoseExtensions.get_bone_names(get_reference_pose(skel))`), harus ≥ 161;
    - di `SKEL_Aksa2`, tambahkan `SK_Mannequin` ke **Compatible Skeletons** (supaya animasi Manny bisa diputar). Simpan **hanya** `SKEL_Aksa2`.
-2. Impor `SK_Aksa2.fbx` + LOD ke `/Game/Hermes/Aksa2/Mesh/` dengan skeleton `SKEL_Aksa2` dan **`import_morph_targets` aktif** (cek 8 morph ada di aset) (pola impor `Tools/ue_import_aksa.py`, semua tujuan diganti ke `/Game/Hermes/Aksa2/`). Tekstur & `M_Aksa2_Master` + `MI_Aksa2_*` ke folder sandbox. Socket dari JSON.
+2. Impor `SK_Aksa2.fbx` + LOD ke `/Game/Hermes/Aksa2/Mesh/` dengan skeleton `SKEL_Aksa2` (mesh **tanpa morph target**; morph ditambahkan Claude kemudian) (pola impor `Tools/ue_import_aksa.py`, semua tujuan diganti ke `/Game/Hermes/Aksa2/`). Tekstur & `M_Aksa2_Master` + `MI_Aksa2_*` ke folder sandbox. Socket dari JSON.
 3. **Bukti tidak merusak**: setelah impor, jalankan cek ini dan tempel hasilnya:
    - `git status --porcelain` → tidak ada `.uasset` di luar `Content/Hermes/`;
    - `python -I Tools/hermes_cek_sandbox.py` → LULUS.
