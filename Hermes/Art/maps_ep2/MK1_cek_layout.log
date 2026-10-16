@@ -1,0 +1,197 @@
+========================================================================================================
+TABEL OBJEK (145) - id | jenis | pos (x,y) | alas (m) | selisih tanah di tapak (m)
+========================================================================================================
+KAMPUNG_PosRT            kotak    (-34,91)             7.85     0.08
+KAMPUNG_Musala           kotak    (78,65)              7.22     0.29
+KAMPUNG_RumahKemalingan  rumah    (-170,78)            7.54     0.16
+KAMPUNG_WarungCCTV       kotak    (143,110)            8.23     0.10
+KAMPUNG_TiangCCTV        kotak    (143,114)            8.36     0.01
+KAMPUNG_GangBuntu_Beringin kotak    (-222,-22)           5.55     0.05
+KAMPUNG_GangBuntu_Tajuk  kerucut  (-222,-22)          12.39     0.37  zdr=7.0
+KAMPUNG_Sesajen          kotak    (-218,-24)           5.52     0.02
+BLOK1_Rumah1             rumah    (-233.5,-43)         5.05     0.18
+BLOK1_Rumah2             rumah    (-224.5,-43)         5.05     0.18
+BLOK1_Rumah3             rumah    (-215.5,-43)         5.05     0.18
+BLOK1_Rumah4             rumah    (-206.5,-43)         5.05     0.18
+BLOK2_Rumah1             rumah    (-133.5,-43)         5.05     0.18
+BLOK2_Rumah2             rumah    (-124.5,-43)         5.05     0.18
+BLOK2_Rumah3             rumah    (-115.5,-43)         5.05     0.18
+BLOK2_Rumah4             rumah    (-106.5,-43)         5.05     0.18
+BLOK3_Rumah1             rumah    (46.5,-43)           5.05     0.18
+BLOK3_Rumah2             rumah    (55.5,-43)           5.05     0.18
+BLOK3_Rumah3             rumah    (64.5,-43)           5.05     0.18
+BLOK3_Rumah4             rumah    (73.5,-43)           5.05     0.18
+BLOK4_Rumah1             rumah    (136.5,-43)          5.05     0.18
+BLOK4_Rumah2             rumah    (145.5,-43)          5.05     0.18
+BLOK4_Rumah3             rumah    (154.5,-43)          5.05     0.18
+BLOK4_Rumah4             rumah    (163.5,-43)          5.05     0.18
+BLOK5_Rumah1             rumah    (-213.5,133)         8.66     0.18
+BLOK5_Rumah2             rumah    (-204.5,133)         8.66     0.18
+BLOK5_Rumah3             rumah    (-195.5,133)         8.66     0.18
+BLOK5_Rumah4             rumah    (-186.5,133)         8.66     0.18
+BLOK6_Rumah1             rumah    (-113.5,133)         8.66     0.18
+BLOK6_Rumah2             rumah    (-104.5,133)         8.66     0.18
+BLOK6_Rumah3             rumah    (-95.5,133)          8.66     0.18
+BLOK6_Rumah4             rumah    (-86.5,133)          8.66     0.18
+BLOK7_Rumah1             rumah    (36.5,133)           8.66     0.18
+BLOK7_Rumah2             rumah    (45.5,133)           8.66     0.18
+BLOK7_Rumah3             rumah    (54.5,133)           8.66     0.18
+BLOK7_Rumah4             rumah    (63.5,133)           8.66     0.18
+BLOK8_Rumah1             rumah    (126.5,133)          8.66     0.18
+BLOK8_Rumah2             rumah    (135.5,133)          8.66     0.18
+BLOK8_Rumah3             rumah    (144.5,133)          8.66     0.18
+BLOK8_Rumah4             rumah    (153.5,133)          8.66     0.18
+ATAP_Naik01              rumah    (-170,98)            7.95     0.18
+ATAP_Naik02              rumah    (-160,98)            7.95     0.18
+ATAP_Naik03              rumah    (-150,98)            7.95     0.18
+ATAP_Naik06              rumah    (-124,85.3)          7.69     0.18
+ATAP_Naik07              rumah    (-118,78.7)          7.55     0.18
+ATAP_Naik08              rumah    (-112,72)            7.41     0.18
+ATAP_Naik09              rumah    (-106.7,65.3)        7.28     0.18
+ATAP_Naik10              rumah    (-101.3,58.7)        7.14     0.18
+ATAP_Naik11              rumah    (-96,52)             7.00     0.18
+ATAP_Naik12              rumah    (-87,45.5)           6.87     0.18
+ATAP_Naik15              rumah    (-62.7,33)           6.61     0.18
+ATAP_Naik16              rumah    (-55,30)             6.55     0.18
+ATAP_Naik17              rumah    (-46.7,30)           6.55     0.18
+ATAP_Naik18              rumah    (-38.3,30)           6.55     0.18
+ATAP_Naik20              rumah    (-20,30)             6.55     0.18
+ATAP_Naik21              rumah    (-10,30)             6.55     0.18
+ATAP_Naik22              rumah    (0,30)               6.55     0.18
+ATAP_Naik23              rumah    (10,30)              6.55     0.18
+ATAP_Naik24              rumah    (20,30)              6.55     0.18
+ATAP_Naik26              rumah    (40,29.3)            6.54     0.18
+ATAP_Naik27              rumah    (50,28.7)            6.53     0.18
+ATAP_Naik28              rumah    (60,28)              6.51     0.18
+ATAP_Naik29              rumah    (70,27.3)            6.50     0.18
+ATAP_Naik30              rumah    (80,26.7)            6.49     0.18
+ATAP_Naik32              rumah    (99,26)              6.47     0.18
+ATAP_Naik33              rumah    (108,26)             6.47     0.18
+ATAP_Naik34              rumah    (117,26)             6.47     0.18
+ATAP_Papan01             kotak    (-140,95)           11.46      -    z=11.46
+ATAP_Papan02             kotak    (-130,92)           11.40      -    z=11.40
+ATAP_Papan03             kotak    (-78,39)            10.32      -    z=10.32
+ATAP_Papan04             kotak    (-70.3,36)          10.25      -    z=10.25
+ATAP_Papan05             kotak    (-30,30)            10.13      -    z=10.13
+ATAP_Papan06             kotak    (30,30)             10.13      -    z=10.13
+ATAP_Papan07             kotak    (90,26)             10.05      -    z=10.05
+ATAP_TanggaBambu         kotak    (-170,84.5)          7.75     0.02
+JALAN_MobilDWARA         kotak    (-46,158)            9.00     0.00
+JALAN_Mobil1             kotak    (-330,160)           9.00     0.00
+JALAN_Mobil2             kotak    (-250,150)           9.00     0.00
+JALAN_Mobil3             kotak    (60,160)             9.00     0.00
+JALAN_Angkot             kotak    (300,150)            9.00     0.00
+JALAN_Gerobak1           kotak    (110,150)            9.00     0.00
+JALAN_Gerobak2           kotak    (-140,160)           9.00     0.00
+JALAN_GarisPolisiBarat   dinding  (-500,145)           9.00     0.00
+JALAN_GarisPolisiTimur   dinding  (680,145)            9.00     0.00
+JALAN_MobilPemadamBarat  kotak    (-492,155)           9.00     0.00
+JALAN_MobilPemadamTimur  kotak    (672,155)            9.00     0.00
+PASAR_Los1               kotak    (272,105)            7.67     1.03
+PASAR_Los2               kotak    (272,45)             6.44     1.03
+PASAR_Los3               kotak    (272,-10)            5.51     0.62
+PASAR_GerbangDikunci     dinding  (205,70)             7.46     0.45
+GUDANG_Gudang1           kotak    (425,104)            6.00     0.00
+GUDANG_Gudang2           kotak    (535,104)            6.00     0.00
+GUDANG_Pabrik            kotak    (640,95)             6.00     0.00
+GUDANG_Cerobong          kotak    (668,118)            6.00     0.00
+GUDANG_Truk1             kotak    (420,55)             6.00     0.00
+GUDANG_Truk2             kotak    (432,55)             6.00     0.00
+GUDANG_Truk3             kotak    (444,55)             6.00     0.00
+GUDANG_PosJaga           kotak    (370,135)            6.00     0.00
+GUDANG_Dermaga           kotak    (485,-68)            3.50      -    z=3.50
+GUDANG_PagarBarat        dinding  (360,140)            6.00     0.00
+GUDANG_PagarUtara        dinding  (378,140)            6.00     0.00
+REL_JembatanJalan        kotak    (-550,155)           9.00      -    z=9.00
+REL_JembatanKali         kotak    (-550,-105)         10.00      -    z=10.00
+REL_JembatanInspeksi     kotak    (-550,-133)          9.00      -    z=9.00
+STASIUN_Bangunan         kotak    (-625,60)            7.05     0.41
+STASIUN_AtapPeron        kotak    (-575,60)           15.50      -    z=15.50
+STASIUN_Peron            kotak    (-575,60)            5.82     2.87
+REL_Kereta               kotak    (-550,250)          12.00     0.00
+BANTARAN_LapanganTepiKali bidang   (-420,-68)           2.20     2.80
+BANTARAN_Perahu1         kotak    (-250,-78)           3.50     0.00
+BANTARAN_Perahu2         kotak    (90,-78)             3.50     0.00
+BANTARAN_Gubuk1          kotak    (-330,-70)           3.50     0.00
+BANTARAN_Gubuk2          kotak    (260,-70)            3.50     0.00
+AIR_Kali                 bidang   (0,-105)             0.00      -    z=0.00
+AIR_AnakKali             bidang   (-505,-362)          0.00      -    z=0.00
+PINTUAIR_MenaraBarat     kotak    (-528,-128)         -1.50      -    z=-1.50
+PINTUAIR_MenaraTimur     kotak    (-482,-128)         -1.50      -    z=-1.50
+PINTUAIR_Jembatan        kotak    (-505,-128)          6.00      -    z=6.00
+PINTUAIR_Daun            kotak    (-505,-128)         -1.50      -    z=-1.50
+JEMBATAN_GantungDek      kotak    (-105,-105)          4.00      -    z=4.00
+JEMBATAN_GantungTiangU1  kotak    (-106.5,-78)         3.50     0.00
+JEMBATAN_GantungTiangU2  kotak    (-103.5,-78)         3.50     0.00
+JEMBATAN_GantungTiangS1  kotak    (-106.5,-132)        3.50     0.00
+JEMBATAN_GantungTiangS2  kotak    (-103.5,-132)        3.50     0.00
+JEMBATAN_BetonDek        kotak    (156,-105)           3.50      -    z=3.50
+SELATAN_LapanganBola     bidang   (-200,-414)          3.00     0.00
+SELATAN_MenaraAir_Tiang  kotak    (260,-230)           3.50     0.00
+SELATAN_MenaraAir_Tangki kotak    (260,-230)          27.50     0.00  zdr=24.0
+SELATAN_SUTET1           kotak    (-400,-520)          3.00     0.00
+SELATAN_SUTET2           kotak    (-40,-520)           3.00     0.00
+SELATAN_SUTET3           kotak    (320,-520)           3.00     0.00
+SELATAN_SUTET4           kotak    (660,-520)           3.00     0.00
+SELATAN_Gubuk1           kotak    (-350,-470)          3.00     0.00
+SELATAN_Gubuk2           kotak    (100,-380)           3.00     0.00
+SELATAN_Gubuk3           kotak    (400,-450)           3.00     0.00
+SELATAN_Gubuk4           kotak    (550,-380)           3.00     0.00
+LATAR_GedungAdikara1     kotak    (-480,520)           9.00      -    z=9.00
+LATAR_GedungAdikara2     kotak    (-360,580)           9.00      -    z=9.00
+LATAR_GedungAdikara3     kotak    (-240,640)           9.00      -    z=9.00
+LATAR_GedungAdikara4     kotak    (-120,520)           9.00      -    z=9.00
+LATAR_GedungAdikara5     kotak    (0,580)              9.00      -    z=9.00
+LATAR_GedungAdikara6     kotak    (120,640)            9.00      -    z=9.00
+LATAR_GedungAdikara7     kotak    (240,520)            9.00      -    z=9.00
+LATAR_GedungAdikara8     kotak    (360,580)            9.00      -    z=9.00
+LATAR_GedungAdikara9     kotak    (480,640)            9.00      -    z=9.00
+
+========================================================================================================
+RINGKASAN KELOMPOK (8)
+========================================================================================================
+KAMPUNG_RumahInti      bentuk=rumah  n= 810  alas    5.05 ..    8.65
+BARAT_Rumah            bentuk=rumah  n= 181  alas    5.07 ..    8.64
+SEBERANG_Rumah         bentuk=rumah  n= 581  alas    3.50 ..    3.50
+JALAN_Ruko             bentuk=kotak  n=  62  alas    9.00 ..    9.00
+KOTA_Blok              bentuk=kotak  n=  93  alas    9.00 ..    9.00
+LAYANG_Pilar           bentuk=kotak  n=  23  alas    9.00 ..    9.00  (z=9.0 semua item)
+LAYANG_Dek             bentuk=kotak  n=  22  alas   22.50 ..   22.50  (z=22.5 semua item)
+GUDANG_Kontainer       bentuk=kotak  n=  45  alas    6.00 ..    6.00
+TOTAL item kelompok: 1817
+
+========================================================================================================
+CEK KRITERIA MK1
+========================================================================================================
+OK  jumlah objek                                     = 145        (harap 145)
+OK  total item kelompok                              = 1817       (harap 1817)
+OK  penanda PlayerStart                              = 1          (harap 1)
+OK  penanda titik                                    = 15         (harap 15)
+OK  penanda area                                     = 7          (harap 7)
+OK  tag penalti_tinggi                               = 61         (harap 61)
+OK  tag penalti_normal                               = 10         (harap 10)
+OK  tag tanpa_penalti                                = 19         (harap 19)
+OK  tag adikara                                      = 11         (harap 11)
+OK  tag curian                                       = 6          (harap 6)
+OK  alas KAMPUNG_PosRT                               = 7.851282051282052 (harap 7.85 +-0.02)
+OK  alas KAMPUNG_Musala                              = 7.2153846153846155 (harap 7.22 +-0.02)
+OK  alas GUDANG_Gudang1                              = 6.0        (harap 6.0 +-0.02)
+OK  alas BANTARAN_Gubuk1                             = 3.5        (harap 3.5 +-0.02)
+OK  alas SELATAN_SUTET1                              = 3.0        (harap 3.0 +-0.02)
+OK  ATAP_Naik n                                      = 27         (harap 27)
+OK  puncak ATAP_Naik terendah                        = 9.97       (harap 9.97 +-0.02)
+OK  puncak ATAP_Naik tertinggi                       = 11.45      (harap 11.45 +-0.02)
+  papan vs puncak ATAP_Naik terdekat (papan top = z + 0,15):
+      ATAP_Papan01 top=11.61  naik(-150,98)=11.45  jarak 10.4 m  diff=0.16
+      ATAP_Papan02 top=11.55  naik(-124,85)=11.19  jarak 9.0 m  diff=0.36
+      ATAP_Papan03 top=10.47  naik(-87,46)=10.37  jarak 11.1 m  diff=0.10
+      ATAP_Papan04 top=10.40  naik(-63,33)=10.11  jarak 8.2 m  diff=0.29
+      ATAP_Papan05 top=10.28  naik(-38,30)=10.05  jarak 8.3 m  diff=0.23
+      ATAP_Papan06 top=10.28  naik(20,30)=10.05  jarak 10.0 m  diff=0.23
+      ATAP_Papan07 top=10.20  naik(99,26)=9.97  jarak 9.0 m  diff=0.23
+OK  papan: selisih maks ke puncak naik               = 0.36       (harap 0.0 +-0.60)
+
+TEMUAN selisih tanah di tapak > 2 m (jenis != bidang):
+      STASIUN_Peron            2.87 m
+
+SEMUA LULUS
