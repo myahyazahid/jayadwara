@@ -40,7 +40,7 @@ Model raksasa Jayadwara dibuat di Blender **lebih awal** dari rencana semula (se
 ### Jalur paralel — Level/Map *(mulai 16 Okt 2026, keputusan developer)*
 Desain map (denah, alur, zona, konsep) dan **greybox UE** dikerjakan terpisah dari iterasi Fase 1, karena sebagian besar keputusannya selera developer. Struktur map mengikuti [28](28-struktur-level-episode.md) (satu map per episode ala RE4). Angka yang bergantung pada Fase 1 (luas arena dari Iterasi 6–8, jumlah gedung dari Iterasi 7) disimpan di file data `Art/Level/`, jadi cukup dikoreksi lalu skrip dijalankan ulang.
 - Ep 1: desain [30](30-desain-level-ep01.md), data `Art/Level/ep01_*`, greybox pertama oleh Hermes ([`Hermes/maps_ep1_hermes.md`](../Hermes/maps_ep1_hermes.md), branch `hermes/maps_ep1`).
-- Ep 2: desain [31](31-desain-level-ep02.md). Ep 3–10 menyusul.
+- Ep 2: desain [31](31-desain-level-ep02.md) (tata letak v02), data `Art/Level/ep02_*`, greybox oleh Hermes ([`Hermes/maps_ep2_hermes.md`](../Hermes/maps_ep2_hermes.md), branch `hermes/maps_ep2`; dimajukan atas permintaan developer 16 Okt 2026). Ep 3–10 menyusul.
 - Level art realistis tetap di jadwal semula: Ep 1 di Fase 2, Ep 2–10 di Fase 4. Jam editor developer untuk jalur ini dicicil supaya Fase 1 tidak molor.
 
 ### Jalur art paralel — Model Aksa *(Iterasi 0 berjalan sejak 12 Okt 2026; jadwal menunggu konfirmasi developer)*

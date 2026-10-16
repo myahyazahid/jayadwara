@@ -82,7 +82,7 @@ Utara = jalan raya. Titik nol = tengah kampung (dekat pos RT).
 | Arena raksasa | ±500 × 380 m | **±1340 × 930 m** (x −650 … +690, y −600 … +330) |
 | Jayadwara melintas arena | ±7 detik | **±19 detik** (Ep 1 v02: ±17) |
 | Kampung inti | 350 × 145 m | **455 × 190 m**, tetap padat |
-| Rute kejar Aksa | ±650 m | **±900 m** (atap → gang → jembatan gantung → bantaran → pintu air) |
+| Rute kejar Aksa | ±650 m | **±1270 m** pos RT → T5 (atap → gang → jembatan gantung → bantaran → pintu air), ±3,5 mnt lari |
 | Tempat bertarung tanpa penalti | kali | **kali, bantaran, gudang Adikara, lapangan + sawah selatan** |
 
 ```
@@ -104,6 +104,10 @@ Utara = jalan raya. Titik nol = tengah kampung (dekat pos RT).
  │ ║     LAPANGAN BOLA + SAWAH KOTA (aman) ── tiang SUTET ── tiang SUTET ── tiang SUTET   ││
  └───────────────────────────────────────────────────────────────────────────────────────┘
 ```
+
+**Pratinjau tampak atas:** `python -I Art/Level/pratinjau_ep02_v02.py` menulis `docs/visual/ep02_layout_v02_atas.png` (butuh Pillow; PNG tidak di-commit dari sesi cloud karena unggahan Git LFS ditolak, developer boleh meng-commit-nya).
+
+**Data (sumber kebenaran, dipakai Hermes dan nanti `Tools/ue_greybox_ep02.py`):** [`Art/Level/ep02_medan_v02.py`](../Art/Level/ep02_medan_v02.py) (medan, 8 slot material, 14 titik uji; z = 0 muka air kali) dan [`Art/Level/ep02_layout_v02.json`](../Art/Level/ep02_layout_v02.json) (145 objek, 8 kelompok instanced berisi 1.817 rumah/ruko/blok/pilar/kontainer, pohon, tiang, 23 penanda, 5 zona, 8 kamera), yang **dibuat** oleh [`Art/Level/buat_layout_ep02_v02.py`](../Art/Level/buat_layout_ep02_v02.py). Pratinjau: [`Art/Level/pratinjau_ep02_v02.py`](../Art/Level/pratinjau_ep02_v02.py). Tata letak diubah di generator, bukan di JSON. Instruksi Hermes: [`Hermes/maps_ep2_hermes.md`](../Hermes/maps_ep2_hermes.md) (branch `hermes/maps_ep2`; greybox dimajukan atas permintaan developer 16 Okt 2026, jalur paralel Level/Map).
 
 ### Koordinat greybox v02 (meter, Y utara, titik nol dekat pos RT)
 
@@ -131,8 +135,9 @@ Utara = jalan raya. Titik nol = tengah kampung (dekat pos RT).
 | Jembatan beton | x +156 | lebar 8 | Mobil; jalur evakuasi warga ke selatan |
 | **Pintu air** *(baru)* | (−505, −105) | 50 × 50, menara 12 m | Landmark kedua; T5; aman untuk Jayadwara |
 | **Anak kali** *(baru)* | dari pintu air ke selatan, x −520 … −490, y −125 … −600 | lebar ±20 | Zona aman; membelah selatan-barat |
-| Rel kereta | x −560 … −540, utara–selatan, tanggul 6 m | — | Batas barat; **jembatan rel** di atas kali (tidak hancur) |
-| **Stasiun kecil** *(baru)* | x −650 … −575, y +40 … +180 | peron 140 m | Penalti normal; kereta lewat sesekali sebagai bahaya ringan |
+| **Kampung pinggir barat** *(baru)* | x −530 … −265, y −50 … +140 | jarang | Penalti normal; pengisi antara rel dan kampung inti |
+| Rel kereta | x −560 … −540, utara–selatan, puncak tanggul +12 m (±3–8 m di atas tanah) | — | Batas barat; **jembatan rel** di atas jalan raya, kali, dan jalan inspeksi (tidak hancur) |
+| **Stasiun kecil** *(baru)* | x −650 … −570, y −10 … +130 | peron 140 m sejajar puncak rel | Penalti normal; kereta lewat sesekali sebagai bahaya ringan |
 | Kampung seberang | x −470 … +450, y −130 … −330 | lebih jarang | Jalan inspeksi di y −130 |
 | **Menara air** *(baru)* | (+260, −230) | tinggi 30 m | Pembanding skala |
 | **Lapangan bola + sawah kota** *(baru)* | x −480 … +700, y −340 … −600 | lapangan 105 × 68 di (−200, −414) | **Zona aman** kedua; 4 tiang SUTET 48 m di y −520 sebagai pembanding skala |
@@ -171,7 +176,7 @@ Area semi-terbuka; urutan petunjuk bebas. Gang utama adalah "koridor" yang selal
 - Warga di teras (ibu-ibu, anak-anak, tukang ojek) memberi celetukan; tanpa sistem wawancara (itu Ep 4).
 
 ### C. Kejar-kejaran · ±5–6 menit · mekanik baru episode
-Setelah ★1 dan ★2 ditemukan, kawanan mencuri **kotak uang kas RT** di pos RT dan kabur. Kejar 5 tuyul lewat **rute melingkar** (±900 m di v02) dengan 5 titik:
+Setelah ★1 dan ★2 ditemukan, kawanan mencuri **kotak uang kas RT** di pos RT dan kabur. Kejar 5 tuyul lewat **rute melingkar** (±1270 m di v02, ±3,5 menit lari tanpa berhenti) dengan 5 titik:
 
 | Titik | Lokasi | Lapis | Isi |
 |---|---|---|---|
@@ -253,7 +258,7 @@ Transisi lewat Data Layer pencahayaan ([28](28-struktur-level-episode.md#teknis-
 | Arah | Batas | Fungsi |
 |---|---|---|
 | Utara | Blok kota + jalan layang; gedung tinggi **Distrik Adikara** di kejauhan | Foreshadow Ep 3 |
-| Barat | **Rel kereta** di tanggul 6 m + stasiun kecil; kereta lewat sesekali | Batas alami + pembanding skala |
+| Barat | **Rel kereta** di tanggul (puncak +12 m) + stasiun kecil; kereta lewat sesekali | Batas alami + pembanding skala |
 | Timur | Pasar (tutup) → gudang Adikara → kali berbelok | Pasar disimpan untuk Ep 4 |
 | Selatan | Kampung seberang → lapangan bola + sawah kota + tiang SUTET | Arena fase 2, zona aman kedua |
 

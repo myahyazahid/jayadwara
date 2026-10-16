@@ -135,7 +135,7 @@ text{font-family:var(--f-body)}
   <div class="flow">
     <div class="step" style="--c:var(--andesit)"><span class="k">A · ±2 mnt · 12.30</span><b>Kedatangan</b><p>Mobil berhenti di jalan raya di bawah jalan layang. Dari mulut gang, gang utama menurun ke jembatan gantung kuning.</p></div>
     <div class="step" style="--c:var(--emas)"><span class="k">B · ±5–7 mnt</span><b>Investigasi</b><p>★1 jejak kaki naik ke atap (barat), ★2 CCTV warung + mainan (timur), ○ sesajen di gang buntu lewat atap.</p></div>
-    <div class="step" style="--c:var(--kala)"><span class="k">C · ±5–6 mnt · 15.30</span><b>Kejar 5 tuyul</b><p>Kotak kas RT dicuri. T1–T3 lewat atap, T4 jembatan gantung, lalu menyusur bantaran ke T5 di pintu air. Rute ±900 m.</p></div>
+    <div class="step" style="--c:var(--kala)"><span class="k">C · ±5–6 mnt · 15.30</span><b>Kejar 5 tuyul</b><p>Kotak kas RT dicuri. T1–T3 lewat atap, T4 jembatan gantung, lalu menyusur bantaran ke T5 di pintu air. Rute ±1,3 km.</p></div>
     <div class="step" style="--c:var(--kala)"><span class="k">D · ±1 mnt</span><b>Bergabung</b><p>Kawanan menyatu di lapangan tepi kali dekat pintu air. Jayadwara berdiri di dalam kali, bukan di atas rumah.</p></div>
     <div class="step" style="--c:var(--emas)"><span class="k">E · ±7–9 mnt · 17.00</span><b>Arena raksasa</b><p>Fase 1: tuyul raksasa membawa mobil ke gudang Adikara, potong jalannya lewat kali. Fase 2: tiga tuyul besar di gudang, stasiun, dan lapangan bola; yang asli ikut rute CCTV.</p></div>
     <div class="step" style="--c:var(--air)"><span class="k">±1–2 mnt · senja</span><b>Segel &amp; debrief</b><p>Uang kembali ke warga. Sekar: semua uang mengalir ke rekening penampung yang sama.</p></div>
@@ -217,11 +217,13 @@ for(let x=380;x<670;x+=14){for(let y=-5;y<45;y+=12)if(rnd()>.3)R(base,x,y,x+11,y
 R(base,450,-45,520,-85,`fill:${V("andesit")};stroke:${V("ink")};stroke-width:.5`);
 L(base,525,60,"GUDANG & PABRIK ADIKARA",{fs:10,w:800});L(base,526,-58,"dermaga",{fs:8.5,a:"start",w:600});
 // rel + stasiun + permukiman barat
-R(base,-700,365,-562,-130,`fill:${V("desa")};opacity:.22`);
+R(base,-700,365,-570,-130,`fill:${V("andesit")};opacity:.15`);
 R(base,-560,400,-540,-600,`fill:${V("andesit")};opacity:.8`);
 for(let y=395;y>-600;y-=10)el("line",{x1:X(-559),y1:Y(y),x2:X(-541),y2:Y(y),css:`stroke:${V("ink")};stroke-width:.5`},base);
-R(base,-650,180,-575,40,`fill:${V("andesit")};stroke:${V("ink")};stroke-width:.6`);
-L(base,-612,105,"STASIUN",{fs:9,c:"#fff",w:800,attrs:{transform:`rotate(-90 ${X(-612)} ${Y(105)})`}});
+R(base,-650,130,-570,-10,`fill:${V("andesit")};stroke:${V("ink")};stroke-width:.6`);
+R(base,-530,140,-265,-50,`fill:${V("desa")};opacity:.3`);
+for(let x=-525;x<-270;x+=13){for(let y=-45;y<136;y+=12){if(rnd()>.62)R(base,x,y,x+8,y+8,`fill:${V("desa")};stroke:${V("bg")};stroke-width:.4`);}}
+L(base,-610,60,"STASIUN",{fs:9,c:"#fff",w:800,attrs:{transform:`rotate(-90 ${X(-610)} ${Y(60)})`}});
 L(base,-528,-250,"REL KERETA (tanggul 6 m)",{fs:9,w:700,a:"middle",attrs:{transform:`rotate(-90 ${X(-528)} ${Y(-250)})`}});
 // bantaran + lapangan tepi kali
 R(base,-540,-50,700,-85,`fill:${V("sawah")};opacity:.55`);
@@ -259,7 +261,8 @@ L(base,-40,-544,"tiang SUTET 48 m",{fs:8.5,w:600});
 const arena=el("g",{id:"g-arena"},map);
 R(arena,-260,140,195,-50,`fill:${V("kala")};opacity:.32`);
 R(arena,-540,330,700,145,`fill:${V("kala")};opacity:.14`);
-R(arena,-650,180,-575,40,`fill:${V("kala")};opacity:.18`);
+R(arena,-650,130,-570,-10,`fill:${V("kala")};opacity:.18`);
+R(arena,-530,140,-265,-50,`fill:${V("kala")};opacity:.14`);
 R(arena,205,140,340,-30,`fill:${V("kala")};opacity:.14`);
 R(arena,-470,-130,450,-330,`fill:${V("kala")};opacity:.14`);
 R(arena,-540,-50,700,-128,`fill:${V("safe")};opacity:.45`);
@@ -280,7 +283,7 @@ el("path",{d:`M${X(-420)} ${Y(-60)} C${X(-420)} ${Y(60)} ${X(-380)} ${Y(150)} ${
 L(arena,-360,216,"FASE 1: curi mobil → lari ke gudang Adikara",{fs:9.5,w:800,c:V("kala"),a:"start"});
 el("path",{d:`M${X(-350)} ${Y(-98)} L${X(470)} ${Y(-98)} C${X(500)} ${Y(-98)} ${X(510)} ${Y(-70)} ${X(510)} ${Y(-50)}`,css:`fill:none;stroke:${V("safe")};stroke-width:2.2;stroke-dasharray:6 4;marker-end:url(#arrS)`},arena);
 L(arena,90,-94,"potong jalan lewat kali",{fs:8.5,c:"#fff",w:800});
-[[600,10,1],[-612,110,0],[-200,-414,0]].forEach(([x,y,real])=>el("circle",{cx:X(x),cy:Y(y),r:6.5,css:`fill:${V(real?"kala":"line")};stroke:${V("kala")};stroke-width:1.4`},arena));
+[[600,10,1],[-612,60,0],[-200,-414,0]].forEach(([x,y,real])=>el("circle",{cx:X(x),cy:Y(y),r:6.5,css:`fill:${V(real?"kala":"line")};stroke:${V("kala")};stroke-width:1.4`},arena));
 L(arena,-200,-370,"FASE 2: 3 tuyul besar 27 m (gudang, stasiun, lapangan)",{fs:9,w:700});
 
 // ----- investigasi & kejar -----
