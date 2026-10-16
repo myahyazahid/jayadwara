@@ -160,6 +160,34 @@ for label, t in (("ue_k6_anim_a", 0.10), ("ue_k6_anim_b", 0.45)):
     capture(label, [(0.0, 200.0), (220.0, H["Manny"])], fov=45.0)
 cleanup()
 
+# ---------- 5b) close-up pendar (warna aksen) ----------
+print("=== SHOT: ue_k6_pendar ===")
+cleanup()
+spawn("K6_p_T1", MESH["Tuyul1"], 0.0)
+
+
+def add_light(cls, prop, pos, rot, intensity, label):
+    a = EAS.spawn_actor_from_class(cls, pos, rot)
+    a.set_actor_label(label)
+    try:
+        comp = a.get_editor_property(prop)
+        try:
+            comp.set_mobility(unreal.ComponentMobility.MOVABLE)
+        except Exception:  # noqa: BLE001
+            pass
+        comp.set_editor_property("intensity", intensity)
+    except Exception as e:  # noqa: BLE001
+        print("    light err", e)
+    return a
+
+
+add_light(unreal.DirectionalLight, "directional_light_component", unreal.Vector(0.0, 0.0, 800.0),
+          unreal.Rotator(roll=0.0, pitch=-55.0, yaw=-25.0), 7.0, "K6_p_sun")
+add_light(unreal.SkyLight, "light_component", unreal.Vector(0.0, 0.0, 400.0),
+          unreal.Rotator(), 1.0, "K6_p_sky")
+capture("ue_k6_pendar", [(0.0, 100.0)], fov=45.0)
+cleanup()
+
 # bukti angka: posisi telapak pada kedua waktu harus berbeda (bukan frame identik)
 print("=== BUKTI FRAME BERBEDA (anim retarget Tuyul) ===")
 for t in (0.10, 0.45):
