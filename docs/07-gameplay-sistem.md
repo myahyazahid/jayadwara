@@ -35,7 +35,7 @@ Arah dihitung **relatif ke musuh yang dituju**, bukan ke kamera, supaya "maju" s
 
 #### Daftar jurus (konsep pose)
 
-Disetujui developer 16 Okt 2026 dari konsep pose ("Usulan Jurus Aksa"). Patokan bentuk gerak untuk memilih animasi placeholder F1 dan brief mocap F2; tendangan memakai bentuk taekwondo sebagai referensi, nanti dibalut gaya silat saat animasi final. Sama untuk Aksa dan Jayadwara.
+Disetujui developer 16 Okt 2026 dari konsep pose ("Usulan Jurus Aksa"). Patokan bentuk gerak untuk memilih animasi placeholder F1 dan brief mocap F2; tendangan memakai bentuk taekwondo. Gaya combat tidak harus silat murni; yang dikejar combat yang seru (keputusan developer 16 Okt 2026). Sama untuk Aksa dan Jayadwara.
 
 | Input | Jurus | Gerak |
 |---|---|---|
