@@ -1,0 +1,30 @@
+[Info] [MK3] level baru dibuat: /Game/Hermes/MapsEp2/Maps/Test_Hermes_MapsEp2 (template /Engine/Maps/Templates/Template_Default)
+[Info] [MK3] hapus 2 StaticMeshActor bawaan template (lantai)
+[Info] [MK3] M_Hermes_Greybox dibuat (param `Warna` -> Base Color, Roughness 0.9)
+[Info] [MK3] MI dibuat/dimuat: 23 (target 23)
+[Info] [MK3] SM_Ep02_Medan terimpor; 8 slot = ['Air', 'Rel', 'Jalan', 'Gudang', 'Paving', 'Kampung', 'Bantaran', 'Sawah']
+[Info] [MK3] slot material SM_Ep02_Medan: [('Air', 'MI_Ep02_Air'), ('Rel', 'MI_Ep02_Rel'), ('Jalan', 'MI_Ep02_Jalan'), ('Gudang', 'MI_Ep02_Gudang'), ('Paving', 'MI_Ep02_Paving'), ('Kampung', 'MI_Ep02_Kampung'), ('Bantaran', 'MI_Ep02_Bantaran'), ('Sawah', 'MI_Ep02_Sawah')]
+[Info] [MK3] medan ditaruh di (0,0,0)
+[Info] [MK3] World Settings: GameMode Override = /Game/Jayadwara/Core/BP_JDGameMode
+[Info] [MK3] cahaya 'siang': pitch=-62 yaw=20 warna=(1.00,0.98,0.94) intensitas=10.0 lux
+[Info] [MK3] level disimpan
+[Info] [MK3] BOUNDS medan (cm): origin=(0, 10000, 525) size=(140000, 100000, 1350)  Z -150..1200
+[Info] [MK3] LINE TRACE 14 TITIK (cm) [mengenai MEDAN]: titik | UE_x UE_y | elev*100 | hit_z | selisih | actor
+[Info] [MK3]   jalan_raya (0,155)         (       0,  -15500)     900.0     900.0   +0.00 OK SM_Ep02_Medan
+[Info] [MK3]   blok_kota (200,300)        (   20000,  -30000)     900.0     900.0   +0.00 OK SM_Ep02_Medan
+[Info] [MK3]   pos_rt (-26,91)            (   -2600,   -9100)     789.2     789.2   +0.00 OK SM_Ep02_Medan
+[Info] [MK3]   kampung_selatan (0,-40)    (       0,    4000)     520.5     520.5   +0.00 OK SM_Ep02_Medan
+[Info] [MK3]   puncak_tanggul (0,-53)     (       0,    5300)     500.0     500.0   -0.00 OK SM_Ep02_Medan
+[Info] [MK3]   bantaran (-420,-68)        (  -42000,    6800)     350.0     350.0   -0.00 OK SM_Ep02_Medan
+[Info] [MK3]   dasar_kali (0,-105)        (       0,   10500)    -150.0    -150.0   -0.00 OK SM_Ep02_Medan
+[Info] [MK3]   anak_kali (-505,-300)      (  -50500,   30000)    -150.0    -150.0   -0.00 OK SM_Ep02_Medan
+[Info] [MK3]   kampung_seberang (0,-230)  (       0,   23000)     350.0     350.0   -0.00 OK SM_Ep02_Medan
+[Info] [MK3]   lapangan_bola (-200,-414)  (  -20000,   41400)     300.0     300.0   -0.00 OK SM_Ep02_Medan
+[Info] [MK3]   gudang (525,60)            (   52500,   -6000)     600.0     600.0   -0.00 OK SM_Ep02_Medan
+[Info] [MK3]   rel (-550,0)               (  -55000,       0)    1200.0    1200.0   +0.00 OK SM_Ep02_Medan
+[Info] [MK3]   rel_celah_jalan (-550,155) (  -55000,  -15500)     900.0     900.0   +0.00 OK SM_Ep02_Medan
+[Info] [MK3]   rel_celah_kali (-550,-105) (  -55000,   10500)    -150.0    -150.0   -0.00 OK SM_Ep02_Medan
+[Info] [MK3] line trace (medan): 14/14 dalam +/-5 cm; selisih terburuk 0.00 cm
+[Info] [MK3] screenshot -> C:\repository\unreal_engine\jayadwara_hermes_maps_ep2\Hermes\Art\maps_ep2\Render\MK3_perspektif.png ; piksel tengah = 130,162,81
+[Info] [MK3] CEK bounds: X 140000=True Y 100000=True Z -150..1200=True (Z -150..1200 cm)
+[Info] [MK3] CEK MK3: bounds_x=True bounds_y=True bounds_z=True trace=14/14 -> LULUS

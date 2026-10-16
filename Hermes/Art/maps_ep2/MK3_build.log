@@ -1,0 +1,56 @@
+Using bundled DotNet SDK version: 8.0.300 win-x64
+Running UnrealBuildTool: dotnet "..\..\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.dll" JayadwaraEditor Win64 Development -project=C:\repository\unreal_engine\jayadwara_hermes_maps_ep2\Jayadwara.uproject -waitmutex
+Log file: C:\Users\- LENOVO -\AppData\Local\UnrealBuildTool\Log.txt
+Using 'git status' to determine working set for adaptive non-unity build (C:\repository\unreal_engine\jayadwara_hermes_maps_ep2).
+Creating makefile for JayadwaraEditor (no existing makefile)
+Parsing headers for JayadwaraEditor
+  Running Internal UnrealHeaderTool C:\repository\unreal_engine\jayadwara_hermes_maps_ep2\Jayadwara.uproject C:\repository\unreal_engine\jayadwara_hermes_maps_ep2\Intermediate\Build\Win64\JayadwaraEditor\Development\JayadwaraEditor.uhtmanifest -WarningsAsErrors -installed
+Total of 62 written
+Reflection code generated for JayadwaraEditor in 1.8001886 seconds
+Building JayadwaraEditor...
+Using Visual Studio 2022 14.38.33145 toolchain (C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.38.33130) and Windows 10.0.26100.0 SDK (C:\Program Files (x86)\Windows Kits\10).
+Determining max actions to execute in parallel (10 physical cores, 16 logical cores)
+  Executing up to 10 processes, one per physical core
+  Requested 1.5 GB memory per action, 4.51 GB available: limiting max parallel actions to 3
+Using Unreal Build Accelerator local executor to run 20 action(s)
+  Storage capacity 40Gb
+---- Starting trace: 261016_223049 ----
+UbaServer - Listening on 0.0.0.0:1345
+------ Building 20 action(s) started ------
+[1/20] Resource Default.rc2
+[2/20] Resource Default.rc2
+[3/20] Resource Default.rc2
+[4/20] Compile [x64] SharedPCH.UnrealEd.Project.ValApi.ValExpApi.Cpp20.cpp
+[5/20] Compile [x64] JayadwaraAnimNodes.cpp
+UbaSessionServer - Waited 1.0s for memory pressure to go down (Available: 7.7gb Total: 42.9gb)
+[6/20] Compile [x64] AnimGraphNode_JDCapeChains.cpp
+UbaSessionServer - Delaying 1 processes from spawning due to memory pressure (Available: 4.9gb Total: 42.9gb)
+UbaSessionServer - NOTE - To mitigate this spawn delay it is recommended to make page file larger until you don't see these messages again (Or reduce number of max parallel processes)
+UbaSessionServer -        Set max page file to a large number (like 128gb). It will not use disk space unless you actually start using that amount of committed memory
+UbaSessionServer -        Also note, this is "committed" memory. Not memory in use. So you necessarily don't need more physical memory
+UbaSessionServer -   MaxPage:   15.6gb
+UbaSessionServer -   TotalPhys: 25.5gb
+UbaSessionServer -   AvailPhys: 5.3gb
+UbaSessionServer -   TotalPage: 42.9gb
+UbaSessionServer -   AvailPage: 4.9gb
+UbaSessionServer - Waited 6.8s for memory pressure to go down (Available: 7.0gb Total: 42.9gb)
+[7/20] Compile [x64] Module.JayadwaraAnimNodes.gen.cpp
+[8/20] Compile [x64] PerModuleInline.gen.cpp
+[9/20] Link [x64] UnrealEditor-JayadwaraAnimNodes.lib
+[10/20] Compile [x64] JayadwaraEditor.cpp
+[11/20] Compile [x64] Module.JayadwaraEditor.gen.cpp
+UbaSessionServer - Waited 374ms for memory pressure to go down (Available: 9.6gb Total: 42.9gb)
+[12/20] Compile [x64] JDEditorToolsLibrary.cpp
+[13/20] Compile [x64] Module.Jayadwara.cpp
+[14/20] Link [x64] UnrealEditor-Jayadwara.lib
+[15/20] Compile [x64] PerModuleInline.gen.cpp
+[16/20] Link [x64] UnrealEditor-JayadwaraAnimNodes.dll
+[17/20] Link [x64] UnrealEditor-Jayadwara.dll
+[18/20] Link [x64] UnrealEditor-JayadwaraEditor.dll
+[19/20] Link [x64] UnrealEditor-JayadwaraEditor.lib
+[20/20] WriteMetadata JayadwaraEditor.target (UBA disabled)
+Trace written to file C:/Users/- LENOVO -/AppData/Local/UnrealBuildTool/Log.uba with size 9.5kb
+Total time in Unreal Build Accelerator local executor: 40.87 seconds
+
+Result: Succeeded
+Total execution time: 82.92 seconds

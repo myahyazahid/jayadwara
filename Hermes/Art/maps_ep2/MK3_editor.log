@@ -1,0 +1,229 @@
+LogInit: Display: Running engine for game: Jayadwara
+LogCore: Display: Requested channels: 'cpu,gpu,frame,log,bookmark,screenshot,region'
+LogTrace: Display: Control listening on port 1985
+LogCsvProfiler: Display: Metadata set : platform="Windows"
+LogCsvProfiler: Display: Metadata set : config="Development"
+LogCsvProfiler: Display: Metadata set : buildversion="++UE5+Release-5.6-CL-44394996"
+LogCsvProfiler: Display: Metadata set : engineversion="5.6.1-44394996+++UE5+Release-5.6"
+LogCsvProfiler: Display: Metadata set : os="Windows 11 (25H2) [10.0.26200.9711] "
+LogCsvProfiler: Display: Metadata set : cpu="GenuineIntel|13th Gen Intel(R) Core(TM) i5-13450HX"
+LogCsvProfiler: Display: Metadata set : pgoenabled="0"
+LogCsvProfiler: Display: Metadata set : pgoprofilingenabled="0"
+LogCsvProfiler: Display: Metadata set : ltoenabled="0"
+LogCsvProfiler: Display: Metadata set : asan="0"
+LogCsvProfiler: Display: Metadata set : commandline="" C:\repository\unreal_engine\jayadwara_hermes_maps_ep2\Jayadwara.uproject -nosplash -stdout""
+LogCsvProfiler: Display: Metadata set : loginid="93108747468920fdcde981bb7ed6c387"
+LogCsvProfiler: Display: Metadata set : llm="0"
+LogCsvProfiler: Display: Metadata set : systemresolution.resx="1280"
+LogCsvProfiler: Display: Metadata set : systemresolution.resy="720"
+LogAudio: Display: Pre-Initializing Audio Device Manager...
+LogAudio: Display: AudioInfo: 'OPUS' Registered
+LogAudioDebug: Display: Lib vorbis DLL was dynamically loaded.
+LogAudio: Display: AudioInfo: 'OGG' Registered
+LogAudio: Display: AudioInfo: 'ADPCM' Registered
+LogAudio: Display: AudioInfo: 'PCM' Registered
+LogAudio: Display: AudioInfo: 'BINKA' Registered
+LogAudio: Display: AudioInfo: 'RADA' Registered
+LogAudio: Display: Audio Device Manager Pre-Initialized
+LogAssetRegistry: Display: No AssetDiscovery cache present at ../../../../../../repository/unreal_engine/jayadwara_hermes_maps_ep2/Intermediate/CachedAssetRegistryDiscovery.bin. AssetRegistry discovery of files will be uncached.
+LogConfig: Display: Loading VulkanPC ini files took 0.03 seconds
+LogConfig: Display: Loading Windows ini files took 0.04 seconds
+LogConfig: Display: Loading Unix ini files took 0.05 seconds
+LogConfig: Display: Loading Mac ini files took 0.08 seconds
+LogConfig: Display: Loading Android ini files took 0.09 seconds
+LogConfig: Display: Loading Linux ini files took 0.09 seconds
+LogConfig: Display: Loading IOS ini files took 0.11 seconds
+LogConfig: Display: Loading TVOS ini files took 0.11 seconds
+LogConfig: Display: Loading VisionOS ini files took 0.11 seconds
+RenderDocPlugin: Display: RenderDoc plugin will not be loaded. Use '-AttachRenderDoc' on the cmd line or enable 'renderdoc.AutoAttach' in the plugin settings.
+[2026.10.16-15.35.11:228][  0]LogCsvProfiler: Display: Metadata set : systemresolution.resx="1536"
+[2026.10.16-15.35.11:228][  0]LogCsvProfiler: Display: Metadata set : systemresolution.resy="864"
+[2026.10.16-15.35.12:266][  0]LogHAL: Display: Platform has ~ 24 GB [25463480320 / 34359738368 / 24], which maps to Larger [LargestMinGB=32, LargerMinGB=12, DefaultMinGB=8, SmallerMinGB=6, SmallestMinGB=0)
+[2026.10.16-15.35.12:269][  0]LogCsvProfiler: Display: Metadata set : extradevelopmentmemorymb="0"
+[2026.10.16-15.35.12:982][  0]LogWindowsTouchpad: Display: CacheForceMaxTouchpadSensitivityMode SetMaxTouchpadSensitivity
+[2026.10.16-15.35.13:015][  0]LogObj: Display: Attempting to load config data for Default__SlateThemeManager before the Class has been constructed/registered/linked (likely during module loading or early startup). This will result in the load silently failing and should be fixed.
+[2026.10.16-15.35.14:870][  0]LogD3D12RHI: Display: Creating D3D12 RHI with Max Feature Level SM6
+[2026.10.16-15.35.15:218][  0]LogD3D12RHI: Display: Not using pipeline state disk cache per r.D3D12.PSO.DiskCache=0
+[2026.10.16-15.35.15:221][  0]LogD3D12RHI: Display: Not using driver-optimized pipeline state disk cache per r.D3D12.PSO.DriverOptimizedDiskCache=0
+[2026.10.16-15.35.15:675][  0]LogD3D12RHI: Display: Batched command list execution is disabled for async queues due to known bugs in the current driver.
+[2026.10.16-15.35.15:731][  0]LogCsvProfiler: Display: Metadata set : verbatimrhiname="D3D12"
+[2026.10.16-15.35.15:731][  0]LogCsvProfiler: Display: Metadata set : rhiname="D3D12"
+[2026.10.16-15.35.15:731][  0]LogCsvProfiler: Display: Metadata set : rhifeaturelevel="SM6"
+[2026.10.16-15.35.15:731][  0]LogCsvProfiler: Display: Metadata set : shaderplatform="PCD3D_SM6"
+[2026.10.16-15.35.15:760][  0]LogTextureFormatASTC: Display: ASTCEnc version 5.0.1 library loaded
+[2026.10.16-15.35.15:760][  0]LogTextureFormatManager: Display: Loaded Base TextureFormat: TextureFormatASTC
+[2026.10.16-15.35.15:760][  0]LogTextureFormatManager: Display: Loaded Base TextureFormat: TextureFormatDXT
+[2026.10.16-15.35.15:760][  0]LogTextureFormatManager: Display: Loaded Base TextureFormat: TextureFormatETC2
+[2026.10.16-15.35.15:760][  0]LogTextureFormatManager: Display: Loaded Base TextureFormat: TextureFormatIntelISPCTexComp
+[2026.10.16-15.35.15:760][  0]LogTextureFormatManager: Display: Loaded Base TextureFormat: TextureFormatUncompressed
+[2026.10.16-15.35.15:760][  0]LogTextureFormatOodle: Display: Oodle Texture TFO init; latest sdk version = 2.9.13
+[2026.10.16-15.35.15:760][  0]LogTextureFormatOodle: Display: Oodle Texture loading DLL: oo2tex_win64_2.9.13.dll
+[2026.10.16-15.35.15:761][  0]LogTextureFormatOodle: Display: Oodle Texture loading DLL: oo2tex_win64_2.9.5.dll
+[2026.10.16-15.35.15:761][  0]LogTextureFormatManager: Display: Loaded Base TextureFormat: TextureFormatOodle
+[2026.10.16-15.35.15:801][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android'
+[2026.10.16-15.35.15:801][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_ASTC'
+[2026.10.16-15.35.15:801][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_DXT'
+[2026.10.16-15.35.15:801][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_ETC2'
+[2026.10.16-15.35.15:801][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_OpenXR'
+[2026.10.16-15.35.15:801][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'AndroidClient'
+[2026.10.16-15.35.15:801][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_ASTCClient'
+[2026.10.16-15.35.15:801][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_DXTClient'
+[2026.10.16-15.35.15:801][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_ETC2Client'
+[2026.10.16-15.35.15:801][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_OpenXRClient'
+[2026.10.16-15.35.15:801][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_Multi'
+[2026.10.16-15.35.15:801][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_MultiClient'
+[2026.10.16-15.35.15:819][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'IOS'
+[2026.10.16-15.35.15:819][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'IOSClient'
+[2026.10.16-15.35.15:842][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Linux'
+[2026.10.16-15.35.15:842][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'LinuxEditor'
+[2026.10.16-15.35.15:842][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'LinuxServer'
+[2026.10.16-15.35.15:842][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'LinuxClient'
+[2026.10.16-15.35.15:870][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Mac'
+[2026.10.16-15.35.15:870][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'MacEditor'
+[2026.10.16-15.35.15:870][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'MacServer'
+[2026.10.16-15.35.15:870][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'MacClient'
+[2026.10.16-15.35.15:890][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'TVOS'
+[2026.10.16-15.35.15:890][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'TVOSClient'
+[2026.10.16-15.35.15:906][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Windows'
+[2026.10.16-15.35.15:906][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'WindowsEditor'
+[2026.10.16-15.35.15:906][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'WindowsServer'
+[2026.10.16-15.35.15:906][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'WindowsClient'
+[2026.10.16-15.35.15:906][  0]LogTargetPlatformManager: Display: Building Assets For WindowsEditor
+[2026.10.16-15.35.16:095][  0]LogDerivedDataCache: Display: Memory: Max Cache Size: -1 MB
+[2026.10.16-15.35.16:271][  0]LogDerivedDataCache: Display: ../../../Engine/DerivedDataCache/Compressed.ddp: Opened pak cache for reading. (1350 MiB)
+[2026.10.16-15.35.16:286][  0]LogZenServiceInstance: Display: Launching executable 'C:/Users/- LENOVO -/AppData/Local/UnrealEngine/Common/Zen/Install/zenserver.exe', working dir 'C:/Users/- LENOVO -/AppData/Local/UnrealEngine/Common/Zen/Install', data dir 'C:/Users/- LENOVO -/AppData/Local/UnrealEngine/Common/Zen/Data', args '--port 8558 --data-dir "C:\Users\- LENOVO -\AppData\Local\UnrealEngine\Common\Zen\Data" --http asio --gc-cache-duration-seconds 1209600 --gc-interval-seconds 21600 --gc-low-diskspace-threshold 2147483648 --quiet --http-forceloopback --owner-pid 34296  --child-id Zen_34296_Startup'
+[2026.10.16-15.35.16:581][  0]LogZenServiceInstance: Display: Unreal Zen Storage Server HTTP service at [::1]:8558 status: OK!.
+[2026.10.16-15.35.16:592][  0]LogDerivedDataCache: Display: ZenLocal: Using ZenServer HTTP service at http://[::1]:8558/ with namespace ue.ddc status: OK!.
+[2026.10.16-15.35.16:784][  0]LogDerivedDataCache: Display: C:/Users/- LENOVO -/AppData/Local/UnrealEngine/Common/DerivedDataCache: Performance: Latency=0.11ms. RandomReadSpeed=5.12MBs, RandomWriteSpeed=135.13MBs. Assigned SpeedClass 'Local'
+[2026.10.16-15.35.16:785][  0]LogUbaHorde: Display: UBA/Horde Configuration [Uba.Provider.Horde]: Not Enabled
+[2026.10.16-15.35.16:785][  0]LogShaderCompilers: Display: Using 8 local workers for shader compilation
+[2026.10.16-15.35.16:785][  0]LogShaderCompilers: Display: Compiling shader autogen file: ../../../../../../repository/unreal_engine/jayadwara_hermes_maps_ep2/Intermediate/ShaderAutogen/PCD3D_SM6/AutogenShaderHeaders.ush
+[2026.10.16-15.35.16:785][  0]LogShaderCompilers: Display: Failed to delete old shader autogen file: ../../../../../../repository/unreal_engine/jayadwara_hermes_maps_ep2/Intermediate/ShaderAutogen/PCD3D_SM6/AutogenShaderHeaders.ush
+[2026.10.16-15.35.16:785][  0]LogShaderCompilers: Display: Shader autogen file written: ../../../../../../repository/unreal_engine/jayadwara_hermes_maps_ep2/Intermediate/ShaderAutogen/PCD3D_SM6/AutogenShaderHeaders.ush
+[2026.10.16-15.35.22:338][  0]LogStreaming: Warning: Failed to read file '../../../Engine/Platforms/VisionOS/Content/Editor/Slate/Launcher/Platform_VisionOS_128x.png' error.
+[2026.10.16-15.35.22:338][  0]LogStreaming: Warning: Failed to read file '../../../Engine/Platforms/VisionOS/Content/Editor/Slate/Launcher/Platform_VisionOS_24x.png' error.
+[2026.10.16-15.35.22:384][  0]LogEditorDomain: Display: EditorDomain is Disabled
+[2026.10.16-15.35.22:402][  0]LogAssetRegistry: Display: AssetDataGatherer spent 0.000s loading caches ../../../../../../repository/unreal_engine/jayadwara_hermes_maps_ep2/Intermediate/CachedAssetRegistry_*.bin.
+[2026.10.16-15.35.22:804][  0]LogDeviceProfileManager: Display: Deviceprofile LinuxArm64Editor not found.
+[2026.10.16-15.35.22:804][  0]LogDeviceProfileManager: Display: Deviceprofile LinuxArm64 not found.
+[2026.10.16-15.35.22:835][  0]LogCsvProfiler: Display: Metadata set : deviceprofile="WindowsEditor"
+[2026.10.16-15.35.22:848][  0]LogStreaming: Display: FlushAsyncLoading(1): 1 QueuedPackages, 0 AsyncPackages
+[2026.10.16-15.35.22:924][  0]LogTextureEncodingSettings: Display: Texture Encode Speed: FinalIfAvailable (editor).
+[2026.10.16-15.35.22:924][  0]LogTextureEncodingSettings: Display: Oodle Texture Encode Speed settings: Fast: RDO Off Lambda=0, Effort=Normal Final: RDO Off Lambda=0, Effort=Normal
+[2026.10.16-15.35.22:924][  0]LogTextureEncodingSettings: Display: Shared linear texture encoding: Disabled
+[2026.10.16-15.35.23:308][  0]LogStreaming: Display: Flushing package /Engine/Functions/Engine_MaterialFunctions01/Shading/PowerToRoughness (state: WaitingForIo) recursively from another package /Engine/EngineMaterials/DefaultTextMaterialOpaque (state: CreateLinkerLoadExports) will result in a partially loaded package to avoid a deadlock.
+[2026.10.16-15.35.23:324][  0]LogStreaming: Display: Package /Engine/EngineMaterials/DefaultTextMaterialOpaque is adding a dynamic import to package /Engine/Functions/Engine_MaterialFunctions01/Shading/PowerToRoughness because of a recursive sync load
+[2026.10.16-15.35.23:324][  0]LogStreaming: Display: Flushing package /Engine/Functions/Engine_MaterialFunctions01/Shading/PowerToRoughness (state: DeferredPostLoad) recursively from another package /Engine/EngineMaterials/DefaultTextMaterialOpaque (state: CreateLinkerLoadExports) will result in a partially loaded package to avoid a deadlock.
+[2026.10.16-15.35.23:324][  0]LogStreaming: Display: Flushing package /Engine/Functions/Engine_MaterialFunctions01/Shading/ConvertFromDiffSpec (state: WaitingForIo) recursively from another package /Engine/EngineMaterials/DefaultTextMaterialOpaque (state: CreateLinkerLoadExports) will result in a partially loaded package to avoid a deadlock.
+[2026.10.16-15.35.23:324][  0]LogStreaming: Display: Package /Engine/EngineMaterials/DefaultTextMaterialOpaque is adding a dynamic import to package /Engine/Functions/Engine_MaterialFunctions01/Shading/ConvertFromDiffSpec because of a recursive sync load
+[2026.10.16-15.35.23:324][  0]LogStreaming: Display: Flushing package /Engine/Functions/Engine_MaterialFunctions01/Shading/ConvertFromDiffSpec (state: DeferredPostLoad) recursively from another package /Engine/EngineMaterials/DefaultTextMaterialOpaque (state: CreateLinkerLoadExports) will result in a partially loaded package to avoid a deadlock.
+[2026.10.16-15.35.23:324][  0]LogStreaming: Display: Flushing package /Engine/EngineMaterials/WorldGridMaterial (state: WaitingForIo) recursively from another package /Engine/EngineMaterials/DefaultTextMaterialOpaque (state: CreateLinkerLoadExports) will result in a partially loaded package to avoid a deadlock.
+[2026.10.16-15.35.23:449][  0]LogStreaming: Display: Package /Engine/EngineMaterials/DefaultTextMaterialOpaque is adding a dynamic import to package /Engine/EngineMaterials/T_Default_Material_Grid_M because of a recursive sync load
+[2026.10.16-15.35.23:449][  0]LogStreaming: Display: Package /Engine/EngineMaterials/DefaultTextMaterialOpaque is adding a dynamic import to package /Engine/EngineMaterials/T_Default_Material_Grid_N because of a recursive sync load
+[2026.10.16-15.35.23:452][  0]LogStreaming: Display: Package /Engine/EngineMaterials/DefaultTextMaterialOpaque is adding a dynamic import to package /Engine/Functions/Engine_MaterialFunctions01/Opacity/CameraDepthFade because of a recursive sync load
+[2026.10.16-15.35.23:454][  0]LogStreaming: Display: Flushing package /Engine/EngineMaterials/DefaultDeferredDecalMaterial (state: WaitingForIo) recursively from another package /Engine/EngineMaterials/WorldGridMaterial (state: CreateLinkerLoadExports) will result in a partially loaded package to avoid a deadlock.
+[2026.10.16-15.35.23:461][  0]LogStreaming: Display: Flushing package /Engine/EngineMaterials/DefaultLightFunctionMaterial (state: WaitingForIo) recursively from another package /Engine/EngineMaterials/DefaultDeferredDecalMaterial (state: CreateLinkerLoadExports) will result in a partially loaded package to avoid a deadlock.
+[2026.10.16-15.35.23:461][  0]LogStreaming: Display: Flushing package /Engine/EngineMaterials/DefaultPostProcessMaterial (state: WaitingForIo) recursively from another package /Engine/EngineMaterials/DefaultLightFunctionMaterial (state: CreateLinkerLoadExports) will result in a partially loaded package to avoid a deadlock.
+[2026.10.16-15.35.23:515][  0]LogStreaming: Display: Package /Engine/EngineMaterials/DefaultLightFunctionMaterial is adding a dynamic import to package /Engine/EngineMaterials/DefaultDiffuse because of a recursive sync load
+[2026.10.16-15.35.23:515][  0]LogStreaming: Display: Package /Engine/EngineMaterials/DefaultLightFunctionMaterial is adding a dynamic import to package /Engine/Functions/Engine_MaterialFunctions02/Utility/BreakOutFloat2Components because of a recursive sync load
+[2026.10.16-15.35.23:515][  0]LogStreaming: Display: Package /Engine/EngineMaterials/DefaultLightFunctionMaterial is adding a dynamic import to package /Engine/EngineMaterials/DefaultPostProcessMaterial because of a recursive sync load
+[2026.10.16-15.35.23:515][  0]LogStreaming: Display: Flushing package /Engine/EngineMaterials/DefaultPostProcessMaterial (state: DeferredPostLoad) recursively from another package /Engine/EngineMaterials/DefaultLightFunctionMaterial (state: CreateLinkerLoadExports) will result in a partially loaded package to avoid a deadlock.
+[2026.10.16-15.35.23:564][  0]LogStreaming: Display: Package /Engine/EngineMaterials/DefaultDeferredDecalMaterial is adding a dynamic import to package /Engine/EngineMaterials/DefaultLightFunctionMaterial because of a recursive sync load
+[2026.10.16-15.35.23:564][  0]LogStreaming: Display: Flushing package /Engine/EngineMaterials/DefaultLightFunctionMaterial (state: DeferredPostLoad) recursively from another package /Engine/EngineMaterials/DefaultDeferredDecalMaterial (state: CreateLinkerLoadExports) will result in a partially loaded package to avoid a deadlock.
+[2026.10.16-15.35.23:594][  0]LogStreaming: Display: Package /Engine/EngineMaterials/WorldGridMaterial is adding a dynamic import to package /Engine/EngineMaterials/DefaultDeferredDecalMaterial because of a recursive sync load
+[2026.10.16-15.35.23:594][  0]LogStreaming: Display: Flushing package /Engine/EngineMaterials/DefaultDeferredDecalMaterial (state: DeferredPostLoad) recursively from another package /Engine/EngineMaterials/WorldGridMaterial (state: CreateLinkerLoadExports) will result in a partially loaded package to avoid a deadlock.
+[2026.10.16-15.35.23:612][  0]LogStreaming: Display: Package /Engine/EngineMaterials/DefaultTextMaterialOpaque is adding a dynamic import to package /Engine/EngineMaterials/WorldGridMaterial because of a recursive sync load
+[2026.10.16-15.35.23:612][  0]LogStreaming: Display: Flushing package /Engine/EngineMaterials/WorldGridMaterial (state: DeferredPostLoad) recursively from another package /Engine/EngineMaterials/DefaultTextMaterialOpaque (state: CreateLinkerLoadExports) will result in a partially loaded package to avoid a deadlock.
+[2026.10.16-15.35.24:067][  0]LogMeshReduction: Display: Using QuadricMeshReduction for automatic static mesh reduction
+[2026.10.16-15.35.24:067][  0]LogMeshReduction: Display: Using SkeletalMeshReduction for automatic skeletal mesh reduction
+[2026.10.16-15.35.24:067][  0]LogMeshReduction: Display: Using ProxyLODMeshReduction for automatic mesh merging
+[2026.10.16-15.35.24:067][  0]LogMeshReduction: Display: No distributed automatic mesh merging module available
+[2026.10.16-15.35.28:159][  0]LogVirtualization: Display: VirtualizationSystem name found in ini file: None
+[2026.10.16-15.35.28:159][  0]LogVirtualization: Display: FNullVirtualizationSystem mounted, virtualization will be disabled
+[2026.10.16-15.35.28:175][  0]LogLiveCoding: Display: Starting LiveCoding
+[2026.10.16-15.35.28:175][  0]LogLiveCoding: Display: LiveCodingConsole Arguments: UnrealEditor Win64 Development
+[2026.10.16-15.35.28:175][  0]LogLiveCoding: Display: First instance in process group "UE_Jayadwara_0x277ccd45", spawning console
+[2026.10.16-15.35.28:194][  0]LogLiveCoding: Display: Waiting for server
+[2026.10.16-15.35.28:442][  0]LogWorldPartition: Display: FWorldPartitionClassDescRegistry::Initialize started...
+[2026.10.16-15.35.28:449][  0]LogWorldPartition: Display: FWorldPartitionClassDescRegistry::Initialize took 7.223 ms
+LogWindowsTouchpad: Display: CacheForceMaxTouchpadSensitivityMode SetMaxTouchpadSensitivity
+[2026.10.16-15.35.29:252][  0]LogUdpMessaging: Display: Work queue size set to 1024.
+[2026.10.16-15.35.29:253][  0]LogUdpMessaging: Display: Unicast socket bound to '0.0.0.0:58978'.
+[2026.10.16-15.35.29:258][  0]LogUdpMessaging: Display: Added local interface '192.168.1.28' to multicast group '230.0.0.1:6666'
+[2026.10.16-15.35.29:262][  0]LogUdpMessaging: Display: Using asynchronous task graph for message deserialization.
+LogLiveCodingServer: Display: Registered process C:\Program Files\Epic Games\UE_5.6\Engine\Binaries\Win64\UnrealEditor.exe (PID: 34296)
+[2026.10.16-15.35.29:603][  0]LogLiveCoding: Display: Successfully initialized, removing startup thread
+[2026.10.16-15.35.29:627][  0]LogMetaSound: Display: MetaSound Page Target Initialized to 'Default'
+[2026.10.16-15.35.29:628][  0]LogAudio: Display: Registering Engine Module Parameter Interfaces...
+[2026.10.16-15.35.31:464][  0]LogAudioCaptureCore: Display: No Audio Capture implementations found. Audio input will be silent.
+[2026.10.16-15.35.31:464][  0]LogAudioCaptureCore: Display: No Audio Capture implementations found. Audio input will be silent.
+[2026.10.16-15.35.31:848][  0]LogStreaming: Warning: Failed to read file '../../../Engine/Content/Slate/Common/ButtonHoverHint.png' error.
+[2026.10.16-15.35.31:848][  0]LogStreaming: Warning: Failed to read file '../../../Engine/Content/Slate/Icons/doc_16x.png' error.
+[2026.10.16-15.35.32:438][  0]LogStreaming: Warning: Failed to read file '../../../Engine/Platforms/VisionOS/Content/Editor/Slate/Launcher/Platform_VisionOS_24x.png' error.
+[2026.10.16-15.35.32:438][  0]LogStreaming: Warning: Failed to read file '../../../Engine/Platforms/VisionOS/Content/Editor/Slate/Launcher/Platform_VisionOS_128x.png' error.
+[2026.10.16-15.35.32:471][  0]LogStreaming: Warning: Failed to read file '../../../Engine/Content/Slate/Icons/doc_16x.png' error.
+[2026.10.16-15.35.32:471][  0]LogStreaming: Warning: Failed to read file '../../../Engine/Content/Slate/Common/ButtonHoverHint.png' error.
+[2026.10.16-15.35.32:837][  0]LogClass: Display: AttemptToFindUninitializedScriptStructMembers took more than 1ms to process ScriptStruct /Script/IrisCore.InstancedStructNetSerializerConfig. Time(ms): 1.1
+[2026.10.16-15.35.32:869][  0]LogClass: Display: AttemptToFindUninitializedScriptStructMembers took more than 1ms to process ScriptStruct /Script/HairStrandsCore.GroomDataflowSettings. Time(ms): 1.1
+[2026.10.16-15.35.32:885][  0]LogClass: Display: AttemptToFindUninitializedScriptStructMembers took more than 1ms to process ScriptStruct /Script/StateTreeModule.StateTreeRunParallelStateTreeTaskInstanceData. Time(ms): 1.2
+[2026.10.16-15.35.34:611][  0]LogTextureFormatOodle: Display: Oodle Texture loading DLL: oo2tex_win64_2.9.11.dll
+[2026.10.16-15.35.35:009][  0]LogTextureFormatOodle: Display: Oodle Texture loading DLL: oo2tex_win64_2.9.12.dll
+[2026.10.16-15.35.35:501][  0]LogAnalytics: Display: [UEEditor.Rocket.Release] AnalyticsET::StartSession ( APIServer = https://datarouter.ol.epicgames.com/datarouter/api/v1/public/data. AppVersion = 5.6.1-44394996+++UE5+Release-5.6 )
+[2026.10.16-15.35.35:513][  0]LogAudio: Display: Initializing Audio Device Manager...
+[2026.10.16-15.35.35:528][  0]LogAudio: Display: Loading Default Audio Settings Objects...
+[2026.10.16-15.35.35:528][  0]LogAudio: Display: No default SoundConcurrencyObject specified (or failed to load).
+[2026.10.16-15.35.35:528][  0]LogAudio: Display: Audio Device Manager Initialized
+[2026.10.16-15.35.35:528][  0]LogAudio: Display: Creating Audio Device:                 Id: 1, Scope: Shared, Realtime: True
+[2026.10.16-15.35.35:528][  0]LogAudioMixer: Display: Audio Mixer Platform Settings:
+[2026.10.16-15.35.35:528][  0]LogAudioMixer: Display: 	Sample Rate:						  48000
+[2026.10.16-15.35.35:528][  0]LogAudioMixer: Display: 	Callback Buffer Frame Size Requested: 1024
+[2026.10.16-15.35.35:528][  0]LogAudioMixer: Display: 	Callback Buffer Frame Size To Use:	  1024
+[2026.10.16-15.35.35:528][  0]LogAudioMixer: Display: 	Number of buffers to queue:			  1
+[2026.10.16-15.35.35:528][  0]LogAudioMixer: Display: 	Max Channels (voices):				  32
+[2026.10.16-15.35.35:528][  0]LogAudioMixer: Display: 	Number of Async Source Workers:		  4
+[2026.10.16-15.35.35:528][  0]LogAudio: Display: AudioDevice MaxSources: 32
+[2026.10.16-15.35.35:528][  0]LogAudio: Display: Audio Spatialization Plugin: None (built-in).
+[2026.10.16-15.35.35:528][  0]LogAudio: Display: Audio Reverb Plugin: None (built-in).
+[2026.10.16-15.35.35:528][  0]LogAudio: Display: Audio Occlusion Plugin: None (built-in).
+[2026.10.16-15.35.35:549][  0]LogAudioMixer: Display: Initializing audio mixer using platform API: 'XAudio2'
+[2026.10.16-15.35.36:078][  0]LogAudioMixer: Display: Using Audio Hardware Device Speakers (Realtek(R) Audio)
+[2026.10.16-15.35.36:084][  0]LogAudioMixer: Display: Initializing Sound Submixes...
+[2026.10.16-15.35.36:084][  0]LogAudioMixer: Display: Creating Master Submix 'MasterSubmixDefault'
+[2026.10.16-15.35.36:084][  0]LogAudioMixer: Display: Creating Master Submix 'MasterReverbSubmixDefault'
+[2026.10.16-15.35.36:091][  0]LogAudioMixer: Display: Output buffers initialized: Frames=1024, Channels=2, Samples=2048, InstanceID=1
+[2026.10.16-15.35.36:091][  0]LogAudioMixer: Display: Starting AudioMixerPlatformInterface::RunInternal(), InstanceID=1
+[2026.10.16-15.35.36:091][  0]LogAudioMixer: Display: FMixerPlatformXAudio2::SubmitBuffer() called for the first time. InstanceID=1
+[2026.10.16-15.35.36:091][  0]LogAudio: Display: Audio Device (ID: 1) registered with world 'Untitled'.
+[2026.10.16-15.35.36:111][  0]LogCsvProfiler: Display: Metadata set : largeworldcoordinates="1"
+[2026.10.16-15.35.38:558][  0]LogPython: Display: No pip-enabled plugins with python dependencies found, skipping
+[2026.10.16-15.35.39:332][  0]LogCore: Display: GameplayInsights module auto-connecting to local trace server...
+[2026.10.16-15.35.39:456][  0]LogInit: Display: Engine is initialized. Leaving FEngineLoop::Init()
+[2026.10.16-15.35.39:563][  0]LogAudio: Display: Audio Device unregistered from world 'None'.
+[2026.10.16-15.35.41:389][  0]LogAudio: Display: Audio Device (ID: 1) registered with world 'Test_Greybox'.
+[2026.10.16-15.35.41:682][  0]LogPlacementMode: Display: The Asset Registry is not yet fully loaded so some placeable classes might be missing.
+[2026.10.16-15.35.42:277][  0]LogPakFile: Display: Mounted Pak file 'C:/Program Files/Epic Games/UE_5.6/FeaturePacks/StarterContent.upack', mount point: 'root:/'
+[2026.10.16-15.35.42:279][  0]LogPakFile: Display: Mounted Pak file 'C:/Program Files/Epic Games/UE_5.6/FeaturePacks/TP_FirstPerson.upack', mount point: 'root:/'
+[2026.10.16-15.35.42:285][  0]LogPakFile: Display: Mounted Pak file 'C:/Program Files/Epic Games/UE_5.6/FeaturePacks/TP_FirstPersonBP.upack', mount point: 'root:/'
+[2026.10.16-15.35.42:292][  0]LogPakFile: Display: Mounted Pak file 'C:/Program Files/Epic Games/UE_5.6/FeaturePacks/TP_HandheldARBP.upack', mount point: 'root:/'
+[2026.10.16-15.35.42:302][  0]LogPakFile: Display: Mounted Pak file 'C:/Program Files/Epic Games/UE_5.6/FeaturePacks/TP_ThirdPerson.upack', mount point: 'root:/'
+[2026.10.16-15.35.42:303][  0]LogPakFile: Display: Mounted Pak file 'C:/Program Files/Epic Games/UE_5.6/FeaturePacks/TP_ThirdPersonBP.upack', mount point: 'root:/'
+[2026.10.16-15.35.42:313][  0]LogPakFile: Display: Mounted Pak file 'C:/Program Files/Epic Games/UE_5.6/FeaturePacks/TP_TopDown.upack', mount point: 'root:/'
+[2026.10.16-15.35.42:319][  0]LogPakFile: Display: Mounted Pak file 'C:/Program Files/Epic Games/UE_5.6/FeaturePacks/TP_TopDownBP.upack', mount point: 'root:/'
+[2026.10.16-15.35.42:329][  0]LogPakFile: Display: Mounted Pak file 'C:/Program Files/Epic Games/UE_5.6/FeaturePacks/TP_VehicleAdvBP.upack', mount point: 'root:/'
+[2026.10.16-15.35.42:329][  0]LogPakFile: Display: Mounted Pak file 'C:/Program Files/Epic Games/UE_5.6/FeaturePacks/TP_VirtualRealityBP.upack', mount point: 'root:/'
+[2026.10.16-15.35.44:750][  0]LogCsvProfiler: Display: Metadata set : streamingpoolsizemb="1000"
+[2026.10.16-15.35.44:933][  0]LogPython: Display: Running start-up script C:/Program Files/Epic Games/UE_5.6/Engine/Plugins/Animation/ControlRig/Content/Python/init_unreal.py... started...
+[2026.10.16-15.35.45:115][  0]LogPython: Display: Running start-up script C:/Program Files/Epic Games/UE_5.6/Engine/Plugins/Animation/ControlRig/Content/Python/init_unreal.py... took 182.156 ms
+[2026.10.16-15.35.45:223][  0]LoadErrors: Warning: While trying to load package /Game/Jayadwara/Characters/Aksa/Anims/Montages/AM_Aksa_Stagger, a dependent package /Game/Jayadwara/Characters/Aksa/Anims/Attack/A_Aksa_Stagger was not available. Additional explanatory information follows:
+FPackageName: Skipped package /Game/Jayadwara/Characters/Aksa/Anims/Attack/A_Aksa_Stagger has a valid, mounted, mount point but does not exist either on disk or in iostore. The uncooked file would be expected on disk at 'C:/repository/unreal_engine/jayadwara_hermes_maps_ep2/Content/Jayadwara/Characters/Aksa/Anims/Attack/A_Aksa_Stagger'. Perhaps it has been deleted or was not synced?
+
+[2026.10.16-15.35.45:225][  0]LogLiveCoding: Display: LiveCodingConsole Arguments: JayadwaraEditor Win64 Development
+LogLiveCodingServer: Display: Loading module C:\repository\unreal_engine\jayadwara_hermes_maps_ep2\Binaries\Win64\UnrealEditor-Jayadwara.dll (1.036 MB)
+LogLiveCodingServer: Display: Loading module C:\repository\unreal_engine\jayadwara_hermes_maps_ep2\Binaries\Win64\UnrealEditor-JayadwaraAnimNodes.dll (0.086 MB)
+LogLiveCodingServer: Display: Loading module C:\repository\unreal_engine\jayadwara_hermes_maps_ep2\Binaries\Win64\UnrealEditor-JayadwaraEditor.dll (0.140 MB)
+LogLiveCodingServer: Display: Loaded 3 module(s), 828 lazy load module(s), and 434 reserved page ranges (0.000s, 12 translation units)
+LogLiveCodingServer: Display: Live coding ready - Save changes and press Ctrl+Alt+F11 to re-compile code
+[2026.10.16-15.35.46:234][ 35]LogAssetRegistry: Display: Triggering cache save on discovery complete
+[2026.10.16-15.35.46:281][ 35]LogPlacementMode: Display: The Asset Registry is done with its initial scan, the list of placeable classes has been updated.
+[2026.10.16-15.35.46:295][ 35]LogStreaming: Display: FlushAsyncLoading(324): 1 QueuedPackages, 0 AsyncPackages
+[2026.10.16-15.35.46:782][ 37]LogAssetRegistry: Display: Asset registry cache written as 70.3 MiB to ../../../../../../repository/unreal_engine/jayadwara_hermes_maps_ep2/Intermediate/CachedAssetRegistry_*.bin
