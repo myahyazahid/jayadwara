@@ -1,0 +1,45 @@
+C:\repository\unreal_engine\jayadwara_hermes_maps_ep2\Hermes\Tools\maps_ep2_20_medan_blender.py:71: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m.use_nodes = True
+C:\repository\unreal_engine\jayadwara_hermes_maps_ep2\Hermes\Tools\maps_ep2_20_medan_blender.py:117: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  world.use_nodes = True
+00:15.563  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_maps_ep2\Hermes\Art\maps_ep2\Render\MK2_atas.png'
+00:15.985  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_maps_ep2\Hermes\Art\maps_ep2\Render\MK2_miring.png'
+[MK2] grid medan: x -700..700, y -600..400, sel 2.5 -> 561 x 401 = 224961 vertex
+[MK2] render engine: BLENDER_EEVEE
+[MK2] mesh medan: 224961 vertex, 224000 muka
+[MK2] jumlah muka per zona: {'Air': 11212, 'Rel': 5138, 'Jalan': 6746, 'Gudang': 9768, 'Paving': 59094, 'Kampung': 56574, 'Bantaran': 11932, 'Sawah': 63536}
+[MK2] kamera miring di (-1556, -1656, 1540), elevasi 35 deg, lens 40
+[MK2] render -> C:\repository\unreal_engine\jayadwara_hermes_maps_ep2\Hermes\Art\maps_ep2\Render\MK2_atas.png
+[MK2] render -> C:\repository\unreal_engine\jayadwara_hermes_maps_ep2\Hermes\Art\maps_ep2\Render\MK2_miring.png
+Info: Saved as "maps_ep2_medan_v02.blend"
+[MK2] simpan blend -> C:\repository\unreal_engine\jayadwara_hermes_maps_ep2\Hermes\Art\maps_ep2\maps_ep2_medan_v02.blend
+
+FBX export starting... 'C:\\repository\\unreal_engine\\jayadwara_hermes_maps_ep2\\Hermes\\Art\\maps_ep2\\Export\\SM_Ep02_Medan.fbx'
+export finished in 0.1623 sec.
+[MK2] ekspor FBX -> C:\repository\unreal_engine\jayadwara_hermes_maps_ep2\Hermes\Art\maps_ep2\Export\SM_Ep02_Medan.fbx | 2593 KB
+
+[MK2] UJI 14 TITIK: tinggi mesh (bilinear) vs elev (target |d| <= 0.05 m)
+titik                            elev   mesh_bil        d
+jalan_raya (0,155)               9.00       9.00    0.000
+blok_kota (200,300)              9.00       9.00    0.000
+pos_rt (-26,91)                  7.89       7.89   -0.000
+kampung_selatan (0,-40)          5.21       5.21    0.000
+puncak_tanggul (0,-53)           5.00       5.00    0.000
+bantaran (-420,-68)              3.50       3.50    0.000
+dasar_kali (0,-105)             -1.50      -1.50    0.000
+anak_kali (-505,-300)           -1.50      -1.50    0.000
+kampung_seberang (0,-230)        3.50       3.50    0.000
+lapangan_bola (-200,-414)        3.00       3.00    0.000
+gudang (525,60)                  6.00       6.00    0.000
+rel (-550,0)                    12.00      12.00    0.000
+rel_celah_jalan (-550,155)       9.00       9.00    0.000
+rel_celah_kali (-550,-105)      -1.50      -1.50    0.000
+[MK2] max |mesh - elev| = 0.000 m ; lulus <=0.05: 14/14
+
+[MK2] vertex medan = 224961 (target 224961): OK
+[MK2] PNG: True , True
+[MK2] FBX: True
+[MK2] SELESAI
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:37:04)
+
+Blender quit
