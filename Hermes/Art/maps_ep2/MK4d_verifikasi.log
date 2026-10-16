@@ -1,0 +1,16 @@
+[Info] [MK4d] level dimuat ulang dari disk: /Game/Hermes/MapsEp2/Maps/Test_Hermes_MapsEp2
+[Info] [MK4d] jumlah actor di level = 166
+[Info] [MK4d] objek: ada 145/145 ; alas dalam +/-5 cm: 145/145 ; selisih terburuk 0.0 cm
+[Info] [MK4d] tag: hancur=90 penalti_tinggi=61 penalti_normal=10 tanpa_penalti=19 blok_chaos=32 atap_naik=27 adikara=11 curian=6
+[Info] [MK4d] blok_chaos per deret: {'BLOK1': 4, 'BLOK2': 4, 'BLOK3': 4, 'BLOK4': 4, 'BLOK5': 4, 'BLOK6': 4, 'BLOK7': 4, 'BLOK8': 4}
+[Info] [MK4d] KAMPUNG_Musala* (1 actor) tanpa tag hancur: OK
+[Info] [MK4d] KAMPUNG_PosRT* (1 actor) tanpa tag hancur: OK
+[Info] [MK4d] REL_Jembatan* (3 actor) tanpa tag hancur: OK
+[Info] [MK4d] PINTUAIR_* (4 actor) tanpa tag hancur: OK
+[Info] [MK4d] JEMBATAN_* (6 actor) tanpa tag hancur: OK
+[Info] [MK4d] kelompok: 8 actor, total item = 1817 (target 1.817)
+[Info] [MK4d] pohon: 5 actor, batang 258, tajuk 258 (target 5/258/258) ; tiang 55 (target 55)
+[Info] [MK4d] gang utama x=-26 (y +138..-48) 1 m di atas tanah: BEBAS
+[Info] [MK4d] proxy draw call (komponen mesh) = 228 ; komponen ISM = 22
+[Info] [MK4d] CEK MK4d (keadaan tersimpan): LULUS
+[Info] [MK4d] WAKTU skrip MK4d: 0.2 s

@@ -1,0 +1,18 @@
+[Info] [MK4c] level dimuat: /Game/Hermes/MapsEp2/Maps/Test_Hermes_MapsEp2
+[Info] [MK4c] stat RHI dinyalakan di viewport (enable_stat_group)
+[Info] [MK4c] MK4c_1_gang: cam=(-26,140) z=10.5 m -> tgt=(-26,-40,4) fov=70 ; kecerahan rata-rata = 65.2/255 ; C:\repository\unreal_engine\jayadwara_hermes_maps_ep2\Hermes\Art\maps_ep2\Render\MK4c_1_gang.png
+[Info] [MK4c] MK4c_2_atap: cam=(-170,98) z=13.1 m -> tgt=(117,26,10) fov=75 ; kecerahan rata-rata = 95.8/255 ; C:\repository\unreal_engine\jayadwara_hermes_maps_ep2\Hermes\Art\maps_ep2\Render\MK4c_2_atap.png
+[Info] [MK4c] MK4c_3_jembatan: cam=(-105,-72) z=5.2 m -> tgt=(-105,-108,6) fov=70 ; kecerahan rata-rata = 110.6/255 ; C:\repository\unreal_engine\jayadwara_hermes_maps_ep2\Hermes\Art\maps_ep2\Render\MK4c_3_jembatan.png
+[Info] [MK4c] MK4c_4_gudang: cam=(485,-68) z=6.2 m -> tgt=(600,100,10) fov=70 ; kecerahan rata-rata = 108.3/255 ; C:\repository\unreal_engine\jayadwara_hermes_maps_ep2\Hermes\Art\maps_ep2\Render\MK4c_4_gudang.png
+[Info] [MK4c] MK4c_5_layang: cam=(-300,139) z=10.6 m -> tgt=(350,155,24) fov=70 ; kecerahan rata-rata = 89.1/255 ; C:\repository\unreal_engine\jayadwara_hermes_maps_ep2\Hermes\Art\maps_ep2\Render\MK4c_5_layang.png
+[Info] [MK4c] MK4c_6_45m: cam=(-380,-105) z=43.5 m -> tgt=(525,60,6) fov=70 ; kecerahan rata-rata = 112.6/255 ; C:\repository\unreal_engine\jayadwara_hermes_maps_ep2\Hermes\Art\maps_ep2\Render\MK4c_6_45m.png
+[Info] [MK4c] get_stat_exc_average('Draw Calls') = 0.0
+[Info] [MK4c] get_stat_inc_average('Draw Calls') = 0.0
+[Info] [MK4c] get_stat_exc_average('DrawCalls') = 0.0
+[Info] [MK4c] get_stat_inc_average('DrawCalls') = 0.0
+[Info] [MK4c] get_stat_exc_average('DrawPrimitiveCalls') = 0.0
+[Info] [MK4c] get_stat_inc_average('DrawPrimitiveCalls') = 0.0
+[Info] [MK4c] proxy draw call (jumlah komponen mesh berisi mesh) = 228
+[Info] [MK4c] WAKTU skrip MK4c: 3.0 s ; draw call dari stat = None
+[Info] [MK4c] kecerahan min = 65.2/255 (harus > 20)
+[Info] [MK4c] CEK MK4c: 6 png = 6 ; kecerahan>20 = True -> LULUS

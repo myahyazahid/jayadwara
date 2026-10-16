@@ -292,3 +292,886 @@ LogLiveCodingServer: Display: Live coding ready - Save changes and press Ctrl+Al
 [2026.10.16-15.38.44:865][436]LogShaderCompilers: Display: Material DDC Serialization Only: 0.00 s (1%)
 [2026.10.16-15.38.44:865][436]LogShaderCompilers: Display: Material Cache Hits: 13 (9%)
 [2026.10.16-15.38.44:865][436]LogShaderCompilers: Display: ================================================
+[2026.10.16-15.43.58:963][378]LogAudio: Display: Audio Device unregistered from world 'None'.
+[2026.10.16-15.43.58:967][378]LogStreaming: Display: FlushAsyncLoading(359): 1 QueuedPackages, 0 AsyncPackages
+[2026.10.16-15.43.58:973][378]LogAudio: Display: Audio Device (ID: 1) registered with world 'Test_Hermes_MapsEp2'.
+[2026.10.16-15.43.59:045][378]LogPython: Error: Traceback (most recent call last):
+[2026.10.16-15.43.59:045][378]LogPython: Error:   File "C:/repository/unreal_engine/jayadwara_hermes_maps_ep2/Hermes/Tools/maps_ep2_40_objek.py", line 428, in <module>
+[2026.10.16-15.43.59:045][378]LogPython: Error:     main()
+[2026.10.16-15.43.59:045][378]LogPython: Error:   File "C:/repository/unreal_engine/jayadwara_hermes_maps_ep2/Hermes/Tools/maps_ep2_40_objek.py", line 403, in main
+[2026.10.16-15.43.59:045][378]LogPython: Error:     if build_objek(o, mis):
+[2026.10.16-15.43.59:045][378]LogPython: Error:        ^^^^^^^^^^^^^^^^^^^
+[2026.10.16-15.43.59:045][378]LogPython: Error:   File "C:/repository/unreal_engine/jayadwara_hermes_maps_ep2/Hermes/Tools/maps_ep2_40_objek.py", line 235, in build_objek
+[2026.10.16-15.43.59:045][378]LogPython: Error:     cd.set_world_location(unreal.Vector(x * 100.0, -y * 100.0, (base + hw / 2.0) * 100.0))
+[2026.10.16-15.43.59:045][378]LogPython: Error: TypeError: set_world_location() required argument 'sweep' (pos 2) not found
+[2026.10.16-15.44.12:300][418]LogAudio: Display: Audio Device unregistered from world 'None'.
+[2026.10.16-15.44.12:302][418]LogStreaming: Display: FlushAsyncLoading(360): 1 QueuedPackages, 0 AsyncPackages
+[2026.10.16-15.44.12:304][418]LogAudio: Display: Audio Device (ID: 1) registered with world 'Test_Hermes_MapsEp2'.
+[2026.10.16-15.44.12:368][418]LogPython: Error: Traceback (most recent call last):
+[2026.10.16-15.44.12:368][418]LogPython: Error:   File "C:/repository/unreal_engine/jayadwara_hermes_maps_ep2/Hermes/Tools/maps_ep2_40_objek.py", line 428, in <module>
+[2026.10.16-15.44.12:368][418]LogPython: Error:     main()
+[2026.10.16-15.44.12:368][418]LogPython: Error:   File "C:/repository/unreal_engine/jayadwara_hermes_maps_ep2/Hermes/Tools/maps_ep2_40_objek.py", line 403, in main
+[2026.10.16-15.44.12:368][418]LogPython: Error:     if build_objek(o, mis):
+[2026.10.16-15.44.12:368][418]LogPython: Error:        ^^^^^^^^^^^^^^^^^^^
+[2026.10.16-15.44.12:368][418]LogPython: Error:   File "C:/repository/unreal_engine/jayadwara_hermes_maps_ep2/Hermes/Tools/maps_ep2_40_objek.py", line 235, in build_objek
+[2026.10.16-15.44.12:368][418]LogPython: Error:     cd.set_world_location(unreal.Vector(x * 100.0, -y * 100.0, (base + hw / 2.0) * 100.0), False)
+[2026.10.16-15.44.12:368][418]LogPython: Error: TypeError: set_world_location() required argument 'teleport' (pos 3) not found
+[2026.10.16-15.44.29:305][469]LogAudio: Display: Audio Device unregistered from world 'None'.
+[2026.10.16-15.44.29:308][469]LogStreaming: Display: FlushAsyncLoading(361): 1 QueuedPackages, 0 AsyncPackages
+[2026.10.16-15.44.29:310][469]LogAudio: Display: Audio Device (ID: 1) registered with world 'Test_Hermes_MapsEp2'.
+[2026.10.16-15.44.30:636][469]LogPython: Error: [MK4a] KAMPUNG_RumahKemalingan: alas actor -1.28 m != hitung 7.54 m (d=-882.4 cm)
+[2026.10.16-15.44.30:637][469]LogPython: Error: [MK4a] BLOK1_Rumah1: alas actor -1.28 m != hitung 5.05 m (d=-633.1 cm)
+[2026.10.16-15.44.30:637][469]LogPython: Error: [MK4a] BLOK1_Rumah2: alas actor -1.28 m != hitung 5.05 m (d=-633.1 cm)
+[2026.10.16-15.44.30:637][469]LogPython: Error: [MK4a] BLOK1_Rumah3: alas actor -1.28 m != hitung 5.05 m (d=-633.1 cm)
+[2026.10.16-15.44.30:638][469]LogPython: Error: [MK4a] BLOK1_Rumah4: alas actor -1.28 m != hitung 5.05 m (d=-633.1 cm)
+[2026.10.16-15.44.30:638][469]LogPython: Error: [MK4a] BLOK2_Rumah1: alas actor -1.28 m != hitung 5.05 m (d=-633.1 cm)
+[2026.10.16-15.44.30:638][469]LogPython: Error: [MK4a] BLOK2_Rumah2: alas actor -1.28 m != hitung 5.05 m (d=-633.1 cm)
+[2026.10.16-15.44.30:638][469]LogPython: Error: [MK4a] BLOK2_Rumah3: alas actor -1.28 m != hitung 5.05 m (d=-633.1 cm)
+[2026.10.16-15.44.30:639][469]LogPython: Error: [MK4a] BLOK2_Rumah4: alas actor -1.28 m != hitung 5.05 m (d=-633.1 cm)
+[2026.10.16-15.44.30:639][469]LogPython: Error: [MK4a] BLOK3_Rumah1: alas actor -1.28 m != hitung 5.05 m (d=-633.1 cm)
+[2026.10.16-15.44.30:639][469]LogPython: Error: [MK4a] BLOK3_Rumah2: alas actor -1.28 m != hitung 5.05 m (d=-633.1 cm)
+[2026.10.16-15.44.30:639][469]LogPython: Error: [MK4a] BLOK3_Rumah3: alas actor -1.28 m != hitung 5.05 m (d=-633.1 cm)
+[2026.10.16-15.44.30:639][469]LogPython: Error: [MK4a] BLOK3_Rumah4: alas actor -1.28 m != hitung 5.05 m (d=-633.1 cm)
+[2026.10.16-15.44.30:640][469]LogPython: Error: [MK4a] BLOK4_Rumah1: alas actor -1.28 m != hitung 5.05 m (d=-633.1 cm)
+[2026.10.16-15.44.30:640][469]LogPython: Error: [MK4a] BLOK4_Rumah2: alas actor -1.28 m != hitung 5.05 m (d=-633.1 cm)
+[2026.10.16-15.44.30:640][469]LogPython: Error: [MK4a] BLOK4_Rumah3: alas actor -1.28 m != hitung 5.05 m (d=-633.1 cm)
+[2026.10.16-15.44.30:641][469]LogPython: Error: [MK4a] BLOK4_Rumah4: alas actor -1.28 m != hitung 5.05 m (d=-633.1 cm)
+[2026.10.16-15.44.30:641][469]LogPython: Error: [MK4a] BLOK5_Rumah1: alas actor -1.28 m != hitung 8.66 m (d=-994.2 cm)
+[2026.10.16-15.44.30:641][469]LogPython: Error: [MK4a] BLOK5_Rumah2: alas actor -1.28 m != hitung 8.66 m (d=-994.2 cm)
+[2026.10.16-15.44.30:642][469]LogPython: Error: [MK4a] BLOK5_Rumah3: alas actor -1.28 m != hitung 8.66 m (d=-994.2 cm)
+[2026.10.16-15.44.30:642][469]LogPython: Error: [MK4a] BLOK5_Rumah4: alas actor -1.28 m != hitung 8.66 m (d=-994.2 cm)
+[2026.10.16-15.44.30:643][469]LogPython: Error: [MK4a] BLOK6_Rumah1: alas actor -1.28 m != hitung 8.66 m (d=-994.2 cm)
+[2026.10.16-15.44.30:643][469]LogPython: Error: [MK4a] BLOK6_Rumah2: alas actor -1.28 m != hitung 8.66 m (d=-994.2 cm)
+[2026.10.16-15.44.30:643][469]LogPython: Error: [MK4a] BLOK6_Rumah3: alas actor -1.28 m != hitung 8.66 m (d=-994.2 cm)
+[2026.10.16-15.44.30:644][469]LogPython: Error: [MK4a] BLOK6_Rumah4: alas actor -1.28 m != hitung 8.66 m (d=-994.2 cm)
+[2026.10.16-15.44.30:644][469]LogPython: Error: [MK4a] BLOK7_Rumah1: alas actor -1.28 m != hitung 8.66 m (d=-994.2 cm)
+[2026.10.16-15.44.30:644][469]LogPython: Error: [MK4a] BLOK7_Rumah2: alas actor -1.28 m != hitung 8.66 m (d=-994.2 cm)
+[2026.10.16-15.44.30:645][469]LogPython: Error: [MK4a] BLOK7_Rumah3: alas actor -1.28 m != hitung 8.66 m (d=-994.2 cm)
+[2026.10.16-15.44.30:645][469]LogPython: Error: [MK4a] BLOK7_Rumah4: alas actor -1.28 m != hitung 8.66 m (d=-994.2 cm)
+[2026.10.16-15.44.30:645][469]LogPython: Error: [MK4a] BLOK8_Rumah1: alas actor -1.28 m != hitung 8.66 m (d=-994.2 cm)
+[2026.10.16-15.44.30:645][469]LogPython: Error: [MK4a] BLOK8_Rumah2: alas actor -1.28 m != hitung 8.66 m (d=-994.2 cm)
+[2026.10.16-15.44.30:646][469]LogPython: Error: [MK4a] BLOK8_Rumah3: alas actor -1.28 m != hitung 8.66 m (d=-994.2 cm)
+[2026.10.16-15.44.30:647][469]LogPython: Error: [MK4a] BLOK8_Rumah4: alas actor -1.28 m != hitung 8.66 m (d=-994.2 cm)
+[2026.10.16-15.44.30:647][469]LogPython: Error: [MK4a] ATAP_Naik01: alas actor -1.28 m != hitung 7.95 m (d=-922.8 cm)
+[2026.10.16-15.44.30:647][469]LogPython: Error: [MK4a] ATAP_Naik02: alas actor -1.28 m != hitung 7.95 m (d=-922.8 cm)
+[2026.10.16-15.44.30:647][469]LogPython: Error: [MK4a] ATAP_Naik03: alas actor -1.28 m != hitung 7.95 m (d=-922.8 cm)
+[2026.10.16-15.44.30:648][469]LogPython: Error: [MK4a] ATAP_Naik06: alas actor -1.28 m != hitung 7.69 m (d=-896.7 cm)
+[2026.10.16-15.44.30:648][469]LogPython: Error: [MK4a] ATAP_Naik07: alas actor -1.28 m != hitung 7.55 m (d=-883.2 cm)
+[2026.10.16-15.44.30:649][469]LogPython: Error: [MK4a] ATAP_Naik08: alas actor -1.28 m != hitung 7.41 m (d=-869.4 cm)
+[2026.10.16-15.44.30:649][469]LogPython: Error: [MK4a] ATAP_Naik09: alas actor -1.28 m != hitung 7.28 m (d=-855.7 cm)
+[2026.10.16-15.44.30:649][469]LogPython: Error: [MK4a] ATAP_Naik10: alas actor -1.28 m != hitung 7.14 m (d=-842.2 cm)
+[2026.10.16-15.44.30:650][469]LogPython: Error: [MK4a] ATAP_Naik11: alas actor -1.28 m != hitung 7.00 m (d=-828.4 cm)
+[2026.10.16-15.44.30:650][469]LogPython: Error: [MK4a] ATAP_Naik12: alas actor -1.28 m != hitung 6.87 m (d=-815.1 cm)
+[2026.10.16-15.44.30:650][469]LogPython: Error: [MK4a] ATAP_Naik15: alas actor -1.28 m != hitung 6.61 m (d=-789.4 cm)
+[2026.10.16-15.44.30:651][469]LogPython: Error: [MK4a] ATAP_Naik16: alas actor -1.28 m != hitung 6.55 m (d=-783.3 cm)
+[2026.10.16-15.44.30:651][469]LogPython: Error: [MK4a] ATAP_Naik17: alas actor -1.28 m != hitung 6.55 m (d=-783.3 cm)
+[2026.10.16-15.44.30:651][469]LogPython: Error: [MK4a] ATAP_Naik18: alas actor -1.28 m != hitung 6.55 m (d=-783.3 cm)
+[2026.10.16-15.44.30:652][469]LogPython: Error: [MK4a] ATAP_Naik20: alas actor -1.28 m != hitung 6.55 m (d=-783.3 cm)
+[2026.10.16-15.44.30:652][469]LogPython: Error: [MK4a] ATAP_Naik21: alas actor -1.28 m != hitung 6.55 m (d=-783.3 cm)
+[2026.10.16-15.44.30:652][469]LogPython: Error: [MK4a] ATAP_Naik22: alas actor -1.28 m != hitung 6.55 m (d=-783.3 cm)
+[2026.10.16-15.44.30:653][469]LogPython: Error: [MK4a] ATAP_Naik23: alas actor -1.28 m != hitung 6.55 m (d=-783.3 cm)
+[2026.10.16-15.44.30:653][469]LogPython: Error: [MK4a] ATAP_Naik24: alas actor -1.28 m != hitung 6.55 m (d=-783.3 cm)
+[2026.10.16-15.44.30:653][469]LogPython: Error: [MK4a] ATAP_Naik26: alas actor -1.28 m != hitung 6.54 m (d=-781.8 cm)
+[2026.10.16-15.44.30:654][469]LogPython: Error: [MK4a] ATAP_Naik27: alas actor -1.28 m != hitung 6.53 m (d=-780.6 cm)
+[2026.10.16-15.44.30:654][469]LogPython: Error: [MK4a] ATAP_Naik28: alas actor -1.28 m != hitung 6.51 m (d=-779.2 cm)
+[2026.10.16-15.44.30:654][469]LogPython: Error: [MK4a] ATAP_Naik29: alas actor -1.28 m != hitung 6.50 m (d=-777.7 cm)
+[2026.10.16-15.44.30:655][469]LogPython: Error: [MK4a] ATAP_Naik30: alas actor -1.28 m != hitung 6.49 m (d=-776.5 cm)
+[2026.10.16-15.44.30:655][469]LogPython: Error: [MK4a] ATAP_Naik32: alas actor -1.28 m != hitung 6.47 m (d=-775.1 cm)
+[2026.10.16-15.44.30:655][469]LogPython: Error: [MK4a] ATAP_Naik33: alas actor -1.28 m != hitung 6.47 m (d=-775.1 cm)
+[2026.10.16-15.44.30:656][469]LogPython: Error: [MK4a] ATAP_Naik34: alas actor -1.28 m != hitung 6.47 m (d=-775.1 cm)
+[2026.10.16-15.44.30:767][469]LogPython: Error: Traceback (most recent call last):
+[2026.10.16-15.44.30:767][469]LogPython: Error:   File "C:/repository/unreal_engine/jayadwara_hermes_maps_ep2/Hermes/Tools/maps_ep2_40_objek.py", line 428, in <module>
+[2026.10.16-15.44.30:767][469]LogPython: Error:     main()
+[2026.10.16-15.44.30:767][469]LogPython: Error:   File "C:/repository/unreal_engine/jayadwara_hermes_maps_ep2/Hermes/Tools/maps_ep2_40_objek.py", line 408, in main
+[2026.10.16-15.44.30:767][469]LogPython: Error:     test_gang()
+[2026.10.16-15.44.30:767][469]LogPython: Error:   File "C:/repository/unreal_engine/jayadwara_hermes_maps_ep2/Hermes/Tools/maps_ep2_40_objek.py", line 370, in test_gang
+[2026.10.16-15.44.30:767][469]LogPython: Error:     tup = res.to_tuple()
+[2026.10.16-15.44.30:767][469]LogPython: Error:           ^^^^^^^^^^^^
+[2026.10.16-15.44.30:767][469]LogPython: Error: AttributeError: 'NoneType' object has no attribute 'to_tuple'
+[2026.10.16-15.45.06:154][564]LogAudio: Display: Audio Device unregistered from world 'None'.
+[2026.10.16-15.45.06:161][564]LogStreaming: Display: FlushAsyncLoading(362): 1 QueuedPackages, 0 AsyncPackages
+[2026.10.16-15.45.06:163][564]LogAudio: Display: Audio Device (ID: 1) registered with world 'Test_Hermes_MapsEp2'.
+[2026.10.16-15.45.45:485][682]LogAudio: Display: Audio Device unregistered from world 'None'.
+[2026.10.16-15.45.45:489][682]LogStreaming: Display: FlushAsyncLoading(363): 1 QueuedPackages, 0 AsyncPackages
+[2026.10.16-15.45.45:491][682]LogAudio: Display: Audio Device (ID: 1) registered with world 'Test_Hermes_MapsEp2'.
+[2026.10.16-15.46.24:149][798]LogAudio: Display: Audio Device unregistered from world 'None'.
+[2026.10.16-15.46.24:151][798]LogStreaming: Display: FlushAsyncLoading(364): 1 QueuedPackages, 0 AsyncPackages
+[2026.10.16-15.46.24:153][798]LogAudio: Display: Audio Device (ID: 1) registered with world 'Test_Hermes_MapsEp2'.
+[2026.10.16-15.46.24:195][798]LogPython: Error: Traceback (most recent call last):
+[2026.10.16-15.46.24:195][798]LogPython: Error:   File "C:/repository/unreal_engine/jayadwara_hermes_maps_ep2/Hermes/Tools/_probe_rumah2.py", line 52, in <module>
+[2026.10.16-15.46.24:195][798]LogPython: Error:     dump("A bare-Actor", a)
+[2026.10.16-15.46.24:195][798]LogPython: Error:   File "C:/repository/unreal_engine/jayadwara_hermes_maps_ep2/Hermes/Tools/_probe_rumah2.py", line 23, in dump
+[2026.10.16-15.46.24:195][798]LogPython: Error:     b = c.bounds
+[2026.10.16-15.46.24:195][798]LogPython: Error:         ^^^^^^^^
+[2026.10.16-15.46.24:195][798]LogPython: Error: AttributeError: 'BillboardComponent' object has no attribute 'bounds'
+[2026.10.16-15.46.52:155][882]LogAudio: Display: Audio Device unregistered from world 'None'.
+[2026.10.16-15.46.52:158][882]LogStreaming: Display: FlushAsyncLoading(365): 1 QueuedPackages, 0 AsyncPackages
+[2026.10.16-15.46.52:161][882]LogAudio: Display: Audio Device (ID: 1) registered with world 'Test_Hermes_MapsEp2'.
+[2026.10.16-15.46.52:204][882]LogPython: Error: Traceback (most recent call last):
+[2026.10.16-15.46.52:204][882]LogPython: Error:   File "C:/repository/unreal_engine/jayadwara_hermes_maps_ep2/Hermes/Tools/_probe_rumah3.py", line 61, in <module>
+[2026.10.16-15.46.52:204][882]LogPython: Error:     dump("B StaticMeshActor+anak", b)
+[2026.10.16-15.46.52:204][882]LogPython: Error:   File "C:/repository/unreal_engine/jayadwara_hermes_maps_ep2/Hermes/Tools/_probe_rumah3.py", line 25, in dump
+[2026.10.16-15.46.52:204][882]LogPython: Error:     b = c.bounds
+[2026.10.16-15.46.52:204][882]LogPython: Error:         ^^^^^^^^
+[2026.10.16-15.46.52:204][882]LogPython: Error: AttributeError: 'StaticMeshComponent' object has no attribute 'bounds'
+[2026.10.16-15.47.07:489][928]LogAudio: Display: Audio Device unregistered from world 'None'.
+[2026.10.16-15.47.07:491][928]LogStreaming: Display: FlushAsyncLoading(366): 1 QueuedPackages, 0 AsyncPackages
+[2026.10.16-15.47.07:493][928]LogAudio: Display: Audio Device (ID: 1) registered with world 'Test_Hermes_MapsEp2'.
+[2026.10.16-15.47.07:540][928]LogPython: Error: Traceback (most recent call last):
+[2026.10.16-15.47.07:540][928]LogPython: Error:   File "C:/repository/unreal_engine/jayadwara_hermes_maps_ep2/Hermes/Tools/_probe_rumah4.py", line 73, in <module>
+[2026.10.16-15.47.07:540][928]LogPython: Error:     z.destroy_component()
+[2026.10.16-15.47.07:540][928]LogPython: Error: TypeError: destroy_component() required argument 'object' (pos 1) not found
+[2026.10.16-15.47.43:835][ 37]LogAudio: Display: Audio Device unregistered from world 'None'.
+[2026.10.16-15.47.43:837][ 37]LogStreaming: Display: FlushAsyncLoading(367): 1 QueuedPackages, 0 AsyncPackages
+[2026.10.16-15.47.43:840][ 37]LogAudio: Display: Audio Device (ID: 1) registered with world 'Test_Hermes_MapsEp2'.
+[2026.10.16-15.47.44:955][ 38]LogContentValidation: Display: Starting to validate 1 assets
+[2026.10.16-15.51.07:649][646]LogAudio: Display: Audio Device unregistered from world 'None'.
+[2026.10.16-15.51.07:654][646]LogStreaming: Display: FlushAsyncLoading(368): 1 QueuedPackages, 0 AsyncPackages
+[2026.10.16-15.51.07:670][646]LogAudio: Display: Audio Device (ID: 1) registered with world 'Test_Hermes_MapsEp2'.
+[2026.10.16-15.51.09:246][646]LogMaterial: Display: Material /Game/Hermes/MapsEp2/Materials/MI_Ep02_Rumah.MI_Ep02_Rumah needed to have new flag set bUsedWithInstancedStaticMeshes !
+[2026.10.16-15.51.09:471][647]LogContentValidation: Display: Starting to validate 1 assets
+[2026.10.16-15.51.09:532][647]LogNavigation: Warning: FNavigationOctree::AddNode: Empty bounds, ignoring InstancedStaticMeshComponent /Game/Hermes/MapsEp2/Maps/Test_Hermes_MapsEp2.Test_Hermes_MapsEp2:PersistentLevel.Actor_0.Dinding.
+[2026.10.16-15.51.09:532][647]LogNavigation: Warning: FNavigationOctree::AddNode: Empty bounds, ignoring InstancedStaticMeshComponent /Game/Hermes/MapsEp2/Maps/Test_Hermes_MapsEp2.Test_Hermes_MapsEp2:PersistentLevel.Actor_0.Atap.
+[2026.10.16-15.51.09:532][647]LogNavigation: Warning: FNavigationOctree::AddNode: Empty bounds, ignoring InstancedStaticMeshComponent /Game/Hermes/MapsEp2/Maps/Test_Hermes_MapsEp2.Test_Hermes_MapsEp2:PersistentLevel.Actor_1.Dinding.
+[2026.10.16-15.51.09:532][647]LogNavigation: Warning: FNavigationOctree::AddNode: Empty bounds, ignoring InstancedStaticMeshComponent /Game/Hermes/MapsEp2/Maps/Test_Hermes_MapsEp2.Test_Hermes_MapsEp2:PersistentLevel.Actor_1.Atap.
+[2026.10.16-15.51.09:532][647]LogNavigation: Warning: FNavigationOctree::AddNode: Empty bounds, ignoring InstancedStaticMeshComponent /Game/Hermes/MapsEp2/Maps/Test_Hermes_MapsEp2.Test_Hermes_MapsEp2:PersistentLevel.Actor_2.Dinding.
+[2026.10.16-15.51.09:532][647]LogNavigation: Warning: FNavigationOctree::AddNode: Empty bounds, ignoring InstancedStaticMeshComponent /Game/Hermes/MapsEp2/Maps/Test_Hermes_MapsEp2.Test_Hermes_MapsEp2:PersistentLevel.Actor_2.Atap.
+[2026.10.16-15.51.09:532][647]LogNavigation: Warning: FNavigationOctree::AddNode: Empty bounds, ignoring InstancedStaticMeshComponent /Game/Hermes/MapsEp2/Maps/Test_Hermes_MapsEp2.Test_Hermes_MapsEp2:PersistentLevel.Actor_3.Badan.
+[2026.10.16-15.51.09:532][647]LogNavigation: Warning: FNavigationOctree::AddNode: Empty bounds, ignoring InstancedStaticMeshComponent /Game/Hermes/MapsEp2/Maps/Test_Hermes_MapsEp2.Test_Hermes_MapsEp2:PersistentLevel.Actor_4.Badan.
+[2026.10.16-15.51.09:532][647]LogNavigation: Warning: FNavigationOctree::AddNode: Empty bounds, ignoring InstancedStaticMeshComponent /Game/Hermes/MapsEp2/Maps/Test_Hermes_MapsEp2.Test_Hermes_MapsEp2:PersistentLevel.Actor_5.Badan.
+[2026.10.16-15.51.09:532][647]LogNavigation: Warning: FNavigationOctree::AddNode: Empty bounds, ignoring InstancedStaticMeshComponent /Game/Hermes/MapsEp2/Maps/Test_Hermes_MapsEp2.Test_Hermes_MapsEp2:PersistentLevel.Actor_6.Badan.
+[2026.10.16-15.51.09:532][647]LogNavigation: Warning: FNavigationOctree::AddNode: Empty bounds, ignoring InstancedStaticMeshComponent /Game/Hermes/MapsEp2/Maps/Test_Hermes_MapsEp2.Test_Hermes_MapsEp2:PersistentLevel.Actor_7.Badan.
+[2026.10.16-15.51.09:532][647]LogNavigation: Warning: FNavigationOctree::AddNode: Empty bounds, ignoring InstancedStaticMeshComponent /Game/Hermes/MapsEp2/Maps/Test_Hermes_MapsEp2.Test_Hermes_MapsEp2:PersistentLevel.Actor_8.Batang.
+[2026.10.16-15.51.09:532][647]LogNavigation: Warning: FNavigationOctree::AddNode: Empty bounds, ignoring InstancedStaticMeshComponent /Game/Hermes/MapsEp2/Maps/Test_Hermes_MapsEp2.Test_Hermes_MapsEp2:PersistentLevel.Actor_9.Batang.
+[2026.10.16-15.51.09:532][647]LogNavigation: Warning: FNavigationOctree::AddNode: Empty bounds, ignoring InstancedStaticMeshComponent /Game/Hermes/MapsEp2/Maps/Test_Hermes_MapsEp2.Test_Hermes_MapsEp2:PersistentLevel.Actor_10.Batang.
+[2026.10.16-15.51.09:532][647]LogNavigation: Warning: FNavigationOctree::AddNode: Empty bounds, ignoring InstancedStaticMeshComponent /Game/Hermes/MapsEp2/Maps/Test_Hermes_MapsEp2.Test_Hermes_MapsEp2:PersistentLevel.Actor_11.Batang.
+[2026.10.16-15.51.09:532][647]LogNavigation: Warning: FNavigationOctree::AddNode: Empty bounds, ignoring InstancedStaticMeshComponent /Game/Hermes/MapsEp2/Maps/Test_Hermes_MapsEp2.Test_Hermes_MapsEp2:PersistentLevel.Actor_12.Batang.
+[2026.10.16-15.51.09:532][647]LogNavigation: Warning: FNavigationOctree::AddNode: Empty bounds, ignoring InstancedStaticMeshComponent /Game/Hermes/MapsEp2/Maps/Test_Hermes_MapsEp2.Test_Hermes_MapsEp2:PersistentLevel.Actor_13.Tiang.
+[2026.10.16-15.52.53:632][ 16]LogAudio: Display: Audio Device unregistered from world 'None'.
+[2026.10.16-15.52.53:639][ 16]LogStreaming: Display: FlushAsyncLoading(369): 1 QueuedPackages, 0 AsyncPackages
+[2026.10.16-15.52.53:652][ 16]LogAudio: Display: Audio Device (ID: 1) registered with world 'Test_Hermes_MapsEp2'.
+[2026.10.16-15.52.53:719][ 16]LogPython: Error: [MK4c] enable_stat_group(RHI) gagal: AutomationLibrary: Failed to convert parameter 'world_context_object' when calling function 'AutomationBlueprintFunctionLibrary.EnableStatGroup' on 'Default__AutomationBlueprintFunctionLibrary'
+  TypeError: NativizeProperty: Cannot nativize 'str' as 'WorldContextObject' (ObjectProperty)
+    TypeError: NativizeObject: Cannot nativize 'str' as 'Object' (allowed Class type: 'Object')
+[2026.10.16-15.52.53:721][ 16]PIE: Warning: Could not find stat data for RHI, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.52.53:721][ 16]AutomationFunctionLibrary: Warning: Could not find stat data for RHI, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.52.53:721][ 16]PIE: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.52.53:721][ 16]AutomationFunctionLibrary: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.52.53:721][ 16]PIE: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.52.53:721][ 16]AutomationFunctionLibrary: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.52.53:722][ 16]PIE: Warning: Could not find stat data for MeshDrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.52.53:722][ 16]AutomationFunctionLibrary: Warning: Could not find stat data for MeshDrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.52.53:722][ 16]LogPython: Error: Traceback (most recent call last):
+[2026.10.16-15.52.53:722][ 16]LogPython: Error:   File "C:/repository/unreal_engine/jayadwara_hermes_maps_ep2/Hermes/Tools/maps_ep2_42_gambar.py", line 175, in <module>
+[2026.10.16-15.52.53:723][ 16]LogPython: Error:     main()
+[2026.10.16-15.52.53:723][ 16]LogPython: Error:   File "C:/repository/unreal_engine/jayadwara_hermes_maps_ep2/Hermes/Tools/maps_ep2_42_gambar.py", line 163, in main
+[2026.10.16-15.52.53:723][ 16]LogPython: Error:     terang.append(render(nama, cam, tinggi, tgt, fov))
+[2026.10.16-15.52.53:723][ 16]LogPython: Error:                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2026.10.16-15.52.53:723][ 16]LogPython: Error:   File "C:/repository/unreal_engine/jayadwara_hermes_maps_ep2/Hermes/Tools/maps_ep2_42_gambar.py", line 78, in render
+[2026.10.16-15.52.53:723][ 16]LogPython: Error:     cz = z_atas(cam[0], cam[1]) + tinggi
+[2026.10.16-15.52.53:723][ 16]LogPython: Error:          ^^^^^^^^^^^^^^^^^^^^^^
+[2026.10.16-15.52.53:723][ 16]LogPython: Error:   File "C:/repository/unreal_engine/jayadwara_hermes_maps_ep2/Hermes/Tools/maps_ep2_42_gambar.py", line 73, in z_atas
+[2026.10.16-15.52.53:723][ 16]LogPython: Error:     return (tup[8].z if tup[8] is not None else M.elev(x, y) * 100.0) / 100.0
+[2026.10.16-15.52.53:723][ 16]LogPython: Error:             ^^^^^^^^
+[2026.10.16-15.52.53:723][ 16]LogPython: Error: AttributeError: 'PhysicalMaterial' object has no attribute 'z'
+[2026.10.16-15.53.22:971][104]LogAudio: Display: Audio Device unregistered from world 'None'.
+[2026.10.16-15.53.22:977][104]LogStreaming: Display: FlushAsyncLoading(370): 1 QueuedPackages, 0 AsyncPackages
+[2026.10.16-15.53.22:989][104]LogAudio: Display: Audio Device (ID: 1) registered with world 'Test_Hermes_MapsEp2'.
+[2026.10.16-15.53.23:054][104]LogPython: Error: [MK4c] enable_stat_group(RHI) gagal: enable_stat_group() takes at most 2 arguments (3 given)
+[2026.10.16-15.53.23:151][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.23:151][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.23:151][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.23:151][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.23:151][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.23:151][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.23:151][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.23:151][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.23:869][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.23:869][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.23:869][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.23:869][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.23:869][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.23:869][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.23:869][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.23:869][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.24:281][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.24:281][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.24:281][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.24:281][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.24:281][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.24:281][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.24:281][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.24:281][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.24:702][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.24:702][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.24:702][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.24:702][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.24:702][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.24:702][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.24:702][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.24:703][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.25:105][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.25:105][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.25:105][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.25:105][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.25:105][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.25:105][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.25:105][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.25:105][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.25:453][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.25:454][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.25:454][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.25:454][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.25:454][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.25:454][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.25:454][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.25:454][104]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.53.25:891][104]PIE: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.53.25:891][104]AutomationFunctionLibrary: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.53.25:891][104]PIE: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.53.25:891][104]AutomationFunctionLibrary: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.53.25:891][104]PIE: Warning: Could not find stat data for RHI.DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.53.25:891][104]AutomationFunctionLibrary: Warning: Could not find stat data for RHI.DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.53.25:891][104]PIE: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.53.25:891][104]AutomationFunctionLibrary: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.53.25:891][104]PIE: Warning: Could not find stat data for RHI.DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.53.25:891][104]AutomationFunctionLibrary: Warning: Could not find stat data for RHI.DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.53.25:891][104]PIE: Warning: Could not find stat data for MeshDrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.53.25:891][104]AutomationFunctionLibrary: Warning: Could not find stat data for MeshDrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.53.25:891][104]PIE: Warning: Could not find stat data for BasePassDrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.53.25:891][104]AutomationFunctionLibrary: Warning: Could not find stat data for BasePassDrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.53.25:891][104]PIE: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.53.25:891][104]AutomationFunctionLibrary: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.53.25:891][104]PIE: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.53.25:891][104]AutomationFunctionLibrary: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.53.25:891][104]PIE: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.53.25:891][104]AutomationFunctionLibrary: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.53.25:891][104]PIE: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.53.25:891][104]AutomationFunctionLibrary: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.53.25:891][104]PIE: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.53.25:891][104]AutomationFunctionLibrary: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.53.25:891][104]PIE: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.53.25:891][104]AutomationFunctionLibrary: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.53.25:892][104]LogPython: Warning: [MK4c] masalah: enable_stat_group(RHI) gagal: enable_stat_group() takes at most 2 arguments (3 given)
+[2026.10.16-15.53.26:243][107]LogStats: Display: There is no thread with id: 24048. Please add thread metadata for this thread.
+[2026.10.16-15.53.45:561][164]LogShaderCompilers: Display: ================================================
+[2026.10.16-15.53.45:561][164]LogShaderCompilers: Display: === FShaderJobCache stats ===
+[2026.10.16-15.53.45:561][164]LogShaderCompilers: Display: Total job queries 425, among them cache hits 28 (6.59%), DDC hits 310 (72.94%), Duplicates 75 (17.65%)
+[2026.10.16-15.53.45:561][164]LogShaderCompilers: Display: Tracking 322 distinct input hashes that result in 228 distinct outputs (70.81%)
+[2026.10.16-15.53.45:561][164]LogShaderCompilers: Display: RAM used: 3.16 MiB of 1.20 GiB budget. Usage: 0.26%
+[2026.10.16-15.53.45:561][164]LogShaderCompilers: Display: === Shader Compilation stats ===
+[2026.10.16-15.53.45:561][164]LogShaderCompilers: Display: Shaders Compiled: 12
+[2026.10.16-15.53.45:561][164]LogShaderCompilers: Display: Jobs assigned 12, completed 12 (100%)
+[2026.10.16-15.53.45:561][164]LogShaderCompilers: Display: Average time worker was idle: 860.56 s
+[2026.10.16-15.53.45:561][164]LogShaderCompilers: Display: Time job spent in pending queue: average 0.04 s, longest 0.07 s
+[2026.10.16-15.53.45:561][164]LogShaderCompilers: Display: Job execution time: average 1.07 s, max 1.55 s
+[2026.10.16-15.53.45:561][164]LogShaderCompilers: Display: Job life time (pending + execution): average 1.11 s, max 1.61
+[2026.10.16-15.53.45:561][164]LogShaderCompilers: Display: Shader code size: total 108.662 KiB, numShaders 12, average 9.055 KiB, min 4.379 KiB, max 12.526 KiB
+[2026.10.16-15.53.45:561][164]LogShaderCompilers: Display: Time at least one job was in flight (either pending or executed): 2.91 s
+[2026.10.16-15.53.45:561][164]LogShaderCompilers: Display: Mutex wait stall in FShaderJobCache::SubmitJobs:  0.02%
+[2026.10.16-15.53.45:561][164]LogShaderCompilers: Display: Jobs were issued in 12 batches (only local compilation was used), average 1.00 jobs/batch
+[2026.10.16-15.53.45:561][164]LogShaderCompilers: Display: Average processing rate: 4.13 jobs/sec
+[2026.10.16-15.53.45:561][164]LogShaderCompilers: Display: Total thread time: 8.869 s
+[2026.10.16-15.53.45:561][164]LogShaderCompilers: Display: Total thread preprocess time: 7.618 s
+[2026.10.16-15.53.45:561][164]LogShaderCompilers: Display: Percentage time preprocessing: 85.89%
+[2026.10.16-15.53.45:561][164]LogShaderCompilers: Display: Effective parallelization: 3.05 (times faster than compiling all shaders on one thread). Compare with number of workers: 8 - 0.381209
+[2026.10.16-15.53.45:561][164]LogShaderCompilers: Display: Top 5 most expensive shader types by average time:
+[2026.10.16-15.53.45:561][164]LogShaderCompilers: Display:                                             FDebugViewModePS (compiled    2 times, average 1.08 sec, max 1.21 sec, min 0.95 sec)
+[2026.10.16-15.53.45:561][164]LogShaderCompilers: Display:                                TMaterialCHSFNoLightMapPolicy (compiled    2 times, average 0.99 sec, max 1.12 sec, min 0.87 sec)
+[2026.10.16-15.53.45:561][164]LogShaderCompilers: Display:                                      FPathTracingMaterialCHS (compiled    2 times, average 0.94 sec, max 1.05 sec, min 0.83 sec)
+[2026.10.16-15.53.45:561][164]LogShaderCompilers: Display:                                 TBasePassPSFNoLightMapPolicy (compiled    2 times, average 0.54 sec, max 0.60 sec, min 0.48 sec)
+[2026.10.16-15.53.45:561][164]LogShaderCompilers: Display:                         TBasePassPSFNoLightMapPolicySkylight (compiled    2 times, average 0.54 sec, max 0.58 sec, min 0.49 sec)
+[2026.10.16-15.53.45:561][164]LogShaderCompilers: Display: Top 5 shader types by total compile time:
+[2026.10.16-15.53.45:561][164]LogShaderCompilers: Display:                                             FDebugViewModePS - 24.35% of total time (compiled    2 times, average 1.08 sec, max 1.21 sec, min 0.95 sec)
+[2026.10.16-15.53.45:561][164]LogShaderCompilers: Display:                                TMaterialCHSFNoLightMapPolicy - 22.38% of total time (compiled    2 times, average 0.99 sec, max 1.12 sec, min 0.87 sec)
+[2026.10.16-15.53.45:561][164]LogShaderCompilers: Display:                                      FPathTracingMaterialCHS - 21.23% of total time (compiled    2 times, average 0.94 sec, max 1.05 sec, min 0.83 sec)
+[2026.10.16-15.53.45:561][164]LogShaderCompilers: Display:                                 TBasePassPSFNoLightMapPolicy - 12.13% of total time (compiled    2 times, average 0.54 sec, max 0.60 sec, min 0.48 sec)
+[2026.10.16-15.53.45:561][164]LogShaderCompilers: Display:                         TBasePassPSFNoLightMapPolicySkylight - 12.08% of total time (compiled    2 times, average 0.54 sec, max 0.58 sec, min 0.49 sec)
+[2026.10.16-15.53.45:561][164]LogShaderCompilers: Display: === Material stats ===
+[2026.10.16-15.53.45:561][164]LogShaderCompilers: Display: Materials Cooked:        0
+[2026.10.16-15.53.45:561][164]LogShaderCompilers: Display: Materials Translated:    148
+[2026.10.16-15.53.45:561][164]LogShaderCompilers: Display: Material Total Translate Time: 0.15 s
+[2026.10.16-15.53.45:561][164]LogShaderCompilers: Display: Material Translation Only: 0.06 s (41%)
+[2026.10.16-15.53.45:561][164]LogShaderCompilers: Display: Material DDC Serialization Only: 0.00 s (1%)
+[2026.10.16-15.53.45:561][164]LogShaderCompilers: Display: Material Cache Hits: 13 (9%)
+[2026.10.16-15.53.45:561][164]LogShaderCompilers: Display: ================================================
+[2026.10.16-15.55.43:630][518]LogAudio: Display: Audio Device unregistered from world 'None'.
+[2026.10.16-15.55.43:637][518]LogStreaming: Display: FlushAsyncLoading(371): 1 QueuedPackages, 0 AsyncPackages
+[2026.10.16-15.55.43:648][518]LogAudio: Display: Audio Device (ID: 1) registered with world 'Test_Hermes_MapsEp2'.
+[2026.10.16-15.55.43:728][518]LogPython: Error: Traceback (most recent call last):
+[2026.10.16-15.55.43:728][518]LogPython: Error:   File "C:/repository/unreal_engine/jayadwara_hermes_maps_ep2/Hermes/Tools/_probe_kamera.py", line 60, in <module>
+[2026.10.16-15.55.43:728][518]LogPython: Error:     unreal.log(f"[P7]   {i} pos={o['pos']} ukuran={o.get('ukuran')} z={o.get('z')} yaw={o.get('yaw')}")
+[2026.10.16-15.55.43:728][518]LogPython: Error:                                  ~^^^^^^^
+[2026.10.16-15.55.43:728][518]LogPython: Error: KeyError: 'pos'
+[2026.10.16-15.56.49:995][717]LogAudio: Display: Audio Device unregistered from world 'None'.
+[2026.10.16-15.56.50:003][717]LogStreaming: Display: FlushAsyncLoading(372): 1 QueuedPackages, 0 AsyncPackages
+[2026.10.16-15.56.50:015][717]LogAudio: Display: Audio Device (ID: 1) registered with world 'Test_Hermes_MapsEp2'.
+[2026.10.16-15.56.50:147][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.50:147][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.50:147][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.50:147][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.50:147][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.50:147][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.50:147][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.50:147][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.50:800][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.50:800][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.50:800][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.50:800][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.50:800][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.50:800][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.50:800][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.50:800][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.51:222][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.51:222][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.51:222][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.51:222][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.51:222][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.51:222][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.51:222][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.51:222][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.51:639][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.51:640][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.51:640][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.51:640][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.51:640][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.51:640][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.51:640][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.51:640][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.52:050][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.52:051][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.52:051][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.52:051][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.52:051][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.52:051][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.52:051][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.52:051][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.52:342][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.52:342][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.52:342][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.52:342][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.52:342][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.52:342][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.52:342][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.52:342][717]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.56.52:777][717]PIE: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.56.52:777][717]AutomationFunctionLibrary: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.56.52:777][717]PIE: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.56.52:777][717]AutomationFunctionLibrary: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.56.52:777][717]PIE: Warning: Could not find stat data for RHI.DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.56.52:777][717]AutomationFunctionLibrary: Warning: Could not find stat data for RHI.DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.56.52:777][717]PIE: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.56.52:777][717]AutomationFunctionLibrary: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.56.52:777][717]PIE: Warning: Could not find stat data for RHI.DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.56.52:777][717]AutomationFunctionLibrary: Warning: Could not find stat data for RHI.DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.56.52:777][717]PIE: Warning: Could not find stat data for MeshDrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.56.52:777][717]AutomationFunctionLibrary: Warning: Could not find stat data for MeshDrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.56.52:777][717]PIE: Warning: Could not find stat data for BasePassDrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.56.52:777][717]AutomationFunctionLibrary: Warning: Could not find stat data for BasePassDrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.56.52:777][717]PIE: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.56.52:777][717]AutomationFunctionLibrary: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.56.52:777][717]PIE: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.56.52:777][717]AutomationFunctionLibrary: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.56.52:777][717]PIE: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.56.52:777][717]AutomationFunctionLibrary: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.56.52:777][717]PIE: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.56.52:777][717]AutomationFunctionLibrary: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.56.52:777][717]PIE: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.56.52:777][717]AutomationFunctionLibrary: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.56.52:777][717]PIE: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.56.52:777][717]AutomationFunctionLibrary: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.56.52:778][717]LogPython: Error: Traceback (most recent call last):
+[2026.10.16-15.56.52:778][717]LogPython: Error:   File "C:/repository/unreal_engine/jayadwara_hermes_maps_ep2/Hermes/Tools/maps_ep2_42_gambar.py", line 202, in <module>
+[2026.10.16-15.56.52:778][717]LogPython: Error:     main()
+[2026.10.16-15.56.52:778][717]LogPython: Error:   File "C:/repository/unreal_engine/jayadwara_hermes_maps_ep2/Hermes/Tools/maps_ep2_42_gambar.py", line 190, in main
+[2026.10.16-15.56.52:778][717]LogPython: Error:     if c.get_static_mesh() is not None:
+[2026.10.16-15.56.52:778][717]LogPython: Error:        ^^^^^^^^^^^^^^^^^
+[2026.10.16-15.56.52:778][717]LogPython: Error: AttributeError: 'StaticMeshComponent' object has no attribute 'get_static_mesh'
+[2026.10.16-15.57.09:828][769]LogAudio: Display: Audio Device unregistered from world 'None'.
+[2026.10.16-15.57.09:834][769]LogStreaming: Display: FlushAsyncLoading(373): 1 QueuedPackages, 0 AsyncPackages
+[2026.10.16-15.57.09:844][769]LogAudio: Display: Audio Device (ID: 1) registered with world 'Test_Hermes_MapsEp2'.
+[2026.10.16-15.57.09:952][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.09:952][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.09:952][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.09:952][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.09:952][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.09:952][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.09:952][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.09:952][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.10:575][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.10:575][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.10:575][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.10:575][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.10:575][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.10:575][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.10:575][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.10:575][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.10:975][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.10:975][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.10:975][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.10:975][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.10:975][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.10:976][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.10:976][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.10:976][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.11:381][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.11:381][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.11:381][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.11:381][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.11:381][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.11:381][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.11:381][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.11:381][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.11:772][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.11:772][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.11:772][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.11:772][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.11:772][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.11:772][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.11:772][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.11:772][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.12:057][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.12:057][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.12:057][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.12:057][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.12:057][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.12:057][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.12:057][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.12:057][769]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.57.12:478][769]PIE: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.57.12:478][769]AutomationFunctionLibrary: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.57.12:478][769]PIE: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.57.12:478][769]AutomationFunctionLibrary: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.57.12:478][769]PIE: Warning: Could not find stat data for RHI.DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.57.12:478][769]AutomationFunctionLibrary: Warning: Could not find stat data for RHI.DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.57.12:478][769]PIE: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.57.12:478][769]AutomationFunctionLibrary: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.57.12:478][769]PIE: Warning: Could not find stat data for RHI.DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.57.12:478][769]AutomationFunctionLibrary: Warning: Could not find stat data for RHI.DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.57.12:478][769]PIE: Warning: Could not find stat data for MeshDrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.57.12:478][769]AutomationFunctionLibrary: Warning: Could not find stat data for MeshDrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.57.12:478][769]PIE: Warning: Could not find stat data for BasePassDrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.57.12:478][769]AutomationFunctionLibrary: Warning: Could not find stat data for BasePassDrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.57.12:478][769]PIE: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.57.12:478][769]AutomationFunctionLibrary: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.57.12:478][769]PIE: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.57.12:478][769]AutomationFunctionLibrary: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.57.12:478][769]PIE: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.57.12:478][769]AutomationFunctionLibrary: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.57.12:478][769]PIE: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.57.12:478][769]AutomationFunctionLibrary: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.57.12:478][769]PIE: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.57.12:478][769]AutomationFunctionLibrary: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.57.12:478][769]PIE: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.57.12:478][769]AutomationFunctionLibrary: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.57.49:199][880]LogAudio: Display: Audio Device unregistered from world 'None'.
+[2026.10.16-15.57.49:205][880]LogStreaming: Display: FlushAsyncLoading(374): 1 QueuedPackages, 0 AsyncPackages
+[2026.10.16-15.57.49:217][880]LogAudio: Display: Audio Device (ID: 1) registered with world 'Test_Hermes_MapsEp2'.
+[2026.10.16-15.58.04:205][925]LogAudio: Display: Audio Device unregistered from world 'None'.
+[2026.10.16-15.58.04:210][925]LogStreaming: Display: FlushAsyncLoading(375): 1 QueuedPackages, 0 AsyncPackages
+[2026.10.16-15.58.04:222][925]LogAudio: Display: Audio Device (ID: 1) registered with world 'Test_Hermes_MapsEp2'.
+[2026.10.16-15.58.04:326][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.04:326][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.04:326][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.04:326][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.04:326][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.04:326][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.04:326][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.04:326][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.04:876][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.04:876][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.04:876][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.04:876][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.04:876][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.04:876][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.04:876][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.04:876][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.05:296][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.05:296][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.05:296][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.05:296][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.05:296][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.05:296][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.05:296][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.05:296][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.05:715][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.05:715][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.05:715][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.05:715][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.05:715][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.05:715][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.05:715][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.05:715][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.06:129][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.06:130][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.06:130][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.06:130][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.06:130][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.06:130][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.06:130][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.06:130][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.06:494][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.06:494][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.06:494][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.06:494][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.06:494][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.06:494][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.06:494][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.06:494][925]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.06:929][925]PIE: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.06:929][925]AutomationFunctionLibrary: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.06:929][925]PIE: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.06:929][925]AutomationFunctionLibrary: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.06:929][925]PIE: Warning: Could not find stat data for RHI.DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.06:929][925]AutomationFunctionLibrary: Warning: Could not find stat data for RHI.DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.06:929][925]PIE: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.06:929][925]AutomationFunctionLibrary: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.06:929][925]PIE: Warning: Could not find stat data for RHI.DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.06:929][925]AutomationFunctionLibrary: Warning: Could not find stat data for RHI.DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.06:929][925]PIE: Warning: Could not find stat data for MeshDrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.06:929][925]AutomationFunctionLibrary: Warning: Could not find stat data for MeshDrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.06:929][925]PIE: Warning: Could not find stat data for BasePassDrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.06:929][925]AutomationFunctionLibrary: Warning: Could not find stat data for BasePassDrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.06:929][925]PIE: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.06:929][925]AutomationFunctionLibrary: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.06:929][925]PIE: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.06:929][925]AutomationFunctionLibrary: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.06:929][925]PIE: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.06:929][925]AutomationFunctionLibrary: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.06:929][925]PIE: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.06:929][925]AutomationFunctionLibrary: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.06:929][925]PIE: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.06:929][925]AutomationFunctionLibrary: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.06:929][925]PIE: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.06:929][925]AutomationFunctionLibrary: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.40:991][ 28]LogAudio: Display: Audio Device unregistered from world 'None'.
+[2026.10.16-15.58.40:996][ 28]LogStreaming: Display: FlushAsyncLoading(376): 1 QueuedPackages, 0 AsyncPackages
+[2026.10.16-15.58.41:009][ 28]LogAudio: Display: Audio Device (ID: 1) registered with world 'Test_Hermes_MapsEp2'.
+[2026.10.16-15.58.41:102][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.41:102][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.41:102][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.41:102][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.41:102][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.41:102][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.41:102][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.41:102][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.41:500][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.41:500][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.41:500][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.41:500][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.41:500][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.41:500][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.41:500][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.41:500][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.41:927][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.41:927][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.41:927][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.41:927][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.41:927][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.41:927][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.41:927][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.41:927][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.42:368][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.42:368][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.42:368][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.42:368][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.42:368][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.42:368][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.42:368][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.42:368][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.42:786][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.42:786][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.42:786][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.42:786][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.42:788][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.42:788][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.42:788][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.42:788][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.43:150][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.43:150][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.43:150][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.43:150][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.43:150][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.43:150][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.43:150][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.43:150][ 28]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.58.43:594][ 28]PIE: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.43:594][ 28]AutomationFunctionLibrary: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.43:594][ 28]PIE: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.43:594][ 28]AutomationFunctionLibrary: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.43:594][ 28]PIE: Warning: Could not find stat data for RHI.DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.43:594][ 28]AutomationFunctionLibrary: Warning: Could not find stat data for RHI.DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.43:594][ 28]PIE: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.43:594][ 28]AutomationFunctionLibrary: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.43:594][ 28]PIE: Warning: Could not find stat data for RHI.DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.43:594][ 28]AutomationFunctionLibrary: Warning: Could not find stat data for RHI.DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.43:594][ 28]PIE: Warning: Could not find stat data for MeshDrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.43:594][ 28]AutomationFunctionLibrary: Warning: Could not find stat data for MeshDrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.43:594][ 28]PIE: Warning: Could not find stat data for BasePassDrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.43:595][ 28]AutomationFunctionLibrary: Warning: Could not find stat data for BasePassDrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.43:595][ 28]PIE: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.43:595][ 28]AutomationFunctionLibrary: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.43:595][ 28]PIE: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.43:595][ 28]AutomationFunctionLibrary: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.43:595][ 28]PIE: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.43:595][ 28]AutomationFunctionLibrary: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.43:595][ 28]PIE: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.43:595][ 28]AutomationFunctionLibrary: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.43:595][ 28]PIE: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.43:595][ 28]AutomationFunctionLibrary: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.43:595][ 28]PIE: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.58.43:595][ 28]AutomationFunctionLibrary: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.59.22:027][144]LogAudio: Display: Audio Device unregistered from world 'None'.
+[2026.10.16-15.59.22:037][144]LogStreaming: Display: FlushAsyncLoading(377): 1 QueuedPackages, 0 AsyncPackages
+[2026.10.16-15.59.22:055][144]LogAudio: Display: Audio Device (ID: 1) registered with world 'Test_Hermes_MapsEp2'.
+[2026.10.16-15.59.22:193][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.22:193][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.22:193][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.22:193][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.22:194][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.22:194][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.22:194][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.22:194][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.22:685][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.22:685][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.22:685][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.22:685][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.22:685][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.22:685][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.22:685][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.22:685][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.23:171][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.23:171][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.23:171][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.23:171][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.23:171][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.23:171][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.23:171][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.23:171][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.23:646][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.23:648][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.23:648][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.23:648][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.23:648][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.23:648][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.23:648][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.23:648][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.24:074][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.24:074][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.24:074][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.24:074][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.24:074][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.24:074][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.24:074][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.24:074][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.24:468][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.24:468][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.24:468][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.24:468][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.24:468][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.24:468][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.24:468][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.24:468][144]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.59.24:944][144]PIE: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.59.24:944][144]AutomationFunctionLibrary: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.59.24:944][144]PIE: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.59.24:944][144]AutomationFunctionLibrary: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.59.24:944][144]PIE: Warning: Could not find stat data for RHI.DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.59.24:944][144]AutomationFunctionLibrary: Warning: Could not find stat data for RHI.DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.59.24:944][144]PIE: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.59.24:944][144]AutomationFunctionLibrary: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.59.24:944][144]PIE: Warning: Could not find stat data for RHI.DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.59.24:944][144]AutomationFunctionLibrary: Warning: Could not find stat data for RHI.DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.59.24:944][144]PIE: Warning: Could not find stat data for MeshDrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.59.24:944][144]AutomationFunctionLibrary: Warning: Could not find stat data for MeshDrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.59.24:944][144]PIE: Warning: Could not find stat data for BasePassDrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.59.24:944][144]AutomationFunctionLibrary: Warning: Could not find stat data for BasePassDrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.59.24:944][144]PIE: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.59.24:944][144]AutomationFunctionLibrary: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.59.24:944][144]PIE: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.59.24:944][144]AutomationFunctionLibrary: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.59.24:944][144]PIE: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.59.24:944][144]AutomationFunctionLibrary: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.59.24:944][144]PIE: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.59.24:944][144]AutomationFunctionLibrary: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.59.24:944][144]PIE: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.59.24:944][144]AutomationFunctionLibrary: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.59.24:944][144]PIE: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-15.59.24:944][144]AutomationFunctionLibrary: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]PIE: Warning: Could not find stat data for RHI, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]AutomationFunctionLibrary: Warning: Could not find stat data for RHI, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]PIE: Warning: Could not find stat data for RHI, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]AutomationFunctionLibrary: Warning: Could not find stat data for RHI, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]PIE: Warning: Could not find stat data for RHI, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]AutomationFunctionLibrary: Warning: Could not find stat data for RHI, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]PIE: Warning: Could not find stat data for RHI, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]AutomationFunctionLibrary: Warning: Could not find stat data for RHI, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]PIE: Warning: Could not find stat data for RHI, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]AutomationFunctionLibrary: Warning: Could not find stat data for RHI, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]PIE: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]AutomationFunctionLibrary: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]PIE: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]AutomationFunctionLibrary: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]PIE: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]AutomationFunctionLibrary: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]PIE: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]AutomationFunctionLibrary: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]PIE: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]AutomationFunctionLibrary: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]PIE: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]AutomationFunctionLibrary: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]PIE: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]AutomationFunctionLibrary: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]PIE: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]AutomationFunctionLibrary: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]PIE: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]AutomationFunctionLibrary: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]PIE: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]AutomationFunctionLibrary: Warning: Could not find stat data for DrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]PIE: Warning: Could not find stat data for DrawPrimitive Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]AutomationFunctionLibrary: Warning: Could not find stat data for DrawPrimitive Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]PIE: Warning: Could not find stat data for DrawPrimitive Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]AutomationFunctionLibrary: Warning: Could not find stat data for DrawPrimitive Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]PIE: Warning: Could not find stat data for DrawPrimitive Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]AutomationFunctionLibrary: Warning: Could not find stat data for DrawPrimitive Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]PIE: Warning: Could not find stat data for DrawPrimitive Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]AutomationFunctionLibrary: Warning: Could not find stat data for DrawPrimitive Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]PIE: Warning: Could not find stat data for DrawPrimitive Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]AutomationFunctionLibrary: Warning: Could not find stat data for DrawPrimitive Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]PIE: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]AutomationFunctionLibrary: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]PIE: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]AutomationFunctionLibrary: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]PIE: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]AutomationFunctionLibrary: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]PIE: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]AutomationFunctionLibrary: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]PIE: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]AutomationFunctionLibrary: Warning: Could not find stat data for DrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]PIE: Warning: Could not find stat data for Primitives Drawn, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]AutomationFunctionLibrary: Warning: Could not find stat data for Primitives Drawn, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]PIE: Warning: Could not find stat data for Primitives Drawn, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]AutomationFunctionLibrary: Warning: Could not find stat data for Primitives Drawn, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]PIE: Warning: Could not find stat data for Primitives Drawn, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]AutomationFunctionLibrary: Warning: Could not find stat data for Primitives Drawn, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]PIE: Warning: Could not find stat data for Primitives Drawn, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]AutomationFunctionLibrary: Warning: Could not find stat data for Primitives Drawn, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]PIE: Warning: Could not find stat data for Primitives Drawn, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]AutomationFunctionLibrary: Warning: Could not find stat data for Primitives Drawn, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]PIE: Warning: Could not find stat data for STAT_RHIDrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]AutomationFunctionLibrary: Warning: Could not find stat data for STAT_RHIDrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]PIE: Warning: Could not find stat data for STAT_RHIDrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]AutomationFunctionLibrary: Warning: Could not find stat data for STAT_RHIDrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]PIE: Warning: Could not find stat data for STAT_RHIDrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]AutomationFunctionLibrary: Warning: Could not find stat data for STAT_RHIDrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]PIE: Warning: Could not find stat data for STAT_RHIDrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]AutomationFunctionLibrary: Warning: Could not find stat data for STAT_RHIDrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]PIE: Warning: Could not find stat data for STAT_RHIDrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]AutomationFunctionLibrary: Warning: Could not find stat data for STAT_RHIDrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]PIE: Warning: Could not find stat data for STATGROUP_RHI, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]AutomationFunctionLibrary: Warning: Could not find stat data for STATGROUP_RHI, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:973][355]PIE: Warning: Could not find stat data for STATGROUP_RHI, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]AutomationFunctionLibrary: Warning: Could not find stat data for STATGROUP_RHI, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]PIE: Warning: Could not find stat data for STATGROUP_RHI, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]AutomationFunctionLibrary: Warning: Could not find stat data for STATGROUP_RHI, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]PIE: Warning: Could not find stat data for STATGROUP_RHI, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]AutomationFunctionLibrary: Warning: Could not find stat data for STATGROUP_RHI, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]PIE: Warning: Could not find stat data for STATGROUP_RHI, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]AutomationFunctionLibrary: Warning: Could not find stat data for STATGROUP_RHI, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]PIE: Warning: Could not find stat data for RHIDrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]AutomationFunctionLibrary: Warning: Could not find stat data for RHIDrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]PIE: Warning: Could not find stat data for RHIDrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]AutomationFunctionLibrary: Warning: Could not find stat data for RHIDrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]PIE: Warning: Could not find stat data for RHIDrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]AutomationFunctionLibrary: Warning: Could not find stat data for RHIDrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]PIE: Warning: Could not find stat data for RHIDrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]AutomationFunctionLibrary: Warning: Could not find stat data for RHIDrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]PIE: Warning: Could not find stat data for RHIDrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]AutomationFunctionLibrary: Warning: Could not find stat data for RHIDrawPrimitiveCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]PIE: Warning: Could not find stat data for BasePass, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]AutomationFunctionLibrary: Warning: Could not find stat data for BasePass, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]PIE: Warning: Could not find stat data for BasePass, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]AutomationFunctionLibrary: Warning: Could not find stat data for BasePass, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]PIE: Warning: Could not find stat data for BasePass, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]AutomationFunctionLibrary: Warning: Could not find stat data for BasePass, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]PIE: Warning: Could not find stat data for BasePass, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]AutomationFunctionLibrary: Warning: Could not find stat data for BasePass, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]PIE: Warning: Could not find stat data for BasePass, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]AutomationFunctionLibrary: Warning: Could not find stat data for BasePass, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]PIE: Warning: Could not find stat data for Mesh Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]AutomationFunctionLibrary: Warning: Could not find stat data for Mesh Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]PIE: Warning: Could not find stat data for Mesh Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]AutomationFunctionLibrary: Warning: Could not find stat data for Mesh Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]PIE: Warning: Could not find stat data for Mesh Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]AutomationFunctionLibrary: Warning: Could not find stat data for Mesh Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]PIE: Warning: Could not find stat data for Mesh Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]AutomationFunctionLibrary: Warning: Could not find stat data for Mesh Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]PIE: Warning: Could not find stat data for Mesh Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]AutomationFunctionLibrary: Warning: Could not find stat data for Mesh Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]PIE: Warning: Could not find stat data for MeshDrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]AutomationFunctionLibrary: Warning: Could not find stat data for MeshDrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]PIE: Warning: Could not find stat data for MeshDrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]AutomationFunctionLibrary: Warning: Could not find stat data for MeshDrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]PIE: Warning: Could not find stat data for MeshDrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]AutomationFunctionLibrary: Warning: Could not find stat data for MeshDrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]PIE: Warning: Could not find stat data for MeshDrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]AutomationFunctionLibrary: Warning: Could not find stat data for MeshDrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]PIE: Warning: Could not find stat data for MeshDrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]AutomationFunctionLibrary: Warning: Could not find stat data for MeshDrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]PIE: Warning: Could not find stat data for Triangles Drawn, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:974][355]AutomationFunctionLibrary: Warning: Could not find stat data for Triangles Drawn, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:975][355]PIE: Warning: Could not find stat data for Triangles Drawn, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:975][355]AutomationFunctionLibrary: Warning: Could not find stat data for Triangles Drawn, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:975][355]PIE: Warning: Could not find stat data for Triangles Drawn, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:975][355]AutomationFunctionLibrary: Warning: Could not find stat data for Triangles Drawn, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:975][355]PIE: Warning: Could not find stat data for Triangles Drawn, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:975][355]AutomationFunctionLibrary: Warning: Could not find stat data for Triangles Drawn, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:975][356]PIE: Warning: Could not find stat data for Triangles Drawn, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:975][356]AutomationFunctionLibrary: Warning: Could not find stat data for Triangles Drawn, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:975][356]PIE: Warning: Could not find stat data for FrameTime, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:975][356]AutomationFunctionLibrary: Warning: Could not find stat data for FrameTime, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:975][356]PIE: Warning: Could not find stat data for FrameTime, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:975][356]AutomationFunctionLibrary: Warning: Could not find stat data for FrameTime, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:975][356]PIE: Warning: Could not find stat data for FrameTime, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:975][356]AutomationFunctionLibrary: Warning: Could not find stat data for FrameTime, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:975][356]PIE: Warning: Could not find stat data for FrameTime, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:975][356]AutomationFunctionLibrary: Warning: Could not find stat data for FrameTime, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:975][356]PIE: Warning: Could not find stat data for FrameTime, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.00.34:975][356]AutomationFunctionLibrary: Warning: Could not find stat data for FrameTime, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.01.23:982][502]PIE: Warning: Could not find stat data for Mesh Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.01.23:982][502]AutomationFunctionLibrary: Warning: Could not find stat data for Mesh Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.01.23:982][502]PIE: Warning: Could not find stat data for Mesh Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.01.23:982][502]AutomationFunctionLibrary: Warning: Could not find stat data for Mesh Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.01.23:982][502]PIE: Warning: Could not find stat data for Mesh Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.01.23:982][502]AutomationFunctionLibrary: Warning: Could not find stat data for Mesh Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.01.23:982][502]PIE: Warning: Could not find stat data for Mesh Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.01.23:982][502]AutomationFunctionLibrary: Warning: Could not find stat data for Mesh Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.01.23:982][502]PIE: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.01.23:982][502]AutomationFunctionLibrary: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.01.23:982][502]PIE: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.01.23:982][502]AutomationFunctionLibrary: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.01.23:982][502]PIE: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.01.23:982][502]AutomationFunctionLibrary: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.01.23:982][502]PIE: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.01.23:982][502]AutomationFunctionLibrary: Warning: Could not find stat data for Draw Calls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.01.23:982][502]PIE: Warning: Could not find stat data for MeshDrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.01.23:982][502]AutomationFunctionLibrary: Warning: Could not find stat data for MeshDrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.01.23:982][502]PIE: Warning: Could not find stat data for MeshDrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.01.23:982][502]AutomationFunctionLibrary: Warning: Could not find stat data for MeshDrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.01.23:982][502]PIE: Warning: Could not find stat data for MeshDrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.01.23:982][502]AutomationFunctionLibrary: Warning: Could not find stat data for MeshDrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.01.23:982][502]PIE: Warning: Could not find stat data for MeshDrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.01.23:982][502]AutomationFunctionLibrary: Warning: Could not find stat data for MeshDrawCalls, did you call ToggleStatGroup with enough time to capture data?
+[2026.10.16-16.02.15:369][656]LogAudio: Display: Audio Device unregistered from world 'None'.
+[2026.10.16-16.02.15:376][656]LogStreaming: Display: FlushAsyncLoading(378): 1 QueuedPackages, 0 AsyncPackages
+[2026.10.16-16.02.15:387][656]LogAudio: Display: Audio Device (ID: 1) registered with world 'Test_Hermes_MapsEp2'.
+[2026.10.16-16.02.15:465][656]LogPython: Error: Traceback (most recent call last):
+[2026.10.16-16.02.15:465][656]LogPython: Error:   File "C:/repository/unreal_engine/jayadwara_hermes_maps_ep2/Hermes/Tools/maps_ep2_43_verifikasi.py", line 210, in <module>
+[2026.10.16-16.02.15:465][656]LogPython: Error:     main()
+[2026.10.16-16.02.15:465][656]LogPython: Error:   File "C:/repository/unreal_engine/jayadwara_hermes_maps_ep2/Hermes/Tools/maps_ep2_43_verifikasi.py", line 120, in main
+[2026.10.16-16.02.15:465][656]LogPython: Error:     P, L = o["ukuran"][0], o["ukuran"][1]
+[2026.10.16-16.02.15:465][656]LogPython: Error:            ~^^^^^^^^^^
+[2026.10.16-16.02.15:465][656]LogPython: Error: KeyError: 'ukuran'
+[2026.10.16-16.02.49:043][757]LogAudio: Display: Audio Device unregistered from world 'None'.
+[2026.10.16-16.02.49:050][757]LogStreaming: Display: FlushAsyncLoading(379): 1 QueuedPackages, 0 AsyncPackages
+[2026.10.16-16.02.49:062][757]LogAudio: Display: Audio Device (ID: 1) registered with world 'Test_Hermes_MapsEp2'.

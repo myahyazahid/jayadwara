@@ -1,0 +1,157 @@
+[Info] [MK4a] level dimuat: /Game/Hermes/MapsEp2/Maps/Test_Hermes_MapsEp2
+[Info] [MK4a] dibangun 145 objek (target 145)
+[Info] [MK4a] TABEL UJI OBJEK: id | jenis | alas_hitung(m) | alas_actor(m) | d(cm) | tag
+[Info] [MK4a]   KAMPUNG_PosRT              kotak        7.85       7.85    -0.0
+[Info] [MK4a]   KAMPUNG_Musala             kotak        7.22       7.22    -0.0
+[Info] [MK4a]   KAMPUNG_RumahKemalingan    rumah        7.54       7.54    +0.0  hancur,penalti_tinggi
+[Info] [MK4a]   KAMPUNG_WarungCCTV         kotak        8.23       8.23    -0.0  hancur,penalti_tinggi
+[Info] [MK4a]   KAMPUNG_TiangCCTV          kotak        8.36       8.36    +0.0
+[Info] [MK4a]   KAMPUNG_GangBuntu_Beringin kotak        5.55       5.55    +0.0
+[Info] [MK4a]   KAMPUNG_GangBuntu_Tajuk    kerucut     12.39      12.39    +0.0
+[Info] [MK4a]   KAMPUNG_Sesajen            kotak        5.52       5.52    +0.0
+[Info] [MK4a]   BLOK1_Rumah1               rumah        5.05       5.05    +0.0  hancur,penalti_tinggi,blok_chaos,BLOK1
+[Info] [MK4a]   BLOK1_Rumah2               rumah        5.05       5.05    +0.0  hancur,penalti_tinggi,blok_chaos,BLOK1
+[Info] [MK4a]   BLOK1_Rumah3               rumah        5.05       5.05    +0.0  hancur,penalti_tinggi,blok_chaos,BLOK1
+[Info] [MK4a]   BLOK1_Rumah4               rumah        5.05       5.05    +0.0  hancur,penalti_tinggi,blok_chaos,BLOK1
+[Info] [MK4a]   BLOK2_Rumah1               rumah        5.05       5.05    +0.0  hancur,penalti_tinggi,blok_chaos,BLOK2
+[Info] [MK4a]   BLOK2_Rumah2               rumah        5.05       5.05    +0.0  hancur,penalti_tinggi,blok_chaos,BLOK2
+[Info] [MK4a]   BLOK2_Rumah3               rumah        5.05       5.05    +0.0  hancur,penalti_tinggi,blok_chaos,BLOK2
+[Info] [MK4a]   BLOK2_Rumah4               rumah        5.05       5.05    +0.0  hancur,penalti_tinggi,blok_chaos,BLOK2
+[Info] [MK4a]   BLOK3_Rumah1               rumah        5.05       5.05    +0.0  hancur,penalti_tinggi,blok_chaos,BLOK3
+[Info] [MK4a]   BLOK3_Rumah2               rumah        5.05       5.05    +0.0  hancur,penalti_tinggi,blok_chaos,BLOK3
+[Info] [MK4a]   BLOK3_Rumah3               rumah        5.05       5.05    +0.0  hancur,penalti_tinggi,blok_chaos,BLOK3
+[Info] [MK4a]   BLOK3_Rumah4               rumah        5.05       5.05    +0.0  hancur,penalti_tinggi,blok_chaos,BLOK3
+[Info] [MK4a]   BLOK4_Rumah1               rumah        5.05       5.05    +0.0  hancur,penalti_tinggi,blok_chaos,BLOK4
+[Info] [MK4a]   BLOK4_Rumah2               rumah        5.05       5.05    +0.0  hancur,penalti_tinggi,blok_chaos,BLOK4
+[Info] [MK4a]   BLOK4_Rumah3               rumah        5.05       5.05    +0.0  hancur,penalti_tinggi,blok_chaos,BLOK4
+[Info] [MK4a]   BLOK4_Rumah4               rumah        5.05       5.05    +0.0  hancur,penalti_tinggi,blok_chaos,BLOK4
+[Info] [MK4a]   BLOK5_Rumah1               rumah        8.66       8.66    +0.0  hancur,penalti_tinggi,blok_chaos,BLOK5
+[Info] [MK4a]   BLOK5_Rumah2               rumah        8.66       8.66    +0.0  hancur,penalti_tinggi,blok_chaos,BLOK5
+[Info] [MK4a]   BLOK5_Rumah3               rumah        8.66       8.66    +0.0  hancur,penalti_tinggi,blok_chaos,BLOK5
+[Info] [MK4a]   BLOK5_Rumah4               rumah        8.66       8.66    +0.0  hancur,penalti_tinggi,blok_chaos,BLOK5
+[Info] [MK4a]   BLOK6_Rumah1               rumah        8.66       8.66    +0.0  hancur,penalti_tinggi,blok_chaos,BLOK6
+[Info] [MK4a]   BLOK6_Rumah2               rumah        8.66       8.66    +0.0  hancur,penalti_tinggi,blok_chaos,BLOK6
+[Info] [MK4a]   BLOK6_Rumah3               rumah        8.66       8.66    +0.0  hancur,penalti_tinggi,blok_chaos,BLOK6
+[Info] [MK4a]   BLOK6_Rumah4               rumah        8.66       8.66    +0.0  hancur,penalti_tinggi,blok_chaos,BLOK6
+[Info] [MK4a]   BLOK7_Rumah1               rumah        8.66       8.66    +0.0  hancur,penalti_tinggi,blok_chaos,BLOK7
+[Info] [MK4a]   BLOK7_Rumah2               rumah        8.66       8.66    +0.0  hancur,penalti_tinggi,blok_chaos,BLOK7
+[Info] [MK4a]   BLOK7_Rumah3               rumah        8.66       8.66    +0.0  hancur,penalti_tinggi,blok_chaos,BLOK7
+[Info] [MK4a]   BLOK7_Rumah4               rumah        8.66       8.66    +0.0  hancur,penalti_tinggi,blok_chaos,BLOK7
+[Info] [MK4a]   BLOK8_Rumah1               rumah        8.66       8.66    +0.0  hancur,penalti_tinggi,blok_chaos,BLOK8
+[Info] [MK4a]   BLOK8_Rumah2               rumah        8.66       8.66    +0.0  hancur,penalti_tinggi,blok_chaos,BLOK8
+[Info] [MK4a]   BLOK8_Rumah3               rumah        8.66       8.66    +0.0  hancur,penalti_tinggi,blok_chaos,BLOK8
+[Info] [MK4a]   BLOK8_Rumah4               rumah        8.66       8.66    +0.0  hancur,penalti_tinggi,blok_chaos,BLOK8
+[Info] [MK4a]   ATAP_Naik01                rumah        7.95       7.95    +0.0  hancur,penalti_tinggi,atap_naik
+[Info] [MK4a]   ATAP_Naik02                rumah        7.95       7.95    +0.0  hancur,penalti_tinggi,atap_naik
+[Info] [MK4a]   ATAP_Naik03                rumah        7.95       7.95    +0.0  hancur,penalti_tinggi,atap_naik
+[Info] [MK4a]   ATAP_Naik06                rumah        7.69       7.69    +0.0  hancur,penalti_tinggi,atap_naik
+[Info] [MK4a]   ATAP_Naik07                rumah        7.55       7.55    +0.0  hancur,penalti_tinggi,atap_naik
+[Info] [MK4a]   ATAP_Naik08                rumah        7.41       7.41    +0.0  hancur,penalti_tinggi,atap_naik
+[Info] [MK4a]   ATAP_Naik09                rumah        7.28       7.28    -0.0  hancur,penalti_tinggi,atap_naik
+[Info] [MK4a]   ATAP_Naik10                rumah        7.14       7.14    +0.0  hancur,penalti_tinggi,atap_naik
+[Info] [MK4a]   ATAP_Naik11                rumah        7.00       7.00    -0.0  hancur,penalti_tinggi,atap_naik
+[Info] [MK4a]   ATAP_Naik12                rumah        6.87       6.87    +0.0  hancur,penalti_tinggi,atap_naik
+[Info] [MK4a]   ATAP_Naik15                rumah        6.61       6.61    +0.0  hancur,penalti_tinggi,atap_naik
+[Info] [MK4a]   ATAP_Naik16                rumah        6.55       6.55    +0.0  hancur,penalti_tinggi,atap_naik
+[Info] [MK4a]   ATAP_Naik17                rumah        6.55       6.55    +0.0  hancur,penalti_tinggi,atap_naik
+[Info] [MK4a]   ATAP_Naik18                rumah        6.55       6.55    +0.0  hancur,penalti_tinggi,atap_naik
+[Info] [MK4a]   ATAP_Naik20                rumah        6.55       6.55    +0.0  hancur,penalti_tinggi,atap_naik
+[Info] [MK4a]   ATAP_Naik21                rumah        6.55       6.55    +0.0  hancur,penalti_tinggi,atap_naik
+[Info] [MK4a]   ATAP_Naik22                rumah        6.55       6.55    +0.0  hancur,penalti_tinggi,atap_naik
+[Info] [MK4a]   ATAP_Naik23                rumah        6.55       6.55    +0.0  hancur,penalti_tinggi,atap_naik
+[Info] [MK4a]   ATAP_Naik24                rumah        6.55       6.55    +0.0  hancur,penalti_tinggi,atap_naik
+[Info] [MK4a]   ATAP_Naik26                rumah        6.54       6.54    +0.0  hancur,penalti_tinggi,atap_naik
+[Info] [MK4a]   ATAP_Naik27                rumah        6.53       6.53    +0.0  hancur,penalti_tinggi,atap_naik
+[Info] [MK4a]   ATAP_Naik28                rumah        6.51       6.51    +0.0  hancur,penalti_tinggi,atap_naik
+[Info] [MK4a]   ATAP_Naik29                rumah        6.50       6.50    +0.0  hancur,penalti_tinggi,atap_naik
+[Info] [MK4a]   ATAP_Naik30                rumah        6.49       6.49    +0.0  hancur,penalti_tinggi,atap_naik
+[Info] [MK4a]   ATAP_Naik32                rumah        6.47       6.47    +0.0  hancur,penalti_tinggi,atap_naik
+[Info] [MK4a]   ATAP_Naik33                rumah        6.47       6.47    +0.0  hancur,penalti_tinggi,atap_naik
+[Info] [MK4a]   ATAP_Naik34                rumah        6.47       6.47    +0.0  hancur,penalti_tinggi,atap_naik
+[Info] [MK4a]   ATAP_Papan01               kotak       11.46      11.46    +0.0
+[Info] [MK4a]   ATAP_Papan02               kotak       11.40      11.40    +0.0
+[Info] [MK4a]   ATAP_Papan03               kotak       10.32      10.32    +0.0
+[Info] [MK4a]   ATAP_Papan04               kotak       10.25      10.25    +0.0
+[Info] [MK4a]   ATAP_Papan05               kotak       10.13      10.13    +0.0
+[Info] [MK4a]   ATAP_Papan06               kotak       10.13      10.13    +0.0
+[Info] [MK4a]   ATAP_Papan07               kotak       10.05      10.05    +0.0
+[Info] [MK4a]   ATAP_TanggaBambu           kotak        7.75       7.75    +0.0
+[Info] [MK4a]   JALAN_MobilDWARA           kotak        9.00       9.00    +0.0
+[Info] [MK4a]   JALAN_Mobil1               kotak        9.00       9.00    +0.0  hancur,tanpa_penalti,curian
+[Info] [MK4a]   JALAN_Mobil2               kotak        9.00       9.00    +0.0  hancur,tanpa_penalti,curian
+[Info] [MK4a]   JALAN_Mobil3               kotak        9.00       9.00    +0.0  hancur,tanpa_penalti,curian
+[Info] [MK4a]   JALAN_Angkot               kotak        9.00       9.00    +0.0  hancur,tanpa_penalti,curian
+[Info] [MK4a]   JALAN_Gerobak1             kotak        9.00       9.00    +0.0  hancur,tanpa_penalti,curian
+[Info] [MK4a]   JALAN_Gerobak2             kotak        9.00       9.00    +0.0  hancur,tanpa_penalti,curian
+[Info] [MK4a]   JALAN_GarisPolisiBarat     dinding      9.00       9.00    +0.0
+[Info] [MK4a]   JALAN_GarisPolisiTimur     dinding      9.00       9.00    +0.0
+[Info] [MK4a]   JALAN_MobilPemadamBarat    kotak        9.00       9.00    +0.0
+[Info] [MK4a]   JALAN_MobilPemadamTimur    kotak        9.00       9.00    +0.0
+[Info] [MK4a]   PASAR_Los1                 kotak        7.67       7.67    -0.0  hancur,penalti_normal
+[Info] [MK4a]   PASAR_Los2                 kotak        6.44       6.44    +0.0  hancur,penalti_normal
+[Info] [MK4a]   PASAR_Los3                 kotak        5.51       5.51    +0.0  hancur,penalti_normal
+[Info] [MK4a]   PASAR_GerbangDikunci       dinding      7.46       7.46    +0.0
+[Info] [MK4a]   GUDANG_Gudang1             kotak        6.00       6.00    +0.0  hancur,tanpa_penalti,adikara
+[Info] [MK4a]   GUDANG_Gudang2             kotak        6.00       6.00    +0.0  hancur,tanpa_penalti,adikara
+[Info] [MK4a]   GUDANG_Pabrik              kotak        6.00       6.00    +0.0  hancur,tanpa_penalti,adikara
+[Info] [MK4a]   GUDANG_Cerobong            kotak        6.00       6.00    +0.0  hancur,tanpa_penalti,adikara
+[Info] [MK4a]   GUDANG_Truk1               kotak        6.00       6.00    +0.0  hancur,tanpa_penalti,adikara
+[Info] [MK4a]   GUDANG_Truk2               kotak        6.00       6.00    +0.0  hancur,tanpa_penalti,adikara
+[Info] [MK4a]   GUDANG_Truk3               kotak        6.00       6.00    +0.0  hancur,tanpa_penalti,adikara
+[Info] [MK4a]   GUDANG_PosJaga             kotak        6.00       6.00    +0.0  hancur,tanpa_penalti,adikara
+[Info] [MK4a]   GUDANG_Dermaga             kotak        3.50       3.50    +0.0  hancur,tanpa_penalti,adikara
+[Info] [MK4a]   GUDANG_PagarBarat          dinding      6.00       6.00    +0.0  adikara
+[Info] [MK4a]   GUDANG_PagarUtara          dinding      6.00       6.00    +0.0  adikara
+[Info] [MK4a]   REL_JembatanJalan          kotak        9.00       9.00    +0.0
+[Info] [MK4a]   REL_JembatanKali           kotak       10.00      10.00    +0.0
+[Info] [MK4a]   REL_JembatanInspeksi       kotak        9.00       9.00    +0.0
+[Info] [MK4a]   STASIUN_Bangunan           kotak        7.05       7.05    +0.0  hancur,penalti_normal
+[Info] [MK4a]   STASIUN_AtapPeron          kotak       15.50      15.50    +0.0  hancur,penalti_normal
+[Info] [MK4a]   STASIUN_Peron              kotak        5.82       5.82    +0.0  hancur,penalti_normal
+[Info] [MK4a]   REL_Kereta                 kotak       12.00      12.00    +0.0
+[Info] [MK4a]   BANTARAN_LapanganTepiKali  bidang       2.25       2.25    +0.0
+[Info] [MK4a]   BANTARAN_Perahu1           kotak        3.50       3.50    +0.0
+[Info] [MK4a]   BANTARAN_Perahu2           kotak        3.50       3.50    +0.0
+[Info] [MK4a]   BANTARAN_Gubuk1            kotak        3.50       3.50    +0.0  hancur,penalti_normal
+[Info] [MK4a]   BANTARAN_Gubuk2            kotak        3.50       3.50    +0.0  hancur,penalti_normal
+[Info] [MK4a]   AIR_Kali                   bidang       0.00      -0.00    -0.0
+[Info] [MK4a]   AIR_AnakKali               bidang       0.00      -0.00    -0.0
+[Info] [MK4a]   PINTUAIR_MenaraBarat       kotak       -1.50      -1.50    +0.0
+[Info] [MK4a]   PINTUAIR_MenaraTimur       kotak       -1.50      -1.50    +0.0
+[Info] [MK4a]   PINTUAIR_Jembatan          kotak        6.00       6.00    +0.0
+[Info] [MK4a]   PINTUAIR_Daun              kotak       -1.50      -1.50    +0.0
+[Info] [MK4a]   JEMBATAN_GantungDek        kotak        4.00       4.00    -0.0
+[Info] [MK4a]   JEMBATAN_GantungTiangU1    kotak        3.50       3.50    +0.0
+[Info] [MK4a]   JEMBATAN_GantungTiangU2    kotak        3.50       3.50    +0.0
+[Info] [MK4a]   JEMBATAN_GantungTiangS1    kotak        3.50       3.50    +0.0
+[Info] [MK4a]   JEMBATAN_GantungTiangS2    kotak        3.50       3.50    +0.0
+[Info] [MK4a]   JEMBATAN_BetonDek          kotak        3.50       3.50    +0.0
+[Info] [MK4a]   SELATAN_LapanganBola       bidang       3.05       3.05    +0.0
+[Info] [MK4a]   SELATAN_MenaraAir_Tiang    kotak        3.50       3.50    +0.0  hancur,penalti_normal
+[Info] [MK4a]   SELATAN_MenaraAir_Tangki   kotak       27.50      27.50    +0.0  hancur,penalti_normal
+[Info] [MK4a]   SELATAN_SUTET1             kotak        3.00       3.00    +0.0  hancur,tanpa_penalti
+[Info] [MK4a]   SELATAN_SUTET2             kotak        3.00       3.00    +0.0  hancur,tanpa_penalti
+[Info] [MK4a]   SELATAN_SUTET3             kotak        3.00       3.00    +0.0  hancur,tanpa_penalti
+[Info] [MK4a]   SELATAN_SUTET4             kotak        3.00       3.00    +0.0  hancur,tanpa_penalti
+[Info] [MK4a]   SELATAN_Gubuk1             kotak        3.00       3.00    +0.0
+[Info] [MK4a]   SELATAN_Gubuk2             kotak        3.00       3.00    +0.0
+[Info] [MK4a]   SELATAN_Gubuk3             kotak        3.00       3.00    +0.0
+[Info] [MK4a]   SELATAN_Gubuk4             kotak        3.00       3.00    +0.0
+[Info] [MK4a]   LATAR_GedungAdikara1       kotak        9.00       9.00    +0.0
+[Info] [MK4a]   LATAR_GedungAdikara2       kotak        9.00       9.00    +0.0
+[Info] [MK4a]   LATAR_GedungAdikara3       kotak        9.00       9.00    +0.0
+[Info] [MK4a]   LATAR_GedungAdikara4       kotak        9.00       9.00    +0.0
+[Info] [MK4a]   LATAR_GedungAdikara5       kotak        9.00       9.00    +0.0
+[Info] [MK4a]   LATAR_GedungAdikara6       kotak        9.00       9.00    +0.0
+[Info] [MK4a]   LATAR_GedungAdikara7       kotak        9.00       9.00    +0.0
+[Info] [MK4a]   LATAR_GedungAdikara8       kotak        9.00       9.00    +0.0
+[Info] [MK4a]   LATAR_GedungAdikara9       kotak        9.00       9.00    +0.0
+[Info] [MK4a] objek ditemukan = 145 (target 145) | alas OK = 145/145
+[Info] [MK4a] tag: hancur=90 (90) penalti_tinggi=61 (61) penalti_normal=10 (10) tanpa_penalti=19 (19) blok_chaos=32 (32) atap_naik=27 (27) adikara=11 (11) curian=6 (6)
+[Info] [MK4a] blok_chaos per deret: {'BLOK1': 4, 'BLOK2': 4, 'BLOK3': 4, 'BLOK4': 4, 'BLOK5': 4, 'BLOK6': 4, 'BLOK7': 4, 'BLOK8': 4} (tiap deret target 4)
+[Info] [MK4a] KAMPUNG_Musala, KAMPUNG_PosRT, REL_Jembatan*, PINTUAIR_*, JEMBATAN_* tanpa tag hancur: OK
+[Info] [MK4a] kontrol trace vertikal x=-26,y=138 mengenai 'SM_Ep02_Medan' -> trace bekerja
+[Info] [MK4a] gang utama x=-26 (y +138..-48) 1 m di atas tanah: BEBAS (tidak mengenai apa pun)
+[Info] [MK4a] level disimpan
+[Info] [MK4a] CEK MK4a: objek145=True alas145=True hancur90=True chaos32=True atap_naik27=True adikara11=True curian6=True -> LULUS
+[Info] [MK4a] WAKTU skrip MK4a: 1.1 s

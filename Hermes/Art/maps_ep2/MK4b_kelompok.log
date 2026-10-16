@@ -1,0 +1,18 @@
+[Info] [MK4b] level dimuat: /Game/Hermes/MapsEp2/Maps/Test_Hermes_MapsEp2
+[Info] [MK4b] TABEL KELOMPOK: id | bentuk | n_item | n_Dinding | n_Atap | tag
+[Info] [MK4b]   KAMPUNG_RumahInti    rumah     810        810      810  hancur,penalti_tinggi,tukar_puing
+[Info] [MK4b]   BARAT_Rumah          rumah     181        181      181  hancur,penalti_normal,tukar_puing
+[Info] [MK4b]   SEBERANG_Rumah       rumah     581        581      581  hancur,penalti_normal,tukar_puing
+[Info] [MK4b]   JALAN_Ruko           kotak      62         62        0  hancur,penalti_normal,tukar_puing
+[Info] [MK4b]   KOTA_Blok            kotak      93         93        0  hancur,penalti_normal,tukar_puing
+[Info] [MK4b]   LAYANG_Pilar         kotak      23         23        0  hancur,penalti_normal,tukar_puing
+[Info] [MK4b]   LAYANG_Dek           kotak      22         22        0  hancur,penalti_normal,tukar_puing
+[Info] [MK4b]   GUDANG_Kontainer     kotak      45         45        0  hancur,tanpa_penalti,tukar_puing,adikara
+[Info] [MK4b] kelompok: 8 actor, total item = 1817 (target 8 actor / 1.817 item)
+[Info] [MK4b] pohon: 5 actor, instance batang = 258, tajuk = 258 (target 258/258)
+[Info] [MK4b] tiang: 1 actor, instance = 55 (target 55)
+[Info] [MK4b] pohon: 5 actor, batang = 258, tajuk = 258 (target 5 / 258 / 258)
+[Info] [MK4b] tiang: 1 actor, instance = 55 (target 55)
+[Info] [MK4b] level disimpan
+[Info] [MK4b] CEK MK4b: item1817=True pohon5=True batang258=True tajuk258=True tiang55=True -> LULUS
+[Info] [MK4b] WAKTU skrip MK4b: 1.8 s
