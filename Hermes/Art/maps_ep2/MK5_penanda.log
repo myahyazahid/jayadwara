@@ -1,0 +1,43 @@
+[Info] [MK5] level dimuat: /Game/Hermes/MapsEp2/Maps/Test_Hermes_MapsEp2
+[Info] [MK5] hapus 0 actor MK5 lama + 1 PlayerStart (termasuk bawaan)
+[Info] [MK5] 1/2 kapsul dari BP_Aksa_C = 96.0 cm
+[Info] [MK5] START PlayerStart: Z=996.0 cm (= elev(-40,155)*100 900.0 + kapsul 96.0); yaw=104.0 (-> jembatan -105,-105)
+[Info] [MK5]   titik CLUE_1_JejakKaki: base=7.50 m, TargetPoint Z=1050 cm
+[Info] [MK5]   titik CLUE_2_CCTV: base=8.20 m, TargetPoint Z=1120 cm
+[Info] [MK5]   titik CLUE_O_Sesajen: base=5.47 m, TargetPoint Z=847 cm
+[Info] [MK5]   area CP_Kejar: radius 6.0 m, Z=789 cm
+[Info] [MK5]   T1 di_atap: kena atap z=11.45 m
+[Info] [MK5]   titik T1: base=11.45 m, TargetPoint Z=1445 cm
+[Info] [MK5]   T2 di_atap: kena atap z=10.47 m
+[Info] [MK5]   titik T2: base=10.47 m, TargetPoint Z=1347 cm
+[Info] [MK5]   T3 di_atap: kena atap z=9.97 m
+[Info] [MK5]   titik T3: base=9.97 m, TargetPoint Z=1297 cm
+[Info] [MK5]   area CP_Tuyul3: radius 5.0 m, Z=654 cm
+[Info] [MK5]   titik T4: base=4.20 m, TargetPoint Z=720 cm
+[Info] [MK5]   titik T5: base=12.20 m, TargetPoint Z=1520 cm
+[Info] [MK5]   titik UMPAN_Mainan: base=8.08 m, TargetPoint Z=1108 cm
+[Info] [MK5]   titik UMPAN_Yuyu: base=3.50 m, TargetPoint Z=650 cm
+[Info] [MK5]   area GABUNG: radius 15.0 m, Z=360 cm
+[Info] [MK5]   titik TRANSFORMASI: base=3.50 m, TargetPoint Z=650 cm
+[Info] [MK5]   titik JAYADWARA_Mulai: base=-1.50 m, TargetPoint Z=150 cm
+[Info] [MK5]   area CP_Fase1: radius 20.0 m, Z=-140 cm
+[Info] [MK5]   area BOSS_Fase1_Tujuan: radius 30.0 m, Z=610 cm
+[Info] [MK5]   titik BOSS_Fase2_Asli: base=6.00 m, TargetPoint Z=900 cm
+[Info] [MK5]   titik BOSS_Fase2_Palsu1: base=7.26 m, TargetPoint Z=1026 cm
+[Info] [MK5]   titik BOSS_Fase2_Palsu2: base=3.00 m, TargetPoint Z=600 cm
+[Info] [MK5]   area CP_Fase2: radius 20.0 m, Z=-140 cm
+[Info] [MK5]   area WARGA_Kumpul: radius 25.0 m, Z=310 cm
+[Info] [MK5] penanda titik=15, area=7
+[Info] [MK5] zona ZONA_PenaltiTinggi_Kampung: extent=(22750,9500,3000) cm, warna=merah
+[Info] [MK5] zona ZONA_Aman_Kali: extent=(70000,3900,3000) cm, warna=hijau
+[Info] [MK5] zona ZONA_Aman_AnakKali: extent=(2000,23600,3000) cm, warna=hijau
+[Info] [MK5] zona ZONA_Aman_Selatan: extent=(59000,13000,3000) cm, warna=hijau
+[Info] [MK5] zona ZONA_TanpaPenalti_Gudang: extent=(16500,9250,3000) cm, warna=ungu
+[Info] [MK5] dibuat 8 dinding batas (Hidden in Game, BlockAll), tinggi 120 m
+[Info] [MK5] JUMLAH: PlayerStart=1 (1) | titik=15 (15) | area=7 (7) | zona=5 (5) | dinding=8 (8)
+[Info] [MK5] PlayerStart Z: aktual=996.0 cm, hitung=996.0 cm, d=+0.0 cm (tol +/-10)
+[Info] [MK5]   T1 Z=1445 cm (harap >= 990)
+[Info] [MK5]   T2 Z=1347 cm (harap >= 990)
+[Info] [MK5]   T3 Z=1297 cm (harap >= 990)
+[Info] [MK5] level disimpan
+[Info] [MK5] CEK MK5: LULUS

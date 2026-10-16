@@ -1,0 +1,11 @@
+[Info] [MK5c] level dimuat ulang dari disk: /Game/Hermes/MapsEp2/Maps/Test_Hermes_MapsEp2
+[Info] [MK5c] total actor di level: 228
+[Info] [MK5c] PlayerStart=1 (1) | TargetPoint=15 (15) | area Cylinder=7 (7) | zona TriggerBox=5 (5) | dinding=8 (8) | sisa Capture=0 (0)
+[Info] [MK5c] PlayerStart Z: aktual=996.0 cm, hitung=996.0 cm, d=+0.0 cm (tol +/-10)
+[Info] [MK5c] folder penanda: [Name("PENANDA")]
+[Info] [MK5c]   T1 Z=1445 cm (harap >= 990)
+[Info] [MK5c]   T2 Z=1347 cm (harap >= 990)
+[Info] [MK5c]   T3 Z=1297 cm (harap >= 990)
+[Info] [MK5c] dinding tidak Hidden in Game: 0 (0)
+[Info] [MK5c] WAKTU: 0.2 s
+[Info] [MK5c] CEK MK5c (disk): LULUS

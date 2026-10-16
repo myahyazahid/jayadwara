@@ -1175,3 +1175,32 @@ LogLiveCodingServer: Display: Live coding ready - Save changes and press Ctrl+Al
 [2026.10.16-16.02.49:043][757]LogAudio: Display: Audio Device unregistered from world 'None'.
 [2026.10.16-16.02.49:050][757]LogStreaming: Display: FlushAsyncLoading(379): 1 QueuedPackages, 0 AsyncPackages
 [2026.10.16-16.02.49:062][757]LogAudio: Display: Audio Device (ID: 1) registered with world 'Test_Hermes_MapsEp2'.
+[2026.10.16-16.11.04:792][244]LogAudio: Display: Audio Device unregistered from world 'None'.
+[2026.10.16-16.11.04:800][244]LogStreaming: Display: FlushAsyncLoading(380): 1 QueuedPackages, 0 AsyncPackages
+[2026.10.16-16.11.04:815][244]LogAudio: Display: Audio Device (ID: 1) registered with world 'Test_Hermes_MapsEp2'.
+[2026.10.16-16.11.05:434][245]LogContentValidation: Display: Starting to validate 1 assets
+[2026.10.16-16.12.00:096][409]LogAudio: Display: Audio Device unregistered from world 'None'.
+[2026.10.16-16.12.00:105][409]LogStreaming: Display: FlushAsyncLoading(381): 1 QueuedPackages, 0 AsyncPackages
+[2026.10.16-16.12.00:123][409]LogAudio: Display: Audio Device (ID: 1) registered with world 'Test_Hermes_MapsEp2'.
+[2026.10.16-16.12.00:234][409]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-16.12.00:234][409]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-16.12.00:235][409]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-16.12.00:235][409]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-16.12.00:235][409]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-16.12.00:235][409]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-16.12.00:235][409]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-16.12.00:235][409]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-16.12.00:774][409]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-16.12.00:774][409]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-16.12.00:774][409]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-16.12.00:774][409]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-16.12.00:775][409]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-16.12.00:775][409]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-16.12.00:775][409]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-16.12.00:775][409]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-16.18.26:944][567]LogAudio: Display: Audio Device unregistered from world 'None'.
+[2026.10.16-16.18.26:952][567]LogStreaming: Display: FlushAsyncLoading(382): 1 QueuedPackages, 0 AsyncPackages
+[2026.10.16-16.18.26:967][567]LogAudio: Display: Audio Device (ID: 1) registered with world 'Test_Hermes_MapsEp2'.
+[2026.10.16-16.19.30:998][759]LogAudio: Display: Audio Device unregistered from world 'None'.
+[2026.10.16-16.19.31:008][759]LogStreaming: Display: FlushAsyncLoading(383): 1 QueuedPackages, 0 AsyncPackages
+[2026.10.16-16.19.31:030][759]LogAudio: Display: Audio Device (ID: 1) registered with world 'Test_Hermes_MapsEp2'.
