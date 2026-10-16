@@ -10,6 +10,7 @@ Model Aksa: rencana [docs/19-rencana-model-aksa.md](../docs/19-rencana-model-aks
 | `Blender/` | File `.blend` berversi: `jayadwara_giant_vNN_<tahap>.blend` |
 | `Scripts/` | Script Python Blender (modeling, rig, validasi) dan alat bantu referensi |
 | `Export/` | Hasil export FBX + tekstur siap import UE |
+| `Level/` | Data tata letak map per episode (sumber kebenaran untuk greybox Blender/UE): `ep01_medan.py` (fungsi tinggi medan + uji), `ep01_layout_v01.json` (objek, penanda, kamera). Desain: [docs/30](../docs/30-desain-level-ep01.md) |
 
 ## Script (`Scripts/`)
 Dijalankan di Blender (mis. lewat MCP: `exec(open(path).read())`), kecuali yang ditandai *sistem*.
