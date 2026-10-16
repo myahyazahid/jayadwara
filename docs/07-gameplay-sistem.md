@@ -51,6 +51,18 @@ Disetujui developer 16 Okt 2026 dari konsep pose ("Usulan Jurus Aksa"). Patokan 
 | Udara + ringan | Tendangan terbang memutar | Satu putaran penuh di udara, lalu kaki kanan menendang lurus, kaki kiri terlipat |
 | Udara + berat | Hantaman ke bawah | Menukik, tinju kanan ke tanah sampai berlutut, gelombang kejut |
 
+### Dodge per arah
+
+Keputusan developer 16 Okt 2026. Sama untuk Aksa dan Jayadwara; `UJDGA_Dodge` sudah memilih montage per arah.
+
+| Input | Gerak |
+|---|---|
+| Mundur + dodge | **Salto belakang** |
+| Kiri/kanan + dodge | Guling ke samping atau *cartwheel* |
+| Maju + dodge | Langkah cepat menunduk (bukan salto, supaya tidak menabrak musuh) |
+
+Gerak dibedakan per arah, bukan per jarak ke musuh, supaya pemain selalu tahu hasil tombolnya.
+
 ### Serangan udara
 
 Keputusan developer 16 Okt 2026. Sama untuk Aksa dan Jayadwara.

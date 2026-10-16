@@ -268,7 +268,7 @@ Didownload developer (butuh akun Adobe), di-retarget ke skeleton Mannequin (sama
 | Aksa serangan udara | *Flying Kick* / *Jump Spin Kick* / *Tornado Kick* (tendangan terbang memutar), *Jump Down Attack* / *Ground Slam* (hantaman) | 2 |
 | Aksa cabang finisher | Finisher 1 *Back Kick* / *Spinning Back Kick* (dwi chagi); finisher 2 *Double Kick* / *Jumping Double Kick* (narae chagi) | 2–3 |
 | Aksa berat | Pukulan putar satu tangan: *Cross Punch* / *Heavy Punch* / *Spinning Punch* (melangkah + putar badan) | 3 |
-| Aksa dodge | *Dodging* / *Standing Dodge* (kiri, kanan, belakang, depan) | 3 |
+| Aksa dodge | Belakang *Back Flip*; kiri/kanan *Dodge Roll* / *Cartwheel*; depan *Quick Step* / *Dodging* ([07](07-gameplay-sistem.md#dodge-per-arah)) | 3 |
 | Aksa tangkis | *Body Block*, *Center Block*, *Standing Block React* | 3 |
 | Reaksi | *Hit Reaction* ×2, *Stunned*, *Knocked Down*, *Getting Up*, *Dying* | 4 |
 | Minion | *Zombie Walk*, *Zombie Attack* ×2, *Zombie Dying*, *Zombie Stand Up* | 5 |
