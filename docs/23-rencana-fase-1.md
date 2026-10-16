@@ -263,11 +263,11 @@ Didownload developer (butuh akun Adobe), di-retarget ke skeleton Mannequin (sama
 
 | Untuk | Animasi (cari di Mixamo) | Iter |
 |---|---|---|
-| Aksa combo ringan | *Jab*, *Cross Punch*, *Hook Punch*, finisher *Uppercut* / *Elbow Punch* (combo 4) | 2 |
-| Aksa pembuka arah | Terjang: *Lead Jab* / *Punch Forward*; mundur: *Back Step Punch* / *Spin Kick* | 2 |
-| Aksa serangan udara | *Jump Attack* / *Flying Kick* (pukulan udara), *Jump Down Attack* / *Ground Slam* (hantaman) | 2 |
-| Aksa cabang finisher | 2 pukulan berat berbeda: *Hurricane Kick*, *Mma Kick* | 2–3 |
-| Aksa berat | *Mma Kick* / *Uppercut* | 3 |
+| Aksa combo ringan | *Jab*, *Cross Punch*, *Hook Punch*, combo 4 *Spinning Back Kick* / *Spinning Hook Kick* (dwi huryeo chagi) | 2 |
+| Aksa pembuka arah | Terjang (lompat kecil, pukulan dari atas ke dada): *Jump Attack* / *Superman Punch* / *Overhand Punch*; mundur: *Back Step Punch* | 2 |
+| Aksa serangan udara | *Flying Kick* / *Jump Spin Kick* / *Tornado Kick* (tendangan terbang memutar), *Jump Down Attack* / *Ground Slam* (hantaman) | 2 |
+| Aksa cabang finisher | Finisher 1 *Back Kick* / *Spinning Back Kick* (dwi chagi); finisher 2 *Double Kick* / *Jumping Double Kick* (narae chagi) | 2–3 |
+| Aksa berat | Pukulan putar satu tangan: *Cross Punch* / *Heavy Punch* / *Spinning Punch* (melangkah + putar badan) | 3 |
 | Aksa dodge | *Dodging* / *Standing Dodge* (kiri, kanan, belakang, depan) | 3 |
 | Aksa tangkis | *Body Block*, *Center Block*, *Standing Block React* | 3 |
 | Reaksi | *Hit Reaction* ×2, *Stunned*, *Knocked Down*, *Getting Up*, *Dying* | 4 |
