@@ -8,7 +8,7 @@ Membuat / mengisi ulang (aman diulang; jalankan ulang setelah ue_setup_jayadwara
   Jayadwara2/Combat/A_JD2_Attack_01..03     salinan MM_Attack_0x_JD2 (ue_setup_jayadwara2.py menghapus isi Anims/ tiap jalan)
   Jayadwara2/Combat/AM_JD2_Light_01..03     notify JD Hit Window + JD Combo Window, waktu sama dengan Aksa (animasi sumber sama)
   Jayadwara2/Combat/AM_JD2_Heavy, AM_JD2_Block   sama dengan AM_Aksa_Heavy/Block (ue_setup_defense.py), dari A_JD2_Attack_02
-  Data/DA_CombatProfile_Giant               damage 10/10/18, laju terlihat 0,55, radius hit x skala, hit-stop 0,12 s, shake lebih besar;
+  Data/DA_CombatProfile_Giant               damage 10/10/18, laju terlihat 1,0 (ala Mebius, 16 Okt 2026), radius hit x skala, hit-stop 0,12 s, shake lebih besar;
                                             berat 30/40/25, dodge & tangkis/parry (GIANT_DEFENSE, parry 0,25 s)
   Data/DA_AbilitySet_Jayadwara              atribut awal (Sync penuh), ringan/berat/dodge/tangkis, buffer input 0,3 s
   BP_Jayadwara2                             ability_set, input_config (DA_InputConfig_Human; IMC_Giant di Iterasi 6), combat_profile
@@ -35,15 +35,15 @@ STEPS = [
 ]
 HEAVY = {"hit": ("hand_l", 0.32, 0.24), "damage": 30.0, "poise": 40.0, "stamina": 25.0, "rate": 0.75}
 BLOCK_HOLD = 0.75
-# Detik nyata. Dodge: durasi & i-frame manusia / 0,55 (laju terlihat raksasa), jarak ±0,6 x proporsional skala.
-GIANT_DEFENSE = {"dodge_distance": 5500.0, "dodge_duration": 0.64, "dodge_i_frame_start": 0.0, "dodge_i_frame_duration": 0.45,
+# Detik nyata. Dodge: durasi & i-frame sama dengan manusia (ala Mebius, 16 Okt 2026; dulu / 0,55), jarak ±0,6 x proporsional skala.
+GIANT_DEFENSE = {"dodge_distance": 5500.0, "dodge_duration": 0.35, "dodge_i_frame_start": 0.0, "dodge_i_frame_duration": 0.25,
                  "dodge_stamina_cost": 20.0, "block_hold_time": BLOCK_HOLD, "block_damage_reduction": 0.8,
                  "block_stamina_per_hit": 15.0, "block_angle": 140.0, "block_move_speed_scale": 0.4, "block_pushback": 1500.0,
                  "guard_break_stagger_duration": 1.0, "parry_window": 0.25, "parry_lockout": 0.5, "parry_stagger_duration": 1.0}
-PLAY_RATE = 0.55            # laju terlihat (docs/23 bagian 5); ability membagi dengan GlobalAnimRateScale mesh (±0,205)
+PLAY_RATE = 1.0             # laju terlihat (docs/23 bagian 5): ala Mebius, secepat Aksa; ability membagi dengan GlobalAnimRateScale mesh
 HUMAN_HIT_RADIUS = 30.0     # x skala raksasa
 BLEND_IN_S, BLEND_OUT_S = 0.12, 0.3   # detik nyata; blend montage ikut diperlambat GlobalAnimRateScale
-HIT_STOP = 0.12
+HIT_STOP = 0.15            # rasa berat dari momen kena, bukan dari kelambatan (docs/07)
 SHAKE_SCALE = 2.5
 GIANT_ATTRIBUTES = {"max_health": 100.0, "max_stamina": 100.0, "max_poise": 100.0, "max_sync": 100.0,
                     "max_transform_energy": 0.0, "stamina_regen_per_second": 25.0, "stamina_regen_delay": 0.8}

@@ -14,7 +14,7 @@
 
 | Sistem | Deskripsi |
 |---|---|
-| **Combat brawler berat** | Animasi lebih lambat, impact besar, terasa berbobot |
+| **Combat raksasa gesit, impact berat** | Gerak "ala Mebius" (keputusan developer 16 Okt 2026): serangan secepat mode manusia, berbalik badan cepat, lompatan tinggi. Rasa raksasa datang dari momen kena (hit-stop, guncangan kamera, debu, suara langkah, gedung runtuh pelan), bukan dari animasi yang diperlambat. Gerakan dan nama jurus tetap silat/Dwarapala, tidak meniru jurus Ultraman ([01](01-konsep-dan-pilar.md#wajib-dihindari)) |
 | **Meter sinkronisasi** | Lihat di bawah |
 | **Kelemahan boss** | Terbuka dari hasil investigasi mode manusia |
 | **Destruction** | Gedung bisa hancur; kerusakan memengaruhi meter sinkronisasi |

@@ -3,7 +3,7 @@
 Butuh: hasil ue_import_jayadwara2.py; IK_Mannequin & BP_Jayadwara dari setup model lama (TIDAK diubah).
 Membuat (semua di folder/nama baru; model lama utuh):
   /Game/Jayadwara/Characters/Jayadwara2/Rig/IK_Jayadwara2, RTG_Mannequin_To_Jayadwara2
-  /Game/Jayadwara/Characters/Jayadwara2/Anims/<nama>_JD2, ABP_Jayadwara2 (+ BS skala Froude, Anim Dynamics scarf/cloth_front)
+  /Game/Jayadwara/Characters/Jayadwara2/Anims/<nama>_JD2, ABP_Jayadwara2 (+ BS x GetSpeedScale(), Anim Dynamics scarf/cloth_front)
   /Game/Jayadwara/Characters/Jayadwara2/BP_Jayadwara2     salinan BP_Jayadwara (setelan kamera/input sama), mesh & ABP diganti
   /Game/Jayadwara/Core/BP_JDGameMode_Giant2               pawn BP_Jayadwara2
   /Game/Jayadwara/Maps/Test_GiantScale2                   salinan Test_GiantScale; Jayadwara LAMA berdiri di samping (JD_Lama)
@@ -303,8 +303,9 @@ def main():
     retarget(mesh)
     report_lean()
     bp = make_pawn(mesh)
-    scale = unreal.get_default_object(bp.generated_class()).get_giant_scale()
-    scale_blendspace(scale ** 0.5)
+    d = unreal.get_default_object(bp.generated_class())
+    scale = d.get_giant_scale()
+    scale_blendspace(d.get_speed_scale())   # pasangan GlobalAnimRateScale = speed / skala (AJDGiantCharacter)
     physics_and_cloth(mesh, scale)
     make_level(bp)
 

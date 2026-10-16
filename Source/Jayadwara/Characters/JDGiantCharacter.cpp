@@ -79,6 +79,11 @@ float AJDGiantCharacter::GetGiantHalfHeight() const
 	return AuthoredCapsuleHalfHeight * GetGiantScale();
 }
 
+float AJDGiantCharacter::GetSpeedScale() const
+{
+	return FMath::Pow(GetGiantScale(), SpeedScaleExponent);
+}
+
 void AJDGiantCharacter::BeginScaleTransition(bool bGrow, float Duration, TFunction<void()> OnFinished)
 {
 	if (bScaleTransitioning)
@@ -169,22 +174,24 @@ void AJDGiantCharacter::ApplyCameraScale(float EffectiveScale)
 void AJDGiantCharacter::ApplyGiantScale()
 {
 	const float Scale = GetGiantScale();
-	const float Froude = FMath::Sqrt(Scale);   // kecepatan & waktu makhluk besar naik ~ akar ukuran
+	const float Froude = FMath::Sqrt(Scale);   // lompatan: kecepatan naik ~ akar ukuran (tinggi lompat sebanding ukuran)
+	const float Speed = GetSpeedScale();       // gerak: skala^SpeedScaleExponent (0,83 = ala Mebius, 0,5 = Froude)
 
 	const float HalfHeight = AuthoredCapsuleHalfHeight * Scale;
 	GetCapsuleComponent()->SetCapsuleSize(AuthoredCapsuleRadius * Scale, HalfHeight);
 
 	GetMesh()->SetRelativeScale3D(FVector(GiantHeightCm / FMath::Max(MeshHeightCm, 1.0f)));
 	GetMesh()->SetRelativeLocation(FVector(0.0f, 0.0f, -HalfHeight));
-	// Animasi manusia diputar 1/sqrt(skala) kali: langkah berat & kaki menapak pada kecepatan Froude. Sumbu Speed
-	// BlendSpace raksasa dikali sqrt(skala) oleh Tools/ue_setup_giant.py supaya cocok.
-	GetMesh()->GlobalAnimRateScale = 1.0f / Froude;
+	// Langkah raksasa = langkah manusia x Scale; supaya kaki menapak pada kecepatan manusia x Speed, animasi diputar
+	// Speed / Scale kali. Sumbu Speed BlendSpace raksasa dikali Speed oleh Tools/ue_setup_giant_speed.py.
+	GetMesh()->GlobalAnimRateScale = Speed / Scale;
 
 	UCharacterMovementComponent* Movement = GetCharacterMovement();
-	Movement->MaxWalkSpeed = HumanWalkSpeed * Froude;
-	Movement->JumpZVelocity = HumanJumpZVelocity * Froude;
-	Movement->BrakingDecelerationWalking = 2000.0f * Froude;
-	Movement->RotationRate = FRotator(0.0f, HumanTurnRate / Froude, 0.0f);
+	Movement->MaxWalkSpeed = HumanWalkSpeed * Speed;
+	Movement->MaxAcceleration = HumanMaxAcceleration * Speed;   // lari penuh dalam waktu yang sama dengan manusia
+	Movement->BrakingDecelerationWalking = 2000.0f * Speed;
+	Movement->JumpZVelocity = HumanJumpZVelocity * Froude * JumpBoost;
+	Movement->RotationRate = FRotator(0.0f, GiantTurnRate, 0.0f);
 	Movement->MaxStepHeight = 45.0f * Scale;
 
 	ApplyCameraScale(Scale);
