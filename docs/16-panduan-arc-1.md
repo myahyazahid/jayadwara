@@ -167,6 +167,8 @@ Bola petir kuning keemasan yang didorong dua telapak. *Braja* = petir; langkah 3
 | 6 | Kaki kanan melangkah maju, badan condong, dua telapak didorong ke depan | Bola petir melesat ke target, meledak saat kena |
 
 - **Dua versi:** sinematik (langkah 1–6, ±4–5 s) saat pertama dipakai di Ep 1; gameplay (langkah 3–6, ±2 s).
+- **Dipakai:** mulai Ep 1 (klimaks, hancurkan tengkorak Jerangkong), terbuka resmi di debrief Ep 1, versi gameplay mulai Ep 2.
+- **Dikerjakan:** Fase 2 (`UJDGA_JurusSpesial01`, [18](18-kebutuhan-episode-1.md)), slot Agu–Sep 2027 bareng boss final, animasi silat, dan VFX. Di Fase 1 diganti finisher/pukulan berat ke tengkorak ([23](23-rencana-fase-1.md)).
 - **Syarat pakai:** boss **stagger** atau titik lemah terbuka (berfungsi sebagai finisher); tidak ada meter baru.
 - **Proyektil, bukan sinar:** meleset lalu kena gedung → kerusakan gedung + penalti Sync seperti sumber lain.
 - **Batas IP** ([01](01-konsep-dan-pilar.md#wajib-dihindari)): silang hanya **X**, tidak pernah **L** atau **+**, dan energi tidak keluar dari posisi silang. Permata dada hanya menyala selama jurus lalu padam, **tidak pernah berkedip** sebagai penanda status/waktu (lihat K1 di [14](14-model-sheet-jayadwara.md)).
@@ -175,7 +177,7 @@ Bola petir kuning keemasan yang didorong dua telapak. *Braja* = petir; langkah 3
 ### Senjata *(usulan developer 16 Okt 2026, mulai Ep 3)*
 
 - **Aksa: kujang**, **Jayadwara: keris** pusaka sang penjaga (bilah ber-luk, pamor menyala), dipanggil dari kalung lewat gerbang cahaya. Bilah berwujud fisik, **bukan** bilah cahaya yang keluar dari lengan (beda dari Mebium Blade).
-- Senjata = **jurus/mode tambahan**; combo silat tangan kosong tetap inti. Fase 1–2 tetap tangan kosong.
+- Senjata = **jurus/mode tambahan**; combo silat tangan kosong tetap inti. Fase 1–2 tetap tangan kosong. Dikerjakan di **Fase 4** saat produksi Ep 3.
 - **Satu moveset**: combo senjata sama di dua skala (sabet, sabet, tusuk, finisher); beda bentuk hitbox, efek, dan animasi lewat `UJDCombatProfile` per senjata.
 - **Belum diputuskan:** asal-usul kujang Aksa (keluarga Mangkubumi Jawa, kujang dari Sunda), misalnya dibuat DWARA/Nadia atau ditemukan saat misi Ep 3. Ditentukan di Fase 4.
 
