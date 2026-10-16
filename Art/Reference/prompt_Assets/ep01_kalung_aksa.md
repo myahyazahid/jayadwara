@@ -13,7 +13,7 @@ Aturan umum dan cara potong: [README](README.md).
 
 ## Catatan
 
-- Bentuk dikunci di docs/03: **pecahan batu arca berbentuk belah ketupat (diamond), berbingkai emas**, peninggalan Ki Zahid. Warna batu = batu [arca Dwarapala](arca_dwarapala.md).
+- Bentuk dikunci di docs/03: **pecahan batu arca berbentuk belah ketupat (diamond), berbingkai emas**, peninggalan Ki Zahid. Warna batu = batu [arca Dwarapala](ep01_arca_dwarapala.md).
 - Mesh dibuat **terpisah dari Aksa** ([prompt Aksa](../prompt_karakter/aksa.md#catatan)) supaya bisa menyala (material emissive) dan muncul jelas di close-up.
 - Rantai cukup tube sederhana atau dibuat dari array mata rantai di Blender; gambar hanya untuk liontin.
 - Glow saat transformasi = material/VFX, jadi gambar **tanpa cahaya**.

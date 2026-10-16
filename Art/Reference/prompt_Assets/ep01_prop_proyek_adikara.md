@@ -13,7 +13,7 @@ Aturan umum dan cara potong: [README](README.md).
 
 ## Catatan
 
-- Daftar dari docs/30: pagar seng, ekskavator, buldoser, truk derek ([file sendiri](truk_derek_adikara.md)), kantor kontainer (pos mandor), lampu sorot proyek, papan proyek tol, patok survei, terpal, tenda kerja. **Patok survei dan terpal** tidak perlu prompt (bentuk sederhana).
+- Daftar dari docs/30: pagar seng, ekskavator, buldoser, truk derek ([file sendiri](ep01_truk_derek_adikara.md)), kantor kontainer (pos mandor), lampu sorot proyek, papan proyek tol, patok survei, terpal, tenda kerja. **Patok survei dan terpal** tidak perlu prompt (bentuk sederhana).
 - Satu identitas visual: putih + oranye, logo matahari terbit abstrak. **Tanpa merek alat berat nyata.**
 - Ekskavator dan buldoser paling layak dibeli dari Fab lalu dicat ulang; prompt tetap disediakan kalau mau dibuat sendiri.
 

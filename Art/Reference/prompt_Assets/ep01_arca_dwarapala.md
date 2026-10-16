@@ -18,8 +18,8 @@ Aturan umum dan cara potong: [README](README.md).
   - **Kiri retak** (adegan 4) dan **retak besar** (adegan 6): retak sebagai potongan geometri + decal; versi **hancur** = fracture menjadi pecahan yang berputar saat transformasi.
   - **Kanan dililit tali derek** (adegan 4): tali sebagai curve/tube terpisah + stiker inventaris Adikara (decal).
   - **Kanan berterpal** (adegan 6): kain terpal dari cloth sim di atas model, lalu dibekukan jadi static mesh.
-- **Alas** dimodel terpisah (lihat [gerbang_prasasti.md](gerbang_prasasti.md)) karena alas kanan harus tetap ada saat arcanya hilang (adegan 9).
-- Kalung Aksa adalah **pecahan arca ini** ([kalung_aksa.md](kalung_aksa.md)); samakan warna dan tekstur batunya.
+- **Alas** dimodel terpisah (lihat [gerbang_prasasti.md](ep01_gerbang_prasasti.md)) karena alas kanan harus tetap ada saat arcanya hilang (adegan 9).
+- Kalung Aksa adalah **pecahan arca ini** ([kalung_aksa.md](ep01_kalung_aksa.md)); samakan warna dan tekstur batunya.
 - Wajah garang tapi **tidak seram berlebihan**: ia pelindung yang ambigu, bukan monster. Hiasan tengkorak tradisional (Singosari) **dihilangkan** supaya aman untuk rating remaja dan konsisten dengan aturan "tanpa gore". Penggambaran tetap menunggu review budayawan ([17 cek budaya](../../../docs/17-skenario-arc-1.md#cek-ip--budaya-ep-1)).
 - Gada bersandar ke tanah dan menyatu dengan tangan (padat, tanpa celah tipis).
 
