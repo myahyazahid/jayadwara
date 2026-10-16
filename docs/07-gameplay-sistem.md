@@ -10,6 +10,14 @@
 | **Combat silat** | Melee melawan minion / bentuk awal monster. Sistem yang sama dipakai di mode raksasa |
 | **Dialog & pilihan** | Sederhana, mendukung tema "apa benar dia pahlawan?" dan konsekuensi (mis. salah tuduh di Ep 16) |
 
+### Satu sistem, dua skala
+
+Keputusan developer 16 Okt 2026. Aksa dan Jayadwara memakai **sistem combo inti yang sama**: input, ability, dan aturan combo (bagian di bawah). Yang beda per skala:
+- **Rasa**: animasi, hit-stop, guncangan kamera, debu/puing (`DA_CombatProfile_Human` vs `DA_CombatProfile_Giant`).
+- **Jurus khas**: 2–3 jurus per skala, mulai **Fase 2** (beam Jayadwara dibahas terpisah).
+
+Di Fase 1 combo kedua skala identik.
+
 ### Combo & arah
 
 Keputusan developer 16 Okt 2026. Berlaku sama untuk Aksa dan Jayadwara (satu ability, beda `DA_CombatProfile`).
