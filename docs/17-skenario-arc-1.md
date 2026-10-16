@@ -105,6 +105,8 @@ Latar: kabin mobil DWARA di jalan desa menuju candi, sore. Panggilan video di ta
 
 Aksa turun dari mobil di batas garis polisi. Truk dan alat berat Adikara sedang pergi; seorang mandor menyuruh semua orang pulang sebelum gelap. Desa kecil terlihat di bawah bukit.
 
+> **Catatan tata letak v02 (16 Okt 2026, [30 bagian 2a](30-desain-level-ep01.md#2a-tata-letak-v02-16-okt-2026-yang-berlaku)):** Aksa kini turun dari mobil **di desa** (jalan ke atas ditutup polisi) dan berjalan naik lewat jalan setapak dan kebun ke galian. Teks adegan ini direvisi menyusul; dialog mandor dan batu latihan tetap dipakai di sepanjang jalan setapak.
+
 **Gameplay:** tutorial gerak (jalan, lari, lompat, dodge) di jalur galian yang berundak menuju candi. Penanda tujuan: gerbang candi.
 
 > **MANDOR (lewat):** Mas cagar budaya? Jangan lama-lama. Habis magrib, nggak ada yang mau di sini.
