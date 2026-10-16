@@ -5,7 +5,7 @@
   "medan": {
     "x_min": -340, "x_max": 460, "y_min": -420, "y_max": 280, "sel": 2.0,
     "material_zona": [
-      {"slot": "Air", "aturan": "z < -1"},
+      {"slot": "Air", "aturan": "z < -13 (hanya alur kali di dasar jurang; dasar jurang -12 m tetap Hutan)"},
       {"slot": "Galian", "aturan": "di dalam elips galian (x/70)^2 + (y/60)^2 < 1, atau koridor mulut galian |x| < 25 dan -110 <= y <= -27"},
       {"slot": "Jalan", "aturan": "<= 4 m dari JALAN_AKSES (x > 120) atau JALAN_PROYEK"},
       {"slot": "Plato", "aturan": "-60 <= x <= 60 dan 120 <= y <= 220"},
