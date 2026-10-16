@@ -78,7 +78,7 @@ Utara = arah candi. Angka = ketinggian tanah relatif terhadap desa (m).
 | Batu latihan | (+110, −60) | — | +24 | Menghadap sawah dan desa (interaksi opsional) |
 | Kebun / lereng penyangga | (−110, −120) | — | +20 → +2 | Pemisah galian–desa; jarak bibir galian → rumah terdekat **≥150 m** |
 | Sawah | (+60, −190) | ±300 × 160 | +0 … +3 | Selatan–tenggara galian; zona aman; ada lapangan bola (konsep) |
-| Desa | (−170, −260) | ±180 × 130 | 0 | **Barat daya, dekat kali** (konsep, 15 Okt 2026); 8 bangunan hancur + musala |
+| Desa | (−170, −262) | ±180 × 125 | 0 | **Barat daya, dekat kali** (konsep, 15 Okt 2026); 8 bangunan hancur + musala |
 
 Kemiringan lereng plato → sawah: ±35 m turun dalam ±300 m, **±7°**. Untuk Aksa ini bukit; untuk Jayadwara hampir datar. Undakan galian 2,5 m: tinggi bagi Aksa (pakai ram/tangga kayu), setinggi mata kaki bagi Jayadwara.
 
@@ -217,14 +217,19 @@ Target 60 FPS di 1080p PC menengah ([12](12-technical-design.md#target-performa)
 
 ---
 
-## 8. Greybox (akhir Fase 1)
+## 8. Greybox (jalur paralel Level/Map, mulai 16 Okt 2026)
 
-Greybox dibuat dengan skrip Python (`Tools/ue_greybox_ep01.py`, belum dibuat) supaya angka bagian 2 bisa diubah dan dijalankan ulang:
-1. Medan: plato, tangga, galian 4 undakan + ram, lereng, sawah, desa (kotak dan bidang miring).
-2. Kotak candi induk, gerbang, alas arca, prasasti; kotak gedung D1–D10 + musala.
-3. Titik mulai, `AJDWaveSpawner` gelombang 1–3, checkpoint, titik bangkit boss, titik transformasi, lapangan desa.
-4. Penanda petunjuk ★1–★3 (sementara memakai trigger kotak sampai scanner Netra ada di Fase 2).
-5. `BlockingVolume` batas dan latar kotak untuk uji garis pandang (gerbang terlihat dari garis polisi; truk terlihat dari gerbang).
+**Keputusan developer 16 Okt 2026:** desain dan greybox map dikerjakan sebagai **jalur paralel**, terpisah dari iterasi Fase 1 (sama seperti model karakter). Level dibangun **langsung di UE**; Blender hanya untuk mesh medan dan aset satuan. Angka yang bergantung pada Fase 1 (luas arena, jarak, jumlah gedung) disimpan di satu file data, jadi koreksinya cukup mengubah angka lalu menjalankan ulang skrip.
+
+**Sumber data (satu-satunya):**
+| File | Isi |
+|---|---|
+| [`Art/Level/ep01_medan.py`](../Art/Level/ep01_medan.py) | Fungsi `elev(x, y)` tinggi medan (bagian 2) + uji mandiri 12 titik dan jarak galian→desa ≥ 150 m |
+| [`Art/Level/ep01_layout_v01.json`](../Art/Level/ep01_layout_v01.json) | 43 objek, 11 penanda gameplay, zona aman/penalti, batas arena, 6 kamera, cahaya sore/senja |
+
+**Pelaksana greybox pertama: Hermes**, sesuai instruksi [`Hermes/maps_ep1_hermes.md`](../Hermes/maps_ep1_hermes.md) (worktree `C:\repository\unreal_engine\jayadwara_hermes_maps_ep1`, branch `hermes/maps_ep1`, sandbox `/Game/Hermes/MapsEp1/`). Langkah M0–M7: cek data → medan Blender headless → level `Test_Hermes_MapsEp1` → objek → penanda dan batas → kamera dan render → uji skala oleh developer.
+
+**Setelah dipakai:** Claude memindahkan logika skrip Hermes ke `Tools/ue_greybox_ep01.py` (membaca file data yang sama) dan membangun level greybox di `/Game/Jayadwara/Maps/` lewat PR. Penanda gelombang dan checkpoint diganti aktor gameplay (`AJDWaveSpawner`, `AJDCheckpoint`) setelah Iterasi 5; bangunan bertag `hancur` diganti Geometry Collection setelah Iterasi 7.
 
 **Diuji di greybox:** waktu tempuh zona A–C, terbaca-tidaknya landmark, ukuran arena untuk raksasa 45 m, sudut kamera raksasa saat di lereng, dan FPS dengan 8–10 gedung.
 
@@ -246,46 +251,6 @@ Semua keputusan disetujui sesuai usulan Claude.
 
 ---
 
-## 10. Rencana blockout 3D di Blender (didokumentasikan 15 Okt 2026, eksekusi nanti)
+## 10. Blockout Blender (dibatalkan 16 Okt 2026)
 
-Tujuan: melihat bukit, galian, candi, dan desa dalam 3D **sebelum** greybox UE, terutama rasa skala dan garis pandang. Developer memilih "dokumentasi dulu, eksekusi nanti", dengan opsi teknis diserahkan ke Claude. Pilihan Claude:
-
-### 10.1 Satu sumber data untuk Blender dan UE
-- **`Art/Level/ep01_layout.json`** menjadi sumber kebenaran tata letak: medan (profil ketinggian bagian 2), semua objek dengan posisi/ukuran/rotasi dari tabel koordinat, titik gameplay (START, ★1–★3, W1–W3, checkpoint, titik bangkit boss, titik transformasi, lapangan), dan kamera.
-- Skrip Blender dan skrip greybox UE (`Tools/ue_greybox_ep01.py`, bagian 8) **sama-sama membaca file ini**, jadi tata letak cukup diubah di satu tempat dan kedua alat tidak pernah berbeda.
-- Satuan: meter di JSON; Blender 1 unit = 1 m; UE dikali 100 (cm). Sumbu: X timur, Y utara, Z atas, titik nol tengah dasar galian (sama dengan bagian 2).
-
-### 10.2 Skrip dan file
-| File | Isi |
-|---|---|
-| `Art/Level/ep01_layout.json` | Data tata letak (10.1) |
-| `Art/Scripts/lv_ep01_blockout.py` | Membangun scene dari JSON; bisa lewat MCP Blender atau headless (`blender --background --factory-startup --python ...`) |
-| `Art/Blender/level/ep01_blockout_v01.blend` | Hasil scene (LFS) |
-| `docs/visual/ep01_blockout_C1.png` … `C6.png` | Render kamera (LFS), ditautkan dari dokumen ini |
-
-### 10.3 Isi scene
-- **Medan:** grid ±800 × 800 m (sel 5 m) yang ditinggikan mengikuti profil bagian 2; galian dibuat sebagai 4 undakan tegas (2,5 m) dan dasar datar; tangga sebagai anak tangga kotak.
-- **Bangunan kotak** dengan ukuran tabel bagian 4: candi induk (bentuk bertingkat sederhana), gerbang, alas + arca, rumah D1–D4, warung D5–D6, menara air D7, gardu D8, cadangan D9–D10 (wireframe), musala, pos mandor, alat berat, truk derek.
-- **Figur berskala:** pakai model asli dari `Art/Export/` (`SK_Aksa2`, `SK_Jayadwara2`, Jerangkong) di posisi adegan; kalau gagal impor, kapsul dengan tinggi yang sama (1,75 / 31 / 45 m).
-- **Penanda gameplay:** bola warna untuk ★, W, checkpoint; garis putus untuk jalur Aksa dan garis pandang (warna sama dengan [visual](visual/ep01-lawang-sapta.html)).
-- **Material datar** (warna token visual: andesit, tanah merah, sawah, desa, hutan) supaya terbaca sebagai blockout, bukan art final.
-- **Latar:** bukit utara, jurang barat, pilar tol timur, sawah melebar ke selatan sebagai kotak/bidang sederhana.
-
-### 10.4 Kamera render (Eevee, 1600 × 900)
-| # | Kamera | Posisi / arah | Yang dicek |
-|---|---|---|---|
-| C1 | Mata Aksa di START | (140, −20, +25 m) tinggi 1,6 m, ke gerbang | Gerbang terbaca sebagai landmark (adegan 3) |
-| C2 | Bibir galian | (64, 14, +25 m) tinggi 1,6 m, ke dasar galian | Jalur U dan kedalaman undakan terbaca |
-| C3 | Gerbang ke timur | (0, 125, +35 m) tinggi 1,6 m, ke jalan proyek | Wide shot adegan 6: Jerangkong + truk di belakangnya |
-| C4 | Mata Jayadwara | (0, 138, +35 m) tinggi 42 m, ke selatan | Desa dan sawah dari 45 m: skala dan pilihan sawah vs desa |
-| C5 | Tampak atas ortografis | di atas (0, −80) | Cocok dengan denah bagian 2 |
-| C6 | Sinematik sawah | (−60, −160) tinggi 3 m, menghadap utara | Dua raksasa di siluet senja (adegan 7) |
-
-- Pencahayaan: **sore** (matahari dari barat, elevasi ±12°) untuk C1–C3 dan C5; **senja merah** untuk C4 dan C6.
-
-### 10.5 Kapan dan siapa
-- **Kapan:** saat developer siap membuka Blender. Tidak mengganggu urutan Fase 1; boleh dikerjakan kapan saja sebelum greybox UE.
-- **Claude:** menulis JSON + skrip, menjalankan lewat MCP Blender (scene baru, file developer tidak disentuh), render C1–C6, commit.
-- **Developer:** membuka Blender, menilai render, mencatat koreksi (ukuran arena, posisi, garis pandang) → JSON diperbarui → render ulang.
-- **Selesai jika:** keenam render ada di `docs/visual/`, developer setuju skala dan garis pandangnya, dan JSON siap dipakai `Tools/ue_greybox_ep01.py`.
-
+Rencana blockout 3D di Blender (versi 15 Okt 2026) **diganti greybox langsung di UE** (bagian 8): skala hanya bisa dinilai dengan memainkan Aksa dan Jayadwara2 di dalam game. Yang dipertahankan dari rencana lama: satu file data untuk semua alat (`Art/Level/`), dan enam kamera C1–C6 yang kini dirender dari UE (`ep01_layout_v01.json` → `kamera`). Render Blender tetap boleh untuk gambar presentasi, tapi tidak wajib.
