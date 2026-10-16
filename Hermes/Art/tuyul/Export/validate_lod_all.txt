@@ -1,0 +1,240 @@
+--- SK_Tuyul
+PASS 52 tulang tuyul_skeleton ada
+PASS tidak ada tulang tambahan  [[]]
+PASS satu akar bernama root  [['root']]
+PASS hierarki sama dengan tuyul_skeleton  [[]]
+PASS posisi tulang = tuyul_skeleton (<= 1 mm, ruang model)  [terburuk 0.001 mm]
+PASS tidak ada empty
+PASS tepat 1 objek mesh  [1]
+PASS tris LOD0 <= 100000  [38090]
+PASS 1-2 slot material (atlas Tripo)  [['M_Tuyul']]
+PASS grup vertex hanya ke tulang yang ada
+PASS <= 4 influence per vertex  [maks 4]
+PASS 0 vertex tanpa bobot  [0]
+PASS bobot ternormalisasi (±0,01)  [0]
+PASS bobot lunak: tidak ada vertex 1-tulang-kaku wajib  [profil Tuyul tidak memakai cek potongan kaku]
+PASS tinggi model 1,00 m x skala 1 = 1.00 m (±1%)  [1.000 m x skala 1.0 = 1.00 m]
+PASS telapak di z≈0  [0.0000 m]
+PASS UV 0-1
+PASS socket JSON: tulang induk ada (>= 8)  [8 socket]
+HASIL: 18/18 lulus — SK_Tuyul.fbx
+--- SK_Tuyul_LOD1
+PASS 52 tulang tuyul_skeleton ada
+PASS tidak ada tulang tambahan  [[]]
+PASS satu akar bernama root  [['root']]
+PASS hierarki sama dengan tuyul_skeleton  [[]]
+PASS posisi tulang = tuyul_skeleton (<= 1 mm, ruang model)  [terburuk 0.001 mm]
+PASS tidak ada empty
+PASS tepat 1 objek mesh  [1]
+PASS tris LOD1 <= 30000  [30000]
+PASS 1-2 slot material (atlas Tripo)  [['M_Tuyul']]
+PASS grup vertex hanya ke tulang yang ada
+PASS <= 4 influence per vertex  [maks 4]
+PASS 0 vertex tanpa bobot  [0]
+PASS bobot ternormalisasi (±0,01)  [0]
+PASS bobot lunak: tidak ada vertex 1-tulang-kaku wajib  [profil Tuyul tidak memakai cek potongan kaku]
+PASS tinggi model 1,00 m x skala 1 = 1.00 m (±1%)  [1.000 m x skala 1.0 = 1.00 m]
+PASS telapak di z≈0  [0.0000 m]
+PASS UV 0-1
+PASS socket JSON: tulang induk ada (>= 8)  [8 socket]
+HASIL: 18/18 lulus — SK_Tuyul_LOD1.fbx
+--- SK_Tuyul_LOD2
+PASS 52 tulang tuyul_skeleton ada
+PASS tidak ada tulang tambahan  [[]]
+PASS satu akar bernama root  [['root']]
+PASS hierarki sama dengan tuyul_skeleton  [[]]
+PASS posisi tulang = tuyul_skeleton (<= 1 mm, ruang model)  [terburuk 0.001 mm]
+PASS tidak ada empty
+PASS tepat 1 objek mesh  [1]
+PASS tris LOD2 <= 14000  [14000]
+PASS 1-2 slot material (atlas Tripo)  [['M_Tuyul']]
+PASS grup vertex hanya ke tulang yang ada
+PASS <= 4 influence per vertex  [maks 4]
+PASS 0 vertex tanpa bobot  [0]
+PASS bobot ternormalisasi (±0,01)  [0]
+PASS bobot lunak: tidak ada vertex 1-tulang-kaku wajib  [profil Tuyul tidak memakai cek potongan kaku]
+PASS tinggi model 1,00 m x skala 1 = 1.00 m (±1%)  [1.000 m x skala 1.0 = 1.00 m]
+PASS telapak di z≈0  [0.0000 m]
+PASS UV 0-1
+PASS socket JSON: tulang induk ada (>= 8)  [8 socket]
+HASIL: 18/18 lulus — SK_Tuyul_LOD2.fbx
+--- SK_Tuyul_LOD3
+PASS 52 tulang tuyul_skeleton ada
+PASS tidak ada tulang tambahan  [[]]
+PASS satu akar bernama root  [['root']]
+PASS hierarki sama dengan tuyul_skeleton  [[]]
+PASS posisi tulang = tuyul_skeleton (<= 1 mm, ruang model)  [terburuk 0.001 mm]
+PASS tidak ada empty
+PASS tepat 1 objek mesh  [1]
+PASS tris LOD3 <= 6000  [6000]
+PASS 1-2 slot material (atlas Tripo)  [['M_Tuyul']]
+PASS grup vertex hanya ke tulang yang ada
+PASS <= 4 influence per vertex  [maks 4]
+PASS 0 vertex tanpa bobot  [0]
+PASS bobot ternormalisasi (±0,01)  [0]
+PASS bobot lunak: tidak ada vertex 1-tulang-kaku wajib  [profil Tuyul tidak memakai cek potongan kaku]
+PASS tinggi model 1,00 m x skala 1 = 1.00 m (±1%)  [1.000 m x skala 1.0 = 1.00 m]
+PASS telapak di z≈0  [0.0002 m]
+PASS UV 0-1
+PASS socket JSON: tulang induk ada (>= 8)  [8 socket]
+HASIL: 18/18 lulus — SK_Tuyul_LOD3.fbx
+--- SK_TuyulBesar
+PASS 52 tulang tuyul_skeleton ada
+PASS tidak ada tulang tambahan  [[]]
+PASS satu akar bernama root  [['root']]
+PASS hierarki sama dengan tuyul_skeleton  [[]]
+PASS posisi tulang = tuyul_skeleton (<= 1 mm, ruang model)  [terburuk 0.001 mm]
+PASS tidak ada empty
+PASS tepat 1 objek mesh  [1]
+PASS tris LOD0 <= 100000  [38090]
+PASS 1-2 slot material (atlas Tripo)  [['M_Tuyul']]
+PASS grup vertex hanya ke tulang yang ada
+PASS <= 4 influence per vertex  [maks 4]
+PASS 0 vertex tanpa bobot  [0]
+PASS bobot ternormalisasi (±0,01)  [0]
+PASS bobot lunak: tidak ada vertex 1-tulang-kaku wajib  [profil Tuyul tidak memakai cek potongan kaku]
+PASS tinggi model 1,00 m x skala 27 = 27.00 m (±1%)  [1.000 m x skala 27.0 = 27.00 m]
+PASS telapak di z≈0  [0.0000 m]
+PASS UV 0-1
+PASS socket JSON: tulang induk ada (>= 8)  [8 socket]
+HASIL: 18/18 lulus — SK_TuyulBesar.fbx
+--- SK_TuyulBesar_LOD1
+PASS 52 tulang tuyul_skeleton ada
+PASS tidak ada tulang tambahan  [[]]
+PASS satu akar bernama root  [['root']]
+PASS hierarki sama dengan tuyul_skeleton  [[]]
+PASS posisi tulang = tuyul_skeleton (<= 1 mm, ruang model)  [terburuk 0.001 mm]
+PASS tidak ada empty
+PASS tepat 1 objek mesh  [1]
+PASS tris LOD1 <= 30000  [30000]
+PASS 1-2 slot material (atlas Tripo)  [['M_Tuyul']]
+PASS grup vertex hanya ke tulang yang ada
+PASS <= 4 influence per vertex  [maks 4]
+PASS 0 vertex tanpa bobot  [0]
+PASS bobot ternormalisasi (±0,01)  [0]
+PASS bobot lunak: tidak ada vertex 1-tulang-kaku wajib  [profil Tuyul tidak memakai cek potongan kaku]
+PASS tinggi model 1,00 m x skala 27 = 27.00 m (±1%)  [1.000 m x skala 27.0 = 27.00 m]
+PASS telapak di z≈0  [0.0000 m]
+PASS UV 0-1
+PASS socket JSON: tulang induk ada (>= 8)  [8 socket]
+HASIL: 18/18 lulus — SK_TuyulBesar_LOD1.fbx
+--- SK_TuyulBesar_LOD2
+PASS 52 tulang tuyul_skeleton ada
+PASS tidak ada tulang tambahan  [[]]
+PASS satu akar bernama root  [['root']]
+PASS hierarki sama dengan tuyul_skeleton  [[]]
+PASS posisi tulang = tuyul_skeleton (<= 1 mm, ruang model)  [terburuk 0.001 mm]
+PASS tidak ada empty
+PASS tepat 1 objek mesh  [1]
+PASS tris LOD2 <= 14000  [14000]
+PASS 1-2 slot material (atlas Tripo)  [['M_Tuyul']]
+PASS grup vertex hanya ke tulang yang ada
+PASS <= 4 influence per vertex  [maks 4]
+PASS 0 vertex tanpa bobot  [0]
+PASS bobot ternormalisasi (±0,01)  [0]
+PASS bobot lunak: tidak ada vertex 1-tulang-kaku wajib  [profil Tuyul tidak memakai cek potongan kaku]
+PASS tinggi model 1,00 m x skala 27 = 27.00 m (±1%)  [1.000 m x skala 27.0 = 27.00 m]
+PASS telapak di z≈0  [0.0000 m]
+PASS UV 0-1
+PASS socket JSON: tulang induk ada (>= 8)  [8 socket]
+HASIL: 18/18 lulus — SK_TuyulBesar_LOD2.fbx
+--- SK_TuyulBesar_LOD3
+PASS 52 tulang tuyul_skeleton ada
+PASS tidak ada tulang tambahan  [[]]
+PASS satu akar bernama root  [['root']]
+PASS hierarki sama dengan tuyul_skeleton  [[]]
+PASS posisi tulang = tuyul_skeleton (<= 1 mm, ruang model)  [terburuk 0.001 mm]
+PASS tidak ada empty
+PASS tepat 1 objek mesh  [1]
+PASS tris LOD3 <= 6000  [6000]
+PASS 1-2 slot material (atlas Tripo)  [['M_Tuyul']]
+PASS grup vertex hanya ke tulang yang ada
+PASS <= 4 influence per vertex  [maks 4]
+PASS 0 vertex tanpa bobot  [0]
+PASS bobot ternormalisasi (±0,01)  [0]
+PASS bobot lunak: tidak ada vertex 1-tulang-kaku wajib  [profil Tuyul tidak memakai cek potongan kaku]
+PASS tinggi model 1,00 m x skala 27 = 27.00 m (±1%)  [1.000 m x skala 27.0 = 26.99 m]
+PASS telapak di z≈0  [0.0058 m]
+PASS UV 0-1
+PASS socket JSON: tulang induk ada (>= 8)  [8 socket]
+HASIL: 18/18 lulus — SK_TuyulBesar_LOD3.fbx
+--- SK_TuyulRaksasa
+PASS 52 tulang tuyul_skeleton ada
+PASS tidak ada tulang tambahan  [[]]
+PASS satu akar bernama root  [['root']]
+PASS hierarki sama dengan tuyul_skeleton  [[]]
+PASS posisi tulang = tuyul_skeleton (<= 1 mm, ruang model)  [terburuk 0.001 mm]
+PASS tidak ada empty
+PASS tepat 1 objek mesh  [1]
+PASS tris LOD0 <= 100000  [38090]
+PASS 1-2 slot material (atlas Tripo)  [['M_Tuyul']]
+PASS grup vertex hanya ke tulang yang ada
+PASS <= 4 influence per vertex  [maks 4]
+PASS 0 vertex tanpa bobot  [0]
+PASS bobot ternormalisasi (±0,01)  [0]
+PASS bobot lunak: tidak ada vertex 1-tulang-kaku wajib  [profil Tuyul tidak memakai cek potongan kaku]
+PASS tinggi model 1,00 m x skala 45 = 45.00 m (±1%)  [1.000 m x skala 45.0 = 45.00 m]
+PASS telapak di z≈0  [0.0000 m]
+PASS UV 0-1
+PASS socket JSON: tulang induk ada (>= 8)  [8 socket]
+HASIL: 18/18 lulus — SK_TuyulRaksasa.fbx
+--- SK_TuyulRaksasa_LOD1
+PASS 52 tulang tuyul_skeleton ada
+PASS tidak ada tulang tambahan  [[]]
+PASS satu akar bernama root  [['root']]
+PASS hierarki sama dengan tuyul_skeleton  [[]]
+PASS posisi tulang = tuyul_skeleton (<= 1 mm, ruang model)  [terburuk 0.001 mm]
+PASS tidak ada empty
+PASS tepat 1 objek mesh  [1]
+PASS tris LOD1 <= 30000  [30000]
+PASS 1-2 slot material (atlas Tripo)  [['M_Tuyul']]
+PASS grup vertex hanya ke tulang yang ada
+PASS <= 4 influence per vertex  [maks 4]
+PASS 0 vertex tanpa bobot  [0]
+PASS bobot ternormalisasi (±0,01)  [0]
+PASS bobot lunak: tidak ada vertex 1-tulang-kaku wajib  [profil Tuyul tidak memakai cek potongan kaku]
+PASS tinggi model 1,00 m x skala 45 = 45.00 m (±1%)  [1.000 m x skala 45.0 = 45.00 m]
+PASS telapak di z≈0  [0.0000 m]
+PASS UV 0-1
+PASS socket JSON: tulang induk ada (>= 8)  [8 socket]
+HASIL: 18/18 lulus — SK_TuyulRaksasa_LOD1.fbx
+--- SK_TuyulRaksasa_LOD2
+PASS 52 tulang tuyul_skeleton ada
+PASS tidak ada tulang tambahan  [[]]
+PASS satu akar bernama root  [['root']]
+PASS hierarki sama dengan tuyul_skeleton  [[]]
+PASS posisi tulang = tuyul_skeleton (<= 1 mm, ruang model)  [terburuk 0.001 mm]
+PASS tidak ada empty
+PASS tepat 1 objek mesh  [1]
+PASS tris LOD2 <= 14000  [14000]
+PASS 1-2 slot material (atlas Tripo)  [['M_Tuyul']]
+PASS grup vertex hanya ke tulang yang ada
+PASS <= 4 influence per vertex  [maks 4]
+PASS 0 vertex tanpa bobot  [0]
+PASS bobot ternormalisasi (±0,01)  [0]
+PASS bobot lunak: tidak ada vertex 1-tulang-kaku wajib  [profil Tuyul tidak memakai cek potongan kaku]
+PASS tinggi model 1,00 m x skala 45 = 45.00 m (±1%)  [1.000 m x skala 45.0 = 45.00 m]
+PASS telapak di z≈0  [0.0000 m]
+PASS UV 0-1
+PASS socket JSON: tulang induk ada (>= 8)  [8 socket]
+HASIL: 18/18 lulus — SK_TuyulRaksasa_LOD2.fbx
+--- SK_TuyulRaksasa_LOD3
+PASS 52 tulang tuyul_skeleton ada
+PASS tidak ada tulang tambahan  [[]]
+PASS satu akar bernama root  [['root']]
+PASS hierarki sama dengan tuyul_skeleton  [[]]
+PASS posisi tulang = tuyul_skeleton (<= 1 mm, ruang model)  [terburuk 0.001 mm]
+PASS tidak ada empty
+PASS tepat 1 objek mesh  [1]
+PASS tris LOD3 <= 6000  [6000]
+PASS 1-2 slot material (atlas Tripo)  [['M_Tuyul']]
+PASS grup vertex hanya ke tulang yang ada
+PASS <= 4 influence per vertex  [maks 4]
+PASS 0 vertex tanpa bobot  [0]
+PASS bobot ternormalisasi (±0,01)  [0]
+PASS bobot lunak: tidak ada vertex 1-tulang-kaku wajib  [profil Tuyul tidak memakai cek potongan kaku]
+PASS tinggi model 1,00 m x skala 45 = 45.00 m (±1%)  [1.000 m x skala 45.0 = 44.99 m]
+PASS telapak di z≈0  [0.0097 m]
+PASS UV 0-1
+PASS socket JSON: tulang induk ada (>= 8)  [8 socket]
+HASIL: 18/18 lulus — SK_TuyulRaksasa_LOD3.fbx

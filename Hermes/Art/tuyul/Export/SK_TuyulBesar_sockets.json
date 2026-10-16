@@ -1,0 +1,119 @@
+{
+  "mesh": "SK_TuyulBesar",
+  "export_scale": 27.0,
+  "note": "posisi rest; ue_component_cm = (x, -y, z) x 100 x export_scale (konvensi docs/13 Iterasi 6)",
+  "sockets": [
+    {
+      "name": "SOCKET_head_top",
+      "bone": "head",
+      "blender_m": [
+        0.0,
+        -0.02,
+        0.97
+      ],
+      "ue_component_cm": [
+        0.0,
+        54.0,
+        2619.0
+      ]
+    },
+    {
+      "name": "SOCKET_mouth_fx",
+      "bone": "jaw",
+      "blender_m": [
+        0.0,
+        -0.2,
+        0.83
+      ],
+      "ue_component_cm": [
+        0.0,
+        540.0,
+        2241.0
+      ]
+    },
+    {
+      "name": "SOCKET_hand_l_hit",
+      "bone": "hand_l",
+      "blender_m": [
+        0.24362,
+        -0.02419,
+        0.2084
+      ],
+      "ue_component_cm": [
+        657.761,
+        65.319,
+        562.689
+      ]
+    },
+    {
+      "name": "SOCKET_carry_l",
+      "bone": "hand_l",
+      "blender_m": [
+        0.248,
+        -0.022,
+        0.238
+      ],
+      "ue_component_cm": [
+        669.6,
+        59.4,
+        642.6
+      ]
+    },
+    {
+      "name": "SOCKET_foot_l_hit",
+      "bone": "foot_l",
+      "blender_m": [
+        0.13,
+        -0.06,
+        0.03
+      ],
+      "ue_component_cm": [
+        351.0,
+        162.0,
+        81.0
+      ]
+    },
+    {
+      "name": "SOCKET_hand_r_hit",
+      "bone": "hand_r",
+      "blender_m": [
+        -0.24286,
+        -0.02,
+        0.21244
+      ],
+      "ue_component_cm": [
+        -655.721,
+        54.0,
+        573.598
+      ]
+    },
+    {
+      "name": "SOCKET_carry_r",
+      "bone": "hand_r",
+      "blender_m": [
+        -0.248,
+        -0.02,
+        0.242
+      ],
+      "ue_component_cm": [
+        -669.6,
+        54.0,
+        653.4
+      ]
+    },
+    {
+      "name": "SOCKET_foot_r_hit",
+      "bone": "foot_r",
+      "blender_m": [
+        -0.13,
+        -0.06,
+        0.03
+      ],
+      "ue_component_cm": [
+        -351.0,
+        162.0,
+        81.0
+      ]
+    }
+  ]
+}

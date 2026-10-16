@@ -1,0 +1,931 @@
+=== audit skala Hermes/Art/tuyul/Export/SK_Tuyul.fbx (height 1.0) ===
+00:07.016  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_kecil\front_color.png'
+00:07.110  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_kecil\front_mask.png'
+00:07.219  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_kecil\side_color.png'
+00:07.297  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_kecil\side_mask.png'
+00:07.391  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_kecil\back_color.png'
+00:07.453  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_kecil\back_mask.png'
+00:07.610  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_kecil\pose_rest_depan.png'
+00:07.641  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_kecil\pose_rest_bawah.png'
+00:07.797  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_kecil\pose_kuda_kuda_depan.png'
+00:07.844  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_kecil\pose_kuda_kuda_bawah.png'
+00:07.985  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_kecil\pose_pukul_depan.png'
+00:08.032  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_kecil\pose_pukul_bawah.png'
+00:08.172  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_kecil\pose_tendang_tinggi_depan.png'
+00:08.219  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_kecil\pose_tendang_tinggi_bawah.png'
+00:08.375  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_kecil\pose_dodge_depan.png'
+00:08.422  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_kecil\pose_dodge_bawah.png'
+00:08.625  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_kecil\pose_jongkok_depan.png'
+00:08.672  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_kecil\pose_jongkok_bawah.png'
+00:08.813  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_kecil\pose_lari_depan.png'
+00:08.860  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_kecil\pose_lari_bawah.png'
+00:09.016  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_kecil\pose_lompat_depan.png'
+00:09.047  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_kecil\pose_lompat_bawah.png'
+00:09.203  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_kecil\pose_tendang_samping_depan.png'
+00:09.250  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_kecil\pose_tendang_samping_bawah.png'
+00:09.407  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_kecil\pose_tangkis_depan.png'
+00:09.453  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_kecil\pose_tangkis_bawah.png'
+00:09.610  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_kecil\pose_putar_badan_depan.png'
+00:09.657  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_kecil\pose_putar_badan_bawah.png'
+00:09.813  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_kecil\pose_lunge_depan.png'
+00:09.860  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_kecil\pose_lunge_bawah.png'
+00:10.016  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_kecil\pose_bungkuk_depan.png'
+00:10.047  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_kecil\pose_bungkuk_bawah.png'
+00:10.203  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_kecil\pose_tangan_terangkat_depan.png'
+00:10.235  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_kecil\pose_tangan_terangkat_bawah.png'
+00:10.391  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_kecil\pose_lengan_depan_90_depan.png'
+00:10.422  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_kecil\pose_lengan_depan_90_bawah.png'
+00:10.578  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_kecil\pose_lengan_depan_atas_depan.png'
+00:10.625  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_kecil\pose_lengan_depan_atas_bawah.png'
+00:10.766  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_kecil\pose_lengan_samping_90_depan.png'
+00:10.813  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_kecil\pose_lengan_samping_90_bawah.png'
+00:10.969  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_kecil\pose_lengan_guard_depan.png'
+00:11.000  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_kecil\pose_lengan_guard_bawah.png'
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:37:04)
+FBX version: 7400
+PASS tinggi 1.000 m -6/+2 cm  [1.000 m]
+PASS telapak di z≈0 (±1 cm)  [0.0000 m]
+PASS tulang wajib profil 'tuyul' ada  [52 tulang]
+PASS semua tulang di pose profil ada
+PASS menghadap -Y (foot_l -> ball_l)  [vektor (0.01, -0.08, -0.04)]
+PASS menghadap -Y (foot_r -> ball_r)  [vektor (-0.01, -0.08, -0.04)]
+PASS kiri karakter = +X (thigh_r -> thigh_l)  [vektor (0.2, 0.0, 0.0)]
+PASS atas = +Z (pelvis -> head)  [vektor (0.0, -0.02, 0.595)]
+tepi terbuka (boundary): 0 | terbanyak per tulang: []
+PASS 0 vertex tanpa bobot  [0]
+warna render: MATERIAL (3 tekstur, ada yang GAGAL dimuat -> pakai warna material)
+  rest               regangan p99   0.0% maks    0.0% | peregangan maks  0.00 cm  
+  kuda_kuda          regangan p99  42.9% maks  629.9% | peregangan maks  2.13 cm  head 2.13 | clavicle_l 1.97 | clavicle_r 1.84
+  pukul              regangan p99  47.4% maks 1134.1% | peregangan maks  2.94 cm  clavicle_r 2.94 | head 2.85 | clavicle_l 2.79
+  tendang_tinggi     regangan p99  50.9% maks 1071.3% | peregangan maks  2.94 cm  spine_01 2.94 | thigh_r 2.76 | clavicle_r 1.92
+  dodge              regangan p99  42.7% maks  662.3% | peregangan maks  2.26 cm  head 2.26 | clavicle_l 2.09 | clavicle_r 1.93
+  jongkok            regangan p99  74.2% maks 1081.8% | peregangan maks  3.13 cm  thigh_l 3.13 | spine_01 2.75 | thigh_r 2.61
+  lari               regangan p99  54.4% maks  747.7% | peregangan maks  2.22 cm  clavicle_r 2.22 | thigh_l 2.16 | spine_01 2.11
+  lompat             regangan p99  58.7% maks 1244.9% | peregangan maks  3.72 cm  clavicle_r 3.72 | head 3.71 | clavicle_l 3.69
+  tendang_samping    regangan p99  39.8% maks  814.9% | peregangan maks  2.37 cm  clavicle_r 2.37 | spine_01 2.21 | jaw 2.11
+  tangkis            regangan p99  52.9% maks 1043.1% | peregangan maks  3.14 cm  head 3.14 | clavicle_l 2.99 | clavicle_r 2.90
+  putar_badan        regangan p99  48.1% maks  543.8% | peregangan maks  2.39 cm  clavicle_l 2.39 | head 2.30 | jaw 1.69
+  lunge              regangan p99  50.2% maks  489.5% | peregangan maks  2.53 cm  thigh_l 2.53 | head 2.34 | clavicle_l 2.18
+  bungkuk            regangan p99  51.4% maks  527.1% | peregangan maks  1.92 cm  head 1.92 | spine_02 1.87 | clavicle_l 1.72
+  tangan_terangkat   regangan p99  72.5% maks 1410.1% | peregangan maks  5.49 cm  clavicle_l 5.49 | spine_03 4.98 | head 4.47
+  lengan_depan_90    regangan p99  56.5% maks 1103.4% | peregangan maks  3.71 cm  head 3.71 | clavicle_l 3.57 | clavicle_r 3.18
+  lengan_depan_atas  regangan p99  73.2% maks 1567.2% | peregangan maks  4.73 cm  head 4.73 | clavicle_l 4.68 | spine_03 4.58
+  lengan_samping_90  regangan p99  35.4% maks  945.3% | peregangan maks  2.87 cm  clavicle_r 2.87 | head 2.79 | clavicle_l 2.79
+  lengan_guard       regangan p99  48.8% maks  947.6% | peregangan maks  3.13 cm  head 3.13 | clavicle_l 2.83 | clavicle_r 2.58
+FAIL regangan p99 <= 40.0% di semua pose  [74.2% di jongkok]
+
+HASIL AUDIT: 9/10 lulus — SK_Tuyul.fbx -> C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_kecil
+exit=1
+=== audit skala Hermes/Art/tuyul/Export/SK_TuyulBesar.fbx (height 27.0) ===
+00:05.407  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_besar\front_color.png'
+00:05.485  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_besar\front_mask.png'
+00:05.594  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_besar\side_color.png'
+00:05.641  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_besar\side_mask.png'
+00:05.766  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_besar\back_color.png'
+00:05.829  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_besar\back_mask.png'
+00:05.969  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_besar\pose_rest_depan.png'
+00:06.016  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_besar\pose_rest_bawah.png'
+00:06.188  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_besar\pose_kuda_kuda_depan.png'
+00:06.219  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_besar\pose_kuda_kuda_bawah.png'
+00:06.375  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_besar\pose_pukul_depan.png'
+00:06.422  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_besar\pose_pukul_bawah.png'
+00:06.579  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_besar\pose_tendang_tinggi_depan.png'
+00:06.610  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_besar\pose_tendang_tinggi_bawah.png'
+00:06.782  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_besar\pose_dodge_depan.png'
+00:06.829  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_besar\pose_dodge_bawah.png'
+00:07.000  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_besar\pose_jongkok_depan.png'
+00:07.047  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_besar\pose_jongkok_bawah.png'
+00:07.204  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_besar\pose_lari_depan.png'
+00:07.250  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_besar\pose_lari_bawah.png'
+00:07.391  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_besar\pose_lompat_depan.png'
+00:07.438  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_besar\pose_lompat_bawah.png'
+00:07.594  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_besar\pose_tendang_samping_depan.png'
+00:07.641  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_besar\pose_tendang_samping_bawah.png'
+00:07.782  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_besar\pose_tangkis_depan.png'
+00:07.829  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_besar\pose_tangkis_bawah.png'
+00:07.985  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_besar\pose_putar_badan_depan.png'
+00:08.016  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_besar\pose_putar_badan_bawah.png'
+00:08.188  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_besar\pose_lunge_depan.png'
+00:08.219  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_besar\pose_lunge_bawah.png'
+00:08.375  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_besar\pose_bungkuk_depan.png'
+00:08.422  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_besar\pose_bungkuk_bawah.png'
+00:08.579  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_besar\pose_tangan_terangkat_depan.png'
+00:08.610  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_besar\pose_tangan_terangkat_bawah.png'
+00:08.766  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_besar\pose_lengan_depan_90_depan.png'
+00:08.813  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_besar\pose_lengan_depan_90_bawah.png'
+00:08.954  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_besar\pose_lengan_depan_atas_depan.png'
+00:09.000  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_besar\pose_lengan_depan_atas_bawah.png'
+00:09.157  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_besar\pose_lengan_samping_90_depan.png'
+00:09.204  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_besar\pose_lengan_samping_90_bawah.png'
+00:09.329  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_besar\pose_lengan_guard_depan.png'
+00:09.375  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_besar\pose_lengan_guard_bawah.png'
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:37:04)
+FBX version: 7400
+PASS tinggi 27.000 m -6/+2 cm  [27.000 m]
+PASS telapak di z≈0 (±1 cm)  [0.0000 m]
+PASS tulang wajib profil 'tuyul' ada  [52 tulang]
+PASS semua tulang di pose profil ada
+PASS menghadap -Y (foot_l -> ball_l)  [vektor (0.27, -2.16, -1.08)]
+PASS menghadap -Y (foot_r -> ball_r)  [vektor (-0.27, -2.16, -1.08)]
+PASS kiri karakter = +X (thigh_r -> thigh_l)  [vektor (5.4, 0.0, 0.0)]
+PASS atas = +Z (pelvis -> head)  [vektor (0.0, -0.54, 16.065)]
+tepi terbuka (boundary): 0 | terbanyak per tulang: []
+PASS 0 vertex tanpa bobot  [0]
+warna render: TEXTURE (2 tekstur)
+  rest               regangan p99   0.0% maks    0.0% | peregangan maks  0.00 cm  
+  kuda_kuda          regangan p99 119.6% maks 7406.5% | peregangan maks 389.69 cm  clavicle_l 389.69 | upperarm_l 378.80 | clavicle_r 278.39
+  pukul              regangan p99 172.6% maks 12434.3% | peregangan maks 473.12 cm  clavicle_r 473.12 | upperarm_r 442.53 | neck_02 430.11
+  tendang_tinggi     regangan p99  76.7% maks 3378.1% | peregangan maks 181.18 cm  neck_02 181.18 | upperarm_r 165.92 | clavicle_l 145.97
+  dodge              regangan p99 120.4% maks 6620.0% | peregangan maks 348.40 cm  clavicle_l 348.40 | upperarm_l 337.81 | neck_02 273.25
+  jongkok            regangan p99 146.6% maks 7406.5% | peregangan maks 389.69 cm  clavicle_l 389.69 | upperarm_l 378.80 | clavicle_r 278.39
+  lari               regangan p99 137.1% maks 8217.9% | peregangan maks 389.24 cm  clavicle_l 389.24 | upperarm_l 388.98 | clavicle_r 311.50
+  lompat             regangan p99 191.3% maks 4588.3% | peregangan maks 302.91 cm  upperarm_l 302.91 | clavicle_l 301.64 | head 267.37
+  tendang_samping    regangan p99  83.6% maks 2998.4% | peregangan maks 143.61 cm  upperarm_r 143.61 | upperarm_l 137.76 | clavicle_l 130.62
+  tangkis            regangan p99 205.0% maks 11775.2% | peregangan maks 583.04 cm  clavicle_l 583.04 | upperarm_l 571.11 | clavicle_r 448.39
+  putar_badan        regangan p99 109.9% maks 3381.2% | peregangan maks 246.03 cm  neck_02 246.03 | upperarm_r 215.42 | clavicle_l 211.93
+  lunge              regangan p99 109.9% maks 3514.7% | peregangan maks 430.21 cm  clavicle_l 430.21 | upperarm_l 419.05 | neck_02 263.70
+  bungkuk            regangan p99  88.9% maks 3361.4% | peregangan maks 228.87 cm  neck_02 228.87 | upperarm_r 193.27 | clavicle_l 186.05
+  tangan_terangkat   regangan p99 256.7% maks 5764.3% | peregangan maks 381.43 cm  clavicle_l 381.43 | upperarm_l 374.20 | head 309.51
+  lengan_depan_90    regangan p99 246.5% maks 13071.2% | peregangan maks 681.87 cm  clavicle_l 681.87 | upperarm_l 671.00 | clavicle_r 492.99
+  lengan_depan_atas  regangan p99 327.5% maks 17719.0% | peregangan maks 937.78 cm  clavicle_l 937.78 | upperarm_l 930.49 | clavicle_r 679.74
+  lengan_samping_90  regangan p99 132.7% maks 3363.0% | peregangan maks 215.90 cm  clavicle_l 215.90 | upperarm_l 215.62 | head 193.67
+  lengan_guard       regangan p99 179.2% maks 11070.4% | peregangan maks 584.98 cm  clavicle_l 584.98 | upperarm_l 576.61 | clavicle_r 418.74
+FAIL regangan p99 <= 40.0% di semua pose  [327.5% di lengan_depan_atas]
+
+HASIL AUDIT: 9/10 lulus — SK_TuyulBesar.fbx -> C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_besar
+exit=1
+=== audit skala Hermes/Art/tuyul/Export/SK_TuyulRaksasa.fbx (height 45.0) ===
+00:05.437  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_raksasa\front_color.png'
+00:05.516  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_raksasa\front_mask.png'
+00:05.625  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_raksasa\side_color.png'
+00:05.687  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_raksasa\side_mask.png'
+00:05.781  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_raksasa\back_color.png'
+00:05.844  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_raksasa\back_mask.png'
+00:05.984  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_raksasa\pose_rest_depan.png'
+00:06.031  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_raksasa\pose_rest_bawah.png'
+00:06.203  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_raksasa\pose_kuda_kuda_depan.png'
+00:06.234  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_raksasa\pose_kuda_kuda_bawah.png'
+00:06.391  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_raksasa\pose_pukul_depan.png'
+00:06.437  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_raksasa\pose_pukul_bawah.png'
+00:06.594  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_raksasa\pose_tendang_tinggi_depan.png'
+00:06.625  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_raksasa\pose_tendang_tinggi_bawah.png'
+00:06.781  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_raksasa\pose_dodge_depan.png'
+00:06.828  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_raksasa\pose_dodge_bawah.png'
+00:07.000  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_raksasa\pose_jongkok_depan.png'
+00:07.047  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_raksasa\pose_jongkok_bawah.png'
+00:07.203  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_raksasa\pose_lari_depan.png'
+00:07.234  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_raksasa\pose_lari_bawah.png'
+00:07.391  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_raksasa\pose_lompat_depan.png'
+00:07.422  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_raksasa\pose_lompat_bawah.png'
+00:07.562  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_raksasa\pose_tendang_samping_depan.png'
+00:07.609  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_raksasa\pose_tendang_samping_bawah.png'
+00:07.750  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_raksasa\pose_tangkis_depan.png'
+00:07.797  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_raksasa\pose_tangkis_bawah.png'
+00:07.953  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_raksasa\pose_putar_badan_depan.png'
+00:08.000  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_raksasa\pose_putar_badan_bawah.png'
+00:08.172  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_raksasa\pose_lunge_depan.png'
+00:08.203  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_raksasa\pose_lunge_bawah.png'
+00:08.359  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_raksasa\pose_bungkuk_depan.png'
+00:08.406  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_raksasa\pose_bungkuk_bawah.png'
+00:08.547  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_raksasa\pose_tangan_terangkat_depan.png'
+00:08.578  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_raksasa\pose_tangan_terangkat_bawah.png'
+00:08.734  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_raksasa\pose_lengan_depan_90_depan.png'
+00:08.766  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_raksasa\pose_lengan_depan_90_bawah.png'
+00:08.922  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_raksasa\pose_lengan_depan_atas_depan.png'
+00:08.953  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_raksasa\pose_lengan_depan_atas_bawah.png'
+00:09.109  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_raksasa\pose_lengan_samping_90_depan.png'
+00:09.156  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_raksasa\pose_lengan_samping_90_bawah.png'
+00:09.312  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_raksasa\pose_lengan_guard_depan.png'
+00:09.344  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_raksasa\pose_lengan_guard_bawah.png'
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:37:04)
+FBX version: 7400
+PASS tinggi 45.000 m -6/+2 cm  [45.000 m]
+PASS telapak di z≈0 (±1 cm)  [0.0000 m]
+PASS tulang wajib profil 'tuyul' ada  [52 tulang]
+PASS semua tulang di pose profil ada
+PASS menghadap -Y (foot_l -> ball_l)  [vektor (0.45, -3.6, -1.8)]
+PASS menghadap -Y (foot_r -> ball_r)  [vektor (-0.45, -3.6, -1.8)]
+PASS kiri karakter = +X (thigh_r -> thigh_l)  [vektor (9.0, 0.0, 0.0)]
+PASS atas = +Z (pelvis -> head)  [vektor (0.0, -0.9, 26.775)]
+tepi terbuka (boundary): 0 | terbanyak per tulang: []
+PASS 0 vertex tanpa bobot  [0]
+warna render: TEXTURE (2 tekstur)
+  rest               regangan p99   0.0% maks    0.0% | peregangan maks  0.00 cm  
+  kuda_kuda          regangan p99 119.6% maks 7407.6% | peregangan maks 649.48 cm  clavicle_l 649.48 | upperarm_l 631.33 | clavicle_r 463.98
+  pukul              regangan p99 172.6% maks 12436.1% | peregangan maks 788.53 cm  clavicle_r 788.53 | upperarm_r 737.55 | neck_02 716.85
+  tendang_tinggi     regangan p99  76.7% maks 3378.6% | peregangan maks 301.96 cm  neck_02 301.96 | upperarm_r 276.53 | clavicle_l 243.29
+  dodge              regangan p99 120.4% maks 6621.0% | peregangan maks 580.66 cm  clavicle_l 580.66 | upperarm_l 563.02 | neck_02 455.42
+  jongkok            regangan p99 146.6% maks 7407.6% | peregangan maks 649.48 cm  clavicle_l 649.48 | upperarm_l 631.33 | clavicle_r 463.98
+  lari               regangan p99 137.1% maks 8219.1% | peregangan maks 648.74 cm  clavicle_l 648.74 | upperarm_l 648.30 | clavicle_r 519.17
+  lompat             regangan p99 191.3% maks 4588.9% | peregangan maks 504.85 cm  upperarm_l 504.85 | clavicle_l 502.74 | head 445.62
+  tendang_samping    regangan p99  83.6% maks 2998.9% | peregangan maks 239.34 cm  upperarm_r 239.34 | upperarm_l 229.60 | clavicle_l 217.70
+  tangkis            regangan p99 205.0% maks 11776.9% | peregangan maks 971.73 cm  clavicle_l 971.73 | upperarm_l 951.85 | clavicle_r 747.31
+  putar_badan        regangan p99 109.9% maks 3381.7% | peregangan maks 410.05 cm  neck_02 410.05 | upperarm_r 359.04 | clavicle_l 353.22
+  lunge              regangan p99 109.9% maks 3514.7% | peregangan maks 717.01 cm  clavicle_l 717.01 | upperarm_l 698.41 | neck_02 439.50
+  bungkuk            regangan p99  88.9% maks 3361.8% | peregangan maks 381.45 cm  neck_02 381.45 | upperarm_r 322.11 | clavicle_l 310.08
+  tangan_terangkat   regangan p99 256.7% maks 5765.1% | peregangan maks 635.72 cm  clavicle_l 635.72 | upperarm_l 623.67 | head 515.85
+  lengan_depan_90    regangan p99 246.5% maks 13073.1% | peregangan maks 1136.46 cm  clavicle_l 1136.46 | upperarm_l 1118.34 | clavicle_r 821.65
+  lengan_depan_atas  regangan p99 327.5% maks 17721.5% | peregangan maks 1562.96 cm  clavicle_l 1562.96 | upperarm_l 1550.81 | clavicle_r 1132.91
+  lengan_samping_90  regangan p99 132.7% maks 3363.5% | peregangan maks 359.82 cm  clavicle_l 359.82 | upperarm_l 359.37 | head 322.78
+  lengan_guard       regangan p99 179.2% maks 11072.0% | peregangan maks 974.97 cm  clavicle_l 974.97 | upperarm_l 961.01 | clavicle_r 697.90
+FAIL regangan p99 <= 40.0% di semua pose  [327.5% di lengan_depan_atas]
+
+HASIL AUDIT: 9/10 lulus — SK_TuyulRaksasa.fbx -> C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_raksasa
+exit=1
+=== LOD1 ===
+00:05.359  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod1\front_color.png'
+00:05.437  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod1\front_mask.png'
+00:05.515  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod1\side_color.png'
+00:05.593  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod1\side_mask.png'
+00:05.687  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod1\back_color.png'
+00:05.765  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod1\back_mask.png'
+00:05.875  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod1\pose_rest_depan.png'
+00:05.921  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod1\pose_rest_bawah.png'
+00:06.046  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod1\pose_kuda_kuda_depan.png'
+00:06.093  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod1\pose_kuda_kuda_bawah.png'
+00:06.234  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod1\pose_pukul_depan.png'
+00:06.265  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod1\pose_pukul_bawah.png'
+00:06.406  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod1\pose_tendang_tinggi_depan.png'
+00:06.437  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod1\pose_tendang_tinggi_bawah.png'
+00:06.578  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod1\pose_dodge_depan.png'
+00:06.609  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod1\pose_dodge_bawah.png'
+00:06.734  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod1\pose_jongkok_depan.png'
+00:06.781  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod1\pose_jongkok_bawah.png'
+00:06.921  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod1\pose_lari_depan.png'
+00:06.968  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod1\pose_lari_bawah.png'
+00:07.093  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod1\pose_lompat_depan.png'
+00:07.125  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod1\pose_lompat_bawah.png'
+00:07.281  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod1\pose_tendang_samping_depan.png'
+00:07.328  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod1\pose_tendang_samping_bawah.png'
+00:07.437  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod1\pose_tangkis_depan.png'
+00:07.484  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod1\pose_tangkis_bawah.png'
+00:07.625  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod1\pose_putar_badan_depan.png'
+00:07.656  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod1\pose_putar_badan_bawah.png'
+00:07.796  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod1\pose_lunge_depan.png'
+00:07.843  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod1\pose_lunge_bawah.png'
+00:07.968  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod1\pose_bungkuk_depan.png'
+00:08.000  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod1\pose_bungkuk_bawah.png'
+00:08.125  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod1\pose_tangan_terangkat_depan.png'
+00:08.156  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod1\pose_tangan_terangkat_bawah.png'
+00:08.281  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod1\pose_lengan_depan_90_depan.png'
+00:08.328  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod1\pose_lengan_depan_90_bawah.png'
+00:08.453  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod1\pose_lengan_depan_atas_depan.png'
+00:08.484  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod1\pose_lengan_depan_atas_bawah.png'
+00:08.609  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod1\pose_lengan_samping_90_depan.png'
+00:08.656  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod1\pose_lengan_samping_90_bawah.png'
+00:08.781  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod1\pose_lengan_guard_depan.png'
+00:08.828  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod1\pose_lengan_guard_bawah.png'
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:37:04)
+FBX version: 7400
+PASS tinggi 1.000 m -6/+2 cm  [1.000 m]
+PASS telapak di z≈0 (±1 cm)  [0.0000 m]
+PASS tulang wajib profil 'tuyul' ada  [52 tulang]
+PASS semua tulang di pose profil ada
+PASS menghadap -Y (foot_l -> ball_l)  [vektor (0.01, -0.08, -0.04)]
+PASS menghadap -Y (foot_r -> ball_r)  [vektor (-0.01, -0.08, -0.04)]
+PASS kiri karakter = +X (thigh_r -> thigh_l)  [vektor (0.2, 0.0, 0.0)]
+PASS atas = +Z (pelvis -> head)  [vektor (0.0, -0.02, 0.595)]
+tepi terbuka (boundary): 0 | terbanyak per tulang: []
+PASS 0 vertex tanpa bobot  [0]
+warna render: TEXTURE (2 tekstur)
+  rest               regangan p99   0.0% maks    0.0% | peregangan maks  0.00 cm  
+  kuda_kuda          regangan p99 133.7% maks 3133.5% | peregangan maks 14.43 cm  clavicle_l 14.43 | upperarm_l 14.03 | clavicle_r 10.16
+  pukul              regangan p99 189.0% maks 2946.2% | peregangan maks 17.37 cm  clavicle_r 17.37 | upperarm_r 16.17 | neck_02 13.80
+  tendang_tinggi     regangan p99  79.1% maks  979.3% | peregangan maks  6.71 cm  neck_02 6.71 | upperarm_r 5.72 | clavicle_l 5.41
+  dodge              regangan p99 135.1% maks 2794.5% | peregangan maks 12.90 cm  clavicle_l 12.90 | upperarm_l 12.51 | neck_02 9.39
+  jongkok            regangan p99 148.6% maks 3133.5% | peregangan maks 14.43 cm  clavicle_l 14.43 | upperarm_l 14.03 | clavicle_r 10.16
+  lari               regangan p99 146.9% maks 3202.7% | peregangan maks 14.42 cm  upperarm_l 14.42 | clavicle_l 14.42 | clavicle_r 11.38
+  lompat             regangan p99 212.9% maks 2421.7% | peregangan maks 11.22 cm  upperarm_l 11.22 | clavicle_l 11.17 | head 9.90
+  tendang_samping    regangan p99  88.3% maks 1048.7% | peregangan maks  5.32 cm  upperarm_r 5.32 | upperarm_l 5.10 | clavicle_l 4.84
+  tangkis            regangan p99 230.8% maks 4724.3% | peregangan maks 21.59 cm  clavicle_l 21.59 | upperarm_l 21.15 | clavicle_r 16.43
+  putar_badan        regangan p99 121.9% maks 2232.4% | peregangan maks  9.11 cm  neck_02 9.11 | upperarm_r 8.23 | clavicle_l 7.85
+  lunge              regangan p99 115.2% maks 3466.5% | peregangan maks 15.93 cm  clavicle_l 15.93 | upperarm_l 15.52 | neck_02 9.77
+  bungkuk            regangan p99  93.2% maks 1851.0% | peregangan maks  7.81 cm  neck_02 7.81 | upperarm_r 7.59 | clavicle_l 6.89
+  tangan_terangkat   regangan p99 279.3% maks 3062.2% | peregangan maks 14.13 cm  clavicle_l 14.13 | upperarm_l 13.86 | head 11.46
+  lengan_depan_90    regangan p99 277.3% maks 5550.7% | peregangan maks 25.25 cm  clavicle_l 25.25 | upperarm_l 24.85 | clavicle_r 18.05
+  lengan_depan_atas  regangan p99 352.3% maks 7697.2% | peregangan maks 34.73 cm  clavicle_l 34.73 | upperarm_l 34.46 | clavicle_r 24.98
+  lengan_samping_90  regangan p99 149.3% maks 1704.8% | peregangan maks  8.00 cm  clavicle_l 8.00 | upperarm_l 7.99 | head 7.17
+  lengan_guard       regangan p99 202.1% maks 4769.8% | peregangan maks 21.67 cm  clavicle_l 21.67 | upperarm_l 21.36 | clavicle_r 15.33
+FAIL regangan p99 <= 40.0% di semua pose  [352.3% di lengan_depan_atas]
+
+HASIL AUDIT: 9/10 lulus — SK_Tuyul_LOD1.fbx -> C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod1
+  tuyul exit=1
+00:05.859  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod1\front_color.png'
+00:05.953  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod1\front_mask.png'
+00:06.046  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod1\side_color.png'
+00:06.109  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod1\side_mask.png'
+00:06.218  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod1\back_color.png'
+00:06.281  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod1\back_mask.png'
+00:06.406  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod1\pose_rest_depan.png'
+00:06.453  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod1\pose_rest_bawah.png'
+00:06.562  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod1\pose_kuda_kuda_depan.png'
+00:06.593  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod1\pose_kuda_kuda_bawah.png'
+00:06.718  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod1\pose_pukul_depan.png'
+00:06.750  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod1\pose_pukul_bawah.png'
+00:06.859  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod1\pose_tendang_tinggi_depan.png'
+00:06.906  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod1\pose_tendang_tinggi_bawah.png'
+00:07.015  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod1\pose_dodge_depan.png'
+00:07.046  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod1\pose_dodge_bawah.png'
+00:07.171  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod1\pose_jongkok_depan.png'
+00:07.218  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod1\pose_jongkok_bawah.png'
+00:07.328  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod1\pose_lari_depan.png'
+00:07.375  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod1\pose_lari_bawah.png'
+00:07.515  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod1\pose_lompat_depan.png'
+00:07.546  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod1\pose_lompat_bawah.png'
+00:07.656  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod1\pose_tendang_samping_depan.png'
+00:07.703  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod1\pose_tendang_samping_bawah.png'
+00:07.812  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod1\pose_tangkis_depan.png'
+00:07.843  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod1\pose_tangkis_bawah.png'
+00:07.953  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod1\pose_putar_badan_depan.png'
+00:07.984  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod1\pose_putar_badan_bawah.png'
+00:08.093  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod1\pose_lunge_depan.png'
+00:08.140  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod1\pose_lunge_bawah.png'
+00:08.250  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod1\pose_bungkuk_depan.png'
+00:08.281  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod1\pose_bungkuk_bawah.png'
+00:08.406  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod1\pose_tangan_terangkat_depan.png'
+00:08.437  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod1\pose_tangan_terangkat_bawah.png'
+00:08.531  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod1\pose_lengan_depan_90_depan.png'
+00:08.578  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod1\pose_lengan_depan_90_bawah.png'
+00:08.687  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod1\pose_lengan_depan_atas_depan.png'
+00:08.718  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod1\pose_lengan_depan_atas_bawah.png'
+00:08.828  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod1\pose_lengan_samping_90_depan.png'
+00:08.875  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod1\pose_lengan_samping_90_bawah.png'
+00:08.968  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod1\pose_lengan_guard_depan.png'
+00:09.015  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod1\pose_lengan_guard_bawah.png'
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:37:04)
+FBX version: 7400
+PASS tinggi 1.806 m -6/+2 cm  [1.800 m]
+PASS telapak di z≈0 (±1 cm)  [0.0000 m]
+PASS tulang wajib profil 'manny' ada  [99 tulang]
+PASS semua tulang di pose profil ada
+PASS menghadap -Y (foot_l -> ball_l)  [vektor (0.017, -0.149, -0.075)]
+PASS menghadap -Y (foot_r -> ball_r)  [vektor (-0.017, -0.149, -0.075)]
+PASS kiri karakter = +X (thigh_r -> thigh_l)  [vektor (0.199, 0.0, -0.0)]
+PASS atas = +Z (pelvis -> head)  [vektor (-0.0, 0.016, 0.667)]
+tepi terbuka (boundary): 4335 | terbanyak per tulang: [('head', 3875), ('neck_01', 84), ('spine_05', 83), ('thigh_l', 75), ('thigh_r', 74), ('clavicle_r', 30), ('clavicle_l', 30), ('pelvis', 18)]
+PASS 0 vertex tanpa bobot  [0]
+warna render: TEXTURE (5 tekstur)
+  rest               regangan p99   0.0% maks    0.0% | peregangan maks  0.00 cm  
+  kuda_kuda          regangan p99  17.9% maks   75.5% | peregangan maks  5.20 cm  thigh_twist_01_r 5.20 | thigh_twist_01_l 5.20 | thigh_r 5.15
+  pukul              regangan p99  22.2% maks  101.0% | peregangan maks  4.49 cm  upperarm_r 4.49 | spine_01 3.99 | upperarm_twist_02_l 2.89
+  tendang_tinggi     regangan p99  18.8% maks   87.6% | peregangan maks 11.72 cm  thigh_r 11.72 | spine_02 11.53 | pelvis 7.47
+  dodge              regangan p99  20.1% maks   85.3% | peregangan maks  4.18 cm  spine_02 4.18 | spine_04 3.75 | spine_03 3.70
+  jongkok            regangan p99  25.0% maks   93.2% | peregangan maks 12.53 cm  calf_l 12.53 | calf_r 12.03 | thigh_twist_02_l 11.73
+  lari               regangan p99  18.7% maks   65.7% | peregangan maks  8.83 cm  calf_l 8.83 | thigh_twist_02_l 8.60 | spine_02 6.68
+  lompat             regangan p99  27.0% maks   66.0% | peregangan maks  8.15 cm  calf_l 8.15 | thigh_twist_02_l 7.96 | calf_r 6.83
+  tendang_samping    regangan p99  17.6% maks   61.0% | peregangan maks 10.60 cm  thigh_r 10.60 | thigh_twist_01_r 8.36 | pelvis 8.23
+  tangkis            regangan p99  18.4% maks   58.0% | peregangan maks  4.21 cm  upperarm_twist_02_r 4.21 | upperarm_twist_02_l 4.10 | upperarm_l 3.82
+  putar_badan        regangan p99  26.5% maks  193.6% | peregangan maks  7.29 cm  spine_01 7.29 | spine_02 3.75 | jacket_l_02 3.72
+  lunge              regangan p99  16.1% maks   75.4% | peregangan maks 10.16 cm  calf_l 10.16 | thigh_twist_02_l 9.83 | spine_02 7.29
+  bungkuk            regangan p99  23.0% maks   91.7% | peregangan maks  4.85 cm  spine_04 4.85 | spine_03 4.79 | spine_02 4.74
+  tangan_terangkat   regangan p99  27.6% maks   95.1% | peregangan maks  7.87 cm  clavicle_l 7.87 | upperarm_r 7.86 | upperarm_l 7.61
+  lengan_depan_90    regangan p99  16.4% maks   68.5% | peregangan maks  5.25 cm  upperarm_r 5.25 | upperarm_l 4.99 | clavicle_l 4.95
+  lengan_depan_atas  regangan p99  17.9% maks   90.0% | peregangan maks  6.74 cm  clavicle_l 6.74 | upperarm_r 6.73 | upperarm_l 6.30
+  lengan_samping_90  regangan p99  13.8% maks   32.9% | peregangan maks  1.98 cm  upperarm_twist_01_r 1.98 | upperarm_twist_01_l 1.98 | upperarm_l 1.98
+  lengan_guard       regangan p99  15.4% maks   48.9% | peregangan maks  4.35 cm  upperarm_twist_02_l 4.35 | upperarm_twist_02_r 4.35 | upperarm_l 4.05
+PASS regangan p99 <= 40.0% di semua pose  [27.6% di tangan_terangkat]
+
+HASIL AUDIT: 10/10 lulus — SK_Aksa_LOD1.fbx -> C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod1
+  aksa exit=0
+00:05.235  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod1\front_color.png'
+00:05.313  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod1\front_mask.png'
+00:05.391  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod1\side_color.png'
+00:05.453  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod1\side_mask.png'
+00:05.547  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod1\back_color.png'
+00:05.610  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod1\back_mask.png'
+00:05.672  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod1\pose_rest_depan.png'
+00:05.719  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod1\pose_rest_bawah.png'
+00:05.813  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod1\pose_kuda_kuda_depan.png'
+00:05.844  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod1\pose_kuda_kuda_bawah.png'
+00:05.938  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod1\pose_pukul_depan.png'
+00:05.969  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod1\pose_pukul_bawah.png'
+00:06.063  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod1\pose_tendang_tinggi_depan.png'
+00:06.094  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod1\pose_tendang_tinggi_bawah.png'
+00:06.172  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod1\pose_dodge_depan.png'
+00:06.219  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod1\pose_dodge_bawah.png'
+00:06.313  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod1\pose_jongkok_depan.png'
+00:06.344  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod1\pose_jongkok_bawah.png'
+00:06.438  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod1\pose_lari_depan.png'
+00:06.469  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod1\pose_lari_bawah.png'
+00:06.563  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod1\pose_lompat_depan.png'
+00:06.594  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod1\pose_lompat_bawah.png'
+00:06.672  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod1\pose_tendang_samping_depan.png'
+00:06.703  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod1\pose_tendang_samping_bawah.png'
+00:06.782  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod1\pose_tangkis_depan.png'
+00:06.813  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod1\pose_tangkis_bawah.png'
+00:06.907  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod1\pose_putar_badan_depan.png'
+00:06.938  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod1\pose_putar_badan_bawah.png'
+00:07.032  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod1\pose_lunge_depan.png'
+00:07.063  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod1\pose_lunge_bawah.png'
+00:07.157  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod1\pose_bungkuk_depan.png'
+00:07.188  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod1\pose_bungkuk_bawah.png'
+00:07.282  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod1\pose_tangan_terangkat_depan.png'
+00:07.313  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod1\pose_tangan_terangkat_bawah.png'
+00:07.407  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod1\pose_lengan_depan_90_depan.png'
+00:07.453  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod1\pose_lengan_depan_90_bawah.png'
+00:07.532  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod1\pose_lengan_depan_atas_depan.png'
+00:07.563  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod1\pose_lengan_depan_atas_bawah.png'
+00:07.641  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod1\pose_lengan_samping_90_depan.png'
+00:07.672  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod1\pose_lengan_samping_90_bawah.png'
+00:07.766  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod1\pose_lengan_guard_depan.png'
+00:07.797  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod1\pose_lengan_guard_bawah.png'
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:37:04)
+FBX version: 7400
+PASS tinggi 30.660 m -6/+2 cm  [30.653 m]
+FAIL telapak di z≈0 (±1 cm)  [0.0121 m]
+PASS tulang wajib profil 'manny' ada  [70 tulang]
+PASS semua tulang di pose profil ada
+PASS menghadap -Y (foot_l -> ball_l)  [vektor (0.28, -2.38, -2.24)]
+PASS menghadap -Y (foot_r -> ball_r)  [vektor (-0.35, -2.52, -2.24)]
+PASS kiri karakter = +X (thigh_r -> thigh_l)  [vektor (4.76, 0.0, 0.0)]
+PASS atas = +Z (pelvis -> head)  [vektor (0.0, -1.26, 9.94)]
+tepi terbuka (boundary): 802 | terbanyak per tulang: [('jaw', 77), ('cloth_front_03', 74), ('upperarm_r', 64), ('calf_l', 57), ('neck_02', 53), ('thigh_l', 46), ('thigh_r', 44), ('pelvis', 43)]
+PASS 0 vertex tanpa bobot  [0]
+warna render: TEXTURE (1 tekstur)
+  rest               regangan p99   0.0% maks    0.0% | peregangan maks  0.00 cm  
+  kuda_kuda          regangan p99   0.0% maks    0.0% | peregangan maks  0.00 cm  upperarm_l 0.00 | hand_r 0.00 | lowerarm_l 0.00
+  pukul              regangan p99   0.0% maks  102.0% | peregangan maks 16.19 cm  spine_01 16.19 | spine_02 13.34 | hand_l 0.00
+  tendang_tinggi     regangan p99   0.0% maks   53.6% | peregangan maks  7.01 cm  spine_02 7.01 | spine_01 6.61 | head 0.00
+  dodge              regangan p99   0.0% maks   64.1% | peregangan maks  8.38 cm  spine_02 8.38 | spine_01 8.04 | clavicle_l 0.00
+  jongkok            regangan p99   0.0% maks   19.3% | peregangan maks  7.31 cm  spine_01 7.31 | spine_02 5.49 | spine_04 0.00
+  lari               regangan p99   0.0% maks   32.6% | peregangan maks  8.39 cm  spine_02 8.39 | spine_01 5.52 | clavicle_r 0.00
+  lompat             regangan p99   0.0% maks    0.0% | peregangan maks  0.00 cm  hand_l 0.00 | hand_r 0.00 | lowerarm_l 0.00
+  tendang_samping    regangan p99   0.0% maks   58.1% | peregangan maks 16.53 cm  spine_02 16.53 | spine_01 10.98 | spine_04 0.00
+  tangkis            regangan p99   0.0% maks   15.3% | peregangan maks  4.21 cm  spine_01 4.21 | spine_02 3.12 | hand_l 0.00
+  putar_badan        regangan p99   0.0% maks  127.2% | peregangan maks 20.01 cm  spine_01 20.01 | spine_02 16.62 | upperarm_l 0.00
+  lunge              regangan p99   0.0% maks   14.9% | peregangan maks  5.25 cm  spine_01 5.25 | spine_02 3.91 | clavicle_r 0.00
+  bungkuk            regangan p99   0.0% maks   40.7% | peregangan maks 12.74 cm  spine_01 12.74 | spine_02 9.84 | clavicle_l 0.00
+  tangan_terangkat   regangan p99  36.2% maks  165.0% | peregangan maks 76.23 cm  spine_04 76.23 | clavicle_r 68.51 | clavicle_l 62.33
+  lengan_depan_90    regangan p99   0.0% maks    0.0% | peregangan maks  0.00 cm  upperarm_l 0.00 | upperarm_r 0.00 | lowerarm_r 0.00
+  lengan_depan_atas  regangan p99   0.0% maks    0.0% | peregangan maks  0.00 cm  lowerarm_r 0.00 | lowerarm_l 0.00 | hand_l 0.00
+  lengan_samping_90  regangan p99   0.0% maks    0.0% | peregangan maks  0.00 cm  upperarm_r 0.00 | lowerarm_r 0.00 | hand_l 0.00
+  lengan_guard       regangan p99   0.0% maks    0.0% | peregangan maks  0.00 cm  hand_r 0.00 | hand_l 0.00 | lowerarm_r 0.00
+PASS regangan p99 <= 40.0% di semua pose  [36.2% di tangan_terangkat]
+
+HASIL AUDIT: 9/10 lulus — SK_Jerangkong_LOD1.fbx -> C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod1
+  jerangkong exit=1
+=== LOD2 ===
+00:05.468  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod2\front_color.png'
+00:05.547  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod2\front_mask.png'
+00:05.656  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod2\side_color.png'
+00:05.718  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod2\side_mask.png'
+00:05.797  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod2\back_color.png'
+00:05.859  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod2\back_mask.png'
+00:05.953  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod2\pose_rest_depan.png'
+00:05.984  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod2\pose_rest_bawah.png'
+00:06.078  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod2\pose_kuda_kuda_depan.png'
+00:06.109  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod2\pose_kuda_kuda_bawah.png'
+00:06.187  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod2\pose_pukul_depan.png'
+00:06.234  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod2\pose_pukul_bawah.png'
+00:06.312  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod2\pose_tendang_tinggi_depan.png'
+00:06.343  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod2\pose_tendang_tinggi_bawah.png'
+00:06.437  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod2\pose_dodge_depan.png'
+00:06.468  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod2\pose_dodge_bawah.png'
+00:06.547  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod2\pose_jongkok_depan.png'
+00:06.593  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod2\pose_jongkok_bawah.png'
+00:06.672  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod2\pose_lari_depan.png'
+00:06.718  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod2\pose_lari_bawah.png'
+00:06.797  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod2\pose_lompat_depan.png'
+00:06.828  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod2\pose_lompat_bawah.png'
+00:06.906  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod2\pose_tendang_samping_depan.png'
+00:06.953  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod2\pose_tendang_samping_bawah.png'
+00:07.031  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod2\pose_tangkis_depan.png'
+00:07.078  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod2\pose_tangkis_bawah.png'
+00:07.156  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod2\pose_putar_badan_depan.png'
+00:07.187  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod2\pose_putar_badan_bawah.png'
+00:07.265  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod2\pose_lunge_depan.png'
+00:07.312  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod2\pose_lunge_bawah.png'
+00:07.390  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod2\pose_bungkuk_depan.png'
+00:07.437  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod2\pose_bungkuk_bawah.png'
+00:07.500  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod2\pose_tangan_terangkat_depan.png'
+00:07.547  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod2\pose_tangan_terangkat_bawah.png'
+00:07.625  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod2\pose_lengan_depan_90_depan.png'
+00:07.656  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod2\pose_lengan_depan_90_bawah.png'
+00:07.734  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod2\pose_lengan_depan_atas_depan.png'
+00:07.781  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod2\pose_lengan_depan_atas_bawah.png'
+00:07.859  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod2\pose_lengan_samping_90_depan.png'
+00:07.890  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod2\pose_lengan_samping_90_bawah.png'
+00:07.968  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod2\pose_lengan_guard_depan.png'
+00:08.000  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod2\pose_lengan_guard_bawah.png'
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:37:04)
+FBX version: 7400
+PASS tinggi 1.000 m -6/+2 cm  [1.000 m]
+PASS telapak di z≈0 (±1 cm)  [0.0000 m]
+PASS tulang wajib profil 'tuyul' ada  [52 tulang]
+PASS semua tulang di pose profil ada
+PASS menghadap -Y (foot_l -> ball_l)  [vektor (0.01, -0.08, -0.04)]
+PASS menghadap -Y (foot_r -> ball_r)  [vektor (-0.01, -0.08, -0.04)]
+PASS kiri karakter = +X (thigh_r -> thigh_l)  [vektor (0.2, 0.0, 0.0)]
+PASS atas = +Z (pelvis -> head)  [vektor (0.0, -0.02, 0.595)]
+tepi terbuka (boundary): 0 | terbanyak per tulang: []
+PASS 0 vertex tanpa bobot  [0]
+warna render: TEXTURE (2 tekstur)
+  rest               regangan p99   0.0% maks    0.0% | peregangan maks  0.00 cm  
+  kuda_kuda          regangan p99 124.6% maks 1271.6% | peregangan maks 13.25 cm  upperarm_l 13.25 | clavicle_l 12.84 | neck_02 10.87
+  pukul              regangan p99 192.5% maks 1630.4% | peregangan maks 17.00 cm  clavicle_r 17.00 | upperarm_r 14.30 | neck_02 13.16
+  tendang_tinggi     regangan p99  77.1% maks  678.7% | peregangan maks  6.23 cm  thigh_r 6.23 | upperarm_r 5.51 | neck_02 5.42
+  dodge              regangan p99 124.6% maks 1121.7% | peregangan maks 11.86 cm  upperarm_l 11.86 | neck_02 11.64 | clavicle_l 11.40
+  jongkok            regangan p99 130.9% maks 1271.6% | peregangan maks 13.25 cm  upperarm_l 13.25 | clavicle_l 12.84 | neck_02 10.87
+  lari               regangan p99 155.0% maks 1287.3% | peregangan maks 13.30 cm  upperarm_l 13.30 | clavicle_l 12.74 | clavicle_r 11.02
+  lompat             regangan p99 225.6% maks 1574.3% | peregangan maks  9.90 cm  head 9.90 | upperarm_r 9.15 | clavicle_l 8.85
+  tendang_samping    regangan p99  89.5% maks  988.7% | peregangan maks  5.32 cm  upperarm_r 5.32 | jaw 4.67 | clavicle_l 4.16
+  tangkis            regangan p99 223.7% maks 1944.1% | peregangan maks 19.77 cm  upperarm_l 19.77 | clavicle_l 19.63 | neck_02 16.75
+  putar_badan        regangan p99 120.4% maks 1072.1% | peregangan maks  8.21 cm  neck_02 8.21 | head 6.96 | upperarm_l 6.72
+  lunge              regangan p99 107.6% maks 1412.3% | peregangan maks 14.62 cm  upperarm_l 14.62 | clavicle_l 14.25 | neck_02 12.10
+  bungkuk            regangan p99 100.1% maks  787.8% | peregangan maks  9.64 cm  neck_02 9.64 | upperarm_l 6.02 | clavicle_l 5.84
+  tangan_terangkat   regangan p99 290.0% maks 1800.9% | peregangan maks 11.46 cm  head 11.46 | upperarm_r 11.13 | jaw 11.07
+  lengan_depan_90    regangan p99 288.5% maks 2352.0% | peregangan maks 23.58 cm  upperarm_l 23.58 | clavicle_l 23.39 | neck_02 20.11
+  lengan_depan_atas  regangan p99 373.1% maks 3094.0% | peregangan maks 32.10 cm  clavicle_l 32.10 | upperarm_l 31.68 | neck_02 26.47
+  lengan_samping_90  regangan p99 156.7% maks 1145.7% | peregangan maks  7.19 cm  clavicle_l 7.19 | head 7.17 | upperarm_r 6.36
+  lengan_guard       regangan p99 197.6% maks 1917.5% | peregangan maks 19.82 cm  clavicle_l 19.82 | upperarm_l 19.81 | neck_02 16.27
+FAIL regangan p99 <= 40.0% di semua pose  [373.1% di lengan_depan_atas]
+
+HASIL AUDIT: 9/10 lulus — SK_Tuyul_LOD2.fbx -> C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod2
+  tuyul exit=1
+00:05.375  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod2\front_color.png'
+00:05.453  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod2\front_mask.png'
+00:05.531  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod2\side_color.png'
+00:05.578  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod2\side_mask.png'
+00:05.672  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod2\back_color.png'
+00:05.735  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod2\back_mask.png'
+00:05.813  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod2\pose_rest_depan.png'
+00:05.844  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod2\pose_rest_bawah.png'
+00:05.922  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod2\pose_kuda_kuda_depan.png'
+00:05.969  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod2\pose_kuda_kuda_bawah.png'
+00:06.031  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod2\pose_pukul_depan.png'
+00:06.063  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod2\pose_pukul_bawah.png'
+00:06.125  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod2\pose_tendang_tinggi_depan.png'
+00:06.156  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod2\pose_tendang_tinggi_bawah.png'
+00:06.235  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod2\pose_dodge_depan.png'
+00:06.266  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod2\pose_dodge_bawah.png'
+00:06.344  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod2\pose_jongkok_depan.png'
+00:06.375  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod2\pose_jongkok_bawah.png'
+00:06.438  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod2\pose_lari_depan.png'
+00:06.469  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod2\pose_lari_bawah.png'
+00:06.531  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod2\pose_lompat_depan.png'
+00:06.578  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod2\pose_lompat_bawah.png'
+00:06.641  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod2\pose_tendang_samping_depan.png'
+00:06.672  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod2\pose_tendang_samping_bawah.png'
+00:06.735  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod2\pose_tangkis_depan.png'
+00:06.766  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod2\pose_tangkis_bawah.png'
+00:06.844  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod2\pose_putar_badan_depan.png'
+00:06.875  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod2\pose_putar_badan_bawah.png'
+00:06.953  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod2\pose_lunge_depan.png'
+00:06.985  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod2\pose_lunge_bawah.png'
+00:07.063  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod2\pose_bungkuk_depan.png'
+00:07.094  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod2\pose_bungkuk_bawah.png'
+00:07.172  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod2\pose_tangan_terangkat_depan.png'
+00:07.219  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod2\pose_tangan_terangkat_bawah.png'
+00:07.281  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod2\pose_lengan_depan_90_depan.png'
+00:07.313  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod2\pose_lengan_depan_90_bawah.png'
+00:07.391  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod2\pose_lengan_depan_atas_depan.png'
+00:07.422  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod2\pose_lengan_depan_atas_bawah.png'
+00:07.485  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod2\pose_lengan_samping_90_depan.png'
+00:07.516  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod2\pose_lengan_samping_90_bawah.png'
+00:07.594  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod2\pose_lengan_guard_depan.png'
+00:07.625  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod2\pose_lengan_guard_bawah.png'
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:37:04)
+FBX version: 7400
+PASS tinggi 1.806 m -6/+2 cm  [1.793 m]
+PASS telapak di z≈0 (±1 cm)  [0.0001 m]
+PASS tulang wajib profil 'manny' ada  [99 tulang]
+PASS semua tulang di pose profil ada
+PASS menghadap -Y (foot_l -> ball_l)  [vektor (0.017, -0.149, -0.075)]
+PASS menghadap -Y (foot_r -> ball_r)  [vektor (-0.017, -0.149, -0.075)]
+PASS kiri karakter = +X (thigh_r -> thigh_l)  [vektor (0.199, 0.0, -0.0)]
+PASS atas = +Z (pelvis -> head)  [vektor (-0.0, 0.016, 0.667)]
+tepi terbuka (boundary): 600 | terbanyak per tulang: [('head', 120), ('thigh_l', 66), ('thigh_r', 66), ('spine_05', 58), ('neck_01', 49), ('calf_r', 38), ('calf_l', 37), ('clavicle_r', 24)]
+PASS 0 vertex tanpa bobot  [0]
+warna render: TEXTURE (5 tekstur)
+  rest               regangan p99   0.0% maks    0.0% | peregangan maks  0.00 cm  
+  kuda_kuda          regangan p99  17.7% maks   61.9% | peregangan maks  7.84 cm  thigh_r 7.84 | pelvis 6.68 | thigh_l 6.56
+  pukul              regangan p99  23.8% maks   65.5% | peregangan maks  4.51 cm  spine_01 4.51 | lowerarm_l 4.29 | jacket_r_02 4.25
+  tendang_tinggi     regangan p99  19.7% maks   61.1% | peregangan maks 10.03 cm  thigh_r 10.03 | pelvis 8.46 | spine_02 7.94
+  dodge              regangan p99  20.1% maks   86.3% | peregangan maks  4.52 cm  thigh_twist_02_l 4.52 | spine_02 4.33 | calf_l 4.18
+  jongkok            regangan p99  24.8% maks   87.3% | peregangan maks 16.46 cm  calf_l 16.46 | thigh_twist_02_l 15.49 | calf_r 13.45
+  lari               regangan p99  19.3% maks   60.1% | peregangan maks 10.05 cm  thigh_twist_02_l 10.05 | calf_l 9.58 | pelvis 6.94
+  lompat             regangan p99  25.9% maks   70.6% | peregangan maks  9.43 cm  thigh_twist_02_l 9.43 | calf_l 8.95 | calf_r 8.19
+  tendang_samping    regangan p99  16.5% maks   60.2% | peregangan maks 10.56 cm  thigh_r 10.56 | pelvis 9.45 | thigh_twist_02_r 9.15
+  tangkis            regangan p99  18.0% maks   58.8% | peregangan maks  4.42 cm  upperarm_l 4.42 | upperarm_twist_02_r 4.30 | upperarm_twist_02_l 4.25
+  putar_badan        regangan p99  28.1% maks  119.3% | peregangan maks  8.31 cm  spine_01 8.31 | jacket_r_02 7.53 | jacket_l_02 6.65
+  lunge              regangan p99  16.5% maks   68.6% | peregangan maks 11.10 cm  thigh_twist_02_l 11.10 | calf_l 10.75 | pelvis 7.55
+  bungkuk            regangan p99  20.6% maks   90.5% | peregangan maks  6.74 cm  spine_04 6.74 | spine_03 6.73 | spine_01 6.30
+  tangan_terangkat   regangan p99  25.9% maks   93.1% | peregangan maks  6.47 cm  upperarm_l 6.47 | clavicle_r 5.54 | clavicle_l 5.45
+  lengan_depan_90    regangan p99  14.9% maks   64.9% | peregangan maks  3.71 cm  upperarm_twist_01_r 3.71 | upperarm_r 3.59 | clavicle_l 3.08
+  lengan_depan_atas  regangan p99  17.9% maks   76.2% | peregangan maks  5.95 cm  clavicle_r 5.95 | upperarm_r 4.40 | clavicle_l 4.30
+  lengan_samping_90  regangan p99  13.4% maks   41.1% | peregangan maks  3.16 cm  upperarm_l 3.16 | upperarm_r 3.08 | upperarm_twist_02_l 2.48
+  lengan_guard       regangan p99  15.1% maks   54.7% | peregangan maks  4.36 cm  upperarm_twist_02_r 4.36 | upperarm_r 4.34 | upperarm_l 4.31
+PASS regangan p99 <= 40.0% di semua pose  [28.1% di putar_badan]
+
+HASIL AUDIT: 10/10 lulus — SK_Aksa_LOD2.fbx -> C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod2
+  aksa exit=0
+00:05.000  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod2\front_color.png'
+00:05.094  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod2\front_mask.png'
+00:05.172  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod2\side_color.png'
+00:05.235  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod2\side_mask.png'
+00:05.328  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod2\back_color.png'
+00:05.391  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod2\back_mask.png'
+00:05.453  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod2\pose_rest_depan.png'
+00:05.485  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod2\pose_rest_bawah.png'
+00:05.610  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod2\pose_kuda_kuda_depan.png'
+00:05.641  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod2\pose_kuda_kuda_bawah.png'
+00:05.703  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod2\pose_pukul_depan.png'
+00:05.735  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod2\pose_pukul_bawah.png'
+00:05.797  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod2\pose_tendang_tinggi_depan.png'
+00:05.828  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod2\pose_tendang_tinggi_bawah.png'
+00:05.891  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod2\pose_dodge_depan.png'
+00:05.938  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod2\pose_dodge_bawah.png'
+00:06.000  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod2\pose_jongkok_depan.png'
+00:06.032  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod2\pose_jongkok_bawah.png'
+00:06.110  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod2\pose_lari_depan.png'
+00:06.141  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod2\pose_lari_bawah.png'
+00:06.203  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod2\pose_lompat_depan.png'
+00:06.235  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod2\pose_lompat_bawah.png'
+00:06.297  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod2\pose_tendang_samping_depan.png'
+00:06.328  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod2\pose_tendang_samping_bawah.png'
+00:06.391  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod2\pose_tangkis_depan.png'
+00:06.422  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod2\pose_tangkis_bawah.png'
+00:06.485  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod2\pose_putar_badan_depan.png'
+00:06.532  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod2\pose_putar_badan_bawah.png'
+00:06.594  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod2\pose_lunge_depan.png'
+00:06.625  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod2\pose_lunge_bawah.png'
+00:06.688  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod2\pose_bungkuk_depan.png'
+00:06.719  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod2\pose_bungkuk_bawah.png'
+00:06.782  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod2\pose_tangan_terangkat_depan.png'
+00:06.828  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod2\pose_tangan_terangkat_bawah.png'
+00:06.891  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod2\pose_lengan_depan_90_depan.png'
+00:06.922  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod2\pose_lengan_depan_90_bawah.png'
+00:06.985  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod2\pose_lengan_depan_atas_depan.png'
+00:07.016  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod2\pose_lengan_depan_atas_bawah.png'
+00:07.078  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod2\pose_lengan_samping_90_depan.png'
+00:07.110  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod2\pose_lengan_samping_90_bawah.png'
+00:07.172  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod2\pose_lengan_guard_depan.png'
+00:07.203  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod2\pose_lengan_guard_bawah.png'
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:37:04)
+FBX version: 7400
+PASS tinggi 30.660 m -6/+2 cm  [30.617 m]
+PASS telapak di z≈0 (±1 cm)  [-0.0036 m]
+PASS tulang wajib profil 'manny' ada  [70 tulang]
+PASS semua tulang di pose profil ada
+PASS menghadap -Y (foot_l -> ball_l)  [vektor (0.28, -2.38, -2.24)]
+PASS menghadap -Y (foot_r -> ball_r)  [vektor (-0.35, -2.52, -2.24)]
+PASS kiri karakter = +X (thigh_r -> thigh_l)  [vektor (4.76, 0.0, 0.0)]
+PASS atas = +Z (pelvis -> head)  [vektor (0.0, -1.26, 9.94)]
+tepi terbuka (boundary): 618 | terbanyak per tulang: [('cloth_front_03', 61), ('jaw', 49), ('calf_l', 43), ('upperarm_r', 41), ('thigh_r', 39), ('pelvis', 37), ('thigh_l', 37), ('spine_04', 33)]
+PASS 0 vertex tanpa bobot  [0]
+warna render: TEXTURE (1 tekstur)
+  rest               regangan p99   0.0% maks    0.0% | peregangan maks  0.00 cm  
+  kuda_kuda          regangan p99   0.0% maks    0.0% | peregangan maks  0.00 cm  calf_r 0.00 | upperarm_l 0.00 | hand_l 0.00
+  pukul              regangan p99   0.0% maks   34.9% | peregangan maks 21.86 cm  spine_02 21.86 | spine_01 11.47 | lowerarm_l 0.00
+  tendang_tinggi     regangan p99   0.0% maks   39.8% | peregangan maks  9.85 cm  spine_01 9.85 | spine_02 5.98 | calf_r 0.00
+  dodge              regangan p99   0.0% maks   46.5% | peregangan maks 11.52 cm  spine_01 11.52 | spine_02 7.14 | clavicle_l 0.00
+  jongkok            regangan p99   0.0% maks   40.3% | peregangan maks 10.00 cm  spine_01 10.00 | spine_02 5.52 | calf_r 0.00
+  lari               regangan p99   0.0% maks   24.5% | peregangan maks 13.95 cm  spine_02 13.95 | spine_01 5.05 | upperarm_r 0.00
+  lompat             regangan p99   0.0% maks    0.0% | peregangan maks  0.00 cm  hand_r 0.00 | calf_l 0.00 | hand_l 0.00
+  tendang_samping    regangan p99   0.0% maks   72.9% | peregangan maks 18.46 cm  spine_02 18.46 | spine_01 12.45 | calf_r 0.00
+  tangkis            regangan p99   0.0% maks   24.7% | peregangan maks  6.11 cm  spine_01 6.11 | spine_02 3.23 | lowerarm_r 0.00
+  putar_badan        regangan p99   0.0% maks   50.4% | peregangan maks 26.73 cm  spine_02 26.73 | spine_01 14.80 | upperarm_l 0.00
+  lunge              regangan p99   0.0% maks   30.3% | peregangan maks  7.51 cm  spine_01 7.51 | spine_02 3.96 | spine_04 0.00
+  bungkuk            regangan p99   0.0% maks   52.3% | peregangan maks 16.42 cm  spine_01 16.42 | spine_02 9.62 | spine_04 0.00
+  tangan_terangkat   regangan p99  29.6% maks  101.9% | peregangan maks 73.90 cm  spine_04 73.90 | clavicle_r 69.81 | clavicle_l 63.79
+  lengan_depan_90    regangan p99   0.0% maks    0.0% | peregangan maks  0.00 cm  upperarm_l 0.00 | hand_l 0.00 | hand_r 0.00
+  lengan_depan_atas  regangan p99   0.0% maks    0.0% | peregangan maks  0.00 cm  lowerarm_r 0.00 | hand_r 0.00 | upperarm_l 0.00
+  lengan_samping_90  regangan p99   0.0% maks    0.0% | peregangan maks  0.00 cm  upperarm_r 0.00 | upperarm_l 0.00 | hand_l 0.00
+  lengan_guard       regangan p99   0.0% maks    0.0% | peregangan maks  0.00 cm  hand_r 0.00 | upperarm_l 0.00 | upperarm_r 0.00
+PASS regangan p99 <= 40.0% di semua pose  [29.6% di tangan_terangkat]
+
+HASIL AUDIT: 10/10 lulus — SK_Jerangkong_LOD2.fbx -> C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod2
+  jerangkong exit=0
+=== LOD3 ===
+00:05.375  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod3\front_color.png'
+00:05.453  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod3\front_mask.png'
+00:05.531  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod3\side_color.png'
+00:05.625  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod3\side_mask.png'
+00:05.734  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod3\back_color.png'
+00:05.796  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod3\back_mask.png'
+00:05.859  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod3\pose_rest_depan.png'
+00:05.890  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod3\pose_rest_bawah.png'
+00:05.968  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod3\pose_kuda_kuda_depan.png'
+00:06.000  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod3\pose_kuda_kuda_bawah.png'
+00:06.062  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod3\pose_pukul_depan.png'
+00:06.093  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod3\pose_pukul_bawah.png'
+00:06.156  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod3\pose_tendang_tinggi_depan.png'
+00:06.203  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod3\pose_tendang_tinggi_bawah.png'
+00:06.265  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod3\pose_dodge_depan.png'
+00:06.296  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod3\pose_dodge_bawah.png'
+00:06.359  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod3\pose_jongkok_depan.png'
+00:06.406  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod3\pose_jongkok_bawah.png'
+00:06.468  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod3\pose_lari_depan.png'
+00:06.500  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod3\pose_lari_bawah.png'
+00:06.578  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod3\pose_lompat_depan.png'
+00:06.609  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod3\pose_lompat_bawah.png'
+00:06.671  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod3\pose_tendang_samping_depan.png'
+00:06.703  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod3\pose_tendang_samping_bawah.png'
+00:06.765  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod3\pose_tangkis_depan.png'
+00:06.796  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod3\pose_tangkis_bawah.png'
+00:06.859  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod3\pose_putar_badan_depan.png'
+00:06.890  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod3\pose_putar_badan_bawah.png'
+00:06.953  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod3\pose_lunge_depan.png'
+00:06.984  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod3\pose_lunge_bawah.png'
+00:07.046  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod3\pose_bungkuk_depan.png'
+00:07.093  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod3\pose_bungkuk_bawah.png'
+00:07.140  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod3\pose_tangan_terangkat_depan.png'
+00:07.171  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod3\pose_tangan_terangkat_bawah.png'
+00:07.234  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod3\pose_lengan_depan_90_depan.png'
+00:07.281  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod3\pose_lengan_depan_90_bawah.png'
+00:07.343  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod3\pose_lengan_depan_atas_depan.png'
+00:07.375  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod3\pose_lengan_depan_atas_bawah.png'
+00:07.437  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod3\pose_lengan_samping_90_depan.png'
+00:07.468  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod3\pose_lengan_samping_90_bawah.png'
+00:07.531  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod3\pose_lengan_guard_depan.png'
+00:07.562  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod3\pose_lengan_guard_bawah.png'
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:37:04)
+FBX version: 7400
+PASS tinggi 1.000 m -6/+2 cm  [1.000 m]
+PASS telapak di z≈0 (±1 cm)  [0.0002 m]
+PASS tulang wajib profil 'tuyul' ada  [52 tulang]
+PASS semua tulang di pose profil ada
+PASS menghadap -Y (foot_l -> ball_l)  [vektor (0.01, -0.08, -0.04)]
+PASS menghadap -Y (foot_r -> ball_r)  [vektor (-0.01, -0.08, -0.04)]
+PASS kiri karakter = +X (thigh_r -> thigh_l)  [vektor (0.2, 0.0, 0.0)]
+PASS atas = +Z (pelvis -> head)  [vektor (0.0, -0.02, 0.595)]
+tepi terbuka (boundary): 0 | terbanyak per tulang: []
+PASS 0 vertex tanpa bobot  [0]
+warna render: TEXTURE (2 tekstur)
+  rest               regangan p99   0.0% maks    0.0% | peregangan maks  0.00 cm  
+  kuda_kuda          regangan p99 149.1% maks  922.6% | peregangan maks 11.12 cm  neck_02 11.12 | upperarm_l 10.79 | clavicle_l 8.73
+  pukul              regangan p99 235.6% maks 1267.3% | peregangan maks 10.59 cm  neck_02 10.59 | upperarm_r 9.94 | spine_04 9.57
+  tendang_tinggi     regangan p99  82.0% maks  678.7% | peregangan maks  7.94 cm  spine_01 7.94 | thigh_r 6.72 | neck_02 3.97
+  dodge              regangan p99 159.1% maks  969.8% | peregangan maks 12.12 cm  neck_02 12.12 | upperarm_l 11.10 | clavicle_l 8.08
+  jongkok            regangan p99 150.8% maks  922.6% | peregangan maks 11.12 cm  neck_02 11.12 | upperarm_l 10.79 | clavicle_l 8.73
+  lari               regangan p99 194.6% maks 1185.0% | peregangan maks  7.58 cm  upperarm_l 7.58 | neck_02 7.26 | upperarm_r 6.65
+  lompat             regangan p99 309.8% maks 1574.3% | peregangan maks  9.90 cm  head 9.90 | upperarm_r 9.15 | upperarm_l 8.75
+  tendang_samping    regangan p99 122.7% maks  988.7% | peregangan maks  5.32 cm  upperarm_r 5.32 | thigh_r 5.13 | jaw 4.67
+  tangkis            regangan p99 270.2% maks 1494.8% | peregangan maks 16.36 cm  upperarm_l 16.36 | neck_02 16.34 | clavicle_l 12.91
+  putar_badan        regangan p99 173.8% maks 1072.1% | peregangan maks  7.01 cm  upperarm_r 7.01 | head 6.96 | neck_02 6.78
+  lunge              regangan p99 123.3% maks  864.2% | peregangan maks 12.23 cm  neck_02 12.23 | upperarm_l 11.96 | clavicle_l 9.62
+  bungkuk            regangan p99 119.6% maks  787.8% | peregangan maks 10.76 cm  neck_02 10.76 | upperarm_l 9.83 | upperarm_r 6.49
+  tangan_terangkat   regangan p99 373.3% maks 1800.9% | peregangan maks 11.46 cm  head 11.46 | upperarm_r 11.13 | jaw 11.07
+  lengan_depan_90    regangan p99 354.1% maks 1796.6% | peregangan maks 19.80 cm  upperarm_l 19.80 | neck_02 19.34 | clavicle_l 15.27
+  lengan_depan_atas  regangan p99 446.8% maks 2124.1% | peregangan maks 26.56 cm  upperarm_l 26.56 | neck_02 24.65 | clavicle_l 19.57
+  lengan_samping_90  regangan p99 210.5% maks 1145.7% | peregangan maks  7.17 cm  head 7.17 | upperarm_r 6.36 | upperarm_l 6.28
+  lengan_guard       regangan p99 243.5% maks 1346.1% | peregangan maks 16.87 cm  upperarm_l 16.87 | neck_02 16.44 | clavicle_l 12.74
+FAIL regangan p99 <= 40.0% di semua pose  [446.8% di lengan_depan_atas]
+
+HASIL AUDIT: 9/10 lulus — SK_Tuyul_LOD3.fbx -> C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_lod3
+  tuyul exit=1
+00:05.094  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod3\front_color.png'
+00:05.172  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod3\front_mask.png'
+00:05.250  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod3\side_color.png'
+00:05.313  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod3\side_mask.png'
+00:05.407  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod3\back_color.png'
+00:05.469  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod3\back_mask.png'
+00:05.532  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod3\pose_rest_depan.png'
+00:05.563  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod3\pose_rest_bawah.png'
+00:05.625  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod3\pose_kuda_kuda_depan.png'
+00:05.657  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod3\pose_kuda_kuda_bawah.png'
+00:05.703  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod3\pose_pukul_depan.png'
+00:05.750  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod3\pose_pukul_bawah.png'
+00:05.797  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod3\pose_tendang_tinggi_depan.png'
+00:05.828  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod3\pose_tendang_tinggi_bawah.png'
+00:05.891  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod3\pose_dodge_depan.png'
+00:05.922  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod3\pose_dodge_bawah.png'
+00:05.985  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod3\pose_jongkok_depan.png'
+00:06.016  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod3\pose_jongkok_bawah.png'
+00:06.063  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod3\pose_lari_depan.png'
+00:06.110  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod3\pose_lari_bawah.png'
+00:06.157  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod3\pose_lompat_depan.png'
+00:06.188  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod3\pose_lompat_bawah.png'
+00:06.250  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod3\pose_tendang_samping_depan.png'
+00:06.282  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod3\pose_tendang_samping_bawah.png'
+00:06.344  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod3\pose_tangkis_depan.png'
+00:06.375  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod3\pose_tangkis_bawah.png'
+00:06.438  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod3\pose_putar_badan_depan.png'
+00:06.469  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod3\pose_putar_badan_bawah.png'
+00:06.532  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod3\pose_lunge_depan.png'
+00:06.563  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod3\pose_lunge_bawah.png'
+00:06.610  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod3\pose_bungkuk_depan.png'
+00:06.641  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod3\pose_bungkuk_bawah.png'
+00:06.703  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod3\pose_tangan_terangkat_depan.png'
+00:06.735  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod3\pose_tangan_terangkat_bawah.png'
+00:06.782  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod3\pose_lengan_depan_90_depan.png'
+00:06.813  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod3\pose_lengan_depan_90_bawah.png'
+00:06.875  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod3\pose_lengan_depan_atas_depan.png'
+00:06.907  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod3\pose_lengan_depan_atas_bawah.png'
+00:06.969  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod3\pose_lengan_samping_90_depan.png'
+00:07.000  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod3\pose_lengan_samping_90_bawah.png'
+00:07.047  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod3\pose_lengan_guard_depan.png'
+00:07.078  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod3\pose_lengan_guard_bawah.png'
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:37:04)
+FBX version: 7400
+PASS tinggi 1.806 m -6/+2 cm  [1.791 m]
+PASS telapak di z≈0 (±1 cm)  [-0.0007 m]
+PASS tulang wajib profil 'manny' ada  [99 tulang]
+PASS semua tulang di pose profil ada
+PASS menghadap -Y (foot_l -> ball_l)  [vektor (0.017, -0.149, -0.075)]
+PASS menghadap -Y (foot_r -> ball_r)  [vektor (-0.017, -0.149, -0.075)]
+PASS kiri karakter = +X (thigh_r -> thigh_l)  [vektor (0.199, 0.0, -0.0)]
+PASS atas = +Z (pelvis -> head)  [vektor (-0.0, 0.016, 0.667)]
+tepi terbuka (boundary): 469 | terbanyak per tulang: [('thigh_r', 64), ('thigh_l', 62), ('calf_r', 38), ('calf_l', 36), ('head', 36), ('spine_05', 32), ('spine_04', 28), ('neck_01', 26)]
+PASS 0 vertex tanpa bobot  [0]
+warna render: TEXTURE (5 tekstur)
+  rest               regangan p99   0.0% maks    0.0% | peregangan maks  0.00 cm  
+  kuda_kuda          regangan p99  16.5% maks   36.1% | peregangan maks  7.06 cm  thigh_r 7.06 | spine_02 6.20 | thigh_twist_02_r 5.25
+  pukul              regangan p99  19.0% maks   43.1% | peregangan maks  7.76 cm  upperarm_l 7.76 | spine_01 5.17 | jacket_l_02 5.07
+  tendang_tinggi     regangan p99  15.3% maks   54.6% | peregangan maks 12.63 cm  thigh_r 12.63 | pelvis 9.22 | calf_r 8.73
+  dodge              regangan p99  14.2% maks   30.1% | peregangan maks  7.27 cm  spine_04 7.27 | spine_01 7.25 | clavicle_l 6.39
+  jongkok            regangan p99  18.6% maks   49.8% | peregangan maks 31.93 cm  calf_twist_02_l 31.93 | thigh_l 30.93 | pelvis 25.84
+  lari               regangan p99  16.3% maks   38.0% | peregangan maks 14.62 cm  calf_twist_02_l 14.62 | thigh_l 13.88 | pelvis 10.75
+  lompat             regangan p99  19.5% maks   64.4% | peregangan maks 11.86 cm  calf_twist_02_l 11.86 | thigh_l 11.10 | thigh_twist_02_l 9.75
+  tendang_samping    regangan p99  11.4% maks   56.6% | peregangan maks 12.11 cm  thigh_r 12.11 | thigh_twist_02_r 9.18 | thigh_l 9.01
+  tangkis            regangan p99  17.4% maks   38.2% | peregangan maks  6.43 cm  upperarm_l 6.43 | lowerarm_r 5.98 | lowerarm_l 5.28
+  putar_badan        regangan p99  19.0% maks   85.4% | peregangan maks  9.32 cm  jacket_l_02 9.32 | spine_01 9.29 | jacket_r_02 7.15
+  lunge              regangan p99  13.0% maks   40.9% | peregangan maks 18.42 cm  calf_twist_02_l 18.42 | thigh_l 17.64 | pelvis 13.84
+  bungkuk            regangan p99  16.4% maks   57.0% | peregangan maks  9.43 cm  spine_04 9.43 | spine_01 9.41 | clavicle_r 8.56
+  tangan_terangkat   regangan p99  24.3% maks   81.9% | peregangan maks  7.25 cm  clavicle_l 7.25 | clavicle_r 6.79 | upperarm_r 6.68
+  lengan_depan_90    regangan p99  11.9% maks   52.0% | peregangan maks  3.87 cm  clavicle_r 3.87 | clavicle_l 3.77 | upperarm_r 3.58
+  lengan_depan_atas  regangan p99  14.7% maks   66.0% | peregangan maks  6.41 cm  upperarm_l 6.41 | clavicle_r 6.19 | clavicle_l 4.45
+  lengan_samping_90  regangan p99  11.7% maks   24.8% | peregangan maks  4.51 cm  upperarm_r 4.51 | lowerarm_l 4.04 | upperarm_l 3.87
+  lengan_guard       regangan p99  12.8% maks   34.2% | peregangan maks  5.22 cm  lowerarm_r 5.22 | upperarm_l 4.39 | clavicle_r 4.37
+PASS regangan p99 <= 40.0% di semua pose  [24.3% di tangan_terangkat]
+
+HASIL AUDIT: 10/10 lulus — SK_Aksa_LOD3.fbx -> C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_aksa_lod3
+  aksa exit=0
+00:05.000  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod3\front_color.png'
+00:05.063  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod3\front_mask.png'
+00:05.157  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod3\side_color.png'
+00:05.219  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod3\side_mask.png'
+00:05.297  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod3\back_color.png'
+00:05.360  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod3\back_mask.png'
+00:05.407  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod3\pose_rest_depan.png'
+00:05.438  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod3\pose_rest_bawah.png'
+00:05.485  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod3\pose_kuda_kuda_depan.png'
+00:05.532  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod3\pose_kuda_kuda_bawah.png'
+00:05.579  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod3\pose_pukul_depan.png'
+00:05.610  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod3\pose_pukul_bawah.png'
+00:05.672  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod3\pose_tendang_tinggi_depan.png'
+00:05.704  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod3\pose_tendang_tinggi_bawah.png'
+00:05.750  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod3\pose_dodge_depan.png'
+00:05.782  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod3\pose_dodge_bawah.png'
+00:05.844  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod3\pose_jongkok_depan.png'
+00:05.875  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod3\pose_jongkok_bawah.png'
+00:05.922  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod3\pose_lari_depan.png'
+00:05.954  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod3\pose_lari_bawah.png'
+00:06.016  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod3\pose_lompat_depan.png'
+00:06.047  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod3\pose_lompat_bawah.png'
+00:06.094  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod3\pose_tendang_samping_depan.png'
+00:06.125  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod3\pose_tendang_samping_bawah.png'
+00:06.172  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod3\pose_tangkis_depan.png'
+00:06.219  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod3\pose_tangkis_bawah.png'
+00:06.266  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod3\pose_putar_badan_depan.png'
+00:06.297  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod3\pose_putar_badan_bawah.png'
+00:06.344  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod3\pose_lunge_depan.png'
+00:06.375  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod3\pose_lunge_bawah.png'
+00:06.422  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod3\pose_bungkuk_depan.png'
+00:06.454  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod3\pose_bungkuk_bawah.png'
+00:06.500  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod3\pose_tangan_terangkat_depan.png'
+00:06.532  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod3\pose_tangan_terangkat_bawah.png'
+00:06.594  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod3\pose_lengan_depan_90_depan.png'
+00:06.610  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod3\pose_lengan_depan_90_bawah.png'
+00:06.657  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod3\pose_lengan_depan_atas_depan.png'
+00:06.704  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod3\pose_lengan_depan_atas_bawah.png'
+00:06.750  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod3\pose_lengan_samping_90_depan.png'
+00:06.782  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod3\pose_lengan_samping_90_bawah.png'
+00:06.844  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod3\pose_lengan_guard_depan.png'
+00:06.875  render           | Saved: 'C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod3\pose_lengan_guard_bawah.png'
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:37:04)
+FBX version: 7400
+FAIL tinggi 30.660 m -6/+2 cm  [30.681 m]
+PASS telapak di z≈0 (±1 cm)  [-0.0086 m]
+PASS tulang wajib profil 'manny' ada  [70 tulang]
+PASS semua tulang di pose profil ada
+PASS menghadap -Y (foot_l -> ball_l)  [vektor (0.28, -2.38, -2.24)]
+PASS menghadap -Y (foot_r -> ball_r)  [vektor (-0.35, -2.52, -2.24)]
+PASS kiri karakter = +X (thigh_r -> thigh_l)  [vektor (4.76, 0.0, 0.0)]
+PASS atas = +Z (pelvis -> head)  [vektor (0.0, -1.26, 9.94)]
+tepi terbuka (boundary): 330 | terbanyak per tulang: [('pelvis', 29), ('lowerarm_r', 22), ('thigh_r', 22), ('calf_r', 20), ('spine_04', 19), ('thigh_l', 19), ('upperarm_r', 19), ('jaw', 18)]
+PASS 0 vertex tanpa bobot  [0]
+warna render: TEXTURE (1 tekstur)
+  rest               regangan p99   0.0% maks    0.0% | peregangan maks  0.00 cm  
+  kuda_kuda          regangan p99   0.0% maks    0.0% | peregangan maks  0.00 cm  calf_r 0.00 | thigh_r 0.00 | calf_l 0.00
+  pukul              regangan p99   0.0% maks   11.1% | peregangan maks  7.85 cm  spine_02 7.85 | spine_01 6.20 | upperarm_l 0.00
+  tendang_tinggi     regangan p99   0.0% maks    7.4% | peregangan maks  9.61 cm  spine_01 9.61 | spine_02 3.84 | calf_r 0.00
+  dodge              regangan p99   0.0% maks    8.8% | peregangan maks 11.34 cm  spine_01 11.34 | spine_02 4.41 | clavicle_r 0.00
+  jongkok            regangan p99   0.0% maks    7.5% | peregangan maks  9.43 cm  spine_01 9.43 | spine_02 5.18 | calf_r 0.00
+  lari               regangan p99   0.0% maks    7.7% | peregangan maks  5.47 cm  spine_02 5.47 | spine_01 4.93 | foot_r 0.00
+  lompat             regangan p99   0.0% maks    0.0% | peregangan maks  0.00 cm  thigh_r 0.00 | calf_l 0.00 | hand_r 0.00
+  tendang_samping    regangan p99   0.0% maks    7.4% | peregangan maks  8.33 cm  spine_01 8.33 | spine_02 2.62 | calf_r 0.00
+  tangkis            regangan p99   0.0% maks    4.5% | peregangan maks  5.63 cm  spine_01 5.63 | spine_02 2.88 | lowerarm_r 0.00
+  putar_badan        regangan p99   0.0% maks   13.4% | peregangan maks  9.48 cm  spine_02 9.48 | spine_01 7.36 | lowerarm_r 0.00
+  lunge              regangan p99   0.0% maks    5.5% | peregangan maks  6.94 cm  spine_01 6.94 | spine_02 3.63 | spine_04 0.00
+  bungkuk            regangan p99   0.0% maks   13.7% | peregangan maks 15.39 cm  spine_01 15.39 | spine_02 9.70 | clavicle_l 0.00
+  tangan_terangkat   regangan p99  21.6% maks   48.9% | peregangan maks 62.59 cm  clavicle_r 62.59 | spine_04 58.80 | clavicle_l 42.11
+  lengan_depan_90    regangan p99   0.0% maks    0.0% | peregangan maks  0.00 cm  upperarm_l 0.00 | upperarm_r 0.00 | hand_r 0.00
+  lengan_depan_atas  regangan p99   0.0% maks    0.0% | peregangan maks  0.00 cm  hand_r 0.00 | upperarm_r 0.00 | lowerarm_r 0.00
+  lengan_samping_90  regangan p99   0.0% maks    0.0% | peregangan maks  0.00 cm  hand_l 0.00 | upperarm_l 0.00 | lowerarm_l 0.00
+  lengan_guard       regangan p99   0.0% maks    0.0% | peregangan maks  0.00 cm  hand_l 0.00 | upperarm_l 0.00 | upperarm_r 0.00
+PASS regangan p99 <= 40.0% di semua pose  [21.6% di tangan_terangkat]
+
+HASIL AUDIT: 9/10 lulus — SK_Jerangkong_LOD3.fbx -> C:\repository\unreal_engine\jayadwara_hermes_tuyul\Hermes\Art\tuyul\Audit\k5_jk_lod3
+  jerangkong exit=1
+SELESAI-AUDIT-K5

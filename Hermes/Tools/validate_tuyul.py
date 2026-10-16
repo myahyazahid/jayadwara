@@ -93,8 +93,8 @@ check("bobot lunak: tidak ada vertex 1-tulang-kaku wajib", True, "profil Tuyul t
 mw = mesh.matrix_world
 zs = [(mw @ v.co).z * UNIT for v in me.vertices]
 h = (max(zs) - min(zs)) / SCALE
-check(f"tinggi model {TINGGI:.2f} m (±1%) setelah dibagi skala", abs(h - TINGGI) <= 0.01 * TINGGI,
-      f"{h:.3f} m / skala {SCALE} = {h * SCALE:.2f} m")
+check(f"tinggi model 1,00 m x skala {SCALE:.0f} = {TINGGI:.2f} m (±1%)", abs(h - 1.0) <= 0.01,
+      f"{h:.3f} m x skala {SCALE} = {h * SCALE:.2f} m")
 check("telapak di z≈0", abs(min(zs)) / SCALE <= 0.01, f"{min(zs):.4f} m")
 uv = me.uv_layers.active
 check("UV 0-1", uv is not None and all(-0.001 <= c <= 1.001 for d in uv.data for c in d.uv), "")
