@@ -1,6 +1,7 @@
 # 31 — Desain Level Ep 2: `Ep02_KampungKali`
 
-> **Status: DISETUJUI v0.2 (15 Okt 2026)**: F1–F7 dijawab developer sesuai usulan (bagian 9). Rincian dari pola di [28](28-struktur-level-episode.md#ep-2--ep02_kampungkali--siang--sore), format sama dengan [30](30-desain-level-ep01.md) (Ep 1).
+> **Status: v0.3, tata letak v02 (16 Okt 2026)**: developer menilai map v01 (600 × 500 m) terlalu kecil untuk Jayadwara yang gesit (±70 m/s, PR #29) dan memilih **opsi B: perluas + area baru** (bagian 2a). Angka di bagian 2 adalah **v01 (arsip)**. F1–F7 tetap berlaku (bagian 9).
+> v0.2 (15 Okt 2026): F1–F7 dijawab developer sesuai usulan. Rincian dari pola di [28](28-struktur-level-episode.md#ep-2--ep02_kampungkali--siang--sore), format sama dengan [30](30-desain-level-ep01.md) (Ep 1).
 > Sumber: [16 kartu Ep 2](16-panduan-arc-1.md#ep-2--tangan-tangan-kecil--tuyul) (isi episode), [27](27-rencana-model-tuyul.md) (ukuran Tuyul), [02](02-setting-dunia.md) (Kampung Kali). Skenario adegan Ep 2 belum ada ([17](17-skenario-arc-1.md#episode-210)), jadi urutan di sini juga jadi kerangka skenarionya.
 
 **Visual:** [`visual/ep02-kampung-kali.html`](visual/ep02-kampung-kali.html) (buka di browser).
@@ -15,15 +16,17 @@
 |---|---|
 | **Konsep tempat** | **Kampung kota padat di tepi kali**: gang sempit, atap seng bertumpuk, jemuran, kabel semrawut, bantaran sungai, jembatan gantung kuning. Diapit jalan raya (utara) dan kali (selatan) |
 | **Nada** | Ringan dan jahil, siang terang (kontras dengan Ep 1 yang senja dan seram) |
-| **Durasi main** | ±20–25 menit |
-| **Area total** | ±600 × 500 m bisa diinjak raksasa |
+| **Durasi main** | ±23–28 menit (v01: ±20–25) |
+| **Area total** | **±1400 × 1000 m** (v02; v01: 600 × 500 m), arena raksasa ±1340 × 930 m |
 | **Skala acuan** | Aksa 1,75 m · tuyul kecil 1 m · rumah 1 lantai 3,5 m / 2 lantai 6,5 m · gang 1,2–2,5 m · kali lebar ±40 m · tuyul besar 27 m · tuyul raksasa 45 m ([27](27-rencana-model-tuyul.md#1-satu-model-tiga-ukuran)) · Jayadwara 45 m |
-| **Ide utama level** | **Atap adalah jalan kedua.** Bagian manusia bergerak di dua lapis (gang dan atap). Di mode raksasa, seluruh kampung itu setinggi mata kaki, jadi pemain harus bertarung di kali dan jalan raya supaya tidak menginjak rumah |
+| **Ide utama level** | **Atap adalah jalan kedua.** Bagian manusia bergerak di dua lapis (gang dan atap). Di mode raksasa, seluruh kampung itu setinggi mata kaki, jadi pemain harus bertarung di kali, gudang Adikara, dan lapangan selatan supaya tidak menginjak rumah. **Kampung inti tetap padat; ruang Jayadwara ada di cincin luar** (v02) |
 | **Kit baru** | **Kampung Kali** ([28 bagian 3](28-struktur-level-episode.md#3-kit-distrik-dibangun-sekali-dipakai-ulang)), dipakai ulang di Ep 4 (pasar) dan Ep 10 |
 
 ---
 
-## 2. Denah (tampak atas)
+## 2. Denah v01 (arsip, 15 Okt 2026)
+
+> Diganti tata letak v02 di bagian 2a. Disimpan untuk riwayat.
 
 Utara = jalan raya. Titik nol = tengah kampung (dekat pos RT).
 
@@ -69,6 +72,77 @@ Utara = jalan raya. Titik nol = tengah kampung (dekat pos RT).
 | Kampung seberang | y −125 … −230 | lebih jarang | Jalan inspeksi di y −125 |
 | Rel kereta | x −235, utara–selatan, tanggul 6 m | — | Batas barat + jembatan rel di atas kali |
 
+## 2a. Tata letak v02 (16 Okt 2026, yang berlaku)
+
+**Alasan:** dari mata Jayadwara yang lari ±70 m/s, arena v01 (500 × 380 m) habis dilintasi dalam ±7 detik, sementara Ep 1 sudah naik ke 1400 × 1220 m ([30 bagian 2a](30-desain-level-ep01.md#2a-tata-letak-v02-16-okt-2026-yang-berlaku)). Dari tiga opsi (A tarik jarak ×1,7 · **B perluas + area baru** · C dua kampung), developer memilih **B**. Prinsipnya sama dengan Ep 1 v02: **ukuran objek tetap asli** (gang 1,2–2,5 m, rumah 3,5–6,5 m, kali ±40 m). **Kampung inti hanya dibesarkan ±1,3×** supaya kejar-kejaran di gang tetap rapat; luas baru ditaruh di **cincin luar** tempat Jayadwara bergerak, dan tiap area baru punya fungsi untuk boss.
+
+| | v01 (arsip, bagian 2) | **v02** |
+|---|---|---|
+| Medan | 600 × 500 m | **1400 × 1000 m** (x −700 … +700, y −600 … +400) |
+| Arena raksasa | ±500 × 380 m | **±1340 × 930 m** (x −650 … +690, y −600 … +330) |
+| Jayadwara melintas arena | ±7 detik | **±19 detik** (Ep 1 v02: ±17) |
+| Kampung inti | 350 × 145 m | **455 × 190 m**, tetap padat |
+| Rute kejar Aksa | ±650 m | **±1270 m** pos RT → T5 (atap → gang → jembatan gantung → bantaran → pintu air), ±3,5 mnt lari |
+| Tempat bertarung tanpa penalti | kali | **kali, bantaran, gudang Adikara, lapangan + sawah selatan** |
+
+```
+   ░░░░░ gedung tinggi Distrik Adikara (latar, di luar batas, foreshadow Ep 3) ░░░░░
+ ┌──────────────── BLOK KOTA (ruko belakang, perumahan; penalti normal) ─────────────────┐
+ │ R ┌────────────── RUKO + toko ───────────────────────────────────────────────────────┐│
+ │ E │═╪══╪══╪══╪ JALAN LAYANG (pilar 15 m) di atas JALAN RAYA ══╪══╪══╪══╪══╪══╪══╪══╪═││
+ │ L │   ● START → mulut gang                                                            ││
+ │   │ ┌─────── KAMPUNG PADAT (inti, ±1,3×) ─────────┐┌─ PASAR ─┐┌── GUDANG & PABRIK ───┐││
+ │ ▓ │ │ ★1  T1        ┊ gang utama          ★2      ││ (tutup, ││  ADIKARA             │││
+ │ STASIUN │   T2 seng ┊ ⌂ pos RT  ☪ musala   T3     ││  Ep 4)  ││  (tanpa penalti)     │││
+ │   │ │ ○ sesajen     ┊                             │└─────────┘└────── dermaga ───────┘││
+ │   │ └──────────────── bantaran / tanggul ─────────┘                                   ││
+ │ ⊟ pintu air  LAPANGAN TEPI KALI (gabung)                                              ││
+ │≈≈≈≈╪≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈ K A L I (±40 m, arus ke timur) ≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈││
+ │ ║ jbt rel  ╪ jembatan gantung kuning (T4)       ║ jembatan beton                       ││
+ │ ║ anak  ┌──────────── KAMPUNG SEBERANG + jalan inspeksi ─────────────┐  ⊙ menara air   ││
+ │ ║ kali  └────────────────────────────────────────────────────────────┘  lahan kosong   ││
+ │ ║     LAPANGAN BOLA + SAWAH KOTA (aman) ── tiang SUTET ── tiang SUTET ── tiang SUTET   ││
+ └───────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+**Pratinjau tampak atas:** `python -I Art/Level/pratinjau_ep02_v02.py` menulis `docs/visual/ep02_layout_v02_atas.png` (butuh Pillow; PNG tidak di-commit dari sesi cloud karena unggahan Git LFS ditolak, developer boleh meng-commit-nya).
+
+**Data (sumber kebenaran, dipakai Hermes dan nanti `Tools/ue_greybox_ep02.py`):** [`Art/Level/ep02_medan_v02.py`](../Art/Level/ep02_medan_v02.py) (medan, 8 slot material, 14 titik uji; z = 0 muka air kali) dan [`Art/Level/ep02_layout_v02.json`](../Art/Level/ep02_layout_v02.json) (145 objek, 8 kelompok instanced berisi 1.817 rumah/ruko/blok/pilar/kontainer, pohon, tiang, 23 penanda, 5 zona, 8 kamera), yang **dibuat** oleh [`Art/Level/buat_layout_ep02_v02.py`](../Art/Level/buat_layout_ep02_v02.py). Pratinjau: [`Art/Level/pratinjau_ep02_v02.py`](../Art/Level/pratinjau_ep02_v02.py). Tata letak diubah di generator, bukan di JSON. Instruksi Hermes: [`Hermes/maps_ep2_hermes.md`](../Hermes/maps_ep2_hermes.md) (branch `hermes/maps_ep2`; greybox dimajukan atas permintaan developer 16 Okt 2026, jalur paralel Level/Map).
+
+### Koordinat greybox v02 (meter, Y utara, titik nol dekat pos RT)
+
+| Bagian | Pusat / rentang | Ukuran | Catatan |
+|---|---|---|---|
+| Blok kota utara | y +200 … +365, x −700 … +700 | blok 20–40 m, tinggi 10–20 m | Penalti normal; latar gedung Adikara di luar batas (y > +400) |
+| Deret ruko | y +168 … +195 | 2–3 lantai (7–10 m) | Batas utara area manusia |
+| Jalan raya | y +145 … +165 | lebar 20 | Mobil parkir, gerobak, angkot (properti yang dicuri boss) |
+| **Jalan layang** *(baru)* | di atas jalan raya, y +150 … +160 | dek 15 m, pilar tiap 60 m | Penghalang dan pembanding skala (setinggi paha Jayadwara), mirip pilar tol Ep 1 |
+| START + mobil DWARA | (−40, +155) | — | Mulut gang utama di (−26, +140) |
+| Kampung padat | x −260 … +195, y −50 … +140 | ±455 × 190 | Turun pelan ±4 m ke arah kali |
+| Gang utama | x −26, y −50 … +140 | lebar 2,5 | Tulang punggung navigasi |
+| Gang samping | y +91, +39, −13 (timur–barat) | lebar 1,2–2 | Ditambah gang buntu dan tangga |
+| Pos RT | (−26, +91) | — | Titik kumpul warga, checkpoint |
+| Musala | (+78, +65) | 14 × 14 | **Tidak bisa hancur** |
+| Rumah kemalingan (★1) | (−170, +78) | 2 lantai | Cabang barat |
+| Warung + CCTV (★2) | (+143, +110) | — | Cabang timur, dekat gerbang pasar |
+| Gang buntu + beringin (○) | (−220, −26) | — | Cabang tersembunyi barat daya |
+| Pasar (tutup) | x +205 … +340, y −30 … +140 | ±135 × 170 | Gerbang dikunci; dipakai Ep 4 |
+| **Gudang & pabrik Adikara** *(baru)* | x +360 … +690, y −45 … +140 | ±330 × 185 | **Tanpa penalti** (milik Adikara, sama dengan base camp Ep 1). 3 gudang besar, deret kontainer, truk, dermaga bongkar ke kali di x +450 … +520 |
+| Bantaran + tanggul | y −50 … −85, x −560 … +700 | tanggul 3 m | Jalan setapak, perahu, jemuran |
+| **Lapangan tepi kali** | (−420, −68) | 60 × 30 | Dipindah ke barat (v01: +20, −60): titik gabung kawanan + transformasi, dekat pintu air |
+| Kali | y −85 … −125, x −700 … +700 | lebar ±40, dalam ±1,5 m | Arus ke timur; dangkal untuk raksasa; **jalur cepat aman** untuk memotong jalan boss |
+| Jembatan gantung | x −105 | lebar 1,5 | Kuning, landmark dari mulut gang |
+| Jembatan beton | x +156 | lebar 8 | Mobil; jalur evakuasi warga ke selatan |
+| **Pintu air** *(baru)* | (−505, −105) | 50 × 50, menara 12 m | Landmark kedua; T5; aman untuk Jayadwara |
+| **Anak kali** *(baru)* | dari pintu air ke selatan, x −520 … −490, y −125 … −600 | lebar ±20 | Zona aman; membelah selatan-barat |
+| **Kampung pinggir barat** *(baru)* | x −530 … −265, y −50 … +140 | jarang | Penalti normal; pengisi antara rel dan kampung inti |
+| Rel kereta | x −560 … −540, utara–selatan, puncak tanggul +12 m (±3–8 m di atas tanah) | — | Batas barat; **jembatan rel** di atas jalan raya, kali, dan jalan inspeksi (tidak hancur) |
+| **Stasiun kecil** *(baru)* | x −650 … −570, y −10 … +130 | peron 140 m sejajar puncak rel | Penalti normal; kereta lewat sesekali sebagai bahaya ringan |
+| Kampung seberang | x −470 … +450, y −130 … −330 | lebih jarang | Jalan inspeksi di y −130 |
+| **Menara air** *(baru)* | (+260, −230) | tinggi 30 m | Pembanding skala |
+| **Lapangan bola + sawah kota** *(baru)* | x −480 … +700, y −340 … −600 | lapangan 105 × 68 di (−200, −414) | **Zona aman** kedua; 4 tiang SUTET 48 m di y −520 sebagai pembanding skala |
+| Lahan kosong timur | x +450 … +700, y −130 … −330 | — | Penalti rendah; puing dan semak |
+
 ---
 
 ## 3. Zona dan alur pemain
@@ -78,9 +152,9 @@ Utara = jalan raya. Titik nol = tengah kampung (dekat pos RT).
 | Briefing di hub | Markas DWARA pertama kali ([16 D4](16-panduan-arc-1.md#9-keputusan-yang-perlu-dijawab-developer)) | 1–2 mnt | — |
 | A. Kedatangan | Turun di jalan raya, masuk mulut gang | ±2 mnt | Siang terik 12.30 |
 | B. Investigasi | 3 petunjuk di kampung | ±5–7 mnt | Siang |
-| C. Kejar-kejaran | 5 tuyul di gang dan atap | ±5–6 mnt | Sore 15.30 |
+| C. Kejar-kejaran | 5 tuyul di gang, atap, dan bantaran | ±5–6 mnt | Sore 15.30 |
 | D. Gabung + transformasi | Lapangan tepi kali | ±1 mnt | Sore keemasan |
-| E. Arena raksasa | Kali, kampung, jalan raya | ±6–8 mnt | Keemasan → senja |
+| E. Arena raksasa | Kali, kampung, jalan raya, gudang Adikara, selatan | ±7–9 mnt | Keemasan → senja |
 | Segel + debrief | Bantaran, uang warga kembali | ±1–2 mnt | Senja |
 
 ### A. Kedatangan · ±2 menit
@@ -94,23 +168,23 @@ Area semi-terbuka; urutan petunjuk bebas. Gang utama adalah "koridor" yang selal
 
 | # | Petunjuk | Lokasi | Catatan |
 |---|---|---|---|
-| ★1 | Jejak kaki kecil berenergi Kala (`Clue.Ep02.JejakKaki`) | Rumah kemalingan, barat (−130, +60) | Scan menunjukkan jejak naik dinding ke **atap**: mengenalkan lapis atap |
-| ★2 | CCTV warung yang diretas Sekar (`Clue.Ep02.CCTV`) | Warung, timur (+110, +85) | Memperlihatkan **pola rute kawanan** (dipakai di fase 2 boss). Pemilik warung menjual mainan → **umpan mainan** |
+| ★1 | Jejak kaki kecil berenergi Kala (`Clue.Ep02.JejakKaki`) | Rumah kemalingan, barat (−170, +78) | Scan menunjukkan jejak naik dinding ke **atap**: mengenalkan lapis atap |
+| ★2 | CCTV warung yang diretas Sekar (`Clue.Ep02.CCTV`) | Warung, timur (+143, +110) | Memperlihatkan **pola rute kawanan** (dipakai di fase 2 boss). Pemilik warung menjual mainan → **umpan mainan** |
 | ○ | Sesajen pesugihan (`Clue.Ep02.Sesajen`) | Gang buntu di bawah beringin, barat daya | Bestiary + petunjuk benang merah "rekening penampung" (Sekar) |
 
 - **Pintu kecil ala RE4:** gang buntu ○ hanya terbuka lewat atap rumah sebelah (tangga bambu di belakang rumah kemalingan), jadi hadiah untuk pemain yang menjelajah.
 - Warga di teras (ibu-ibu, anak-anak, tukang ojek) memberi celetukan; tanpa sistem wawancara (itu Ep 4).
 
 ### C. Kejar-kejaran · ±5–6 menit · mekanik baru episode
-Setelah ★1 dan ★2 ditemukan, kawanan mencuri **kotak uang kas RT** di pos RT dan kabur. Kejar 5 tuyul lewat **rute melingkar** dengan 5 titik:
+Setelah ★1 dan ★2 ditemukan, kawanan mencuri **kotak uang kas RT** di pos RT dan kabur. Kejar 5 tuyul lewat **rute melingkar** (±1270 m di v02, ±3,5 menit lari tanpa berhenti) dengan 5 titik:
 
 | Titik | Lokasi | Lapis | Isi |
 |---|---|---|---|
-| T1 | Atap rumah kemalingan (−130, +75) | Atap | Tuyul pertama; tangga bambu naik atap |
-| T2 | Deret atap seng (−60, +30) | Atap | Lari di atap yang berbunyi; lompat celah gang |
-| T3 | Atap belakang warung (+90, +20) | Atap → gang | Turun lewat tumpukan galon; **umpan mainan** dari warung |
-| T4 | Jembatan gantung (−80, −100) | Jembatan | Jembatan bergoyang; **umpan yuyu** dari bantaran |
-| T5 | Lapangan tepi kali (+20, −60) | Tanah | Sisa kawanan berkumpul → zona D |
+| T1 | Atap rumah kemalingan (−170, +98) | Atap | Tuyul pertama; tangga bambu naik atap |
+| T2 | Deret atap seng (−78, +39) | Atap | Lari di atap yang berbunyi; lompat celah gang |
+| T3 | Atap belakang warung (+117, +26) | Atap → gang | Turun lewat tumpukan galon; **umpan mainan** dari warung |
+| T4 | Jembatan gantung (−105, −105) | Jembatan | Jembatan bergoyang; tuyul kabur ke barat lewat bantaran; **umpan yuyu** dari bantaran (−250, −70) |
+| T5 | Pintu air (−505, −105) | Tanah → menara | *(v02)* Tuyul memanjat menara pintu air; turun ke lapangan tepi kali (−420, −68) → zona D |
 
 - **Aturan:** tuyul yang lolos kabur ke titik berikutnya; **tidak ada game over** ([16 Ep 2](16-panduan-arc-1.md#ep-2--tangan-tangan-kecil--tuyul)). Tuyul ditangkap dengan pukulan atau sapuan.
 - **Umpan:** mainan (warung) dan yuyu (bantaran) bisa diambil dan dilempar; tuyul berhenti sejenak.
@@ -123,19 +197,22 @@ Setelah ★1 dan ★2 ditemukan, kawanan mencuri **kotak uang kas RT** di pos RT
 - Aksa transformasi di lapangan (gestur **Lawang Terbuka** versi pendek, [17 S1](17-skenario-arc-1.md#keputusan-untuk-developer-ep-1)). Jayadwara berdiri **di dalam kali**: sengaja, supaya langkah pertamanya tidak menginjak rumah.
 
 ### E. Arena raksasa · ±6–8 menit
-Arena = jalan raya + kampung + kali + kampung seberang, **±500 × 380 m**.
+Arena = blok kota + jalan raya + kampung + gudang Adikara + kali + kampung seberang + lapangan dan sawah selatan, **±1340 × 930 m** (v02).
 
 | Bagian arena | Meter sinkronisasi | Catatan |
 |---|---|---|
-| **Kali + bantaran + lapangan** | **Zona aman** (tanpa penalti) | Air setinggi mata kaki Jayadwara; percikan besar (VFX) |
+| **Kali + bantaran + lapangan + pintu air + anak kali** | **Zona aman** (tanpa penalti) | Air setinggi mata kaki Jayadwara; percikan besar (VFX) |
+| **Lapangan bola + sawah kota** *(v02)* | **Zona aman** | Tiang SUTET hancur tanpa penalti |
+| **Gudang & pabrik Adikara** *(v02)* | **Tanpa penalti** | Milik Adikara, sama dengan base camp Ep 1; boleh dihancurkan bebas |
 | Kampung padat | **Penalti tinggi** | Rumah rapat: satu langkah salah = beberapa rumah |
-| Jalan raya + ruko | Penalti normal | Mobil yang dicuri boss tidak dihitung |
+| Jalan raya + ruko + blok kota | Penalti normal | Mobil yang dicuri boss tidak dihitung |
+| Jalan layang + stasiun *(v02)* | Penalti normal | Pilar dan gelagar runtuh per bentang |
 | Kampung seberang | Penalti normal | Lebih jarang; ruang fase 2 |
-| Musala, jembatan rel | Tidak hancur | — |
+| Musala, jembatan rel, menara pintu air | Tidak hancur | — |
 | Pasar (tutup) | Penalti normal | Hanya pinggirnya yang terjangkau |
 
-- **Fase 1, tuyul raksasa (45 m) lari dan mencuri:** boss berlari dari jalan raya ke kali dan menyeberang. Pemain **memotong jalannya** (tidak mengejar dari belakang) dan menjatuhkannya dengan pukulan. Saat jatuh, ia menjatuhkan barang curian (mobil, gerobak). Pelajaran meter Ep 2: **mengejar membabi buta lewat kampung itu mahal** ([16](16-panduan-arc-1.md#ep-2--tangan-tangan-kecil--tuyul)).
-- **Fase 2, tiga tuyul besar (27 m):** tubuhnya pecah jadi tiga dan menyebar (kali, jalan raya, kampung seberang). **Kelemahan:** dengan petunjuk CCTV, tuyul yang asli bergerak mengikuti **pola rute yang sama dengan rekaman CCTV** dan ubun-ubunnya berdenyut (`RealPulse`, [27](27-rencana-model-tuyul.md#2-arahan-desain-usulan)). Tanpa petunjuk, pemain harus menebak; memukul yang palsu membuatnya pecah jadi asap dan muncul lagi.
+- **Fase 1, tuyul raksasa (45 m) lari dan mencuri:** boss mengangkat mobil di jalan raya lalu berlari ke timur menuju **gudang Adikara** (±950 m, *v02*). Pemain **memotong jalannya** lewat kali yang sejajar dan aman (tidak mengejar dari belakang) dan menjatuhkannya dengan pukulan. Saat jatuh, ia menjatuhkan barang curian (mobil, gerobak). Pelajaran meter Ep 2: **mengejar membabi buta lewat kampung itu mahal** ([16](16-panduan-arc-1.md#ep-2--tangan-tangan-kecil--tuyul)).
+- **Fase 2, tiga tuyul besar (27 m):** tubuhnya pecah jadi tiga dan menyebar ke **gudang Adikara, stasiun, dan lapangan bola selatan** (*v02*; v01: kali, jalan raya, kampung seberang). **Kelemahan:** dengan petunjuk CCTV, tuyul yang asli bergerak mengikuti **pola rute yang sama dengan rekaman CCTV** dan ubun-ubunnya berdenyut (`RealPulse`, [27](27-rencana-model-tuyul.md#2-arahan-desain-usulan)). Tanpa petunjuk, pemain harus menebak; memukul yang palsu membuatnya pecah jadi asap dan muncul lagi.
 - **Checkpoint:** awal fase 1, awal fase 2.
 - **Kalah sebagai Jayadwara:** Aksa muncul di tempat; gang dan bawah jembatan jadi tempat bersembunyi skala manusia.
 
@@ -159,7 +236,7 @@ Kampung padat punya ratusan rumah, jauh lebih banyak dari anggaran 8–10 gedung
 - **Properti curian** (fase 1): 3–4 mobil dan 2 gerobak di jalan raya, sebagai aktor fisika biasa.
 
 ### Warga
-- 10–14 warga ([30](30-desain-level-ep01.md#4-daftar-bangunan-dan-prop-arena) memakai 8–12); berlari ke **lapangan seberang** lewat jembatan beton saat fase 1.
+- 10–14 warga ([30](30-desain-level-ep01.md#4-daftar-bangunan-dan-prop-arena) memakai 8–12); berlari ke **lapangan bola selatan** lewat jembatan beton saat fase 1.
 
 ---
 
@@ -180,10 +257,10 @@ Transisi lewat Data Layer pencahayaan ([28](28-struktur-level-episode.md#teknis-
 
 | Arah | Batas | Fungsi |
 |---|---|---|
-| Utara | Ruko + gedung tinggi **Distrik Adikara** di kejauhan | Foreshadow Ep 3 |
-| Barat | **Rel kereta** di tanggul 6 m; kereta lewat sesekali | Batas alami + pembanding skala |
-| Timur | Pasar (tutup) + kali berbelok | Disimpan untuk Ep 4 |
-| Selatan | Kampung seberang → gudang dan lahan kosong | Arena fase 2 |
+| Utara | Blok kota + jalan layang; gedung tinggi **Distrik Adikara** di kejauhan | Foreshadow Ep 3 |
+| Barat | **Rel kereta** di tanggul (puncak +12 m) + stasiun kecil; kereta lewat sesekali | Batas alami + pembanding skala |
+| Timur | Pasar (tutup) → gudang Adikara → kali berbelok | Pasar disimpan untuk Ep 4 |
+| Selatan | Kampung seberang → lapangan bola + sawah kota + tiang SUTET | Arena fase 2, zona aman kedua |
 
 ---
 
@@ -196,6 +273,9 @@ Transisi lewat Data Layer pencahayaan ([28](28-struktur-level-episode.md#teknis-
 | Warga | ≤ 14 |
 | Tuyul kecil bersamaan | 5 |
 | Mobil/gerobak fisika | ≤ 6 |
+| Gudang Adikara *(v02)* | rumah tukar puing (mesh swap) + kontainer fisika ≤ 10 |
+| Jalan layang *(v02)* | tukar puing per bentang (tanpa Chaos) |
+| Pembanding skala *(v02)* | pohon, tiang listrik, SUTET: instancing |
 | Kampung | Nanite + HLOD per blok; atap dan kabel memakai instancing |
 | Air kali | Satu permukaan air sederhana + VFX percikan (tanpa simulasi fluida) |
 
@@ -209,6 +289,8 @@ Transisi lewat Data Layer pencahayaan ([28](28-struktur-level-episode.md#teknis-
 | `LI_KampungKali_Bantaran` | Tanggul, rumah panggung, lapangan, jembatan gantung | Ep 4, Ep 10 |
 | `LI_KampungKali_JalanRaya` | Jalan, ruko, kendaraan | Ep 3 (pinggir), Ep 10 |
 | `LI_KampungKali_Pasar` | Pasar (tutup di Ep 2) | **Ep 4** (pasar malam, dibuka) |
+
+Area baru v02 **tidak menambah kit**: gudang Adikara memakai ulang prop base camp Adikara Ep 1 (kontainer, truk, pagar seng) + gudang blok kasar; jalan layang, stasiun, pintu air, dan menara air cukup mesh blok sederhana. Anggaran 1 kit baru per episode ([28](28-struktur-level-episode.md)) tetap.
 
 **Sistem baru episode ini** ([16 bagian 2.2](16-panduan-arc-1.md#22-anggaran-produksi-per-episode-ep-210): maks 1): **kejar-kejaran + kawanan**, mis. `AJDFleeRoute` (titik T1–T5 + jalur gang/atap) dan perilaku kabur di StateTree. Dibuat generik karena dipakai ulang di Ep 11 (Ebu Gogo).
 
