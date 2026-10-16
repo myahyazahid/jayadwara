@@ -35,6 +35,20 @@ struct FJDAttackStep
 	/** Stamina yang dipakai; ability gagal aktif kalau stamina kurang (docs/23 bagian 5: pukulan berat 25). */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attack", meta = (ClampMin = "0"))
 	float StaminaCost = 0.0f;
+
+	/**
+	 * Gerak saat langkah dimulai (cm, searah hadap; negatif = mundur), lewat root motion source selama MoveDuration.
+	 * 0 = hanya root motion animasi. Dipakai pembuka terjang & mundur (docs/07 "Combo & arah").
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attack|Move", meta = (Units = "cm"))
+	float MoveDistance = 0.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attack|Move", meta = (ClampMin = "0.05", Units = "s"))
+	float MoveDuration = 0.2f;
+
+	/** Gerak maju berhenti UJDCombatProfile::LungeStopDistance sebelum target (MoveDistance jadi batas atas). */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attack|Move")
+	bool bStopAtTarget = false;
 };
 
 /** Montage per arah relatif hadap karakter (dodge 4 arah, Q10). Kosong = tanpa animasi (gerak tetap jalan). */
@@ -68,9 +82,37 @@ class JAYADWARA_API UJDCombatProfile : public UDataAsset
 	GENERATED_BODY()
 
 public:
-	/** Combo pukulan ringan, berurutan (docs/23: 3 pukulan, damage 10 / 10 / 18). */
+	/** Combo pukulan ringan, berurutan (docs/07 & docs/23: 4 pukulan, damage 10 / 10 / 12 / 20). */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Light Combo", meta = (TitleProperty = "Montage"))
 	TArray<FJDAttackStep> LightCombo;
+
+	// ------------------------------------------------------------------ combo & arah (docs/07 "Combo & arah")
+	// Arah input dihitung relatif ke target terdekat, bukan ke kamera. Maju/mundur memilih pembuka pengganti langkah 1;
+	// kiri/kanan dan tanpa target = combo biasa (kiri/kanan untuk memilih target, Iterasi 4). Combo berlanjut dari langkah 2.
+
+	/** Pembuka maju + pukul saat target lebih jauh dari LungeMinDistance (terjang). Montage kosong = langkah 1 biasa. */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Light Combo|Direction")
+	FJDAttackStep LungeAttack;
+
+	/** Pembuka mundur + pukul (sapuan / pukulan sambil mundur). Montage kosong = langkah 1 biasa. */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Light Combo|Direction")
+	FJDAttackStep BackAttack;
+
+	/** Jarak cari target untuk menentukan arah (sementara: target terdekat; UJDTargetingComponent di Iterasi 4). */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Light Combo|Direction", meta = (ClampMin = "0", Units = "cm"))
+	float TargetSearchRadius = 800.0f;
+
+	/** Target lebih dekat dari ini = maju + pukul jadi langkah 1 biasa (tidak perlu terjang). */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Light Combo|Direction", meta = (ClampMin = "0", Units = "cm"))
+	float LungeMinDistance = 250.0f;
+
+	/** Terjang berhenti sejauh ini dari target (jarak antar-pusat kapsul). */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Light Combo|Direction", meta = (ClampMin = "0", Units = "cm"))
+	float LungeStopDistance = 100.0f;
+
+	/** Batas cos sudut input vs arah ke target: >= ini = maju, <= minus ini = mundur (0,5 = kerucut 60 derajat). */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Light Combo|Direction", meta = (ClampMin = "0", ClampMax = "1"))
+	float DirectionThreshold = 0.5f;
 
 	/** Laju semua montage serangan yang terlihat (manusia 1,0; raksasa 1,0 sejak 16 Okt 2026, dulu ±0,55). GlobalAnimRateScale mesh dikompensasi ability. */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Animation", meta = (ClampMin = "0.05"))
@@ -95,9 +137,55 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Hit|Feel", meta = (ClampMin = "0"))
 	float HitCameraShakeScale = 1.0f;
 
+	// ------------------------------------------------------------------ serangan udara (docs/07 "Serangan udara")
+
+	/** Pukulan ringan saat melompat/jatuh. Montage kosong = combo darat biasa. Animasi tanpa root motion (gerak dari lompatan). */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Air Attack")
+	FJDAttackStep AirAttack;
+
+	/** Maksimal pukulan udara per lompatan (reset saat mendarat). */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Air Attack", meta = (ClampMin = "1"))
+	int32 AirComboMax = 2;
+
+	/** "Ngambang": tiap pukulan udara, kecepatan jatuh dinolkan dan gravitasi dikali AirHangGravityScale selama AirHangTime. */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Air Attack", meta = (ClampMin = "0", Units = "s"))
+	float AirHangTime = 0.3f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Air Attack", meta = (ClampMin = "0", ClampMax = "1"))
+	float AirHangGravityScale = 0.1f;
+
+	/** Pukulan berat saat di udara: menukik ke bawah, gelombang kejut saat mendarat. Montage kosong = pukulan berat biasa. */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Air Attack")
+	FJDAttackStep AirSlam;
+
+	/** Kecepatan menukik (cm/s). */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Air Attack", meta = (ClampMin = "0"))
+	float AirSlamSpeed = 2000.0f;
+
+	/** Radius gelombang kejut di titik mendarat (cm). */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Air Attack", meta = (ClampMin = "0", Units = "cm"))
+	float AirSlamRadius = 250.0f;
+
+	/** Jeda setelah mendarat sebelum bisa bergerak/menyerang lagi. */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Air Attack", meta = (ClampMin = "0", Units = "s"))
+	float AirSlamRecovery = 0.35f;
+
 	/** Pukulan berat (docs/23 bagian 5: damage 30, poise 40, stamina 25). Bisa memotong combo ringan di jendela combo. */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Heavy Attack")
 	FJDAttackStep HeavyAttack;
+
+	/**
+	 * Cabang finisher: pukulan berat yang memotong combo ringan di langkah ke-i (indeks 0 = setelah pukulan 1). Slot tidak
+	 * ada / montage kosong = HeavyAttack. Pukulan berat dari diam selalu HeavyAttack.
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Heavy Attack", meta = (TitleProperty = "Montage"))
+	TArray<FJDAttackStep> HeavyFinishers;
+
+	/** Pukulan berat setelah langkah combo ringan LightStep (INDEX_NONE = dari diam). */
+	const FJDAttackStep& GetHeavyAttack(int32 LightStep) const
+	{
+		return HeavyFinishers.IsValidIndex(LightStep) && HeavyFinishers[LightStep].Montage ? HeavyFinishers[LightStep] : HeavyAttack;
+	}
 
 	// ------------------------------------------------------------------ dodge (Iterasi 3)
 

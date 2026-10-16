@@ -9,6 +9,7 @@
 #include "Combat/JDCombatProfile.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "GameFramework/Character.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 UJDGameplayAbility::UJDGameplayAbility()
 {
@@ -102,6 +103,12 @@ void UJDGameplayAbility::SpendStamina(float Cost) const
 		// Lewat base value: delegate perubahan Stamina memicu jeda regen di UJDAbilitySystemComponent.
 		ASC->ApplyModToAttribute(UJDAttributeSet::GetStaminaAttribute(), EGameplayModOp::Additive, -Cost);
 	}
+}
+
+bool UJDGameplayAbility::IsAvatarFalling(const FGameplayAbilityActorInfo* ActorInfo)
+{
+	const ACharacter* Character = ActorInfo ? Cast<ACharacter>(ActorInfo->AvatarActor.Get()) : nullptr;
+	return Character && Character->GetCharacterMovement() && Character->GetCharacterMovement()->IsFalling();
 }
 
 void UJDGameplayAbility::CancelAbilitiesWithAnyTag(std::initializer_list<FGameplayTag> Tags)

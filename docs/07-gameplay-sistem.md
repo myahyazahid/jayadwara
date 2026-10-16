@@ -10,6 +10,33 @@
 | **Combat silat** | Melee melawan minion / bentuk awal monster. Sistem yang sama dipakai di mode raksasa |
 | **Dialog & pilihan** | Sederhana, mendukung tema "apa benar dia pahlawan?" dan konsekuensi (mis. salah tuduh di Ep 16) |
 
+### Combo & arah
+
+Keputusan developer 16 Okt 2026. Berlaku sama untuk Aksa dan Jayadwara (satu ability, beda `DA_CombatProfile`).
+
+| Input | Hasil |
+|---|---|
+| Pukulan ringan berulang | Combo **4 pukulan**; pukulan ke-4 = finisher |
+| **Maju** + pukul, musuh agak jauh | Pembuka **terjang** (gap closer) ke musuh, lalu combo lanjut dari pukulan 2 |
+| **Mundur** + pukul | Pembuka **sapuan / pukulan sambil mundur**, lalu combo lanjut dari pukulan 2 |
+| Netral, atau maju saat musuh sudah dekat | Combo biasa |
+| **Kiri/kanan** + pukul | Untuk **memilih target** (soft target ala Arkham, [23](23-rencana-fase-1.md) Iterasi 4), bukan jurus |
+| Pukulan berat di tengah combo | **Cabang finisher**: setelah pukulan 1 dan setelah pukulan 2 masing-masing punya pukulan berat sendiri; dari diam / langkah lain = pukulan berat biasa |
+
+Arah dihitung **relatif ke musuh yang dituju**, bukan ke kamera, supaya "maju" selalu berarti mendekati musuh. Combo sengaja tidak lebih dari 4 pukulan: referensinya Arkham + Sekiro ringan, dan combo yang lebih panjang membuat pemain terkunci animasi sehingga telat menangkis. Variasi datang dari pembuka arah dan cabang finisher, bukan dari panjang combo.
+
+### Serangan udara
+
+Keputusan developer 16 Okt 2026. Sama untuk Aksa dan Jayadwara.
+
+| Input di udara | Hasil |
+|---|---|
+| Pukulan ringan | Pukulan/tendangan udara; badan "ngambang" sebentar (gravitasi dikurangi ±0,3 s). Maks. **2 per lompatan**, reset saat mendarat |
+| Pukulan berat | **Hantaman ke bawah**: menukik lurus ke tanah, saat mendarat gelombang kejut dengan radius (hit-stop, shake). Untuk Jayadwara nanti ikut merusak gedung sekitar ([23](23-rencana-fase-1.md) Iterasi 7) |
+| Dodge, tangkis | Tidak bisa di udara (F1) |
+
+Gaya tetap silat (tendangan melayang, hantaman siku/tinju ke bawah), bukan tendangan terbang khas Ultraman.
+
 ## Mode Raksasa (Jayadwara)
 
 | Sistem | Deskripsi |

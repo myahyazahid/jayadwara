@@ -5,6 +5,12 @@
 #include "Abilities/Tasks/AbilityTask_PlayMontageAndWait.h"
 #include "Combat/JDCombatComponent.h"
 #include "Combat/JDCombatProfile.h"
+#include "Animation/AnimInstance.h"
+#include "Components/CapsuleComponent.h"
+#include "Components/SkeletalMeshComponent.h"
+#include "Engine/World.h"
+#include "GameFramework/Character.h"
+#include "TimerManager.h"
 
 UJDGA_HeavyAttack::UJDGA_HeavyAttack()
 {
@@ -32,8 +38,16 @@ bool UJDGA_HeavyAttack::CanActivateAbility(const FGameplayAbilitySpecHandle Hand
 	{
 		return false;
 	}
-	const UJDCombatProfile* Profile = GetCombatProfile(ActorInfo);
-	if (!Profile || !Profile->HeavyAttack.Montage || !HasStamina(ActorInfo, Profile->HeavyAttack.StaminaCost))
+	const AActor* Avatar = ActorInfo ? ActorInfo->AvatarActor.Get() : nullptr;
+	const UJDCombatComponent* Combat = Avatar ? Avatar->FindComponentByClass<UJDCombatComponent>() : nullptr;
+	const UJDCombatProfile* Profile = Combat ? Combat->GetCombatProfile() : nullptr;
+	if (!Profile)
+	{
+		return false;
+	}
+	const FJDAttackStep& Step = IsAvatarFalling(ActorInfo) && Profile->AirSlam.Montage
+		? Profile->AirSlam : Profile->GetHeavyAttack(Combat->GetComboStepForFinisher());
+	if (!Step.Montage || !HasStamina(ActorInfo, Step.StaminaCost))
 	{
 		return false;
 	}
@@ -51,7 +65,16 @@ void UJDGA_HeavyAttack::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
 		EndAbility(Handle, ActorInfo, ActivationInfo, true, true);
 		return;
 	}
-	const FJDAttackStep& Step = Profile->HeavyAttack;
+	bSlam = false;
+	bSlamLanded = false;
+	if (IsAvatarFalling(ActorInfo) && Profile->AirSlam.Montage)
+	{
+		ActivateAirSlam(Profile->AirSlam);
+		return;
+	}
+
+	// Cabang finisher: combo ringan yang baru dipotong menentukan pukulan beratnya (docs/07 "Combo & arah").
+	const FJDAttackStep& Step = Profile->GetHeavyAttack(Combat->GetComboStepForFinisher());
 
 	SpendStamina(Step.StaminaCost);
 	FaceInputDirection();
@@ -64,6 +87,61 @@ void UJDGA_HeavyAttack::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
 	Task->OnInterrupted.AddDynamic(this, &UJDGA_HeavyAttack::OnMontageInterrupted);
 	Task->OnCancelled.AddDynamic(this, &UJDGA_HeavyAttack::OnMontageInterrupted);
 	Task->ReadyForActivation();
+}
+
+void UJDGA_HeavyAttack::ActivateAirSlam(const FJDAttackStep& Step)
+{
+	ACharacter* Character = Cast<ACharacter>(GetAvatarActorFromActorInfo());
+	UJDCombatComponent* Combat = GetCombat();
+	const UJDCombatProfile* Profile = GetCombatProfile();
+	UWorld* World = GetWorld();
+	if (!Character || !Combat || !Profile || !World)
+	{
+		EndAbility(CurrentSpecHandle, CurrentActorInfo, CurrentActivationInfo, true, true);
+		return;
+	}
+	bSlam = true;
+	SpendStamina(Step.StaminaCost);
+	FaceInputDirection();
+	Combat->BeginAttack(Step);
+
+	// Montage hanya pose menukik: selesai/blend out sebelum mendarat tidak mengakhiri ability, pendaratan yang mengakhiri.
+	UAnimInstance* Anim = Character->GetMesh() ? Character->GetMesh()->GetAnimInstance() : nullptr;
+	if (Anim && Anim->Montage_Play(Step.Montage, GetMontageRate(Step.PlayRate)) > 0.0f)
+	{
+		SlamMontage = Step.Montage;
+	}
+	Character->LaunchCharacter(FVector(0.0f, 0.0f, -Profile->AirSlamSpeed), true, true);
+	LandedHandle = Combat->OnLanded.AddUObject(this, &UJDGA_HeavyAttack::OnSlamLanded);
+
+	// Pengaman kalau tidak pernah mendarat (mis. tersangkut di tepi).
+	World->GetTimerManager().SetTimer(SlamTimer, FTimerDelegate::CreateWeakLambda(this, [this]()
+	{
+		EndAbility(CurrentSpecHandle, CurrentActorInfo, CurrentActivationInfo, true, true);
+	}), 3.0f, false);
+}
+
+void UJDGA_HeavyAttack::OnSlamLanded()
+{
+	UJDCombatComponent* Combat = GetCombat();
+	const UJDCombatProfile* Profile = GetCombatProfile();
+	const ACharacter* Character = Cast<ACharacter>(GetAvatarActorFromActorInfo());
+	UWorld* World = GetWorld();
+	if (!IsActive() || bSlamLanded || !Combat || !Profile || !Character || !World)
+	{
+		return;
+	}
+	bSlamLanded = true;
+	Combat->OnLanded.Remove(LandedHandle);
+	LandedHandle.Reset();
+
+	const float HalfHeight = Character->GetCapsuleComponent()->GetScaledCapsuleHalfHeight();
+	Combat->ApplyAreaHit(Character->GetActorLocation() - FVector(0.0f, 0.0f, HalfHeight), Profile->AirSlamRadius);
+
+	World->GetTimerManager().SetTimer(SlamTimer, FTimerDelegate::CreateWeakLambda(this, [this]()
+	{
+		EndAbility(CurrentSpecHandle, CurrentActorInfo, CurrentActivationInfo, true, false);
+	}), FMath::Max(Profile->AirSlamRecovery, 0.01f), false);
 }
 
 void UJDGA_HeavyAttack::OnMontageFinished()
@@ -81,9 +159,30 @@ void UJDGA_HeavyAttack::EndAbility(const FGameplayAbilitySpecHandle Handle, cons
 {
 	if (IsActive())
 	{
-		if (UJDCombatComponent* Combat = GetCombat())
+		UJDCombatComponent* Combat = GetCombat();
+		if (Combat)
 		{
 			Combat->EndAttack();
+		}
+		if (bSlam)
+		{
+			if (Combat && LandedHandle.IsValid())
+			{
+				Combat->OnLanded.Remove(LandedHandle);
+			}
+			LandedHandle.Reset();
+			if (UWorld* World = GetWorld())
+			{
+				World->GetTimerManager().ClearTimer(SlamTimer);
+			}
+			const ACharacter* Character = Cast<ACharacter>(GetAvatarActorFromActorInfo());
+			UAnimInstance* Anim = Character && Character->GetMesh() ? Character->GetMesh()->GetAnimInstance() : nullptr;
+			if (Anim && SlamMontage)
+			{
+				Anim->Montage_Stop(0.2f, SlamMontage);
+			}
+			SlamMontage = nullptr;
+			bSlam = false;
 		}
 	}
 	Super::EndAbility(Handle, ActorInfo, ActivationInfo, bReplicateEndAbility, bWasCancelled);
