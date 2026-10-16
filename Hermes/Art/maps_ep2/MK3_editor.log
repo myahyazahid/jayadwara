@@ -1204,3 +1204,43 @@ LogLiveCodingServer: Display: Live coding ready - Save changes and press Ctrl+Al
 [2026.10.16-16.19.30:998][759]LogAudio: Display: Audio Device unregistered from world 'None'.
 [2026.10.16-16.19.31:008][759]LogStreaming: Display: FlushAsyncLoading(383): 1 QueuedPackages, 0 AsyncPackages
 [2026.10.16-16.19.31:030][759]LogAudio: Display: Audio Device (ID: 1) registered with world 'Test_Hermes_MapsEp2'.
+[2026.10.16-16.24.24:357][288]LogAudio: Display: Creating Audio Device:                 Id: 2, Scope: Unique, Realtime: True
+[2026.10.16-16.24.24:359][288]LogAudioMixer: Display: Audio Mixer Platform Settings:
+[2026.10.16-16.24.24:359][288]LogAudioMixer: Display: 	Sample Rate:						  48000
+[2026.10.16-16.24.24:359][288]LogAudioMixer: Display: 	Callback Buffer Frame Size Requested: 1024
+[2026.10.16-16.24.24:359][288]LogAudioMixer: Display: 	Callback Buffer Frame Size To Use:	  1024
+[2026.10.16-16.24.24:359][288]LogAudioMixer: Display: 	Number of buffers to queue:			  1
+[2026.10.16-16.24.24:359][288]LogAudioMixer: Display: 	Max Channels (voices):				  32
+[2026.10.16-16.24.24:359][288]LogAudioMixer: Display: 	Number of Async Source Workers:		  4
+[2026.10.16-16.24.24:359][288]LogAudio: Display: AudioDevice MaxSources: 32
+[2026.10.16-16.24.24:361][288]LogAudio: Display: Audio Spatialization Plugin: None (built-in).
+[2026.10.16-16.24.24:361][288]LogAudio: Display: Audio Reverb Plugin: None (built-in).
+[2026.10.16-16.24.24:361][288]LogAudio: Display: Audio Occlusion Plugin: None (built-in).
+[2026.10.16-16.24.24:365][288]LogAudioMixer: Display: Initializing audio mixer using platform API: 'XAudio2'
+[2026.10.16-16.24.24:439][288]LogAudioMixer: Display: Using Audio Hardware Device Speakers (Realtek(R) Audio)
+[2026.10.16-16.24.24:445][288]LogAudioMixer: Display: Initializing Sound Submixes...
+[2026.10.16-16.24.24:445][288]LogAudioMixer: Display: Creating Master Submix 'MasterSubmixDefault'
+[2026.10.16-16.24.24:446][288]LogAudioMixer: Display: Creating Master Submix 'MasterReverbSubmixDefault'
+[2026.10.16-16.24.24:448][288]LogAudioMixer: Display: Output buffers initialized: Frames=1024, Channels=2, Samples=2048, InstanceID=2
+[2026.10.16-16.24.24:450][288]LogAudioMixer: Display: Starting AudioMixerPlatformInterface::RunInternal(), InstanceID=2
+[2026.10.16-16.24.24:450][288]LogAudioMixer: Display: FMixerPlatformXAudio2::SubmitBuffer() called for the first time. InstanceID=2
+[2026.10.16-16.24.24:450][288]LogAudio: Display: Audio Device (ID: 2) registered with world 'Test_Hermes_MapsEp2'.
+[2026.10.16-16.24.24:619][288]LogAbilitySystem: Display: Processing InitializeRuntimeObjectLibrary.
+[2026.10.16-16.24.24:894][293]LogStats: Display: There is no thread with id: 15604. Please add thread metadata for this thread.
+[2026.10.16-16.24.31:501][682]LogPlayLevel: Display: Shutting down PIE online subsystems
+[2026.10.16-16.24.31:521][682]LogAudio: Display: Audio Device unregistered from world 'None'.
+[2026.10.16-16.24.31:523][682]LogAudioMixer: Display: FMixerPlatformXAudio2::StopAudioStream() called. InstanceID=2, StreamState=4
+[2026.10.16-16.24.31:526][682]LogAudioMixer: Display: FMixerPlatformXAudio2::StopAudioStream() called. InstanceID=2, StreamState=2
+[2026.10.16-16.24.31:584][683]LogPlayLevel: Display: Destroying online subsystem :Context_3
+[2026.10.16-16.24.37:865][926]LogContentValidation: Display: Starting to validate 2 assets
+[2026.10.16-16.24.37:947][927]LogAnalytics: Display: [UEEditor.Rocket.Release] AnalyticsET::EndSession
+[2026.10.16-16.24.38:141][927]LogAudio: Display: Beginning Audio Device Manager Shutdown (Module: AudioMixerXAudio2)...
+[2026.10.16-16.24.38:141][927]LogAudio: Display: Destroying 1 Remaining Audio Device(s)...
+[2026.10.16-16.24.38:141][927]LogAudio: Display: Audio Device unregistered from world 'Test_Hermes_MapsEp2'.
+[2026.10.16-16.24.38:141][927]LogAudio: Display: Shutting down audio device while 1 references to it are still alive. For more information, compile with INSTRUMENT_AUDIODEVICE_HANDLES.
+[2026.10.16-16.24.38:142][927]LogAudioMixer: Display: FMixerPlatformXAudio2::StopAudioStream() called. InstanceID=1, StreamState=4
+[2026.10.16-16.24.38:145][927]LogAudioMixer: Display: FMixerPlatformXAudio2::StopAudioStream() called. InstanceID=1, StreamState=2
+[2026.10.16-16.24.38:167][927]LogAudio: Display: Audio Device Manager Shutdown
+[2026.10.16-16.24.39:943][927]LogShaderCompilers: Display: Shaders left to compile 0
+[2026.10.16-16.24.40:815][927]LogHttp: Warning: [FHttpManager::Shutdown] Unbinding delegates for 1 outstanding Http Requests:
+[2026.10.16-16.24.40:816][927]LogHttp: Warning: 	verb=[POST] url=[https://datarouter.ol.epicgames.com/datarouter/api/v1/public/data?SessionID=%7B1B83D383-450B-36F6-4976-2EBF279B63A4%7D&AppID=UEEditor.Rocket.Release&AppVersion=5.6.1-44394996%2B%2B%2BUE5%2BRelease-5.6&UserID=93108747468920fdcde981bb7ed6c387%7C4457b2bad17241f49703798ecdff7968%7C1858af14-f8b4-4261-9711-f7976fb481f7&AppEnvironment=datacollector-binary&UploadType=eteventstream] refs=[2] status=Processing

@@ -1,0 +1,28 @@
+[Info] [MK6] level dimuat: /Game/Hermes/MapsEp2/Maps/Test_Hermes_MapsEp2
+[Info] [MK6] cahaya=siang: pitch=-62 yaw=20 (target -62/20) lux=10.0 warna=[1.0, 0.98, 0.94]
+[Info] [MK6]   render C1_START_MulutGang_siang.png: kecerahan 71.8/255
+[Info] [MK6] C1_START_MulutGang: pos=(-40,155) base=9.00 (tanah(overhead), trace=24.00 overhead=15.00) cam_z=10.60 m, lihat_ke=[-105, -105, 4] fov=70 -> kec=71.8
+[Info] [MK6] cahaya=sore: pitch=-30 yaw=0 (target -30/0) lux=8.0 warna=[1.0, 0.92, 0.8]
+[Info] [MK6]   render C2_AtapT2_sore.png: kecerahan 73.0/255
+[Info] [MK6] C2_AtapT2: pos=(-96,52) base=10.50 (trace, trace=10.50 overhead=3.41) cam_z=15.60 m, lihat_ke=[117, 26, 8] fov=75 -> kec=73.0
+[Info] [MK6] cahaya=sore: pitch=-30 yaw=0 (target -30/0) lux=8.0 warna=[1.0, 0.92, 0.8]
+[Info] [MK6]   render C3_JembatanGantung_sore.png: kecerahan 84.5/255
+[Info] [MK6] C3_JembatanGantung: pos=(-105,-82) base=4.20 (trace, trace=4.20 overhead=0.70) cam_z=5.80 m, lihat_ke=[-505, -128, 8] fov=70 -> kec=84.5
+[Info] [MK6] cahaya=keemasan: pitch=-10 yaw=5 (target -10/5) lux=5.0 warna=[1.0, 0.7, 0.42]
+[Info] [MK6]   render C4_MataJayadwara_keemasan.png: kecerahan 45.1/255
+[Info] [MK6] C4_MataJayadwara: pos=(-380,-105) base=-1.50 (trace, trace=-1.50 overhead=-0.00) cam_z=40.50 m, lihat_ke=[525, 60, 6] fov=70 -> kec=45.1
+[Info] [MK6] cahaya=siang: pitch=-62 yaw=20 (target -62/20) lux=10.0 warna=[1.0, 0.98, 0.94]
+[Info] [MK6]   render C5_TampakAtas_siang.png: kecerahan 106.4/255
+[Info] [MK6] C5_TampakAtas: ORTHO lebar 1450 m, pusat (0,-100)
+[Info] [MK6] cahaya=keemasan: pitch=-10 yaw=5 (target -10/5) lux=5.0 warna=[1.0, 0.7, 0.42]
+[Info] [MK6]   render C6_DariLapanganBola_keemasan.png: kecerahan 24.3/255
+[Info] [MK6] C6_DariLapanganBola: pos=(-200,-414) base=3.05 (trace, trace=3.05 overhead=0.05) cam_z=4.65 m, lihat_ke=[-26, 80, 10] fov=70 -> kec=24.3
+[Info] [MK6] cahaya=sore: pitch=-30 yaw=0 (target -30/0) lux=8.0 warna=[1.0, 0.92, 0.8]
+[Info] [MK6]   render C7_GudangAdikara_sore.png: kecerahan 63.9/255
+[Info] [MK6] C7_GudangAdikara: pos=(400,-20) base=6.00 (trace, trace=6.00 overhead=-0.00) cam_z=7.60 m, lihat_ke=[600, 100, 10] fov=70 -> kec=63.9
+[Info] [MK6] cahaya=keemasan: pitch=-10 yaw=5 (target -10/5) lux=5.0 warna=[1.0, 0.7, 0.42]
+[Info] [MK6]   render C8_JalanLayangRaksasa_keemasan.png: kecerahan 41.4/255
+[Info] [MK6] C8_JalanLayangRaksasa: pos=(-300,120) base=8.49 (trace, trace=8.49 overhead=-0.00) cam_z=50.49 m, lihat_ke=[400, 155, 24] fov=70 -> kec=41.4
+[Info] [MK6] cahaya=siang: pitch=-62 yaw=20 (target -62/20) lux=10.0 warna=[1.0, 0.98, 0.94]
+[Info] [MK6] WAKTU MK6: 3.7 s
+[Info] [MK6] CEK MK6: LULUS (8 PNG, kec min=24.3)
