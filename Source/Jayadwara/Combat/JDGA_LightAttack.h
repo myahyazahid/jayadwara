@@ -20,6 +20,9 @@ struct FJDAttackStep;
  * Arah (docs/07 "Combo & arah"): saat combo dimulai, arah input dibandingkan dengan arah ke target terdekat. Maju +
  * target jauh -> LungeAttack (terjang ke target), mundur -> BackAttack; keduanya menggantikan langkah 1 dan combo
  * berlanjut dari langkah 2. Kiri/kanan atau tanpa target -> combo biasa.
+ *
+ * Di udara (docs/07 "Serangan udara"): UJDCombatProfile::AirAttack, maks. AirComboMax per lompatan, tiap pukulan
+ * "ngambang" sebentar (gravitasi dikurangi). Slot AirAttack kosong = combo darat seperti dulu.
  */
 UCLASS()
 class JAYADWARA_API UJDGA_LightAttack : public UJDGameplayAbility
@@ -43,6 +46,9 @@ private:
 	const FJDAttackStep* ChooseOpener();
 	void PlayStep(int32 Index);
 	void PlayAttack(const FJDAttackStep& Step, bool bFaceInput);
+	void PlayAirAttack();
+	void StartAirHang();
+	void EndAirHang();
 	void TryAdvanceCombo();
 	void OnComboWindowChanged(const FGameplayTag Tag, int32 NewCount);
 
@@ -59,6 +65,11 @@ private:
 	TObjectPtr<UAbilityTask_ApplyRootMotionConstantForce> MoveTask;
 
 	TWeakObjectPtr<AActor> OpenerTarget;
+
+	bool bAirMode = false;
+	bool bAirHang = false;
+	float SavedGravityScale = 1.0f;
+	FTimerHandle AirHangTimer;
 
 	int32 ComboIndex = 0;
 	double LastPressTime = -1000.0;

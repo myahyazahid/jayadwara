@@ -36,7 +36,17 @@ bool UJDGA_LightAttack::CanActivateAbility(const FGameplayAbilitySpecHandle Hand
 		return false;
 	}
 	const UJDCombatProfile* Profile = GetCombatProfile(ActorInfo);
-	return Profile && !Profile->LightCombo.IsEmpty() && Profile->LightCombo[0].Montage;
+	if (!Profile)
+	{
+		return false;
+	}
+	if (IsAvatarFalling(ActorInfo) && Profile->AirAttack.Montage)
+	{
+		const AActor* Avatar = ActorInfo->AvatarActor.Get();
+		const UJDCombatComponent* Combat = Avatar ? Avatar->FindComponentByClass<UJDCombatComponent>() : nullptr;
+		return Combat && Combat->CanAirAttack();
+	}
+	return !Profile->LightCombo.IsEmpty() && Profile->LightCombo[0].Montage;
 }
 
 void UJDGA_LightAttack::ActivateAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo,
@@ -55,6 +65,14 @@ void UJDGA_LightAttack::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
 	{
 		ComboWindowHandle = ASC->RegisterGameplayTagEvent(JDGameplayTags::State_Combat_ComboWindow, EGameplayTagEventType::NewOrRemoved)
 			.AddUObject(this, &UJDGA_LightAttack::OnComboWindowChanged);
+	}
+
+	const UJDCombatProfile* Profile = GetCombatProfile();
+	bAirMode = IsAvatarFalling(ActorInfo) && Profile && Profile->AirAttack.Montage;
+	if (bAirMode)
+	{
+		PlayAirAttack();
+		return;
 	}
 
 	if (const FJDAttackStep* Opener = ChooseOpener())
@@ -104,6 +122,58 @@ const FJDAttackStep* UJDGA_LightAttack::ChooseOpener()
 		OpenerTarget = Target;
 	}
 	return Opener;
+}
+
+void UJDGA_LightAttack::PlayAirAttack()
+{
+	UJDCombatComponent* Combat = GetCombat();
+	const UJDCombatProfile* Profile = Combat ? Combat->GetCombatProfile() : nullptr;
+	if (!Profile)
+	{
+		EndAbility(CurrentSpecHandle, CurrentActorInfo, CurrentActivationInfo, true, true);
+		return;
+	}
+	Combat->NoteAirAttack();
+	StartAirHang();
+	PlayAttack(Profile->AirAttack, true);
+}
+
+void UJDGA_LightAttack::StartAirHang()
+{
+	ACharacter* Character = Cast<ACharacter>(GetAvatarActorFromActorInfo());
+	const UJDCombatProfile* Profile = GetCombatProfile();
+	UWorld* World = GetWorld();
+	if (!Character || !Profile || !World || Profile->AirHangTime <= 0.0f)
+	{
+		return;
+	}
+	UCharacterMovementComponent* Movement = Character->GetCharacterMovement();
+	if (!bAirHang)
+	{
+		SavedGravityScale = Movement->GravityScale;
+		bAirHang = true;
+	}
+	Movement->GravityScale = SavedGravityScale * Profile->AirHangGravityScale;
+	Movement->Velocity.Z = FMath::Max(Movement->Velocity.Z, 0.0f);
+	World->GetTimerManager().SetTimer(AirHangTimer, FTimerDelegate::CreateWeakLambda(this, [this]() { EndAirHang(); }),
+		Profile->AirHangTime, false);
+}
+
+void UJDGA_LightAttack::EndAirHang()
+{
+	if (UWorld* World = GetWorld())
+	{
+		World->GetTimerManager().ClearTimer(AirHangTimer);
+	}
+	if (!bAirHang)
+	{
+		return;
+	}
+	bAirHang = false;
+	if (ACharacter* Character = Cast<ACharacter>(GetAvatarActorFromActorInfo()))
+	{
+		Character->GetCharacterMovement()->GravityScale = SavedGravityScale;
+	}
 }
 
 void UJDGA_LightAttack::PlayStep(int32 Index)
@@ -224,6 +294,15 @@ void UJDGA_LightAttack::TryAdvanceCombo()
 
 	const UJDCombatComponent* Combat = GetCombat();
 	const UJDCombatProfile* Profile = Combat ? Combat->GetCombatProfile() : nullptr;
+	if (bAirMode)
+	{
+		if (Combat && Combat->CanAirAttack() && IsAvatarFalling(CurrentActorInfo))
+		{
+			LastPressTime = -1000.0;
+			PlayAirAttack();
+		}
+		return;
+	}
 	if (!Profile || ComboIndex + 1 >= Profile->LightCombo.Num())
 	{
 		return;
@@ -263,6 +342,8 @@ void UJDGA_LightAttack::EndAbility(const FGameplayAbilitySpecHandle Handle, cons
 		MontageTask = nullptr;
 		MoveTask = nullptr;
 		OpenerTarget.Reset();
+		EndAirHang();
+		bAirMode = false;
 	}
 
 	Super::EndAbility(Handle, ActorInfo, ActivationInfo, bReplicateEndAbility, bWasCancelled);

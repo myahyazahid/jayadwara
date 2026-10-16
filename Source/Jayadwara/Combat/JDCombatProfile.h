@@ -137,6 +137,39 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Hit|Feel", meta = (ClampMin = "0"))
 	float HitCameraShakeScale = 1.0f;
 
+	// ------------------------------------------------------------------ serangan udara (docs/07 "Serangan udara")
+
+	/** Pukulan ringan saat melompat/jatuh. Montage kosong = combo darat biasa. Animasi tanpa root motion (gerak dari lompatan). */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Air Attack")
+	FJDAttackStep AirAttack;
+
+	/** Maksimal pukulan udara per lompatan (reset saat mendarat). */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Air Attack", meta = (ClampMin = "1"))
+	int32 AirComboMax = 2;
+
+	/** "Ngambang": tiap pukulan udara, kecepatan jatuh dinolkan dan gravitasi dikali AirHangGravityScale selama AirHangTime. */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Air Attack", meta = (ClampMin = "0", Units = "s"))
+	float AirHangTime = 0.3f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Air Attack", meta = (ClampMin = "0", ClampMax = "1"))
+	float AirHangGravityScale = 0.1f;
+
+	/** Pukulan berat saat di udara: menukik ke bawah, gelombang kejut saat mendarat. Montage kosong = pukulan berat biasa. */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Air Attack")
+	FJDAttackStep AirSlam;
+
+	/** Kecepatan menukik (cm/s). */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Air Attack", meta = (ClampMin = "0"))
+	float AirSlamSpeed = 2000.0f;
+
+	/** Radius gelombang kejut di titik mendarat (cm). */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Air Attack", meta = (ClampMin = "0", Units = "cm"))
+	float AirSlamRadius = 250.0f;
+
+	/** Jeda setelah mendarat sebelum bisa bergerak/menyerang lagi. */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Air Attack", meta = (ClampMin = "0", Units = "s"))
+	float AirSlamRecovery = 0.35f;
+
 	/** Pukulan berat (docs/23 bagian 5: damage 30, poise 40, stamina 25). Bisa memotong combo ringan di jendela combo. */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Heavy Attack")
 	FJDAttackStep HeavyAttack;

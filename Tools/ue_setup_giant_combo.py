@@ -9,6 +9,7 @@ Membuat / mengisi ulang (aman diulang; jalankan ulang setelah ue_setup_jayadwara
   Jayadwara2/Combat/AM_JD2_Light_01..04     notify JD Hit Window + JD Combo Window, waktu sama dengan Aksa (animasi sumber sama);
                                             langkah 4 dilewati (combo 3) kalau MM_ChargedAttack_JD2 belum di-retarget
   Jayadwara2/Combat/AM_JD2_Lunge, AM_JD2_Back, AM_JD2_Finisher_01..02   pembuka arah & cabang finisher (docs/07 "Combo & arah")
+  Jayadwara2/Combat/A_JD2_Air(Slam), AM_JD2_Air(Slam)   serangan udara, salinan tanpa root motion (docs/07 "Serangan udara")
   Jayadwara2/Combat/AM_JD2_Heavy, AM_JD2_Block   sama dengan AM_Aksa_Heavy/Block (ue_setup_defense.py), dari A_JD2_Attack_02
   Data/DA_CombatProfile_Giant               damage 10/10/12/20, laju terlihat 1,0 (ala Mebius, 16 Okt 2026), radius hit x skala, hit-stop 0,12 s, shake lebih besar;
                                             berat 30/40/25, dodge & tangkis/parry (GIANT_DEFENSE, parry 0,25 s)
@@ -51,6 +52,12 @@ FINISHERS = [
     {"name": "AM_JD2_Finisher_01", "seq": "A_JD2_Attack_03", "hit": ("foot_r", 0.24, 0.48), "rate": 0.8},
     {"name": "AM_JD2_Finisher_02", "seq": "A_JD2_Attack_04", "hit": "auto", "rate": 0.85},
 ]
+AIR = {"name": "AM_JD2_Air", "seq": "A_JD2_Air", "source": f"{SRC}/MM_Attack_03_JD2", "damage": 10.0, "poise": 5.0,
+       "hit": ("foot_r", 0.24, 0.48), "combo": (0.40, 0.40)}
+AIR_SLAM = {"name": "AM_JD2_AirSlam", "seq": "A_JD2_AirSlam", "source": f"{SRC}/MM_ChargedAttack_JD2"}
+# Angka manusia; slam_speed x MOVE_SCALE, radius x skala raksasa (seperti radius hit).
+AIR_VALUES = {"air_combo_max": 2, "air_hang_time": 0.3, "air_hang_gravity_scale": 0.1, "air_slam_recovery": 0.35}
+AIR_SLAM_SPEED, AIR_SLAM_RADIUS = 2000.0, 250.0
 MOVE_SCALE_FACTOR = 0.6     # x skala raksasa (dodge: 400 cm -> 5500 cm)
 STRIKE_BONES = ("hand_r", "hand_l", "foot_r", "foot_l")
 HEAVY = {"hit": ("hand_l", 0.32, 0.24), "damage": 30.0, "poise": 40.0, "stamina": 25.0, "rate": 0.75}
@@ -126,6 +133,7 @@ def make_montages(mesh_rate):
     """Buat ulang salinan animasi + montage tiap jalan (sumber MM_Attack_0x_JD2 bisa berubah setelah retarget ulang)."""
     out = []
     extra = ["AM_JD2_Heavy", "AM_JD2_Block"] + [o["name"] for o in OPENERS.values()] + [f["name"] for f in FINISHERS]
+    extra += [AIR["name"], AIR_SLAM["name"], AIR["seq"], AIR_SLAM["seq"]]
     for name in extra:                                           # merujuk A_JD2_Attack_0x: hapus dulu
         if EAL.does_asset_exist(f"{COMBAT}/{name}"):
             EAL.delete_asset(f"{COMBAT}/{name}")
@@ -215,6 +223,28 @@ def make_step_montage(step, mesh_rate, hit_radius=0.0):
     return m
 
 
+def make_air_montage(step, mesh_rate, hit_radius):
+    """Salinan animasi tanpa root motion + montage (make_montages sudah menghapus yang lama)."""
+    if not EAL.does_asset_exist(step["source"]):
+        unreal.log_warning(f"[Jayadwara2] {step['source']} belum ada: {step['name']} dilewati")
+        return None
+    seq = EAL.duplicate_asset(step["source"], f"{COMBAT}/{step['seq']}")
+    seq.set_editor_property("enable_root_motion", False)
+    EAL.save_loaded_asset(seq, only_if_is_dirty=False)
+    f = unreal.AnimMontageFactory()
+    f.set_editor_property("source_animation", seq)
+    m = asset_tools.create_asset(step["name"], COMBAT, unreal.AnimMontage, f)
+    for prop, t in (("blend_in", BLEND_IN_S), ("blend_out", BLEND_OUT_S)):
+        b = m.get_editor_property(prop)
+        b.set_editor_property("blend_time", t * mesh_rate)
+        m.set_editor_property(prop, b)
+    if step.get("hit"):
+        add_combat_notifies(m, step, seq, hit_radius)
+    EAL.save_loaded_asset(m, only_if_is_dirty=False)
+    log(f"{step['name']} dari {step['source'].rsplit('/', 1)[1]} (tanpa root motion)")
+    return m
+
+
 def make_extra_montage(name, seq_path, mesh_rate, blend_in, blend_out, hit=None):
     path = f"{COMBAT}/{name}"
     if EAL.does_asset_exist(path):
@@ -299,6 +329,24 @@ def setup_profile(montages, giant_scale, mesh_rate):
         st.set_editor_property("hit_cue", tag("GameplayCue.Hit.Heavy"))
         finishers.append(st)
     prof.set_editor_property("heavy_finishers", finishers)
+
+    air = unreal.JDAttackStep()
+    air.set_editor_property("montage", make_air_montage(AIR, mesh_rate, 0.0))
+    air.set_editor_property("damage", AIR["damage"])
+    air.set_editor_property("poise_damage", AIR["poise"])
+    air.set_editor_property("hit_cue", tag("GameplayCue.Hit.Heavy"))
+    prof.set_editor_property("air_attack", air)
+    slam = unreal.JDAttackStep()
+    slam.set_editor_property("montage", make_air_montage(AIR_SLAM, mesh_rate, 0.0))
+    slam.set_editor_property("damage", HEAVY["damage"])
+    slam.set_editor_property("poise_damage", HEAVY["poise"])
+    slam.set_editor_property("stamina_cost", HEAVY["stamina"])
+    slam.set_editor_property("hit_cue", tag("GameplayCue.Hit.Heavy"))
+    prof.set_editor_property("air_slam", slam)
+    for k, v in AIR_VALUES.items():
+        prof.set_editor_property(k, v)
+    prof.set_editor_property("air_slam_speed", AIR_SLAM_SPEED * move_scale)
+    prof.set_editor_property("air_slam_radius", AIR_SLAM_RADIUS * giant_scale)
     EAL.save_loaded_asset(prof, only_if_is_dirty=False)
     log(f"DA_CombatProfile_Giant: laju {PLAY_RATE}, radius hit {HUMAN_HIT_RADIUS * giant_scale:.0f} cm, hit-stop {HIT_STOP} s")
     return prof

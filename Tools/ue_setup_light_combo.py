@@ -11,6 +11,8 @@ Membuat / mengisi ulang (aman diulang):
                                               JD Combo Window (langkah 1–3)
   Aksa/Anims/Montages/AM_Aksa_Lunge, AM_Aksa_Back   pembuka maju (terjang) & mundur (docs/07 "Combo & arah")
   Aksa/Anims/Montages/AM_Aksa_Finisher_01..02       cabang finisher pukulan berat setelah langkah 1 / 2
+  Aksa/Anims/Attack/A_Aksa_Air, A_Aksa_AirSlam      salinan tanpa root motion (gerak dari lompatan) untuk serangan udara
+  Aksa/Anims/Montages/AM_Aksa_Air, AM_Aksa_AirSlam  pukulan udara & hantaman ke bawah (docs/07 "Serangan udara")
   Abilities/GameplayCues/GC_Hit_Light, GC_Hit_Heavy   JDGameplayCueNotify_Sound + S_Combat_Punch_*
   Data/DA_CombatProfile_Human                4 langkah (damage 10/10/12/20), pembuka arah, finisher berat, shake JDCameraShake_Hit, hit-stop 0,06 s
   Data/DA_AbilitySet_Aksa                    + JDGA_LightAttack pada Input.Attack.Light
@@ -64,6 +66,12 @@ FINISHERS = [
     {"name": "AM_Aksa_Finisher_02", "seq": "A_Aksa_Attack_04", "hit": "auto", "rate": 0.85},
 ]
 HEAVY = {"damage": 30.0, "poise": 40.0, "stamina": 25.0}
+# Serangan udara (docs/07 "Serangan udara", 16 Okt 2026). Salinan animasi tanpa root motion supaya tidak melayang/tertahan.
+AIR = {"name": "AM_Aksa_Air", "seq": "A_Aksa_Air", "source": f"{ATTACK}/MM_Attack_03", "damage": 10.0, "poise": 5.0,
+       "hit": ("foot_r", 0.24, 0.48), "combo": (0.40, 0.40)}
+AIR_SLAM = {"name": "AM_Aksa_AirSlam", "seq": "A_Aksa_AirSlam", "source": f"{ATTACK}/MM_ChargedAttack"}
+AIR_VALUES = {"air_combo_max": 2, "air_hang_time": 0.3, "air_hang_gravity_scale": 0.1,
+              "air_slam_speed": 2000.0, "air_slam_radius": 250.0, "air_slam_recovery": 0.35}
 STRIKE_BONES = ("hand_r", "hand_l", "foot_r", "foot_l")
 CUE_SETS = {"GC_Hit_Light": ("GameplayCue.Hit.Light", "S_Combat_Punch_Light"),
             "GC_Hit_Heavy": ("GameplayCue.Hit.Heavy", "S_Combat_Punch_Heavy")}
@@ -264,6 +272,32 @@ def ensure_extra_montage(step):
     return m
 
 
+def ensure_air_montage(step):
+    """Salinan animasi tanpa root motion + montage (dibuat ulang tiap jalan). Tanpa "hit" = tanpa notify (hantaman area)."""
+    path, seq_path = f"{MONTAGES}/{step['name']}", f"{SEQS}/{step['seq']}"
+    if EAL.does_asset_exist(path):
+        EAL.delete_asset(path)
+    if not EAL.does_asset_exist(seq_path):
+        EAL.duplicate_asset(step["source"], seq_path)
+    seq = load(seq_path)
+    if not seq:
+        return None
+    seq.set_editor_property("enable_root_motion", False)
+    EAL.save_loaded_asset(seq, only_if_is_dirty=False)
+    f = unreal.AnimMontageFactory()
+    f.set_editor_property("source_animation", seq)
+    m = asset_tools.create_asset(step["name"], MONTAGES, unreal.AnimMontage, f)
+    for prop, t in (("blend_in", 0.06), ("blend_out", 0.2)):
+        b = m.get_editor_property(prop)
+        b.set_editor_property("blend_time", t)
+        m.set_editor_property(prop, b)
+    if step.get("hit"):
+        add_combat_notifies(m, step, seq)
+    EAL.save_loaded_asset(m, only_if_is_dirty=False)
+    log(f"{step['name']} dari {step['seq']} (tanpa root motion)")
+    return m
+
+
 # ------------------------------------------------------------------ cue & data
 def setup_cues():
     for name, (cue_tag, sound_base) in CUE_SETS.items():
@@ -315,6 +349,22 @@ def setup_profile(montages):
         s.set_editor_property("hit_cue", tag("GameplayCue.Hit.Heavy"))
         finishers.append(s)
     prof.set_editor_property("heavy_finishers", finishers)
+
+    air = unreal.JDAttackStep()
+    air.set_editor_property("montage", ensure_air_montage(AIR))
+    air.set_editor_property("damage", AIR["damage"])
+    air.set_editor_property("poise_damage", AIR["poise"])
+    air.set_editor_property("hit_cue", tag("GameplayCue.Hit.Light"))
+    prof.set_editor_property("air_attack", air)
+    slam = unreal.JDAttackStep()
+    slam.set_editor_property("montage", ensure_air_montage(AIR_SLAM))
+    slam.set_editor_property("damage", HEAVY["damage"])
+    slam.set_editor_property("poise_damage", HEAVY["poise"])
+    slam.set_editor_property("stamina_cost", HEAVY["stamina"])
+    slam.set_editor_property("hit_cue", tag("GameplayCue.Hit.Heavy"))
+    prof.set_editor_property("air_slam", slam)
+    for k, v in AIR_VALUES.items():
+        prof.set_editor_property(k, v)
     prof.set_editor_property("montage_play_rate", 1.0)
     prof.set_editor_property("hit_radius", 30.0)
     prof.set_editor_property("hit_stop_duration", 0.06)
@@ -322,7 +372,7 @@ def setup_profile(montages):
     prof.set_editor_property("hit_camera_shake", unreal.JDCameraShake_Hit.static_class())
     prof.set_editor_property("hit_camera_shake_scale", 1.0)
     EAL.save_loaded_asset(prof, only_if_is_dirty=False)
-    log(f"DA_CombatProfile_Human terisi: {len(steps)} langkah, pembuka terjang/mundur, {len(finishers)} finisher berat")
+    log(f"DA_CombatProfile_Human terisi: {len(steps)} langkah, pembuka terjang/mundur, {len(finishers)} finisher berat, serangan udara")
     return prof
 
 

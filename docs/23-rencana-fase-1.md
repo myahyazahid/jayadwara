@@ -177,6 +177,7 @@ Untuk transformasi pertama Ep 1 (cutscene) dan `Test_Loop`, energi diisi penuh o
 |---|---|---|---|
 | Combo ringan | **4 pukulan**, damage 10 / 10 / 12 / 20 (dulu 3 pukulan 10 / 10 / 18) | sama × skala damage boss | Jendela combo dari notify. Combo & arah: [07](07-gameplay-sistem.md#combo--arah) (16 Okt 2026) |
 | Pembuka arah | terjang (maju, target > 2,5 m, maks. 6 m, berhenti 1 m dari target), mundur 1,5 m sambil memukul; damage 10, poise 8; cari target 8 m | jarak × skala raksasa × 0,6 | Arah input relatif ke target terdekat; kiri/kanan = combo biasa sampai soft target Iterasi 4 |
+| Serangan udara | pukulan udara damage 10, maks. 2 per lompatan, "ngambang" 0,3 s (gravitasi ×0,1); hantaman ke bawah 2000 cm/s, radius 2,5 m, damage/poise/stamina = pukulan berat, jeda 0,35 s | kecepatan × skala × 0,6, radius × skala | [07](07-gameplay-sistem.md#serangan-udara) (16 Okt 2026); dodge & tangkis tidak bisa di udara |
 | Cabang finisher | pukulan berat setelah pukulan 1 / 2 punya animasi sendiri; angka sama dengan pukulan berat | sama | `HeavyFinishers` di `DA_CombatProfile_*`; slot kosong = pukulan berat biasa |
 | Buffer input | 0,2 s | 0,3 s | Input saat animasi berjalan diingat |
 | Pukulan berat | damage 30, poise 40, stamina 25 | sama | Tanpa charge di F1 |
@@ -220,6 +221,7 @@ Kapasitas ±50 jam/bulan. Jam di bawah = **jam developer** (build, editor, tunin
 - **Developer:** uji rasa & tuning. (Implementasi 12 Okt 2026: **satu montage per langkah** `AM_Aksa_Light_01..03`, bukan satu montage 3 section, supaya bisa dibuat & diisi notify dari Python; placeholder `MM_Attack_01..03` bawaan Mannequin dengan root motion, waktu hit dari analisis kecepatan tulang. Mixamo *Jab/Cross/Hook* opsional: ganti `SOURCE`/waktu di `Tools/ue_setup_light_combo.py` lalu jalankan ulang. `ABP_Aksa` sudah punya `DefaultSlot`.)
 - **Gate:** combo 3 pukulan ke dummy terasa responsif (tekan cepat = 3 pukulan beruntun, berhenti menekan = berhenti), hit terasa (hit-stop + shake + suara), hitbox terlihat lewat `JD.Debug.Hitbox 1`.
 - **Revisi 16 Okt 2026 (keputusan developer, [07](07-gameplay-sistem.md#combo--arah)):** combo jadi **4 pukulan** (langkah 4 sementara `MM_ChargedAttack`), pembuka **terjang** (maju + pukul ke target yang agak jauh) dan **mundur** (mundur + pukul), serta **cabang finisher** pukulan berat setelah pukulan 1 / 2. C++: `FJDAttackStep` dapat `MoveDistance/MoveDuration/bStopAtTarget`; `UJDCombatProfile` dapat `LungeAttack`, `BackAttack`, `HeavyFinishers`, jarak arah; `UJDCombatComponent::FindNearestTarget` (sementara sampai `UJDTargetingComponent`). Skrip: `ue_setup_light_combo.py` (Aksa), `ue_setup_jayadwara2.py` (retarget `MM_ChargedAttack`) lalu `ue_setup_giant_combo.py` (Jayadwara). Waktu hit langkah 4 dicari otomatis dari puncak kecepatan tangan/kaki (lihat log). **Gate tambahan:** tekan cepat = 4 pukulan; maju + pukul dari ±5 m menerjang lalu combo berlanjut; mundur + pukul mundur sambil memukul; berat setelah pukulan 1 dan 2 terlihat berbeda.
+- **Serangan udara (16 Okt 2026, [07](07-gameplay-sistem.md#serangan-udara)):** `AirAttack` (+ `AirComboMax`, `AirHang*`) dan `AirSlam` (+ `AirSlamSpeed/Radius/Recovery`) di `UJDCombatProfile`; `UJDCombatComponent::ApplyAreaHit` + `OnLanded`; tangkis diblok di udara. Placeholder tanpa root motion: udara = salinan `MM_Attack_03`, hantaman = salinan `MM_ChargedAttack` (skrip yang sama). **Gate:** lompat + LMB ×2 = 2 tendangan melayang lalu tidak bisa lagi sampai mendarat; lompat + E di dekat dummy = menukik, dummy kena saat mendarat.
 
 ### Iterasi 3 — Pukulan berat, dodge, tangkis, parry
 - **Claude:** `UJDGA_HeavyAttack`, `UJDGA_Dodge` (arah dari input, i-frame, biaya stamina, batal recovery), `UJDGA_Block` (tahan, reduksi, guard break, jendela parry), `AJDTrainingDummy` mode **menyerang** berkala dengan wind-up yang terbaca (untuk latihan tangkis/parry), Gameplay Cue blok/parry/dodge.
@@ -263,6 +265,7 @@ Didownload developer (butuh akun Adobe), di-retarget ke skeleton Mannequin (sama
 |---|---|---|
 | Aksa combo ringan | *Jab*, *Cross Punch*, *Hook Punch*, finisher *Uppercut* / *Elbow Punch* (combo 4) | 2 |
 | Aksa pembuka arah | Terjang: *Lead Jab* / *Punch Forward*; mundur: *Back Step Punch* / *Spin Kick* | 2 |
+| Aksa serangan udara | *Jump Attack* / *Flying Kick* (pukulan udara), *Jump Down Attack* / *Ground Slam* (hantaman) | 2 |
 | Aksa cabang finisher | 2 pukulan berat berbeda: *Hurricane Kick*, *Mma Kick* | 2–3 |
 | Aksa berat | *Mma Kick* / *Uppercut* | 3 |
 | Aksa dodge | *Dodging* / *Standing Dodge* (kiri, kanan, belakang, depan) | 3 |

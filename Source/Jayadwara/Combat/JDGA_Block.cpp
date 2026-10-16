@@ -29,7 +29,7 @@ bool UJDGA_Block::CanActivateAbility(const FGameplayAbilitySpecHandle Handle, co
 	const FGameplayTagContainer* SourceTags, const FGameplayTagContainer* TargetTags, FGameplayTagContainer* OptionalRelevantTags) const
 {
 	return Super::CanActivateAbility(Handle, ActorInfo, SourceTags, TargetTags, OptionalRelevantTags)
-		&& GetCombatProfile(ActorInfo) && IsAttackCancelable(ActorInfo);
+		&& GetCombatProfile(ActorInfo) && IsAttackCancelable(ActorInfo) && !IsAvatarFalling(ActorInfo);
 }
 
 void UJDGA_Block::ActivateAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo,

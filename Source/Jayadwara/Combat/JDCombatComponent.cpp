@@ -12,6 +12,7 @@
 #include "Components/SkeletalMeshComponent.h"
 #include "DrawDebugHelpers.h"
 #include "Engine/Engine.h"
+#include "Engine/OverlapResult.h"
 #include "Engine/World.h"
 #include "EngineUtils.h"
 #include "GameFramework/Character.h"
@@ -48,6 +49,73 @@ UJDCombatComponent::UJDCombatComponent()
 {
 	// Hitbox digerakkan tick notify montage, bukan tick komponen.
 	PrimaryComponentTick.bCanEverTick = false;
+}
+
+void UJDCombatComponent::BeginPlay()
+{
+	Super::BeginPlay();
+	if (ACharacter* Character = Cast<ACharacter>(GetOwner()))
+	{
+		Character->LandedDelegate.AddDynamic(this, &UJDCombatComponent::HandleLanded);
+	}
+}
+
+void UJDCombatComponent::HandleLanded(const FHitResult& Hit)
+{
+	AirAttacksUsed = 0;
+	OnLanded.Broadcast();
+}
+
+bool UJDCombatComponent::CanAirAttack() const
+{
+	return AirAttacksUsed < (CombatProfile ? CombatProfile->AirComboMax : 0);
+}
+
+void UJDCombatComponent::ApplyAreaHit(const FVector& Center, float Radius)
+{
+	UWorld* World = GetWorld();
+	AActor* Owner = GetOwner();
+	if (!World || !Owner || !bAttackActive)
+	{
+		return;
+	}
+	TArray<FOverlapResult> Overlaps;
+	FCollisionQueryParams Params(SCENE_QUERY_STAT(JDAreaHit), false, Owner);
+	World->OverlapMultiByObjectType(Overlaps, Center, FQuat::Identity, FCollisionObjectQueryParams(ECC_Pawn),
+		FCollisionShape::MakeSphere(Radius), Params);
+
+	const int32 HitsBefore = HitActors.Num();
+	for (const FOverlapResult& Overlap : Overlaps)
+	{
+		AActor* Victim = Overlap.GetActor();
+		if (!Victim)
+		{
+			continue;
+		}
+		const FVector Point = Victim->GetActorLocation();
+		FHitResult Hit(Victim, Overlap.GetComponent(), Point, (Point - Center).GetSafeNormal());
+		Hit.TraceStart = Center;
+		Hit.TraceEnd = Point;
+		ProcessHit(Hit);
+	}
+	if (HitActors.Num() == HitsBefore)
+	{
+		PlayHitCameraShake();
+	}
+	if (CVarDebugHitbox.GetValueOnGameThread())
+	{
+		DrawDebugSphere(World, Center, Radius, 24, FColor::Orange, false, 1.0f);
+	}
+}
+
+void UJDCombatComponent::PlayHitCameraShake() const
+{
+	const APawn* OwnerPawn = Cast<APawn>(GetOwner());
+	APlayerController* PC = OwnerPawn ? Cast<APlayerController>(OwnerPawn->GetController()) : nullptr;
+	if (PC && CombatProfile && CombatProfile->HitCameraShake)
+	{
+		PC->ClientStartCameraShake(CombatProfile->HitCameraShake, CombatProfile->HitCameraShakeScale);
+	}
 }
 
 void UJDCombatComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
@@ -335,14 +403,7 @@ void UJDCombatComponent::ProcessHit(const FHitResult& Hit)
 
 	StartHitStop(Victim);
 
-	if (CombatProfile && CombatProfile->HitCameraShake)
-	{
-		const APawn* OwnerPawn = Cast<APawn>(Owner);
-		if (APlayerController* PC = OwnerPawn ? Cast<APlayerController>(OwnerPawn->GetController()) : nullptr)
-		{
-			PC->ClientStartCameraShake(CombatProfile->HitCameraShake, CombatProfile->HitCameraShakeScale);
-		}
-	}
+	PlayHitCameraShake();
 
 	if (CVarDebugHitbox.GetValueOnGameThread())
 	{
