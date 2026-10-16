@@ -8,7 +8,7 @@ DEST = /Game/Hermes/MapsEp1  (sandbox Hermes; material v01 dipakai ulang)
 3. Pakai ulang material v01 (M_Hermes_Greybox + 15 MI_Ep01_*) -- TIDAK dibuat ulang; pasang ke
    slot medan/tangga per nama slot.
 4. Taruh medan & tangga di (0, 0, 0).
-5. World Settings level: GameMode Override = /Game/Jayadwara/Core/BP_JDGameMode (hanya referensi).
+5. World Settings level: GameMode Override = /Game/Jayadwara/Core/BP_JDGameMode_Aksa2 (hanya referensi; pawn = Aksa baru, sesuai keputusan developer 16 Okt 2026 & preseden M7b v01).
 6. DirectionalLight = setelan cahaya `sore` v02 dari ep01_layout_v02.json.
 7. Simpan level + aset DEST satu per satu (TIDAK PERNAH Save All).
 
@@ -32,7 +32,7 @@ LEVEL_NAME = "Test_Hermes_MapsEp1_v02"
 MESH_DIR = f"{DEST}/Meshes"
 MAT_DIR = f"{DEST}/Materials"
 TEMPLATE = "/Engine/Maps/Templates/Template_Default"
-GAMEMODE = "/Game/Jayadwara/Core/BP_JDGameMode"
+GAMEMODE = "/Game/Jayadwara/Core/BP_JDGameMode_Aksa2"
 
 REPO = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", ".."))
 EXPORT = os.path.join(REPO, "Hermes", "Art", "maps_ep1", "v02", "Export")
