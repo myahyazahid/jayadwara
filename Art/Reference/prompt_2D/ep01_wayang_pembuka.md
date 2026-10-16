@@ -52,10 +52,12 @@ A single Javanese wayang kulit leather shadow puppet of a fierce temple guardian
 Flat front lighting, no shadow on the background, no text, no letters, no blue, no blood.
 ```
 
-Untuk **gaya B**, ganti kalimat terakhir sebelum "Flat front lighting" dengan:
+## Prompt 3b: layer wayang Dwarapala (gaya B)
 
 ```
-Rendered as the shadow side seen through the screen: a dark warm brown semi-translucent silhouette glowing amber at the edges, the carved perforations showing as tiny points of warm light.
+A single Javanese wayang kulit leather shadow puppet of a fierce temple guardian giant (Dwarapala), shown flat in full side profile facing right, isolated on a plain flat light-gray background, full figure from head to the central control rod. Stocky powerful body in classic wayang proportions, large round bulging eye, curled fangs, thick curly hair rendered as carved swirls, a tall ornate crown, heavy armlets, a patterned cloth wrap at the waist, holding a heavy club (gada) upright in the front hand. Both arms jointed at the shoulder and elbow with thin dark control rods (cempurit) attached to the hands. Rendered as the shadow side seen through the screen: a dark warm brown semi-translucent silhouette glowing amber at the edges, the carved perforations showing as tiny points of warm light.
+
+Flat front lighting, no shadow on the background, no text, no letters, no blue, no blood.
 ```
 
 ## Prompt 4: layer makhluk Kala
