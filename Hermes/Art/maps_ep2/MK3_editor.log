@@ -227,3 +227,68 @@ LogLiveCodingServer: Display: Live coding ready - Save changes and press Ctrl+Al
 [2026.10.16-15.35.46:281][ 35]LogPlacementMode: Display: The Asset Registry is done with its initial scan, the list of placeable classes has been updated.
 [2026.10.16-15.35.46:295][ 35]LogStreaming: Display: FlushAsyncLoading(324): 1 QueuedPackages, 0 AsyncPackages
 [2026.10.16-15.35.46:782][ 37]LogAssetRegistry: Display: Asset registry cache written as 70.3 MiB to ../../../../../../repository/unreal_engine/jayadwara_hermes_maps_ep2/Intermediate/CachedAssetRegistry_*.bin
+[2026.10.16-15.36.47:326][218]LogAudio: Display: Audio Device unregistered from world 'None'.
+[2026.10.16-15.36.47:375][218]LogStreaming: Display: FlushAsyncLoading(330): 1 QueuedPackages, 0 AsyncPackages
+[2026.10.16-15.36.47:395][218]LogAudio: Display: Audio Device (ID: 1) registered with world 'Untitled_1'.
+[2026.10.16-15.36.51:878][218]LogFbx: Display: Triangulating static mesh SM_Ep02_Medan
+[2026.10.16-15.36.58:584][218]LogStaticMesh: Display: Building static mesh SM_Ep02_Medan (Required Memory Estimate: 671.187832 MB)...
+[2026.10.16-15.37.03:291][218]LogStaticMesh: Display: Waiting for static meshes to be ready 0/1 (/Game/Hermes/MapsEp2/Meshes/SM_Ep02_Medan) ...
+[2026.10.16-15.37.06:746][218]LogStaticMesh: Display: Waiting for static meshes to be ready 0/1 (/Game/Hermes/MapsEp2/Meshes/SM_Ep02_Medan) ...
+[2026.10.16-15.37.10:235][218]LogStaticMesh: Display: Waiting for static meshes to be ready 0/1 (/Game/Hermes/MapsEp2/Meshes/SM_Ep02_Medan) ...
+[2026.10.16-15.37.13:879][218]LogStaticMesh: Display: Waiting for static meshes to be ready 0/1 (/Game/Hermes/MapsEp2/Meshes/SM_Ep02_Medan) ...
+[2026.10.16-15.37.17:257][218]LogStaticMesh: Display: Waiting for static meshes to be ready 0/1 (/Game/Hermes/MapsEp2/Meshes/SM_Ep02_Medan) ...
+[2026.10.16-15.37.20:627][218]LogStaticMesh: Display: Waiting for static meshes to be ready 0/1 (/Game/Hermes/MapsEp2/Meshes/SM_Ep02_Medan) ...
+[2026.10.16-15.37.24:108][218]LogStaticMesh: Display: Waiting for static meshes to be ready 0/1 (/Game/Hermes/MapsEp2/Meshes/SM_Ep02_Medan) ...
+[2026.10.16-15.37.27:481][218]LogStaticMesh: Display: Waiting for static meshes to be ready 0/1 (/Game/Hermes/MapsEp2/Meshes/SM_Ep02_Medan) ...
+[2026.10.16-15.37.30:791][218]LogStaticMesh: Display: Waiting for static meshes to be ready 0/1 (/Game/Hermes/MapsEp2/Meshes/SM_Ep02_Medan) ...
+[2026.10.16-15.37.31:994][218]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.37.31:994][218]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.37.31:994][218]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.37.31:994][218]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.37.31:994][218]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.37.31:994][218]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.37.31:995][218]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.37.31:995][218]Blueprint: Warning: CaptureScene: Scene capture with bCaptureEveryFrame enabled was told to update - major inefficiency.
+[2026.10.16-15.37.32:518][218]LogSourceControl: Display: Uncontrolled Changelist persistency file saved ../../../../../../repository/unreal_engine/jayadwara_hermes_maps_ep2/Saved/SourceControl/UncontrolledChangelists.json
+[2026.10.16-15.37.32:590][219]LogContentValidation: Display: Starting to validate 26 assets
+[2026.10.16-15.37.32:628][219]LogNavigation: Warning: Exporting collision geometry with too many triangles (448000). This might cause performance and memory issues. Add a simple collision or change GeometryExportVertexCountWarningThreshold. See 'StaticMeshComponent /Game/Hermes/MapsEp2/Maps/Test_Hermes_MapsEp2.Test_Hermes_MapsEp2:PersistentLevel.StaticMeshActor_0.StaticMeshComponent0'.
+[2026.10.16-15.38.44:865][436]LogShaderCompilers: Display: ================================================
+[2026.10.16-15.38.44:865][436]LogShaderCompilers: Display: === FShaderJobCache stats ===
+[2026.10.16-15.38.44:865][436]LogShaderCompilers: Display: Total job queries 401, among them cache hits 17 (4.24%), DDC hits 305 (76.06%), Duplicates 73 (18.20%)
+[2026.10.16-15.38.44:865][436]LogShaderCompilers: Display: Tracking 311 distinct input hashes that result in 219 distinct outputs (70.42%)
+[2026.10.16-15.38.44:865][436]LogShaderCompilers: Display: RAM used: 3.10 MiB of 1.20 GiB budget. Usage: 0.25%
+[2026.10.16-15.38.44:865][436]LogShaderCompilers: Display: === Shader Compilation stats ===
+[2026.10.16-15.38.44:865][436]LogShaderCompilers: Display: Shaders Compiled: 6
+[2026.10.16-15.38.44:865][436]LogShaderCompilers: Display: Jobs assigned 6, completed 6 (100%)
+[2026.10.16-15.38.44:865][436]LogShaderCompilers: Display: Time job spent in pending queue: average 0.01 s, longest 0.02 s
+[2026.10.16-15.38.44:865][436]LogShaderCompilers: Display: Job execution time: average 1.00 s, max 1.27 s
+[2026.10.16-15.38.44:865][436]LogShaderCompilers: Display: Job life time (pending + execution): average 1.01 s, max 1.29
+[2026.10.16-15.38.44:865][436]LogShaderCompilers: Display: Shader code size: total 53.296 KiB, numShaders 6, average 8.882 KiB, min 4.379 KiB, max 11.331 KiB
+[2026.10.16-15.38.44:865][436]LogShaderCompilers: Display: Time at least one job was in flight (either pending or executed): 1.29 s
+[2026.10.16-15.38.44:865][436]LogShaderCompilers: Display: Mutex wait stall in FShaderJobCache::SubmitJobs:  0.02%
+[2026.10.16-15.38.44:865][436]LogShaderCompilers: Display: Jobs were issued in 6 batches (only local compilation was used), average 1.00 jobs/batch
+[2026.10.16-15.38.44:865][436]LogShaderCompilers: Display: Average processing rate: 4.65 jobs/sec
+[2026.10.16-15.38.44:865][436]LogShaderCompilers: Display: Total thread time: 3.951 s
+[2026.10.16-15.38.44:865][436]LogShaderCompilers: Display: Total thread preprocess time: 7.174 s
+[2026.10.16-15.38.44:865][436]LogShaderCompilers: Display: Percentage time preprocessing: 181.57%
+[2026.10.16-15.38.44:865][436]LogShaderCompilers: Display: Effective parallelization: 3.06 (times faster than compiling all shaders on one thread). Compare with number of workers: 8 - 0.382903
+[2026.10.16-15.38.44:865][436]LogShaderCompilers: Display: Top 5 most expensive shader types by average time:
+[2026.10.16-15.38.44:865][436]LogShaderCompilers: Display:                                             FDebugViewModePS (compiled    1 times, average 0.95 sec, max 0.95 sec, min 0.95 sec)
+[2026.10.16-15.38.44:865][436]LogShaderCompilers: Display:                                TMaterialCHSFNoLightMapPolicy (compiled    1 times, average 0.87 sec, max 0.87 sec, min 0.87 sec)
+[2026.10.16-15.38.44:865][436]LogShaderCompilers: Display:                                      FPathTracingMaterialCHS (compiled    1 times, average 0.83 sec, max 0.83 sec, min 0.83 sec)
+[2026.10.16-15.38.44:865][436]LogShaderCompilers: Display:                         TBasePassPSFNoLightMapPolicySkylight (compiled    1 times, average 0.49 sec, max 0.49 sec, min 0.49 sec)
+[2026.10.16-15.38.44:865][436]LogShaderCompilers: Display:                                 TBasePassPSFNoLightMapPolicy (compiled    1 times, average 0.48 sec, max 0.48 sec, min 0.48 sec)
+[2026.10.16-15.38.44:865][436]LogShaderCompilers: Display: Top 5 shader types by total compile time:
+[2026.10.16-15.38.44:865][436]LogShaderCompilers: Display:                                             FDebugViewModePS - 24.02% of total time (compiled    1 times, average 0.95 sec, max 0.95 sec, min 0.95 sec)
+[2026.10.16-15.38.44:865][436]LogShaderCompilers: Display:                                TMaterialCHSFNoLightMapPolicy - 21.94% of total time (compiled    1 times, average 0.87 sec, max 0.87 sec, min 0.87 sec)
+[2026.10.16-15.38.44:865][436]LogShaderCompilers: Display:                                      FPathTracingMaterialCHS - 21.03% of total time (compiled    1 times, average 0.83 sec, max 0.83 sec, min 0.83 sec)
+[2026.10.16-15.38.44:865][436]LogShaderCompilers: Display:                         TBasePassPSFNoLightMapPolicySkylight - 12.37% of total time (compiled    1 times, average 0.49 sec, max 0.49 sec, min 0.49 sec)
+[2026.10.16-15.38.44:865][436]LogShaderCompilers: Display:                                 TBasePassPSFNoLightMapPolicy - 12.08% of total time (compiled    1 times, average 0.48 sec, max 0.48 sec, min 0.48 sec)
+[2026.10.16-15.38.44:865][436]LogShaderCompilers: Display: === Material stats ===
+[2026.10.16-15.38.44:865][436]LogShaderCompilers: Display: Materials Cooked:        0
+[2026.10.16-15.38.44:865][436]LogShaderCompilers: Display: Materials Translated:    147
+[2026.10.16-15.38.44:865][436]LogShaderCompilers: Display: Material Total Translate Time: 0.15 s
+[2026.10.16-15.38.44:865][436]LogShaderCompilers: Display: Material Translation Only: 0.06 s (41%)
+[2026.10.16-15.38.44:865][436]LogShaderCompilers: Display: Material DDC Serialization Only: 0.00 s (1%)
+[2026.10.16-15.38.44:865][436]LogShaderCompilers: Display: Material Cache Hits: 13 (9%)
+[2026.10.16-15.38.44:865][436]LogShaderCompilers: Display: ================================================
