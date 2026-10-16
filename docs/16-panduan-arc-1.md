@@ -150,8 +150,36 @@ Sistem upgrade baru dibangun di Fase 4 ([10](10-roadmap.md#fase-4--produksi-seas
 | **Silat** (berlaku di dua skala) | finisher (Ep 4), cengkeram/lepas (Ep 8) | Ingatan latihan Ki Zahid |
 | **Meter** | kapasitas +15% (Ep 6) | Alat penstabil Nadia |
 
-- Nama dan gerak jurus spesial: berbasis pencak silat + motif Dwarapala (mis. gada, injakan bumi). **Hindari pose dan nama yang mirip Specium Ray** ([01](01-konsep-dan-pilar.md#wajib-dihindari)). Desain jurus #2–#4 ditentukan di Fase 4.
+- Nama dan gerak jurus spesial: berbasis pencak silat + motif Dwarapala (mis. gada, injakan bumi). **Hindari pose dan nama yang mirip Specium Ray** ([01](01-konsep-dan-pilar.md#wajib-dihindari)). Jurus #1 di bawah (keputusan developer 16 Okt 2026); desain jurus #2–#4 ditentukan di Fase 4.
 - Kurva kesulitan: Ep 1–3 pemaaf (checkpoint rapat, meter turun pelan), Ep 4–7 normal, Ep 8–10 menuntut pemain memakai semua mekanik.
+
+### Jurus spesial #1: Ajian Braja Lawang *(keputusan developer 16 Okt 2026)*
+
+Bola petir kuning keemasan yang didorong dua telapak. *Braja* = petir; langkah 3 merujuk legenda Ki Ageng Selo, penangkap petir dari Jawa.
+
+| # | Gerak | Efek |
+|---|---|---|
+| 1 | Berdiri **tegak**, kaki selebar bahu, dua telapak rapat tegak di depan dada (sikap sembah). Tanpa kuda-kuda tengah | Permata dada **menyala selama jurus**, percik petir kuning merambat ke lengan |
+| 2 | Telapak dibuka lalu dihempas ke bawah ke sisi paha; kaki kanan mundur selangkah, badan sedikit turun | Petir menyambar tanah: retak + debu |
+| 3 | Tangan kanan diangkat lurus ke atas | Petir dari langit menyambar telapak |
+| 4 | Tangan kanan turun, menyilang **bentuk X** dengan tangan kiri di depan dada (pergelangan bertemu) | — |
+| 5 | Dua tangan memutar satu lingkaran di depan badan (kembangan silat) | Bola petir terbentuk di antara telapak |
+| 6 | Kaki kanan melangkah maju, badan condong, dua telapak didorong ke depan | Bola petir melesat ke target, meledak saat kena |
+
+- **Dua versi:** sinematik (langkah 1–6, ±4–5 s) saat pertama dipakai di Ep 1; gameplay (langkah 3–6, ±2 s).
+- **Dipakai:** mulai Ep 1 (klimaks, hancurkan tengkorak Jerangkong), terbuka resmi di debrief Ep 1, versi gameplay mulai Ep 2.
+- **Dikerjakan:** Fase 2 (`UJDGA_JurusSpesial01`, [18](18-kebutuhan-episode-1.md)), slot Agu–Sep 2027 bareng boss final, animasi silat, dan VFX. Di Fase 1 diganti finisher/pukulan berat ke tengkorak ([23](23-rencana-fase-1.md)).
+- **Syarat pakai:** boss **stagger** atau titik lemah terbuka (berfungsi sebagai finisher); tidak ada meter baru.
+- **Proyektil, bukan sinar:** meleset lalu kena gedung → kerusakan gedung + penalti Sync seperti sumber lain.
+- **Batas IP** ([01](01-konsep-dan-pilar.md#wajib-dihindari)): silang hanya **X**, tidak pernah **L** atau **+**, dan energi tidak keluar dari posisi silang. Permata dada hanya menyala selama jurus lalu padam, **tidak pernah berkedip** sebagai penanda status/waktu (lihat K1 di [14](14-model-sheet-jayadwara.md)).
+- **Kaitan Ep 3:** Jenglot menyerap listrik, jadi Braja Lawang justru **menguatkannya**. Ini alasan cerita Jayadwara butuh jurus #2.
+
+### Senjata *(usulan developer 16 Okt 2026, mulai Ep 3)*
+
+- **Aksa: kujang**, **Jayadwara: keris** pusaka sang penjaga (bilah ber-luk, pamor menyala), dipanggil dari kalung lewat gerbang cahaya. Bilah berwujud fisik, **bukan** bilah cahaya yang keluar dari lengan (beda dari Mebium Blade).
+- Senjata = **jurus/mode tambahan**; combo silat tangan kosong tetap inti. Fase 1–2 tetap tangan kosong. Dikerjakan di **Fase 4** saat produksi Ep 3.
+- **Satu moveset**: combo senjata sama di dua skala (sabet, sabet, tusuk, finisher); beda bentuk hitbox, efek, dan animasi lewat `UJDCombatProfile` per senjata.
+- **Belum diputuskan:** asal-usul kujang Aksa (keluarga Mangkubumi Jawa, kujang dari Sunda), misalnya dibuat DWARA/Nadia atau ditemukan saat misi Ep 3. Ditentukan di Fase 4.
 
 ---
 
@@ -184,6 +212,7 @@ Batas scope ada di [11-vertical-slice-spec.md](11-vertical-slice-spec.md); skena
   - Fase 2: boss yang sudah lemah mengamuk; selesaikan dengan combat. **Kelemahan:** jimat menunjukkan intinya di dada boss.
 - **Meter:** gardu harus diputus tanpa meruntuhkan gedung di sampingnya.
 - **Catatan:** pertumbuhan boss dibatasi per fase, **bukan timer menit**, supaya tidak terasa seperti batas waktu transformasi (aturan IP).
+- **Jurus #1 gagal:** Ajian Braja Lawang (petir) diserap dan membuat boss membesar; debrief membuka jurus #2. **Senjata** pertama kali didapat di episode ini (bagian 5).
 
 ### Ep 4 — Lilin di Pasar Malam · Babi Ngepet
 - **Pembuka wayang:** babi ngepet yang mencuri sementara rekannya menjaga lilin. Lilin yang bergoyang tanda bahaya.
