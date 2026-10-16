@@ -52,7 +52,7 @@ protected:
 
 	/**
 	 * Laju montage yang membuat animasi terlihat berjalan pada Profile->MontagePlayRate x StepRate. Mesh raksasa sudah
-	 * diperlambat GlobalAnimRateScale (1/sqrt(skala) ≈ 0,2, untuk locomotion), jadi dikompensasi di sini.
+	 * diperlambat GlobalAnimRateScale (speed / skala, ±0,6 ala Mebius, untuk locomotion), jadi dikompensasi di sini.
 	 */
 	float GetMontageRate(float StepRate = 1.0f) const;
 

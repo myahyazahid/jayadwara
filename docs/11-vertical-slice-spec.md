@@ -35,7 +35,7 @@
 - [ ] Ganti pawn manusia → raksasa, ganti input & kamera
 
 ### Mode Raksasa
-- [ ] Combat yang sama dengan data skala raksasa (lebih lambat, impact besar, camera shake)
+- [ ] Combat yang sama dengan data skala raksasa (gesit "ala Mebius", impact besar, hit-stop, camera shake; [07](07-gameplay-sistem.md#mode-raksasa-jayadwara))
 - [ ] 1 jurus spesial Jayadwara
 - [ ] **Meter sinkronisasi**: turun saat gedung hancur / NPC terkena; habis = gagal
 - [ ] 6–10 gedung yang bisa hancur (Chaos Geometry Collection, pre-fractured)

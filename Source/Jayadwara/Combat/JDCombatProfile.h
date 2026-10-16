@@ -72,7 +72,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Light Combo", meta = (TitleProperty = "Montage"))
 	TArray<FJDAttackStep> LightCombo;
 
-	/** Laju semua montage serangan yang terlihat (manusia 1,0; raksasa ±0,55). GlobalAnimRateScale mesh dikompensasi ability. */
+	/** Laju semua montage serangan yang terlihat (manusia 1,0; raksasa 1,0 sejak 16 Okt 2026, dulu ±0,55). GlobalAnimRateScale mesh dikompensasi ability. */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Animation", meta = (ClampMin = "0.05"))
 	float MontagePlayRate = 1.0f;
 

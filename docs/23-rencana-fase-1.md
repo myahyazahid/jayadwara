@@ -59,7 +59,7 @@ Kalau G1–G3 gagal: **perbaiki combat dulu** sebelum masuk Fase 2 ([18](18-kebu
 
 | Sudah ada | Dipakai di |
 |---|---|
-| `AJDCharacterBase` (Move/Look/Jump), `AJDHumanCharacter`, `AJDGiantCharacter` (skala, kapsul, kamera, gerak Froude) | Semua iterasi |
+| `AJDCharacterBase` (Move/Look/Jump), `AJDHumanCharacter`, `AJDGiantCharacter` (skala, kapsul, kamera, gerak; kelincahan `SpeedScaleExponent` sejak 16 Okt 2026) | Semua iterasi |
 | `AJDPlayerController`: transformasi tombol **T** (ganti pawn, pawn manusia disembunyikan, efek tumbuh/menyusut 2 s) | Iterasi 6 tinggal ditambah IMC raksasa, atribut, dan syarat |
 | `BP_Aksa`, `BP_Jayadwara`, `BP_JDPlayerController`, `Test_Greybox`, `Test_GiantScale` | Level uji |
 | `SK_Jayadwara` + RTG Mannequin → Jayadwara + socket JSON | Retarget animasi combat (Iterasi 6) |
@@ -178,12 +178,13 @@ Untuk transformasi pertama Ep 1 (cutscene) dan `Test_Loop`, energi diisi penuh o
 | Combo ringan | 3 pukulan, damage 10 / 10 / 18 | sama × skala damage boss | Jendela combo dari notify |
 | Buffer input | 0,2 s | 0,3 s | Input saat animasi berjalan diingat |
 | Pukulan berat | damage 30, poise 40, stamina 25 | sama | Tanpa charge di F1 |
-| Dodge | stamina 20, i-frame ±0,25 s | i-frame lebih panjang, jarak × skala | Bisa membatalkan *recovery* serangan setelah frame hit |
+| Dodge | stamina 20, i-frame ±0,25 s | durasi 0,35 s & i-frame 0,25 s (sama dengan manusia, ala Mebius), jarak ±55 m | Bisa membatalkan *recovery* serangan setelah frame hit |
 | Tangkis | kurangi 80% damage, tiap hit −15 stamina; stamina habis → *guard break* (stagger 1 s) | sama | Tahan tombol |
 | Parry | 0,2 s pertama setelah tekan tangkis (tombol sama, Q5) | 0,25 s | Penyerang stagger, `GameplayCue.Parry` |
 | Stamina | 100, regen 25/s setelah jeda 0,8 s | sama | |
-| Hit-stop | 0,06 s | 0,12 s | Time dilation lokal pada penyerang & korban |
-| Play rate montage | 1,0 | **±0,55** | Locomotion raksasa sudah 1/√skala ≈ 0,2; serangan setara itu terlalu lambat, jadi angka ini dicari di Iterasi 6 |
+| Hit-stop | 0,06 s | 0,15 s | Time dilation lokal pada penyerang & korban |
+| Play rate montage | 1,0 | **1,0** | Ala Mebius (keputusan developer 16 Okt 2026): serangan raksasa secepat manusia; dulu ±0,55. Berat dari hit-stop & shake |
+| Gerak raksasa | lari 5 m/s, berbalik 500°/s | **lari ±70 m/s, animasi ±0,6×, berbalik 720°/s, akselerasi setara manusia, lompat ×1,25** | `SpeedScaleExponent` 0,83 di `BP_Jayadwara2` (0,5 = Froude/berat lama: lari ±24 m/s, animasi 0,2×, berbalik ±100°/s). Boss `BP_Jerangkong` tetap 0,5. Ubah lalu jalankan `Tools/ue_setup_giant_speed.py` + `ue_setup_giant_combo.py` |
 | Minion | HP 30, poise 20, wind-up serangan 0,5 s dengan kedip | — | Maks. **2 penyerang** bersamaan (token) |
 | Minion bangkit | roboh 4 s lalu bangkit dengan HP 50% kecuali di-finisher | — | Gelombang 3 saja |
 | Energi transformasi | 0 → penuh ±40 s setelah kalah | Health kembali ±50% | Bagian 4.5 |
@@ -235,7 +236,7 @@ Kapasitas ±50 jam/bulan. Jam di bawah = **jam developer** (build, editor, tunin
 ### Iterasi 6 — Transformasi & combat raksasa
 - **Claude:** `IMC_Giant` (skrip), ASC & atribut Jayadwara (`DA_AbilitySet_Jayadwara`, Sync awal penuh), `DA_CombatProfile_Giant`, socket hit dari `SK_Jayadwara_sockets.json`, rig kamera raksasa (framing target, lag, jarak saat combat) + **lock-on boss** (Q3), transformasi tombol **T** / **L1+R1** dengan syarat (Q8), **kalah → Aksa muncul di tempat + `TransformEnergy` + berubah lagi** (bagian 4.5), `AJDTrainingDummy` skala raksasa.
 - **Developer:** retarget montage combat Aksa ke Jayadwara (RTG yang sudah ada), tuning play rate, shake, hit-stop; uji di `Test_GiantScale`.
-- **Gate:** combo, berat, dodge, tangkis jalan sebagai Jayadwara dengan **ability yang sama**; terasa berat tapi tidak lamban (G2); bolak-balik transformasi tanpa bug kamera/input; kalah → jadi Aksa di tempat → energi penuh → berubah lagi berjalan tanpa reload.
+- **Gate:** combo, berat, dodge, tangkis jalan sebagai Jayadwara dengan **ability yang sama**; terasa raksasa tapi **gesit** (G2, ala Mebius: berat dari impact, bukan dari kelambatan); bolak-balik transformasi tanpa bug kamera/input; kalah → jadi Aksa di tempat → energi penuh → berubah lagi berjalan tanpa reload.
 
 ### Iterasi 7 — Gedung hancur & meter sinkronisasi
 - **Claude:** `AJDDestructibleBuilding` (kerusakan sebanding gaya dari pukulan, tabrakan badan, terpental, proyektil; Q7), pembersih puing (puing → hilang bertahap), `UJDSyncComponent` + `UJDSyncConfig` + `UJDGE_SyncPenalty`, `OnSyncDepleted` → kembali jadi Aksa di tempat (alur bagian 4.5, Q17), `AJDCivilianMarker` (Q11), `WBP_HUD_Giant` base (bar Sync), cheat `JD.Sync <n>`.
@@ -349,7 +350,7 @@ PR dibuat kecil (satu iterasi atau setengahnya) karena Claude tidak bisa build U
 | 3 | 🟡 | 13 Okt 2026 | C++: `UJDGA_HeavyAttack` (dari diam/jendela combo/recovery), `UJDGA_Dodge` (root motion source, hadap tetap, montage 4 arah opsional, i-frame `State.Invulnerable`), `UJDGA_Block` (tahan; tiap tekan buka `State.ParryWindow`, anti spam `ParryLockout` 0,5 s; jalan ×0,4), `UJDCombatComponent::ResolveIncomingHit` (dodge/parry/tangkis hanya dari depan 140°/guard break) + `ApplyStagger` (sementara sampai Iterasi 4), `AJDTrainingDummy` mode menyerang (aba-aba "!" merah berkedip 0,5 s, tiap 2,5 s, jarak 2,5 m). Skrip `Tools/ue_setup_defense.py` (Aksa + dummy; `Dummy_Attacker` di `Test_Combat`) dan `ue_setup_giant_combo.py` (Jayadwara2). Animasi placeholder: berat & pose tangkis dari `A_Aksa_Attack_02` (berat diputar 0,75×, tangkis = frame 0,75 s ditahan), stagger dari `MM_HitReact_Front_Hvy_01` (Rifle), **dodge tanpa animasi**. SFX **pilihan sementara**: tangkis k1, parry k2, dodge k1. Uji otomatis PIE: berat −30 HP/−25 stamina; dodge mundur 404 cm/−20 stamina, i-frame aktif lalu lepas; tangkis −2 HP/−15 stamina, jalan 200; guard break → stagger; parry → tanpa damage, dummy stagger (raksasa: berat −30, dodge ±56 m). Sisa: uji tangan gate (parry ≥ 7/10), animasi Mixamo (berat, dodge 4 arah, tangkis) |
 | 4 | ⬜ | | |
 | 5 | ⬜ | | |
-| 6 | 🟡 | 13 Okt 2026 | Transformasi tombol T sudah ada sejak Iterasi 6 Jayadwara. **Dimajukan (permintaan developer):** combo ringan Jayadwara2 lewat `Tools/ue_setup_giant_combo.py` — `AM_JD2_Light_01..03` (salinan `MM_Attack_0x_JD2`, notify sama dengan Aksa), `DA_CombatProfile_Giant` (laju terlihat 0,55, radius hit 711 cm, hit-stop 0,12 s, shake ×2,5, cue `Hit.Heavy`), `DA_AbilitySet_Jayadwara` (Sync 100, buffer 0,3 s), `BP_Jayadwara2` memakai `DA_InputConfig_Human`, `Dummy_Giant` (BP_TrainingDummy ×20) di `Test_GiantScale`. C++: `JDGA_LightAttack` membagi laju montage dengan `GlobalAnimRateScale` mesh (raksasa ±0,205) supaya `MontagePlayRate` = laju terlihat. Uji otomatis PIE: pukulan 1 ke `Dummy_Giant` −10 HP. Iterasi 3 ikut dipasang (berat, dodge 55 m/0,64 s, tangkis, parry 0,25 s; `AM_JD2_Heavy/Block`). Sisa Iterasi 6: uji tangan & tuning, `IMC_Giant`, rig kamera + lock-on, syarat transformasi, kalah → Aksa |
+| 6 | 🟡 | 13 Okt 2026 | Transformasi tombol T sudah ada sejak Iterasi 6 Jayadwara. **Dimajukan (permintaan developer):** combo ringan Jayadwara2 lewat `Tools/ue_setup_giant_combo.py` — `AM_JD2_Light_01..03` (salinan `MM_Attack_0x_JD2`, notify sama dengan Aksa), `DA_CombatProfile_Giant` (laju terlihat 0,55, radius hit 711 cm, hit-stop 0,12 s, shake ×2,5, cue `Hit.Heavy`), `DA_AbilitySet_Jayadwara` (Sync 100, buffer 0,3 s), `BP_Jayadwara2` memakai `DA_InputConfig_Human`, `Dummy_Giant` (BP_TrainingDummy ×20) di `Test_GiantScale`. C++: `JDGA_LightAttack` membagi laju montage dengan `GlobalAnimRateScale` mesh (raksasa ±0,205) supaya `MontagePlayRate` = laju terlihat. Uji otomatis PIE: pukulan 1 ke `Dummy_Giant` −10 HP. Iterasi 3 ikut dipasang (berat, dodge 55 m/0,64 s, tangkis, parry 0,25 s; `AM_JD2_Heavy/Block`). Sisa Iterasi 6: uji tangan & tuning, `IMC_Giant`, rig kamera + lock-on, syarat transformasi, kalah → Aksa. **16 Okt 2026, ala Mebius (permintaan developer):** `AJDGiantCharacter` dapat `SpeedScaleExponent` (0,83: lari ±70 m/s, animasi ±0,6×, kaki tetap menapak), `GiantTurnRate` 720°/s, akselerasi × speed, `JumpBoost` 1,25; combat raksasa laju 1,0, dodge 0,35 s, hit-stop 0,15 s; `BP_Jerangkong` tetap 0,5. Skrip `Tools/ue_setup_giant_speed.py` lalu `ue_setup_giant_combo.py`. Menunggu build + uji tangan developer |
 | 7 | ⬜ | | |
 | 8 | ⬜ | | |
 | 9 | ⬜ | | |
