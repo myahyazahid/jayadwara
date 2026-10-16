@@ -1,0 +1,97 @@
+{
+  "versi": "ep01_layout_v01 (16 Okt 2026, dari docs/30)",
+  "satuan": "meter; x = timur, y = utara, z = atas (0 = muka desa). UE: X = x*100, Y = -y*100, Z = z*100 (cm)",
+  "z_otomatis": "objek tanpa 'z' diletakkan di atas medan: z = elev(x, y) dari maps_ep1_medan.py",
+  "medan": {
+    "x_min": -340, "x_max": 460, "y_min": -420, "y_max": 280, "sel": 2.0,
+    "material_zona": [
+      {"slot": "Air", "aturan": "z < -1"},
+      {"slot": "Galian", "aturan": "di dalam elips galian (x/70)^2 + (y/60)^2 < 1, atau koridor mulut galian |x| < 25 dan -110 <= y <= -27"},
+      {"slot": "Jalan", "aturan": "<= 4 m dari JALAN_AKSES (x > 120) atau JALAN_PROYEK"},
+      {"slot": "Plato", "aturan": "-60 <= x <= 60 dan 120 <= y <= 220"},
+      {"slot": "Sawah", "aturan": "-90 <= x <= 210 dan -270 <= y <= -110"},
+      {"slot": "Desa", "aturan": "-260 <= x <= -80 dan -325 <= y <= -200"},
+      {"slot": "Hutan", "aturan": "selain di atas"}
+    ]
+  },
+  "objek": [
+    {"id": "CANDI_Induk", "jenis": "candi_bertingkat", "pos": [0, 195], "tingkat": [[18, 18, 6], [14, 14, 6], [9, 9, 5], [4, 4, 3]], "mi": "Andesit", "hancur": false},
+    {"id": "CANDI_GerbangTiangKiri", "jenis": "kotak", "pos": [-3.5, 125], "ukuran": [3, 3, 8], "mi": "Andesit", "hancur": false},
+    {"id": "CANDI_GerbangTiangKanan", "jenis": "kotak", "pos": [3.5, 125], "ukuran": [3, 3, 8], "mi": "Andesit", "hancur": false},
+    {"id": "CANDI_GerbangAmbang", "jenis": "kotak", "pos": [0, 125], "z_dasar_relatif": 6, "ukuran": [10, 3, 2], "mi": "Andesit", "hancur": false},
+    {"id": "CANDI_AlasArcaKiri", "jenis": "kotak", "pos": [-8, 121], "ukuran": [2, 2, 1], "mi": "Andesit", "hancur": false},
+    {"id": "CANDI_ArcaKiri", "jenis": "kotak", "pos": [-8, 121], "z_dasar_relatif": 1, "ukuran": [2, 2, 4], "mi": "Arca", "hancur": false},
+    {"id": "CANDI_AlasArcaKanan", "jenis": "kotak", "pos": [8, 121], "ukuran": [2, 2, 1], "mi": "Andesit", "hancur": false},
+    {"id": "CANDI_ArcaKanan", "jenis": "kotak", "pos": [8, 121], "z_dasar_relatif": 1, "ukuran": [2, 2, 4], "mi": "Arca", "hancur": false, "catatan": "dililit tali derek (adegan 4)"},
+    {"id": "CANDI_Prasasti", "jenis": "kotak", "pos": [0, 120], "ukuran": [2, 0.5, 2], "mi": "Andesit", "hancur": false},
+    {"id": "CANDI_Tangga", "jenis": "tangga", "dari": [0, 87.5, 28.0], "ke": [0, 112.5, 35.0], "lebar": 10, "anak_tangga": 28, "mi": "Andesit", "hancur": false},
+
+    {"id": "PROYEK_PosMandor", "jenis": "kotak", "pos": [104, 22], "ukuran": [14, 6, 3], "mi": "Alat", "hancur": false},
+    {"id": "PROYEK_Ekskavator", "jenis": "kotak", "pos": [88, -40], "ukuran": [9, 4, 4], "yaw": 20, "mi": "Alat", "hancur": false},
+    {"id": "PROYEK_Buldoser", "jenis": "kotak", "pos": [74, -48], "ukuran": [7, 4, 3.5], "yaw": -10, "mi": "Alat", "hancur": false},
+    {"id": "PROYEK_TrukDerek", "jenis": "kotak", "pos": [64, 148], "ukuran": [12, 3, 4], "yaw": 30, "mi": "Alat", "hancur": false, "catatan": "keluar lewat jalan proyek di adegan 6"},
+    {"id": "PROYEK_Tenda1", "jenis": "kotak", "pos": [30, 20], "ukuran": [4, 4, 2.5], "mi": "Terpal", "hancur": false},
+    {"id": "PROYEK_Tenda2", "jenis": "kotak", "pos": [-48, 0], "ukuran": [4, 4, 2.5], "mi": "Terpal", "hancur": false},
+    {"id": "PROYEK_Tenda3", "jenis": "kotak", "pos": [-35, -30], "ukuran": [4, 4, 2.5], "mi": "Terpal", "hancur": false},
+    {"id": "PROYEK_PagarSeng", "jenis": "dinding", "dari": [60, 40], "ke": [95, -30], "tinggi": 2.5, "tebal": 0.2, "mi": "Alat", "hancur": false},
+    {"id": "PROYEK_GarisPolisi", "jenis": "dinding", "dari": [128, -6], "ke": [128, -36], "tinggi": 1.0, "tebal": 0.1, "mi": "Penanda", "hancur": false, "tanpa_tabrakan": true},
+    {"id": "PROYEK_MobilDWARA", "jenis": "kotak", "pos": [148, -22], "ukuran": [5, 2, 1.8], "mi": "Kendaraan", "hancur": false},
+    {"id": "PROYEK_BatuLatihan", "jenis": "kotak", "pos": [110, -62], "ukuran": [2, 1.5, 0.6], "mi": "Andesit", "hancur": false},
+
+    {"id": "DESA_D1_Rumah", "jenis": "rumah", "pos": [-232, -230], "ukuran": [10, 8, 6], "mi": "Desa", "hancur": true},
+    {"id": "DESA_D2_Rumah", "jenis": "rumah", "pos": [-207, -241], "ukuran": [10, 8, 6], "mi": "Desa", "hancur": true},
+    {"id": "DESA_D3_Rumah", "jenis": "rumah", "pos": [-172, -219], "ukuran": [10, 8, 6], "mi": "Desa", "hancur": true},
+    {"id": "DESA_D4_Rumah", "jenis": "rumah", "pos": [-141, -241], "ukuran": [10, 8, 6], "mi": "Desa", "hancur": true},
+    {"id": "DESA_D5_Warung", "jenis": "kotak", "pos": [-195, -280], "ukuran": [6, 5, 4], "mi": "Kayu", "hancur": true},
+    {"id": "DESA_D6_Warung", "jenis": "kotak", "pos": [-122, -277], "ukuran": [6, 5, 4], "mi": "Kayu", "hancur": true},
+    {"id": "DESA_D7_MenaraAir", "jenis": "kotak", "pos": [-107, -219], "ukuran": [4, 4, 15], "mi": "Alat", "hancur": true},
+    {"id": "DESA_D8_GarduRonda", "jenis": "kotak", "pos": [-225, -299], "ukuran": [3, 3, 4], "mi": "Kayu", "hancur": true},
+    {"id": "DESA_D9_Cadangan", "jenis": "rumah", "pos": [-238, -284], "ukuran": [10, 8, 6], "mi": "Desa", "hancur": true, "cadangan": true},
+    {"id": "DESA_D10_Cadangan", "jenis": "rumah", "pos": [-94, -305], "ukuran": [10, 8, 6], "mi": "Desa", "hancur": true, "cadangan": true},
+    {"id": "DESA_Musala", "jenis": "kotak", "pos": [-158, -308], "ukuran": [12, 12, 7], "mi": "Musala", "hancur": false},
+    {"id": "DESA_Lapangan", "jenis": "bidang", "pos": [-125, -310], "ukuran": [36, 20], "mi": "Sawah", "hancur": false},
+
+    {"id": "SAWAH_Gubuk1", "jenis": "kotak", "pos": [0, -150], "ukuran": [3, 3, 3], "mi": "Kayu", "hancur": false},
+    {"id": "SAWAH_Gubuk2", "jenis": "kotak", "pos": [120, -215], "ukuran": [3, 3, 3], "mi": "Kayu", "hancur": false},
+    {"id": "SAWAH_Gubuk3", "jenis": "kotak", "pos": [40, -245], "ukuran": [3, 3, 3], "mi": "Kayu", "hancur": false},
+    {"id": "SAWAH_LapanganBola", "jenis": "bidang", "pos": [160, -135], "ukuran": [30, 18], "mi": "Penanda", "hancur": false},
+
+    {"id": "LATAR_PilarTol1", "jenis": "kotak", "pos": [345, 170], "ukuran": [4, 4, 30], "mi": "Andesit", "hancur": false},
+    {"id": "LATAR_PilarTol2", "jenis": "kotak", "pos": [361, 146], "ukuran": [4, 4, 30], "mi": "Andesit", "hancur": false},
+    {"id": "LATAR_PilarTol3", "jenis": "kotak", "pos": [377, 122], "ukuran": [4, 4, 30], "mi": "Andesit", "hancur": false},
+    {"id": "LATAR_PilarTol4", "jenis": "kotak", "pos": [393, 98], "ukuran": [4, 4, 30], "mi": "Andesit", "hancur": false},
+    {"id": "LATAR_PilarTol5", "jenis": "kotak", "pos": [409, 74], "ukuran": [4, 4, 30], "mi": "Andesit", "hancur": false},
+    {"id": "LATAR_PilarTol6", "jenis": "kotak", "pos": [425, 50], "ukuran": [4, 4, 30], "mi": "Andesit", "hancur": false}
+  ],
+  "penanda": [
+    {"id": "START", "pos": [140, -20], "jenis": "PlayerStart", "hadap_ke": [0, 125]},
+    {"id": "CLUE_1_JejakEnergi", "pos": [74, 10], "jenis": "titik", "label": "★1 jejak energi"},
+    {"id": "CLUE_2_Tulang", "pos": [-10, 8], "jenis": "titik", "label": "★2 tulang bergeser"},
+    {"id": "CLUE_3_Prasasti", "pos": [0, 118], "jenis": "titik", "label": "★3 prasasti"},
+    {"id": "WAVE_1", "pos": [16, 60], "jenis": "area", "radius": 12, "label": "W1 · 3 kerangka · undakan atas"},
+    {"id": "WAVE_2", "pos": [0, 100], "jenis": "area", "radius": 6, "label": "W2 · 5 kerangka · tangga"},
+    {"id": "WAVE_3", "pos": [0, 145], "jenis": "area", "radius": 15, "label": "W3 · 6 kerangka · halaman (checkpoint)"},
+    {"id": "BOSS_Bangkit", "pos": [0, 0], "jenis": "titik", "label": "Jerangkong bangkit (31 m)"},
+    {"id": "TRANSFORMASI", "pos": [-8, 123], "jenis": "titik", "label": "transformasi di arca kiri"},
+    {"id": "JAYADWARA_Mulai", "pos": [0, 138], "jenis": "titik", "label": "Jayadwara mulai (45 m)"},
+    {"id": "WARGA_Kumpul", "pos": [-125, -310], "jenis": "area", "radius": 15, "label": "titik kumpul warga"}
+  ],
+  "zona": [
+    {"id": "ZONA_Aman_Sawah", "x": [-90, 210], "y": [-270, -110], "warna": "hijau", "label": "zona aman (tanpa penalti)"},
+    {"id": "ZONA_Penalti_Desa", "x": [-260, -80], "y": [-325, -200], "warna": "merah", "label": "penalti meter"}
+  ],
+  "batas_arena": {"x": [-268, 262], "y": [-330, 225], "tinggi": 100, "catatan": "dinding tak terlihat, menghalangi Aksa dan Jayadwara"},
+  "kamera": [
+    {"id": "C1_START", "pos": [140, -20], "tinggi_di_atas_tanah": 1.6, "lihat_ke": [0, 125, 37], "fov": 70, "cahaya": "sore"},
+    {"id": "C2_BibirGalian", "pos": [74, 10], "tinggi_di_atas_tanah": 1.6, "lihat_ke": [0, 0, 15], "fov": 70, "cahaya": "sore"},
+    {"id": "C3_GerbangKeTimur", "pos": [0, 125], "tinggi_di_atas_tanah": 1.6, "lihat_ke": [150, 60, 30], "fov": 70, "cahaya": "sore"},
+    {"id": "C4_MataJayadwara", "pos": [0, 138], "tinggi_di_atas_tanah": 42, "lihat_ke": [-60, -250, 0], "fov": 70, "cahaya": "senja"},
+    {"id": "C5_TampakAtas", "pos": [-20, -50], "ortho": true, "lebar_ortho": 820, "cahaya": "sore"},
+    {"id": "C6_DariSawah", "pos": [60, -200], "tinggi_di_atas_tanah": 3, "lihat_ke": [0, 60, 40], "fov": 70, "cahaya": "senja"}
+  ],
+  "cahaya": {
+    "sore": {"pitch": -12, "yaw": 0, "warna": [1.0, 0.86, 0.68], "intensitas_lux": 6.0},
+    "senja": {"pitch": -3, "yaw": 0, "warna": [1.0, 0.45, 0.30], "intensitas_lux": 2.0},
+    "catatan": "DirectionalLight yaw 0 = sinar menuju +X UE (timur), jadi matahari di barat"
+  }
+}
