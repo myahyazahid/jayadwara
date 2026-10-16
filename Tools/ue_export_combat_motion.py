@@ -11,22 +11,25 @@ import os
 import unreal
 
 AKSA = "/Game/Jayadwara/Characters/Aksa/Anims"
+MONT = f"{AKSA}/Montages"
+SEQ = f"{AKSA}/Attack"
 MANNY = "/Game/Characters/Mannequins/Anims/Unarmed/Attack"
-# (id, judul, montage kalau ada (untuk notify), animasi sumber kalau montage belum ada)
+# (id, judul, montage (untuk notify), animasi yang dipakai montage, cadangan kalau animasi belum ada)
+# Animasi ditulis langsung: isi slot montage (SlotAnimTracks) tidak bisa dibaca dari Python.
 MOVES = [
-    ("light_01", "Pukulan 1", f"{AKSA}/Montages/AM_Aksa_Light_01", f"{MANNY}/MM_Attack_01"),
-    ("light_02", "Pukulan 2", f"{AKSA}/Montages/AM_Aksa_Light_02", f"{MANNY}/MM_Attack_02"),
-    ("light_03", "Pukulan 3", f"{AKSA}/Montages/AM_Aksa_Light_03", f"{MANNY}/MM_Attack_03"),
-    ("light_04", "Pukulan 4", f"{AKSA}/Montages/AM_Aksa_Light_04", f"{MANNY}/MM_ChargedAttack"),
-    ("lunge", "Terjang", f"{AKSA}/Montages/AM_Aksa_Lunge", None),
-    ("back", "Pukul mundur", f"{AKSA}/Montages/AM_Aksa_Back", None),
-    ("heavy", "Pukulan berat", f"{AKSA}/Montages/AM_Aksa_Heavy", None),
-    ("finisher_01", "Finisher 1", f"{AKSA}/Montages/AM_Aksa_Finisher_01", None),
-    ("finisher_02", "Finisher 2", f"{AKSA}/Montages/AM_Aksa_Finisher_02", None),
-    ("air", "Tendangan udara", f"{AKSA}/Montages/AM_Aksa_Air", None),
-    ("air_slam", "Hantaman ke bawah", f"{AKSA}/Montages/AM_Aksa_AirSlam", None),
-    ("block", "Tangkis (pose)", f"{AKSA}/Montages/AM_Aksa_Block", None),
-    ("stagger", "Stagger", f"{AKSA}/Montages/AM_Aksa_Stagger", None),
+    ("light_01", "Pukulan 1", f"{MONT}/AM_Aksa_Light_01", f"{SEQ}/A_Aksa_Attack_01", f"{MANNY}/MM_Attack_01"),
+    ("light_02", "Pukulan 2", f"{MONT}/AM_Aksa_Light_02", f"{SEQ}/A_Aksa_Attack_02", f"{MANNY}/MM_Attack_02"),
+    ("light_03", "Pukulan 3", f"{MONT}/AM_Aksa_Light_03", f"{SEQ}/A_Aksa_Attack_03", f"{MANNY}/MM_Attack_03"),
+    ("light_04", "Pukulan 4", f"{MONT}/AM_Aksa_Light_04", f"{SEQ}/A_Aksa_Attack_04", f"{MANNY}/MM_ChargedAttack"),
+    ("lunge", "Terjang", f"{MONT}/AM_Aksa_Lunge", f"{SEQ}/A_Aksa_Attack_01", None),
+    ("back", "Pukul mundur", f"{MONT}/AM_Aksa_Back", f"{SEQ}/A_Aksa_Attack_03", None),
+    ("heavy", "Pukulan berat", f"{MONT}/AM_Aksa_Heavy", f"{SEQ}/A_Aksa_Attack_02", None),
+    ("finisher_01", "Finisher 1", f"{MONT}/AM_Aksa_Finisher_01", f"{SEQ}/A_Aksa_Attack_03", None),
+    ("finisher_02", "Finisher 2", f"{MONT}/AM_Aksa_Finisher_02", f"{SEQ}/A_Aksa_Attack_04", None),
+    ("air", "Tendangan udara", f"{MONT}/AM_Aksa_Air", f"{SEQ}/A_Aksa_Air", None),
+    ("air_slam", "Hantaman ke bawah", f"{MONT}/AM_Aksa_AirSlam", f"{SEQ}/A_Aksa_AirSlam", None),
+    ("stagger", "Stagger", f"{MONT}/AM_Aksa_Stagger", f"{SEQ}/A_Aksa_Stagger",
+     "/Game/Characters/Mannequins/Anims/Rifle/HitReact/MM_HitReact_Front_Hvy_01"),
 ]
 BONES = ["root", "pelvis", "spine_01", "spine_03", "spine_05", "neck_01", "head",
          "clavicle_l", "upperarm_l", "lowerarm_l", "hand_l", "clavicle_r", "upperarm_r", "lowerarm_r", "hand_r",
@@ -41,15 +44,6 @@ PE = unreal.AnimPoseExtensions
 
 def log(msg):
     unreal.log(f"[CombatMotion] {msg}")
-
-
-def montage_sequence(montage):
-    """Animasi pertama di slot montage (montage combat dibuat dari satu animasi)."""
-    for track in montage.get_editor_property("slot_anim_tracks"):
-        segs = track.get_editor_property("anim_track").get_editor_property("anim_segments")
-        if segs:
-            return segs[0].get_editor_property("anim_reference")
-    return None
 
 
 def windows(montage):
@@ -94,11 +88,10 @@ def sample(seq):
 def main():
     os.makedirs(OUT, exist_ok=True)
     result = {"fps": FPS, "units": "cm, X depan, Y kanan, Z atas", "moves": []}
-    for move_id, title, montage_path, fallback in MOVES:
+    for move_id, title, montage_path, seq_path, fallback in MOVES:
         montage = EAL.load_asset(montage_path) if EAL.does_asset_exist(montage_path) else None
-        seq = montage_sequence(montage) if montage else None
-        if seq is None and fallback and EAL.does_asset_exist(fallback):
-            seq = EAL.load_asset(fallback)
+        path = seq_path if EAL.does_asset_exist(seq_path) else fallback if fallback and EAL.does_asset_exist(fallback) else None
+        seq = EAL.load_asset(path) if path else None
         if seq is None:
             log(f"{title}: animasi belum ada, dilewati")
             continue

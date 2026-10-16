@@ -10,6 +10,14 @@
 | **Combat silat** | Melee melawan minion / bentuk awal monster. Sistem yang sama dipakai di mode raksasa |
 | **Dialog & pilihan** | Sederhana, mendukung tema "apa benar dia pahlawan?" dan konsekuensi (mis. salah tuduh di Ep 16) |
 
+### Satu sistem, dua skala
+
+Keputusan developer 16 Okt 2026. Aksa dan Jayadwara memakai **sistem combo inti yang sama**: input, ability, dan aturan combo (bagian di bawah). Yang beda per skala:
+- **Rasa**: animasi, hit-stop, guncangan kamera, debu/puing (`DA_CombatProfile_Human` vs `DA_CombatProfile_Giant`).
+- **Jurus khas**: 2–3 jurus per skala, mulai **Fase 2** (beam Jayadwara dibahas terpisah).
+
+Di Fase 1 combo kedua skala identik.
+
 ### Combo & arah
 
 Keputusan developer 16 Okt 2026. Berlaku sama untuk Aksa dan Jayadwara (satu ability, beda `DA_CombatProfile`).
@@ -17,7 +25,7 @@ Keputusan developer 16 Okt 2026. Berlaku sama untuk Aksa dan Jayadwara (satu abi
 | Input | Hasil |
 |---|---|
 | Pukulan ringan berulang | Combo **4 pukulan**; pukulan ke-4 = finisher |
-| **Maju** + pukul, musuh agak jauh | Pembuka **terjang** (gap closer) ke musuh, lalu combo lanjut dari pukulan 2 |
+| **Maju** + pukul, musuh agak jauh | Pembuka **terjang** (gap closer): lompat kecil ke dekat musuh, pukulan dari atas ke dada; lalu combo lanjut dari pukulan 2 |
 | **Mundur** + pukul | Pembuka **sapuan / pukulan sambil mundur**, lalu combo lanjut dari pukulan 2 |
 | Netral, atau maju saat musuh sudah dekat | Combo biasa |
 | **Kiri/kanan** + pukul | Untuk **memilih target** (soft target ala Arkham, [23](23-rencana-fase-1.md) Iterasi 4), bukan jurus |
@@ -25,17 +33,47 @@ Keputusan developer 16 Okt 2026. Berlaku sama untuk Aksa dan Jayadwara (satu abi
 
 Arah dihitung **relatif ke musuh yang dituju**, bukan ke kamera, supaya "maju" selalu berarti mendekati musuh. Combo sengaja tidak lebih dari 4 pukulan: referensinya Arkham + Sekiro ringan, dan combo yang lebih panjang membuat pemain terkunci animasi sehingga telat menangkis. Variasi datang dari pembuka arah dan cabang finisher, bukan dari panjang combo.
 
+#### Daftar jurus (konsep pose)
+
+Disetujui developer 16 Okt 2026 dari konsep pose ("Usulan Jurus Aksa"). Patokan bentuk gerak untuk memilih animasi placeholder F1 dan brief mocap F2; tendangan memakai bentuk taekwondo. Gaya combat tidak harus silat murni; yang dikejar combat yang seru (keputusan developer 16 Okt 2026). Sama untuk Aksa dan Jayadwara.
+
+| Input | Jurus | Gerak |
+|---|---|---|
+| Ringan ×1 | Jab | Pukulan lurus cepat tangan kiri (depan) |
+| Ringan ×2 | Cross | Pukulan lurus tangan kanan dengan putaran pinggul |
+| Ringan ×3 | Hook | Pukulan melengkung tangan kiri, siku setinggi bahu |
+| Ringan ×4 | Tendangan putar belakang (*dwi huryeo chagi*) | Badan berputar membelakangi musuh, tumit kanan disabetkan melengkung; akhir combo |
+| Maju + ringan | Terjang | Lompat kecil ke dekat musuh, tangan kanan dari atas dihantamkan ke dada |
+| Mundur + ringan | Pukul mundur | Langkah mundur ±1,5 m lalu jab balasan |
+| Berat (diam, atau setelah pukulan 3) | Pukulan putar | Satu tangan: badan diputar menjauh sambil menarik tangan, lalu melangkah maju dan memutar balik melepas pukulan lurus keras |
+| Ringan ×1 → berat | Finisher 1: tendangan belakang (*dwi chagi*) | Berputar membelakangi musuh, telapak kaki didorong lurus ke belakang |
+| Ringan ×2 → berat | Finisher 2: tendangan ganda melompat (*narae chagi*) | Lompat kecil, dua tendangan melingkar beruntun (kanan lalu kiri), dua kali kena |
+| Udara + ringan | Tendangan terbang memutar | Satu putaran penuh di udara, lalu kaki kanan menendang lurus, kaki kiri terlipat |
+| Udara + berat | Hantaman ke bawah | Menukik, tinju kanan ke tanah sampai berlutut, gelombang kejut |
+
+### Dodge per arah
+
+Keputusan developer 16 Okt 2026. Sama untuk Aksa dan Jayadwara; `UJDGA_Dodge` sudah memilih montage per arah.
+
+| Input | Gerak |
+|---|---|
+| Mundur + dodge | **Salto belakang** |
+| Kiri/kanan + dodge | Guling ke samping atau *cartwheel* |
+| Maju + dodge | Langkah cepat menunduk (bukan salto, supaya tidak menabrak musuh) |
+
+Gerak dibedakan per arah, bukan per jarak ke musuh, supaya pemain selalu tahu hasil tombolnya.
+
 ### Serangan udara
 
 Keputusan developer 16 Okt 2026. Sama untuk Aksa dan Jayadwara.
 
 | Input di udara | Hasil |
 |---|---|
-| Pukulan ringan | Pukulan/tendangan udara; badan "ngambang" sebentar (gravitasi dikurangi ±0,3 s). Maks. **2 per lompatan**, reset saat mendarat |
+| Pukulan ringan | Tendangan terbang memutar; badan "ngambang" sebentar (gravitasi dikurangi ±0,3 s). Maks. **2 per lompatan**, reset saat mendarat |
 | Pukulan berat | **Hantaman ke bawah**: menukik lurus ke tanah, saat mendarat gelombang kejut dengan radius (hit-stop, shake). Untuk Jayadwara nanti ikut merusak gedung sekitar ([23](23-rencana-fase-1.md) Iterasi 7) |
 | Dodge, tangkis | Tidak bisa di udara (F1) |
 
-Gaya tetap silat (tendangan melayang, hantaman siku/tinju ke bawah), bukan tendangan terbang khas Ultraman.
+Bentuknya tendangan terbang memutar dan hantaman tinju ke bawah (lihat daftar jurus di atas), bukan pose tendangan terbang khas Ultraman.
 
 ## Mode Raksasa (Jayadwara)
 
