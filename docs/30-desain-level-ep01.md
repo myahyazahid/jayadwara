@@ -1,6 +1,6 @@
 # 30 — Desain Level Ep 1: `Ep01_LawangSapta`
 
-> **Status: DISETUJUI v0.2 (15 Okt 2026)**: keputusan E1–E7 dijawab developer (semua sesuai usulan, bagian 9). Blockout 3D Blender didokumentasikan dulu, eksekusi nanti (bagian 10). Rincian dari pola di [28](28-struktur-level-episode.md#ep-1--ep01_lawangsapta--sore--senja-merah--awal-malam).
+> **Status: v0.3, tata letak v02 (16 Okt 2026)**: developer menilai greybox v01 terlalu kecil saat dimainkan sebagai Jayadwara. Jarak antarzona diperbesar ±1,7× dengan area baru (bagian 2a); angka di bagian 2 adalah **v01 (arsip)**. Keputusan E1–E7 tetap berlaku (bagian 9).
 > Sumber: [17](17-skenario-arc-1.md#episode-1--gerbang-yang-retak) (adegan), [18](18-kebutuhan-episode-1.md#c-lingkungan--level) (zona & aset), [11](11-vertical-slice-spec.md) (scope), [23](23-rencana-fase-1.md) (angka combat & level uji). Kalau bertentangan, dokumen sumber yang berlaku.
 
 **Visual:** denah berlapis, potongan bukit berskala, perbandingan tinggi, dan linimasa cahaya ada di [`visual/ep01-lawang-sapta.html`](visual/ep01-lawang-sapta.html) (buka di browser).
@@ -30,7 +30,39 @@ Koreksi terhadap gambar konsep saat greybox: plato diperlebar dari ±100 m ke ±
 
 ---
 
-## 2. Denah (tampak atas)
+## 2a. Tata letak v02 (16 Okt 2026, yang berlaku)
+
+**Alasan:** setelah greybox v01 dimainkan (Hermes M5–M7), map terasa kecil dari mata Jayadwara 45 m, apalagi setelah Jayadwara dibuat gesit (±69 m/s, PR #29). Keputusan developer: **jarak antarzona diperbesar ±1,7×, ukuran objek tetap ukuran asli** (rumah, undakan 2,5 m, tangga, candi), ditambah area baru dan pembanding skala.
+
+![Tata letak v02 tampak atas](visual/ep01_layout_v02_atas.png)
+
+| | v01 (arsip, bagian 2) | **v02** |
+|---|---|---|
+| Medan | 800 × 700 m | **1400 × 1220 m** |
+| Arena raksasa | ±530 × 550 m | **1190 × 1025 m** |
+| Plato candi (+35) | ±120 m | **200 × 208 m**, candi induk di belakang (y 320), halaman luas untuk Jayadwara |
+| Galian | 140 × 120 m, undakan ±12 m | **220 × 190 m**, undakan ±20 m (tinggi tetap 2,5 m), dasar ±100 × 85 m |
+| Galian → desa | ≥150 m | **≥255 m** |
+| Sawah (aman) | 300 × 160 m | **510 × 280 m** |
+| Rute Aksa START → ★3 | ±290 m (±1 mnt) | **±735 m (±2,4 mnt jalan)** |
+
+**Area baru:**
+| Area | Untuk Aksa | Untuk Jayadwara |
+|---|---|---|
+| **Desa = titik mulai** (barat daya, dekat kali) | Mobil DWARA lewat jalan desa dari tenggara (jalan akses ke atas ditutup garis polisi). Aksa jalan kaki lewat **jalan setapak dan kebun** ke bibir galian barat (★1), mengenal warga dulu | Desa yang dilindungi (penalti) |
+| **Base camp Adikara** (timur galian, +25 m): kantor kontainer ×3, pos mandor, gudang alat, truk ×3, tumpukan pipa/besi, pagar seng | ○ opsional: dokumen relokasi Adikara (usulan) | Semua hancur **tanpa penalti** (milik Adikara) |
+| **Area pilar tol** (timur jauh, lembah 0 m): 8 pilar 40 m, 2 gelagar terpasang | — | Zona bertarung kedua tanpa penalti; pilar = penghalang/senjata |
+| **Hutan + reruntuhan candi perwara** (utara plato) | ○ opsional: relief perwara (usulan) | Batas arena yang jauh |
+| **Pembanding skala** | 775 pohon (6 kelompok), 30 tiang listrik, siluet bukit dan kota di horizon | Membuat ukuran terbaca dari 45 m |
+
+**Data (sumber kebenaran, dipakai Hermes dan nanti `Tools/ue_greybox_ep01.py`):** [`Art/Level/ep01_medan_v02.py`](../Art/Level/ep01_medan_v02.py) (medan + slot material + 14 titik uji) dan [`Art/Level/ep01_layout_v02.json`](../Art/Level/ep01_layout_v02.json), yang **dibuat** oleh [`Art/Level/buat_layout_ep01_v02.py`](../Art/Level/buat_layout_ep01_v02.py). Tata letak diubah di generator, bukan di JSON. Instruksi Hermes: [`Hermes/maps_ep1_v02_hermes.md`](../Hermes/maps_ep1_v02_hermes.md) (branch `hermes/maps_ep1_v02`).
+
+**Dampak ke skenario:** adegan 3 ([17](17-skenario-arc-1.md#adegan-3--tiba-di-galian--main--koms)) kini dimulai di desa, bukan di garis polisi. Isi dialog (mandor, batu latihan) tetap; mandor ditemui di jalan setapak atau base camp. Revisi teks skenario menyusul.
+
+---
+
+## 2. Denah v01 (arsip)
+
 
 Utara = arah candi. Angka = ketinggian tanah relatif terhadap desa (m).
 
