@@ -5,10 +5,12 @@ Butuh: build C++ dengan kompensasi GlobalAnimRateScale di JDGA_LightAttack (13 O
 (GC_Hit_*, BP_TrainingDummy, DA_InputConfig_Human) dan ue_setup_jayadwara2.py (MM_Attack_0x_JD2).
 Pakai: python Tools/ue_remote.py Tools/ue_setup_giant_combo.py
 Membuat / mengisi ulang (aman diulang; jalankan ulang setelah ue_setup_jayadwara2.py karena animasi dibuat ulang):
-  Jayadwara2/Combat/A_JD2_Attack_01..03     salinan MM_Attack_0x_JD2 (ue_setup_jayadwara2.py menghapus isi Anims/ tiap jalan)
-  Jayadwara2/Combat/AM_JD2_Light_01..03     notify JD Hit Window + JD Combo Window, waktu sama dengan Aksa (animasi sumber sama)
+  Jayadwara2/Combat/A_JD2_Attack_01..04     salinan MM_Attack_0x_JD2 + MM_ChargedAttack_JD2 (ue_setup_jayadwara2.py menghapus isi Anims/ tiap jalan)
+  Jayadwara2/Combat/AM_JD2_Light_01..04     notify JD Hit Window + JD Combo Window, waktu sama dengan Aksa (animasi sumber sama);
+                                            langkah 4 dilewati (combo 3) kalau MM_ChargedAttack_JD2 belum di-retarget
+  Jayadwara2/Combat/AM_JD2_Lunge, AM_JD2_Back, AM_JD2_Finisher_01..02   pembuka arah & cabang finisher (docs/07 "Combo & arah")
   Jayadwara2/Combat/AM_JD2_Heavy, AM_JD2_Block   sama dengan AM_Aksa_Heavy/Block (ue_setup_defense.py), dari A_JD2_Attack_02
-  Data/DA_CombatProfile_Giant               damage 10/10/18, laju terlihat 1,0 (ala Mebius, 16 Okt 2026), radius hit x skala, hit-stop 0,12 s, shake lebih besar;
+  Data/DA_CombatProfile_Giant               damage 10/10/12/20, laju terlihat 1,0 (ala Mebius, 16 Okt 2026), radius hit x skala, hit-stop 0,12 s, shake lebih besar;
                                             berat 30/40/25, dodge & tangkis/parry (GIANT_DEFENSE, parry 0,25 s)
   Data/DA_AbilitySet_Jayadwara              atribut awal (Sync penuh), ringan/berat/dodge/tangkis, buffer input 0,3 s
   BP_Jayadwara2                             ability_set, input_config (DA_InputConfig_Human; IMC_Giant di Iterasi 6), combat_profile
@@ -30,9 +32,27 @@ STEPS = [
      "hit": ("hand_r", 0.28, 0.20), "combo": (0.45, 0.35)},
     {"name": "AM_JD2_Light_02", "seq": "A_JD2_Attack_02", "source": f"{SRC}/MM_Attack_02_JD2", "damage": 10.0, "poise": 5.0,
      "hit": ("hand_l", 0.30, 0.20), "combo": (0.48, 0.34)},
-    {"name": "AM_JD2_Light_03", "seq": "A_JD2_Attack_03", "source": f"{SRC}/MM_Attack_03_JD2", "damage": 18.0, "poise": 15.0,
-     "hit": ("foot_r", 0.24, 0.48), "combo": None},
+    {"name": "AM_JD2_Light_03", "seq": "A_JD2_Attack_03", "source": f"{SRC}/MM_Attack_03_JD2", "damage": 12.0, "poise": 8.0,
+     "hit": ("foot_r", 0.24, 0.48), "combo": (0.69, 0.35)},
+    {"name": "AM_JD2_Light_04", "seq": "A_JD2_Attack_04", "source": f"{SRC}/MM_ChargedAttack_JD2", "damage": 20.0, "poise": 20.0,
+     "hit": "auto", "combo": None, "optional": True},
 ]
+# Sama dengan OPENERS/FINISHERS di ue_setup_light_combo.py; jarak gerak x MOVE_SCALE (± proporsional skala, seperti dodge).
+OPENERS = {
+    "lunge_attack": {"name": "AM_JD2_Lunge", "seq": "A_JD2_Attack_01", "damage": 10.0, "poise": 8.0,
+                     "hit": ("hand_r", 0.28, 0.20), "combo": (0.45, 0.35),
+                     "move_distance": 600.0, "move_duration": 0.22, "stop_at_target": True},
+    "back_attack": {"name": "AM_JD2_Back", "seq": "A_JD2_Attack_03", "damage": 10.0, "poise": 8.0,
+                    "hit": ("foot_r", 0.24, 0.48), "radius_scale": 50.0 / 30.0, "combo": (0.69, 0.35),
+                    "move_distance": -150.0, "move_duration": 0.25, "stop_at_target": False},
+}
+DIRECTION_CM = {"target_search_radius": 800.0, "lunge_min_distance": 250.0, "lunge_stop_distance": 100.0}
+FINISHERS = [
+    {"name": "AM_JD2_Finisher_01", "seq": "A_JD2_Attack_03", "hit": ("foot_r", 0.24, 0.48), "rate": 0.8},
+    {"name": "AM_JD2_Finisher_02", "seq": "A_JD2_Attack_04", "hit": "auto", "rate": 0.85},
+]
+MOVE_SCALE_FACTOR = 0.6     # x skala raksasa (dodge: 400 cm -> 5500 cm)
+STRIKE_BONES = ("hand_r", "hand_l", "foot_r", "foot_l")
 HEAVY = {"hit": ("hand_l", 0.32, 0.24), "damage": 30.0, "poise": 40.0, "stamina": 25.0, "rate": 0.75}
 BLOCK_HOLD = 0.75
 # Detik nyata. Dodge: durasi & i-frame sama dengan manusia (ala Mebius, 16 Okt 2026; dulu / 0,55), jarak ±0,6 x proporsional skala.
@@ -97,7 +117,7 @@ def check_sockets():
         return
     bones = {str(b) for b in unreal.AnimPoseExtensions.get_bone_names(unreal.AnimPoseExtensions.get_reference_pose(mesh.skeleton))}
     for s in STEPS:
-        if s["hit"][0] not in bones:
+        if s["hit"] != "auto" and s["hit"][0] not in bones:
             fail(f"tulang {s['hit'][0]} tidak ada di SK_Jayadwara2")
 
 
@@ -105,7 +125,8 @@ def check_sockets():
 def make_montages(mesh_rate):
     """Buat ulang salinan animasi + montage tiap jalan (sumber MM_Attack_0x_JD2 bisa berubah setelah retarget ulang)."""
     out = []
-    for name in ("AM_JD2_Heavy", "AM_JD2_Block"):                # merujuk A_JD2_Attack_02: hapus dulu
+    extra = ["AM_JD2_Heavy", "AM_JD2_Block"] + [o["name"] for o in OPENERS.values()] + [f["name"] for f in FINISHERS]
+    for name in extra:                                           # merujuk A_JD2_Attack_0x: hapus dulu
         if EAL.does_asset_exist(f"{COMBAT}/{name}"):
             EAL.delete_asset(f"{COMBAT}/{name}")
     for step in STEPS:
@@ -113,7 +134,11 @@ def make_montages(mesh_rate):
             if EAL.does_asset_exist(p):
                 EAL.delete_asset(p)
         if not EAL.does_asset_exist(step["source"]):
-            fail(f"{step['source']} tidak ada (jalankan ue_setup_jayadwara2.py)")
+            if step.get("optional"):
+                unreal.log_warning(f"[Jayadwara2] {step['source']} belum ada: {step['name']} dilewati "
+                                   "(jalankan ulang ue_setup_jayadwara2.py untuk combo 4 pukulan)")
+            else:
+                fail(f"{step['source']} tidak ada (jalankan ue_setup_jayadwara2.py)")
             out.append(None)
             continue
         seq = EAL.duplicate_asset(step["source"], f"{COMBAT}/{step['seq']}")
@@ -126,17 +151,68 @@ def make_montages(mesh_rate):
             b.set_editor_property("blend_time", t * mesh_rate)
             m.set_editor_property(prop, b)
 
-        AL.add_animation_notify_track(m, "Combat", unreal.LinearColor(1.0, 0.3, 0.2, 1.0))
-        socket, start, dur = step["hit"]
-        hit = AL.add_animation_notify_state_event(m, "Combat", start, dur, unreal.JDAnimNotifyState_HitWindow)
-        hit.set_editor_property("socket_name", socket)
-        if step["combo"]:
-            AL.add_animation_notify_state_event(m, "Combat", step["combo"][0], step["combo"][1], unreal.JDAnimNotifyState_ComboWindow)
+        socket = add_combat_notifies(m, step, seq)
         EAL.save_loaded_asset(seq, only_if_is_dirty=False)
         EAL.save_loaded_asset(m, only_if_is_dirty=False)
         log(f"{step['name']} dari {step['source'].rsplit('/', 1)[1]} (hit {socket})")
         out.append(m)
     return out
+
+
+def strike_timing(seq):
+    """Sama dengan ue_setup_light_combo.py: hit window dari puncak kecepatan tangan/kaki relatif pelvis."""
+    length = AL.get_sequence_length(seq)
+    opts = unreal.AnimPoseEvaluationOptions()
+    world = unreal.AnimPoseSpaces.WORLD
+    dt = 1.0 / 60.0
+    prev, best = None, (0.0, "hand_r", length * 0.4)
+    for i in range(int(length / dt) + 1):
+        t = min(i * dt, length)
+        pose = unreal.AnimPoseExtensions.get_anim_pose_at_time(seq, t, opts)
+        pelvis = unreal.AnimPoseExtensions.get_bone_pose(pose, "pelvis", world).translation
+        pos = {b: unreal.AnimPoseExtensions.get_bone_pose(pose, b, world).translation - pelvis for b in STRIKE_BONES}
+        if prev:
+            for b in STRIKE_BONES:
+                v = (pos[b] - prev[b]).length() / dt
+                if v > best[0]:
+                    best = (v, b, t)
+        prev = pos
+    _, bone, peak = best
+    start = max(0.0, peak - 0.12)
+    timing = (bone, round(start, 2), round(min(0.22, length - start), 2))
+    log(f"{seq.get_name()}: puncak {bone} pada {peak:.2f} s -> hit {timing}")
+    return timing
+
+
+def add_combat_notifies(m, step, seq, hit_radius=0.0):
+    AL.add_animation_notify_track(m, "Combat", unreal.LinearColor(1.0, 0.3, 0.2, 1.0))
+    socket, start, dur = strike_timing(seq) if step["hit"] == "auto" else step["hit"]
+    hit = AL.add_animation_notify_state_event(m, "Combat", start, dur, unreal.JDAnimNotifyState_HitWindow)
+    hit.set_editor_property("socket_name", socket)
+    if hit_radius > 0.0:
+        hit.set_editor_property("radius_override", hit_radius)
+    if step.get("combo"):
+        AL.add_animation_notify_state_event(m, "Combat", step["combo"][0], step["combo"][1], unreal.JDAnimNotifyState_ComboWindow)
+    return socket
+
+
+def make_step_montage(step, mesh_rate, hit_radius=0.0):
+    """Montage pembuka/finisher dari salinan A_JD2_Attack_0x (make_montages sudah menghapus yang lama)."""
+    seq = EAL.load_asset(f"{COMBAT}/{step['seq']}") if EAL.does_asset_exist(f"{COMBAT}/{step['seq']}") else None
+    if not seq:
+        unreal.log_warning(f"[Jayadwara2] {step['seq']} belum ada: {step['name']} dilewati")
+        return None
+    f = unreal.AnimMontageFactory()
+    f.set_editor_property("source_animation", seq)
+    m = asset_tools.create_asset(step["name"], COMBAT, unreal.AnimMontage, f)
+    for prop, t in (("blend_in", BLEND_IN_S), ("blend_out", BLEND_OUT_S)):
+        b = m.get_editor_property(prop)
+        b.set_editor_property("blend_time", t * mesh_rate)
+        m.set_editor_property(prop, b)
+    add_combat_notifies(m, step, seq, hit_radius)
+    EAL.save_loaded_asset(m, only_if_is_dirty=False)
+    log(f"{step['name']} dari {step['seq']}")
+    return m
 
 
 def make_extra_montage(name, seq_path, mesh_rate, blend_in, blend_out, hit=None):
@@ -167,6 +243,8 @@ def setup_profile(montages, giant_scale, mesh_rate):
     prof = ensure_data_asset("DA_CombatProfile_Giant", unreal.JDCombatProfile)
     steps = []
     for step, m in zip(STEPS, montages):
+        if m is None:
+            continue
         s = unreal.JDAttackStep()
         s.set_editor_property("montage", m)
         s.set_editor_property("damage", step["damage"])
@@ -195,6 +273,32 @@ def setup_profile(montages, giant_scale, mesh_rate):
     for k, v in GIANT_DEFENSE.items():
         prof.set_editor_property(k, v)
     prof.set_editor_property("block_montage", block)
+
+    move_scale = giant_scale * MOVE_SCALE_FACTOR
+    for prop, o in OPENERS.items():
+        st = unreal.JDAttackStep()
+        st.set_editor_property("montage", make_step_montage(o, mesh_rate, HUMAN_HIT_RADIUS * giant_scale * o.get("radius_scale", 0.0)))
+        st.set_editor_property("damage", o["damage"])
+        st.set_editor_property("poise_damage", o["poise"])
+        st.set_editor_property("hit_cue", tag("GameplayCue.Hit.Heavy"))
+        st.set_editor_property("move_distance", o["move_distance"] * move_scale)
+        st.set_editor_property("move_duration", o["move_duration"])
+        st.set_editor_property("stop_at_target", o["stop_at_target"])
+        prof.set_editor_property(prop, st)
+    for k, v in DIRECTION_CM.items():
+        prof.set_editor_property(k, v * move_scale)
+    prof.set_editor_property("direction_threshold", 0.5)
+    finishers = []
+    for fin in FINISHERS:
+        st = unreal.JDAttackStep()
+        st.set_editor_property("montage", make_step_montage(fin, mesh_rate))
+        st.set_editor_property("damage", HEAVY["damage"])
+        st.set_editor_property("poise_damage", HEAVY["poise"])
+        st.set_editor_property("stamina_cost", HEAVY["stamina"])
+        st.set_editor_property("play_rate", fin["rate"])
+        st.set_editor_property("hit_cue", tag("GameplayCue.Hit.Heavy"))
+        finishers.append(st)
+    prof.set_editor_property("heavy_finishers", finishers)
     EAL.save_loaded_asset(prof, only_if_is_dirty=False)
     log(f"DA_CombatProfile_Giant: laju {PLAY_RATE}, radius hit {HUMAN_HIT_RADIUS * giant_scale:.0f} cm, hit-stop {HIT_STOP} s")
     return prof

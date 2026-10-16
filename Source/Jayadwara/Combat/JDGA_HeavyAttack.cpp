@@ -32,8 +32,15 @@ bool UJDGA_HeavyAttack::CanActivateAbility(const FGameplayAbilitySpecHandle Hand
 	{
 		return false;
 	}
-	const UJDCombatProfile* Profile = GetCombatProfile(ActorInfo);
-	if (!Profile || !Profile->HeavyAttack.Montage || !HasStamina(ActorInfo, Profile->HeavyAttack.StaminaCost))
+	const AActor* Avatar = ActorInfo ? ActorInfo->AvatarActor.Get() : nullptr;
+	const UJDCombatComponent* Combat = Avatar ? Avatar->FindComponentByClass<UJDCombatComponent>() : nullptr;
+	const UJDCombatProfile* Profile = Combat ? Combat->GetCombatProfile() : nullptr;
+	if (!Profile)
+	{
+		return false;
+	}
+	const FJDAttackStep& Step = Profile->GetHeavyAttack(Combat->GetComboStepForFinisher());
+	if (!Step.Montage || !HasStamina(ActorInfo, Step.StaminaCost))
 	{
 		return false;
 	}
@@ -51,7 +58,8 @@ void UJDGA_HeavyAttack::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
 		EndAbility(Handle, ActorInfo, ActivationInfo, true, true);
 		return;
 	}
-	const FJDAttackStep& Step = Profile->HeavyAttack;
+	// Cabang finisher: combo ringan yang baru dipotong menentukan pukulan beratnya (docs/07 "Combo & arah").
+	const FJDAttackStep& Step = Profile->GetHeavyAttack(Combat->GetComboStepForFinisher());
 
 	SpendStamina(Step.StaminaCost);
 	FaceInputDirection();

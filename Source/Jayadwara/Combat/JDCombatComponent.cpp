@@ -8,10 +8,12 @@
 #include "Abilities/JDGameplayTags.h"
 #include "Animation/AnimInstance.h"
 #include "Camera/CameraShakeBase.h"
+#include "CoreGlobals.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "DrawDebugHelpers.h"
 #include "Engine/Engine.h"
 #include "Engine/World.h"
+#include "EngineUtils.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/PlayerController.h"
@@ -84,6 +86,60 @@ void UJDCombatComponent::EndAttack()
 	EndHitWindow();
 	bAttackActive = false;
 	HitActors.Reset();
+}
+
+AActor* UJDCombatComponent::FindNearestTarget(float Radius) const
+{
+	const APawn* Owner = Cast<APawn>(GetOwner());
+	const UWorld* World = GetWorld();
+	if (!Owner || !World || Radius <= 0.0f)
+	{
+		return nullptr;
+	}
+	const FVector Origin = Owner->GetActorLocation();
+	AActor* Best = nullptr;
+	float BestDistSq = FMath::Square(Radius);
+	for (TActorIterator<APawn> It(World); It; ++It)
+	{
+		APawn* Other = *It;
+		// Pihak lawan = beda status dikendalikan pemain; Aksa yang disembunyikan saat transformasi dilewati.
+		if (Other == Owner || Other->IsHidden() || Other->IsPlayerControlled() == Owner->IsPlayerControlled()
+			|| !Other->FindComponentByClass<UJDCombatComponent>())
+		{
+			continue;
+		}
+		const UAbilitySystemComponent* ASC = UAbilitySystemGlobals::GetAbilitySystemComponentFromActor(Other);
+		if (!ASC || ASC->HasMatchingGameplayTag(JDGameplayTags::State_Dead))
+		{
+			continue;
+		}
+		const float DistSq = FVector::DistSquared2D(Origin, Other->GetActorLocation());
+		if (DistSq < BestDistSq)
+		{
+			BestDistSq = DistSq;
+			Best = Other;
+		}
+	}
+	return Best;
+}
+
+void UJDCombatComponent::SetLightComboStep(int32 Step, bool bWasCancelled)
+{
+	if (Step == INDEX_NONE && bWasCancelled && LightComboStep != INDEX_NONE)
+	{
+		CancelledLightComboStep = LightComboStep;
+		CancelledLightComboFrame = GFrameCounter;
+	}
+	LightComboStep = Step;
+}
+
+int32 UJDCombatComponent::GetComboStepForFinisher() const
+{
+	if (LightComboStep != INDEX_NONE)
+	{
+		return LightComboStep;
+	}
+	return CancelledLightComboFrame == GFrameCounter ? CancelledLightComboStep : INDEX_NONE;
 }
 
 void UJDCombatComponent::BeginHitWindow(FName SocketName, float RadiusOverride)

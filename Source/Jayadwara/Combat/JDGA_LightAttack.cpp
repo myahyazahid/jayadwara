@@ -2,11 +2,13 @@
 
 #include "Abilities/JDAbilitySystemComponent.h"
 #include "Abilities/JDGameplayTags.h"
+#include "Abilities/Tasks/AbilityTask_ApplyRootMotionConstantForce.h"
 #include "Abilities/Tasks/AbilityTask_PlayMontageAndWait.h"
 #include "Combat/JDCombatComponent.h"
 #include "Combat/JDCombatProfile.h"
 #include "Engine/World.h"
 #include "GameFramework/Character.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "TimerManager.h"
 
 UJDGA_LightAttack::UJDGA_LightAttack()
@@ -55,7 +57,53 @@ void UJDGA_LightAttack::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
 			.AddUObject(this, &UJDGA_LightAttack::OnComboWindowChanged);
 	}
 
+	if (const FJDAttackStep* Opener = ChooseOpener())
+	{
+		PlayAttack(*Opener, false);
+		return;
+	}
 	PlayStep(0);
+}
+
+const FJDAttackStep* UJDGA_LightAttack::ChooseOpener()
+{
+	OpenerTarget.Reset();
+	AActor* Avatar = GetAvatarActorFromActorInfo();
+	const UJDCombatComponent* Combat = GetCombat();
+	const UJDCombatProfile* Profile = Combat ? Combat->GetCombatProfile() : nullptr;
+	const FVector Input = GetInputDirection2D();
+	if (!Avatar || !Profile || Input.IsZero())
+	{
+		return nullptr;
+	}
+	AActor* Target = Combat->FindNearestTarget(Profile->TargetSearchRadius);
+	if (!Target)
+	{
+		return nullptr;
+	}
+	const FVector ToTarget = (Target->GetActorLocation() - Avatar->GetActorLocation()) * FVector(1.0f, 1.0f, 0.0f);
+	const FVector ToTargetDir = ToTarget.GetSafeNormal();
+	const float Dot = FVector::DotProduct(Input, ToTargetDir);
+
+	const FJDAttackStep* Opener = nullptr;
+	if (Dot >= Profile->DirectionThreshold)
+	{
+		if (ToTarget.Size() > Profile->LungeMinDistance && Profile->LungeAttack.Montage)
+		{
+			Opener = &Profile->LungeAttack;
+		}
+	}
+	else if (Dot <= -Profile->DirectionThreshold && Profile->BackAttack.Montage)
+	{
+		Opener = &Profile->BackAttack;
+	}
+	if (Opener && !ToTargetDir.IsZero())
+	{
+		// Pembuka selalu menghadap target: terjang maju ke arahnya, mundur sambil memukul ke arahnya.
+		Avatar->SetActorRotation(FRotator(0.0f, ToTargetDir.Rotation().Yaw, 0.0f));
+		OpenerTarget = Target;
+	}
+	return Opener;
 }
 
 void UJDGA_LightAttack::PlayStep(int32 Index)
@@ -67,7 +115,17 @@ void UJDGA_LightAttack::PlayStep(int32 Index)
 		EndAbility(CurrentSpecHandle, CurrentActorInfo, CurrentActivationInfo, true, true);
 		return;
 	}
-	const FJDAttackStep& Step = Profile->LightCombo[Index];
+	PlayAttack(Profile->LightCombo[Index], true);
+}
+
+void UJDGA_LightAttack::PlayAttack(const FJDAttackStep& Step, bool bFaceInput)
+{
+	UJDCombatComponent* Combat = GetCombat();
+	if (!Combat || !Step.Montage)
+	{
+		EndAbility(CurrentSpecHandle, CurrentActorInfo, CurrentActivationInfo, true, true);
+		return;
+	}
 
 	// Montage langkah sebelumnya digantikan: lepas callback-nya dulu supaya interupsi ini tidak mengakhiri ability.
 	if (MontageTask)
@@ -79,13 +137,22 @@ void UJDGA_LightAttack::PlayStep(int32 Index)
 		MontageTask->EndTask();
 		MontageTask = nullptr;
 	}
+	if (MoveTask)
+	{
+		MoveTask->EndTask();
+		MoveTask = nullptr;
+	}
 	if (UAbilitySystemComponent* ASC = GetAbilitySystemComponentFromActorInfo())
 	{
 		ASC->SetLooseGameplayTagCount(JDGameplayTags::State_Combat_ComboWindow, 0);
 	}
 
-	FaceInputDirection();
+	if (bFaceInput)
+	{
+		FaceInputDirection();
+	}
 	Combat->BeginAttack(Step);
+	Combat->SetLightComboStep(ComboIndex);
 
 	MontageTask = UAbilityTask_PlayMontageAndWait::CreatePlayMontageAndWaitProxy(this, NAME_None, Step.Montage, GetMontageRate(Step.PlayRate));
 	MontageTask->OnBlendOut.AddDynamic(this, &UJDGA_LightAttack::OnMontageFinished);
@@ -93,6 +160,24 @@ void UJDGA_LightAttack::PlayStep(int32 Index)
 	MontageTask->OnInterrupted.AddDynamic(this, &UJDGA_LightAttack::OnMontageInterrupted);
 	MontageTask->OnCancelled.AddDynamic(this, &UJDGA_LightAttack::OnMontageInterrupted);
 	MontageTask->ReadyForActivation();
+
+	ACharacter* Character = Cast<ACharacter>(GetAvatarActorFromActorInfo());
+	float Distance = Step.MoveDistance;
+	if (Step.bStopAtTarget && Distance > 0.0f && Character)
+	{
+		const UJDCombatProfile* Profile = Combat->GetCombatProfile();
+		const float ToTarget = OpenerTarget.IsValid() ? FVector::Dist2D(Character->GetActorLocation(), OpenerTarget->GetActorLocation()) : Distance;
+		Distance = FMath::Clamp(ToTarget - (Profile ? Profile->LungeStopDistance : 0.0f), 0.0f, Distance);
+	}
+	if (Character && !FMath::IsNearlyZero(Distance))
+	{
+		// Override root motion animasi selama MoveDuration (sama dengan dodge), lalu kecepatan dijepit supaya tidak meluncur.
+		const FVector Direction = Character->GetActorForwardVector().GetSafeNormal2D() * FMath::Sign(Distance);
+		MoveTask = UAbilityTask_ApplyRootMotionConstantForce::ApplyRootMotionConstantForce(
+			this, NAME_None, Direction, FMath::Abs(Distance) / Step.MoveDuration, Step.MoveDuration, false, nullptr,
+			ERootMotionFinishVelocityMode::ClampVelocity, FVector::ZeroVector, Character->GetCharacterMovement()->MaxWalkSpeed * 0.3f, true);
+		MoveTask->ReadyForActivation();
+	}
 }
 
 void UJDGA_LightAttack::InputPressed(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo,
@@ -172,8 +257,12 @@ void UJDGA_LightAttack::EndAbility(const FGameplayAbilitySpecHandle Handle, cons
 		if (UJDCombatComponent* Combat = GetCombat())
 		{
 			Combat->EndAttack();
+			// Dipotong pukulan berat -> langkah ini dipakai memilih cabang finisher (UJDGA_HeavyAttack).
+			Combat->SetLightComboStep(INDEX_NONE, bWasCancelled);
 		}
 		MontageTask = nullptr;
+		MoveTask = nullptr;
+		OpenerTarget.Reset();
 	}
 
 	Super::EndAbility(Handle, ActorInfo, ActivationInfo, bReplicateEndAbility, bWasCancelled);

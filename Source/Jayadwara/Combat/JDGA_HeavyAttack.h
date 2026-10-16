@@ -8,7 +8,8 @@ class UAbilityTask_PlayMontageAndWait;
 
 /**
  * Pukulan berat (docs/23 Iterasi 3): satu serangan dari UJDCombatProfile::HeavyAttack, makan stamina, tanpa charge di F1.
- * Bisa dimulai dari diam, dari jendela combo ringan (memotong combo), atau dari recovery serangan lain.
+ * Bisa dimulai dari diam, dari jendela combo ringan (memotong combo), atau dari recovery serangan lain. Memotong combo
+ * ringan di langkah ke-i memakai UJDCombatProfile::HeavyFinishers[i] kalau ada (cabang finisher).
  */
 UCLASS()
 class JAYADWARA_API UJDGA_HeavyAttack : public UJDGameplayAbility

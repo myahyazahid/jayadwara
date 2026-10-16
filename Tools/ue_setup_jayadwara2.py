@@ -27,6 +27,7 @@ ANIMS = [
     "/Game/Characters/Mannequins/Anims/Unarmed/Attack/MM_Attack_01",
     "/Game/Characters/Mannequins/Anims/Unarmed/Attack/MM_Attack_02",
     "/Game/Characters/Mannequins/Anims/Unarmed/Attack/MM_Attack_03",
+    "/Game/Characters/Mannequins/Anims/Unarmed/Attack/MM_ChargedAttack",   # langkah 4 combo (docs/07 "Combo & arah")
 ]
 SUFFIX = "_JD2"
 DISABLED_OPS = ["Run IK Rig"]          # FBIK pada mesh 45 m menurunkan pinggul (docs/13 Iterasi 6b)

@@ -57,6 +57,21 @@ public:
 
 	bool IsAttacking() const { return bAttackActive; }
 
+	/**
+	 * Target terdekat untuk arah combo (docs/07 "Combo & arah"): karakter lain yang terlihat, hidup, beda pihak, dalam
+	 * Radius. Sementara sampai UJDTargetingComponent (Iterasi 4).
+	 */
+	AActor* FindNearestTarget(float Radius) const;
+
+	/** Langkah combo ringan yang sedang jalan (dipanggil UJDGA_LightAttack; INDEX_NONE = combo berakhir). */
+	void SetLightComboStep(int32 Step, bool bWasCancelled = false);
+
+	/**
+	 * Langkah combo ringan untuk cabang finisher pukulan berat: langkah yang sedang jalan, atau yang baru dipotong di frame
+	 * ini (pukulan berat membatalkan combo sebelum ActivateAbility-nya jalan). INDEX_NONE = dari diam.
+	 */
+	int32 GetComboStepForFinisher() const;
+
 	/** Serangan berjalan tapi jendela hit sudah lewat: boleh dibatalkan dodge/tangkis (docs/23 bagian 5). */
 	bool IsInAttackRecovery() const { return bAttackActive && bHitWindowDone; }
 
@@ -106,4 +121,8 @@ private:
 	FTimerHandle HitStopTimer;
 
 	FTimerHandle StaggerTimer;
+
+	int32 LightComboStep = INDEX_NONE;
+	int32 CancelledLightComboStep = INDEX_NONE;
+	uint64 CancelledLightComboFrame = 0;
 };
