@@ -1,0 +1,7 @@
+LogWindowsTouchpad: Display: CacheForceMaxTouchpadSensitivityMode SetMaxTouchpadSensitivity
+LogLiveCodingServer: Display: Registered process C:\Program Files\Epic Games\UE_5.6\Engine\Binaries\Win64\UnrealEditor.exe (PID: 10536)
+LogLiveCodingServer: Display: Loading module C:\repository\unreal_engine\jayadwara_hermes_combo\Binaries\Win64\UnrealEditor-Jayadwara.dll (1.051 MB)
+LogLiveCodingServer: Display: Loading module C:\repository\unreal_engine\jayadwara_hermes_combo\Binaries\Win64\UnrealEditor-JayadwaraAnimNodes.dll (0.086 MB)
+LogLiveCodingServer: Display: Loading module C:\repository\unreal_engine\jayadwara_hermes_combo\Binaries\Win64\UnrealEditor-JayadwaraEditor.dll (0.140 MB)
+LogLiveCodingServer: Display: Loaded 3 module(s), 828 lazy load module(s), and 433 reserved page ranges (0.000s, 12 translation units)
+LogLiveCodingServer: Display: Live coding ready - Save changes and press Ctrl+Alt+F11 to re-compile code

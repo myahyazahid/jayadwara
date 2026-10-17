@@ -1,0 +1,350 @@
+{
+  "jumlah": 11,
+  "lulus": 11,
+  "gagal": 0,
+  "belum_retarget": [
+    "ybot"
+  ],
+  "file": [
+    {
+      "peran": "air",
+      "aset": "/Game/Hermes/ComboIter2/Mixamo/A_Aksa_Mx_air",
+      "gagal": [],
+      "catatan": [
+        "puncak global hand_r 636 cm/s @1.08 s (bukan kaki) — auto strike_timings proyek akan memilih tulang ini"
+      ],
+      "panjang_s": 1.5,
+      "frame_ue": 91,
+      "skeleton": "/Game/Characters/Mannequins/Meshes/SK_Mannequin.SK_Mannequin",
+      "panjang_fbx_s": 1.5,
+      "frame_fbx": 46,
+      "puncak": [
+        {
+          "tulang": "foot_l",
+          "waktu_s": 0.65,
+          "kecepatan_cm_s": 612.8
+        }
+      ],
+      "puncak_global": {
+        "tulang": "hand_r",
+        "waktu_s": 1.083,
+        "kecepatan_cm_s": 636.4
+      },
+      "kena_diharapkan": "kaki",
+      "kena_jumlah_diharapkan": 1,
+      "pinggul_min_cm": 74.34,
+      "lompat_maks_cm": 16.46,
+      "lompat_tulang": "foot_l",
+      "lulus": true
+    },
+    {
+      "peran": "air_slam",
+      "aset": "/Game/Hermes/ComboIter2/Mixamo/A_Aksa_Mx_air_slam",
+      "gagal": [],
+      "catatan": [
+        "peran boleh pinggul rendah (dodge/air_slam)"
+      ],
+      "panjang_s": 2.667,
+      "frame_ue": 161,
+      "skeleton": "/Game/Characters/Mannequins/Meshes/SK_Mannequin.SK_Mannequin",
+      "panjang_fbx_s": 2.667,
+      "frame_fbx": 81,
+      "puncak": [
+        {
+          "tulang": "hand_l",
+          "waktu_s": 1.25,
+          "kecepatan_cm_s": 1028.5
+        }
+      ],
+      "puncak_global": {
+        "tulang": "hand_l",
+        "waktu_s": 1.25,
+        "kecepatan_cm_s": 1028.5
+      },
+      "kena_diharapkan": null,
+      "kena_jumlah_diharapkan": 0,
+      "pinggul_min_cm": 35.84,
+      "lompat_maks_cm": 20.11,
+      "lompat_tulang": "hand_r",
+      "lulus": true
+    },
+    {
+      "peran": "back",
+      "aset": "/Game/Hermes/ComboIter2/Mixamo/A_Aksa_Mx_back",
+      "gagal": [],
+      "catatan": [],
+      "panjang_s": 0.867,
+      "frame_ue": 53,
+      "skeleton": "/Game/Characters/Mannequins/Meshes/SK_Mannequin.SK_Mannequin",
+      "panjang_fbx_s": 0.867,
+      "frame_fbx": 27,
+      "puncak": [
+        {
+          "tulang": "hand_r",
+          "waktu_s": 0.25,
+          "kecepatan_cm_s": 400.0
+        }
+      ],
+      "puncak_global": {
+        "tulang": "hand_r",
+        "waktu_s": 0.25,
+        "kecepatan_cm_s": 400.0
+      },
+      "kena_diharapkan": "tangan",
+      "kena_jumlah_diharapkan": 1,
+      "pinggul_min_cm": 81.94,
+      "lompat_maks_cm": 6.64,
+      "lompat_tulang": "hand_r",
+      "lulus": true
+    },
+    {
+      "peran": "finisher_01",
+      "aset": "/Game/Hermes/ComboIter2/Mixamo/A_Aksa_Mx_finisher_01",
+      "gagal": [],
+      "catatan": [],
+      "panjang_s": 1.6,
+      "frame_ue": 97,
+      "skeleton": "/Game/Characters/Mannequins/Meshes/SK_Mannequin.SK_Mannequin",
+      "panjang_fbx_s": 1.6,
+      "frame_fbx": 49,
+      "puncak": [
+        {
+          "tulang": "foot_l",
+          "waktu_s": 0.5,
+          "kecepatan_cm_s": 608.4
+        }
+      ],
+      "puncak_global": {
+        "tulang": "foot_l",
+        "waktu_s": 0.5,
+        "kecepatan_cm_s": 608.4
+      },
+      "kena_diharapkan": "kaki",
+      "kena_jumlah_diharapkan": 1,
+      "pinggul_min_cm": 85.86,
+      "lompat_maks_cm": 10.17,
+      "lompat_tulang": "foot_l",
+      "lulus": true
+    },
+    {
+      "peran": "finisher_02",
+      "aset": "/Game/Hermes/ComboIter2/Mixamo/A_Aksa_Mx_finisher_02",
+      "gagal": [],
+      "catatan": [],
+      "panjang_s": 1.667,
+      "frame_ue": 100,
+      "skeleton": "/Game/Characters/Mannequins/Meshes/SK_Mannequin.SK_Mannequin",
+      "panjang_fbx_s": 1.667,
+      "frame_fbx": 51,
+      "puncak": [
+        {
+          "tulang": "foot_r",
+          "waktu_s": 0.767,
+          "kecepatan_cm_s": 973.7
+        },
+        {
+          "tulang": "foot_r",
+          "waktu_s": 0.967,
+          "kecepatan_cm_s": 740.8
+        }
+      ],
+      "puncak_global": {
+        "tulang": "foot_r",
+        "waktu_s": 0.767,
+        "kecepatan_cm_s": 973.7
+      },
+      "kena_diharapkan": "kaki",
+      "kena_jumlah_diharapkan": 2,
+      "pinggul_min_cm": 82.61,
+      "lompat_maks_cm": 15.78,
+      "lompat_tulang": "foot_r",
+      "lulus": true
+    },
+    {
+      "peran": "finisher_03",
+      "aset": "/Game/Hermes/ComboIter2/Mixamo/A_Aksa_Mx_finisher_03",
+      "gagal": [],
+      "catatan": [],
+      "panjang_s": 2.667,
+      "frame_ue": 161,
+      "skeleton": "/Game/Characters/Mannequins/Meshes/SK_Mannequin.SK_Mannequin",
+      "panjang_fbx_s": 2.667,
+      "frame_fbx": 81,
+      "puncak": [
+        {
+          "tulang": "foot_r",
+          "waktu_s": 1.417,
+          "kecepatan_cm_s": 1169.5
+        }
+      ],
+      "puncak_global": {
+        "tulang": "foot_r",
+        "waktu_s": 1.417,
+        "kecepatan_cm_s": 1169.5
+      },
+      "kena_diharapkan": null,
+      "kena_jumlah_diharapkan": 0,
+      "pinggul_min_cm": 62.07,
+      "lompat_maks_cm": 18.93,
+      "lompat_tulang": "hand_r",
+      "lulus": true
+    },
+    {
+      "peran": "light_01",
+      "aset": "/Game/Hermes/ComboIter2/Mixamo/A_Aksa_Mx_light_01",
+      "gagal": [],
+      "catatan": [],
+      "panjang_s": 2.233,
+      "frame_ue": 135,
+      "skeleton": "/Game/Characters/Mannequins/Meshes/SK_Mannequin.SK_Mannequin",
+      "panjang_fbx_s": 2.233,
+      "frame_fbx": 68,
+      "puncak": [
+        {
+          "tulang": "hand_r",
+          "waktu_s": 0.55,
+          "kecepatan_cm_s": 583.1
+        }
+      ],
+      "puncak_global": {
+        "tulang": "hand_r",
+        "waktu_s": 0.55,
+        "kecepatan_cm_s": 583.1
+      },
+      "kena_diharapkan": "tangan",
+      "kena_jumlah_diharapkan": 1,
+      "pinggul_min_cm": 69.97,
+      "lompat_maks_cm": 10.92,
+      "lompat_tulang": "hand_r",
+      "lulus": true
+    },
+    {
+      "peran": "light_02",
+      "aset": "/Game/Hermes/ComboIter2/Mixamo/A_Aksa_Mx_light_02",
+      "gagal": [],
+      "catatan": [],
+      "panjang_s": 2.267,
+      "frame_ue": 136,
+      "skeleton": "/Game/Characters/Mannequins/Meshes/SK_Mannequin.SK_Mannequin",
+      "panjang_fbx_s": 2.267,
+      "frame_fbx": 69,
+      "puncak": [
+        {
+          "tulang": "hand_l",
+          "waktu_s": 0.633,
+          "kecepatan_cm_s": 707.3
+        }
+      ],
+      "puncak_global": {
+        "tulang": "hand_l",
+        "waktu_s": 0.633,
+        "kecepatan_cm_s": 707.3
+      },
+      "kena_diharapkan": "tangan",
+      "kena_jumlah_diharapkan": 1,
+      "pinggul_min_cm": 71.46,
+      "lompat_maks_cm": 12.2,
+      "lompat_tulang": "hand_l",
+      "lulus": true
+    },
+    {
+      "peran": "light_03",
+      "aset": "/Game/Hermes/ComboIter2/Mixamo/A_Aksa_Mx_light_03",
+      "gagal": [],
+      "catatan": [
+        "gerak identik dengan lunge (beda maks 0.00 cm) — kemungkinan salah download"
+      ],
+      "panjang_s": 2.167,
+      "frame_ue": 131,
+      "skeleton": "/Game/Characters/Mannequins/Meshes/SK_Mannequin.SK_Mannequin",
+      "panjang_fbx_s": 2.167,
+      "frame_fbx": 66,
+      "puncak": [
+        {
+          "tulang": "hand_r",
+          "waktu_s": 0.95,
+          "kecepatan_cm_s": 1052.1
+        }
+      ],
+      "puncak_global": {
+        "tulang": "hand_r",
+        "waktu_s": 0.95,
+        "kecepatan_cm_s": 1052.1
+      },
+      "kena_diharapkan": "tangan",
+      "kena_jumlah_diharapkan": 1,
+      "pinggul_min_cm": 76.94,
+      "lompat_maks_cm": 17.65,
+      "lompat_tulang": "hand_r",
+      "lulus": true,
+      "gerak_identik_dengan": [
+        "lunge"
+      ]
+    },
+    {
+      "peran": "light_04",
+      "aset": "/Game/Hermes/ComboIter2/Mixamo/A_Aksa_Mx_light_04",
+      "gagal": [],
+      "catatan": [
+        "puncak global hand_l 1207 cm/s @0.58 s (bukan kaki) — auto strike_timings proyek akan memilih tulang ini"
+      ],
+      "panjang_s": 2.033,
+      "frame_ue": 122,
+      "skeleton": "/Game/Characters/Mannequins/Meshes/SK_Mannequin.SK_Mannequin",
+      "panjang_fbx_s": 2.033,
+      "frame_fbx": 62,
+      "puncak": [
+        {
+          "tulang": "foot_r",
+          "waktu_s": 0.933,
+          "kecepatan_cm_s": 1074.1
+        }
+      ],
+      "puncak_global": {
+        "tulang": "hand_l",
+        "waktu_s": 0.583,
+        "kecepatan_cm_s": 1207.4
+      },
+      "kena_diharapkan": "kaki",
+      "kena_jumlah_diharapkan": 1,
+      "pinggul_min_cm": 79.85,
+      "lompat_maks_cm": 19.54,
+      "lompat_tulang": "hand_l",
+      "lulus": true
+    },
+    {
+      "peran": "lunge",
+      "aset": "/Game/Hermes/ComboIter2/Mixamo/A_Aksa_Mx_lunge",
+      "gagal": [],
+      "catatan": [
+        "gerak identik dengan light_03 (beda maks 0.00 cm) — kemungkinan salah download"
+      ],
+      "panjang_s": 2.167,
+      "frame_ue": 131,
+      "skeleton": "/Game/Characters/Mannequins/Meshes/SK_Mannequin.SK_Mannequin",
+      "panjang_fbx_s": 2.167,
+      "frame_fbx": 66,
+      "puncak": [
+        {
+          "tulang": "hand_r",
+          "waktu_s": 0.95,
+          "kecepatan_cm_s": 1052.1
+        }
+      ],
+      "puncak_global": {
+        "tulang": "hand_r",
+        "waktu_s": 0.95,
+        "kecepatan_cm_s": 1052.1
+      },
+      "kena_diharapkan": "tangan",
+      "kena_jumlah_diharapkan": 1,
+      "pinggul_min_cm": 76.94,
+      "lompat_maks_cm": 17.65,
+      "lompat_tulang": "hand_r",
+      "lulus": true,
+      "gerak_identik_dengan": [
+        "light_03"
+      ]
+    }
+  ]
+}

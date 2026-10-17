@@ -1,0 +1,15 @@
+[cek_fbx] 12 file di Hermes/Art/combo-iter2/Mixamo
+[cek_fbx] air.fbx: LULUS tulang=65 frame=46 fps=30 geser=210.66 cm gagal=[] catatan=['tidak In Place: pinggul geser 210.7 cm (dx -7.9, dy -210.5)']
+[cek_fbx] air_slam.fbx: LULUS tulang=65 frame=81 fps=30 geser=383.42 cm gagal=[] catatan=['tidak In Place: pinggul geser 383.4 cm (dx 0.4, dy -383.4)']
+[cek_fbx] back.fbx: LULUS tulang=65 frame=27 fps=30 geser=0.0 cm gagal=[] catatan=[]
+[cek_fbx] finisher_01.fbx: LULUS tulang=65 frame=49 fps=30 geser=0.0 cm gagal=[] catatan=[]
+[cek_fbx] finisher_02.fbx: LULUS tulang=65 frame=51 fps=30 geser=0.0 cm gagal=[] catatan=[]
+[cek_fbx] finisher_03.fbx: LULUS tulang=65 frame=81 fps=30 geser=0.04 cm gagal=[] catatan=[]
+[cek_fbx] light_01.fbx: LULUS tulang=65 frame=68 fps=30 geser=0.0 cm gagal=[] catatan=[]
+[cek_fbx] light_02.fbx: LULUS tulang=65 frame=69 fps=30 geser=0.0 cm gagal=[] catatan=[]
+[cek_fbx] light_03.fbx: LULUS tulang=65 frame=66 fps=30 geser=0.0 cm gagal=[] catatan=[]
+[cek_fbx] light_04.fbx: LULUS tulang=65 frame=62 fps=30 geser=51.29 cm gagal=[] catatan=['tidak In Place: pinggul geser 51.3 cm (dx -44.2, dy -26.0)']
+[cek_fbx] lunge.fbx: LULUS tulang=65 frame=66 fps=30 geser=0.0 cm gagal=[] catatan=[]
+[cek_fbx] ybot.fbx: LULUS tulang=65 frame=2 fps=30 geser=0.0 cm gagal=[] catatan=[]
+[cek_fbx] lulus 12 / gagal 0 -> Hermes/Art/combo-iter2/Log\cek_fbx.json
+[cek_fbx] belum ada file untuk: dodge_back.fbx, dodge_left.fbx, dodge_right.fbx, dodge_forward.fbx, heavy.fbx, parry_01.fbx, parry_02.fbx

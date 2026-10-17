@@ -1,0 +1,27 @@
+[Info] [combo_setup] A_Aksa_Mx_light_01: puncak hand_r 583 cm/s @0.55 s -> hit ('hand_r', 0.43, 0.22)
+[Info] [combo_setup] AM_Hermes_light_01: 2.233 s, hit [{'tulang': 'hand_r', 'mulai': 0.43, 'durasi': 0.22}], combo {'mulai': 0.62, 'durasi': 0.35}
+[Info] [combo_setup] A_Aksa_Mx_light_02: puncak hand_l 707 cm/s @0.63 s -> hit ('hand_l', 0.51, 0.22)
+[Info] [combo_setup] AM_Hermes_light_02: 2.267 s, hit [{'tulang': 'hand_l', 'mulai': 0.51, 'durasi': 0.22}], combo {'mulai': 0.7, 'durasi': 0.35}
+[Info] [combo_setup] A_Aksa_Mx_light_03: puncak hand_r 1052 cm/s @0.95 s -> hit ('hand_r', 0.83, 0.22)
+[Info] [combo_setup] AM_Hermes_light_03: 2.167 s, hit [{'tulang': 'hand_r', 'mulai': 0.83, 'durasi': 0.22}], combo {'mulai': 1.02, 'durasi': 0.35}
+[Info] [combo_setup] A_Aksa_Mx_light_04: puncak foot_r 1074 cm/s @0.93 s -> hit ('foot_r', 0.81, 0.22)
+[Info] [combo_setup] AM_Hermes_light_04: 2.033 s, hit [{'tulang': 'foot_r', 'mulai': 0.81, 'durasi': 0.22}], combo None
+[Info] [combo_setup] A_Aksa_Mx_lunge: puncak hand_r 1052 cm/s @0.95 s -> hit ('hand_r', 0.83, 0.22)
+[Info] [combo_setup] AM_Hermes_lunge: 2.167 s, hit [{'tulang': 'hand_r', 'mulai': 0.83, 'durasi': 0.22}], combo {'mulai': 1.02, 'durasi': 0.35}
+[Info] [combo_setup] A_Aksa_Mx_back: puncak hand_r 400 cm/s @0.25 s -> hit ('hand_r', 0.13, 0.22)
+[Info] [combo_setup] AM_Hermes_back: 0.867 s, hit [{'tulang': 'hand_r', 'mulai': 0.13, 'durasi': 0.22}], combo {'mulai': 0.32, 'durasi': 0.35}
+[Info] [combo_setup] A_Aksa_Mx_finisher_01: puncak foot_l 608 cm/s @0.50 s -> hit ('foot_l', 0.38, 0.22)
+[Info] [combo_setup] AM_Hermes_finisher_01: 1.6 s, hit [{'tulang': 'foot_l', 'mulai': 0.38, 'durasi': 0.22}], combo None
+[Info] [combo_setup] A_Aksa_Mx_finisher_02: puncak foot_r 974 cm/s @0.77 s -> hit ('foot_r', 0.65, 0.22)
+[Info] [combo_setup] A_Aksa_Mx_finisher_02: puncak foot_r 741 cm/s @0.97 s -> hit ('foot_r', 0.85, 0.22)
+[Info] [combo_setup] AM_Hermes_finisher_02: 1.667 s, hit [{'tulang': 'foot_r', 'mulai': 0.65, 'durasi': 0.19}, {'tulang': 'foot_r', 'mulai': 0.85, 'durasi': 0.22}], combo None
+[Info] [combo_setup] A_Aksa_Mx_finisher_03: puncak foot_r 1170 cm/s @1.42 s -> hit ('foot_r', 1.3, 0.22)
+[Info] [combo_setup] AM_Hermes_finisher_03: 2.667 s, hit [{'tulang': 'foot_r', 'mulai': 1.3, 'durasi': 0.22}], combo None
+[Info] [combo_setup] A_Aksa_Mx_air: puncak foot_l 613 cm/s @0.65 s -> hit ('foot_l', 0.53, 0.22)
+[Info] [combo_setup] AM_Hermes_air: 1.5 s, hit [{'tulang': 'foot_l', 'mulai': 0.53, 'durasi': 0.22}], combo {'mulai': 0.72, 'durasi': 0.35}
+[Info] [combo_setup] AM_Hermes_air_slam: 2.667 s, hit [], combo None
+[Info] [combo_setup] 11 montage dibuat: ['air', 'air_slam', 'back', 'finisher_01', 'finisher_02', 'finisher_03', 'light_01', 'light_02', 'light_03', 'light_04', 'lunge']
+[Info] [combo_setup] profil (baca balik): {"light_combo": ["AM_Hermes_light_01", "AM_Hermes_light_02", "AM_Hermes_light_03", "AM_Hermes_light_04"], "lunge_attack": {"montage": "AM_Hermes_lunge", "move_height": 60.0, "move_duration": 0.35}, "back_attack": {"montage": "AM_Hermes_back", "move_height": 0.0, "move_duration": 0.2}, "heavy_attack": {"montage": "AM_Aksa_Heavy", "move_height": 0.0, "move_duration": 0.2}, "air_attack": {"montage": "AM_Hermes_air", "move_height": 0.0, "move_duration": 0.2}, "air_slam": {"montage": "AM_Hermes_air_slam", "move_height": 0.0, "move_duration": 0.2}, "heavy_finishers": [{"montage": "AM_Hermes_finisher_01", "play_rate": 1.0}, {"montage": "AM_Hermes_finisher_02", "play_rate": 0.85}, {"montage": "AM_Hermes_finisher_03", "play_rate": 1.0}], "dodge_montages": {"forward": null, "backward": null, "left": null, "right": null}, "parry_montages": [], "parry_montage_rate": 1.0, "montage_play_rate": 1.0}
+[Info] [combo_setup] BP_Aksa_Hermes.combat_profile = /Game/Hermes/ComboIter2/Data/DA_CombatProfile_Human_Hermes.DA_CombatProfile_Human_Hermes
+[Info] [combo_setup] montage.json ditulis (11 montage)
+[Info] [combo_setup] setup combo iterasi 2 selesai

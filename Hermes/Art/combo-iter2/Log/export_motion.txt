@@ -1,0 +1,12 @@
+[Info] [CombatMotion] Pukulan 1 (jab): A_Aksa_Mx_light_01 2.23 s, 68 frame
+[Info] [CombatMotion] Pukulan 2 (cross): A_Aksa_Mx_light_02 2.27 s, 68 frame
+[Info] [CombatMotion] Pukulan 3 (hook): A_Aksa_Mx_light_03 2.17 s, 66 frame
+[Info] [CombatMotion] Pukulan 4 (tendangan putar belakang): A_Aksa_Mx_light_04 2.03 s, 61 frame
+[Info] [CombatMotion] Terjang: A_Aksa_Mx_lunge 2.17 s, 66 frame
+[Info] [CombatMotion] Pukul mundur: A_Aksa_Mx_back 0.87 s, 27 frame
+[Info] [CombatMotion] Finisher 1 (dwi chagi): A_Aksa_Mx_finisher_01 1.60 s, 49 frame
+[Info] [CombatMotion] Finisher 2 (narae chagi): A_Aksa_Mx_finisher_02 1.67 s, 50 frame
+[Info] [CombatMotion] Finisher 3 (ringan x3): A_Aksa_Mx_finisher_03 2.67 s, 81 frame
+[Info] [CombatMotion] Tendangan udara: A_Aksa_Mx_air 1.50 s, 46 frame
+[Info] [CombatMotion] Hantaman ke bawah: A_Aksa_Mx_air_slam 2.67 s, 81 frame
+[Info] [CombatMotion] selesai: 11 animasi -> ../../../../../../repository/unreal_engine/jayadwara_hermes_combo/Hermes/Art/combo-iter2/Log\combat_motion.json (218 KB)

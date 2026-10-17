@@ -1,0 +1,287 @@
+{
+  "montages": [
+    {
+      "peran": "light_01",
+      "montage": "/Game/Hermes/ComboIter2/Montages/AM_Hermes_light_01",
+      "animasi": "/Game/Hermes/ComboIter2/Mixamo/A_Aksa_Mx_light_01",
+      "panjang_s": 2.233,
+      "blend": [
+        0.08,
+        0.2
+      ],
+      "laju": 1.0,
+      "hit": [
+        {
+          "tulang": "hand_r",
+          "mulai": 0.43,
+          "durasi": 0.22
+        }
+      ],
+      "combo": {
+        "mulai": 0.62,
+        "durasi": 0.35
+      }
+    },
+    {
+      "peran": "light_02",
+      "montage": "/Game/Hermes/ComboIter2/Montages/AM_Hermes_light_02",
+      "animasi": "/Game/Hermes/ComboIter2/Mixamo/A_Aksa_Mx_light_02",
+      "panjang_s": 2.267,
+      "blend": [
+        0.08,
+        0.2
+      ],
+      "laju": 1.0,
+      "hit": [
+        {
+          "tulang": "hand_l",
+          "mulai": 0.51,
+          "durasi": 0.22
+        }
+      ],
+      "combo": {
+        "mulai": 0.7,
+        "durasi": 0.35
+      }
+    },
+    {
+      "peran": "light_03",
+      "montage": "/Game/Hermes/ComboIter2/Montages/AM_Hermes_light_03",
+      "animasi": "/Game/Hermes/ComboIter2/Mixamo/A_Aksa_Mx_light_03",
+      "panjang_s": 2.167,
+      "blend": [
+        0.08,
+        0.2
+      ],
+      "laju": 1.0,
+      "hit": [
+        {
+          "tulang": "hand_r",
+          "mulai": 0.83,
+          "durasi": 0.22
+        }
+      ],
+      "combo": {
+        "mulai": 1.02,
+        "durasi": 0.35
+      }
+    },
+    {
+      "peran": "light_04",
+      "montage": "/Game/Hermes/ComboIter2/Montages/AM_Hermes_light_04",
+      "animasi": "/Game/Hermes/ComboIter2/Mixamo/A_Aksa_Mx_light_04",
+      "panjang_s": 2.033,
+      "blend": [
+        0.08,
+        0.2
+      ],
+      "laju": 1.0,
+      "hit": [
+        {
+          "tulang": "foot_r",
+          "mulai": 0.81,
+          "durasi": 0.22
+        }
+      ],
+      "combo": null
+    },
+    {
+      "peran": "lunge",
+      "montage": "/Game/Hermes/ComboIter2/Montages/AM_Hermes_lunge",
+      "animasi": "/Game/Hermes/ComboIter2/Mixamo/A_Aksa_Mx_lunge",
+      "panjang_s": 2.167,
+      "blend": [
+        0.08,
+        0.2
+      ],
+      "laju": 1.0,
+      "hit": [
+        {
+          "tulang": "hand_r",
+          "mulai": 0.83,
+          "durasi": 0.22
+        }
+      ],
+      "combo": {
+        "mulai": 1.02,
+        "durasi": 0.35
+      }
+    },
+    {
+      "peran": "back",
+      "montage": "/Game/Hermes/ComboIter2/Montages/AM_Hermes_back",
+      "animasi": "/Game/Hermes/ComboIter2/Mixamo/A_Aksa_Mx_back",
+      "panjang_s": 0.867,
+      "blend": [
+        0.08,
+        0.2
+      ],
+      "laju": 1.0,
+      "hit": [
+        {
+          "tulang": "hand_r",
+          "mulai": 0.13,
+          "durasi": 0.22
+        }
+      ],
+      "combo": {
+        "mulai": 0.32,
+        "durasi": 0.35
+      }
+    },
+    {
+      "peran": "finisher_01",
+      "montage": "/Game/Hermes/ComboIter2/Montages/AM_Hermes_finisher_01",
+      "animasi": "/Game/Hermes/ComboIter2/Mixamo/A_Aksa_Mx_finisher_01",
+      "panjang_s": 1.6,
+      "blend": [
+        0.08,
+        0.2
+      ],
+      "laju": 1.0,
+      "hit": [
+        {
+          "tulang": "foot_l",
+          "mulai": 0.38,
+          "durasi": 0.22
+        }
+      ],
+      "combo": null
+    },
+    {
+      "peran": "finisher_02",
+      "montage": "/Game/Hermes/ComboIter2/Montages/AM_Hermes_finisher_02",
+      "animasi": "/Game/Hermes/ComboIter2/Mixamo/A_Aksa_Mx_finisher_02",
+      "panjang_s": 1.667,
+      "blend": [
+        0.08,
+        0.2
+      ],
+      "laju": 1.0,
+      "hit": [
+        {
+          "tulang": "foot_r",
+          "mulai": 0.65,
+          "durasi": 0.19
+        },
+        {
+          "tulang": "foot_r",
+          "mulai": 0.85,
+          "durasi": 0.22
+        }
+      ],
+      "combo": null
+    },
+    {
+      "peran": "finisher_03",
+      "montage": "/Game/Hermes/ComboIter2/Montages/AM_Hermes_finisher_03",
+      "animasi": "/Game/Hermes/ComboIter2/Mixamo/A_Aksa_Mx_finisher_03",
+      "panjang_s": 2.667,
+      "blend": [
+        0.08,
+        0.2
+      ],
+      "laju": 1.0,
+      "hit": [
+        {
+          "tulang": "foot_r",
+          "mulai": 1.3,
+          "durasi": 0.22
+        }
+      ],
+      "combo": null
+    },
+    {
+      "peran": "air",
+      "montage": "/Game/Hermes/ComboIter2/Montages/AM_Hermes_air",
+      "animasi": "/Game/Hermes/ComboIter2/Mixamo/A_Aksa_Mx_air",
+      "panjang_s": 1.5,
+      "blend": [
+        0.08,
+        0.2
+      ],
+      "laju": 1.0,
+      "hit": [
+        {
+          "tulang": "foot_l",
+          "mulai": 0.53,
+          "durasi": 0.22
+        }
+      ],
+      "combo": {
+        "mulai": 0.72,
+        "durasi": 0.35
+      }
+    },
+    {
+      "peran": "air_slam",
+      "montage": "/Game/Hermes/ComboIter2/Montages/AM_Hermes_air_slam",
+      "animasi": "/Game/Hermes/ComboIter2/Mixamo/A_Aksa_Mx_air_slam",
+      "panjang_s": 2.667,
+      "blend": [
+        0.08,
+        0.2
+      ],
+      "laju": 1.0,
+      "hit": [],
+      "combo": null
+    }
+  ],
+  "profil": {
+    "light_combo": [
+      "AM_Hermes_light_01",
+      "AM_Hermes_light_02",
+      "AM_Hermes_light_03",
+      "AM_Hermes_light_04"
+    ],
+    "lunge_attack": {
+      "montage": "AM_Hermes_lunge",
+      "move_height": 60.0,
+      "move_duration": 0.35
+    },
+    "back_attack": {
+      "montage": "AM_Hermes_back",
+      "move_height": 0.0,
+      "move_duration": 0.2
+    },
+    "heavy_attack": {
+      "montage": "AM_Aksa_Heavy",
+      "move_height": 0.0,
+      "move_duration": 0.2
+    },
+    "air_attack": {
+      "montage": "AM_Hermes_air",
+      "move_height": 0.0,
+      "move_duration": 0.2
+    },
+    "air_slam": {
+      "montage": "AM_Hermes_air_slam",
+      "move_height": 0.0,
+      "move_duration": 0.2
+    },
+    "heavy_finishers": [
+      {
+        "montage": "AM_Hermes_finisher_01",
+        "play_rate": 1.0
+      },
+      {
+        "montage": "AM_Hermes_finisher_02",
+        "play_rate": 0.85
+      },
+      {
+        "montage": "AM_Hermes_finisher_03",
+        "play_rate": 1.0
+      }
+    ],
+    "dodge_montages": {
+      "forward": null,
+      "backward": null,
+      "left": null,
+      "right": null
+    },
+    "parry_montages": [],
+    "parry_montage_rate": 1.0,
+    "montage_play_rate": 1.0
+  },
+  "level": "dibuat oleh combo_iter2_level.py"
+}

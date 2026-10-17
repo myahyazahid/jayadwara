@@ -1,0 +1,25 @@
+{
+  "level": "/Game/Hermes/ComboIter2/Maps/Test_Hermes_ComboIter2",
+  "aktor": [
+    "DirectionalLight(DirectionalLight)",
+    "SkyAtmosphere(SkyAtmosphere)",
+    "SkyLight(SkyLight)",
+    "ExponentialHeightFog(ExponentialHeightFog)",
+    "VolumetricCloud(VolumetricCloud)",
+    "Floor(StaticMeshActor)",
+    "Wall_0(StaticMeshActor)",
+    "Wall_1(StaticMeshActor)",
+    "Wall_2(StaticMeshActor)",
+    "Wall_3(StaticMeshActor)",
+    "Pillar_0(StaticMeshActor)",
+    "Pillar_1(StaticMeshActor)",
+    "Pillar_2(StaticMeshActor)",
+    "PlayerStart(PlayerStart)",
+    "TEST_Aksa_Lama(SkeletalMeshActor)",
+    "TEST_Aksa_Baru_Spike(SkeletalMeshActor)",
+    "Dummy_01(BP_TrainingDummy_C)",
+    "Dummy_Attacker(BP_TrainingDummy_C)",
+    "BP_Aksa_Hermes(BP_Aksa_Hermes_C)"
+  ],
+  "dibuang": []
+}
