@@ -1,0 +1,577 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Usulan Iterasi 4</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@600;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: panggung 3D (Aksa + dummy, bar poise, kerucut target) di kiri, daftar skenario & aturan usulan di kanan; satu kolom di HP. */
+:root {
+  --bg: #eef0ee; --panel: #f8f9f7; --ink: #1d2422; --muted: #5d6865; --line: #cdd3cf;
+  --stage: #e3e7e4; --bone: #1d2422; --dummy: #8a7458; --gold: #b07a12; --hit: #b8402e; --move: #2f6b8a;
+  --font-display: "Saira Condensed", "Arial Narrow", sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #161b1a; --panel: #1e2523; --ink: #e6ebe8; --muted: #9aa6a2; --line: #34403c;
+  --stage: #121716; --bone: #e6ebe8; --dummy: #b59d7c; --gold: #e0ad48; --hit: #e57a63; --move: #6fb0d2; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #161b1a; --panel: #1e2523; --ink: #e6ebe8; --muted: #9aa6a2; --line: #34403c;
+  --stage: #121716; --bone: #e6ebe8; --dummy: #b59d7c; --gold: #e0ad48; --hit: #e57a63; --move: #6fb0d2; color-scheme: dark }
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.5; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-block: 24px 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 18px; }
+h1 { font: 800 clamp(30px, 5vw, 44px)/1 var(--font-display); text-transform: uppercase; margin: 0; text-wrap: balance; }
+.eyebrow { font: 12px var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--gold); }
+.lead { color: var(--muted); max-width: 72ch; margin: 0; }
+.layout { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 16px; align-items: start; }
+@media (max-width: 860px) { .layout { grid-template-columns: minmax(0, 1fr); } }
+.main { display: grid; gap: 12px; min-width: 0; }
+.stage { position: relative; background: var(--stage); border: 1px solid var(--line); border-radius: 6px; aspect-ratio: 16 / 10; max-width: 100%; overflow: hidden; }
+.stage canvas { display: block; width: 100%; height: 100%; touch-action: none; cursor: grab; }
+.hud { position: absolute; left: 12px; top: 10px; right: 12px; display: flex; justify-content: space-between; gap: 8px; pointer-events: none; flex-wrap: wrap; }
+.hud b { font: 800 22px var(--font-display); text-transform: uppercase; }
+.state { font: 12px var(--font-mono); padding: 2px 8px; border-radius: 999px; background: var(--panel); border: 1px solid var(--line); height: max-content; }
+.state.hit { color: var(--hit); border-color: var(--hit); }
+.state.combo { color: var(--gold); border-color: var(--gold); }
+.poise { position: absolute; left: 12px; bottom: 10px; display: grid; gap: 4px; pointer-events: none; width: min(240px, 60%); }
+.poise div { display: grid; grid-template-columns: 76px 1fr 26px; gap: 6px; align-items: center; font: 12px var(--font-mono); font-variant-numeric: tabular-nums; }
+.poise .bar { height: 8px; background: var(--panel); border: 1px solid var(--line); border-radius: 2px; overflow: hidden; }
+.poise .bar i { display: block; height: 100%; background: var(--gold); }
+.poise .bar i.zero { background: var(--hit); }
+.inputhud { position: absolute; right: 12px; bottom: 10px; font: 12px var(--font-mono); padding: 2px 8px; border-radius: 4px; background: var(--panel); border: 1px solid var(--line); pointer-events: none; }
+.desc { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 12px 14px; display: grid; gap: 6px; }
+.desc h2 { margin: 0; font: 800 22px var(--font-display); text-transform: uppercase; }
+.desc p { margin: 0; max-width: 72ch; }
+.desc p.giant { color: var(--gold); }
+.meta { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 13px; color: var(--muted); }
+.side { display: grid; gap: 14px; min-width: 0; }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 12px; display: grid; gap: 10px; }
+.panel h3 { margin: 0; font: 600 13px var(--font-mono); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+.list { display: grid; gap: 4px; }
+.group { font: 12px var(--font-mono); color: var(--muted); margin-top: 6px; }
+button { font: 600 14px var(--font-body); border: 1.5px solid var(--ink); background: var(--panel); color: var(--ink); border-radius: 4px; padding: 6px 12px; cursor: pointer; }
+button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.list button { text-align: left; border-width: 1px; border-color: var(--line); display: flex; justify-content: space-between; gap: 8px; }
+.list button small { font: 12px var(--font-mono); opacity: .7; }
+.rules { display: grid; gap: 8px; font-size: 13px; }
+.rules div { display: grid; gap: 1px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+.rules div:last-child { border-bottom: 0; padding-bottom: 0; }
+.rules b { font: 600 13px var(--font-body); }
+.rules span { color: var(--muted); }
+.rules code, .desc code { font: 500 12px var(--font-mono); color: var(--gold); }
+.row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.tl { position: relative; height: 18px; background: var(--bg); border-radius: 3px; overflow: hidden; }
+.tl i { position: absolute; top: 0; height: 50%; }
+.tl i.hit { background: var(--hit); opacity: .6; }
+.tl i.combo { background: var(--gold); opacity: .65; top: 50%; }
+.tl .head { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--ink); height: 100%; }
+input[type=range] { width: 100%; accent-color: var(--gold); }
+.mono { font: 13px var(--font-mono); font-variant-numeric: tabular-nums; }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 12px; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 5px; }
+.sw { width: 12px; height: 8px; border-radius: 2px; display: inline-block; }
+.note { font-size: 13px; color: var(--muted); margin: 0; }
+</style>
+
+<div class="wrap">
+  <div>
+    <div class="eyebrow">Fase 1 · Iterasi 4 · konsep, bukan animasi final</div>
+    <h1>Usulan Iterasi 4</h1>
+  </div>
+  <p class="lead">Gambaran reaksi kena pukul, stagger, knockdown, soft target, dan motion warp seperti yang aku usulkan, untuk Aksa dan Jayadwara. Pemain hitam (Jayadwara emas), lawan cokelat. Angka di sini usulan awal untuk dituning, bukan angka final. Seret panggung untuk memutar kamera.</p>
+
+  <div class="layout">
+    <div class="main">
+      <div class="stage" id="stage">
+        <canvas id="cv" aria-label="Panggung 3D konsep Iterasi 4"></canvas>
+        <div class="hud"><b id="hud-title"></b><span class="state" id="hud-state">—</span></div>
+        <div class="poise" id="poise" hidden>
+          <div><span id="pa-l">Aksa</span><span class="bar"><i id="pa"></i></span><span id="pa-n"></span></div>
+          <div><span id="pd-l">Dummy</span><span class="bar"><i id="pd"></i></span><span id="pd-n"></span></div>
+        </div>
+        <div class="inputhud" id="inputhud" hidden></div>
+      </div>
+      <div class="desc">
+        <h2 id="d-title"></h2>
+        <div class="meta" id="d-meta"></div>
+        <p id="d-text"></p>
+        <p id="d-giant" class="giant" hidden></p>
+      </div>
+      <div class="panel">
+        <h3>Putar</h3>
+        <div class="row">
+          <button type="button" id="play" aria-pressed="true">Jeda</button>
+          <button type="button" data-speed="0.25">0,25×</button>
+          <button type="button" data-speed="0.5" aria-pressed="true">0,5×</button>
+          <button type="button" data-speed="1">1×</button>
+        </div>
+        <div class="tl" id="tl"></div>
+        <input type="range" id="scrub" min="0" max="1000" value="0" aria-label="Posisi waktu">
+        <div class="row" style="justify-content:space-between">
+          <span class="mono" id="time">0,00 s</span>
+          <span class="legend">
+            <span><i class="sw" style="background:var(--hit)"></i> kena / reaksi</span>
+            <span><i class="sw" style="background:var(--gold)"></i> aba-aba, warp, pulih</span>
+            <span><i class="sw" style="background:var(--move)"></i> jalur warp</span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="side">
+      <div class="panel">
+        <h3>Skala</h3>
+        <div class="row" id="mode">
+          <button type="button" data-mode="human" aria-pressed="true">Aksa · 1,8 m</button>
+          <button type="button" data-mode="giant" aria-pressed="false">Jayadwara · 45 m</button>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>Skenario</h3>
+        <div class="list" id="list"></div>
+      </div>
+      <div class="panel">
+        <h3>Aturan usulan</h3>
+        <div class="rules" id="rules"></div>
+      </div>
+      <p class="note" id="rules-note"></p>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function () {
+  // ---------------------------------------------------------------- rig konsep (cm). x kanan, y atas, z depan.
+  var SA = { root: [0, 0], ah: 0, ph: 86, yaw: 0, lean: 5, twist: 15, lh: [10, 8, 26], rh: [-8, 4, 18], lf: [-14, 0, 16], rf: [14, 0, -16] };
+  var SD = { root: [0, 0], ah: 0, ph: 88, yaw: 0, lean: 0, twist: 0, lh: [2, -50, 6], rh: [-2, -50, 6], lf: [-12, 0, 4], rf: [12, 0, -4] };
+  function K(t, o) { var k = { t: t }; for (var n in o) k[n] = o[n]; return k; }
+  function T(keys, hit, react) { return { keys: keys, hit: hit || null, react: !!react, len: keys[keys.length - 1].t }; }
+
+  // Serangan Aksa
+  var JAB = T([K(0, {}), K(0.10, { twist: -5, lean: 8, lh: [16, 6, 56] }), K(0.18, { twist: -5, lean: 8, lh: [16, 6, 56] }), K(0.42, {})], [0.10, 0.18, ["lh"]]);
+  var CROSS = T([K(0, {}), K(0.12, { twist: 45, lean: 10, rh: [-18, 6, 56], rf: [12, 5, -12] }), K(0.20, { twist: 45, lean: 10, rh: [-18, 6, 56], rf: [12, 5, -12] }), K(0.48, {})], [0.12, 0.20, ["rh"]]);
+  var HEAVY = T([K(0, {}), K(0.22, { yaw: -20, ph: 80, twist: -40, lean: -5, rh: [-14, -4, -10], lh: [14, 8, 30] }),
+    K(0.42, { root: [0, 15], yaw: 10, ph: 80, twist: 70, lean: 18, rh: [-20, 8, 62], lh: [12, -4, 6], lf: [-14, 0, 50], rf: [12, 6, -20] }),
+    K(0.55, { root: [0, 15], yaw: 10, ph: 80, twist: 70, lean: 18, rh: [-20, 8, 62], lh: [12, -4, 6], lf: [-14, 0, 50], rf: [12, 6, -20] }),
+    K(0.95, { root: [0, 15] })], [0.42, 0.55, ["rh"]]);
+  var FIN1 = T([K(0, {}), K(0.12, { yaw: 90, twist: 40, lf: [-4, 0, 4] }),
+    K(0.22, { yaw: 175, lean: 15, lf: [-4, 0, 4], rf: [10, 62, -6], rkp: [0, 0.5, 1] }),
+    K(0.31, { yaw: 180, lean: 30, lf: [-4, 0, 4], rf: [10, 86, -80], rkp: [0, 0.5, 1] }),
+    K(0.40, { yaw: 180, lean: 30, lf: [-4, 0, 4], rf: [10, 86, -80], rkp: [0, 0.5, 1] }),
+    K(0.60, { yaw: 270, lf: [-4, 0, 4], rf: [14, 20, -5] }), K(0.82, { yaw: 360 })], [0.28, 0.40, ["rf"]]);
+  // Serangan dummy (aba-aba panjang supaya terbaca)
+  var DATK = T([K(0, {}), K(0.5, { twist: -35, lean: -5, rh: [-10, 14, -18], lh: [8, -30, 10] }),
+    K(0.62, { twist: 40, lean: 12, rh: [-18, 6, 58], lh: [8, -30, 10] }), K(0.75, { twist: 40, lean: 12, rh: [-18, 6, 58], lh: [8, -30, 10] }), K(1.0, {})], [0.62, 0.75, ["rh"]]);
+  // Reaksi
+  var FLINCH = T([K(0, {}), K(0.06, { lean: -14, twist: 12, root: [0, -8], lh: [4, -38, -14], rh: [-4, -38, -14] }), K(0.30, {})], null, true);
+  var STAGGER = T([K(0, {}), K(0.08, { lean: -22, twist: -15, root: [0, -25], ph: 84, lh: [-10, -30, -20], rh: [10, -30, -20] }),
+    K(0.35, { lean: -12, twist: 10, root: [0, -55], ph: 80, rf: [12, 0, -30], lh: [-25, -40, 10], rh: [20, -35, 15] }),
+    K(0.70, { lean: 8, twist: -6, root: [0, -60], ph: 78, lh: [-20, -45, 10], rh: [20, -45, 10] }),
+    K(1.05, { lean: 10, twist: 4, root: [0, -60], ph: 80, lh: [-10, -45, 12], rh: [10, -45, 12] }), K(1.3, { root: [0, -60] })], null, true);
+  var KNOCK = T([K(0, {}), K(0.10, { lean: -30, root: [0, -40], ph: 80, lh: [-10, -20, -20], rh: [10, -20, -20] }),
+    K(0.35, { lean: -70, ph: 40, root: [0, -90], lf: [-14, 0, 40], rf: [14, 0, 30], lh: [-30, 0, -10], rh: [30, 0, -10] }),
+    K(0.55, { lean: -88, ph: 14, root: [0, -120], lf: [-16, 0, 70], rf: [16, 0, 60], lh: [-34, 10, -8], rh: [34, 10, -8] }),
+    K(1.90, { lean: -88, ph: 14, root: [0, -120], lf: [-16, 0, 70], rf: [16, 0, 60], lh: [-34, 10, -8], rh: [34, 10, -8] }),
+    K(2.25, { lean: 40, ph: 48, root: [0, -120], lf: [-14, 0, 30], rf: [14, 0, -24], lh: [-6, -34, 28], rh: [6, -34, 28] }),
+    K(2.60, { root: [0, -120] })], null, true);
+
+  // ---------------------------------------------------------------- penyusun track
+  function rot2(v, deg) { var a = deg * Math.PI / 180, c = Math.cos(a), s = Math.sin(a); return [v[0] * c + v[1] * s, -v[0] * s + v[1] * c]; }
+  function lerp(a, b, f) { return a + (b - a) * f; }
+  // parts: [{tpl, at, from:{x,z,yaw}, to?:{x,z,yaw}, until?}] -> {keys, hits, flash}
+  function track(parts, base) {
+    var keys = [], hits = [], flash = [];
+    if (parts[0].at > 0) keys.push(K(0, { root: [base.x, base.z], yaw: base.yaw }));
+    parts.forEach(function (p, i) {
+      var next = i < parts.length - 1 ? parts[i + 1].at : Infinity;
+      p.tpl.keys.forEach(function (k, j) {
+        var t = k.t + p.at; if (j > 0 && t >= next - 1e-3) return;
+        var f = p.to ? Math.min(1, k.t / (p.until || 0.1)) : 0, A = p.to ? { x: lerp(p.from.x, p.to.x, f), z: lerp(p.from.z, p.to.z, f), yaw: lerp(p.from.yaw, p.to.yaw, f) } : p.from;
+        var c = {}; for (var n in k) c[n] = k[n];
+        var r = rot2(k.root || [0, 0], A.yaw); c.root = [A.x + r[0], A.z + r[1]]; c.yaw = A.yaw + (k.yaw || 0); c.t = t;
+        keys.push(c);
+      });
+      if (p.tpl.hit) hits.push([p.tpl.hit[0] + p.at, p.tpl.hit[1] + p.at, p.tpl.hit[2]]);
+      if (p.tpl.react) flash.push([p.at, p.at + 0.14]);
+    });
+    return { keys: keys, hits: hits, flash: flash };
+  }
+  function actor(kind, base, parts) {
+    var tr = parts && parts.length ? track(parts, base) : { keys: [K(0, { root: [base.x, base.z], yaw: base.yaw })], hits: [], flash: [] };
+    tr.kind = kind; tr.def = kind === "aksa" ? SA : SD; return tr;
+  }
+  function P(x, z, yaw) { return { x: x, z: z, yaw: yaw }; }
+  function face(a, b) { return Math.atan2(b.x - a.x, b.z - a.z) * 180 / Math.PI; }
+  // posisi akhir warp: berhenti `gap` cm di depan target, menghadap target
+  function warpTo(from, tgt, gap) {
+    var dx = tgt.x - from.x, dz = tgt.z - from.z, d = Math.hypot(dx, dz);
+    return P(tgt.x - dx / d * gap, tgt.z - dz / d * gap, face(from, tgt));
+  }
+  function moved(p, tpl) { var k = tpl.keys[tpl.keys.length - 1], r = rot2(k.root || [0, 0], p.yaw); return P(p.x + r[0], p.z + r[1], p.yaw); }
+
+  // ---------------------------------------------------------------- skenario
+  var A0 = P(0, 0, 0), D0 = P(0, 85, 180);
+  var SC = [];
+
+  SC.push({ id: "ringan", gtext: 'Jayadwara: angka poise sama. Bedanya di rasa: hit-stop 0,15 s (Aksa 0,06 s), guncangan kamera lebih besar, debu di titik kena. Boss nanti punya tahan sentak saat sedang menyerang, jadi pukulan ringan tidak membatalkan serangannya.', gmeta: ["hit-stop 0,15 s", "shake besar", "poise sama"], group: "Reaksi", title: "Reaksi ringan + pulih poise", short: "Ringan",
+    text: "Jab lalu cross ke dummy. Poise dummy masih ada, jadi tiap pukulan cuma bikin badannya tersentak sebentar. Setelah 1,5 s tidak kena, poise naik lagi 20 per detik sampai penuh.",
+    meta: ["poise −5 per pukulan", "jeda pulih 1,5 s", "20/s"],
+    actors: [actor("aksa", A0, [{ tpl: JAB, at: 0.4, from: A0 }, { tpl: CROSS, at: 0.62, from: A0 }]),
+             actor("dummy", D0, [{ tpl: FLINCH, at: 0.5, from: D0 }, { tpl: FLINCH, at: 0.74, from: D0 }])],
+    poise: { d: [[0, 50], [0.5, 50], [0.5, 45], [0.74, 45], [0.74, 40], [2.24, 40], [2.74, 50]], a: [[0, 50]] },
+    labels: [[0.5, 0.8, "REAKSI RINGAN · −5", "hit"], [0.74, 1.04, "REAKSI RINGAN · −5", "hit"], [1.1, 2.24, "menunggu 1,5 s tanpa kena", ""], [2.24, 2.74, "poise pulih 20/s", "combo"]],
+    len: 3.4, cam: { yaw: 1.25, pitch: 0.15, dist: 470, c: [0, 95, 45] } });
+
+  SC.push({ id: "stagger", gtext: 'Jayadwara: lawan raksasa terhuyung 1,2 s juga, tidak diperlambat (ala Mebius). Langkah mundurnya menggetarkan tanah dan bisa menabrak gedung; kerusakan dan meter Sync menyusul di Iterasi 7.', gmeta: ["stagger 1,2 s", "mundur ±15 m", "bisa tabrak gedung"], group: "Reaksi", title: "Stagger dari poise habis", short: "Stagger",
+    text: "Jab, cross, lalu pukulan berat. Dua pukulan ringan mengikis poise ke 40, pukulan berat (−40) menghabiskannya. Dummy terhuyung mundur 1,2 s dan tidak bisa menyerang. Setelah itu poise penuh lagi.",
+    meta: ["jab −5", "cross −5", "berat −40", "stagger 1,2 s"],
+    actors: [actor("aksa", A0, [{ tpl: JAB, at: 0.4, from: A0 }, { tpl: CROSS, at: 0.62, from: A0 }, { tpl: HEAVY, at: 0.86, from: A0 }]),
+             actor("dummy", D0, [{ tpl: FLINCH, at: 0.5, from: D0 }, { tpl: FLINCH, at: 0.74, from: D0 }, { tpl: STAGGER, at: 1.28, from: D0 }])],
+    poise: { d: [[0, 50], [0.5, 50], [0.5, 45], [0.74, 45], [0.74, 40], [1.28, 40], [1.28, 0], [2.58, 0], [2.58, 50]], a: [[0, 50]] },
+    labels: [[0.5, 0.8, "REAKSI RINGAN · −5", "hit"], [0.74, 1.04, "REAKSI RINGAN · −5", "hit"], [1.28, 2.58, "STAGGER · poise habis", "hit"], [2.58, 3.2, "poise reset penuh", "combo"]],
+    len: 3.6, cam: { yaw: 1.25, pitch: 0.15, dist: 520, c: [0, 95, 70] } });
+
+  SC.push({ id: "knock", gtext: 'Jayadwara: jatuhnya raksasa jadi momen besar. Debu melingkar ±25 m dan guncangan kamera kuat saat badan menghantam tanah; gedung yang ketiban rusak di Iterasi 7.', gmeta: ["debu ±25 m", "shake kuat", "waktu sama"], group: "Reaksi", title: "Knockdown dari finisher", short: "Knockdown",
+    text: "Poise dummy tinggal 15. Finisher dwi chagi punya tanda Jatuh, jadi saat poise habis karenanya, dummy terlempar dan jatuh telentang, bukan cuma terhuyung. Saat bangun dia kebal sebentar supaya tidak bisa dipukuli terus di tanah.",
+    meta: ["finisher −40 + tanda Jatuh", "jatuh 1,9 s", "bangun 0,7 s kebal"],
+    actors: [actor("aksa", A0, [{ tpl: FIN1, at: 0.4, from: A0 }]),
+             actor("dummy", P(0, 100, 180), [{ tpl: KNOCK, at: 0.68, from: P(0, 100, 180) }])],
+    poise: { d: [[0, 15], [0.68, 15], [0.68, 0], [3.28, 0], [3.28, 50]], a: [[0, 50]] },
+    labels: [[0.68, 2.58, "KNOCKDOWN · poise habis oleh finisher", "hit"], [2.58, 3.28, "bangun · kebal", "combo"]],
+    dust: [[1.23, 1, 110]], len: 3.9, cam: { yaw: 1.3, pitch: 0.2, dist: 600, c: [0, 70, 120] } });
+
+  SC.push({ id: "pemain", gtext: 'Jayadwara: aturan sama, tapi terhuyung atau jatuh ke gedung menurunkan meter Sync, jadi kena stagger lebih mahal daripada sebagai Aksa. Jangan sampai musuh menyerang tanpa aba-aba yang terbaca dari kamera raksasa.', gmeta: ["stagger 1,2 s", "risiko meter Sync"], group: "Reaksi", title: "Pemain kena stagger", short: "Aksa stagger",
+    text: "Dummy menyerang dengan aba-aba, Aksa tidak menangkis. Pukulan pertama cuma reaksi ringan di badan atas (Aksa masih bisa bergerak). Pukulan kedua menghabiskan poise Aksa, dan Aksa terhuyung 1,2 s tanpa bisa apa-apa. Pelajaran buat pemain: tangkis atau dodge.",
+    meta: ["serangan dummy −25", "Aksa poise 50", "stagger 1,2 s"],
+    actors: [actor("aksa", A0, [{ tpl: FLINCH, at: 0.92, from: A0 }, { tpl: STAGGER, at: 2.12, from: A0 }]),
+             actor("dummy", P(0, 90, 180), [{ tpl: DATK, at: 0.3, from: P(0, 90, 180) }, { tpl: DATK, at: 1.5, from: P(0, 90, 180) }])],
+    poise: { a: [[0, 50], [0.92, 50], [0.92, 25], [2.12, 25], [2.12, 0], [3.42, 0], [3.42, 50]], d: [[0, 50]] },
+    labels: [[0.3, 0.8, "aba-aba serangan", "combo"], [0.92, 1.22, "REAKSI RINGAN · −25", "hit"], [1.5, 2.0, "aba-aba serangan", "combo"], [2.12, 3.42, "AKSA STAGGER · input dikunci", "hit"]],
+    len: 4.0, cam: { yaw: 1.25, pitch: 0.15, dist: 500, c: [0, 95, 40] } });
+
+  // Soft target: tiga dummy, arah input berganti, pukulan menempel ke target di kerucut.
+  (function () {
+    var DA = P(150, 180, 0), DB = P(-30, 260, 0), DC = P(-200, 80, 0);
+    var start = P(0, 0, 0); [DA, DB, DC].forEach(function (d) { d.yaw = face(d, start); });
+    var w1 = warpTo(start, DA, 85), w2 = warpTo(w1, DC, 85);
+    SC.push({ id: "target", gtext: 'Jayadwara: lawannya biasanya cuma boss, jadi stik netral = boss. Kerucut tetap dipakai untuk memilih potongan tubuh Jerangkong yang merayap (Iterasi 8) atau puing. Radius ±120 m (8 m × skala × 0,6). Lock-on tombol khusus boss menyusul di Iterasi 6.', gmeta: ["kerucut ±30°", "radius ±120 m", "lock-on boss di Iterasi 6"], group: "Target", title: "Soft target searah input", short: "Soft target",
+      text: "Stik netral: target = dummy yang dihadapi (tengah). Stik ke kiri depan: target pindah ke dummy kiri, dan jab menempel ke sana. Lalu stik ke kanan: target pindah ke dummy kanan. Kerucut kuning = area pencarian ±30° searah input; dummy di luar kerucut tidak dipilih walau lebih dekat.",
+      meta: ["kerucut ±30°", "radius 8 m", "penanda di atas target"],
+      actors: [actor("aksa", start, [{ tpl: JAB, at: 1.4, from: start, to: w1, until: 0.1 }, { tpl: JAB, at: 2.75, from: w1, to: w2, until: 0.1 }]),
+               actor("dummy", DA, [{ tpl: FLINCH, at: 1.5, from: DA }]),
+               actor("dummy", DB, []),
+               actor("dummy", DC, [{ tpl: FLINCH, at: 2.85, from: DC }])],
+      input: [[0, null, "stik netral"], [0.9, 40, "stik ← kiri depan"], [2.2, w2.yaw, "stik → kanan"]],
+      target: [[0, 0.9, 2], [0.9, 2.2, 1], [2.2, 99, 3]],
+      labels: [[0, 0.9, "target: yang dihadapi", ""], [0.9, 1.4, "target pindah", "combo"], [1.4, 1.5, "warp", "combo"], [1.5, 1.8, "KENA", "hit"], [2.2, 2.75, "target pindah", "combo"], [2.75, 2.85, "warp", "combo"], [2.85, 3.15, "KENA", "hit"]],
+      paths: [[[start.x, start.z], [w1.x, w1.z]], [[w1.x, w1.z], [w2.x, w2.z]]],
+      len: 3.8, cam: { yaw: Math.PI - 0.15, pitch: 1.0, dist: 860, c: [-30, 0, 130] } });
+  })();
+
+  // Motion warp: tiga lajur berdampingan.
+  (function () {
+    var L = [280, 0, -280], acts = [], paths = [], tags = [];
+    var a1 = P(L[0], 0, 0), d1 = P(L[0] + 60, 175, 0); d1.yaw = face(d1, a1);
+    var a2 = P(L[1], 0, 0), d2 = P(L[1] + 60, 175, 0); d2.yaw = face(d2, a2);
+    var a3 = P(L[2], 0, 0), d3 = P(L[2] - 70, 430, 0); d3.yaw = face(d3, a3);
+    var w2 = warpTo(a2, d2, 85), r3 = P(a3.x, a3.z, face(a3, d3));
+    acts.push(actor("aksa", a1, [{ tpl: JAB, at: 0.5, from: a1 }]), actor("dummy", d1, []));
+    acts.push(actor("aksa", a2, [{ tpl: JAB, at: 0.5, from: a2, to: w2, until: 0.1 }]), actor("dummy", d2, [{ tpl: FLINCH, at: 0.6, from: d2 }]));
+    acts.push(actor("aksa", a3, [{ tpl: JAB, at: 0.5, from: a3, to: r3, until: 0.1 }]), actor("dummy", d3, []));
+    paths.push([[a2.x, a2.z], [w2.x, w2.z]]);
+    var dist2 = Math.hypot(d2.x - a2.x, d2.z - a2.z) / 100, slide = Math.hypot(w2.x - a2.x, w2.z - a2.z) / 100, dist3 = Math.hypot(d3.x - a3.x, d3.z - a3.z) / 100;
+    function f(x) { return x.toFixed(1).replace(".", ","); }
+    tags.push([L[0], "tanpa warp: meleset", "tanpa warp: meleset"], [L[1], "warp: geser " + f(slide) + " m, putar " + Math.round(w2.yaw) + "°", "warp: geser " + Math.round(slide * 25) + " m, putar " + Math.round(w2.yaw) + "°"], [L[2], f(dist3) + " m: putar saja", Math.round(dist3 * 25) + " m: putar saja"]);
+    SC.push({ id: "warp", gtext: 'Jayadwara: batas warp ±45 m (3 m × skala × 0,6, sama dengan aturan terjang), berhenti ±21 m di depan target (jangkauan tangan raksasa), geser maks. ±30 m. Warp tetap selama ancang 0,1 s, jadi terasa cepat ala Mebius.', gmeta: ["warp ≤ ±45 m", "berhenti ±21 m", "geser maks. ±30 m"], group: "Target", title: "Motion warp ke target", short: "Warp",
+      text: "Tiga lajur, jab yang sama. Kiri: tanpa warp, dummy " + f(dist2) + " m agak menyamping, jab meleset ke udara. Tengah: dengan warp, selama ancang (0,1 s) Aksa digeser dan diputar sampai 0,85 m di depan dummy, jab kena. Kanan: dummy " + f(dist3) + " m, terlalu jauh untuk warp, jadi Aksa cuma memutar badan. Batas ini yang menjaga supaya tidak terasa nyedot.",
+      meta: ["warp ≤ 3 m", "berhenti 0,85 m", "geser maks. 2 m", "selama ancang"],
+      actors: acts, paths: paths, tags: tags,
+      labels: [[0.5, 0.6, "warp selama ancang", "combo"], [0.6, 0.9, "KENA (tengah saja)", "hit"]],
+      len: 2.0, cam: { yaw: Math.PI - 0.12, pitch: 0.5, dist: 1250, c: [-20, 40, 200] } });
+  })();
+
+  // ---------------------------------------------------------------- pose
+  var FIELDS = ["ah", "ph", "yaw", "lean", "twist"], VEC = ["root", "lh", "rh", "lf", "rf", "lpole", "rpole", "lkp", "rkp"];
+  function ease(x) { return x * x * (3 - 2 * x); }
+  function sample(ac, t) {
+    var ks = ac.keys, D = ac.def, i = 0;
+    function get(k, n) { return k[n] !== undefined ? k[n] : D[n]; }
+    while (i < ks.length - 2 && t > ks[i + 1].t) i++;
+    var a = ks[i], b = ks[Math.min(i + 1, ks.length - 1)], span = b.t - a.t, u = span > 0 ? ease(Math.max(0, Math.min(1, (t - a.t) / span))) : 0, p = {};
+    if (t < a.t) u = 0;
+    FIELDS.forEach(function (n) { var x = get(a, n), y = get(b, n); p[n] = x + (y - x) * u; });
+    VEC.forEach(function (n) {
+      var x = get(a, n), y = get(b, n);
+      if (!x && !y) return; x = x || y; y = y || x;
+      p[n] = x.map(function (v, j) { return v + (y[j] - v) * u; });
+    });
+    return p;
+  }
+  var V = THREE.Vector3;
+  function rotY(v, deg) { var a = deg * Math.PI / 180, c = Math.cos(a), s = Math.sin(a); return new V(v.x * c + v.z * s, v.y, -v.x * s + v.z * c); }
+  function ik(root, target, a, b, pole) {
+    var d = target.clone().sub(root), len = Math.min(d.length(), a + b - 0.5), dir = d.normalize();
+    var along = (a * a - b * b + len * len) / (2 * len), h = Math.sqrt(Math.max(0, a * a - along * along));
+    var perp = pole.clone().sub(dir.clone().multiplyScalar(pole.dot(dir))).normalize();
+    return { mid: root.clone().add(dir.clone().multiplyScalar(along)).add(perp.multiplyScalar(h)), end: root.clone().add(dir.multiplyScalar(len)) };
+  }
+  function solve(p) {
+    var O = new V(p.root[0], 0, p.root[1]);
+    function body(x, y, z) { return O.clone().add(rotY(new V(x, y, z), p.yaw)); }
+    var pelvis = body(0, p.ph + p.ah, 0), l = p.lean * Math.PI / 180;
+    var up = rotY(rotY(new V(0, Math.cos(l), Math.sin(l)), -p.twist), p.yaw);
+    var fw = rotY(rotY(new V(0, -Math.sin(l), Math.cos(l)), -p.twist), p.yaw);
+    var rt = rotY(rotY(new V(1, 0, 0), -p.twist), p.yaw);
+    function tor(base, v) { return base.clone().add(rt.clone().multiplyScalar(v[0])).add(up.clone().multiplyScalar(v[1])).add(fw.clone().multiplyScalar(v[2])); }
+    var chest = pelvis.clone().add(up.clone().multiplyScalar(45)), neck = chest.clone().add(up.clone().multiplyScalar(8)), head = neck.clone().add(up.clone().multiplyScalar(13));
+    var J = { pelvis: pelvis, chest: chest, neck: neck, head: head };
+    [["l", -1], ["r", 1]].forEach(function (sd) {
+      var s = sd[0], sign = sd[1];
+      var sh = chest.clone().add(rt.clone().multiplyScalar(18 * sign)).add(up.clone().multiplyScalar(-3));
+      var pole = p[s + "pole"] ? tor(new V(), p[s + "pole"]) : up.clone().multiplyScalar(-1).add(rt.clone().multiplyScalar(0.6 * sign)).add(fw.clone().multiplyScalar(-0.3));
+      var arm = ik(sh, tor(sh, p[s + "h"]), 28, 27, pole);
+      J[s + "sh"] = sh; J[s + "el"] = arm.mid; J[s + "ha"] = arm.end;
+      var hip = pelvis.clone().add(rotY(new V(10 * sign, -4, 0), p.yaw));
+      var f = p[s + "f"], foot = body(f[0], f[1] + p.ah, f[2]);
+      var kp = p[s + "kp"] ? rotY(new V(p[s + "kp"][0] * sign, p[s + "kp"][1], p[s + "kp"][2]), p.yaw) : rotY(new V(0.15 * sign, 0, 1), p.yaw);
+      var leg = ik(hip, foot, 44, 44, kp);
+      J[s + "hip"] = hip; J[s + "kn"] = leg.mid; J[s + "an"] = leg.end;
+      var shin = leg.end.clone().sub(leg.mid).normalize();
+      var toeDir = f[1] > 18 ? shin : rotY(new V(0, -0.2, 1), p.yaw).normalize();
+      J[s + "to"] = leg.end.clone().add(toeDir.multiplyScalar(14));
+    });
+    return J;
+  }
+  var LINKS = [["pelvis", "chest"], ["chest", "neck"], ["lsh", "rsh"], ["lsh", "lel"], ["lel", "lha"], ["rsh", "rel"], ["rel", "rha"],
+    ["lhip", "rhip"], ["lhip", "lkn"], ["lkn", "lan"], ["lan", "lto"], ["rhip", "rkn"], ["rkn", "ran"], ["ran", "rto"]];
+  var LIMB = { lh: ["lsh", "lel", "lha"], rh: ["rsh", "rel", "rha"], lf: ["lhip", "lkn", "lan", "lto"], rf: ["rhip", "rkn", "ran", "rto"] };
+  var JOINTS = ["pelvis", "chest", "neck", "lsh", "rsh", "lel", "rel", "lha", "rha", "lhip", "rhip", "lkn", "rkn", "lan", "ran", "lto", "rto", "head"];
+  function inWin(list, t) { return list.find(function (w) { return t >= w[0] && t <= w[1]; }); }
+
+  // ---------------------------------------------------------------- 3D
+  function css(n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim() || "#888"; }
+  var C;
+  function colors() { C = { bone: new THREE.Color(css("--bone")), dummy: new THREE.Color(css("--dummy")), hit: new THREE.Color(css("--hit")), line: new THREE.Color(css("--line")), move: new THREE.Color(css("--move")), gold: new THREE.Color(css("--gold")) }; }
+  var stage = document.getElementById("stage"), canvas = document.getElementById("cv");
+  var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  var scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(38, 16 / 10, 1, 8000);
+  var figs = [], cone, arrow, ring, pointer;
+
+  function makeFig(kind) {
+    var col = kind === "aksa" ? new THREE.Color(css(M.player)) : C.dummy, fig = { joints: {}, segs: [], base: col };
+    JOINTS.forEach(function (b) {
+      var g = b === "head" ? new THREE.SphereGeometry(11, 18, 12) : new THREE.SphereGeometry(b === "lha" || b === "rha" ? 5.5 : 4, 12, 8);
+      var m = new THREE.Mesh(g, new THREE.MeshBasicMaterial({ color: col })); world.add(m); fig.joints[b] = m;
+    });
+    LINKS.forEach(function (l) {
+      var g = new THREE.CylinderGeometry(kind === "aksa" ? 2.8 : 3.4, kind === "aksa" ? 2.8 : 3.4, 1, 8); g.translate(0, 0.5, 0); g.rotateX(Math.PI / 2);
+      var m = new THREE.Mesh(g, new THREE.MeshBasicMaterial({ color: col })); world.add(m); fig.segs.push({ a: l[0], b: l[1], m: m });
+    });
+    return fig;
+  }
+  function sector(r, half) {
+    var pos = [0, 0.5, 0], idx = [], n = 24;
+    for (var i = 0; i <= n; i++) { var a = (-half + 2 * half * i / n) * Math.PI / 180; pos.push(r * Math.sin(a), 0.5, r * Math.cos(a)); if (i > 0) idx.push(0, i, i + 1); }
+    var g = new THREE.BufferGeometry(); g.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3)); g.setIndex(idx); return g;
+  }
+  function textSprite(str) {
+    var cv = document.createElement("canvas"), g = cv.getContext("2d"), fs = 44;
+    g.font = "500 " + fs + "px 'IBM Plex Mono', monospace"; var w = Math.ceil(g.measureText(str).width) + 20;
+    cv.width = w; cv.height = fs + 20; g.font = "500 " + fs + "px 'IBM Plex Mono', monospace"; g.fillStyle = css("--muted"); g.textBaseline = "middle"; g.fillText(str, 10, cv.height / 2);
+    var tex = new THREE.CanvasTexture(cv), sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true, depthTest: false }));
+    sp.scale.set(w * 0.42, cv.height * 0.42, 1); return sp;
+  }
+  var MODES = {
+    human: { scale: 1, hs: 0.06, shake: 3, names: ["Aksa", "Dummy"], player: "--bone",
+      note: "Ganti skala ke Jayadwara untuk melihat bedanya di mode raksasa.",
+      rules: [["Poise", "Aksa 50, dummy 50, minion 20. Jab/cross −5, pukulan berat −40, serangan dummy −25."],
+        ["Reaksi ringan", "Poise masih ada: badan tersentak ±0,3 s. Musuh: serangannya batal. Pemain: hanya animasi di badan atas, input tidak dikunci."],
+        ["Stagger", "Poise habis: 1,2 s tidak bisa apa-apa, lalu poise penuh lagi supaya tidak bisa di-stagger terus."],
+        ["Knockdown", "Poise habis oleh serangan bertanda <code>Jatuh</code> (finisher, hantaman udara): jatuh 1,9 s, bangun 0,7 s kebal."],
+        ["Pulih poise", "Setelah 1,5 s tidak kena, naik 20/s."],
+        ["Hit-stop", "0,06 s pada penyerang dan korban (sudah ada dari Iterasi 2)."],
+        ["Soft target", "Kerucut ±30° searah stik/WASD, radius 8 m. Stik netral: target yang dihadapi. Penanda segitiga di atas target."],
+        ["Motion warp", "Target ≤ 3 m: geser sampai 0,85 m di depan target (maks. 2 m) dan putar badan selama ancang. Lebih jauh: putar badan saja, tidak ditarik (kejar pakai terjang)."],
+        ["Lock-on", "Usul dipindah ke Iterasi 6, khusus boss raksasa (Q3)."]] },
+    giant: { scale: 25, hs: 0.15, shake: 10, names: ["Jayadwara", "Raksasa"], player: "--gold",
+      note: "Skala 25× (45 m ÷ 1,8 m). Kecepatan animasi sama dengan Aksa (ala Mebius); rasa raksasa dari hit-stop, guncangan, debu, dan gedung. Kotak abu-abu = gedung 20–40 m, kotak kecil = mobil.",
+      rules: [["Poise", "Angka sama dengan Aksa (50, ringan −5, berat −40). Boss Jerangkong nanti punya poise per bagian tubuh (Iterasi 8)."],
+        ["Reaksi ringan", "Sama, ditambah tahan sentak untuk boss saat sedang menyerang."],
+        ["Stagger", "1,2 s, tidak diperlambat. Langkah mundur bisa menabrak gedung (Iterasi 7)."],
+        ["Knockdown", "Sama, ditambah debu ±25 m dan guncangan kuat. Gedung yang ketiban rusak (Iterasi 7)."],
+        ["Pulih poise", "Sama: jeda 1,5 s, lalu 20/s."],
+        ["Hit-stop", "0,15 s (Aksa 0,06 s), guncangan kamera lebih besar."],
+        ["Target", "Stik netral = boss. Kerucut ±30°, radius ±120 m, untuk potongan tubuh & puing. Lock-on boss di Iterasi 6."],
+        ["Motion warp", "Target ≤ ±45 m: geser sampai ±21 m di depan target (maks. ±30 m). Lebih jauh: putar badan saja."],
+        ["Meter Sync", "Terhuyung atau jatuh menabrak gedung menurunkan Sync (Iterasi 7)."]] }
+  };
+  var mode = "human", M = MODES.human, world, dust, H = [];
+  function city() {
+    var mat = new THREE.MeshBasicMaterial({ color: C.line, transparent: true, opacity: 0.55 }), edge = new THREE.LineBasicMaterial({ color: new THREE.Color(css("--muted")) });
+    [[-16000, 2000, 2500, 4000, 2500], [16500, 6000, 3000, 2500, 3000], [-14500, 14000, 2200, 3000, 2200], [3000, 21000, 4000, 3500, 3000], [-6000, 24000, 2500, 2200, 2500],
+     [-10500, -500, 450, 150, 180], [9500, 12500, 450, 150, 180], [-4000, 16000, 450, 150, 180]].forEach(function (b) {
+      if (b[3] === 0) return;
+      var g = new THREE.BoxGeometry(b[2], b[3], b[4]), m = new THREE.Mesh(g, mat); m.position.set(b[0], b[3] / 2, b[1]); scene.add(m);
+      var e = new THREE.LineSegments(new THREE.EdgesGeometry(g), edge); e.position.copy(m.position); scene.add(e);
+    });
+  }
+  var cur;
+  function build() {
+    colors();
+    while (scene.children.length) scene.remove(scene.children[0]);
+    world = new THREE.Group(); world.scale.setScalar(M.scale); scene.add(world);
+    world.add(new THREE.GridHelper(1400, 28, C.line, C.line));
+    if (mode === "giant") city();
+    figs = cur.actors.map(function (a) { return makeFig(a.kind); });
+    dust = new THREE.Mesh(new THREE.RingGeometry(0.85, 1, 64), new THREE.MeshBasicMaterial({ color: C.dummy, transparent: true, side: THREE.DoubleSide, depthWrite: false }));
+    dust.rotation.x = -Math.PI / 2; dust.visible = false; world.add(dust);
+    cone = new THREE.Mesh(sector(360, 30), new THREE.MeshBasicMaterial({ color: C.gold, transparent: true, opacity: 0.18, side: THREE.DoubleSide, depthWrite: false }));
+    cone.visible = false; world.add(cone);
+    arrow = new THREE.ArrowHelper(new V(0, 0, 1), new V(), 150, C.gold.getHex(), 34, 22); arrow.visible = false; world.add(arrow);
+    ring = new THREE.Mesh(new THREE.RingGeometry(36, 44, 48), new THREE.MeshBasicMaterial({ color: C.hit, side: THREE.DoubleSide }));
+    ring.rotation.x = -Math.PI / 2; ring.visible = false; world.add(ring);
+    pointer = new THREE.Mesh(new THREE.ConeGeometry(10, 20, 3), new THREE.MeshBasicMaterial({ color: C.hit })); pointer.rotation.x = Math.PI; pointer.visible = false; world.add(pointer);
+    (cur.paths || []).forEach(function (pp) {
+      var g = new THREE.BufferGeometry().setFromPoints(pp.map(function (q) { return new V(q[0], 1.5, q[1]); }));
+      world.add(new THREE.Line(g, new THREE.LineDashedMaterial({ color: C.move, dashSize: 10, gapSize: 6 })).computeLineDistances());
+    });
+    (cur.tags || []).forEach(function (tg) { var sp = textSprite(tg[mode === "giant" ? 2 : 1]); sp.position.set(tg[0], 2, -110); world.add(sp); });
+    H = [];
+    cur.actors.forEach(function (a) { a.flash.forEach(function (f) { if (H.indexOf(f[0]) < 0) H.push(f[0]); }); });
+    H.sort(function (a, b) { return a - b; });
+  }
+
+  function valAt(track, t) {
+    var v = track[0][1];
+    for (var i = 0; i < track.length; i++) {
+      if (t < track[i][0]) { var a = track[i - 1]; if (!a) return track[i][1]; var u = (t - a[0]) / (track[i][0] - a[0]); return a[1] + (track[i][1] - a[1]) * u; }
+      v = track[i][1];
+    }
+    return v;
+  }
+  function stepAt(list, t) { var r = null; list.forEach(function (x) { if (t >= x[0]) r = x; }); return r; }
+
+  function draw(t) {
+    var Js = cur.actors.map(function (ac, i) {
+      var J = solve(sample(ac, t)), fig = figs[i], h = inWin(ac.hits, t), hot = {}, fl = inWin(ac.flash, t);
+      if (h) h[2].forEach(function (l) { LIMB[l].forEach(function (b) { hot[b] = true; }); });
+      JOINTS.forEach(function (b) { fig.joints[b].position.copy(J[b]); fig.joints[b].material.color = fl || hot[b] ? C.hit : fig.base; });
+      fig.segs.forEach(function (s) {
+        var a = J[s.a], b = J[s.b]; s.m.position.copy(a); world.updateMatrixWorld(); s.m.lookAt(world.localToWorld(b.clone())); s.m.scale.set(1, 1, Math.max(0.01, a.distanceTo(b)));
+        s.m.material.color = fl || (hot[s.a] && hot[s.b]) ? C.hit : fig.base;
+      });
+      return J;
+    });
+    // kerucut input & penanda target
+    var ih = document.getElementById("inputhud");
+    if (cur.input) {
+      var inp = stepAt(cur.input, t), aJ = Js[0], aim = sample(cur.actors[0], t).yaw, dir = inp[1] === null ? aim : inp[1];
+      cone.visible = true; cone.position.set(aJ.pelvis.x, 0, aJ.pelvis.z); cone.rotation.y = dir * Math.PI / 180;
+      arrow.visible = inp[1] !== null;
+      if (arrow.visible) { arrow.position.set(aJ.pelvis.x, 3, aJ.pelvis.z); arrow.setDirection(rotY(new V(0, 0, 1), inp[1])); }
+      ih.hidden = false; ih.textContent = inp[2];
+      var tg = stepAt(cur.target, t), tJ = Js[tg[2]];
+      ring.visible = pointer.visible = true; ring.position.set(tJ.pelvis.x, 1, tJ.pelvis.z);
+      pointer.position.set(tJ.head.x, tJ.head.y + 34 + Math.sin(t * 8) * 4, tJ.head.z);
+    } else { cone.visible = arrow.visible = ring.visible = pointer.visible = false; ih.hidden = true; }
+    // poise
+    var pz = document.getElementById("poise");
+    if (cur.poise) {
+      pz.hidden = false; document.getElementById("pa-l").textContent = M.names[0]; document.getElementById("pd-l").textContent = M.names[1];
+      [["a", "pa"], ["d", "pd"]].forEach(function (x) {
+        var v = valAt(cur.poise[x[0]], t), el = document.getElementById(x[1]);
+        el.style.width = (v / 50 * 100) + "%"; el.className = v < 0.5 ? "zero" : ""; document.getElementById(x[1] + "-n").textContent = Math.round(v);
+      });
+    } else pz.hidden = true;
+    var dw = mode === "giant" && cur.dust ? inWin(cur.dust.map(function (d) { return [d[0], d[0] + 0.7, d]; }), t) : null;
+    if (dw) { var u = (t - dw[0]) / 0.7, dj = Js[dw[2][1]], r = 20 + u * dw[2][2]; dust.visible = true; dust.scale.set(r, r, r); dust.position.set(dj.pelvis.x, 1, dj.pelvis.z); dust.material.opacity = 0.9 * (1 - u); }
+    else dust.visible = false;
+    var lb = inWin(cur.labels, t), st = document.getElementById("hud-state");
+    st.className = "state" + (lb && lb[3] ? " " + lb[3] : ""); st.textContent = lb ? lb[2] : "—";
+    var c = 0, sum = new V(); Js.forEach(function (J) { sum.add(J.pelvis); c++; });
+    return sum.multiplyScalar(1 / c);
+  }
+
+  // ---------------------------------------------------------------- UI
+  var t = 0, speed = 0.5, playing = true, yaw = 1, pitch = 0.2, dist = 500, center = new V(0, 95, 0);
+  function fmt(x) { return x.toFixed(2).replace(".", ","); }
+  var list = document.getElementById("list"), lastGroup = "";
+  SC.forEach(function (s) {
+    if (s.group !== lastGroup) { var gh = document.createElement("div"); gh.className = "group"; gh.textContent = s.group; list.appendChild(gh); lastGroup = s.group; }
+    var b = document.createElement("button"); b.type = "button"; b.dataset.id = s.id;
+    b.innerHTML = "<span>" + s.title + "</span><small>" + fmt(s.len) + " s</small>";
+    b.addEventListener("click", function () { select(s.id); });
+    list.appendChild(b);
+  });
+  function select(id) {
+    cur = SC.find(function (s) { return s.id === id; }); t = 0;
+    list.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.id === id); });
+    document.getElementById("hud-title").textContent = cur.short;
+    document.getElementById("d-title").textContent = cur.title;
+    document.getElementById("d-text").textContent = cur.text;
+    var gd = document.getElementById("d-giant"); gd.hidden = mode !== "giant"; gd.textContent = cur.gtext;
+    document.getElementById("d-meta").innerHTML = (mode === "giant" ? cur.gmeta : cur.meta).map(function (m) { return "<span>" + m + "</span>"; }).join("");
+    build();
+    var L = realLen(), html = "";
+    cur.labels.forEach(function (w) { if (w[3]) { var a = toReal(w[0]), b = toReal(Math.min(w[1], cur.len)); html += '<i class="' + w[3] + '" style="left:' + (a / L * 100) + '%;width:' + ((b - a) / L * 100) + '%"></i>'; } });
+    document.getElementById("tl").innerHTML = html + '<span class="head" id="tl-head"></span>';
+    yaw = cur.cam.yaw; pitch = cur.cam.pitch; dist = cur.cam.dist * M.scale; center.set(cur.cam.c[0], cur.cam.c[1], cur.cam.c[2]).multiplyScalar(M.scale);
+  }
+  function toAnim(r) { var off = 0; for (var i = 0; i < H.length; i++) { var hr = H[i] + off; if (r < hr) break; if (r < hr + M.hs) return H[i]; off += M.hs; } return r - off; }
+  function toReal(a) { var off = 0; H.forEach(function (h) { if (h < a) off += M.hs; }); return a + off; }
+  function realLen() { return toReal(cur.len); }
+  function shakeAt(r) { var off = 0, amp = 0; H.forEach(function (h) { var hr = h + off; off += M.hs; if (r >= hr && r < hr + 0.35) amp = Math.max(amp, 1 - (r - hr) / 0.35); }); return amp; }
+  function setMode(m) {
+    mode = m; M = MODES[m];
+    document.querySelectorAll("[data-mode]").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.mode === m); });
+    document.getElementById("rules").innerHTML = M.rules.map(function (r) { return "<div><b>" + r[0] + "</b><span>" + r[1] + "</span></div>"; }).join("");
+    document.getElementById("rules-note").textContent = M.note;
+    camera.near = m === "giant" ? 20 : 1; camera.far = m === "giant" ? 400000 : 8000; camera.updateProjectionMatrix();
+    select(cur ? cur.id : "stagger");
+  }
+  document.querySelectorAll("[data-mode]").forEach(function (b) { b.addEventListener("click", function () { setMode(b.dataset.mode); }); });
+  function setPlaying(v) { playing = v; var b = document.getElementById("play"); b.textContent = v ? "Jeda" : "Putar"; b.setAttribute("aria-pressed", v); }
+  document.getElementById("play").addEventListener("click", function () { setPlaying(!playing); });
+  document.querySelectorAll("[data-speed]").forEach(function (b) {
+    b.addEventListener("click", function () { speed = parseFloat(b.dataset.speed); document.querySelectorAll("[data-speed]").forEach(function (o) { o.setAttribute("aria-pressed", o === b); }); });
+  });
+  var scrub = document.getElementById("scrub");
+  scrub.addEventListener("input", function () { t = scrub.value / 1000 * realLen(); setPlaying(false); });
+  var drag = null;
+  canvas.addEventListener("pointerdown", function (e) { drag = { x: e.clientX, y: e.clientY }; canvas.setPointerCapture(e.pointerId); });
+  canvas.addEventListener("pointermove", function (e) { if (!drag) return; yaw -= (e.clientX - drag.x) * 0.008; pitch = Math.max(-0.05, Math.min(1.4, pitch + (e.clientY - drag.y) * 0.006)); drag = { x: e.clientX, y: e.clientY }; });
+  canvas.addEventListener("pointerup", function () { drag = null; });
+  canvas.addEventListener("wheel", function (e) { e.preventDefault(); dist = Math.max(250 * M.scale, Math.min(1600 * M.scale, dist + e.deltaY * 0.6 * M.scale)); }, { passive: false });
+  function resize() { var w = stage.clientWidth, h = stage.clientHeight; renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); }
+  window.addEventListener("resize", resize);
+  if (window.matchMedia) window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function () { build(); });
+  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) speed = 0.25;
+
+  var last = performance.now();
+  function tick(now) {
+    var dt = Math.min(0.05, (now - last) / 1000); last = now;
+    var RL = realLen();
+    if (playing) { t += dt * speed; if (t > RL + 0.4) t = 0; }
+    var tt = Math.min(t, RL);
+    draw(toAnim(tt));
+    scrub.value = Math.round(tt / RL * 1000);
+    var head = document.getElementById("tl-head"); if (head) head.style.left = (tt / RL * 100) + "%";
+    document.getElementById("time").textContent = fmt(tt) + " / " + fmt(RL) + " s";
+    var narrow = stage.clientWidth < 520 ? 1.35 : 1, sh = shakeAt(tt) * M.shake * M.scale;
+    camera.position.set(center.x + Math.sin(yaw) * Math.cos(pitch) * dist * narrow, center.y + Math.sin(pitch) * dist * narrow, center.z + Math.cos(yaw) * Math.cos(pitch) * dist * narrow);
+    camera.lookAt(center);
+    if (sh > 0) { camera.position.x += (Math.random() - 0.5) * sh; camera.position.y += (Math.random() - 0.5) * sh; }
+    renderer.render(scene, camera);
+    requestAnimationFrame(tick);
+  }
+  setMode("human"); resize(); requestAnimationFrame(tick);
+})();
+</script>
+
+</body></html>

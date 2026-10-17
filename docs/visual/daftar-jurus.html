@@ -1,0 +1,396 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Daftar Jurus Jayadwara</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: lembar daftar jurus game — pilih karakter di atas, lalu peta combo, garis waktu jendela hit, dan blok angka per kelompok gerakan. */
+:root {
+  --bg: #eef0ee;          /* batu andesit muda */
+  --panel: #f8f9f7;
+  --ink: #1d2422;
+  --muted: #5d6865;
+  --line: #cdd3cf;
+  --gold: #b07a12;        /* prada candi */
+  --gold-soft: #f1e2bd;
+  --hit: #b8402e;         /* jendela kena */
+  --hit-soft: #f2d6cf;
+  --move: #2f6b8a;        /* gerak root motion */
+  --move-soft: #d3e4ec;
+  --new: #6b4fa0;         /* PR #32 */
+  --new-soft: #e6def3;
+  --ok: #3b7a4a;
+  --ok-soft: #d8eadb;
+  --font-display: "Saira Condensed", "Arial Narrow", sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #161b1a; --panel: #1e2523; --ink: #e6ebe8; --muted: #9aa6a2; --line: #34403c;
+  --gold: #e0ad48; --gold-soft: #3d3220; --hit: #e57a63; --hit-soft: #47271f;
+  --move: #6fb0d2; --move-soft: #1f3540; --new: #ad94dd; --new-soft: #33294a; --ok: #7cc28c; --ok-soft: #233a28;
+  color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #161b1a; --panel: #1e2523; --ink: #e6ebe8; --muted: #9aa6a2; --line: #34403c;
+  --gold: #e0ad48; --gold-soft: #3d3220; --hit: #e57a63; --hit-soft: #47271f;
+  --move: #6fb0d2; --move-soft: #1f3540; --new: #ad94dd; --new-soft: #33294a; --ok: #7cc28c; --ok-soft: #233a28;
+  color-scheme: dark }
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.5; }
+.wrap { max-width: 1080px; margin: 0 auto; padding-block: 28px 64px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 36px; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; letter-spacing: .01em; }
+h1 { font-size: clamp(34px, 6vw, 52px); font-weight: 800; line-height: 1; text-transform: uppercase; }
+h2 { font-size: 26px; font-weight: 700; text-transform: uppercase; }
+h3 { font-size: 19px; font-weight: 700; }
+p { margin: 0; }
+.muted { color: var(--muted); }
+.mono { font-family: var(--font-mono); font-size: 13px; font-variant-numeric: tabular-nums; }
+.eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); }
+
+header { display: grid; gap: 14px; }
+header .lead { max-width: 64ch; color: var(--muted); }
+.switch { display: inline-flex; border: 1.5px solid var(--ink); border-radius: 4px; overflow: hidden; width: max-content; }
+.switch button { font: 700 17px var(--font-display); text-transform: uppercase; letter-spacing: .04em; padding: 8px 20px;
+  background: transparent; color: var(--ink); border: 0; cursor: pointer; }
+.switch button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+.switch button:focus-visible { outline: 2px solid var(--gold); outline-offset: -4px; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 13px; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.sw { width: 14px; height: 10px; border-radius: 2px; display: inline-block; }
+
+.kbd { font-family: var(--font-mono); font-size: 12px; font-weight: 500; padding: 1px 7px; border: 1px solid var(--line);
+  border-bottom-width: 2.5px; border-radius: 4px; background: var(--panel); white-space: nowrap; }
+.tag { font-family: var(--font-mono); font-size: 11px; padding: 1px 7px; border-radius: 999px; white-space: nowrap; }
+.tag.dev { background: var(--ok-soft); color: var(--ok); }
+.tag.pr { background: var(--new-soft); color: var(--new); }
+
+/* kontrol */
+.controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: var(--line);
+  border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+.controls div { background: var(--panel); padding: 12px 14px; display: grid; gap: 4px; }
+.controls b { font-family: var(--font-display); font-size: 18px; text-transform: uppercase; }
+
+/* peta combo */
+.map { overflow-x: auto; border: 1px solid var(--line); border-radius: 6px; background: var(--panel); padding: 18px; }
+.map svg { display: block; min-width: 760px; width: 100%; height: auto; }
+.map text { font-family: var(--font-body); fill: var(--ink); }
+.map .lbl { font: 700 15px var(--font-display); text-transform: uppercase; }
+.map .sub { font: 11px var(--font-mono); fill: var(--muted); }
+.map .node { fill: var(--bg); stroke: var(--ink); stroke-width: 1.5; }
+.map .node.pr { stroke: var(--new); stroke-dasharray: 4 3; }
+.map .node.heavy { fill: var(--gold-soft); stroke: var(--gold); }
+.map .node.heavy.pr { stroke: var(--new); }
+.map .edge { stroke: var(--muted); stroke-width: 1.5; fill: none; }
+.map .edge.pr { stroke: var(--new); stroke-dasharray: 4 3; }
+.map .inp { font: 500 11px var(--font-mono); fill: var(--muted); }
+.map .arrowhead { fill: var(--muted); }
+.map .arrowhead.pr { fill: var(--new); }
+
+/* kartu jurus */
+.section { display: grid; gap: 14px; }
+.section > .intro { color: var(--muted); max-width: 70ch; }
+.moves { display: grid; gap: 10px; }
+.move { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 14px 16px;
+  display: grid; grid-template-columns: minmax(0, 260px) minmax(0, 1fr); gap: 10px 22px; align-items: start; }
+.move.pr { border-left: 3px solid var(--new); }
+.move .head { display: grid; gap: 6px; min-width: 0; }
+.move .inputs { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; font-size: 12px; color: var(--muted); }
+.move .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.move .body { display: grid; gap: 10px; min-width: 0; }
+.stats { display: flex; flex-wrap: wrap; gap: 4px 16px; }
+.stat { display: grid; }
+.stat small { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+.stat span { font-family: var(--font-mono); font-size: 14px; font-variant-numeric: tabular-nums; }
+.note { font-size: 13px; color: var(--muted); }
+.anim { font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
+
+/* garis waktu */
+.tl { position: relative; height: 34px; border-radius: 3px; background:
+  repeating-linear-gradient(90deg, var(--line) 0 1px, transparent 1px calc(100% / 12)); background-color: var(--bg); }
+.tl .bar { position: absolute; height: 9px; border-radius: 2px; }
+.tl .bar.hit { top: 4px; background: var(--hit); }
+.tl .bar.combo { top: 15px; background: var(--gold); }
+.tl .bar.move { top: 26px; height: 6px; background: var(--move); }
+.tl .auto { position: absolute; inset: 0; display: grid; place-items: center; font: 12px var(--font-mono); color: var(--muted); }
+.tl-axis { display: flex; justify-content: space-between; font: 10px var(--font-mono); color: var(--muted); margin-top: 2px; }
+
+/* angka rasa */
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 14px 16px; display: grid; gap: 8px; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+td { padding: 5px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+td:last-child { text-align: right; font-family: var(--font-mono); font-size: 13px; font-variant-numeric: tabular-nums; padding-left: 12px; }
+tr:last-child td { border-bottom: 0; }
+footer { font-size: 13px; color: var(--muted); display: grid; gap: 6px; max-width: 75ch; }
+
+@media (max-width: 640px) {
+  .move { grid-template-columns: minmax(0, 1fr); }
+}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Fase 1 · combat · Aksa &amp; Jayadwara</div>
+    <h1>Daftar Jurus</h1>
+    <p class="lead">Semua gerakan combat yang ada sekarang, dari kode di <span class="mono">development</span> dan PR #32. Ability-nya sama untuk dua karakter, yang beda cuma angka di <span class="mono">DA_CombatProfile</span>. Pilih karakter untuk melihat angkanya.</p>
+    <div class="switch" role="group" aria-label="Pilih karakter">
+      <button type="button" id="btn-aksa" aria-pressed="true">Aksa</button>
+      <button type="button" id="btn-jd" aria-pressed="false">Jayadwara</button>
+    </div>
+    <div class="legend">
+      <span><span class="tag dev">development</span> sudah jalan & lulus uji</span>
+      <span><span class="tag pr">PR #32</span> belum di-build</span>
+      <span><i class="sw" style="background:var(--hit)"></i> jendela kena</span>
+      <span><i class="sw" style="background:var(--gold)"></i> jendela combo</span>
+      <span><i class="sw" style="background:var(--move)"></i> gerak dorong</span>
+    </div>
+  </header>
+
+  <section class="section" aria-labelledby="h-kontrol">
+    <h2 id="h-kontrol">Tombol</h2>
+    <div class="controls">
+      <div><b>Pukul ringan</b><span><span class="kbd">LMB</span> <span class="kbd">X</span></span></div>
+      <div><b>Pukul berat</b><span><span class="kbd">E</span> <span class="kbd">Y</span></span></div>
+      <div><b>Dodge</b><span><span class="kbd">Shift</span> <span class="kbd">B</span></span></div>
+      <div><b>Tangkis / parry</b><span><span class="kbd">RMB</span> <span class="kbd">R2</span></span></div>
+      <div><b>Lompat</b><span><span class="kbd">Space</span> <span class="kbd">A</span></span></div>
+      <div><b>Transformasi</b><span><span class="kbd">T</span> <span class="kbd">L1+R1</span></span></div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="h-peta">
+    <h2 id="h-peta">Peta combo</h2>
+    <p class="intro">Arah dihitung ke musuh terdekat. Maju atau mundur memilih pembuka, lalu combo lanjut ke pukulan 2. Pukulan berat di tengah combo memilih finisher sesuai langkahnya.</p>
+    <div class="map">
+      <svg viewBox="0 0 900 330" role="img" aria-label="Peta alur combo ringan, pembuka arah, dan cabang finisher berat">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrowhead" d="M0 0L10 5L0 10z"/></marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrowhead pr" d="M0 0L10 5L0 10z"/></marker>
+        </defs>
+        <!-- start -->
+        <circle cx="40" cy="150" r="22" class="node"/>
+        <text x="40" y="155" text-anchor="middle" class="lbl">Diam</text>
+        <!-- openers -->
+        <rect x="120" y="22" width="150" height="54" rx="6" class="node pr"/>
+        <text x="195" y="46" text-anchor="middle" class="lbl">Terjang</text>
+        <text x="195" y="64" text-anchor="middle" class="sub">maju + pukul, musuh jauh</text>
+        <rect x="120" y="224" width="150" height="54" rx="6" class="node pr"/>
+        <text x="195" y="248" text-anchor="middle" class="lbl">Pukul mundur</text>
+        <text x="195" y="266" text-anchor="middle" class="sub">mundur + pukul</text>
+        <!-- light chain -->
+        <rect x="120" y="123" width="120" height="54" rx="6" class="node"/>
+        <text x="180" y="147" text-anchor="middle" class="lbl">Pukulan 1</text>
+        <text x="180" y="165" text-anchor="middle" class="sub">jab kanan</text>
+        <rect x="320" y="123" width="120" height="54" rx="6" class="node"/>
+        <text x="380" y="147" text-anchor="middle" class="lbl">Pukulan 2</text>
+        <text x="380" y="165" text-anchor="middle" class="sub">pukulan kiri</text>
+        <rect x="520" y="123" width="120" height="54" rx="6" class="node"/>
+        <text x="580" y="147" text-anchor="middle" class="lbl">Pukulan 3</text>
+        <text x="580" y="165" text-anchor="middle" class="sub">tendangan</text>
+        <rect x="720" y="123" width="140" height="54" rx="6" class="node pr"/>
+        <text x="790" y="147" text-anchor="middle" class="lbl">Pukulan 4</text>
+        <text x="790" y="165" text-anchor="middle" class="sub">finisher</text>
+        <!-- heavy finishers -->
+        <rect x="300" y="248" width="160" height="54" rx="6" class="node heavy pr"/>
+        <text x="380" y="272" text-anchor="middle" class="lbl">Finisher 1</text>
+        <text x="380" y="290" text-anchor="middle" class="sub">berat setelah pukulan 1</text>
+        <rect x="500" y="248" width="160" height="54" rx="6" class="node heavy pr"/>
+        <text x="580" y="272" text-anchor="middle" class="lbl">Finisher 2</text>
+        <text x="580" y="290" text-anchor="middle" class="sub">berat setelah pukulan 2</text>
+        <rect x="700" y="22" width="160" height="54" rx="6" class="node heavy"/>
+        <text x="780" y="46" text-anchor="middle" class="lbl">Pukulan berat</text>
+        <text x="780" y="64" text-anchor="middle" class="sub">dari diam / pukulan 3–4</text>
+        <!-- edges -->
+        <path d="M62 150 H118" class="edge" marker-end="url(#ar)"/>
+        <text x="90" y="142" text-anchor="middle" class="inp">LMB</text>
+        <path d="M52 131 Q70 49 118 49" class="edge pr" marker-end="url(#arp)"/>
+        <path d="M52 169 Q70 251 118 251" class="edge pr" marker-end="url(#arp)"/>
+        <path d="M240 150 H318" class="edge" marker-end="url(#ar)"/>
+        <text x="279" y="142" text-anchor="middle" class="inp">LMB</text>
+        <path d="M440 150 H518" class="edge" marker-end="url(#ar)"/>
+        <text x="479" y="142" text-anchor="middle" class="inp">LMB</text>
+        <path d="M640 150 H718" class="edge pr" marker-end="url(#arp)"/>
+        <text x="679" y="142" text-anchor="middle" class="inp">LMB</text>
+        <path d="M270 49 Q300 49 330 121" class="edge pr" marker-end="url(#arp)"/>
+        <path d="M270 251 Q300 251 330 179" class="edge pr" marker-end="url(#arp)"/>
+        <text x="300" y="98" text-anchor="middle" class="inp">LMB</text>
+        <path d="M200 177 Q230 275 298 275" class="edge pr" marker-end="url(#arp)"/>
+        <text x="232" y="236" text-anchor="middle" class="inp">E</text>
+        <path d="M400 177 Q430 275 498 275" class="edge pr" marker-end="url(#arp)"/>
+        <text x="432" y="236" text-anchor="middle" class="inp">E</text>
+        <path d="M600 123 Q620 49 698 49" class="edge" marker-end="url(#ar)"/>
+        <text x="640" y="80" text-anchor="middle" class="inp">E</text>
+      </svg>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="h-darat">
+    <h2 id="h-darat">Serangan darat</h2>
+    <p class="intro">Garis waktu = detik animasi pada laju 1,0, skala 0–1,2 s. Pukulan bisa disambung selama jendela combo terbuka, atau ditekan sampai <span id="buffer-note">0,2 s</span> sebelumnya (buffer input).</p>
+    <div class="moves" id="moves-ground"></div>
+  </section>
+
+  <section class="section" aria-labelledby="h-udara">
+    <h2 id="h-udara">Serangan udara</h2>
+    <p class="intro">Animasi udara memakai salinan tanpa root motion, jadi gerak datang dari lompatan. Dodge dan tangkis tidak bisa di udara.</p>
+    <div class="moves" id="moves-air"></div>
+  </section>
+
+  <section class="section" aria-labelledby="h-bertahan">
+    <h2 id="h-bertahan">Bertahan</h2>
+    <p class="intro">Dodge dan tangkis bisa membatalkan recovery serangan setelah jendela kena lewat. Tangkis dan parry hanya berlaku untuk serangan dari depan.</p>
+    <div class="moves" id="moves-defense"></div>
+  </section>
+
+  <section class="section" aria-labelledby="h-rasa">
+    <h2 id="h-rasa">Rasa pukulan</h2>
+    <div class="grid2" id="feel"></div>
+  </section>
+
+  <footer>
+    <p>Sumber angka: <span class="mono">Tools/ue_setup_light_combo.py</span>, <span class="mono">ue_setup_defense.py</span>, <span class="mono">ue_setup_giant_combo.py</span>, dan <span class="mono">docs/23</span> bagian 5. Jarak Jayadwara dihitung dari skala raksasa ±23,7 (radius hit 711 cm ÷ 30 cm); jarak gerak memakai skala × 0,6 seperti dodge.</p>
+    <p>Semua animasi masih placeholder Mannequin. Penggantinya dari Mixamo tercatat di <span class="mono">docs/23</span> bagian 6.1.</p>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var S = 23.7, M = S * 0.6;
+  function m(cm) { return cm >= 100 ? (cm / 100).toLocaleString("id-ID", { maximumFractionDigits: 1 }) + " m" : cm + " cm"; }
+  function sec(x) { return x.toLocaleString("id-ID", { maximumFractionDigits: 2 }) + " s"; }
+
+  var data = {
+    aksa: { buffer: 0.2, radius: 30, hitstop: 0.06, shake: 1, cue: "Hit.Light (pukulan ringan), Hit.Heavy (berat)",
+            anim: { a1: "A_Aksa_Attack_01 ← MM_Attack_01", a2: "A_Aksa_Attack_02 ← MM_Attack_02", a3: "A_Aksa_Attack_03 ← MM_Attack_03",
+                    a4: "A_Aksa_Attack_04 ← MM_ChargedAttack", heavy: "AM_Aksa_Heavy ← A_Aksa_Attack_02 (0,75×)",
+                    air: "A_Aksa_Air ← MM_Attack_03 (tanpa root motion)", slam: "A_Aksa_AirSlam ← MM_ChargedAttack (tanpa root motion)",
+                    block: "AM_Aksa_Block = frame 0,75 s A_Aksa_Attack_02 ditahan", stagger: "AM_Aksa_Stagger ← MM_HitReact_Front_Hvy_01" },
+            dodge: 400, parry: 0.2, pushback: 300, lunge: 600, lungeMin: 250, lungeStop: 100, back: 150, search: 800,
+            slamSpeed: 2000, slamRadius: 250, extra: [] },
+    jd: { buffer: 0.3, radius: 711, hitstop: 0.15, shake: 2.5, cue: "Hit.Heavy untuk semua pukulan",
+          anim: { a1: "A_JD2_Attack_01 ← MM_Attack_01_JD2", a2: "A_JD2_Attack_02 ← MM_Attack_02_JD2", a3: "A_JD2_Attack_03 ← MM_Attack_03_JD2",
+                  a4: "A_JD2_Attack_04 ← MM_ChargedAttack_JD2 (perlu retarget ulang)", heavy: "AM_JD2_Heavy ← A_JD2_Attack_02 (0,75×)",
+                  air: "A_JD2_Air ← MM_Attack_03_JD2 (tanpa root motion)", slam: "A_JD2_AirSlam ← MM_ChargedAttack_JD2 (tanpa root motion)",
+                  block: "AM_JD2_Block = frame 0,75 s A_JD2_Attack_02 ditahan", stagger: "belum diisi (pakai profil default)" },
+          dodge: 5500, parry: 0.25, pushback: 1500, lunge: 600 * M, lungeMin: 250 * M, lungeStop: 100 * M, back: 150 * M, search: 800 * M,
+          slamSpeed: 2000 * M, slamRadius: 250 * S,
+          extra: [["Lari", "±70 m/s"], ["Berbalik", "720°/s"], ["Lompat", "×1,25"], ["Laju animasi serangan", "1,0 (ala Mebius)"]] }
+  };
+
+  function moves(c) {
+    var d = data[c];
+    return {
+      ground: [
+        { name: "Pukulan 1", inputs: ["LMB"], st: "dev", dmg: "10", poise: "5", anim: d.anim.a1,
+          tl: { hit: [0.28, 0.48], combo: [0.45, 0.80] }, socket: "hand_r", note: "Membuka combo netral. Arah pukulan mengikuti WASD." },
+        { name: "Pukulan 2", inputs: ["LMB", "LMB"], st: "dev", dmg: "10", poise: "5", anim: d.anim.a2,
+          tl: { hit: [0.30, 0.50], combo: [0.48, 0.82] }, socket: "hand_l" },
+        { name: "Pukulan 3", inputs: ["LMB", "LMB", "LMB"], st: "pr", dmg: "12 (dulu 18)", poise: "8 (dulu 15)", anim: d.anim.a3,
+          tl: { hit: [0.24, 0.72], combo: [0.69, 1.04] }, socket: "foot_r", note: "Di development ini langkah terakhir. PR #32 menambah jendela combo ke pukulan 4." },
+        { name: "Pukulan 4 · finisher", inputs: ["LMB ×4"], st: "pr", dmg: "20", poise: "20", anim: d.anim.a4,
+          tl: { auto: true }, socket: "otomatis", note: "Waktu kena dicari skrip dari puncak kecepatan tangan/kaki, hasilnya di log." + (c === "jd" ? " Kalau animasi belum di-retarget, combo Jayadwara tetap 3 pukulan." : "") },
+        { name: "Terjang", inputs: ["W", "+", "LMB"], st: "pr", dmg: "10", poise: "8", anim: d.anim.a1,
+          tl: { hit: [0.28, 0.48], combo: [0.45, 0.80], move: [0, 0.22] }, socket: "hand_r",
+          extra: [["Syarat jarak", "> " + m(d.lungeMin)], ["Dorong maks.", m(d.lunge)], ["Berhenti di", m(d.lungeStop) + " dari musuh"]],
+          note: "Maju ke arah musuh terdekat (cari dalam " + m(d.search) + "). Musuh sudah dekat = pukulan 1 biasa." },
+        { name: "Pukul mundur", inputs: ["S", "+", "LMB"], st: "pr", dmg: "10", poise: "8", anim: d.anim.a3,
+          tl: { hit: [0.24, 0.72], combo: [0.69, 1.04], move: [0, 0.25] }, socket: "foot_r (radius ×1,7)",
+          extra: [["Mundur", m(d.back)]], note: "Menghadap musuh sambil mundur. Lanjut LMB = pukulan 2." },
+        { name: "Pukulan berat", inputs: ["E"], st: "dev", dmg: "30", poise: "40", stamina: "25", anim: d.anim.heavy,
+          tl: { hit: [0.32, 0.56] }, socket: "hand_l", note: "Dari diam, dari jendela combo, atau dari recovery. Diputar 0,75× jadi lebih lambat dari angka garis waktu." },
+        { name: "Finisher 1", inputs: ["LMB", "E"], st: "pr", dmg: "30", poise: "40", stamina: "25", anim: d.anim.a3 + " (0,8×)",
+          tl: { hit: [0.24, 0.72] }, socket: "foot_r", note: "Pukulan berat yang memotong combo di pukulan 1." },
+        { name: "Finisher 2", inputs: ["LMB", "LMB", "E"], st: "pr", dmg: "30", poise: "40", stamina: "25", anim: d.anim.a4 + " (0,85×)",
+          tl: { auto: true }, socket: "otomatis", note: "Pukulan berat yang memotong combo di pukulan 2. Di pukulan 3–4 kembali ke pukulan berat biasa." }
+      ],
+      air: [
+        { name: "Tendangan udara", inputs: ["Space", "+", "LMB"], st: "pr", dmg: "10", poise: "5", anim: d.anim.air,
+          tl: { hit: [0.24, 0.72], combo: [0.40, 0.80] }, socket: "foot_r",
+          extra: [["Maks. per lompatan", "2"], ["Ngambang", "0,3 s, gravitasi ×0,1"]], note: "Hitungan reset saat mendarat." },
+        { name: "Hantaman ke bawah", inputs: ["Space", "+", "E"], st: "pr", dmg: "30", poise: "40", stamina: "25", anim: d.anim.slam,
+          tl: null, socket: "area saat mendarat",
+          extra: [["Kecepatan tukik", m(d.slamSpeed) + "/s"], ["Radius gelombang", m(d.slamRadius)], ["Jeda mendarat", "0,35 s"]],
+          note: "Semua musuh dalam radius kena sekali. Shake tetap jalan walau tidak ada yang kena." }
+      ],
+      defense: [
+        { name: "Dodge", inputs: ["Shift"], st: "dev", stamina: "20", anim: "tanpa animasi (slot 4 arah kosong)",
+          tl: { hit: null, move: [0, 0.35], iframe: [0, 0.25] },
+          extra: [["Jarak", m(d.dodge)], ["Durasi", "0,35 s"], ["i-frame", "0–0,25 s"]], note: "Arah dari WASD, tanpa input = mundur. Hanya di tanah." },
+        { name: "Tangkis", inputs: ["tahan", "RMB"], st: "dev", anim: d.anim.block,
+          extra: [["Kurangi damage", "80%"], ["Stamina per hit", "−15"], ["Sudut depan", "140°"], ["Jalan", "×0,4"], ["Terdorong", m(d.pushback)]],
+          note: "Stamina habis saat ditangkis = guard break, stagger 1 s. Tidak bisa di udara (PR #32)." },
+        { name: "Parry", inputs: ["tekan", "RMB", "tepat waktu"], st: "dev", anim: "pakai pose tangkis",
+          extra: [["Jendela", sec(d.parry) + " setelah tekan"], ["Anti spam", "0,5 s"], ["Penyerang stagger", "1 s"]],
+          note: "Tanpa damage. Hit-stop 2× lebih lama." },
+        { name: "Stagger (kena)", inputs: ["—"], st: "dev", anim: d.anim.stagger,
+          note: "Membatalkan ability combat dan menahan gerak. Reaksi lengkap (poise, knockdown) di Iterasi 4." }
+      ]
+    };
+  }
+
+  function timeline(tl) {
+    if (!tl) return "";
+    var max = 1.2, h = "";
+    function bar(cls, r) { return '<i class="bar ' + cls + '" style="left:' + (r[0] / max * 100) + '%;width:' + ((r[1] - r[0]) / max * 100) + '%"></i>'; }
+    if (tl.auto) h = '<span class="auto">waktu kena dicari otomatis saat skrip jalan</span>';
+    else {
+      if (tl.hit) h += bar("hit", tl.hit);
+      if (tl.iframe) h += bar("hit", tl.iframe).replace('class="bar hit"', 'class="bar hit" title="i-frame"');
+      if (tl.combo) h += bar("combo", tl.combo);
+      if (tl.move) h += bar("move", tl.move);
+    }
+    return '<div><div class="tl" aria-hidden="true">' + h + '</div><div class="tl-axis"><span>0</span><span>0,3</span><span>0,6</span><span>0,9</span><span>1,2 s</span></div></div>';
+  }
+
+  function card(mv) {
+    var keys = mv.inputs.map(function (k) { return /^(\+|tahan|tekan|tepat waktu|—)$/.test(k) ? "<span>" + k + "</span>" : '<span class="kbd">' + k + "</span>"; }).join(" ");
+    var stats = [];
+    if (mv.dmg) stats.push(["Damage", mv.dmg]);
+    if (mv.poise) stats.push(["Poise", mv.poise]);
+    if (mv.stamina) stats.push(["Stamina", "−" + mv.stamina]);
+    if (mv.socket) stats.push(["Kena dari", mv.socket]);
+    (mv.extra || []).forEach(function (e) { stats.push(e); });
+    return '<article class="move' + (mv.st === "pr" ? " pr" : "") + '">' +
+      '<div class="head"><h3>' + mv.name + '</h3><div class="inputs">' + keys + '</div>' +
+      '<div class="tags"><span class="tag ' + mv.st + '">' + (mv.st === "pr" ? "PR #32" : "development") + "</span></div></div>" +
+      '<div class="body"><div class="stats">' + stats.map(function (s) { return '<div class="stat"><small>' + s[0] + "</small><span>" + s[1] + "</span></div>"; }).join("") + "</div>" +
+      timeline(mv.tl) +
+      '<div class="anim">' + mv.anim + "</div>" + (mv.note ? '<p class="note">' + mv.note + "</p>" : "") + "</div></article>";
+  }
+
+  function feel(c) {
+    var d = data[c];
+    var rows = [["Hit-stop", sec(d.hitstop)], ["Time dilation saat hit-stop", "0,05"], ["Camera shake", "×" + String(d.shake).replace(".", ",")],
+      ["Radius hitbox", m(d.radius)], ["Buffer input", sec(d.buffer)], ["Suara", d.cue]];
+    var html = '<div class="card"><h3>Saat pukulan kena</h3><table>' + rows.map(function (r) { return "<tr><td>" + r[0] + "</td><td>" + r[1] + "</td></tr>"; }).join("") + "</table></div>";
+    var res = [["Stamina", "100, regen 25/s setelah 0,8 s"]].concat(d.extra);
+    html += '<div class="card"><h3>' + (c === "jd" ? "Stamina & gerak raksasa" : "Stamina") + '</h3><table>' + res.map(function (r) { return "<tr><td>" + r[0] + "</td><td>" + r[1] + "</td></tr>"; }).join("") + "</table></div>";
+    return html;
+  }
+
+  function render(c) {
+    var mv = moves(c);
+    document.getElementById("moves-ground").innerHTML = mv.ground.map(card).join("");
+    document.getElementById("moves-air").innerHTML = mv.air.map(card).join("");
+    document.getElementById("moves-defense").innerHTML = mv.defense.map(card).join("");
+    document.getElementById("feel").innerHTML = feel(c);
+    document.getElementById("buffer-note").textContent = sec(data[c].buffer);
+    document.getElementById("btn-aksa").setAttribute("aria-pressed", c === "aksa");
+    document.getElementById("btn-jd").setAttribute("aria-pressed", c === "jd");
+    try { localStorage.setItem("jurus-char", c); } catch (e) {}
+  }
+
+  document.getElementById("btn-aksa").addEventListener("click", function () { render("aksa"); });
+  document.getElementById("btn-jd").addEventListener("click", function () { render("jd"); });
+  var start = "aksa";
+  try { start = localStorage.getItem("jurus-char") || "aksa"; } catch (e) {}
+  if (location.hash === "#jayadwara") start = "jd";
+  render(start === "jd" ? "jd" : "aksa");
+})();
+</script>
+
+</body></html>

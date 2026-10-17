@@ -1,0 +1,475 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Usulan Jurus Aksa</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@600;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: panggung 3D + strip pose kunci di kiri, daftar jurus & kontrol putar di kanan; satu kolom di HP. */
+:root {
+  --bg: #eef0ee; --panel: #f8f9f7; --ink: #1d2422; --muted: #5d6865; --line: #cdd3cf;
+  --stage: #e3e7e4; --bone: #1d2422; --gold: #b07a12; --hit: #b8402e; --move: #2f6b8a;
+  --font-display: "Saira Condensed", "Arial Narrow", sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #161b1a; --panel: #1e2523; --ink: #e6ebe8; --muted: #9aa6a2; --line: #34403c;
+  --stage: #121716; --bone: #e6ebe8; --gold: #e0ad48; --hit: #e57a63; --move: #6fb0d2; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #161b1a; --panel: #1e2523; --ink: #e6ebe8; --muted: #9aa6a2; --line: #34403c;
+  --stage: #121716; --bone: #e6ebe8; --gold: #e0ad48; --hit: #e57a63; --move: #6fb0d2; color-scheme: dark }
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.5; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-block: 24px 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 18px; }
+h1 { font: 800 clamp(30px, 5vw, 44px)/1 var(--font-display); text-transform: uppercase; margin: 0; text-wrap: balance; }
+.eyebrow { font: 12px var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--gold); }
+.lead { color: var(--muted); max-width: 72ch; margin: 0; }
+.layout { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 16px; align-items: start; }
+@media (max-width: 820px) { .layout { grid-template-columns: minmax(0, 1fr); } }
+.main { display: grid; gap: 12px; min-width: 0; }
+.stage { position: relative; background: var(--stage); border: 1px solid var(--line); border-radius: 6px; aspect-ratio: 16 / 10; max-width: 100%; overflow: hidden; }
+.stage canvas { display: block; width: 100%; height: 100%; touch-action: none; cursor: grab; }
+.hud { position: absolute; left: 12px; top: 10px; right: 12px; display: flex; justify-content: space-between; gap: 8px; pointer-events: none; }
+.hud b { font: 800 22px var(--font-display); text-transform: uppercase; }
+.hud .state { font: 12px var(--font-mono); padding: 2px 8px; border-radius: 999px; background: var(--panel); border: 1px solid var(--line); height: max-content; white-space: nowrap; }
+.hud .state.hit { color: var(--hit); border-color: var(--hit); }
+.hud .state.combo { color: var(--gold); border-color: var(--gold); }
+.desc { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 12px 14px; display: grid; gap: 6px; }
+.desc h2 { margin: 0; font: 800 22px var(--font-display); text-transform: uppercase; }
+.desc p { margin: 0; }
+.kbd { font: 500 12px var(--font-mono); padding: 1px 7px; border: 1px solid var(--line); border-bottom-width: 2.5px; border-radius: 4px; background: var(--bg); white-space: nowrap; }
+.meta { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 13px; color: var(--muted); }
+.strip { display: grid; grid-template-columns: repeat(auto-fill, minmax(112px, 1fr)); gap: 8px; }
+.strip figure { margin: 0; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 6px; display: grid; gap: 2px; cursor: pointer; }
+.strip figure.on { border-color: var(--ink); }
+.strip canvas { width: 100%; aspect-ratio: 1; display: block; }
+.strip figcaption { font: 12px var(--font-mono); color: var(--muted); text-align: center; }
+.strip figure.hit figcaption { color: var(--hit); }
+.side { display: grid; gap: 14px; }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 12px; display: grid; gap: 10px; }
+.panel h3 { margin: 0; font: 600 13px var(--font-mono); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+.list { display: grid; gap: 4px; }
+.group { font: 12px var(--font-mono); color: var(--muted); margin-top: 6px; }
+button { font: 600 14px var(--font-body); border: 1.5px solid var(--ink); background: var(--panel); color: var(--ink); border-radius: 4px; padding: 6px 12px; cursor: pointer; }
+button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.list button { text-align: left; border-width: 1px; border-color: var(--line); display: flex; justify-content: space-between; gap: 8px; }
+.list button small { font: 12px var(--font-mono); opacity: .7; }
+.list button { flex-wrap: wrap; }
+.list button .mx { flex-basis: 100%; display: flex; justify-content: space-between; gap: 8px; font: 400 12px var(--font-mono); color: var(--muted); }
+.list button[aria-pressed="true"] .mx { color: inherit; opacity: .8; }
+.list button .mx code { color: var(--gold); }
+.list button[aria-pressed="true"] .mx code { color: inherit; }
+.tag { font: 11px var(--font-mono); padding: 0 6px; border-radius: 999px; border: 1px solid var(--hit); color: var(--hit); white-space: nowrap; }
+.files { display: grid; gap: 6px; font-size: 13px; }
+.files div { display: grid; gap: 1px; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
+.files div:last-child { border-bottom: 0; padding-bottom: 0; }
+.files code { font: 500 12px var(--font-mono); color: var(--gold); }
+.files span { color: var(--muted); font-size: 12px; }
+.row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.tl { position: relative; height: 24px; background: var(--bg); border-radius: 3px; overflow: hidden; }
+.tl i { position: absolute; }
+.tl i.hit { background: var(--hit); opacity: .6; top: 0; height: 33%; }
+.tl i.combo { background: var(--gold); opacity: .65; top: 33%; height: 33%; }
+.tl i.move { background: var(--move); opacity: .7; top: 66%; height: 34%; }
+.tl .head { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--ink); }
+input[type=range] { width: 100%; accent-color: var(--gold); }
+.mono { font: 13px var(--font-mono); }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 12px; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 5px; }
+.sw { width: 12px; height: 8px; border-radius: 2px; display: inline-block; }
+.note { font-size: 13px; color: var(--muted); margin: 0; }
+</style>
+
+<div class="wrap">
+  <div>
+    <div class="eyebrow">Konsep · bukan animasi final</div>
+    <h1>Usulan Jurus Aksa</h1>
+  </div>
+  <p class="lead">Pose kunci untuk jurus yang aku usulkan, dibuat dengan tangan sebagai panduan saat memilih animasi Mixamo atau mocap. Jayadwara memakai jurus yang sama di Fase 1, hanya skalanya besar. Seret panggung untuk memutar kamera, dan klik pose kunci di bawah untuk melompat ke pose itu.</p>
+
+  <div class="layout">
+    <div class="main">
+      <div class="stage" id="stage">
+        <canvas id="cv" aria-label="Panggung 3D animasi konsep jurus"></canvas>
+        <div class="hud"><b id="hud-title"></b><span class="state" id="hud-state">—</span></div>
+      </div>
+      <div class="desc">
+        <h2 id="d-title"></h2>
+        <div class="meta" id="d-meta"></div>
+        <p id="d-text"></p>
+      </div>
+      <div class="strip" id="strip" aria-label="Pose kunci"></div>
+    </div>
+
+    <div class="side">
+      <div class="panel">
+        <h3>Jurus</h3>
+        <div class="list" id="list"></div>
+      </div>
+      <div class="panel">
+        <h3>File lain (tanpa preview)</h3>
+        <div class="files">
+          <div><code>ybot.fbx</code><span>Karakter Y Bot, T-pose, <b>With Skin</b> · wajib</span></div>
+          <div><code>dodge_back.fbx</code><span>Standing Backflip · Backflip Moving Backward · wajib</span></div>
+          <div><code>dodge_left.fbx</code><span>Capoeira Cartwheel Move · Long Left Boxing Side Step · wajib</span></div>
+          <div><code>dodge_right.fbx</code><span>Sama dengan kiri, centang Mirror · wajib</span></div>
+          <div><code>dodge_forward.fbx</code><span>Boxing Dodge Advance · Dive Roll From Standing · wajib</span></div>
+          <div><code>finisher_03.fbx</code><span>Finisher 3 (LMB ×3 → E), animasi pilihan kamu sendiri</span></div>
+          <div><code>parry_01.fbx</code><span>Blocking Outward · High Right Block</span></div>
+          <div><code>parry_02.fbx</code><span>Blocking Inward · Inward Block</span></div>
+        </div>
+      </div>
+      <p class="note">Semua file masuk <code>mixamo\result\</code>. Animasi: FBX Binary, Without Skin, 30 fps, Keyframe Reduction none, In Place kalau ada. Combo penuh tidak punya file sendiri. Keyword diambil dari daftar deskripsi animasi Mixamo; ketik di kotak search, hasilnya muncul dengan nama pendek.</p>
+      <div class="panel">
+        <h3>Putar</h3>
+        <div class="row">
+          <button type="button" id="play" aria-pressed="true">Jeda</button>
+          <button type="button" data-speed="0.25">0,25×</button>
+          <button type="button" data-speed="0.5" aria-pressed="true">0,5×</button>
+          <button type="button" data-speed="1">1×</button>
+        </div>
+        <div class="tl" id="tl"></div>
+        <input type="range" id="scrub" min="0" max="1000" value="0" aria-label="Posisi waktu">
+        <div class="mono" id="time">0,00 s</div>
+        <div class="legend">
+          <span><i class="sw" style="background:var(--hit)"></i> kena</span>
+          <span><i class="sw" style="background:var(--gold)"></i> sambung combo</span>
+          <span><i class="sw" style="background:var(--move)"></i> bergerak</span>
+        </div>
+      </div>
+      <p class="note">Durasi di sini perkiraan rasa (cepat, ala Arkham/Sekiro), bukan angka final. Kuda-kuda dasar: kaki kiri di depan, tangan menjaga dagu.</p>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function () {
+  // ---------------------------------------------------------------- rig konsep (cm). x kanan, y atas, z depan.
+  var S = { root: [0, 0], ah: 0, ph: 86, yaw: 0, lean: 5, twist: 15,
+            lh: [10, 8, 26], rh: [-8, 4, 18], lf: [-14, 0, 16], rf: [14, 0, -16] };
+  function K(t, o) { var k = { t: t }; for (var n in o) k[n] = o[n]; return k; }
+
+  var MOVES = [
+    { id: "p1", file: "light_01", mx: "Long Head Jab · Boxing Leading Hand Jab", wajib: false, group: "Combo ringan", title: "Pukulan 1 · Jab", input: ["LMB"], label: "Jab",
+      text: "Pukulan lurus cepat tangan kiri (tangan depan). Gerak kecil, cepat kembali ke jaga. Pembuka combo.",
+      hit: [0.06, 0.18], combo: [0.16, 0.45], limb: ["lh"],
+      keys: [K(0, {}), K(0.10, { twist: -5, lean: 8, lh: [16, 6, 56] }), K(0.18, { twist: -5, lean: 8, lh: [16, 6, 56] }), K(0.42, {})] },
+    { id: "p2", file: "light_02", mx: "Cross Punch · Back Hand Cross", wajib: false, group: "Combo ringan", title: "Pukulan 2 · Cross", input: ["LMB", "LMB"], label: "Cross",
+      text: "Pukulan lurus tangan kanan dengan putaran pinggul dan tumit belakang terangkat. Lebih berat dari jab.",
+      hit: [0.08, 0.20], combo: [0.18, 0.50], limb: ["rh"],
+      keys: [K(0, {}), K(0.12, { twist: 45, lean: 10, rh: [-18, 6, 56], rf: [12, 5, -12] }), K(0.20, { twist: 45, lean: 10, rh: [-18, 6, 56], rf: [12, 5, -12] }), K(0.48, {})] },
+    { id: "p3", file: "light_03", mx: "Hook With The Lead Hand · A Hook Punch", wajib: false, group: "Combo ringan", title: "Pukulan 3 · Hook", input: ["LMB", "×3"], label: "Hook",
+      text: "Pukulan melengkung tangan kiri dari samping, siku setinggi bahu, badan berputar. Bagus untuk musuh di samping.",
+      hit: [0.12, 0.25], combo: [0.22, 0.55], limb: ["lh"],
+      keys: [K(0, {}), K(0.08, { twist: 30, lh: [-14, 8, 22], lpole: [-1, 0.3, 0] }),
+             K(0.18, { twist: -35, lean: 6, lh: [28, 8, 32], lpole: [-1, 0.5, -0.2] }),
+             K(0.25, { twist: -35, lean: 6, lh: [28, 8, 32], lpole: [-1, 0.5, -0.2] }), K(0.52, {})] },
+    { id: "p4", file: "light_04", mx: "Mma Kick ✓", wajib: true, group: "Combo ringan", title: "Pukulan 4 · Dwi huryeo chagi", input: ["LMB", "×4"], label: "Putar belakang",
+      text: "Finisher combo: badan berputar ke kanan membelakangi musuh, lalu kaki kanan disabetkan melengkung dengan tumit (tendangan putar belakang, dwi huryeo chagi). Mendarat menghadap musuh lagi.",
+      hit: [0.27, 0.37], combo: null, limb: ["rf"],
+      keys: [K(0, {}), K(0.10, { yaw: 80, twist: 40, lean: 5, lf: [-4, 0, 4] }),
+             K(0.20, { yaw: 180, twist: 20, lean: -20, lf: [-4, 0, 4], rf: [60, 88, -10], rkp: [0.3, 1, 0] }),
+             K(0.30, { yaw: 270, twist: 0, lean: -25, lf: [-4, 0, 4], rf: [88, 98, 0], rkp: [0.3, 1, 0] }),
+             K(0.37, { yaw: 300, twist: 0, lean: -25, lf: [-4, 0, 4], rf: [88, 98, 0], rkp: [0.3, 1, 0] }),
+             K(0.55, { yaw: 345, lf: [-10, 0, 10], rf: [14, 12, -10] }), K(0.78, { yaw: 360 })] },
+    { id: "combo", group: "Combo ringan", title: "Combo penuh", input: ["LMB", "×4"], label: "Combo", combine: ["p1", "p2", "p3", "p4"],
+      text: "Empat serangan beruntun seperti saat tombol ditekan cepat: jab, cross, hook, lalu tendangan putar belakang." },
+
+    { id: "lunge", file: "lunge", mx: "Jumping Knee Followed By A Punch · Vertical Elbow And Solar Plexus Strike", wajib: false, group: "Pembuka arah", title: "Terjang", input: ["W", "+", "LMB"], label: "Terjang",
+      text: "Saat musuh lebih jauh dari ±2,5 m: jongkok sebentar, lompat kecil ke depan sambil tangan kanan diangkat tinggi, lalu dihantamkan dari atas ke dada musuh begitu mendarat. Di game jaraknya sampai 6 m; di sini dipendekkan supaya muat.",
+      hit: [0.32, 0.42], combo: [0.40, 0.74], move: [0.08, 0.32], limb: ["rh"],
+      keys: [K(0, {}), K(0.08, { ph: 74, lean: 12 }),
+             K(0.20, { root: [0, 140], ah: 40, lean: -5, twist: -20, lf: [-14, 30, 20], rf: [14, 22, -20], rh: [-6, 48, -4], rpole: [1, 0.2, -0.5] }),
+             K(0.32, { root: [0, 280], ph: 74, lean: 22, twist: 40, lf: [-14, 0, 34], rf: [14, 4, -30], rh: [-16, -6, 54], rpole: [1, 0.8, 0] }),
+             K(0.42, { root: [0, 280], ph: 74, lean: 22, twist: 40, lf: [-14, 0, 34], rf: [14, 4, -30], rh: [-16, -6, 54], rpole: [1, 0.8, 0] }),
+             K(0.74, { root: [0, 280] })] },
+    { id: "back", file: "back", mx: "Boxing Dodge Retreat", wajib: false, group: "Pembuka arah", title: "Pukul mundur", input: ["S", "+", "LMB"], label: "Mundur",
+      text: "Langkah mundur cepat ±1,5 m menjauhi musuh, lalu jab balasan begitu kaki menapak. Untuk keluar dari tekanan tanpa kehilangan serangan.",
+      hit: [0.28, 0.40], combo: [0.38, 0.70], move: [0, 0.25], limb: ["lh"],
+      keys: [K(0, {}), K(0.25, { root: [0, -150], ph: 82, lean: -5, lf: [-14, 0, 28], rf: [14, 0, -30] }),
+             K(0.33, { root: [0, -150], lh: [16, 6, 56], twist: -5, lean: 8 }),
+             K(0.40, { root: [0, -150], lh: [16, 6, 56], twist: -5, lean: 8 }), K(0.68, { root: [0, -150] })] },
+
+    { id: "heavy", file: "heavy", mx: "Back Hand Cross · Hook Punch With The Rear Hand", wajib: false, group: "Pukulan berat", title: "Pukulan berat · Pukulan putar", input: ["E"], label: "Pukulan putar",
+      text: "Satu tangan: badan diputar menjauh sambil tangan kanan ditarik ke belakang, lalu melangkah maju dan seluruh badan berputar balik melepas pukulan lurus keras (seperti power straight). Lambat tapi mendorong musuh jauh.",
+      hit: [0.42, 0.55], combo: null, move: [0.22, 0.42], limb: ["rh"],
+      keys: [K(0, {}), K(0.22, { yaw: -20, ph: 80, twist: -40, lean: -5, rh: [-14, -4, -10], lh: [14, 8, 30] }),
+             K(0.42, { root: [0, 70], yaw: 10, ph: 80, twist: 70, lean: 18, rh: [-20, 8, 62], lh: [12, -4, 6], lf: [-14, 0, 50], rf: [12, 6, -20] }),
+             K(0.55, { root: [0, 70], yaw: 10, ph: 80, twist: 70, lean: 18, rh: [-20, 8, 62], lh: [12, -4, 6], lf: [-14, 0, 50], rf: [12, 6, -20] }),
+             K(0.95, { root: [0, 70] })] },
+    { id: "fin1", file: "finisher_01", mx: "Spinning Back Kick Advancing · Male Thrust Kick With The Rear Foot", wajib: true, group: "Pukulan berat", title: "Finisher 1 · Dwi chagi", input: ["LMB", "E"], label: "Dwi chagi",
+      text: "Setelah pukulan 1: badan berputar membelakangi musuh, lutut kanan ditarik, lalu telapak kaki didorong lurus ke belakang (tendangan belakang, dwi chagi). Kuat dan lurus, musuh terlempar.",
+      hit: [0.28, 0.40], combo: null, limb: ["rf"],
+      keys: [K(0, {}), K(0.12, { yaw: 90, twist: 40, lf: [-4, 0, 4] }),
+             K(0.22, { yaw: 175, lean: 15, lf: [-4, 0, 4], rf: [10, 62, -6], rkp: [0, 0.5, 1] }),
+             K(0.31, { yaw: 180, lean: 30, lf: [-4, 0, 4], rf: [10, 86, -80], rkp: [0, 0.5, 1] }),
+             K(0.40, { yaw: 180, lean: 30, lf: [-4, 0, 4], rf: [10, 86, -80], rkp: [0, 0.5, 1] }),
+             K(0.60, { yaw: 270, lf: [-4, 0, 4], rf: [14, 20, -5] }), K(0.82, { yaw: 360 })] },
+    { id: "fin2", file: "finisher_02", mx: "Male Kicking With Both Legs · Double Front Snap Kick", wajib: true, group: "Pukulan berat", title: "Finisher 2 · Narae chagi", input: ["LMB", "LMB", "E"], label: "Narae chagi",
+      text: "Setelah pukulan 2: melompat kecil lalu dua tendangan melingkar beruntun di udara, kaki kanan dulu lalu kaki kiri (narae chagi). Dua kali kena dalam satu jurus.",
+      hit: [0.24, 0.32], combo: null, limb: ["rf"], hits: [[0.24, 0.32, ["rf"]], [0.42, 0.50, ["lf"]]],
+      keys: [K(0, {}), K(0.10, { ph: 76, lean: 5 }),
+             K(0.20, { ah: 30, yaw: -45, lean: -15, lf: [-10, 20, 0], rf: [40, 60, 10], rkp: [1, 0.6, 0.3] }),
+             K(0.27, { ah: 40, yaw: -75, lean: -25, lf: [-10, 20, 0], rf: [88, 98, 10], rkp: [1, 0.6, 0] }),
+             K(0.32, { ah: 40, yaw: -75, lean: -25, lf: [-10, 20, 0], rf: [88, 98, 10], rkp: [1, 0.6, 0] }),
+             K(0.38, { ah: 40, yaw: -10, lean: -10, rf: [14, 25, -10], lf: [-40, 60, 10], lkp: [1, 0.6, 0.3] }),
+             K(0.45, { ah: 30, yaw: 70, lean: -25, rf: [14, 20, -10], lf: [-88, 98, 10], lkp: [1, 0.6, 0] }),
+             K(0.50, { ah: 25, yaw: 70, lean: -25, rf: [14, 20, -10], lf: [-88, 98, 10], lkp: [1, 0.6, 0] }),
+             K(0.64, { ah: 0, ph: 76, yaw: 20, lf: [-14, 0, 16], rf: [14, 0, -16] }), K(0.86, {})] },
+
+    { id: "air", file: "air", mx: "Aerial 360 Degree Front Side Rotation Kick · Butterfly Twirl Kick", wajib: true, group: "Serangan udara", title: "Tendangan terbang memutar", input: ["Space", "+", "LMB"], label: "Terbang putar",
+      text: "Di udara: badan berputar satu putaran penuh dengan kedua lutut ditekuk, lalu kaki kanan menendang lurus ke depan sementara kaki kiri tetap terlipat (seperti tendangan terbang karate). Badan 'ngambang' sebentar. Maks. 2 kali per lompatan.",
+      hit: [0.52, 0.66], combo: [0.62, 0.88], limb: ["rf"],
+      keys: [K(0, {}), K(0.15, { ph: 70, lean: 10 }),
+             K(0.30, { ah: 80, yaw: 120, twist: 30, lf: [-14, 45, -5], rf: [14, 40, 5] }),
+             K(0.42, { ah: 105, yaw: 250, twist: 10, lf: [-10, 52, 10], rf: [10, 55, 10] }),
+             K(0.52, { ah: 115, yaw: 360, lean: -20, rf: [6, 72, 80], lf: [-12, 30, -20], rh: [-8, 2, 10] }),
+             K(0.66, { ah: 115, yaw: 360, lean: -20, rf: [6, 72, 80], lf: [-12, 30, -20], rh: [-8, 2, 10] }),
+             K(0.90, { ah: 50, yaw: 360, lf: [-14, 20, 5], rf: [14, 10, -5] }), K(1.07, { ph: 74, yaw: 360 }), K(1.27, { yaw: 360 })] },
+    { id: "slam", file: "air_slam", mx: "tidak ada yang cocok, skip", wajib: false, group: "Serangan udara", title: "Hantaman ke bawah", input: ["Space", "+", "E"], label: "Hantam",
+      text: "Di udara: kedua tangan diangkat, lalu menukik dan meninju tanah dengan tangan kanan sampai berlutut. Gelombang kejut ±2,5 m di sekitar.",
+      hit: [0.60, 0.72], combo: null, move: [0.40, 0.60], limb: ["rh"], ring: 250,
+      keys: [K(0, {}), K(0.15, { ph: 70 }),
+             K(0.40, { ah: 130, lean: -10, rh: [-6, 50, 6], lh: [6, 50, 6], lf: [-14, 30, -10], rf: [14, 30, -10] }),
+             K(0.55, { ah: 40, lean: 35, rh: [-4, -50, 30], lh: [10, -10, 25], lf: [-14, 25, 10], rf: [14, 15, -20] }),
+             K(0.62, { ah: 0, ph: 55, lean: 35, rh: [-4, -66, 34], lh: [12, -14, 22], lf: [-14, 0, 32], rf: [14, 0, -42] }),
+             K(0.90, { ah: 0, ph: 55, lean: 35, rh: [-4, -66, 34], lh: [12, -14, 22], lf: [-14, 0, 32], rf: [14, 0, -42] }), K(1.25, {})] }
+  ];
+
+  // Combo penuh = gabungan beberapa jurus berurutan.
+  MOVES.forEach(function (m) {
+    if (!m.combine) return;
+    var off = 0, keys = [], hits = [], combos = [];
+    m.combine.forEach(function (id, i) {
+      var src = MOVES.find(function (x) { return x.id === id; });
+      var end = i < m.combine.length - 1 && src.combo ? src.combo[0] + 0.06 : src.keys[src.keys.length - 1].t;
+      src.keys.forEach(function (k) { if (k.t <= end + 1e-6 && !(i > 0 && k.t === 0)) keys.push(K(k.t + off, k)); });
+      hits.push([src.hit[0] + off, src.hit[1] + off, src.limb]);
+      off += end;
+    });
+    keys.forEach(function (k, i) { k.t = keys[i].t; });
+    m.keys = keys.map(function (k) { var c = {}; for (var n in k) c[n] = k[n]; return c; });
+    // waktu yang benar (K() menimpa t dengan nilai sumber): hitung ulang
+    var o2 = 0, out = [];
+    m.combine.forEach(function (id, i) {
+      var src = MOVES.find(function (x) { return x.id === id; });
+      var end = i < m.combine.length - 1 && src.combo ? src.combo[0] + 0.06 : src.keys[src.keys.length - 1].t;
+      src.keys.forEach(function (k) {
+        if (k.t <= end + 1e-6 && !(i > 0 && k.t === 0)) { var c = {}; for (var n in k) c[n] = k[n]; c.t = k.t + o2; out.push(c); }
+      });
+      o2 += end;
+    });
+    m.keys = out; m.hits = hits; m.combo = null;
+  });
+  MOVES.forEach(function (m) { if (!m.hits) m.hits = [[m.hit[0], m.hit[1], m.limb]]; m.length = m.keys[m.keys.length - 1].t; });
+
+  // ---------------------------------------------------------------- pose
+  var FIELDS = ["ah", "ph", "yaw", "lean", "twist"], VEC = ["root", "lh", "rh", "lf", "rf", "lpole", "rpole", "lkp", "rkp"];
+  function get(k, n) { return k[n] !== undefined ? k[n] : S[n]; }
+  function ease(x) { return x * x * (3 - 2 * x); }
+  function sample(m, t) {
+    var ks = m.keys, i = 0;
+    while (i < ks.length - 2 && t > ks[i + 1].t) i++;
+    var a = ks[i], b = ks[Math.min(i + 1, ks.length - 1)], span = b.t - a.t, u = span > 0 ? ease(Math.max(0, Math.min(1, (t - a.t) / span))) : 0, p = {};
+    FIELDS.forEach(function (n) { var x = get(a, n), y = get(b, n); p[n] = x + (y - x) * u; });
+    VEC.forEach(function (n) {
+      var x = get(a, n), y = get(b, n);
+      if (!x && !y) return; x = x || y; y = y || x;
+      p[n] = x.map(function (v, j) { return v + (y[j] - v) * u; });
+    });
+    return p;
+  }
+
+  var V = THREE.Vector3;
+  function rotY(v, deg) { var a = deg * Math.PI / 180, c = Math.cos(a), s = Math.sin(a); return new V(v.x * c + v.z * s, v.y, -v.x * s + v.z * c); }
+  function ik(root, target, a, b, pole) {
+    var d = target.clone().sub(root), len = Math.min(d.length(), a + b - 0.5), dir = d.normalize();
+    var along = (a * a - b * b + len * len) / (2 * len), h = Math.sqrt(Math.max(0, a * a - along * along));
+    var perp = pole.clone().sub(dir.clone().multiplyScalar(pole.dot(dir))).normalize();
+    return { mid: root.clone().add(dir.clone().multiplyScalar(along)).add(perp.multiplyScalar(h)), end: root.clone().add(dir.multiplyScalar(len)) };
+  }
+  function solve(p) {
+    var O = new V(p.root ? p.root[0] : 0, 0, p.root ? p.root[1] : 0);
+    function body(x, y, z) { return O.clone().add(rotY(new V(x, y, z), p.yaw)); }
+    var pelvis = body(0, p.ph + p.ah, 0);
+    var l = p.lean * Math.PI / 180;
+    var up = rotY(rotY(new V(0, Math.cos(l), Math.sin(l)), -p.twist), p.yaw);
+    var fw = rotY(rotY(new V(0, -Math.sin(l), Math.cos(l)), -p.twist), p.yaw);
+    var rt = rotY(rotY(new V(1, 0, 0), -p.twist), p.yaw);
+    function tor(base, v) { return base.clone().add(rt.clone().multiplyScalar(v[0])).add(up.clone().multiplyScalar(v[1])).add(fw.clone().multiplyScalar(v[2])); }
+    var chest = pelvis.clone().add(up.clone().multiplyScalar(45)), neck = chest.clone().add(up.clone().multiplyScalar(8)),
+        head = neck.clone().add(up.clone().multiplyScalar(13));
+    var J = { pelvis: pelvis, chest: chest, neck: neck, head: head };
+    [["l", -1], ["r", 1]].forEach(function (sd) {
+      var s = sd[0], sign = sd[1];
+      var sh = chest.clone().add(rt.clone().multiplyScalar(18 * sign)).add(up.clone().multiplyScalar(-3));
+      var pole = p[s + "pole"] ? tor(new V(), p[s + "pole"]) : up.clone().multiplyScalar(-1).add(rt.clone().multiplyScalar(0.6 * sign)).add(fw.clone().multiplyScalar(-0.3));
+      var arm = ik(sh, tor(sh, p[s + "h"]), 28, 27, pole);
+      J[s + "sh"] = sh; J[s + "el"] = arm.mid; J[s + "ha"] = arm.end;
+      var hip = pelvis.clone().add(rotY(new V(10 * sign, -4, 0), p.yaw));
+      var f = p[s + "f"], foot = body(f[0], f[1] + p.ah, f[2]);
+      var kp = p[s + "kp"] ? rotY(new V(p[s + "kp"][0] * sign, p[s + "kp"][1], p[s + "kp"][2]), p.yaw) : rotY(new V(0.15 * sign, 0, 1), p.yaw);
+      var leg = ik(hip, foot, 44, 44, kp);
+      J[s + "hip"] = hip; J[s + "kn"] = leg.mid; J[s + "an"] = leg.end;
+      var shin = leg.end.clone().sub(leg.mid).normalize();
+      var toeDir = f[1] > 18 ? shin : rotY(new V(0, -0.2, 1), p.yaw).normalize();
+      J[s + "to"] = leg.end.clone().add(toeDir.multiplyScalar(14));
+    });
+    return J;
+  }
+  var LINKS = [["pelvis", "chest"], ["chest", "neck"], ["lsh", "rsh"], ["lsh", "lel"], ["lel", "lha"], ["rsh", "rel"], ["rel", "rha"],
+    ["lhip", "rhip"], ["lhip", "lkn"], ["lkn", "lan"], ["lan", "lto"], ["rhip", "rkn"], ["rkn", "ran"], ["ran", "rto"]];
+  var LIMB = { lh: ["lsh", "lel", "lha"], rh: ["rsh", "rel", "rha"], lf: ["lhip", "lkn", "lan", "lto"], rf: ["rhip", "rkn", "ran", "rto"] };
+  function hotAt(m, t) {
+    var h = m.hits.find(function (w) { return t >= w[0] && t <= w[1]; }), hot = {};
+    if (h) h[2].forEach(function (l) { LIMB[l].forEach(function (b) { hot[b] = true; }); });
+    return { hit: !!h, hot: hot };
+  }
+
+  // ---------------------------------------------------------------- 3D
+  function css(n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim() || "#888"; }
+  var C;
+  function colors() { C = { bone: new THREE.Color(css("--bone")), hit: new THREE.Color(css("--hit")), line: new THREE.Color(css("--line")), move: new THREE.Color(css("--move")) }; }
+  var stage = document.getElementById("stage"), canvas = document.getElementById("cv");
+  var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  var scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(38, 16 / 10, 1, 6000);
+  var joints = {}, segs = [], ring, groundGrid;
+  function build() {
+    colors();
+    while (scene.children.length) scene.remove(scene.children[0]);
+    groundGrid = new THREE.GridHelper(1000, 20, C.line, C.line); scene.add(groundGrid);
+    joints = {}; segs = [];
+    ["pelvis", "chest", "neck", "lsh", "rsh", "lel", "rel", "lha", "rha", "lhip", "rhip", "lkn", "rkn", "lan", "ran", "lto", "rto", "head"].forEach(function (b) {
+      var g = b === "head" ? new THREE.SphereGeometry(11, 18, 12) : new THREE.SphereGeometry(b === "lha" || b === "rha" ? 5.5 : 4, 12, 8);
+      var mesh = new THREE.Mesh(g, new THREE.MeshBasicMaterial({ color: C.bone })); scene.add(mesh); joints[b] = mesh;
+    });
+    LINKS.forEach(function (l) {
+      var g = new THREE.CylinderGeometry(2.8, 2.8, 1, 8); g.translate(0, 0.5, 0); g.rotateX(Math.PI / 2);
+      var mesh = new THREE.Mesh(g, new THREE.MeshBasicMaterial({ color: C.bone })); scene.add(mesh); segs.push({ a: l[0], b: l[1], m: mesh });
+    });
+    ring = new THREE.Mesh(new THREE.RingGeometry(0.92, 1, 64), new THREE.MeshBasicMaterial({ color: C.hit, transparent: true, side: THREE.DoubleSide }));
+    ring.rotation.x = -Math.PI / 2; ring.visible = false; scene.add(ring);
+  }
+  function draw3d(m, t) {
+    var J = solve(sample(m, t)), h = hotAt(m, t);
+    Object.keys(joints).forEach(function (b) { joints[b].position.copy(J[b]); joints[b].material.color = h.hot[b] ? C.hit : C.bone; });
+    segs.forEach(function (s) {
+      var a = J[s.a], b = J[s.b]; s.m.position.copy(a); s.m.lookAt(b); s.m.scale.set(1, 1, Math.max(0.01, a.distanceTo(b)));
+      s.m.material.color = h.hot[s.b] && h.hot[s.a] ? C.hit : C.bone;
+    });
+    if (m.ring && h.hit) {
+      var w = m.hits[0], u = (t - w[0]) / (w[1] - w[0]), r = 30 + u * m.ring;
+      ring.visible = true; ring.scale.set(r, r, r); ring.position.set(J.pelvis.x, 1, J.pelvis.z); ring.material.opacity = 1 - u * 0.7;
+    } else ring.visible = false;
+    var inCombo = m.combo && t >= m.combo[0] && t <= m.combo[1];
+    var st = document.getElementById("hud-state");
+    st.className = "state" + (h.hit ? " hit" : inCombo ? " combo" : "");
+    st.textContent = h.hit ? "KENA" : inCombo ? "bisa disambung" : "—";
+    return J;
+  }
+
+  // ---------------------------------------------------------------- strip pose kunci (2D, pandangan 3/4)
+  function proj(v, cx, cy, s) { var a = 0.6; return [cx + (v.x * Math.cos(a) + v.z * Math.sin(a)) * s, cy - v.y * s - (v.z * Math.cos(a) - v.x * Math.sin(a)) * s * 0.18]; }
+  function drawThumb(cv, m, t) {
+    var dpr = Math.min(window.devicePixelRatio || 1, 2), w = cv.clientWidth || 110;
+    cv.width = w * dpr; cv.height = w * dpr;
+    var g = cv.getContext("2d"); g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, w, w);
+    var J = solve(sample(m, t)), h = hotAt(m, t), O = sample(m, t).root || [0, 0];
+    var cx = w / 2 - (O[0] * Math.cos(0.6) + O[1] * Math.sin(0.6)) * (w / 260), cy = w * 0.9, s = w / 260;
+    g.strokeStyle = css("--line"); g.lineWidth = 1; g.beginPath(); g.moveTo(4, cy); g.lineTo(w - 4, cy); g.stroke();
+    g.lineCap = "round";
+    LINKS.forEach(function (l) {
+      var a = proj(J[l[0]], cx, cy, s), b = proj(J[l[1]], cx, cy, s);
+      g.strokeStyle = h.hot[l[0]] && h.hot[l[1]] ? css("--hit") : css("--bone"); g.lineWidth = 3.2;
+      g.beginPath(); g.moveTo(a[0], a[1]); g.lineTo(b[0], b[1]); g.stroke();
+    });
+    var hd = proj(J.head, cx, cy, s); g.fillStyle = css("--bone"); g.beginPath(); g.arc(hd[0], hd[1], 11 * s * 1.1, 0, Math.PI * 2); g.fill();
+  }
+  function keyLabel(m, i) {
+    var t = m.keys[i].t, h = m.hits.some(function (w) { return t >= w[0] && t <= w[1]; });
+    if (i === 0) return ["jaga", false];
+    if (i === m.keys.length - 1) return ["kembali", false];
+    if (h) return ["kena", true];
+    var nextHit = m.hits.some(function (w) { return w[0] > t; });
+    return [nextHit ? "ancang" : "lanjut", false];
+  }
+
+  // ---------------------------------------------------------------- UI
+  var cur = MOVES[0], t = 0, speed = 0.5, playing = true;
+  var yaw = 0.75, pitch = 0.16, dist = 520, target = new V(0, 95, 0);
+  function fmt(x) { return x.toFixed(2).replace(".", ","); }
+  var list = document.getElementById("list"), lastGroup = "";
+  MOVES.forEach(function (m) {
+    if (m.group !== lastGroup) { var gh = document.createElement("div"); gh.className = "group"; gh.textContent = m.group; list.appendChild(gh); lastGroup = m.group; }
+    var b = document.createElement("button"); b.type = "button"; b.dataset.id = m.id;
+    b.innerHTML = "<span>" + m.title + "</span><small>" + fmt(m.length) + " s</small>" +
+      (m.file ? '<span class="mx"><span>' + m.mx + '</span><code>' + m.file + ".fbx</code></span>" : "");
+    b.addEventListener("click", function () { select(m.id); });
+    list.appendChild(b);
+  });
+  function select(id) {
+    cur = MOVES.find(function (m) { return m.id === id; }); t = 0;
+    list.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.id === id); });
+    document.getElementById("hud-title").textContent = cur.title.split(" · ").pop();
+    document.getElementById("d-title").textContent = cur.title;
+    document.getElementById("d-text").textContent = cur.text;
+    document.getElementById("d-meta").innerHTML = "<span>" + cur.input.map(function (k) { return /^[+×]/.test(k) ? k : '<span class="kbd">' + k + "</span>"; }).join(" ") + "</span>" +
+      "<span>" + fmt(cur.length) + " s</span>" + (cur.ring ? "<span>radius ±2,5 m</span>" : "") +
+      (cur.file ? "<span>Mixamo: <b>" + cur.mx + "</b></span><span>File: <b>" + cur.file + ".fbx</b></span>" + (cur.wajib ? '<span class="tag">wajib</span>' : "") : "");
+    var tl = document.getElementById("tl"), L = cur.length, html = "";
+    cur.hits.forEach(function (w) { html += '<i class="hit" style="left:' + (w[0] / L * 100) + '%;width:' + ((w[1] - w[0]) / L * 100) + '%"></i>'; });
+    if (cur.combo) html += '<i class="combo" style="left:' + (cur.combo[0] / L * 100) + '%;width:' + ((Math.min(cur.combo[1], L) - cur.combo[0]) / L * 100) + '%"></i>';
+    if (cur.move) html += '<i class="move" style="left:' + (cur.move[0] / L * 100) + '%;width:' + ((cur.move[1] - cur.move[0]) / L * 100) + '%"></i>';
+    tl.innerHTML = html + '<span class="head" id="tl-head"></span>';
+    var strip = document.getElementById("strip"); strip.innerHTML = "";
+    cur.keys.forEach(function (k, i) {
+      if (cur.combine && i > 0 && i < cur.keys.length - 1 && !cur.hits.some(function (w) { return k.t >= w[0] && k.t <= w[1]; })) return;
+      var lab = keyLabel(cur, i), fig = document.createElement("figure"), cv = document.createElement("canvas"), cap = document.createElement("figcaption");
+      fig.className = lab[1] ? "hit" : ""; cap.textContent = lab[0] + " · " + fmt(k.t) + " s";
+      fig.appendChild(cv); fig.appendChild(cap); fig.dataset.t = k.t;
+      fig.addEventListener("click", function () { t = k.t; setPlaying(false); });
+      strip.appendChild(fig);
+    });
+    requestAnimationFrame(function () { strip.querySelectorAll("figure").forEach(function (f) { drawThumb(f.querySelector("canvas"), cur, parseFloat(f.dataset.t)); }); });
+  }
+  function setPlaying(v) { playing = v; var b = document.getElementById("play"); b.textContent = v ? "Jeda" : "Putar"; b.setAttribute("aria-pressed", v); }
+  document.getElementById("play").addEventListener("click", function () { setPlaying(!playing); });
+  document.querySelectorAll("[data-speed]").forEach(function (b) {
+    b.addEventListener("click", function () { speed = parseFloat(b.dataset.speed); document.querySelectorAll("[data-speed]").forEach(function (o) { o.setAttribute("aria-pressed", o === b); }); });
+  });
+  var scrub = document.getElementById("scrub");
+  scrub.addEventListener("input", function () { t = scrub.value / 1000 * cur.length; setPlaying(false); });
+  var drag = null;
+  canvas.addEventListener("pointerdown", function (e) { drag = { x: e.clientX, y: e.clientY }; canvas.setPointerCapture(e.pointerId); });
+  canvas.addEventListener("pointermove", function (e) { if (!drag) return; yaw -= (e.clientX - drag.x) * 0.008; pitch = Math.max(-0.05, Math.min(1.2, pitch + (e.clientY - drag.y) * 0.006)); drag = { x: e.clientX, y: e.clientY }; });
+  canvas.addEventListener("pointerup", function () { drag = null; });
+  canvas.addEventListener("wheel", function (e) { e.preventDefault(); dist = Math.max(250, Math.min(1100, dist + e.deltaY * 0.5)); }, { passive: false });
+  function resize() { var w = stage.clientWidth, h = stage.clientHeight; renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); }
+  window.addEventListener("resize", function () { resize(); select(cur.id); });
+  if (window.matchMedia) window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function () { build(); select(cur.id); });
+  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) speed = 0.25;
+
+  var last = performance.now();
+  function tick(now) {
+    var dt = Math.min(0.05, (now - last) / 1000); last = now;
+    if (playing) { t += dt * speed; if (t > cur.length + 0.5) t = 0; }
+    var tt = Math.min(t, cur.length), J = draw3d(cur, tt);
+    target.lerp(new V(J.pelvis.x, 95 + Math.min(J.pelvis.y - 86, 60) * 0.5, J.pelvis.z), 0.12);
+    scrub.value = Math.round(tt / cur.length * 1000);
+    var head = document.getElementById("tl-head"); if (head) head.style.left = (tt / cur.length * 100) + "%";
+    document.getElementById("time").textContent = fmt(tt) + " / " + fmt(cur.length) + " s";
+    document.querySelectorAll("#strip figure").forEach(function (f) { f.classList.toggle("on", Math.abs(parseFloat(f.dataset.t) - tt) < 0.02); });
+    camera.position.set(target.x + Math.sin(yaw) * Math.cos(pitch) * dist, target.y + Math.sin(pitch) * dist, target.z + Math.cos(yaw) * Math.cos(pitch) * dist);
+    camera.lookAt(target);
+    renderer.render(scene, camera);
+    requestAnimationFrame(tick);
+  }
+  build(); resize(); select("combo"); requestAnimationFrame(tick);
+})();
+</script>
+
+</body></html>

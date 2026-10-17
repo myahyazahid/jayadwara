@@ -1,0 +1,686 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Latihan Parry Aksa</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@600;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: panggung 3D (dummy vs Aksa) + jalur waktu di kiri, daftar skenario & angka di kanan; satu kolom di HP. Gaya sama dengan "Usulan Jurus Aksa". */
+:root {
+  --bg: #eef0ee; --panel: #f8f9f7; --ink: #1d2422; --muted: #5d6865; --line: #cdd3cf;
+  --stage: #e3e7e4; --bone: #1d2422; --dummy: #7d8784; --gold: #b07a12; --hit: #b8402e; --move: #2f6b8a;
+  --parry: #2f7d5b; --iframe: #6b5aa6; --console: rgba(20, 26, 24, .82); --console-ink: #dfe7e3;
+  --font-display: "Saira Condensed", "Arial Narrow", sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #161b1a; --panel: #1e2523; --ink: #e6ebe8; --muted: #9aa6a2; --line: #34403c;
+  --stage: #121716; --bone: #e6ebe8; --dummy: #7f8b87; --gold: #e0ad48; --hit: #e57a63; --move: #6fb0d2;
+  --parry: #6cc59a; --iframe: #a597e0; --console: rgba(8, 11, 10, .85); --console-ink: #dfe7e3; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #161b1a; --panel: #1e2523; --ink: #e6ebe8; --muted: #9aa6a2; --line: #34403c;
+  --stage: #121716; --bone: #e6ebe8; --dummy: #7f8b87; --gold: #e0ad48; --hit: #e57a63; --move: #6fb0d2;
+  --parry: #6cc59a; --iframe: #a597e0; --console: rgba(8, 11, 10, .85); --console-ink: #dfe7e3; color-scheme: dark }
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.5; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-block: 24px 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 18px; }
+h1 { font: 800 clamp(30px, 5vw, 44px)/1 var(--font-display); text-transform: uppercase; margin: 0; text-wrap: balance; }
+.eyebrow { font: 12px var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--gold); }
+.lead { color: var(--muted); max-width: 72ch; margin: 0; }
+.layout { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 16px; align-items: start; }
+@media (max-width: 820px) { .layout { grid-template-columns: minmax(0, 1fr); } }
+.main { display: grid; gap: 12px; min-width: 0; }
+.stage { position: relative; background: var(--stage); border: 1px solid var(--line); border-radius: 6px; aspect-ratio: 16 / 10; max-width: 100%; overflow: hidden; user-select: none; -webkit-user-select: none; }
+.stage canvas { display: block; width: 100%; height: 100%; touch-action: none; cursor: grab; }
+.hud { position: absolute; left: 12px; top: 10px; right: 12px; display: flex; justify-content: space-between; gap: 8px; pointer-events: none; align-items: start; }
+.hud b { font: 800 22px var(--font-display); text-transform: uppercase; }
+.hud .right { display: grid; gap: 4px; justify-items: end; }
+.state { font: 12px var(--font-mono); padding: 2px 8px; border-radius: 999px; background: var(--panel); border: 1px solid var(--line); white-space: nowrap; }
+.state.hit { color: var(--hit); border-color: var(--hit); }
+.state.parry { color: var(--parry); border-color: var(--parry); }
+.state.block { color: var(--move); border-color: var(--move); }
+.state.iframe { color: var(--iframe); border-color: var(--iframe); }
+.state.slow { color: var(--gold); border-color: var(--gold); }
+.bars { display: grid; gap: 3px; width: 140px; }
+.bar { display: grid; grid-template-columns: 22px 1fr 26px; gap: 6px; align-items: center; font: 11px var(--font-mono); color: var(--muted); }
+.bar .track { height: 6px; background: var(--panel); border: 1px solid var(--line); border-radius: 3px; overflow: hidden; }
+.bar .fill { height: 100%; transition: width .12s; }
+.bar .num { text-align: right; font-variant-numeric: tabular-nums; }
+.bang { position: absolute; transform: translate(-50%, -100%); font: 800 34px/1 var(--font-display); color: var(--hit); pointer-events: none; text-shadow: 0 0 6px var(--stage); }
+.console { position: absolute; left: 10px; bottom: 10px; right: 10px; max-width: 520px; background: var(--console); color: var(--console-ink);
+  border-radius: 4px; padding: 6px 9px; font: 12px/1.45 var(--font-mono); pointer-events: none; display: grid; gap: 1px; font-variant-numeric: tabular-nums; }
+.console .cmd { color: #9fb0aa; }
+.console .k-parry { color: #7fe0ae; } .console .k-block { color: #8cc8e8; } .console .k-hit { color: #f39a85; }
+.console .k-dodge { color: #c2b6f2; } .console .k-gb { color: #f39a85; } .console .k-info { color: #e9c77a; }
+.desc { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 12px 14px; display: grid; gap: 6px; }
+.desc h2 { margin: 0; font: 800 22px var(--font-display); text-transform: uppercase; }
+.desc p { margin: 0; }
+.kbd { font: 500 12px var(--font-mono); padding: 1px 7px; border: 1px solid var(--line); border-bottom-width: 2.5px; border-radius: 4px; background: var(--bg); white-space: nowrap; }
+.meta { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 13px; color: var(--muted); }
+.lanes { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 4px 8px; align-items: center; font: 12px var(--font-mono); color: var(--muted); }
+.lane { position: relative; height: 18px; background: var(--panel); border: 1px solid var(--line); border-radius: 3px; overflow: hidden; }
+.lane i { position: absolute; top: 0; bottom: 0; opacity: .8; }
+.lane.keys { overflow: visible; background: transparent; border-color: transparent; }
+.lane.keys span { position: absolute; top: 0; transform: translateX(-1px); border-left: 2px solid var(--ink); padding-left: 3px; font-size: 11px; color: var(--ink); white-space: nowrap; line-height: 18px; }
+.lane .head, .lane.keys .head { position: absolute; top: -2px; bottom: -2px; width: 2px; background: var(--ink); opacity: 1; }
+.c-warn { background: var(--gold); } .c-hit { background: var(--hit); } .c-parry { background: var(--parry); }
+.c-block { background: var(--move); } .c-iframe { background: var(--iframe); }
+.side { display: grid; gap: 14px; }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 12px; display: grid; gap: 10px; }
+.panel h3 { margin: 0; font: 600 13px var(--font-mono); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+.list { display: grid; gap: 4px; }
+.group { font: 12px var(--font-mono); color: var(--muted); margin-top: 6px; }
+button { font: 600 14px var(--font-body); border: 1.5px solid var(--ink); background: var(--panel); color: var(--ink); border-radius: 4px; padding: 6px 12px; cursor: pointer; }
+button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.list button { text-align: left; border-width: 1px; border-color: var(--line); display: flex; justify-content: space-between; gap: 8px; }
+.list button small { font: 12px var(--font-mono); opacity: .7; white-space: nowrap; }
+.list button.try { border-color: var(--parry); border-width: 1.5px; }
+.row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+input[type=range] { width: 100%; accent-color: var(--gold); }
+.mono { font: 13px var(--font-mono); }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 12px; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 5px; }
+.sw { width: 12px; height: 8px; border-radius: 2px; display: inline-block; }
+.note { font-size: 13px; color: var(--muted); margin: 0; }
+.nums { display: grid; grid-template-columns: 1fr auto; gap: 3px 10px; font-size: 13px; }
+.nums dt { color: var(--muted); } .nums dd { margin: 0; font: 500 12px var(--font-mono); text-align: right; font-variant-numeric: tabular-nums; }
+.try-ui { display: grid; gap: 10px; }
+.try-ui[hidden] { display: none; }
+.guard-btn { width: 100%; padding: 14px; font: 800 20px var(--font-display); text-transform: uppercase; letter-spacing: .04em; touch-action: none; user-select: none; -webkit-user-select: none; }
+.guard-btn.down { background: var(--move); border-color: var(--move); color: var(--bg); }
+.tally { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; font: 13px var(--font-mono); }
+.dots { display: flex; gap: 4px; }
+.dots i { width: 14px; height: 14px; border-radius: 50%; border: 1px solid var(--line); background: var(--panel); }
+.dots i.parry { background: var(--parry); border-color: var(--parry); }
+.dots i.block { background: var(--move); border-color: var(--move); }
+.dots i.hit, .dots i.gb { background: var(--hit); border-color: var(--hit); }
+.verdict { font: 600 13px var(--font-mono); padding: 2px 8px; border-radius: 999px; border: 1px solid var(--line); }
+.verdict.ok { color: var(--parry); border-color: var(--parry); }
+.verdict.no { color: var(--muted); }
+.play-ui[hidden] { display: none; }
+@media (prefers-reduced-motion: reduce) { .bar .fill { transition: none; } }
+</style>
+
+<div class="wrap">
+  <div>
+    <div class="eyebrow">Fase 1 · Iterasi 3 · konsep, bukan animasi final</div>
+    <h1>Latihan Parry Aksa</h1>
+  </div>
+  <p class="lead">Dummy menyerang dengan aba-aba, Aksa membalas dengan tangkis, parry, dodge, atau pukulan berat. Kotak hitam di bawah panggung adalah usulan cheat <b>JD.Debug.Parry 1</b>: tiap serangan dicatat hasilnya dan selisih waktunya, supaya gate parry ≥ 7/10 bisa dihitung, bukan dikira-kira. Pilih <b>Coba sendiri</b> untuk mencoba timing-nya langsung di sini.</p>
+
+  <div class="layout">
+    <div class="main">
+      <div class="stage" id="stage">
+        <canvas id="cv" aria-label="Panggung 3D dummy dan Aksa"></canvas>
+        <div class="hud">
+          <b id="hud-title"></b>
+          <div class="right">
+            <span class="state" id="hud-state">—</span>
+            <div class="bars">
+              <div class="bar"><span>HP</span><span class="track"><span class="fill" id="hp-fill" style="background:var(--hit)"></span></span><span class="num" id="hp-num">100</span></div>
+              <div class="bar"><span>ST</span><span class="track"><span class="fill" id="st-fill" style="background:var(--gold)"></span></span><span class="num" id="st-num">100</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="bang" id="bang" hidden>!</div>
+        <div class="console" id="console"></div>
+      </div>
+
+      <div class="desc">
+        <h2 id="d-title"></h2>
+        <div class="meta" id="d-meta"></div>
+        <p id="d-text"></p>
+      </div>
+
+      <div class="play-ui" id="play-ui">
+        <div class="lanes" id="lanes"></div>
+      </div>
+
+      <div class="try-ui panel" id="try-ui" hidden>
+        <button type="button" class="guard-btn" id="guard">Tahan untuk tangkis</button>
+        <p class="note">Di keyboard: tahan <span class="kbd">Spasi</span> atau klik kanan panggung. Tekan saat tanda <b style="color:var(--hit)">!</b> hilang. Ditahan terus = tangkis biasa, menekan berulang-ulang = jendela parry tidak dibuka.</p>
+        <div class="tally">
+          <span id="t-count">Parry 0 / 0</span>
+          <div class="dots" id="t-dots" aria-label="10 serangan terakhir"></div>
+          <span class="verdict no" id="t-verdict">belum 10 serangan</span>
+        </div>
+        <div class="row">
+          <button type="button" id="t-reset">Ulang hitungan</button>
+          <span class="mono" id="t-time">latihan 0:00</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="side">
+      <div class="panel">
+        <h3>Skenario</h3>
+        <div class="list" id="list"></div>
+      </div>
+      <div class="panel play-ui" id="play-panel">
+        <h3>Putar</h3>
+        <div class="row">
+          <button type="button" id="play" aria-pressed="true">Jeda</button>
+          <button type="button" data-speed="0.25">0,25×</button>
+          <button type="button" data-speed="0.5" aria-pressed="true">0,5×</button>
+          <button type="button" data-speed="1">1×</button>
+        </div>
+        <input type="range" id="scrub" min="0" max="1000" value="0" aria-label="Posisi waktu">
+        <div class="mono" id="time">0,00 s</div>
+        <div class="legend">
+          <span><i class="sw c-warn"></i> aba-aba</span>
+          <span><i class="sw c-hit"></i> kena</span>
+          <span><i class="sw c-parry"></i> jendela parry</span>
+          <span><i class="sw c-block"></i> tangkis</span>
+          <span><i class="sw c-iframe"></i> i-frame</span>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>Angka di kode sekarang</h3>
+        <dl class="nums">
+          <dt>Jendela parry</dt><dd>0,2 s (raksasa 0,25)</dd>
+          <dt>Anti spam parry</dt><dd>0,5 s</dd>
+          <dt>Tangkis</dt><dd>−80% damage, −15 ST</dd>
+          <dt>Tangkis & parry</dt><dd>depan 140°</dd>
+          <dt>Dodge</dt><dd>0,35 s, −20 ST</dd>
+          <dt>i-frame dodge</dt><dd>0,25 s dari awal</dd>
+          <dt>Pukulan berat</dt><dd>−30 HP, −25 ST</dd>
+          <dt>Regen stamina</dt><dd>25/s, jeda 0,8 s</dd>
+          <dt>Aba-aba dummy</dt><dd>0,5 s tiap 2,5 s</dd>
+          <dt>Setelah parry</dt><dd>beku 0,12 · lambat 0,35 s</dd>
+          <dt>Serangan balik</dt><dd>LMB dalam 0,8 s</dd>
+        </dl>
+        <p class="note">Dari <code>JDCombatProfile.h</code>, <code>JDTrainingDummy.h</code>, <code>ue_setup_parry.py</code>. Damage dummy (−10) dan saat pukulannya mendarat (±0,1 s setelah aba-aba) adalah perkiraan.</p>
+      </div>
+      <div class="panel">
+        <h3>Yang dicatat cheat</h3>
+        <p class="note">Tiap serangan ke pemain: hasil (parry / tangkis / kena / dodge / guard break) dan kapan tombol ditekan dibanding saat pukulan kena. Kalau gagal, alasannya: terlalu awal, telat, atau kena anti spam. Hitungan berjalan tampil di layar dan masuk log, lalu ringkasan saat cheat dimatikan.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function () {
+  // ---------------------------------------------------------------- rig konsep (cm), sama dengan "Usulan Jurus Aksa"
+  var S = { root: [0, 0], ah: 0, ph: 86, yaw: 0, lean: 5, twist: 15, flip: 0, cart: 0,
+            lh: [10, 8, 26], rh: [-8, 4, 18], lf: [-14, 0, 16], rf: [14, 0, -16] };
+  function K(t, o) { var k = { t: t }; for (var n in o) k[n] = o[n]; return k; }
+  function M() { var o = {}; for (var i = 0; i < arguments.length; i++) for (var n in arguments[i]) o[n] = arguments[i][n]; return o; }
+  function shift(keys, dt, extra) { return keys.map(function (k) { var c = M(k, extra || {}); c.t = k.t + dt; return c; }); }
+
+  // Pose umum
+  var BLOCK = { lh: [8, 24, 20], rh: [-8, 24, 20], lean: 8, twist: 5 };
+  var TEPIS = { twist: -22, lean: 4, lh: [28, 22, 30], lpole: [-1, 0.3, 0], rh: [-8, 12, 16] };
+  var REEL = { lean: -26, twist: -22, ph: 84, rh: [-22, 34, -6], lh: [22, 30, -6], rf: [14, 0, -32] };
+
+  // Serangan dummy: aba-aba 0–0,5 s, pukulan mendarat 0,55–0,65 s
+  var D_ATTACK = [K(0, {}), K(0.45, { twist: -40, lean: -6, ph: 80, rh: [-14, -4, -10], lh: [14, 8, 30] }),
+    K(0.56, { root: [0, 40], twist: 45, lean: 12, ph: 82, rh: [-18, 6, 56], lf: [-14, 0, 40], rf: [14, 4, -20] }),
+    K(0.65, { root: [0, 40], twist: 45, lean: 12, ph: 82, rh: [-18, 6, 56], lf: [-14, 0, 40], rf: [14, 4, -20] }), K(1.05, {})];
+  var D_ATTACK_ONLY = D_ATTACK.slice(0, 4);
+  function dReel(t0, root) { return [K(t0, M(REEL, { root: [0, root] })), K(t0 + 0.55, { root: [0, root - 10], lean: -10, twist: -8 }), K(t0 + 1.0, { root: [0, root - 10] })]; }
+
+  // Combo 4 (dwi huryeo chagi) dari "Usulan Jurus Aksa", dipakai sebagai serangan balik
+  var KICK = [K(0, {}), K(0.10, { yaw: 80, twist: 40, lean: 5, lf: [-4, 0, 4] }),
+    K(0.20, { yaw: 180, twist: 20, lean: -20, lf: [-4, 0, 4], rf: [60, 88, -10], rkp: [0.3, 1, 0] }),
+    K(0.30, { yaw: 270, twist: 0, lean: -25, lf: [-4, 0, 4], rf: [88, 98, 0], rkp: [0.3, 1, 0] }),
+    K(0.37, { yaw: 300, twist: 0, lean: -25, lf: [-4, 0, 4], rf: [88, 98, 0], rkp: [0.3, 1, 0] }),
+    K(0.55, { yaw: 345, lf: [-10, 0, 10], rf: [14, 12, -10] }), K(0.78, { yaw: 360 })];
+
+  var END = 2.2;
+  var SC = [
+    { id: "parry", group: "Bertahan", title: "Parry tepat", input: ["RMB", "lalu", "LMB"], len: 2.6,
+      text: "Tangkis ditekan 130 ms sebelum pukulan kena, jadi jendela parry 0,2 s menutupi saat kena. Dunia beku sesaat, Aksa menepis, lalu slow-mo singkat. Dummy stagger, dan LMB dalam 0,8 s menjadi serangan balik.",
+      lanes: { warn: [[0, 0.5]], dhit: [[0.55, 0.65]], parry: [[0.47, 0.67]], ahit: [[1.22, 1.32]] },
+      keys: [["RMB", 0.47], ["LMB", 0.95]],
+      slow: { at: 0.6, steps: [[0.12, 0.02, "BEKU"], [0.35, 0.35, "SLOW-MO 0,35×"]] },
+      spark: [0.6], st: [], hp: [],
+      log: [[0.6, "parry", "PARRY   tekan 130 ms sebelum kena · jendela 200 ms", "3/4"], [1.22, "info", "BALIK   serangan balik kena dummy (−25 HP)"]],
+      dummy: D_ATTACK_ONLY.concat([K(0.76, M(REEL, { root: [0, 16] })), K(1.15, { root: [0, 6], lean: -12, twist: -10 }),
+        K(1.28, { root: [0, 6], lean: -12, twist: -10 }), K(1.45, M(REEL, { root: [0, -45], lean: -32 })), K(2.0, { root: [0, -45], lean: -10 }), K(2.6, { root: [0, -45] })]),
+      aksa: [K(0, {}), K(0.47, {}), K(0.54, TEPIS), K(0.68, TEPIS), K(0.92, {})].concat(shift(KICK, 0.95, { root: [0, 30] }).slice(1), [K(2.6, { yaw: 360, root: [0, 30] })]) },
+
+    { id: "early", group: "Bertahan", title: "Terlalu awal, jadi tangkis", input: ["RMB", "tahan"], len: END,
+      text: "Tombol ditekan 300 ms sebelum kena. Jendela parry sudah tutup 100 ms sebelum pukulan datang, tapi tombol masih ditahan, jadi hasilnya tangkis biasa: damage tinggal 20%, stamina −15, Aksa terdorong sedikit.",
+      lanes: { warn: [[0, 0.5]], dhit: [[0.55, 0.65]], parry: [[0.30, 0.50]], block: [[0.30, 1.2]] },
+      keys: [["RMB", 0.30]], st: [[0.6, -15]], hp: [[0.6, -2]],
+      log: [[0.6, "block", "TANGKIS tekan 300 ms sebelum kena · terlalu awal 100 ms", "2/4"]],
+      dummy: D_ATTACK,
+      aksa: [K(0, {}), K(0.30, {}), K(0.40, BLOCK), K(0.60, BLOCK), K(0.70, M(BLOCK, { root: [0, -30], lean: -4 })), K(1.2, M(BLOCK, { root: [0, -30] })), K(1.5, { root: [0, -30] }), K(END, { root: [0, -30] })] },
+
+    { id: "late", group: "Bertahan", title: "Telat", input: ["RMB"], len: END,
+      text: "Tombol baru ditekan 60 ms setelah pukulan kena. Aksa kena penuh. Cheat tetap mencatat tekanan yang telat itu, supaya kelihatan apakah kamu cenderung telat atau terlalu awal.",
+      lanes: { warn: [[0, 0.5]], dhit: [[0.55, 0.65]], parry: [[0.66, 0.86]], block: [[0.66, 0.9]] },
+      keys: [["RMB", 0.66]], st: [], hp: [[0.6, -10]],
+      log: [[0.6, "hit", "KENA    −10 HP", "1/4"], [0.66, "hit", "        tombol datang 60 ms setelah kena · telat"]],
+      dummy: D_ATTACK,
+      aksa: [K(0, {}), K(0.58, {}), K(0.68, { root: [0, -28], lean: -18, twist: 15, rh: [-6, 10, 8] }), K(0.9, M(BLOCK, { root: [0, -28] })), K(1.3, { root: [0, -28] }), K(END, { root: [0, -28] })] },
+
+    { id: "spam", group: "Bertahan", title: "Spam tangkis", input: ["RMB", "RMB", "tahan"], len: END,
+      text: "Tekan kedua datang 300 ms setelah tekan pertama, masih di dalam jeda anti spam 0,5 s, jadi jendela parry tidak dibuka lagi. Waktunya sebenarnya pas (150 ms sebelum kena), tapi hasilnya hanya tangkis.",
+      lanes: { warn: [[0, 0.5]], dhit: [[0.55, 0.65]], parry: [[0.15, 0.35]], block: [[0.15, 0.25], [0.45, 1.15]] },
+      keys: [["RMB", 0.15], ["RMB", 0.45]], st: [[0.6, -15]], hp: [[0.6, -2]],
+      log: [[0.45, "info", "        tekan ulang 300 ms setelah tekan sebelumnya · anti spam"], [0.6, "block", "TANGKIS tekan 150 ms sebelum kena · jendela tidak dibuka", "2/4"]],
+      dummy: D_ATTACK,
+      aksa: [K(0, {}), K(0.15, {}), K(0.22, BLOCK), K(0.30, {}), K(0.45, {}), K(0.52, BLOCK), K(0.60, BLOCK), K(0.70, M(BLOCK, { root: [0, -30], lean: -4 })), K(1.15, M(BLOCK, { root: [0, -30] })), K(1.45, { root: [0, -30] }), K(END, { root: [0, -30] })] },
+
+    { id: "gb", group: "Bertahan", title: "Guard break", input: ["RMB", "tahan"], len: END, st0: 10,
+      text: "Stamina tinggal 10. Tangkis memakan 15, stamina habis, pertahanan jebol dan Aksa stagger 1 s. Ini yang membuat stamina jadi pertimbangan: tidak bisa menahan tangkis selamanya.",
+      lanes: { warn: [[0, 0.5]], dhit: [[0.55, 0.65]], parry: [[0.25, 0.45]], block: [[0.25, 0.62]] },
+      keys: [["RMB", 0.25]], st: [[0.6, -10]], hp: [[0.6, -2]],
+      log: [[0.6, "gb", "JEBOL   stamina habis · Aksa stagger 1,0 s", "2/4"]],
+      dummy: D_ATTACK,
+      aksa: [K(0, {}), K(0.25, {}), K(0.35, BLOCK), K(0.60, BLOCK), K(0.72, M(REEL, { root: [0, -50] })), K(1.35, { root: [0, -55], lean: -14, twist: -10 }), K(1.7, { root: [0, -55] }), K(END, { root: [0, -55] })] },
+
+    { id: "dback", group: "Dodge", title: "Dodge mundur · salto", input: ["Shift", "+", "S"], len: END,
+      text: "Dodge 150 ms sebelum kena. i-frame aktif 0,25 s sejak dodge mulai, jadi pukulan menembus tanpa damage. Mundur + dodge = salto belakang (docs/07). Stamina −20.",
+      lanes: { warn: [[0, 0.5]], dhit: [[0.55, 0.65]], iframe: [[0.45, 0.70]] },
+      keys: [["Shift+S", 0.45]], st: [[0.45, -20]], hp: [],
+      log: [[0.6, "dodge", "DODGE   i-frame aktif · serangan menembus", "—"]],
+      dummy: D_ATTACK,
+      aksa: [K(0, {}), K(0.45, {}), K(0.50, { ph: 74, lean: 12 }),
+        K(0.58, { ah: 60, root: [0, -140], lean: 0, flip: -90, lf: [-12, 40, 6], rf: [12, 40, 6], lh: [8, 30, 10], rh: [-8, 30, 10] }),
+        K(0.68, { ah: 70, root: [0, -280], lean: 0, flip: -250, lf: [-12, 40, 6], rf: [12, 40, 6], lh: [8, 30, 10], rh: [-8, 30, 10] }),
+        K(0.79, { ah: 8, root: [0, -390], flip: -360, ph: 72, lean: 12 }), K(0.98, { root: [0, -400], flip: -360 }), K(END, { root: [0, -400], flip: -360 })] },
+
+    { id: "dside", group: "Dodge", title: "Dodge samping · cartwheel", input: ["Shift", "+", "A"], len: END,
+      text: "Sama dengan salto, tapi ke kiri dengan cartwheel. Kanan sama, dicerminkan. Maju + dodge nanti berupa langkah cepat menunduk, bukan salto, supaya tidak menabrak musuh.",
+      lanes: { warn: [[0, 0.5]], dhit: [[0.55, 0.65]], iframe: [[0.45, 0.70]] },
+      keys: [["Shift+A", 0.45]], st: [[0.45, -20]], hp: [],
+      log: [[0.6, "dodge", "DODGE   i-frame aktif · serangan menembus", "—"]],
+      dummy: D_ATTACK,
+      aksa: [K(0, {}), K(0.45, {}), K(0.52, { ph: 76, lean: 5, lh: [6, 46, 4], rh: [-6, 46, 4] }),
+        K(0.62, { ah: 40, root: [-160, 0], cart: 120, lh: [6, 46, 4], rh: [-6, 46, 4], lf: [-24, 30, 0], rf: [24, 30, 0] }),
+        K(0.72, { ah: 30, root: [-300, 0], cart: 250, lh: [6, 46, 4], rh: [-6, 46, 4], lf: [-24, 30, 0], rf: [24, 30, 0] }),
+        K(0.82, { ah: 0, root: [-380, 0], cart: 360, ph: 78 }), K(1.0, { root: [-380, 0], cart: 360 }), K(END, { root: [-380, 0], cart: 360 })] },
+
+    { id: "heavy", group: "Menyerang", title: "Pukulan berat", input: ["E"], len: END,
+      text: "Pukulan putar: badan ditarik menjauh, lalu melangkah dan melepas pukulan lurus keras. −30 HP dan dummy stagger, tapi stamina −25, jadi tiga kali berturut-turut sudah menguras tiga perempat stamina.",
+      lanes: { ahit: [[0.62, 0.75]] }, keys: [["E", 0.2]], st: [[0.2, -25]], hp: [],
+      log: [[0.64, "info", "BERAT   −30 HP ke dummy · dummy stagger"]],
+      dummy: [K(0, {}), K(0.64, {})].concat(dReel(0.80, -40)), dummyIdle: true,
+      aksa: [K(0, {}), K(0.2, {}), K(0.42, { yaw: -20, ph: 80, twist: -40, lean: -5, rh: [-14, -4, -10], lh: [14, 8, 30] }),
+        K(0.62, { root: [0, 70], yaw: 10, ph: 80, twist: 70, lean: 18, rh: [-20, 8, 62], lh: [12, -4, 6], lf: [-14, 0, 50], rf: [12, 6, -20] }),
+        K(0.75, { root: [0, 70], yaw: 10, ph: 80, twist: 70, lean: 18, rh: [-20, 8, 62], lh: [12, -4, 6], lf: [-14, 0, 50], rf: [12, 6, -20] }),
+        K(1.15, { root: [0, 70] }), K(END, { root: [0, 70] })] }
+  ];
+  SC.forEach(function (s) { s.dummy.sort(function (a, b) { return a.t - b.t; }); });
+
+  // ---------------------------------------------------------------- pose
+  var FIELDS = ["ah", "ph", "yaw", "lean", "twist", "flip", "cart"], VEC = ["root", "lh", "rh", "lf", "rf", "lpole", "rpole", "lkp", "rkp"];
+  function get(k, n) { return k[n] !== undefined ? k[n] : S[n]; }
+  function ease(x) { return x * x * (3 - 2 * x); }
+  function sample(ks, t) {
+    var i = 0;
+    while (i < ks.length - 2 && t > ks[i + 1].t) i++;
+    var a = ks[i], b = ks[Math.min(i + 1, ks.length - 1)], span = b.t - a.t, u = span > 0 ? ease(Math.max(0, Math.min(1, (t - a.t) / span))) : 0, p = {};
+    if (t <= a.t) u = 0;
+    FIELDS.forEach(function (n) { var x = get(a, n), y = get(b, n); p[n] = x + (y - x) * u; });
+    VEC.forEach(function (n) {
+      var x = get(a, n), y = get(b, n);
+      if (!x && !y) return; x = x || y; y = y || x;
+      p[n] = x.map(function (v, j) { return v + (y[j] - v) * u; });
+    });
+    return p;
+  }
+
+  var V = THREE.Vector3;
+  function rotY(v, deg) { var a = deg * Math.PI / 180, c = Math.cos(a), s = Math.sin(a); return new V(v.x * c + v.z * s, v.y, -v.x * s + v.z * c); }
+  function ik(root, target, a, b, pole) {
+    var d = target.clone().sub(root), len = Math.min(d.length(), a + b - 0.5), dir = d.normalize();
+    var along = (a * a - b * b + len * len) / (2 * len), h = Math.sqrt(Math.max(0, a * a - along * along));
+    var perp = pole.clone().sub(dir.clone().multiplyScalar(pole.dot(dir))).normalize();
+    return { mid: root.clone().add(dir.clone().multiplyScalar(along)).add(perp.multiplyScalar(h)), end: root.clone().add(dir.multiplyScalar(len)) };
+  }
+  function solve(p) {
+    var O = new V(p.root ? p.root[0] : 0, 0, p.root ? p.root[1] : 0);
+    function body(x, y, z) { return O.clone().add(rotY(new V(x, y, z), p.yaw)); }
+    var pelvis = body(0, p.ph + p.ah, 0);
+    var l = p.lean * Math.PI / 180;
+    var up = rotY(rotY(new V(0, Math.cos(l), Math.sin(l)), -p.twist), p.yaw);
+    var fw = rotY(rotY(new V(0, -Math.sin(l), Math.cos(l)), -p.twist), p.yaw);
+    var rt = rotY(rotY(new V(1, 0, 0), -p.twist), p.yaw);
+    function tor(base, v) { return base.clone().add(rt.clone().multiplyScalar(v[0])).add(up.clone().multiplyScalar(v[1])).add(fw.clone().multiplyScalar(v[2])); }
+    var chest = pelvis.clone().add(up.clone().multiplyScalar(45)), neck = chest.clone().add(up.clone().multiplyScalar(8)),
+        head = neck.clone().add(up.clone().multiplyScalar(13));
+    var J = { pelvis: pelvis, chest: chest, neck: neck, head: head };
+    [["l", -1], ["r", 1]].forEach(function (sd) {
+      var s = sd[0], sign = sd[1];
+      var sh = chest.clone().add(rt.clone().multiplyScalar(18 * sign)).add(up.clone().multiplyScalar(-3));
+      var pole = p[s + "pole"] ? tor(new V(), p[s + "pole"]) : up.clone().multiplyScalar(-1).add(rt.clone().multiplyScalar(0.6 * sign)).add(fw.clone().multiplyScalar(-0.3));
+      var arm = ik(sh, tor(sh, p[s + "h"]), 28, 27, pole);
+      J[s + "sh"] = sh; J[s + "el"] = arm.mid; J[s + "ha"] = arm.end;
+      var hip = pelvis.clone().add(rotY(new V(10 * sign, -4, 0), p.yaw));
+      var f = p[s + "f"], foot = body(f[0], f[1] + p.ah, f[2]);
+      var kp = p[s + "kp"] ? rotY(new V(p[s + "kp"][0] * sign, p[s + "kp"][1], p[s + "kp"][2]), p.yaw) : rotY(new V(0.15 * sign, 0, 1), p.yaw);
+      var leg = ik(hip, foot, 44, 44, kp);
+      J[s + "hip"] = hip; J[s + "kn"] = leg.mid; J[s + "an"] = leg.end;
+      var shin = leg.end.clone().sub(leg.mid).normalize();
+      var toeDir = f[1] > 18 ? shin : rotY(new V(0, -0.2, 1), p.yaw).normalize();
+      J[s + "to"] = leg.end.clone().add(toeDir.multiplyScalar(14));
+    });
+    // salto (flip, sumbu kanan) dan cartwheel (cart, sumbu depan) diputar di pinggul
+    if (p.flip || p.cart) {
+      var piv = pelvis.clone(), ax = rotY(new V(1, 0, 0), p.yaw), az = rotY(new V(0, 0, 1), p.yaw);
+      Object.keys(J).forEach(function (k) {
+        J[k] = J[k].clone().sub(piv).applyAxisAngle(ax, p.flip * Math.PI / 180).applyAxisAngle(az, p.cart * Math.PI / 180).add(piv);
+      });
+    }
+    return J;
+  }
+  function solveAt(p, base) {
+    var q = M(p), r = p.root || [0, 0], w = rotY(new V(r[0], 0, r[1]), base.yaw);
+    q.yaw = p.yaw + base.yaw; q.root = [base.x + w.x, base.z + w.z];
+    return solve(q);
+  }
+  var LINKS = [["pelvis", "chest"], ["chest", "neck"], ["lsh", "rsh"], ["lsh", "lel"], ["lel", "lha"], ["rsh", "rel"], ["rel", "rha"],
+    ["lhip", "rhip"], ["lhip", "lkn"], ["lkn", "lan"], ["lan", "lto"], ["rhip", "rkn"], ["rkn", "ran"], ["ran", "rto"]];
+  var JOINTS = ["pelvis", "chest", "neck", "lsh", "rsh", "lel", "rel", "lha", "rha", "lhip", "rhip", "lkn", "rkn", "lan", "ran", "lto", "rto", "head"];
+  var ARM_R = { rsh: 1, rel: 1, rha: 1 }, ARM_L = { lsh: 1, lel: 1, lha: 1 }, LEG_R = { rhip: 1, rkn: 1, ran: 1, rto: 1 };
+
+  // ---------------------------------------------------------------- 3D
+  function css(n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim() || "#888"; }
+  var C;
+  function colors() { C = {}; ["bone", "dummy", "hit", "line", "move", "parry", "iframe", "gold"].forEach(function (n) { C[n] = new THREE.Color(css("--" + n)); }); }
+  var stage = document.getElementById("stage"), canvas = document.getElementById("cv");
+  var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  var scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(38, 16 / 10, 1, 6000);
+  var actors = {}, spark;
+  var BASE = { dummy: { x: 0, z: 0, yaw: 0 }, aksa: { x: 0, z: 130, yaw: 180 } };
+  function makeActor() {
+    var a = { joints: {}, segs: [] };
+    JOINTS.forEach(function (b) {
+      var g = b === "head" ? new THREE.SphereGeometry(11, 18, 12) : new THREE.SphereGeometry(b === "lha" || b === "rha" ? 5.5 : 4, 12, 8);
+      var mesh = new THREE.Mesh(g, new THREE.MeshBasicMaterial({ color: C.bone })); scene.add(mesh); a.joints[b] = mesh;
+    });
+    LINKS.forEach(function (l) {
+      var g = new THREE.CylinderGeometry(2.8, 2.8, 1, 8); g.translate(0, 0.5, 0); g.rotateX(Math.PI / 2);
+      var mesh = new THREE.Mesh(g, new THREE.MeshBasicMaterial({ color: C.bone })); scene.add(mesh); a.segs.push({ a: l[0], b: l[1], m: mesh });
+    });
+    return a;
+  }
+  function build() {
+    colors();
+    while (scene.children.length) scene.remove(scene.children[0]);
+    scene.add(new THREE.GridHelper(1200, 24, C.line, C.line));
+    actors.dummy = makeActor(); actors.aksa = makeActor();
+    spark = new THREE.Mesh(new THREE.RingGeometry(0.7, 1, 32), new THREE.MeshBasicMaterial({ color: C.gold, transparent: true, side: THREE.DoubleSide }));
+    spark.visible = false; scene.add(spark);
+  }
+  // hot: map sendi -> warna
+  function drawActor(a, J, base, hot) {
+    Object.keys(a.joints).forEach(function (b) { a.joints[b].position.copy(J[b]); a.joints[b].material.color = hot[b] || base; });
+    a.segs.forEach(function (s) {
+      var p = J[s.a], q = J[s.b]; s.m.position.copy(p); s.m.lookAt(q); s.m.scale.set(1, 1, Math.max(0.01, p.distanceTo(q)));
+      s.m.material.color = (hot[s.a] && hot[s.b]) ? hot[s.b] : base;
+    });
+  }
+  function paint(set, col) { var o = {}; for (var k in set) o[k] = col; return o; }
+  function allJoints(col) { var o = {}; JOINTS.forEach(function (j) { o[j] = col; }); return o; }
+
+  // ---------------------------------------------------------------- HUD
+  var bang = document.getElementById("bang"), con = document.getElementById("console"), hudState = document.getElementById("hud-state");
+  function setState(cls, text) { hudState.className = "state" + (cls ? " " + cls : ""); hudState.textContent = text; }
+  function setBars(hp, st) {
+    hp = Math.max(0, Math.min(100, hp)); st = Math.max(0, Math.min(100, st));
+    document.getElementById("hp-fill").style.width = hp + "%"; document.getElementById("hp-num").textContent = Math.round(hp);
+    document.getElementById("st-fill").style.width = st + "%"; document.getElementById("st-num").textContent = Math.round(st);
+  }
+  function showBang(J, on) {
+    if (!on) { bang.hidden = true; return; }
+    var p = J.head.clone().add(new V(0, 30, 0)).project(camera);
+    bang.hidden = false; bang.style.left = ((p.x + 1) / 2 * stage.clientWidth) + "px"; bang.style.top = ((1 - p.y) / 2 * stage.clientHeight) + "px";
+  }
+  function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;"); }
+  function renderConsole(lines, tallyText) {
+    var h = '<span class="cmd">&gt; JD.Debug.Parry 1' + (tallyText ? "   ·   " + esc(tallyText) : "") + "</span>";
+    lines.slice(-4).forEach(function (l) { h += '<span class="k-' + l[0] + '">' + esc(l[1]).replace(/ /g, "&nbsp;") + "</span>"; });
+    con.innerHTML = h;
+  }
+
+  // ---------------------------------------------------------------- mode putar skenario
+  function fmt(x) { return x.toFixed(2).replace(".", ","); }
+  var mode = "play", cur = SC[0], t = 0, speed = 0.5, playing = true, slowState = null;
+  var yaw = 2.2, pitch = 0.2, dist = 640, target = new V(0, 95, 65);
+
+  function inAny(list, tt) { return (list || []).some(function (w) { return tt >= w[0] && tt <= w[1]; }); }
+  function playFrame(tt) {
+    var s = cur, L = s.lanes;
+    var Jd = solveAt(sample(s.dummy, tt), BASE.dummy), Ja = solveAt(sample(s.aksa, tt), BASE.aksa);
+    var dHot = inAny(L.dhit, tt) ? paint(ARM_R, C.hit) : {};
+    var aHot = {};
+    if (inAny(L.ahit, tt)) aHot = paint(s.id === "parry" ? LEG_R : ARM_R, C.hit);
+    else if (inAny(L.parry, tt)) aHot = paint(M(ARM_L, ARM_R), C.parry);
+    else if (inAny(L.block, tt)) aHot = paint(M(ARM_L, ARM_R), C.move);
+    else if (inAny(L.iframe, tt)) aHot = allJoints(C.iframe);
+    drawActor(actors.dummy, Jd, C.dummy, dHot); drawActor(actors.aksa, Ja, C.bone, aHot);
+    showBang(Jd, inAny(L.warn, tt) && Math.floor(tt / 0.1) % 2 === 0);
+    // spark parry
+    var sp = (s.spark || []).find(function (x) { return tt >= x && tt <= x + 0.25; });
+    if (sp !== undefined) { var u = (tt - sp) / 0.25, r = 8 + u * 40; spark.visible = true; spark.position.copy(Jd.rha); spark.lookAt(camera.position); spark.scale.set(r, r, r); spark.material.opacity = 1 - u; }
+    else spark.visible = false;
+    // HUD
+    var st = (s.st0 !== undefined ? s.st0 : 100), hp = 100;
+    (s.st || []).forEach(function (e) { if (tt >= e[0]) st += e[1]; });
+    (s.hp || []).forEach(function (e) { if (tt >= e[0]) hp += e[1]; });
+    setBars(hp, st);
+    if (slowState) setState("slow", slowState.label);
+    else if (inAny(L.dhit, tt) && inAny(L.iframe, tt)) setState("iframe", "MENEMBUS");
+    else if (inAny(L.iframe, tt)) setState("iframe", "i-frame");
+    else if (inAny(L.parry, tt)) setState("parry", "jendela parry");
+    else if (inAny(L.block, tt)) setState("block", "tangkis");
+    else if (inAny(L.dhit, tt) || inAny(L.ahit, tt)) setState("hit", "KENA");
+    else if (inAny(L.warn, tt)) setState("hit", "aba-aba");
+    else setState("", "—");
+    var shown = s.log.filter(function (l) { return tt >= l[0]; });
+    var tally = shown.filter(function (l) { return l[3]; }).map(function (l) { return l[3]; }).pop();
+    renderConsole(shown.map(function (l) { return [l[1], l[2]]; }), tally && tally !== "—" ? "parry " + tally.replace("/", " dari ") + " (contoh)" : "");
+    target.lerp(new V((Jd.pelvis.x + Ja.pelvis.x) / 2, 95, (Jd.pelvis.z + Ja.pelvis.z) / 2), 0.08);
+  }
+
+  function lanesHtml(s) {
+    var L = s.len, l = s.lanes;
+    function bars(list, cls) { return (list || []).map(function (w) { return '<i class="' + cls + '" style="left:' + (w[0] / L * 100) + "%;width:" + ((w[1] - w[0]) / L * 100) + '%"></i>'; }).join(""); }
+    var h = '<span>Dummy</span><div class="lane">' + bars(l.warn, "c-warn") + bars(l.dhit, "c-hit") + '<i class="head"></i></div>';
+    h += '<span>Aksa</span><div class="lane">' + bars(l.parry, "c-parry") + bars(l.block, "c-block") + bars(l.iframe, "c-iframe") + bars(l.ahit, "c-hit") + '<i class="head"></i></div>';
+    h += '<span>Tombol</span><div class="lane keys">' + s.keys.map(function (k) { return '<span style="left:' + (k[1] / L * 100) + '%">' + k[0] + "</span>"; }).join("") + '<i class="head"></i></div>';
+    return h;
+  }
+
+  // ---------------------------------------------------------------- mode coba sendiri
+  var TRY = { cycle: 2.5, wind: 0.5, impact: 0.6, window: 0.2, lockout: 0.5, block: 15, dmg: 10 };
+  var tr = null;
+  function tryReset() {
+    tr = { clock: 0, held: false, lastPress: -9, windowUntil: -9, st: 100, hp: 100, regenAt: 0, results: [], log: [], judged: -1,
+           aClip: null, dClip: null, lateWatch: null, elapsed: 0, stunUntil: -9 };
+  }
+  tryReset();
+  function press() {
+    if (!tr || mode !== "try" || tr.held) return;
+    tr.held = true; document.getElementById("guard").classList.add("down");
+    var now = tr.clock;
+    if (now - tr.lastPress >= TRY.lockout) tr.windowUntil = now + TRY.window;
+    else tr.log.push(["info", "        tekan ulang " + Math.round((now - tr.lastPress) * 1000) + " ms setelah sebelumnya · anti spam"]);
+    tr.pressAt = now; tr.lastPress = now;
+    if (tr.lateWatch && now - tr.lateWatch.at < 0.35) {
+      tr.log.push(["hit", "        tombol datang " + Math.round((now - tr.lateWatch.at) * 1000) + " ms setelah kena · telat"]); tr.lateWatch = null;
+    }
+  }
+  function release() { if (!tr) return; tr.held = false; document.getElementById("guard").classList.remove("down"); }
+
+  function judge(n, impactAt) {
+    var res, before = Math.round((impactAt - tr.pressAt) * 1000), pressedRecently = tr.pressAt !== undefined && impactAt - tr.pressAt < 1.0;
+    if (tr.clock < tr.stunUntil) { res = "hit"; }
+    else if (impactAt <= tr.windowUntil) res = "parry";
+    else if (tr.held) res = tr.st - TRY.block <= 0 ? "gb" : "block";
+    else res = "hit";
+    var txt;
+    if (res === "parry") {
+      txt = "PARRY   tekan " + before + " ms sebelum kena · jendela 200 ms";
+      tr.aClip = { kind: "tepis", at: tr.clock }; tr.dClip = { kind: "reel", at: tr.clock };
+      slowState = { steps: [[0.12, 0.02, "BEKU"], [0.35, 0.35, "SLOW-MO 0,35×"]], i: 0, left: 0.12, label: "BEKU" };
+    } else if (res === "block" || res === "gb") {
+      tr.st = Math.max(0, tr.st - TRY.block); tr.hp -= 2; tr.regenAt = tr.clock + 0.8;
+      var why = tr.windowUntil < tr.pressAt ? "jendela tidak dibuka (anti spam)"
+        : before > TRY.window * 1000 ? "terlalu awal " + (before - TRY.window * 1000) + " ms" : "ditahan";
+      txt = res === "gb" ? "JEBOL   stamina habis · Aksa stagger 1,0 s" : "TANGKIS tekan " + before + " ms sebelum kena · " + why;
+      if (res === "gb") { tr.aClip = { kind: "reel", at: tr.clock }; tr.stunUntil = tr.clock + 1.0; tr.held = false; document.getElementById("guard").classList.remove("down"); }
+      else tr.aClip = { kind: "push", at: tr.clock };
+    } else {
+      tr.hp -= TRY.dmg; tr.aClip = { kind: "hurt", at: tr.clock };
+      txt = "KENA    −" + TRY.dmg + " HP" + (pressedRecently && tr.pressAt < impactAt ? " · tekan " + before + " ms sebelum kena, terlalu awal" : "");
+      if (!(pressedRecently && tr.pressAt < impactAt)) tr.lateWatch = { at: tr.clock };
+    }
+    if (tr.hp <= 20) tr.hp = 100;
+    tr.results.push(res); tr.log.push([res === "gb" ? "gb" : res, txt]);
+    renderTally();
+  }
+  function renderTally() {
+    var last = tr.results.slice(-10), p = last.filter(function (r) { return r === "parry"; }).length, all = tr.results.filter(function (r) { return r === "parry"; }).length;
+    document.getElementById("t-count").textContent = "Parry " + all + " / " + tr.results.length;
+    var d = ""; for (var i = 0; i < 10; i++) d += '<i class="' + (last[i] || "") + '"></i>';
+    document.getElementById("t-dots").innerHTML = d;
+    var v = document.getElementById("t-verdict");
+    if (tr.results.length < 10) { v.className = "verdict no"; v.textContent = "belum 10 serangan"; }
+    else { v.className = "verdict " + (p >= 7 ? "ok" : "no"); v.textContent = p + "/10 terakhir · " + (p >= 7 ? "lulus gate" : "butuh ≥ 7"); }
+  }
+
+  var CLIP = {
+    tepis: [K(0, {}), K(0.07, TEPIS), K(0.25, TEPIS), K(0.55, {})],
+    push: [K(0, BLOCK), K(0.10, M(BLOCK, { root: [0, -22], lean: -4 })), K(0.4, M(BLOCK, { root: [0, -22] })), K(0.8, {})],
+    hurt: [K(0, {}), K(0.08, { root: [0, -26], lean: -18, twist: 15, rh: [-6, 10, 8] }), K(0.5, {})],
+    reel: [K(0, {}), K(0.12, REEL), K(0.6, { lean: -10, twist: -8 }), K(1.0, {})]
+  };
+  function tryFrame(dt) {
+    tr.clock += dt; tr.elapsed += dt;
+    if (tr.clock >= tr.regenAt) tr.st = Math.min(100, tr.st + 25 * dt);
+    var n = Math.floor(tr.clock / TRY.cycle), c = tr.clock - n * TRY.cycle;
+    if (c >= TRY.impact && tr.judged < n) { tr.judged = n; judge(n, n * TRY.cycle + TRY.impact); }
+    // dummy
+    var dp;
+    if (tr.dClip && tr.clock - tr.dClip.at < 1.0) dp = sample(CLIP.reel, tr.clock - tr.dClip.at);
+    else dp = sample(D_ATTACK, Math.min(c, 1.05));
+    // aksa
+    var ap, aHot = {};
+    if (tr.aClip && tr.clock - tr.aClip.at < CLIP[tr.aClip.kind][CLIP[tr.aClip.kind].length - 1].t) ap = sample(CLIP[tr.aClip.kind], tr.clock - tr.aClip.at);
+    else if (tr.held) ap = sample([K(0, BLOCK)], 0);
+    else ap = sample([K(0, {})], 0);
+    if (tr.clock <= tr.windowUntil) aHot = paint(M(ARM_L, ARM_R), C.parry);
+    else if (tr.held) aHot = paint(M(ARM_L, ARM_R), C.move);
+    var Jd = solveAt(dp, BASE.dummy), Ja = solveAt(ap, BASE.aksa);
+    var dHot = c >= 0.55 && c <= 0.65 && !(tr.dClip && tr.clock - tr.dClip.at < 1.0) ? paint(ARM_R, C.hit) : {};
+    drawActor(actors.dummy, Jd, C.dummy, dHot); drawActor(actors.aksa, Ja, C.bone, aHot);
+    showBang(Jd, c < TRY.wind && Math.floor(c / 0.1) % 2 === 0);
+    if (tr.dClip && tr.clock - tr.dClip.at < 0.25) { var u = (tr.clock - tr.dClip.at) / 0.25, r = 8 + u * 40; spark.visible = true; spark.position.copy(Jd.rha); spark.lookAt(camera.position); spark.scale.set(r, r, r); spark.material.opacity = 1 - u; }
+    else spark.visible = false;
+    setBars(tr.hp, tr.st);
+    if (slowState) setState("slow", slowState.label);
+    else if (tr.clock <= tr.windowUntil) setState("parry", "jendela parry");
+    else if (tr.held) setState("block", "tangkis");
+    else if (c < TRY.wind) setState("hit", "aba-aba");
+    else setState("", "—");
+    var p = tr.results.slice(-10).filter(function (x) { return x === "parry"; }).length;
+    renderConsole(tr.log, tr.results.length ? "parry " + tr.results.filter(function (x) { return x === "parry"; }).length + " dari " + tr.results.length : "");
+    var sec = Math.floor(tr.elapsed); document.getElementById("t-time").textContent = "latihan " + Math.floor(sec / 60) + ":" + String(sec % 60).padStart(2, "0");
+    target.lerp(new V(0, 95, 65), 0.08);
+  }
+
+  // ---------------------------------------------------------------- UI
+  var list = document.getElementById("list"), lastGroup = "";
+  var tb = document.createElement("button"); tb.type = "button"; tb.className = "try"; tb.dataset.id = "try";
+  tb.innerHTML = "<span>Coba sendiri</span><small>latihan parry</small>"; tb.addEventListener("click", function () { select("try"); }); list.appendChild(tb);
+  SC.forEach(function (s) {
+    if (s.group !== lastGroup) { var gh = document.createElement("div"); gh.className = "group"; gh.textContent = s.group; list.appendChild(gh); lastGroup = s.group; }
+    var b = document.createElement("button"); b.type = "button"; b.dataset.id = s.id;
+    b.innerHTML = "<span>" + s.title + "</span><small>" + s.input.filter(function (k) { return k !== "lalu" && k !== "tahan" && k !== "+"; }).join(" ") + "</small>";
+    b.addEventListener("click", function () { select(s.id); });
+    list.appendChild(b);
+  });
+  function kbd(input) { return input.map(function (k) { return /^(\+|lalu|tahan)$/.test(k) ? k : '<span class="kbd">' + k + "</span>"; }).join(" "); }
+  function select(id) {
+    list.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.id === id); });
+    slowState = null; release();
+    if (id === "try") {
+      mode = "try"; tryReset(); renderTally();
+      document.getElementById("hud-title").textContent = "Coba sendiri";
+      document.getElementById("d-title").textContent = "Coba sendiri · latihan parry";
+      document.getElementById("d-meta").innerHTML = "<span>" + kbd(["Spasi"]) + " / klik kanan / tombol di bawah</span><span>jendela 0,2 s · anti spam 0,5 s</span>";
+      document.getElementById("d-text").textContent = "Dummy menyerang tiap 2,5 s dengan aba-aba 0,5 s, seperti mode menyerang di Test_Combat. Gate Iterasi 3: setelah ±5 menit latihan, minimal 7 dari 10 serangan terakhir harus parry. Di game rasanya beda (animasi, suara, kamera), jadi ini hanya untuk merasakan lebar jendelanya.";
+      document.getElementById("try-ui").hidden = false;
+      document.querySelectorAll(".play-ui").forEach(function (e) { e.hidden = true; });
+      return;
+    }
+    mode = "play"; cur = SC.find(function (s) { return s.id === id; }); t = 0;
+    document.getElementById("try-ui").hidden = true;
+    document.querySelectorAll(".play-ui").forEach(function (e) { e.hidden = false; });
+    document.getElementById("hud-title").textContent = cur.title.split(" · ")[0];
+    document.getElementById("d-title").textContent = cur.title;
+    document.getElementById("d-text").textContent = cur.text;
+    document.getElementById("d-meta").innerHTML = "<span>" + kbd(cur.input) + "</span><span>" + fmt(cur.len) + " s</span>";
+    document.getElementById("lanes").innerHTML = lanesHtml(cur);
+  }
+  function setPlaying(v) { playing = v; var b = document.getElementById("play"); b.textContent = v ? "Jeda" : "Putar"; b.setAttribute("aria-pressed", v); }
+  document.getElementById("play").addEventListener("click", function () { setPlaying(!playing); });
+  document.querySelectorAll("[data-speed]").forEach(function (b) {
+    b.addEventListener("click", function () { speed = parseFloat(b.dataset.speed); document.querySelectorAll("[data-speed]").forEach(function (o) { o.setAttribute("aria-pressed", o === b); }); });
+  });
+  var scrub = document.getElementById("scrub");
+  scrub.addEventListener("input", function () { t = scrub.value / 1000 * cur.len; slowState = null; setPlaying(false); });
+  document.getElementById("t-reset").addEventListener("click", function () { tryReset(); renderTally(); });
+
+  var guard = document.getElementById("guard");
+  guard.addEventListener("pointerdown", function (e) { e.preventDefault(); guard.setPointerCapture(e.pointerId); press(); });
+  guard.addEventListener("pointerup", release); guard.addEventListener("pointercancel", release);
+  guard.addEventListener("contextmenu", function (e) { e.preventDefault(); });
+  window.addEventListener("keydown", function (e) { if (mode === "try" && e.code === "Space") { e.preventDefault(); if (!e.repeat) press(); } });
+  window.addEventListener("keyup", function (e) { if (mode === "try" && e.code === "Space") { e.preventDefault(); release(); } });
+  stage.addEventListener("contextmenu", function (e) { if (mode === "try") e.preventDefault(); });
+
+  var drag = null;
+  canvas.addEventListener("pointerdown", function (e) {
+    if (e.button === 2) { if (mode === "try") press(); return; }
+    drag = { x: e.clientX, y: e.clientY }; canvas.setPointerCapture(e.pointerId);
+  });
+  canvas.addEventListener("pointermove", function (e) { if (!drag) return; yaw -= (e.clientX - drag.x) * 0.008; pitch = Math.max(-0.05, Math.min(1.2, pitch + (e.clientY - drag.y) * 0.006)); drag = { x: e.clientX, y: e.clientY }; });
+  canvas.addEventListener("pointerup", function (e) { if (e.button === 2) { release(); return; } drag = null; });
+  canvas.addEventListener("wheel", function (e) { e.preventDefault(); dist = Math.max(300, Math.min(1300, dist + e.deltaY * 0.5)); }, { passive: false });
+  function resize() { var w = stage.clientWidth, h = stage.clientHeight; renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); }
+  window.addEventListener("resize", resize);
+  if (window.matchMedia) window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function () { build(); });
+  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) speed = 0.25;
+
+  var last = performance.now();
+  function tick(now) {
+    var real = Math.min(0.05, (now - last) / 1000); last = now;
+    var rate = mode === "try" ? 1 : speed, dt = real * rate;
+    // hit-stop & slow-mo: durasinya dalam waktu nyata (dikali laju putar supaya terlihat di 0,25×)
+    if (slowState) {
+      var st = slowState.steps[slowState.i]; dt *= st[1]; slowState.left -= real * rate;
+      if (slowState.left <= 0) { slowState.i++; if (slowState.i < slowState.steps.length) { slowState.left = slowState.steps[slowState.i][0]; slowState.label = slowState.steps[slowState.i][2]; } else slowState = null; }
+    }
+    if (mode === "play") {
+      if (playing) {
+        var prev = t; t += dt;
+        if (cur.slow && prev < cur.slow.at && t >= cur.slow.at && !slowState) { t = cur.slow.at; slowState = { steps: cur.slow.steps, i: 0, left: cur.slow.steps[0][0], label: cur.slow.steps[0][2] }; }
+        if (t > cur.len + 0.5) { t = 0; slowState = null; }
+      }
+      var tt = Math.min(t, cur.len);
+      playFrame(tt);
+      scrub.value = Math.round(tt / cur.len * 1000);
+      document.querySelectorAll("#lanes .head").forEach(function (h) { h.style.left = (tt / cur.len * 100) + "%"; });
+      document.getElementById("time").textContent = fmt(tt) + " / " + fmt(cur.len) + " s";
+    } else tryFrame(dt);
+    camera.position.set(target.x + Math.sin(yaw) * Math.cos(pitch) * dist, target.y + Math.sin(pitch) * dist, target.z + Math.cos(yaw) * Math.cos(pitch) * dist);
+    camera.lookAt(target);
+    renderer.render(scene, camera);
+    requestAnimationFrame(tick);
+  }
+  build(); resize(); select("parry"); requestAnimationFrame(tick);
+})();
+</script>
+
+</body></html>

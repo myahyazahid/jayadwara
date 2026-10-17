@@ -1,0 +1,282 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Gerak Jurus Aksa</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@600;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: panggung 3D di kiri (rangka tulang + jejak), daftar jurus & kontrol putar di kanan; satu kolom di HP. */
+:root {
+  --bg: #eef0ee; --panel: #f8f9f7; --ink: #1d2422; --muted: #5d6865; --line: #cdd3cf;
+  --stage: #e3e7e4; --bone: #1d2422; --gold: #b07a12; --hit: #b8402e; --move: #2f6b8a;
+  --font-display: "Saira Condensed", "Arial Narrow", sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #161b1a; --panel: #1e2523; --ink: #e6ebe8; --muted: #9aa6a2; --line: #34403c;
+  --stage: #121716; --bone: #e6ebe8; --gold: #e0ad48; --hit: #e57a63; --move: #6fb0d2; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #161b1a; --panel: #1e2523; --ink: #e6ebe8; --muted: #9aa6a2; --line: #34403c;
+  --stage: #121716; --bone: #e6ebe8; --gold: #e0ad48; --hit: #e57a63; --move: #6fb0d2; color-scheme: dark }
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.5; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-block: 24px 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 20px; }
+h1 { font: 800 clamp(30px, 5vw, 44px)/1 var(--font-display); text-transform: uppercase; margin: 0; text-wrap: balance; }
+.eyebrow { font: 12px var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--gold); }
+.lead { color: var(--muted); max-width: 70ch; margin: 0; }
+.mono { font-family: var(--font-mono); font-size: 13px; }
+.layout { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 16px; align-items: start; }
+@media (max-width: 820px) { .layout { grid-template-columns: minmax(0, 1fr); } }
+.stage { position: relative; background: var(--stage); border: 1px solid var(--line); border-radius: 6px; aspect-ratio: 4 / 3; max-width: 100%; overflow: hidden; }
+.stage canvas { display: block; width: 100%; height: 100%; touch-action: none; cursor: grab; }
+.hud { position: absolute; left: 12px; top: 10px; right: 12px; display: flex; justify-content: space-between; gap: 8px; pointer-events: none; }
+.hud b { font: 800 22px var(--font-display); text-transform: uppercase; }
+.hud .state { font: 12px var(--font-mono); padding: 2px 8px; border-radius: 999px; background: var(--panel); border: 1px solid var(--line); height: max-content; }
+.hud .state.hit { color: var(--hit); border-color: var(--hit); }
+.hud .state.combo { color: var(--gold); border-color: var(--gold); }
+.empty { position: absolute; inset: 0; display: grid; place-items: center; padding: 24px; text-align: center; }
+.empty .box { display: grid; gap: 10px; max-width: 46ch; justify-items: center; }
+.empty h2 { font: 800 24px var(--font-display); text-transform: uppercase; margin: 0; }
+.drop { border: 1.5px dashed var(--muted); border-radius: 6px; padding: 14px 18px; display: grid; gap: 6px; }
+.drop.over { border-color: var(--gold); background: var(--panel); }
+label.btn, button { font: 600 14px var(--font-body); border: 1.5px solid var(--ink); background: var(--panel); color: var(--ink);
+  border-radius: 4px; padding: 6px 12px; cursor: pointer; }
+button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+button:focus-visible, label.btn:focus-within { outline: 2px solid var(--gold); outline-offset: 2px; }
+.side { display: grid; gap: 14px; }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 12px; display: grid; gap: 10px; }
+.panel h3 { margin: 0; font: 600 13px var(--font-mono); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+.list { display: grid; gap: 4px; }
+.list button { text-align: left; border-width: 1px; border-color: var(--line); display: flex; justify-content: space-between; gap: 8px; }
+.list button small { font: 12px var(--font-mono); color: inherit; opacity: .7; }
+.row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.tl { position: relative; height: 22px; background: var(--bg); border-radius: 3px; overflow: hidden; }
+.tl i { position: absolute; top: 0; bottom: 0; }
+.tl i.hit { background: var(--hit); opacity: .55; top: 0; height: 50%; }
+.tl i.combo { background: var(--gold); opacity: .6; top: 50%; height: 50%; }
+.tl .head { position: absolute; top: -2px; bottom: -2px; width: 2px; background: var(--ink); }
+input[type=range] { width: 100%; accent-color: var(--gold); }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 12px; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 5px; }
+.sw { width: 12px; height: 8px; border-radius: 2px; display: inline-block; }
+.note { font-size: 13px; color: var(--muted); margin: 0; }
+</style>
+
+<div class="wrap">
+  <div>
+    <div class="eyebrow">Fase 1 · animasi combat placeholder</div>
+    <h1>Gerak Jurus Aksa</h1>
+  </div>
+  <p class="lead">Rangka tulang dari animasi combat yang sebenarnya, diambil langsung dari Unreal. Tangan atau kaki yang memukul menyala merah selama jendela kena, dan emas selama jendela combo. Seret panggung untuk memutar kamera.</p>
+
+  <div class="layout">
+    <div class="stage" id="stage">
+      <canvas id="cv" aria-label="Panggung 3D rangka tulang Aksa"></canvas>
+      <div class="hud" id="hud" hidden><b id="hud-title"></b><span class="state" id="hud-state">—</span></div>
+      <div class="empty" id="empty">
+        <div class="box">
+          <h2>Belum ada data gerak</h2>
+          <p class="note">Jalankan <span class="mono">python Tools/ue_remote.py Tools/ue_export_combat_motion.py</span> dengan editor terbuka, lalu pilih file <span class="mono">Saved/CombatMotion/combat_motion.json</span> di sini. Bisa juga unggah file itu ke thread dan Claude yang memasangnya.</p>
+          <div class="drop" id="drop">
+            <label class="btn">Pilih combat_motion.json<input type="file" id="file" accept=".json,application/json" hidden></label>
+            <span class="note">atau seret file ke sini</span>
+          </div>
+          <p class="note" id="err" role="status"></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="side">
+      <div class="panel">
+        <h3>Jurus</h3>
+        <div class="list" id="list"><p class="note">Daftar muncul setelah data dimuat.</p></div>
+      </div>
+      <div class="panel">
+        <h3>Putar</h3>
+        <div class="row">
+          <button type="button" id="play" aria-pressed="true">Jeda</button>
+          <button type="button" data-speed="0.25">0,25×</button>
+          <button type="button" data-speed="0.5">0,5×</button>
+          <button type="button" data-speed="1" aria-pressed="true">1×</button>
+        </div>
+        <div class="tl" id="tl"><span class="head" id="tl-head" style="left:0"></span></div>
+        <input type="range" id="scrub" min="0" max="1000" value="0" aria-label="Posisi waktu animasi">
+        <div class="row mono" id="time">0,00 / 0,00 s</div>
+        <div class="legend">
+          <span><i class="sw" style="background:var(--hit)"></i> kena</span>
+          <span><i class="sw" style="background:var(--gold)"></i> combo</span>
+          <span><i class="sw" style="background:var(--move)"></i> jejak pinggul</span>
+        </div>
+      </div>
+      <p class="note">Semua gerak masih animasi Mannequin placeholder. Gerak Jayadwara sama, hanya diskalakan.</p>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function () {
+  var LINKS = [["root","pelvis"],["pelvis","spine_01"],["spine_01","spine_03"],["spine_03","spine_05"],["spine_05","neck_01"],["neck_01","head"],
+    ["spine_05","clavicle_l"],["clavicle_l","upperarm_l"],["upperarm_l","lowerarm_l"],["lowerarm_l","hand_l"],
+    ["spine_05","clavicle_r"],["clavicle_r","upperarm_r"],["upperarm_r","lowerarm_r"],["lowerarm_r","hand_r"],
+    ["pelvis","thigh_l"],["thigh_l","calf_l"],["calf_l","foot_l"],["pelvis","thigh_r"],["thigh_r","calf_r"],["calf_r","foot_r"]];
+  var LIMB = { hand_r: ["upperarm_r","lowerarm_r","hand_r"], hand_l: ["upperarm_l","lowerarm_l","hand_l"],
+               foot_r: ["thigh_r","calf_r","foot_r"], foot_l: ["thigh_l","calf_l","foot_l"] };
+  function css(n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim() || "#888"; }
+
+  var data = window.COMBAT_MOTION || null, cur = null, t = 0, speed = 1, playing = true;
+  var canvas = document.getElementById("cv"), stage = document.getElementById("stage");
+  var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  var scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(40, 4 / 3, 1, 5000);
+  var grid, bones = {}, segs = [], trail;
+  var yaw = 0.9, pitch = 0.18, dist = 420, target = new THREE.Vector3(0, 95, 0);
+
+  function colors() {
+    return { bone: new THREE.Color(css("--bone")), hit: new THREE.Color(css("--hit")), gold: new THREE.Color(css("--gold")),
+             move: new THREE.Color(css("--move")), line: new THREE.Color(css("--line")) };
+  }
+  var C = colors();
+
+  function build() {
+    while (scene.children.length) scene.remove(scene.children[0]);
+    grid = new THREE.GridHelper(600, 12, C.line, C.line); scene.add(grid);
+    bones = {}; segs = [];
+    var jg = new THREE.SphereGeometry(4.5, 12, 8);
+    Object.keys(LIMB).concat(["root","pelvis","spine_01","spine_03","spine_05","neck_01","head","clavicle_l","upperarm_l","lowerarm_l","clavicle_r","upperarm_r","lowerarm_r","thigh_l","calf_l","thigh_r","calf_r"])
+      .forEach(function (b) {
+        var m = new THREE.Mesh(b === "head" ? new THREE.SphereGeometry(11, 16, 12) : jg, new THREE.MeshBasicMaterial({ color: C.bone }));
+        scene.add(m); bones[b] = m;
+      });
+    LINKS.forEach(function (l) {
+      var g = new THREE.CylinderGeometry(2.6, 2.6, 1, 8); g.translate(0, 0.5, 0); g.rotateX(Math.PI / 2);
+      var m = new THREE.Mesh(g, new THREE.MeshBasicMaterial({ color: C.bone })); scene.add(m); segs.push({ a: l[0], b: l[1], m: m });
+    });
+    trail = new THREE.Line(new THREE.BufferGeometry(), new THREE.LineBasicMaterial({ color: C.move }));
+    scene.add(trail);
+  }
+
+  // UE (X depan, Y kanan, Z atas) -> three (x kanan, y atas, z ke kamera)
+  function v(row, i) { return new THREE.Vector3(row[i * 3 + 1], row[i * 3 + 2], row[i * 3]); }
+
+  function frameAt(time) {
+    var f = time * data.fps, i = Math.floor(f), a = cur.frames[Math.min(i, cur.frames.length - 1)], b = cur.frames[Math.min(i + 1, cur.frames.length - 1)], k = f - i;
+    return a.map(function (x, j) { return x + (b[j] - x) * k; });
+  }
+  function inWin(list, time) { return (list || []).find(function (w) { return time >= w[0] && time <= w[1]; }); }
+
+  function pose(time) {
+    var row = frameAt(time), pos = {};
+    cur.bones.forEach(function (b, i) { pos[b] = v(row, i); });
+    var hit = inWin(cur.windows.hit, time), combo = inWin(cur.windows.combo, time);
+    var hot = {}; if (hit && LIMB[hit[2]]) LIMB[hit[2]].forEach(function (b) { hot[b] = true; });
+    Object.keys(bones).forEach(function (b) {
+      var m = bones[b]; if (!pos[b]) { m.visible = false; return; }
+      m.visible = true; m.position.copy(pos[b]); m.material.color = hot[b] ? C.hit : C.bone;
+    });
+    segs.forEach(function (s) {
+      var p = pos[s.a], q = pos[s.b]; if (!p || !q) { s.m.visible = false; return; }
+      s.m.visible = true; s.m.position.copy(p); s.m.lookAt(q); s.m.scale.set(1, 1, p.distanceTo(q));
+      s.m.material.color = hot[s.b] ? C.hit : C.bone;
+    });
+    var hs = document.getElementById("hud-state");
+    hs.className = "state" + (hit ? " hit" : combo ? " combo" : "");
+    hs.textContent = hit ? "KENA · " + hit[2] : combo ? "jendela combo" : "—";
+    if (pos.pelvis) target.set(pos.pelvis.x, 95, pos.pelvis.z);
+  }
+
+  function buildTrail() {
+    var pi = cur.bones.indexOf("pelvis"); if (pi < 0) return;
+    var pts = cur.frames.map(function (r) { var p = v(r, pi); return new THREE.Vector3(p.x, 1, p.z); });
+    trail.geometry.dispose(); trail.geometry = new THREE.BufferGeometry().setFromPoints(pts);
+  }
+
+  function timeline() {
+    var tl = document.getElementById("tl"), L = cur.length, h = '<span class="head" id="tl-head"></span>';
+    (cur.windows.hit || []).forEach(function (w) { h += '<i class="hit" style="left:' + (w[0] / L * 100) + '%;width:' + ((w[1] - w[0]) / L * 100) + '%"></i>'; });
+    (cur.windows.combo || []).forEach(function (w) { h += '<i class="combo" style="left:' + (w[0] / L * 100) + '%;width:' + ((w[1] - w[0]) / L * 100) + '%"></i>'; });
+    tl.innerHTML = h;
+  }
+
+  function select(id) {
+    cur = data.moves.find(function (m) { return m.id === id; }) || data.moves[0]; t = 0;
+    document.querySelectorAll("#list button").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.id === cur.id); });
+    document.getElementById("hud-title").textContent = cur.title;
+    buildTrail(); timeline();
+  }
+
+  function load(json) {
+    if (!json || !Array.isArray(json.moves) || !json.moves.length) throw new Error("File ini bukan hasil ue_export_combat_motion.py (tidak ada daftar animasi).");
+    data = json;
+    document.getElementById("empty").hidden = true; document.getElementById("hud").hidden = false;
+    document.getElementById("list").innerHTML = data.moves.map(function (m) {
+      return '<button type="button" data-id="' + m.id + '" aria-pressed="false"><span>' + m.title + '</span><small>' + m.length.toFixed(2).replace(".", ",") + " s</small></button>";
+    }).join("");
+    document.querySelectorAll("#list button").forEach(function (b) { b.addEventListener("click", function () { select(b.dataset.id); }); });
+    select(data.moves[0].id);
+  }
+
+  function readFile(f) {
+    var err = document.getElementById("err"); err.textContent = "";
+    if (!f) return;
+    var r = new FileReader();
+    r.onload = function () { try { load(JSON.parse(r.result)); } catch (e) { err.textContent = e.message || "File tidak bisa dibaca sebagai JSON."; } };
+    r.readAsText(f);
+  }
+  document.getElementById("file").addEventListener("change", function (e) { readFile(e.target.files[0]); });
+  var drop = document.getElementById("drop");
+  ["dragover", "dragenter"].forEach(function (n) { stage.addEventListener(n, function (e) { e.preventDefault(); drop.classList.add("over"); }); });
+  ["dragleave", "drop"].forEach(function (n) { stage.addEventListener(n, function () { drop.classList.remove("over"); }); });
+  stage.addEventListener("drop", function (e) { e.preventDefault(); readFile(e.dataTransfer.files[0]); });
+
+  document.getElementById("play").addEventListener("click", function () {
+    playing = !playing; this.textContent = playing ? "Jeda" : "Putar"; this.setAttribute("aria-pressed", playing);
+  });
+  document.querySelectorAll("[data-speed]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      speed = parseFloat(b.dataset.speed);
+      document.querySelectorAll("[data-speed]").forEach(function (o) { o.setAttribute("aria-pressed", o === b); });
+    });
+  });
+  var scrub = document.getElementById("scrub");
+  scrub.addEventListener("input", function () { if (cur) { t = scrub.value / 1000 * cur.length; playing = false; var p = document.getElementById("play"); p.textContent = "Putar"; p.setAttribute("aria-pressed", false); } });
+
+  var drag = null;
+  canvas.addEventListener("pointerdown", function (e) { drag = { x: e.clientX, y: e.clientY }; canvas.setPointerCapture(e.pointerId); });
+  canvas.addEventListener("pointermove", function (e) {
+    if (!drag) return; yaw -= (e.clientX - drag.x) * 0.008; pitch = Math.max(-0.1, Math.min(1.2, pitch + (e.clientY - drag.y) * 0.006)); drag = { x: e.clientX, y: e.clientY };
+  });
+  canvas.addEventListener("pointerup", function () { drag = null; });
+  canvas.addEventListener("wheel", function (e) { e.preventDefault(); dist = Math.max(200, Math.min(900, dist + e.deltaY * 0.4)); }, { passive: false });
+
+  function resize() {
+    var w = stage.clientWidth, h = stage.clientHeight; renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix();
+  }
+  window.addEventListener("resize", resize);
+  if (window.matchMedia) window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function () { C = colors(); build(); if (cur) buildTrail(); });
+
+  var last = performance.now(), reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce) { speed = 0.5; }
+  function tick(now) {
+    var dt = Math.min(0.05, (now - last) / 1000); last = now;
+    if (cur) {
+      if (playing) { t += dt * speed; if (t > cur.length + 0.4) t = 0; }
+      var tt = Math.min(t, cur.length);
+      pose(tt);
+      scrub.value = Math.round(tt / cur.length * 1000);
+      var head = document.getElementById("tl-head"); if (head) head.style.left = (tt / cur.length * 100) + "%";
+      document.getElementById("time").textContent = tt.toFixed(2).replace(".", ",") + " / " + cur.length.toFixed(2).replace(".", ",") + " s";
+    }
+    camera.position.set(target.x + Math.sin(yaw) * Math.cos(pitch) * dist, target.y + Math.sin(pitch) * dist, target.z + Math.cos(yaw) * Math.cos(pitch) * dist);
+    camera.lookAt(target);
+    renderer.render(scene, camera);
+    requestAnimationFrame(tick);
+  }
+  build(); resize();
+  if (data) { try { load(data); } catch (e) {} }
+  requestAnimationFrame(tick);
+})();
+</script>
+
+</body></html>
