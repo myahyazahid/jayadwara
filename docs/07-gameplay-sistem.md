@@ -54,7 +54,7 @@ Disetujui developer 16 Okt 2026 dari konsep pose ([`visual/usulan-jurus-aksa.htm
 
 #### Daftar jurus Jayadwara (usulan)
 
-Usulan 17 Okt 2026 (permintaan developer), menunggu persetujuan. Visual: [`visual/usulan-jurus-jayadwara.html`](visual/usulan-jurus-jayadwara.html). Slot, tombol, ability, dan aturan combo **sama dengan Aksa**; yang beda hanya animasi (montage di `DA_CombatProfile_Giant`). Aksa cepat dan lincah; Jayadwara pendek, lurus, menghantam. Kalau disetujui, kalimat "di Fase 1 combo kedua skala identik" di atas berubah jadi "identik secara sistem, beda animasi".
+**Ditunda (keputusan developer 17 Okt 2026):** Jayadwara tetap memakai jurus yang sama dengan Aksa (animasi Aksa di-retarget). Daftar ini disimpan sebagai bahan kalau setelah review/uji tangan developer meminta perubahan. Visual: [`visual/usulan-jurus-jayadwara.html`](visual/usulan-jurus-jayadwara.html). Slot, tombol, ability, dan aturan combo **sama dengan Aksa**; yang beda hanya animasi (montage di `DA_CombatProfile_Giant`). Aksa cepat dan lincah; Jayadwara pendek, lurus, menghantam. Kalau nanti dipakai, cukup slot yang diminta developer yang diganti; aturan "combo kedua skala identik" di atas tetap berlaku sampai saat itu.
 
 | Input | Jurus | Gerak |
 |---|---|---|
