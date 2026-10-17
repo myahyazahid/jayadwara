@@ -1,6 +1,6 @@
 # 30 — Desain Level Ep 1: `Ep01_LawangSapta`
 
-> **Status: v0.3, tata letak v02 (16 Okt 2026)**: developer menilai greybox v01 terlalu kecil saat dimainkan sebagai Jayadwara. Jarak antarzona diperbesar ±1,7× dengan area baru (bagian 2a); angka di bagian 2 adalah **v01 (arsip)**. Keputusan E1–E7 tetap berlaku (bagian 9).
+> **Status: v0.4, tata letak v02 (16 Okt 2026), revisi 17 Okt 2026**: developer menilai greybox v01 terlalu kecil saat dimainkan sebagai Jayadwara. Jarak antarzona diperbesar ±1,7× dengan area baru (bagian 2a); angka di bagian 2 adalah **v01 (arsip)**. Revisi 17 Okt (setelah playtest v02 lulus): galian 260 × 230 m dan dalam 30 m (G5), kamera C1/C3/C5/C7/C8 dibenahi, tebing desa dihaluskan, aturan alas objek diganti (2a). Keputusan E1–E7 tetap berlaku (bagian 9).
 > Sumber: [17](17-skenario-arc-1.md#episode-1--gerbang-yang-retak) (adegan), [18](18-kebutuhan-episode-1.md#c-lingkungan--level) (zona & aset), [11](11-vertical-slice-spec.md) (scope), [23](23-rencana-fase-1.md) (angka combat & level uji). Kalau bertentangan, dokumen sumber yang berlaku.
 
 **Visual:** denah berlapis, potongan bukit berskala, perbandingan tinggi, dan linimasa cahaya ada di [`visual/ep01-lawang-sapta.html`](visual/ep01-lawang-sapta.html) (buka di browser).
@@ -41,10 +41,10 @@ Koreksi terhadap gambar konsep saat greybox: plato diperlebar dari ±100 m ke ±
 | Medan | 800 × 700 m | **1400 × 1220 m** |
 | Arena raksasa | ±530 × 550 m | **1190 × 1025 m** |
 | Plato candi (+35) | ±120 m | **200 × 208 m**, candi induk di belakang (y 320), halaman luas untuk Jayadwara |
-| Galian | 140 × 120 m, undakan ±12 m | **220 × 190 m**, undakan ±20 m (tinggi tetap 2,5 m), dasar ±100 × 85 m |
-| Galian → desa | ≥150 m | **≥255 m** |
+| Galian | 140 × 120 m, undakan ±12 m | **260 × 230 m**, berpusat (20, 10), **6 undakan** × 5 m, **dalam 30 m** (bibir +25, dasar −5; G5), dasar ±104 × 92 m |
+| Galian → desa | ≥150 m | **≥250 m** (terukur 253 m) |
 | Sawah (aman) | 300 × 160 m | **510 × 280 m** |
-| Rute Aksa START → ★3 | ±290 m (±1 mnt) | **±735 m (±2,4 mnt jalan)** |
+| Rute Aksa START → ★3 | ±290 m (±1 mnt) | **±738 m (±2,5 mnt jalan)** |
 
 **Area baru:**
 | Area | Untuk Aksa | Untuk Jayadwara |
@@ -56,6 +56,14 @@ Koreksi terhadap gambar konsep saat greybox: plato diperlebar dari ±100 m ke ±
 | **Pembanding skala** | 775 pohon (6 kelompok), 30 tiang listrik, siluet bukit dan kota di horizon | Membuat ukuran terbaca dari 45 m |
 
 **Data (sumber kebenaran, dipakai Hermes dan nanti `Tools/ue_greybox_ep01.py`):** [`Art/Level/ep01_medan_v02.py`](../Art/Level/ep01_medan_v02.py) (medan + slot material + 14 titik uji) dan [`Art/Level/ep01_layout_v02.json`](../Art/Level/ep01_layout_v02.json), yang **dibuat** oleh [`Art/Level/buat_layout_ep01_v02.py`](../Art/Level/buat_layout_ep01_v02.py). Tata letak diubah di generator, bukan di JSON. Instruksi Hermes: [`Hermes/maps_ep1_v02_hermes.md`](../Hermes/maps_ep1_v02_hermes.md) (branch `hermes/maps_ep1_v02`).
+
+**Revisi 17 Okt 2026** (hasil playtest developer + usulan Hermes, diterapkan Claude lewat generator; keputusan G1–G4):
+- **G1 galian lebih lebar dan dalam.** 220 × 190 → **260 × 230 m**, dasar +15 → **+12,5 m** (5 undakan). Pusat digeser dari (0, 0) ke **(20, 10)**, bukan (30, 30) seperti usulan Hermes: dengan (30, 30) bibir utara menyentuh kaki tangga (y 142) dan bibir timur masuk pagar base camp (x 150). Pusat (20, 10) menjaga jarak ke desa 253 m, bibir utara di y 124 (18 m di bawah kaki tangga), bibir timur tepat di x 150, jadi tangga, candi, dan base camp **tidak digeser**. Ikut berubah: tiga ram (kepala di bibir +25, ujung di tepi dasar +12,5), jalan setapak berujung di kepala ram barat, ★1 dan C2 ke (−110, −20), Jerangkong bangkit di (20, 10), profil bukit utara datar +25 sampai y 125, buldoser ke (138, 30) dan tenda 2 ke (−75, 7) (menghindari tepi undakan dan ram).
+- **G5 galian lebih dalam (17 Okt, setelah playtest: "kurang dalam").** Dasar +12,5 → **−5 m** (dalam 12,5 → **30 m**, bibir luar tetap +25); undakan 5 × 2,5 m → **6 × 5 m** (dasar −5, lalu 0/5/10/15/20, batas e 0,40/0,52/0,64/0,76/0,88/1,0). Tiga ram kini turun 30 m (±20–23°, jalan kaki aman; batas lantai 44,8°). Mulut galian ke selatan dari −5 naik ke +3,7 di y −190 (±3°). Tenda 3 dan ekskavator digeser agar tidak menjepit tepi undakan; ★1 jalur masuk ram barat dari (−112, −5) (tepat di tepi undakan memberi lereng mesh 41°). C2 menghadap dasar (20, 10, −5). Rute START → ★3 jadi 750 m. Dasar tetap ±104 × 92 m. Tinggi Jerangkong (46 m) tetap lebih tinggi dari kedalaman galian.
+- **G2 kamera.** C1 ke (−150, −450) menghadap rumah desa + bukit; C3 ke (0, 226) menghadap (250, 200, 32) (46 m di utara gerbang, tidak lagi terhalang pilar dan di luar disc W3); C7 dipindah ke (326, −56) tinggi 9 m menghadap (225, 45, 24) supaya galian, baris kantor, dan truk masuk frame (hasil render ulang 17 Okt); C8 ke (760, −250) sejajar baris pilar; C5 `lebar_ortho` 1450 → **2200 m** supaya seluruh medan 1400 × 1220 m masuk.
+- **G3 tebing desa.** Tebing ±2 m di tepi utara desa (jatuh di rute Aksa) diganti **lereng 10 m** (`DESA_LERENG`); lereng maksimum 1,98 → 0,31 m per 1 m.
+- **G4 alas objek.** Alas = **elev titik tengah tapak** (sebelumnya titik terendah, sehingga objek di lereng tenggelam >1 m). Nilainya ditulis ke JSON sebagai `alas_m`; objek yang sisi rendahnya melayang >0,3 m dapat `pondasi_m` (perpanjang ke bawah, puncak tetap): tenda 2, empat reruntuhan perwara, pilar tol 6 dan 7. Garis polisi dipendekkan ke y −42…−18 (lereng jalan akses).
+- Pratinjau tampak atas dibuat ulang oleh [`Art/Level/pratinjau_ep01_v02.py`](../Art/Level/pratinjau_ep01_v02.py) dari data yang sama (gambar di atas).
 
 **Dampak ke skenario:** adegan 3 ([17](17-skenario-arc-1.md#adegan-3--tiba-di-galian--main--koms)) kini dimulai di desa, bukan di garis polisi. Isi dialog (mandor, batu latihan) tetap; mandor ditemui di jalan setapak atau base camp. Revisi teks skenario menyusul.
 
@@ -133,7 +141,7 @@ Di Ep 1 ketiga petunjuk ada di jalur utama ([17 S6](17-skenario-arc-1.md#keputus
 | # | Petunjuk | Lokasi | Cara jalur mengarahkan |
 |---|---|---|---|
 | ★1 | Jejak energi (`Clue.Ep01.JejakEnergi`) | Bibir galian (+25) | Pertama kali mode scan dipakai: aliran merah mengalir dari dasar galian, naik ke arah gerbang. Pemain melihat seluruh rute sekaligus |
-| ★2 | Tulang bergeser (`Clue.Ep01.Tulang`) | Dasar galian (+15) | Ram sisi timur turun 4 undakan. Scan dua kali di titik yang sama (tulang pindah 3 cm). Tidak ada jasad pekerja ([17 S5](17-skenario-arc-1.md#keputusan-untuk-developer-ep-1)) |
+| ★2 | Tulang bergeser (`Clue.Ep01.Tulang`) | Dasar galian (−5) | Ram sisi barat turun 6 undakan. Scan dua kali di titik yang sama (tulang pindah 3 cm). Tidak ada jasad pekerja ([17 S5](17-skenario-arc-1.md#keputusan-untuk-developer-ep-1)) |
 | ★3 | Prasasti retak (`Clue.Ep01.Prasasti`) | Gerbang candi (+35) | Naik ram sisi utara → tangga candi. Arca kanan dililit tali derek dari truk di ujung jalan proyek |
 
 - **Isi galian:** patok survei, terpal, tenda kerja, lampu sorot proyek (belum menyala), ember dan cangkul, papan "Proyek Tol Adikara".
@@ -144,7 +152,7 @@ Setelah prasasti dibaca, tanah bergetar. Bagas memerintahkan mundur ke mobil, ta
 
 | Gelombang | Tempat | Musuh | Arah |
 |---|---|---|---|
-| 1 | Undakan atas galian (+22 … +25) | 3 kerangka keluar dari tanah undakan | Pemain turun dari tangga candi, dihadang |
+| 1 | Undakan atas galian (+20 … +25) | 3 kerangka keluar dari tanah undakan | Pemain turun dari tangga candi, dihadang |
 | 2 | Tangga candi (+28 … +35) | 5 kerangka naik dari galian | Pemain didesak naik; tangga sempit memaksa dodge/tangkis |
 | 3 | Halaman depan gerbang (+35) | 6 kerangka yang bangkit lagi | Terpojok di depan arca; finisher pecahkan kepala. **Checkpoint** |
 
@@ -152,7 +160,7 @@ Setelah prasasti dibaca, tanah bergetar. Bagas memerintahkan mundur ke mobil, ta
 - **Spawn:** kerangka **merangkak keluar dari tanah** di titik yang ditandai (`AJDWaveSpawner`), bukan muncul tiba-tiba.
 
 ### D. Kebangkitan · adegan 6 · ±1,5–2 menit (sequence)
-- Senja merah. Tulang di galian tersedot ke dasar galian; Jerangkong bangkit dari **dasar galian (+15)**, kepalanya ±46 m, setinggi gerbang candi plus satu tubuhnya.
+- Senja merah. Tulang di galian tersedot ke dasar galian; Jerangkong bangkit dari **dasar galian (−5)**, kepalanya ±46 m, setinggi gerbang candi plus satu tubuhnya.
 - Aksa terpental ke arca kiri di gerbang.
 - **Wide shot dari gerbang ke timur:** Jerangkong di tengah, dan di belakangnya truk derek membawa arca kanan berterpal keluar lewat **jalan proyek**. Jalan proyek dirancang agar terlihat jelas di garis pandang ini.
 - Transformasi di alas arca kiri. Jayadwara berdiri di plato (+35) dan menahan kaki Jerangkong.
@@ -261,7 +269,7 @@ Target 60 FPS di 1080p PC menengah ([12](12-technical-design.md#target-performa)
 
 **Pelaksana greybox pertama: Hermes**, sesuai instruksi [`Hermes/maps_ep1_hermes.md`](../Hermes/maps_ep1_hermes.md) (worktree `C:\repository\unreal_engine\jayadwara_hermes_maps_ep1`, branch `hermes/maps_ep1`, sandbox `/Game/Hermes/MapsEp1/`). Langkah M0–M7: cek data → medan Blender headless → level `Test_Hermes_MapsEp1` → objek → penanda dan batas → kamera dan render → uji skala oleh developer.
 
-**Setelah dipakai:** Claude memindahkan logika skrip Hermes ke `Tools/ue_greybox_ep01.py` (membaca file data yang sama) dan membangun level greybox di `/Game/Jayadwara/Maps/` lewat PR. Penanda gelombang dan checkpoint diganti aktor gameplay (`AJDWaveSpawner`, `AJDCheckpoint`) setelah Iterasi 5; bangunan bertag `hancur` diganti Geometry Collection setelah Iterasi 7.
+**Sudah dipindahkan (17 Okt 2026):** logika skrip Hermes V2–V7 digabung ke [`Art/Scripts/ep01_medan_blender.py`](../Art/Scripts/ep01_medan_blender.py) (mesh medan + tangga → `Art/Export/Level/`, `Art/Blender/ep01/`) dan [`Tools/ue_greybox_ep01.py`](../Tools/ue_greybox_ep01.py) (membangun seluruh level dari data yang sama, lengkap dengan uji); render C1–C8 oleh [`Tools/ue_greybox_ep01_render.py`](../Tools/ue_greybox_ep01_render.py). Level: `/Game/Jayadwara/Maps/Ep01_LawangSapta_Greybox`, aset di `/Game/Jayadwara/Environment/Ep01Greybox/` (`M_Greybox`, `MI_Ep01_*`, `SM_Ep01_Medan`, `SM_Ep01_Tangga`). Hasil uji pada data revisi 17 Okt: bounds 1400 × 1220 m, line trace 15/15 (±5 cm), 88 objek (30 hancur, 20 Adikara, 2 cadangan), 775 pohon, 30 tiang, rute Aksa 737,8 m (148 s; lereng maks 30,9° < 44,8°). Cara membangun ulang: `Blender --background --python Art/Scripts/ep01_medan_blender.py`, lalu `python Tools/ue_remote.py Tools/ue_greybox_ep01.py` (aman diulang). Aset `Content/Hermes/MapsEp1` hanya arsip hasil Hermes (data lama). Penanda gelombang dan checkpoint diganti aktor gameplay (`AJDWaveSpawner`, `AJDCheckpoint`) setelah Iterasi 5; bangunan bertag `hancur` diganti Geometry Collection setelah Iterasi 7.
 
 **Diuji di greybox:** waktu tempuh zona A–C, terbaca-tidaknya landmark, ukuran arena untuk raksasa 45 m, sudut kamera raksasa saat di lereng, dan FPS dengan 8–10 gedung.
 

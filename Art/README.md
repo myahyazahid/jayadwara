@@ -10,7 +10,7 @@ Model Aksa: rencana [docs/19-rencana-model-aksa.md](../docs/19-rencana-model-aks
 | `Blender/` | File `.blend` berversi: `jayadwara_giant_vNN_<tahap>.blend` |
 | `Scripts/` | Script Python Blender (modeling, rig, validasi) dan alat bantu referensi |
 | `Export/` | Hasil export FBX + tekstur siap import UE |
-| `Level/` | Data tata letak map per episode (sumber kebenaran untuk greybox Blender/UE). **Ep 1 v02 (berlaku):** `ep01_medan_v02.py` (medan, slot material, uji), `buat_layout_ep01_v02.py` (generator) → `ep01_layout_v02.json`. v01 (`ep01_medan.py`, `ep01_layout_v01.json`) = arsip. Desain: [docs/30](../docs/30-desain-level-ep01.md) |
+| `Level/` | Data tata letak map per episode (sumber kebenaran untuk greybox Blender/UE). Mesh medan/tangga Ep 1 → `Export/Level/` (`SM_Ep01_Medan.fbx`, `SM_Ep01_Tangga.fbx`) dan `Blender/ep01/ep01_medan.blend` lewat `Scripts/ep01_medan_blender.py`; level UE dibangun `Tools/ue_greybox_ep01.py`. Pratinjau tampak atas: `pratinjau_ep01_v02.py`. **Ep 2:** `Scripts/ep02_medan_blender.py` → `Export/Level/SM_Ep02_Medan.fbx` + `Blender/ep02/ep02_medan.blend`; level `Tools/ue_greybox_ep02.py`; pratinjau `pratinjau_ep02_v02.py`. **Ep 1 v02 (berlaku):** `ep01_medan_v02.py` (medan, slot material, uji), `buat_layout_ep01_v02.py` (generator) → `ep01_layout_v02.json`. v01 (`ep01_medan.py`, `ep01_layout_v01.json`) = arsip. Desain: [docs/30](../docs/30-desain-level-ep01.md) |
 
 ## Script (`Scripts/`)
 Dijalankan di Blender (mis. lewat MCP: `exec(open(path).read())`), kecuali yang ditandai *sistem*.

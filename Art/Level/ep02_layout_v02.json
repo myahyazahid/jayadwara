@@ -2,7 +2,7 @@
  "versi": "ep02_layout_v02 (16 Okt 2026, dari docs/31 bagian 2a). Dibuat oleh Art/Level/buat_layout_ep02_v02.py — jangan sunting manual",
  "medan_modul": "ep02_medan_v02",
  "satuan": "meter; x = timur, y = utara, z = atas (0 = muka air kali). UE: X = x*100, Y = -y*100, Z = z*100 (cm)",
- "z_otomatis": "objek/item tanpa 'z' diletakkan di atas medan: alas = elev terendah di tapak; 'z' = tinggi alas absolut",
+ "z_otomatis": "objek tanpa 'z': alas = elev titik tengah tapak, nilainya di 'alas_m' (dinding = titik tengah garis); 'pondasi_m' = perpanjang objek ke bawah sebanyak itu (puncak tetap) supaya sisi rendah di lereng tidak melayang (bidang tidak diberi pondasi); 'z' = tinggi alas absolut. Item kelompok tanpa 'z': alas = elev titik tengah item (selisih ke titik terendah maks 0,11 m). Tinggi akhir objek = alas_m (atau z) + z_dasar_relatif",
  "medan": {
   "x_min": -700,
   "x_max": 700,
@@ -143,7 +143,8 @@
    ],
    "mi": "Kayu",
    "hancur": false,
-   "catatan": "checkpoint; titik kumpul warga (tidak hancur)"
+   "catatan": "checkpoint; titik kumpul warga (tidak hancur)",
+   "alas_m": 7.89
   },
   {
    "id": "KAMPUNG_Musala",
@@ -159,7 +160,8 @@
    ],
    "mi": "Musala",
    "hancur": false,
-   "catatan": "tidak bisa hancur"
+   "catatan": "tidak bisa hancur",
+   "alas_m": 7.36
   },
   {
    "id": "KAMPUNG_RumahKemalingan",
@@ -177,7 +179,8 @@
    "hancur": true,
    "penalti": "tinggi",
    "catatan": "★1; tangga bambu di belakang (utara) ke atap",
-   "mi_atap": "Atap"
+   "mi_atap": "Atap",
+   "alas_m": 7.63
   },
   {
    "id": "KAMPUNG_WarungCCTV",
@@ -194,7 +197,8 @@
    "mi": "Kayu",
    "hancur": true,
    "penalti": "tinggi",
-   "catatan": "★2; CCTV di tiang depan, jual mainan"
+   "catatan": "★2; CCTV di tiang depan, jual mainan",
+   "alas_m": 8.28
   },
   {
    "id": "KAMPUNG_TiangCCTV",
@@ -209,7 +213,8 @@
     5
    ],
    "mi": "Kendaraan",
-   "hancur": false
+   "hancur": false,
+   "alas_m": 8.36
   },
   {
    "id": "KAMPUNG_GangBuntu_Beringin",
@@ -225,7 +230,8 @@
    ],
    "mi": "Kayu",
    "hancur": false,
-   "catatan": "○ sesajen di bawahnya"
+   "catatan": "○ sesajen di bawahnya",
+   "alas_m": 5.57
   },
   {
    "id": "KAMPUNG_GangBuntu_Tajuk",
@@ -242,7 +248,8 @@
    "z_dasar_relatif": 7,
    "mi": "Pohon",
    "hancur": false,
-   "tanpa_tabrakan": true
+   "tanpa_tabrakan": true,
+   "alas_m": 5.57
   },
   {
    "id": "KAMPUNG_Sesajen",
@@ -257,7 +264,8 @@
     0.5
    ],
    "mi": "Penanda",
-   "hancur": false
+   "hancur": false,
+   "alas_m": 5.53
   },
   {
    "id": "BLOK1_Rumah1",
@@ -276,7 +284,8 @@
    "penalti": "tinggi",
    "blok_chaos": "BLOK1",
    "catatan": "satu Geometry Collection per deret (F2)",
-   "mi_atap": "Atap"
+   "mi_atap": "Atap",
+   "alas_m": 5.14
   },
   {
    "id": "BLOK1_Rumah2",
@@ -295,7 +304,8 @@
    "penalti": "tinggi",
    "blok_chaos": "BLOK1",
    "catatan": "satu Geometry Collection per deret (F2)",
-   "mi_atap": "Atap"
+   "mi_atap": "Atap",
+   "alas_m": 5.14
   },
   {
    "id": "BLOK1_Rumah3",
@@ -314,7 +324,8 @@
    "penalti": "tinggi",
    "blok_chaos": "BLOK1",
    "catatan": "satu Geometry Collection per deret (F2)",
-   "mi_atap": "Atap"
+   "mi_atap": "Atap",
+   "alas_m": 5.14
   },
   {
    "id": "BLOK1_Rumah4",
@@ -333,7 +344,8 @@
    "penalti": "tinggi",
    "blok_chaos": "BLOK1",
    "catatan": "satu Geometry Collection per deret (F2)",
-   "mi_atap": "Atap"
+   "mi_atap": "Atap",
+   "alas_m": 5.14
   },
   {
    "id": "BLOK2_Rumah1",
@@ -352,7 +364,8 @@
    "penalti": "tinggi",
    "blok_chaos": "BLOK2",
    "catatan": "satu Geometry Collection per deret (F2)",
-   "mi_atap": "Atap"
+   "mi_atap": "Atap",
+   "alas_m": 5.14
   },
   {
    "id": "BLOK2_Rumah2",
@@ -371,7 +384,8 @@
    "penalti": "tinggi",
    "blok_chaos": "BLOK2",
    "catatan": "satu Geometry Collection per deret (F2)",
-   "mi_atap": "Atap"
+   "mi_atap": "Atap",
+   "alas_m": 5.14
   },
   {
    "id": "BLOK2_Rumah3",
@@ -390,7 +404,8 @@
    "penalti": "tinggi",
    "blok_chaos": "BLOK2",
    "catatan": "satu Geometry Collection per deret (F2)",
-   "mi_atap": "Atap"
+   "mi_atap": "Atap",
+   "alas_m": 5.14
   },
   {
    "id": "BLOK2_Rumah4",
@@ -409,7 +424,8 @@
    "penalti": "tinggi",
    "blok_chaos": "BLOK2",
    "catatan": "satu Geometry Collection per deret (F2)",
-   "mi_atap": "Atap"
+   "mi_atap": "Atap",
+   "alas_m": 5.14
   },
   {
    "id": "BLOK3_Rumah1",
@@ -428,7 +444,8 @@
    "penalti": "tinggi",
    "blok_chaos": "BLOK3",
    "catatan": "satu Geometry Collection per deret (F2)",
-   "mi_atap": "Atap"
+   "mi_atap": "Atap",
+   "alas_m": 5.14
   },
   {
    "id": "BLOK3_Rumah2",
@@ -447,7 +464,8 @@
    "penalti": "tinggi",
    "blok_chaos": "BLOK3",
    "catatan": "satu Geometry Collection per deret (F2)",
-   "mi_atap": "Atap"
+   "mi_atap": "Atap",
+   "alas_m": 5.14
   },
   {
    "id": "BLOK3_Rumah3",
@@ -466,7 +484,8 @@
    "penalti": "tinggi",
    "blok_chaos": "BLOK3",
    "catatan": "satu Geometry Collection per deret (F2)",
-   "mi_atap": "Atap"
+   "mi_atap": "Atap",
+   "alas_m": 5.14
   },
   {
    "id": "BLOK3_Rumah4",
@@ -485,7 +504,8 @@
    "penalti": "tinggi",
    "blok_chaos": "BLOK3",
    "catatan": "satu Geometry Collection per deret (F2)",
-   "mi_atap": "Atap"
+   "mi_atap": "Atap",
+   "alas_m": 5.14
   },
   {
    "id": "BLOK4_Rumah1",
@@ -504,7 +524,8 @@
    "penalti": "tinggi",
    "blok_chaos": "BLOK4",
    "catatan": "satu Geometry Collection per deret (F2)",
-   "mi_atap": "Atap"
+   "mi_atap": "Atap",
+   "alas_m": 5.14
   },
   {
    "id": "BLOK4_Rumah2",
@@ -523,7 +544,8 @@
    "penalti": "tinggi",
    "blok_chaos": "BLOK4",
    "catatan": "satu Geometry Collection per deret (F2)",
-   "mi_atap": "Atap"
+   "mi_atap": "Atap",
+   "alas_m": 5.14
   },
   {
    "id": "BLOK4_Rumah3",
@@ -542,7 +564,8 @@
    "penalti": "tinggi",
    "blok_chaos": "BLOK4",
    "catatan": "satu Geometry Collection per deret (F2)",
-   "mi_atap": "Atap"
+   "mi_atap": "Atap",
+   "alas_m": 5.14
   },
   {
    "id": "BLOK4_Rumah4",
@@ -561,7 +584,8 @@
    "penalti": "tinggi",
    "blok_chaos": "BLOK4",
    "catatan": "satu Geometry Collection per deret (F2)",
-   "mi_atap": "Atap"
+   "mi_atap": "Atap",
+   "alas_m": 5.14
   },
   {
    "id": "BLOK5_Rumah1",
@@ -580,7 +604,8 @@
    "penalti": "tinggi",
    "blok_chaos": "BLOK5",
    "catatan": "satu Geometry Collection per deret (F2)",
-   "mi_atap": "Atap"
+   "mi_atap": "Atap",
+   "alas_m": 8.75
   },
   {
    "id": "BLOK5_Rumah2",
@@ -599,7 +624,8 @@
    "penalti": "tinggi",
    "blok_chaos": "BLOK5",
    "catatan": "satu Geometry Collection per deret (F2)",
-   "mi_atap": "Atap"
+   "mi_atap": "Atap",
+   "alas_m": 8.75
   },
   {
    "id": "BLOK5_Rumah3",
@@ -618,7 +644,8 @@
    "penalti": "tinggi",
    "blok_chaos": "BLOK5",
    "catatan": "satu Geometry Collection per deret (F2)",
-   "mi_atap": "Atap"
+   "mi_atap": "Atap",
+   "alas_m": 8.75
   },
   {
    "id": "BLOK5_Rumah4",
@@ -637,7 +664,8 @@
    "penalti": "tinggi",
    "blok_chaos": "BLOK5",
    "catatan": "satu Geometry Collection per deret (F2)",
-   "mi_atap": "Atap"
+   "mi_atap": "Atap",
+   "alas_m": 8.75
   },
   {
    "id": "BLOK6_Rumah1",
@@ -656,7 +684,8 @@
    "penalti": "tinggi",
    "blok_chaos": "BLOK6",
    "catatan": "satu Geometry Collection per deret (F2)",
-   "mi_atap": "Atap"
+   "mi_atap": "Atap",
+   "alas_m": 8.75
   },
   {
    "id": "BLOK6_Rumah2",
@@ -675,7 +704,8 @@
    "penalti": "tinggi",
    "blok_chaos": "BLOK6",
    "catatan": "satu Geometry Collection per deret (F2)",
-   "mi_atap": "Atap"
+   "mi_atap": "Atap",
+   "alas_m": 8.75
   },
   {
    "id": "BLOK6_Rumah3",
@@ -694,7 +724,8 @@
    "penalti": "tinggi",
    "blok_chaos": "BLOK6",
    "catatan": "satu Geometry Collection per deret (F2)",
-   "mi_atap": "Atap"
+   "mi_atap": "Atap",
+   "alas_m": 8.75
   },
   {
    "id": "BLOK6_Rumah4",
@@ -713,7 +744,8 @@
    "penalti": "tinggi",
    "blok_chaos": "BLOK6",
    "catatan": "satu Geometry Collection per deret (F2)",
-   "mi_atap": "Atap"
+   "mi_atap": "Atap",
+   "alas_m": 8.75
   },
   {
    "id": "BLOK7_Rumah1",
@@ -732,7 +764,8 @@
    "penalti": "tinggi",
    "blok_chaos": "BLOK7",
    "catatan": "satu Geometry Collection per deret (F2)",
-   "mi_atap": "Atap"
+   "mi_atap": "Atap",
+   "alas_m": 8.75
   },
   {
    "id": "BLOK7_Rumah2",
@@ -751,7 +784,8 @@
    "penalti": "tinggi",
    "blok_chaos": "BLOK7",
    "catatan": "satu Geometry Collection per deret (F2)",
-   "mi_atap": "Atap"
+   "mi_atap": "Atap",
+   "alas_m": 8.75
   },
   {
    "id": "BLOK7_Rumah3",
@@ -770,7 +804,8 @@
    "penalti": "tinggi",
    "blok_chaos": "BLOK7",
    "catatan": "satu Geometry Collection per deret (F2)",
-   "mi_atap": "Atap"
+   "mi_atap": "Atap",
+   "alas_m": 8.75
   },
   {
    "id": "BLOK7_Rumah4",
@@ -789,7 +824,8 @@
    "penalti": "tinggi",
    "blok_chaos": "BLOK7",
    "catatan": "satu Geometry Collection per deret (F2)",
-   "mi_atap": "Atap"
+   "mi_atap": "Atap",
+   "alas_m": 8.75
   },
   {
    "id": "BLOK8_Rumah1",
@@ -808,7 +844,8 @@
    "penalti": "tinggi",
    "blok_chaos": "BLOK8",
    "catatan": "satu Geometry Collection per deret (F2)",
-   "mi_atap": "Atap"
+   "mi_atap": "Atap",
+   "alas_m": 8.75
   },
   {
    "id": "BLOK8_Rumah2",
@@ -827,7 +864,8 @@
    "penalti": "tinggi",
    "blok_chaos": "BLOK8",
    "catatan": "satu Geometry Collection per deret (F2)",
-   "mi_atap": "Atap"
+   "mi_atap": "Atap",
+   "alas_m": 8.75
   },
   {
    "id": "BLOK8_Rumah3",
@@ -846,7 +884,8 @@
    "penalti": "tinggi",
    "blok_chaos": "BLOK8",
    "catatan": "satu Geometry Collection per deret (F2)",
-   "mi_atap": "Atap"
+   "mi_atap": "Atap",
+   "alas_m": 8.75
   },
   {
    "id": "BLOK8_Rumah4",
@@ -865,7 +904,8 @@
    "penalti": "tinggi",
    "blok_chaos": "BLOK8",
    "catatan": "satu Geometry Collection per deret (F2)",
-   "mi_atap": "Atap"
+   "mi_atap": "Atap",
+   "alas_m": 8.75
   },
   {
    "id": "ATAP_Naik01",
@@ -884,7 +924,8 @@
    "penalti": "tinggi",
    "atap_naik": true,
    "catatan": "atap bertanda (jemuran/antena), bisa dinaiki Aksa (F5)",
-   "mi_atap": "AtapNaik"
+   "mi_atap": "AtapNaik",
+   "alas_m": 8.04
   },
   {
    "id": "ATAP_Naik02",
@@ -903,7 +944,8 @@
    "penalti": "tinggi",
    "atap_naik": true,
    "catatan": "atap bertanda (jemuran/antena), bisa dinaiki Aksa (F5)",
-   "mi_atap": "AtapNaik"
+   "mi_atap": "AtapNaik",
+   "alas_m": 8.04
   },
   {
    "id": "ATAP_Naik03",
@@ -922,7 +964,8 @@
    "penalti": "tinggi",
    "atap_naik": true,
    "catatan": "atap bertanda (jemuran/antena), bisa dinaiki Aksa (F5)",
-   "mi_atap": "AtapNaik"
+   "mi_atap": "AtapNaik",
+   "alas_m": 8.04
   },
   {
    "id": "ATAP_Naik06",
@@ -941,7 +984,8 @@
    "penalti": "tinggi",
    "atap_naik": true,
    "catatan": "atap bertanda (jemuran/antena), bisa dinaiki Aksa (F5)",
-   "mi_atap": "AtapNaik"
+   "mi_atap": "AtapNaik",
+   "alas_m": 7.78
   },
   {
    "id": "ATAP_Naik07",
@@ -960,7 +1004,8 @@
    "penalti": "tinggi",
    "atap_naik": true,
    "catatan": "atap bertanda (jemuran/antena), bisa dinaiki Aksa (F5)",
-   "mi_atap": "AtapNaik"
+   "mi_atap": "AtapNaik",
+   "alas_m": 7.64
   },
   {
    "id": "ATAP_Naik08",
@@ -979,7 +1024,8 @@
    "penalti": "tinggi",
    "atap_naik": true,
    "catatan": "atap bertanda (jemuran/antena), bisa dinaiki Aksa (F5)",
-   "mi_atap": "AtapNaik"
+   "mi_atap": "AtapNaik",
+   "alas_m": 7.5
   },
   {
    "id": "ATAP_Naik09",
@@ -998,7 +1044,8 @@
    "penalti": "tinggi",
    "atap_naik": true,
    "catatan": "atap bertanda (jemuran/antena), bisa dinaiki Aksa (F5)",
-   "mi_atap": "AtapNaik"
+   "mi_atap": "AtapNaik",
+   "alas_m": 7.37
   },
   {
    "id": "ATAP_Naik10",
@@ -1017,7 +1064,8 @@
    "penalti": "tinggi",
    "atap_naik": true,
    "catatan": "atap bertanda (jemuran/antena), bisa dinaiki Aksa (F5)",
-   "mi_atap": "AtapNaik"
+   "mi_atap": "AtapNaik",
+   "alas_m": 7.23
   },
   {
    "id": "ATAP_Naik11",
@@ -1036,7 +1084,8 @@
    "penalti": "tinggi",
    "atap_naik": true,
    "catatan": "atap bertanda (jemuran/antena), bisa dinaiki Aksa (F5)",
-   "mi_atap": "AtapNaik"
+   "mi_atap": "AtapNaik",
+   "alas_m": 7.09
   },
   {
    "id": "ATAP_Naik12",
@@ -1055,7 +1104,8 @@
    "penalti": "tinggi",
    "atap_naik": true,
    "catatan": "atap bertanda (jemuran/antena), bisa dinaiki Aksa (F5)",
-   "mi_atap": "AtapNaik"
+   "mi_atap": "AtapNaik",
+   "alas_m": 6.96
   },
   {
    "id": "ATAP_Naik15",
@@ -1074,7 +1124,8 @@
    "penalti": "tinggi",
    "atap_naik": true,
    "catatan": "atap bertanda (jemuran/antena), bisa dinaiki Aksa (F5)",
-   "mi_atap": "AtapNaik"
+   "mi_atap": "AtapNaik",
+   "alas_m": 6.7
   },
   {
    "id": "ATAP_Naik16",
@@ -1093,7 +1144,8 @@
    "penalti": "tinggi",
    "atap_naik": true,
    "catatan": "atap bertanda (jemuran/antena), bisa dinaiki Aksa (F5)",
-   "mi_atap": "AtapNaik"
+   "mi_atap": "AtapNaik",
+   "alas_m": 6.64
   },
   {
    "id": "ATAP_Naik17",
@@ -1112,7 +1164,8 @@
    "penalti": "tinggi",
    "atap_naik": true,
    "catatan": "atap bertanda (jemuran/antena), bisa dinaiki Aksa (F5)",
-   "mi_atap": "AtapNaik"
+   "mi_atap": "AtapNaik",
+   "alas_m": 6.64
   },
   {
    "id": "ATAP_Naik18",
@@ -1131,7 +1184,8 @@
    "penalti": "tinggi",
    "atap_naik": true,
    "catatan": "atap bertanda (jemuran/antena), bisa dinaiki Aksa (F5)",
-   "mi_atap": "AtapNaik"
+   "mi_atap": "AtapNaik",
+   "alas_m": 6.64
   },
   {
    "id": "ATAP_Naik20",
@@ -1150,7 +1204,8 @@
    "penalti": "tinggi",
    "atap_naik": true,
    "catatan": "atap bertanda (jemuran/antena), bisa dinaiki Aksa (F5)",
-   "mi_atap": "AtapNaik"
+   "mi_atap": "AtapNaik",
+   "alas_m": 6.64
   },
   {
    "id": "ATAP_Naik21",
@@ -1169,7 +1224,8 @@
    "penalti": "tinggi",
    "atap_naik": true,
    "catatan": "atap bertanda (jemuran/antena), bisa dinaiki Aksa (F5)",
-   "mi_atap": "AtapNaik"
+   "mi_atap": "AtapNaik",
+   "alas_m": 6.64
   },
   {
    "id": "ATAP_Naik22",
@@ -1188,7 +1244,8 @@
    "penalti": "tinggi",
    "atap_naik": true,
    "catatan": "atap bertanda (jemuran/antena), bisa dinaiki Aksa (F5)",
-   "mi_atap": "AtapNaik"
+   "mi_atap": "AtapNaik",
+   "alas_m": 6.64
   },
   {
    "id": "ATAP_Naik23",
@@ -1207,7 +1264,8 @@
    "penalti": "tinggi",
    "atap_naik": true,
    "catatan": "atap bertanda (jemuran/antena), bisa dinaiki Aksa (F5)",
-   "mi_atap": "AtapNaik"
+   "mi_atap": "AtapNaik",
+   "alas_m": 6.64
   },
   {
    "id": "ATAP_Naik24",
@@ -1226,7 +1284,8 @@
    "penalti": "tinggi",
    "atap_naik": true,
    "catatan": "atap bertanda (jemuran/antena), bisa dinaiki Aksa (F5)",
-   "mi_atap": "AtapNaik"
+   "mi_atap": "AtapNaik",
+   "alas_m": 6.64
   },
   {
    "id": "ATAP_Naik26",
@@ -1245,7 +1304,8 @@
    "penalti": "tinggi",
    "atap_naik": true,
    "catatan": "atap bertanda (jemuran/antena), bisa dinaiki Aksa (F5)",
-   "mi_atap": "AtapNaik"
+   "mi_atap": "AtapNaik",
+   "alas_m": 6.63
   },
   {
    "id": "ATAP_Naik27",
@@ -1264,7 +1324,8 @@
    "penalti": "tinggi",
    "atap_naik": true,
    "catatan": "atap bertanda (jemuran/antena), bisa dinaiki Aksa (F5)",
-   "mi_atap": "AtapNaik"
+   "mi_atap": "AtapNaik",
+   "alas_m": 6.61
   },
   {
    "id": "ATAP_Naik28",
@@ -1283,7 +1344,8 @@
    "penalti": "tinggi",
    "atap_naik": true,
    "catatan": "atap bertanda (jemuran/antena), bisa dinaiki Aksa (F5)",
-   "mi_atap": "AtapNaik"
+   "mi_atap": "AtapNaik",
+   "alas_m": 6.6
   },
   {
    "id": "ATAP_Naik29",
@@ -1302,7 +1364,8 @@
    "penalti": "tinggi",
    "atap_naik": true,
    "catatan": "atap bertanda (jemuran/antena), bisa dinaiki Aksa (F5)",
-   "mi_atap": "AtapNaik"
+   "mi_atap": "AtapNaik",
+   "alas_m": 6.59
   },
   {
    "id": "ATAP_Naik30",
@@ -1321,7 +1384,8 @@
    "penalti": "tinggi",
    "atap_naik": true,
    "catatan": "atap bertanda (jemuran/antena), bisa dinaiki Aksa (F5)",
-   "mi_atap": "AtapNaik"
+   "mi_atap": "AtapNaik",
+   "alas_m": 6.57
   },
   {
    "id": "ATAP_Naik32",
@@ -1340,7 +1404,8 @@
    "penalti": "tinggi",
    "atap_naik": true,
    "catatan": "atap bertanda (jemuran/antena), bisa dinaiki Aksa (F5)",
-   "mi_atap": "AtapNaik"
+   "mi_atap": "AtapNaik",
+   "alas_m": 6.56
   },
   {
    "id": "ATAP_Naik33",
@@ -1359,7 +1424,8 @@
    "penalti": "tinggi",
    "atap_naik": true,
    "catatan": "atap bertanda (jemuran/antena), bisa dinaiki Aksa (F5)",
-   "mi_atap": "AtapNaik"
+   "mi_atap": "AtapNaik",
+   "alas_m": 6.56
   },
   {
    "id": "ATAP_Naik34",
@@ -1378,7 +1444,8 @@
    "penalti": "tinggi",
    "atap_naik": true,
    "catatan": "atap bertanda (jemuran/antena), bisa dinaiki Aksa (F5)",
-   "mi_atap": "AtapNaik"
+   "mi_atap": "AtapNaik",
+   "alas_m": 6.56
   },
   {
    "id": "ATAP_Papan01",
@@ -1513,7 +1580,8 @@
    ],
    "mi": "Kayu",
    "hancur": false,
-   "catatan": "naik ke atap rumah kemalingan → T1"
+   "catatan": "naik ke atap rumah kemalingan → T1",
+   "alas_m": 7.76
   },
   {
    "id": "JALAN_MobilDWARA",
@@ -1529,7 +1597,8 @@
    ],
    "mi": "Kendaraan",
    "hancur": false,
-   "catatan": "START di sampingnya"
+   "catatan": "START di sampingnya",
+   "alas_m": 9.0
   },
   {
    "id": "JALAN_Mobil1",
@@ -1546,7 +1615,8 @@
    "mi": "Mobil",
    "hancur": true,
    "penalti": "tanpa",
-   "curian": true
+   "curian": true,
+   "alas_m": 9.0
   },
   {
    "id": "JALAN_Mobil2",
@@ -1563,7 +1633,8 @@
    "mi": "Mobil",
    "hancur": true,
    "penalti": "tanpa",
-   "curian": true
+   "curian": true,
+   "alas_m": 9.0
   },
   {
    "id": "JALAN_Mobil3",
@@ -1580,7 +1651,8 @@
    "mi": "Mobil",
    "hancur": true,
    "penalti": "tanpa",
-   "curian": true
+   "curian": true,
+   "alas_m": 9.0
   },
   {
    "id": "JALAN_Angkot",
@@ -1597,7 +1669,8 @@
    "mi": "Mobil",
    "hancur": true,
    "penalti": "tanpa",
-   "curian": true
+   "curian": true,
+   "alas_m": 9.0
   },
   {
    "id": "JALAN_Gerobak1",
@@ -1614,7 +1687,8 @@
    "mi": "Kayu",
    "hancur": true,
    "penalti": "tanpa",
-   "curian": true
+   "curian": true,
+   "alas_m": 9.0
   },
   {
    "id": "JALAN_Gerobak2",
@@ -1631,7 +1705,8 @@
    "mi": "Kayu",
    "hancur": true,
    "penalti": "tanpa",
-   "curian": true
+   "curian": true,
+   "alas_m": 9.0
   },
   {
    "id": "JALAN_GarisPolisiBarat",
@@ -1648,7 +1723,8 @@
    "tebal": 0.1,
    "mi": "Penanda",
    "hancur": false,
-   "tanpa_tabrakan": true
+   "tanpa_tabrakan": true,
+   "alas_m": 9.0
   },
   {
    "id": "JALAN_GarisPolisiTimur",
@@ -1665,7 +1741,8 @@
    "tebal": 0.1,
    "mi": "Penanda",
    "hancur": false,
-   "tanpa_tabrakan": true
+   "tanpa_tabrakan": true,
+   "alas_m": 9.0
   },
   {
    "id": "JALAN_MobilPemadamBarat",
@@ -1680,7 +1757,8 @@
     3
    ],
    "mi": "Penanda",
-   "hancur": false
+   "hancur": false,
+   "alas_m": 9.0
   },
   {
    "id": "JALAN_MobilPemadamTimur",
@@ -1695,7 +1773,8 @@
     3
    ],
    "mi": "Penanda",
-   "hancur": false
+   "hancur": false,
+   "alas_m": 9.0
   },
   {
    "id": "PASAR_Los1",
@@ -1711,7 +1790,9 @@
    ],
    "mi": "Kota",
    "hancur": true,
-   "penalti": "normal"
+   "penalti": "normal",
+   "alas_m": 8.18,
+   "pondasi_m": 0.61
   },
   {
    "id": "PASAR_Los2",
@@ -1727,7 +1808,9 @@
    ],
    "mi": "Kota",
    "hancur": true,
-   "penalti": "normal"
+   "penalti": "normal",
+   "alas_m": 6.95,
+   "pondasi_m": 0.61
   },
   {
    "id": "PASAR_Los3",
@@ -1743,7 +1826,9 @@
    ],
    "mi": "Kota",
    "hancur": true,
-   "penalti": "normal"
+   "penalti": "normal",
+   "alas_m": 5.82,
+   "pondasi_m": 0.41
   },
   {
    "id": "PASAR_GerbangDikunci",
@@ -1760,7 +1845,8 @@
    "tebal": 0.4,
    "mi": "Penanda",
    "hancur": false,
-   "catatan": "gerbang pasar dikunci (dibuka Ep 4)"
+   "catatan": "gerbang pasar dikunci (dibuka Ep 4)",
+   "alas_m": 7.69
   },
   {
    "id": "GUDANG_Gudang1",
@@ -1777,7 +1863,8 @@
    "mi": "Adikara",
    "hancur": true,
    "penalti": "tanpa",
-   "milik": "Adikara"
+   "milik": "Adikara",
+   "alas_m": 6.0
   },
   {
    "id": "GUDANG_Gudang2",
@@ -1794,7 +1881,8 @@
    "mi": "Adikara",
    "hancur": true,
    "penalti": "tanpa",
-   "milik": "Adikara"
+   "milik": "Adikara",
+   "alas_m": 6.0
   },
   {
    "id": "GUDANG_Pabrik",
@@ -1811,7 +1899,8 @@
    "mi": "Adikara",
    "hancur": true,
    "penalti": "tanpa",
-   "milik": "Adikara"
+   "milik": "Adikara",
+   "alas_m": 6.0
   },
   {
    "id": "GUDANG_Cerobong",
@@ -1828,7 +1917,8 @@
    "mi": "Adikara",
    "hancur": true,
    "penalti": "tanpa",
-   "milik": "Adikara"
+   "milik": "Adikara",
+   "alas_m": 6.0
   },
   {
    "id": "GUDANG_Truk1",
@@ -1846,7 +1936,8 @@
    "hancur": true,
    "penalti": "tanpa",
    "milik": "Adikara",
-   "yaw": 90
+   "yaw": 90,
+   "alas_m": 6.0
   },
   {
    "id": "GUDANG_Truk2",
@@ -1864,7 +1955,8 @@
    "hancur": true,
    "penalti": "tanpa",
    "milik": "Adikara",
-   "yaw": 90
+   "yaw": 90,
+   "alas_m": 6.0
   },
   {
    "id": "GUDANG_Truk3",
@@ -1882,7 +1974,8 @@
    "hancur": true,
    "penalti": "tanpa",
    "milik": "Adikara",
-   "yaw": 90
+   "yaw": 90,
+   "alas_m": 6.0
   },
   {
    "id": "GUDANG_PosJaga",
@@ -1899,7 +1992,8 @@
    "mi": "Alat",
    "hancur": true,
    "penalti": "tanpa",
-   "milik": "Adikara"
+   "milik": "Adikara",
+   "alas_m": 6.0
   },
   {
    "id": "GUDANG_Dermaga",
@@ -1935,7 +2029,8 @@
    "tebal": 0.2,
    "mi": "Alat",
    "hancur": false,
-   "milik": "Adikara"
+   "milik": "Adikara",
+   "alas_m": 6.0
   },
   {
    "id": "GUDANG_PagarUtara",
@@ -1952,7 +2047,8 @@
    "tebal": 0.2,
    "mi": "Alat",
    "hancur": false,
-   "milik": "Adikara"
+   "milik": "Adikara",
+   "alas_m": 6.0
   },
   {
    "id": "REL_JembatanJalan",
@@ -2018,7 +2114,8 @@
    ],
    "mi": "Kota",
    "hancur": true,
-   "penalti": "normal"
+   "penalti": "normal",
+   "alas_m": 7.26
   },
   {
    "id": "STASIUN_AtapPeron",
@@ -2052,7 +2149,9 @@
    "mi": "Kota",
    "hancur": true,
    "penalti": "normal",
-   "catatan": "peron sejajar puncak rel"
+   "catatan": "peron sejajar puncak rel",
+   "alas_m": 7.26,
+   "pondasi_m": 1.54
   },
   {
    "id": "REL_Kereta",
@@ -2068,7 +2167,8 @@
    ],
    "mi": "Kendaraan",
    "hancur": false,
-   "catatan": "rangkaian kereta diam (penanda bahaya ringan; bergerak nanti)"
+   "catatan": "rangkaian kereta diam (penanda bahaya ringan; bergerak nanti)",
+   "alas_m": 12.0
   },
   {
    "id": "BANTARAN_LapanganTepiKali",
@@ -2083,7 +2183,8 @@
    ],
    "mi": "Lapangan",
    "hancur": false,
-   "catatan": "titik gabung kawanan + transformasi"
+   "catatan": "titik gabung kawanan + transformasi",
+   "alas_m": 3.5
   },
   {
    "id": "BANTARAN_Perahu1",
@@ -2098,7 +2199,8 @@
     1
    ],
    "mi": "Kayu",
-   "hancur": false
+   "hancur": false,
+   "alas_m": 3.5
   },
   {
    "id": "BANTARAN_Perahu2",
@@ -2113,7 +2215,8 @@
     1
    ],
    "mi": "Kayu",
-   "hancur": false
+   "hancur": false,
+   "alas_m": 3.5
   },
   {
    "id": "BANTARAN_Gubuk1",
@@ -2129,7 +2232,8 @@
    ],
    "mi": "Kayu",
    "hancur": true,
-   "penalti": "normal"
+   "penalti": "normal",
+   "alas_m": 3.5
   },
   {
    "id": "BANTARAN_Gubuk2",
@@ -2145,7 +2249,8 @@
    ],
    "mi": "Kayu",
    "hancur": true,
-   "penalti": "normal"
+   "penalti": "normal",
+   "alas_m": 3.5
   },
   {
    "id": "AIR_Kali",
@@ -2273,7 +2378,8 @@
     8
    ],
    "mi": "JembatanKuning",
-   "hancur": false
+   "hancur": false,
+   "alas_m": 3.5
   },
   {
    "id": "JEMBATAN_GantungTiangU2",
@@ -2288,7 +2394,8 @@
     8
    ],
    "mi": "JembatanKuning",
-   "hancur": false
+   "hancur": false,
+   "alas_m": 3.5
   },
   {
    "id": "JEMBATAN_GantungTiangS1",
@@ -2303,7 +2410,8 @@
     8
    ],
    "mi": "JembatanKuning",
-   "hancur": false
+   "hancur": false,
+   "alas_m": 3.5
   },
   {
    "id": "JEMBATAN_GantungTiangS2",
@@ -2318,7 +2426,8 @@
     8
    ],
    "mi": "JembatanKuning",
-   "hancur": false
+   "hancur": false,
+   "alas_m": 3.5
   },
   {
    "id": "JEMBATAN_BetonDek",
@@ -2349,7 +2458,8 @@
     68
    ],
    "mi": "Lapangan",
-   "hancur": false
+   "hancur": false,
+   "alas_m": 3.0
   },
   {
    "id": "SELATAN_MenaraAir_Tiang",
@@ -2365,7 +2475,8 @@
    ],
    "mi": "Kota",
    "hancur": true,
-   "penalti": "normal"
+   "penalti": "normal",
+   "alas_m": 3.5
   },
   {
    "id": "SELATAN_MenaraAir_Tangki",
@@ -2382,7 +2493,8 @@
    "mi": "Kota",
    "hancur": true,
    "penalti": "normal",
-   "z_dasar_relatif": 24
+   "z_dasar_relatif": 24,
+   "alas_m": 3.5
   },
   {
    "id": "SELATAN_SUTET1",
@@ -2399,7 +2511,8 @@
    "mi": "Kendaraan",
    "hancur": true,
    "penalti": "tanpa",
-   "catatan": "pembanding skala 48 m"
+   "catatan": "pembanding skala 48 m",
+   "alas_m": 3.0
   },
   {
    "id": "SELATAN_SUTET2",
@@ -2416,7 +2529,8 @@
    "mi": "Kendaraan",
    "hancur": true,
    "penalti": "tanpa",
-   "catatan": "pembanding skala 48 m"
+   "catatan": "pembanding skala 48 m",
+   "alas_m": 3.0
   },
   {
    "id": "SELATAN_SUTET3",
@@ -2433,7 +2547,8 @@
    "mi": "Kendaraan",
    "hancur": true,
    "penalti": "tanpa",
-   "catatan": "pembanding skala 48 m"
+   "catatan": "pembanding skala 48 m",
+   "alas_m": 3.0
   },
   {
    "id": "SELATAN_SUTET4",
@@ -2450,7 +2565,8 @@
    "mi": "Kendaraan",
    "hancur": true,
    "penalti": "tanpa",
-   "catatan": "pembanding skala 48 m"
+   "catatan": "pembanding skala 48 m",
+   "alas_m": 3.0
   },
   {
    "id": "SELATAN_Gubuk1",
@@ -2465,7 +2581,8 @@
     3
    ],
    "mi": "Kayu",
-   "hancur": false
+   "hancur": false,
+   "alas_m": 3.0
   },
   {
    "id": "SELATAN_Gubuk2",
@@ -2480,7 +2597,8 @@
     3
    ],
    "mi": "Kayu",
-   "hancur": false
+   "hancur": false,
+   "alas_m": 3.0
   },
   {
    "id": "SELATAN_Gubuk3",
@@ -2495,7 +2613,8 @@
     3
    ],
    "mi": "Kayu",
-   "hancur": false
+   "hancur": false,
+   "alas_m": 3.0
   },
   {
    "id": "SELATAN_Gubuk4",
@@ -2510,7 +2629,8 @@
     3
    ],
    "mi": "Kayu",
-   "hancur": false
+   "hancur": false,
+   "alas_m": 3.0
   },
   {
    "id": "LATAR_GedungAdikara1",
@@ -18852,8 +18972,8 @@
    ],
    "jenis": "PlayerStart",
    "hadap_ke": [
-    -105,
-    -105
+    -26,
+    100
    ]
   },
   {
@@ -19155,9 +19275,9 @@
    ],
    "tinggi_di_atas_tanah": 1.6,
    "lihat_ke": [
-    -105,
-    -105,
-    4
+    -26,
+    60,
+    16
    ],
    "fov": 70,
    "cahaya": "siang"
@@ -19214,7 +19334,7 @@
     -100
    ],
    "ortho": true,
-   "lebar_ortho": 1450,
+   "lebar_ortho": 1800,
    "cahaya": "siang"
   },
   {
@@ -19227,7 +19347,7 @@
    "lihat_ke": [
     -26,
     80,
-    10
+    40
    ],
    "fov": 70,
    "cahaya": "keemasan"
@@ -19242,7 +19362,7 @@
    "lihat_ke": [
     600,
     100,
-    10
+    25
    ],
    "fov": 70,
    "cahaya": "sore"
@@ -19462,5 +19582,11 @@
    -528,
    -122
   ]
- ]
+ ],
+ "kecepatan_rute_ms": 5.0,
+ "kecepatan_catatan": "MaxWalkSpeed Aksa 500 cm/s (tidak ada sprint); rute investigasi dan kejar diukur pada kecepatan ini. Sprint 6 m/s = backlog",
+ "rute_panjang_m": {
+  "investigasi": 560.12,
+  "kejar": 1265.79
+ }
 }
