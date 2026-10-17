@@ -26,7 +26,14 @@ FPS = 30
 # peran -> (mulai_detik_di_klip_asli, durasi_detik)
 PANGKAS = {
     "air_slam": (1.50, 0.40),
+    # air: ekor 0,65 s hanya recovery diam -> memutar penuh terasa kaku setelah
+    # tendangan. Dipotong di 0,90 s supaya montage selesai saat masih di udara
+    # lalu blend balik ke animasi lompat/jatuh.
+    "air": (0.00, 0.90),
 }
+# jalankan hanya peran tertentu (klip lain sudah dipangkas, memangkas ulang akan
+# mengambil rentang dari klip yang sudah pendek)
+HANYA = {"air"}
 
 EAL = unreal.EditorAssetLibrary
 AL = unreal.AnimationLibrary
@@ -81,6 +88,9 @@ def pangkas(seq, t0, dur):
 
 def main():
     for peran, (t0, dur) in PANGKAS.items():
+        if HANYA and peran not in HANYA:
+            log(f"LEWAT {peran}: sudah dipangkas sebelumnya")
+            continue
         seq = EAL.load_asset(f"{MX}/A_Aksa_Mx_{peran}")
         if not seq:
             log(f"LEWAT {peran}: aset tidak ada")

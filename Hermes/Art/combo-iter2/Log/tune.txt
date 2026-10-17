@@ -8,7 +8,7 @@ OK     back         panjang 0.87 s (0.58 s nyata) | hantaman 0.13 s | jendela co
 OK     finisher_01  panjang 1.60 s (1.28 s nyata) | hantaman 0.70 s | jendela combo None->0 jadi tidak diberi jendela combo | laju 1.25x
 OK     finisher_02  panjang 1.67 s (1.96 s nyata) | hantaman 0.48 s | jendela combo None->0 jadi tidak diberi jendela combo | laju 0.85x
 OK     finisher_03  panjang 2.67 s (2.32 s nyata) | hantaman 1.30 s | jendela combo None->0 jadi tidak diberi jendela combo | laju 1.15x
-OK     air          panjang 1.50 s (1.25 s nyata) | hantaman 0.53 s | jendela combo 0.72->1.07 jadi 0.95->1.48 | laju 1.20x
+OK     air          panjang 0.87 s (0.72 s nyata) | hantaman 0.51 s | jendela combo 0.7->0.87 jadi 0.32->0.85 | laju 1.20x
 LEWAT  air_slam     tanpa notify HitWindow (damage area saat mendarat), tidak disetel
 --- baca balik dari aset ---
      light_01     play_rate 1.60 | montage AM_Hermes_light_01 | combo [(1.683, 0.53)] | hit [(0.43, 0.22, 'hand_r', False)]
@@ -20,5 +20,5 @@ LEWAT  air_slam     tanpa notify HitWindow (damage area saat mendarat), tidak di
      finisher_01  play_rate 1.25 | montage AM_Hermes_finisher_01 | combo [] | hit [(0.7, 0.22, 'foot_l', False)]
      finisher_02  play_rate 0.85 | montage AM_Hermes_finisher_02 | combo [] | hit [(0.48, 0.19, 'foot_r', False), (0.68, 0.22, 'foot_r', True)]
      finisher_03  play_rate 1.15 | montage AM_Hermes_finisher_03 | combo [] | hit [(1.3, 0.22, 'foot_r', False)]
-     air          play_rate 1.20 | montage AM_Hermes_air | combo [(0.95, 0.53)] | hit [(0.53, 0.22, 'foot_l', False)]
+     air          play_rate 1.20 | montage AM_Hermes_air | combo [(0.317, 0.53)] | hit [(0.51, 0.22, 'foot_l', False)]
      air_slam     play_rate 1.00 | montage AM_Hermes_air_slam | combo [] | hit []

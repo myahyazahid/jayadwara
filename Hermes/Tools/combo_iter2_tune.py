@@ -62,6 +62,8 @@ TANPA_COMBO = {"finisher_01", "finisher_02", "finisher_03"}
 LEWATI = {"air_slam"}
 BLEND_IN = 0.05
 BLEND_OUT = 0.22
+# transisi lompat -> tendangan butuh blend lebih panjang; 0,05 s terasa menyentak.
+BLEND_KHUSUS = {"air": (0.15, 0.30)}
 EKOR_JENDELA = 0.55   # jendela combo = EKOR_JENDELA terakhir dari klip (bukan di hantaman!)
 SISA_UJUNG = 0.02     # sisa di ujung montage
 
@@ -138,7 +140,8 @@ def tune_montage(peran, laju):
         baru_mulai, baru_durasi = None, None
 
     # blend
-    for prop, t in (("blend_in", BLEND_IN), ("blend_out", BLEND_OUT)):
+    bi, bo = BLEND_KHUSUS.get(peran, (BLEND_IN, BLEND_OUT))
+    for prop, t in (("blend_in", bi), ("blend_out", bo)):
         b = m.get_editor_property(prop)
         b.set_editor_property("blend_time", t)
         m.set_editor_property(prop, b)
@@ -159,8 +162,17 @@ def tune_montage(peran, laju):
         "combo_lama": combo,
         "combo_baru": [baru_mulai, baru_durasi],
         "laju": laju,
-        "blend": [BLEND_IN, BLEND_OUT],
+        "blend": [bi, bo],
     }
+
+
+# nilai yang harus selalu ada di profil (setup.py menulis ulang profil dari awal)
+PROFIL_TETAP = {
+    "air_slam_speed": 500.0,      # pose menukik: turun cepat tapi tidak melesat
+    "air_slam_recovery": 0.45,
+    "air_hang_time": 0.10,        # tahan di udara sesaat, tidak melayang
+    "air_hang_gravity_scale": 0.6,
+}
 
 
 def tune_profil(prof):
@@ -179,6 +191,8 @@ def tune_profil(prof):
             s.set_editor_property("play_rate", laju)
             arr[idx] = s
             prof.set_editor_property(prop, arr)
+    for prop, val in PROFIL_TETAP.items():
+        prof.set_editor_property(prop, val)
     EAL.save_loaded_asset(prof, only_if_is_dirty=False)
 
 

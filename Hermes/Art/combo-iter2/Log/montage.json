@@ -195,7 +195,7 @@
       "peran": "air",
       "montage": "/Game/Hermes/ComboIter2/Montages/AM_Hermes_air",
       "animasi": "/Game/Hermes/ComboIter2/Mixamo/A_Aksa_Mx_air",
-      "panjang_s": 1.5,
+      "panjang_s": 0.867,
       "blend": [
         0.08,
         0.2
@@ -204,13 +204,13 @@
       "hit": [
         {
           "tulang": "foot_l",
-          "mulai": 0.53,
+          "mulai": 0.51,
           "durasi": 0.22
         }
       ],
       "combo": {
-        "mulai": 0.72,
-        "durasi": 0.35
+        "mulai": 0.7,
+        "durasi": 0.17
       }
     },
     {

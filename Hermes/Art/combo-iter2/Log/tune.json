@@ -239,11 +239,11 @@
   },
   {
     "peran": "air",
-    "panjang": 1.5,
-    "panjang_nyata": 1.25,
+    "panjang": 0.867,
+    "panjang_nyata": 0.722,
     "hantaman": [
       [
-        0.53,
+        0.51,
         0.22,
         "foot_l",
         false
@@ -251,18 +251,18 @@
     ],
     "combo_lama": [
       [
-        0.72,
-        0.35
+        0.7,
+        0.17
       ]
     ],
     "combo_baru": [
-      0.95,
+      0.317,
       0.53
     ],
     "laju": 1.2,
     "blend": [
-      0.05,
-      0.22
+      0.15,
+      0.3
     ]
   }
 ]

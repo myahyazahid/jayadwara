@@ -11,29 +11,30 @@
       "aset": "/Game/Hermes/ComboIter2/Mixamo/A_Aksa_Mx_air",
       "gagal": [],
       "catatan": [
-        "puncak global hand_r 639 cm/s @1.08 s (bukan kaki) — auto strike_timings proyek akan memilih tulang ini"
+        "dipangkas sengaja: 0.87 s (FBX 1.50 s)",
+        "puncak global hand_l 623 cm/s @0.13 s (bukan kaki) — auto strike_timings proyek akan memilih tulang ini"
       ],
-      "panjang_s": 1.5,
-      "frame_ue": 91,
+      "panjang_s": 0.867,
+      "frame_ue": 53,
       "skeleton": "/Game/Characters/Mannequins/Meshes/SK_Mannequin.SK_Mannequin",
       "panjang_fbx_s": 1.5,
       "frame_fbx": 46,
       "puncak": [
         {
           "tulang": "foot_l",
-          "waktu_s": 0.65,
-          "kecepatan_cm_s": 613.6
+          "waktu_s": 0.633,
+          "kecepatan_cm_s": 609.4
         }
       ],
       "puncak_global": {
-        "tulang": "hand_r",
-        "waktu_s": 1.083,
-        "kecepatan_cm_s": 638.7
+        "tulang": "hand_l",
+        "waktu_s": 0.133,
+        "kecepatan_cm_s": 623.3
       },
       "kena_diharapkan": "kaki",
       "kena_jumlah_diharapkan": 1,
       "pinggul_min_cm": 79.49,
-      "lompat_maks_cm": 11.79,
+      "lompat_maks_cm": 11.73,
       "lompat_tulang": "hand_r",
       "lulus": true
     },
