@@ -107,7 +107,8 @@ public:
 
 	bool IsStaggered() const;
 
-	void BeginHitWindow(FName SocketName, float RadiusOverride);
+	/** bNewHit = korban jendela sebelumnya boleh kena lagi (jurus 2× kena). */
+	void BeginHitWindow(FName SocketName, float RadiusOverride, bool bNewHit = false);
 	void UpdateHitWindow();
 	void EndHitWindow();
 

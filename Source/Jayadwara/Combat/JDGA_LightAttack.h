@@ -4,7 +4,7 @@
 #include "Abilities/JDGameplayAbility.h"
 #include "JDGA_LightAttack.generated.h"
 
-class UAbilityTask_ApplyRootMotionConstantForce;
+class UAbilityTask;
 class UAbilityTask_PlayMontageAndWait;
 struct FJDAttackStep;
 
@@ -63,7 +63,7 @@ private:
 	TObjectPtr<UAbilityTask_PlayMontageAndWait> MontageTask;
 
 	UPROPERTY(Transient)
-	TObjectPtr<UAbilityTask_ApplyRootMotionConstantForce> MoveTask;
+	TObjectPtr<UAbilityTask> MoveTask;
 
 	TWeakObjectPtr<AActor> OpenerTarget;
 

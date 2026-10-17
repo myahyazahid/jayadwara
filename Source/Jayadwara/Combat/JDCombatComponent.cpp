@@ -212,11 +212,15 @@ int32 UJDCombatComponent::GetComboStepForFinisher() const
 	return CancelledLightComboFrame == GFrameCounter ? CancelledLightComboStep : INDEX_NONE;
 }
 
-void UJDCombatComponent::BeginHitWindow(FName SocketName, float RadiusOverride)
+void UJDCombatComponent::BeginHitWindow(FName SocketName, float RadiusOverride, bool bNewHit)
 {
 	if (!bAttackActive)
 	{
 		return;
+	}
+	if (bNewHit)
+	{
+		HitActors.Reset();
 	}
 	bHitWindowOpen = true;
 	HitSocket = SocketName;

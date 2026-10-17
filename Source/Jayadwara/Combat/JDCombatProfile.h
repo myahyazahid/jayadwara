@@ -46,6 +46,10 @@ struct FJDAttackStep
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attack|Move", meta = (ClampMin = "0.05", Units = "s"))
 	float MoveDuration = 0.2f;
 
+	/** Tinggi lompatan selama gerak (cm). 0 = meluncur datar; > 0 = lompat kecil melengkung (terjang, docs/07). */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attack|Move", meta = (ClampMin = "0", Units = "cm"))
+	float MoveHeight = 0.0f;
+
 	/** Gerak maju berhenti UJDCombatProfile::LungeStopDistance sebelum target (MoveDistance jadi batas atas). */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attack|Move")
 	bool bStopAtTarget = false;

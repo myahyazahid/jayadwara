@@ -27,4 +27,11 @@ public:
 	/** Radius (cm, skala 1); 0 = HitRadius dari UJDCombatProfile. */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Hit", meta = (ClampMin = "0"))
 	float RadiusOverride = 0.0f;
+
+	/**
+	 * Jendela ini boleh mengenai korban yang sudah kena di jendela sebelumnya dalam serangan yang sama (jurus 2× kena,
+	 * mis. narae chagi). Mati = satu korban satu kali per serangan.
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Hit")
+	bool bNewHit = false;
 };

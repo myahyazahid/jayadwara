@@ -24,6 +24,8 @@ SPARK = "NS_Parry_Spark"
 PARRY_SOURCES = [("AM_Aksa_Parry_01", f"{SEQS}/A_Aksa_Attack_01"),   # tepis luar (placeholder: jab)
                  ("AM_Aksa_Parry_02", f"{SEQS}/A_Aksa_Attack_03")]   # tepis dalam (placeholder: hook)
 COUNTER = {"montage": f"{MONTAGES}/AM_Aksa_Light_04", "damage": 25.0, "poise": 30.0, "rate": 1.2}
+# Hasil Tools/ue_import_mixamo.py (parry_01/02) menggantikan placeholder; laju tepisan lalu 1,0.
+MIXAMO = f"{AKSA}/Anims/Mixamo"
 
 # docs/07 "Parry": beku sesaat -> lambat -> normal. Durasi dalam detik nyata.
 FEEL = {"parry_montage_rate": 1.6, "parry_hit_stop_duration": 0.12, "parry_hit_stop_time_dilation": 0.02,
@@ -114,7 +116,15 @@ def fill_feel(prof):
 
 
 def setup_human():
-    montages = [m for m in (make_montage(n, s) for n, s in PARRY_SOURCES) if m]
+    sources, mixamo = [], 0
+    for i, (name, src) in enumerate(PARRY_SOURCES):
+        mx = f"{MIXAMO}/A_Aksa_Mx_parry_0{i + 1}"
+        if EAL.does_asset_exist(mx):
+            src, mixamo = mx, mixamo + 1
+        sources.append((name, src))
+    montages = [m for m in (make_montage(n, s) for n, s in sources) if m]
+    if mixamo == len(PARRY_SOURCES):
+        FEEL["parry_montage_rate"] = 1.0
     prof = load(f"{DATA}/DA_CombatProfile_Human")
     if not prof:
         return
