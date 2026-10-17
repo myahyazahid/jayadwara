@@ -30,10 +30,15 @@ PANGKAS = {
     # tendangan. Dipotong di 0,90 s supaya montage selesai saat masih di udara
     # lalu blend balik ke animasi lompat/jatuh.
     "air": (0.00, 0.90),
+    # light_01/light_02: kaki belakang geser 33 cm ke belakang saat ancang-ancang
+    # (0-0,6 s) dan kaki depan geser balik 34 cm saat recovery (1,4-1,6 s).
+    # Dua bagian itu yang terbaca "bergerak ke belakang" -> dibuang.
+    "light_01": (0.00, 1.10),
+    "light_02": (0.00, 1.15),
 }
 # jalankan hanya peran tertentu (klip lain sudah dipangkas, memangkas ulang akan
 # mengambil rentang dari klip yang sudah pendek)
-HANYA = {"air"}
+HANYA = {"light_01", "light_02"}
 
 EAL = unreal.EditorAssetLibrary
 AL = unreal.AnimationLibrary

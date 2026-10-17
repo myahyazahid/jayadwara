@@ -1,40 +1,79 @@
 [
  {
-  "peran": "air",
+  "peran": "light_01",
   "potong": [
    0.0,
-   0.9
+   1.1
   ],
-  "frame": 26,
+  "frame": 33,
   "tulang": 89,
   "sebelum": {
-   "panjang": 1.5,
+   "panjang": 1.2,
    "kepala_z": [
-    117.6,
-    146.8
+    137.0,
+    151.1
    ],
    "pelvis_z": [
-    79.5,
-    81.3
+    70.1,
+    85.3
    ],
    "pelvis_y": [
-    0.3,
-    1.5
+    -0.1,
+    0.4
    ]
   },
   "sesudah": {
-   "panjang": 0.867,
+   "panjang": 1.1,
    "kepala_z": [
-    116.7,
-    142.9
+    137.2,
+    145.1
    ],
    "pelvis_z": [
-    79.5,
-    81.2
+    70.2,
+    78.7
    ],
    "pelvis_y": [
-    0.4,
-    1.2
+    -0.3,
+    0.3
+   ]
+  }
+ },
+ {
+  "peran": "light_02",
+  "potong": [
+   0.0,
+   1.15
+  ],
+  "frame": 34,
+  "tulang": 89,
+  "sebelum": {
+   "panjang": 1.267,
+   "kepala_z": [
+    137.2,
+    153.5
+   ],
+   "pelvis_z": [
+    72.4,
+    87.8
+   ],
+   "pelvis_y": [
+    -0.2,
+    0.4
+   ]
+  },
+  "sesudah": {
+   "panjang": 1.133,
+   "kepala_z": [
+    136.6,
+    150.3
+   ],
+   "pelvis_z": [
+    71.7,
+    84.1
+   ],
+   "pelvis_y": [
+    -0.3,
+    0.4
    ]
   }
  }

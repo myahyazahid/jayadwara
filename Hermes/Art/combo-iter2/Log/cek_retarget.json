@@ -195,28 +195,30 @@
       "peran": "light_01",
       "aset": "/Game/Hermes/ComboIter2/Mixamo/A_Aksa_Mx_light_01",
       "gagal": [],
-      "catatan": [],
-      "panjang_s": 2.233,
-      "frame_ue": 135,
+      "catatan": [
+        "dipangkas sengaja: 1.10 s (FBX 2.23 s)"
+      ],
+      "panjang_s": 1.1,
+      "frame_ue": 67,
       "skeleton": "/Game/Characters/Mannequins/Meshes/SK_Mannequin.SK_Mannequin",
       "panjang_fbx_s": 2.233,
       "frame_fbx": 68,
       "puncak": [
         {
           "tulang": "hand_r",
-          "waktu_s": 0.55,
-          "kecepatan_cm_s": 593.7
+          "waktu_s": 0.383,
+          "kecepatan_cm_s": 578.0
         }
       ],
       "puncak_global": {
         "tulang": "hand_r",
-        "waktu_s": 0.55,
-        "kecepatan_cm_s": 593.7
+        "waktu_s": 0.383,
+        "kecepatan_cm_s": 578.0
       },
       "kena_diharapkan": "tangan",
       "kena_jumlah_diharapkan": 1,
-      "pinggul_min_cm": 70.08,
-      "lompat_maks_cm": 9.95,
+      "pinggul_min_cm": 70.14,
+      "lompat_maks_cm": 9.68,
       "lompat_tulang": "hand_r",
       "lulus": true
     },
@@ -224,28 +226,30 @@
       "peran": "light_02",
       "aset": "/Game/Hermes/ComboIter2/Mixamo/A_Aksa_Mx_light_02",
       "gagal": [],
-      "catatan": [],
-      "panjang_s": 2.267,
-      "frame_ue": 136,
+      "catatan": [
+        "dipangkas sengaja: 1.13 s (FBX 2.27 s)"
+      ],
+      "panjang_s": 1.133,
+      "frame_ue": 68,
       "skeleton": "/Game/Characters/Mannequins/Meshes/SK_Mannequin.SK_Mannequin",
       "panjang_fbx_s": 2.267,
       "frame_fbx": 69,
       "puncak": [
         {
           "tulang": "hand_l",
-          "waktu_s": 0.667,
-          "kecepatan_cm_s": 735.3
+          "waktu_s": 0.467,
+          "kecepatan_cm_s": 701.7
         }
       ],
       "puncak_global": {
         "tulang": "hand_l",
-        "waktu_s": 0.667,
-        "kecepatan_cm_s": 735.3
+        "waktu_s": 0.467,
+        "kecepatan_cm_s": 701.7
       },
       "kena_diharapkan": "tangan",
       "kena_jumlah_diharapkan": 1,
-      "pinggul_min_cm": 71.58,
-      "lompat_maks_cm": 11.27,
+      "pinggul_min_cm": 71.65,
+      "lompat_maks_cm": 10.61,
       "lompat_tulang": "hand_l",
       "lulus": true
     },

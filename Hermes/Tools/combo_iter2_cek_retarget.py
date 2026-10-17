@@ -24,7 +24,7 @@ PINGGUL_RENDAH_OK = ("dodge_", "air_slam")
 TOLERANSI_FRAME = 1.0 / 30.0 + 0.005
 # peran yang sengaja dipangkas (combo_iter2_pangkas.py) -> panjang yang diharapkan, bukan panjang FBX.
 # air_slam: kode memakainya sebagai pose menukik singkat (JDGA_HeavyAttack baris 108).
-DIPANGKAS = {"air_slam": 0.40, "air": 0.867}
+DIPANGKAS = {"air_slam": 0.40, "air": 0.867, "light_01": 1.10, "light_02": 1.133}
 
 EAL = unreal.EditorAssetLibrary
 AL = unreal.AnimationLibrary

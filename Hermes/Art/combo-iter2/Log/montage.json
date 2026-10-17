@@ -4,7 +4,7 @@
       "peran": "light_01",
       "montage": "/Game/Hermes/ComboIter2/Montages/AM_Hermes_light_01",
       "animasi": "/Game/Hermes/ComboIter2/Mixamo/A_Aksa_Mx_light_01",
-      "panjang_s": 2.233,
+      "panjang_s": 1.1,
       "blend": [
         0.08,
         0.2
@@ -13,12 +13,12 @@
       "hit": [
         {
           "tulang": "hand_r",
-          "mulai": 0.43,
+          "mulai": 0.26,
           "durasi": 0.22
         }
       ],
       "combo": {
-        "mulai": 0.62,
+        "mulai": 0.45,
         "durasi": 0.35
       }
     },
@@ -26,7 +26,7 @@
       "peran": "light_02",
       "montage": "/Game/Hermes/ComboIter2/Montages/AM_Hermes_light_02",
       "animasi": "/Game/Hermes/ComboIter2/Mixamo/A_Aksa_Mx_light_02",
-      "panjang_s": 2.267,
+      "panjang_s": 1.133,
       "blend": [
         0.08,
         0.2
@@ -35,12 +35,12 @@
       "hit": [
         {
           "tulang": "hand_l",
-          "mulai": 0.55,
+          "mulai": 0.35,
           "durasi": 0.22
         }
       ],
       "combo": {
-        "mulai": 0.74,
+        "mulai": 0.54,
         "durasi": 0.35
       }
     },

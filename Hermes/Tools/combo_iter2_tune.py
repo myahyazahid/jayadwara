@@ -63,7 +63,7 @@ LEWATI = {"air_slam"}
 BLEND_IN = 0.05
 BLEND_OUT = 0.22
 # transisi lompat -> tendangan butuh blend lebih panjang; 0,05 s terasa menyentak.
-BLEND_KHUSUS = {"air": (0.15, 0.30)}
+BLEND_KHUSUS = {"air": (0.15, 0.30), "light_01": (0.12, 0.28), "light_02": (0.12, 0.28)}
 EKOR_JENDELA = 0.55   # jendela combo = EKOR_JENDELA terakhir dari klip (bukan di hantaman!)
 SISA_UJUNG = 0.02     # sisa di ujung montage
 
@@ -175,8 +175,16 @@ PROFIL_TETAP = {
 }
 
 
+# Langkah yang harus maju sedikit saat memukul. Klip Mixamo pukulan 1-2 geser kaki
+# belakang ~21 cm ke belakang (bagian dari ancang-ancang) dan root motion-nya sudah
+# diratakan, jadi tanpa dorongan maju kapsul terlihat mundur. Dipakai MoveDistance
+# (JDGA_LightAttack.cpp:253) dengan MoveHeight 0 -> dorongan rata, bukan terjang.
+STEP_MAJU = {"light_01": 15.0, "light_02": 15.0}   # cm
+STEP_MAJU_DURASI = 0.30
+
+
 def tune_profil(prof):
-    """Tulis play_rate ke tiap langkah profil (struct di TArray: ubah salinan lalu ganti elemen)."""
+    """Tulis play_rate + dorongan maju ke tiap langkah profil (struct di TArray: ubah salinan lalu ganti elemen)."""
     for prop, idx, peran in SLOT:
         laju = LAJU[peran]
         if idx is None:
@@ -189,6 +197,11 @@ def tune_profil(prof):
                 arr.append(unreal.JDAttackStep())
             s = arr[idx]
             s.set_editor_property("play_rate", laju)
+            if peran in STEP_MAJU:
+                s.set_editor_property("move_distance", STEP_MAJU[peran])
+                s.set_editor_property("move_duration", STEP_MAJU_DURASI)
+                s.set_editor_property("move_height", 0.0)
+                s.set_editor_property("stop_at_target", True)
             arr[idx] = s
             prof.set_editor_property(prop, arr)
     for prop, val in PROFIL_TETAP.items():
