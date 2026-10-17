@@ -14,7 +14,7 @@
 
 Keputusan developer 16 Okt 2026. Aksa dan Jayadwara memakai **sistem combo inti yang sama**: input, ability, dan aturan combo (bagian di bawah). Yang beda per skala:
 - **Rasa**: animasi, hit-stop, guncangan kamera, debu/puing (`DA_CombatProfile_Human` vs `DA_CombatProfile_Giant`).
-- **Jurus khas**: 2–3 jurus per skala, mulai **Fase 2** (beam Jayadwara dibahas terpisah).
+- **Jurus khas**: 2–3 jurus per skala, mulai **Fase 2** (beam Jayadwara dibahas terpisah). Usulan Jayadwara: [Jurus khas Jayadwara](#jurus-khas-jayadwara-usulan).
 
 Di Fase 1 combo kedua skala identik.
 
@@ -51,6 +51,27 @@ Disetujui developer 16 Okt 2026 dari konsep pose ([`visual/usulan-jurus-aksa.htm
 | Ringan ×3 → berat | Finisher 3 | Animasi dipilih developer langsung di Mixamo (`finisher_03.fbx`, keputusan 17 Okt 2026); selama belum ada, slot ini = pukulan putar |
 | Udara + ringan | Tendangan terbang memutar | Satu putaran penuh di udara, lalu kaki kanan menendang lurus, kaki kiri terlipat |
 | Udara + berat | Hantaman ke bawah | Menukik, tinju kanan ke tanah sampai berlutut, gelombang kejut |
+
+#### Daftar jurus Jayadwara (usulan)
+
+**Ditunda (keputusan developer 17 Okt 2026):** Jayadwara tetap memakai jurus yang sama dengan Aksa (animasi Aksa di-retarget). Daftar ini disimpan sebagai bahan kalau setelah review/uji tangan developer meminta perubahan. Visual: [`visual/usulan-jurus-jayadwara.html`](visual/usulan-jurus-jayadwara.html). Slot, tombol, ability, dan aturan combo **sama dengan Aksa**; yang beda hanya animasi (montage di `DA_CombatProfile_Giant`). Aksa cepat dan lincah; Jayadwara pendek, lurus, menghantam. Kalau nanti dipakai, cukup slot yang diminta developer yang diganti; aturan "combo kedua skala identik" di atas tetap berlaku sampai saat itu.
+
+| Input | Jurus | Gerak |
+|---|---|---|
+| Ringan ×1 | Jab berat | Pukulan lurus tangan kiri, kaki depan menapak keras |
+| Ringan ×2 | Siku kanan | Pinggul diputar, siku kanan diayun mendatar setinggi bahu |
+| Ringan ×3 | Dengkul | Tangan menarik kepala musuh ke bawah, lutut kanan dihantamkan ke atas (pose lutut arca Dwarapala) |
+| Ringan ×4 | Tendangan samping (*yop chagi*) | Badan menyamping, lutut ditarik ke dada, telapak didorong lurus setinggi dada; akhir combo, musuh terpental |
+| Maju + ringan | Tabrak bahu | Dua langkah lari berat, bahu kiri ditabrakkan ke dada musuh |
+| Mundur + ringan | Tendangan dorong | Langkah mundur, lalu telapak kaki kanan didorong ke perut musuh |
+| Berat | Palu dua tangan | Kedua tangan digenggam di atas kepala lalu dihantamkan ke bawah sambil melangkah |
+| Ringan ×1 → berat | Finisher 1: uppercut lompat | Jongkok, tinju kanan dilontarkan ke atas sambil melompat kecil |
+| Ringan ×2 → berat | Finisher 2: sapuan kaki | Badan turun rendah, kaki kanan disapukan memutar di atas tanah; boss jatuh |
+| Ringan ×3 → berat | Finisher 3: tendangan kapak (*neryo chagi*) | Kaki diayun lurus ke atas lalu tumit dijatuhkan ke bahu/kepala musuh |
+| Udara + ringan | Tendangan samping terbang | Badan dimiringkan, kaki kanan didorong lurus ke samping; tanpa putaran |
+| Udara + berat | Hantaman dua tinju | Menukik, dua tinju sekaligus ke tanah, gelombang kejut |
+
+Dodge dan parry tetap memakai animasi Aksa yang di-retarget. Nama file Mixamo usulan `jd_<peran>.fbx`; `Tools/ue_import_mixamo.py` perlu jalur baru ke `A_JD2_*` lewat RTG Jayadwara. Batas IP: tanpa tebasan tangan ala jurus Ultra, lengan tidak menyilang / bentuk L.
 
 ### Dodge per arah
 
@@ -114,6 +135,24 @@ Pukulan "menempel" ke musuh searah input (Q3, gaya Arkham): musuh dalam kerucut 
 | **Kelemahan boss** | Terbuka dari hasil investigasi mode manusia |
 | **Destruction** | Gedung bisa hancur; kerusakan memengaruhi meter sinkronisasi |
 | **Kamera skala** | Rig kamera khusus + elemen pembanding (kendaraan, warga, fog) agar terasa raksasa |
+
+### Jurus khas Jayadwara (usulan)
+
+Usulan 17 Okt 2026, **Fase 2**, menunggu keputusan developer (JK1–JK4). Visual: [`visual/usulan-jurus-khas-jayadwara.html`](visual/usulan-jurus-khas-jayadwara.html). Tiga jurus yang hanya dimiliki Jayadwara, berangkat dari arca Dwarapala: kuda-kuda satu lutut terangkat, telapak penolak, gerbang yang ditutup. Beam tetap dibahas terpisah. Satu tombol, hasil dari konteks (pola sama dengan tangkis + parry).
+
+| Input (usulan) | Jurus | Gerak | Fungsi | Biaya (usulan) |
+|---|---|---|---|---|
+| **R** / **L2** | Tapak Penolak | Lutut kiri naik sebentar, lalu hentak maju dan telapak kanan didorong terbuka | Damage 25, poise 60, boss terdorong ±60 m: memindahkan boss keluar dari kampung ke zona aman | Stamina 35, cooldown 6 s |
+| Tahan **R** (sampai 0,6 s) | Injak Bumi | Kaki kanan diangkat setinggi pinggang, tangan terbuka ke samping, lalu dihentakkan | Gelombang kejut radius 50–80 m: musuh kecil jatuh, boss terhuyung, anggota tubuh Jerangkong yang merayap hancur. Gedung dalam radius ikut rusak (penalti Sync) | Stamina 50, cooldown 10 s |
+| **R** saat `Boss.WeakPoint.Exposed` | Tutup Lawang | Rentangkan tangan lebar, dua belahan gerbang emas (candi bentar) muncul di sisi boss, tangan diayun ke depan sampai telapak berdampingan dan gerbang menutup | Finisher segel; usulan **jurus spesial #1 Ep 1** ([11](11-vertical-slice-spec.md)) untuk tengkorak Jerangkong | Tanpa biaya, i-frame |
+
+Batas IP: lengan tidak menyilang / bentuk L, tidak ada sinar dari tangan, permata dada tetap statis (K1, K6 di [14](14-model-sheet-jayadwara.md)).
+
+**Keputusan yang ditunggu:**
+- **JK1 tombol:** R / L2. L1 atau R1 sendiri tidak dipakai karena L1+R1 untuk transformasi.
+- **JK2 biaya:** stamina + cooldown, atau bar baru "Tenaga Dwara".
+- **JK3 jurus Ep 1:** Tutup Lawang.
+- **JK4 nama:** nama-nama di atas masih sementara.
 
 ### Tameng Inten (perisai energi)
 
