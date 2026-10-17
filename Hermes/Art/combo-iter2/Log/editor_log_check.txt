@@ -1,0 +1,21 @@
+# Cek Output Log editor WORKTREE (Jayadwara.log) — 17 Okt 2026
+# Sumber: Saved/Logs/Jayadwara.log
+
+== Boot ==
+LogInit: Display: Running engine for game: Jayadwara
+
+== Baris Error/Fatal (harus kosong) ==
+(selesai)
+
+== Warning (harus kosong) ==
+(selesai)
+
+== DLL opsional yang tidak ada (normal, bukan modul proyek) ==
+LogWindows: File 'aqProf.dll' does not exist
+LogWindows: File 'VtuneApi.dll' does not exist
+LogWindows: File 'VtuneApi32e.dll' does not exist
+LogWindows: File 'WinPixGpuCapturer.dll' does not exist
+FPackageName: Skipped package /Game/Jayadwara/Characters/Aksa/Anims/Attack/A_Aksa_Stagger has a valid, mounted, mount point but does not exist either on disk or in iostore. The uncooked file would be expected on disk at 'C:/repository/unreal_engine/jayadwara_hermes_combo/Content/Jayadwara/Characters/Aksa/Anims/Attack/A_Aksa_Stagger'. Perhaps it has been deleted or was not synced?
+
+== Editor selesai loading ==
+[2026.10.17-08.25.20:107][  1]LogPlacementMode: Display: The Asset Registry is done with its initial scan, the list of placeable classes has been updated.

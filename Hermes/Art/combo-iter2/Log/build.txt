@@ -1,0 +1,44 @@
+Using bundled DotNet SDK version: 8.0.300 win-x64
+Running UnrealBuildTool: dotnet "..\..\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.dll" JayadwaraEditor Win64 Development -Project=C:/repository/unreal_engine/jayadwara_hermes_combo/Jayadwara.uproject -WaitMutex
+Log file: C:\Users\- LENOVO -\AppData\Local\UnrealBuildTool\Log.txt
+Using 'git status' to determine working set for adaptive non-unity build (C:\repository\unreal_engine\jayadwara_hermes_combo).
+Creating makefile for JayadwaraEditor (no existing makefile)
+Parsing headers for JayadwaraEditor
+  Running Internal UnrealHeaderTool C:\repository\unreal_engine\jayadwara_hermes_combo\Jayadwara.uproject C:\repository\unreal_engine\jayadwara_hermes_combo\Intermediate\Build\Win64\JayadwaraEditor\Development\JayadwaraEditor.uhtmanifest -WarningsAsErrors -installed
+Total of 62 written
+Reflection code generated for JayadwaraEditor in 19.2418448 seconds
+Building JayadwaraEditor...
+Using Visual Studio 2022 14.38.33145 toolchain (C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.38.33130) and Windows 10.0.26100.0 SDK (C:\Program Files (x86)\Windows Kits\10).
+Determining max actions to execute in parallel (10 physical cores, 16 logical cores)
+  Executing up to 10 processes, one per physical core
+  Requested 1.5 GB memory per action, 3.32 GB available: limiting max parallel actions to 2
+Using Unreal Build Accelerator local executor to run 20 action(s)
+  Storage capacity 40Gb
+---- Starting trace: 261017_152210 ----
+UbaServer - Listening on 0.0.0.0:1345
+------ Building 20 action(s) started ------
+[1/20] Resource Default.rc2
+[2/20] Resource Default.rc2
+[3/20] Resource Default.rc2
+[4/20] Compile [x64] SharedPCH.UnrealEd.Project.ValApi.ValExpApi.Cpp20.cpp
+[5/20] Compile [x64] AnimGraphNode_JDCapeChains.cpp
+[6/20] Compile [x64] JayadwaraAnimNodes.cpp
+[7/20] Compile [x64] Module.JayadwaraAnimNodes.gen.cpp
+[8/20] Compile [x64] PerModuleInline.gen.cpp
+[9/20] Link [x64] UnrealEditor-JayadwaraAnimNodes.lib
+[10/20] Compile [x64] JDEditorToolsLibrary.cpp
+[11/20] Compile [x64] JayadwaraEditor.cpp
+[12/20] Compile [x64] Module.JayadwaraEditor.gen.cpp
+[13/20] Compile [x64] PerModuleInline.gen.cpp
+[14/20] Link [x64] UnrealEditor-JayadwaraEditor.lib
+[15/20] Compile [x64] Module.Jayadwara.cpp
+[16/20] Link [x64] UnrealEditor-Jayadwara.lib
+[17/20] Link [x64] UnrealEditor-JayadwaraAnimNodes.dll
+[18/20] Link [x64] UnrealEditor-Jayadwara.dll
+[19/20] Link [x64] UnrealEditor-JayadwaraEditor.dll
+[20/20] WriteMetadata JayadwaraEditor.target (UBA disabled)
+Trace written to file C:/Users/- LENOVO -/AppData/Local/UnrealBuildTool/Log.uba with size 13.7kb
+Total time in Unreal Build Accelerator local executor: 99.04 seconds
+
+Result: Succeeded
+Total execution time: 269.93 seconds
