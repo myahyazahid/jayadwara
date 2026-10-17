@@ -38,7 +38,7 @@ LOG_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 # laju main per peran. finisher_02 sengaja 0,85: dua tendangannya hanya berjarak 0,15 s,
 # kalau dipercepat keduanya jatuh hampir bersamaan (lihat laporan, temuan 5).
 LAJU = {
-    "light_01": 1.35, "light_02": 1.35, "light_03": 1.45, "light_04": 1.35,
+    "light_01": 1.35, "light_02": 1.35, "light_03": 1.45, "light_04": 1.00,
     "lunge": 1.50, "back": 1.50,
     "finisher_01": 1.25, "finisher_02": 0.85, "finisher_03": 1.15,
     "air": 1.20, "air_slam": 1.00,

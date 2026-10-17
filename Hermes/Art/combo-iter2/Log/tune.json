@@ -86,7 +86,7 @@
   {
     "peran": "light_04",
     "panjang": 1.033,
-    "panjang_nyata": 0.765,
+    "panjang_nyata": 1.033,
     "hantaman": [
       [
         0.33,
@@ -105,7 +105,7 @@
       0.483,
       0.53
     ],
-    "laju": 1.35,
+    "laju": 1.0,
     "blend": [
       0.22,
       0.3
