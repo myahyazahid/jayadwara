@@ -1,0 +1,34 @@
+BlenderMCP addon registered
+[INFO ] services.locationservice ...............: Not adding link to MakeHuman user data, since neither explicit path nor auto-discovery is set in preferences.
+[INFO ] mpfb.init ..............................: Build info 20261010
+[INFO ] mpfb.init ..............................: Online access preference is not enabled. Not checking if MakeHuman is online.
+[INFO ] mpfb.init ..............................: MPFB initialization has finished.
+BlenderMCP addon unregistered
+FBX version: 7700
+[inplace] air: SEBELUM dunia X    -0.1..    0.0 | Y    -2.1..   -0.0 | Z     0.8..    1.4
+
+FBX export starting... 'C:\\repository\\unreal_engine\\jayadwara_hermes_combo\\Hermes\\Art\\combo-iter2\\Mixamo\\inplace\\air.fbx'
+export finished in 0.2239 sec.
+[inplace] air: ditulis C:\repository\unreal_engine\jayadwara_hermes_combo\Hermes\Art\combo-iter2\Mixamo\inplace\air.fbx
+FBX version: 7400
+[inplace] air: SESUDAH dunia X     0.0..    0.0 | Y    -0.0..   -0.0 | Z     0.8..    0.8
+FBX version: 7700
+[inplace] air_slam: SEBELUM dunia X     0.0..    0.3 | Y    -3.8..   -0.0 | Z     0.4..    2.0
+
+FBX export starting... 'C:\\repository\\unreal_engine\\jayadwara_hermes_combo\\Hermes\\Art\\combo-iter2\\Mixamo\\inplace\\air_slam.fbx'
+export finished in 0.3357 sec.
+[inplace] air_slam: ditulis C:\repository\unreal_engine\jayadwara_hermes_combo\Hermes\Art\combo-iter2\Mixamo\inplace\air_slam.fbx
+FBX version: 7400
+[inplace] air_slam: SESUDAH dunia X     0.0..    0.0 | Y    -0.0..   -0.0 | Z     1.0..    1.0
+FBX version: 7700
+[inplace] light_04: SEBELUM dunia X    -0.5..   -0.0 | Y    -0.4..    0.0 | Z     0.8..    1.0
+
+FBX export starting... 'C:\\repository\\unreal_engine\\jayadwara_hermes_combo\\Hermes\\Art\\combo-iter2\\Mixamo\\inplace\\light_04.fbx'
+export finished in 0.2678 sec.
+[inplace] light_04: ditulis C:\repository\unreal_engine\jayadwara_hermes_combo\Hermes\Art\combo-iter2\Mixamo\inplace\light_04.fbx
+FBX version: 7400
+[inplace] light_04: SESUDAH dunia X    -0.0..   -0.0 | Y    -0.0..   -0.0 | Z     0.8..    1.0
+[inplace] selesai
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:37:04)
+
+Blender quit

@@ -32,6 +32,10 @@ MANNY = "/Game/Characters/Mannequins/Meshes/SKM_Manny_Simple"
 SOURCE_DIR = "Hermes/Art/combo-iter2/Mixamo"   # relatif ke folder proyek (sandbox)
 MESH_FILE = "ybot.fbx"
 MESH_NAME = "SK_Mixamo_YBot"
+# Kosong: percobaan memakai FBX in-place buatan Blender GAGAL — file hasil ekspor masuk UE
+# dengan tulang terotasi 90 derajat (skeleton SK_Mixamo_YBot dipakai bersama, sumbu bone beda),
+# hasil retarget jadi rebah (kepala 33,8 cm, seharusnya 144 cm). Lihat laporan temuan 8.
+INPLACE = set()
 
 # peran (nama file tanpa .fbx) -> jurus (docs/07). Yang tidak ada dilewati; skrip setup tetap pakai placeholder.
 ROLES = {
@@ -140,6 +144,15 @@ def main():
     if MESH_FILE[:-4] not in files:
         unreal.log_error(f"[Jayadwara] {MESH_FILE} (Y Bot With Skin) tidak ada di {folder}")
         return
+    # tiga klip yang pinggulnya bergeser dipakai versi in-place buatan Blender
+    # (Hermes/Tools/combo_iter2_inplace_fbx.py). File asli di Mixamo/ tidak diubah.
+    inplace_dir = os.path.join(folder, "inplace")
+    for role in INPLACE:
+        p = os.path.join(inplace_dir, f"{role}.fbx")
+        if role in files and os.path.isfile(p):
+            files[role] = p
+            log(f"{role}: pakai versi in-place ({os.path.basename(p)})")
+
     unknown = sorted(k for k in files if k not in ROLES and k != MESH_FILE[:-4])
     if unknown:
         fail(f"nama file tidak dikenal (lihat ROLES): {unknown}")

@@ -262,7 +262,7 @@
     "heavy_finishers": [
       {
         "montage": "AM_Hermes_finisher_01",
-        "play_rate": 1.0
+        "play_rate": 1.25
       },
       {
         "montage": "AM_Hermes_finisher_02",
@@ -270,7 +270,7 @@
       },
       {
         "montage": "AM_Hermes_finisher_03",
-        "play_rate": 1.0
+        "play_rate": 1.15
       }
     ],
     "dodge_montages": {

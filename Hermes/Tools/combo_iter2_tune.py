@@ -12,8 +12,11 @@ Sebabnya (dibaca dari kode, bukan dugaan):
     Placeholder Mannequin dulu hanya ~1 s dengan hantaman di 0,4 s.
 
 Yang diubah (semua di sandbox /Game/Hermes/ComboIter2):
-  1. Jendela combo dibuka 0,05 s SEBELUM hantaman dan diperpanjang sampai ujung montage.
-     Tekanan saat/sesudah hantaman langsung menyambung ke jurus berikut -> recovery tidak diputar.
+  1. Jendela combo ditaruh di 0,55 s TERAKHIR klip (bukan di hantaman).
+     Umpan balik M6 kedua: "klik cepat jangan sampai memotong animasi".
+     Dengan jendela di ekor, tekanan cepat tidak menyela gerakan; jurus berikutnya
+     baru dimulai setelah gerakan sebelumnya selesai. Tekanan tetap tertangkap karena
+     buffer input 0,2 s (JDGA_LightAttack.cpp:319).
   2. Laju main (play_rate) dinaikkan supaya wind-up 0,43 s -> ~0,27 s. Finisher tetap berat.
   3. blend_in 0,05 s (masuk cepat) dan blend_out 0,22 s (interupsi mulus, tidak menyentak).
 
@@ -59,8 +62,8 @@ TANPA_COMBO = {"finisher_01", "finisher_02", "finisher_03"}
 LEWATI = {"air_slam"}
 BLEND_IN = 0.05
 BLEND_OUT = 0.22
-LEAD_JENDELA = 0.05   # jendela combo dibuka sekian detik sebelum hantaman pertama
-EKOR_JENDELA = 0.02   # sisa di ujung montage
+EKOR_JENDELA = 0.55   # jendela combo = EKOR_JENDELA terakhir dari klip (bukan di hantaman!)
+SISA_UJUNG = 0.02     # sisa di ujung montage
 
 baris = []
 
@@ -116,8 +119,10 @@ def tune_montage(peran, laju):
         return None
 
     awal_hit = hits[0][0]
-    baru_mulai = max(0.02, round(awal_hit - LEAD_JENDELA, 3))
-    baru_durasi = round(panjang - baru_mulai - EKOR_JENDELA, 3)
+    # Jendela combo ditaruh di EKOR klip: tekanan cepat tidak memotong animasi yang sedang jalan,
+    # dan jurus berikutnya baru mulai setelah gerakan sebelumnya selesai (umpan balik M6 kedua).
+    baru_mulai = max(0.05, round(panjang - EKOR_JENDELA, 3))
+    baru_durasi = round(panjang - baru_mulai - SISA_UJUNG, 3)
 
     # tulis ulang seluruh track "Combat": jendela hit dipertahankan, jendela combo diganti
     AL.remove_animation_notify_events_by_track(m, TRACK)
