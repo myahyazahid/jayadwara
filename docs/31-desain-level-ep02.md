@@ -1,6 +1,6 @@
 # 31 — Desain Level Ep 2: `Ep02_KampungKali`
 
-> **Status: v0.3, tata letak v02 (16 Okt 2026)**: developer menilai map v01 (600 × 500 m) terlalu kecil untuk Jayadwara yang gesit (±70 m/s, PR #29) dan memilih **opsi B: perluas + area baru** (bagian 2a). Angka di bagian 2 adalah **v01 (arsip)**. F1–F7 tetap berlaku (bagian 9).
+> **Status: v0.4, tata letak v02 (16 Okt 2026), revisi 17 Okt 2026 setelah review greybox Hermes (bagian 2a)**: developer menilai map v01 (600 × 500 m) terlalu kecil untuk Jayadwara yang gesit (±70 m/s, PR #29) dan memilih **opsi B: perluas + area baru** (bagian 2a). Angka di bagian 2 adalah **v01 (arsip)**. F1–F7 tetap berlaku (bagian 9).
 > v0.2 (15 Okt 2026): F1–F7 dijawab developer sesuai usulan. Rincian dari pola di [28](28-struktur-level-episode.md#ep-2--ep02_kampungkali--siang--sore), format sama dengan [30](30-desain-level-ep01.md) (Ep 1).
 > Sumber: [16 kartu Ep 2](16-panduan-arc-1.md#ep-2--tangan-tangan-kecil--tuyul) (isi episode), [27](27-rencana-model-tuyul.md) (ukuran Tuyul), [02](02-setting-dunia.md) (Kampung Kali). Skenario adegan Ep 2 belum ada ([17](17-skenario-arc-1.md#episode-210)), jadi urutan di sini juga jadi kerangka skenarionya.
 
@@ -82,7 +82,7 @@ Utara = jalan raya. Titik nol = tengah kampung (dekat pos RT).
 | Arena raksasa | ±500 × 380 m | **±1340 × 930 m** (x −650 … +690, y −600 … +330) |
 | Jayadwara melintas arena | ±7 detik | **±19 detik** (Ep 1 v02: ±17) |
 | Kampung inti | 350 × 145 m | **455 × 190 m**, tetap padat |
-| Rute kejar Aksa | ±650 m | **±1270 m** pos RT → T5 (atap → gang → jembatan gantung → bantaran → pintu air), ±3,5 mnt lari |
+| Rute kejar Aksa | ±650 m | **±1270 m** pos RT → T5 (atap → gang → jembatan gantung → bantaran → pintu air), ±4,2 mnt pada 5 m/s (revisi 17 Okt, sebelumnya ±3,5 mnt @ 6 m/s) |
 | Tempat bertarung tanpa penalti | kali | **kali, bantaran, gudang Adikara, lapangan + sawah selatan** |
 
 ```
@@ -107,7 +107,17 @@ Utara = jalan raya. Titik nol = tengah kampung (dekat pos RT).
 
 **Pratinjau tampak atas:** `python -I Art/Level/pratinjau_ep02_v02.py` menulis `docs/visual/ep02_layout_v02_atas.png` (butuh Pillow; PNG tidak di-commit dari sesi cloud karena unggahan Git LFS ditolak, developer boleh meng-commit-nya).
 
-**Data (sumber kebenaran, dipakai Hermes dan nanti `Tools/ue_greybox_ep02.py`):** [`Art/Level/ep02_medan_v02.py`](../Art/Level/ep02_medan_v02.py) (medan, 8 slot material, 14 titik uji; z = 0 muka air kali) dan [`Art/Level/ep02_layout_v02.json`](../Art/Level/ep02_layout_v02.json) (145 objek, 8 kelompok instanced berisi 1.817 rumah/ruko/blok/pilar/kontainer, pohon, tiang, 23 penanda, 5 zona, 8 kamera), yang **dibuat** oleh [`Art/Level/buat_layout_ep02_v02.py`](../Art/Level/buat_layout_ep02_v02.py). Pratinjau: [`Art/Level/pratinjau_ep02_v02.py`](../Art/Level/pratinjau_ep02_v02.py). Tata letak diubah di generator, bukan di JSON. Instruksi Hermes: [`Hermes/maps_ep2_hermes.md`](../Hermes/maps_ep2_hermes.md) (branch `hermes/maps_ep2`; greybox dimajukan atas permintaan developer 16 Okt 2026, jalur paralel Level/Map).
+**Data (sumber kebenaran, dipakai greybox Hermes dan `Tools/ue_greybox_ep02.py`):** [`Art/Level/ep02_medan_v02.py`](../Art/Level/ep02_medan_v02.py) (medan, 8 slot material, 14 titik uji; z = 0 muka air kali) dan [`Art/Level/ep02_layout_v02.json`](../Art/Level/ep02_layout_v02.json) (145 objek, 8 kelompok instanced berisi 1.817 rumah/ruko/blok/pilar/kontainer, pohon, tiang, 23 penanda, 5 zona, 8 kamera), yang **dibuat** oleh [`Art/Level/buat_layout_ep02_v02.py`](../Art/Level/buat_layout_ep02_v02.py). Pratinjau: [`Art/Level/pratinjau_ep02_v02.py`](../Art/Level/pratinjau_ep02_v02.py). Tata letak diubah di generator, bukan di JSON. Instruksi Hermes: [`Hermes/maps_ep2_hermes.md`](../Hermes/maps_ep2_hermes.md) (branch `hermes/maps_ep2`; greybox dimajukan atas permintaan developer 16 Okt 2026, jalur paralel Level/Map).
+
+**Revisi 17 Okt 2026** (review `hermes/maps_ep2` oleh Claude; keputusan developer K1–K4, C5 default Claude):
+- **Greybox Hermes lulus uji hitung tetapi punya bug rotasi:** `unreal.Rotator` posisional = (roll, pitch, yaw), sehingga 4 dari 8 dinding batas (barat/timur) berdiri vertikal, START menghadap langit, dan C5 terputar 90° (timur di atas) serta terpotong. Greybox dibangun ulang dari data yang sama dengan rotasi bernama dan uji arah ([`Tools/ue_greybox_ep02.py`](../Tools/ue_greybox_ep02.py), mesh dari [`Art/Scripts/ep02_medan_blender.py`](../Art/Scripts/ep02_medan_blender.py), render oleh [`Tools/ue_greybox_ep02_render.py`](../Tools/ue_greybox_ep02_render.py)). Level: `/Game/Jayadwara/Maps/Ep02_KampungKali_Greybox`, aset di `/Game/Jayadwara/Environment/Ep02Greybox/`. `Content/Hermes/MapsEp2` hanya arsip.
+- **K1 START dan C1:** START menghadap mulut gang (−26, 100), bukan jembatan; C1 di START melihat ke (−26, 60, 16) menyusuri gang (z dinaikkan dari 7 pada tinjauan kamera 17 Okt supaya bagian bawah frame tidak penuh tanah; C6 dan C7 juga dimiringkan ke atas: lihat_ke z 40 dan 25). Mobil DWARA ada di data (`JALAN_MobilDWARA` (−46, 158)), di belakang-kiri kamera C1.
+- **K2 kecepatan:** pawn Aksa `MaxWalkSpeed` 500 cm/s dan belum punya sprint, jadi rute diukur pada 5 m/s: investigasi 560 m = 1,9 menit, kejar 1.277 m (di mesh) = ±4,3 menit (sebelumnya ±3,5 menit @ 6 m/s). Sprint 6 m/s = backlog. Kecepatan dan panjang rute ditulis di JSON (`kecepatan_rute_ms`, `rute_panjang_m`).
+- **K3 alas objek:** alas = elev titik tengah tapak (`alas_m`) + `pondasi_m` untuk sisi rendah yang melayang (Pasar Los 1–3, Stasiun Peron); sama dengan Ep 1 (G4). Item kelompok memakai elev titik tengah (selisih ke titik terendah maks 0,11 m). Bidang (`BANTARAN_LapanganTepiKali`) tidak diberi pondasi.
+- **K4 GameMode:** `BP_JDGameMode_Aksa2`.
+- **C5:** `lebar_ortho` 1450 → **1800 m** (16:9 butuh ≥1778 m untuk memuat medan 1000 m) dan yaw −90 (utara di atas, seperti pratinjau).
+- **Koreksi landmark (bagian 3A):** jembatan gantung kuning (−105, −105) **tidak** di ujung gang utama (x = −26); jaraknya ±80 m ke barat-daya dari ujung gang. Teks bagian 3A diperbaiki; posisi jembatan tidak diubah.
+- Hasil uji pada level baru: bounds 1400 × 1000 m, line trace 14/14 (±5 cm), 145 objek (tag sesuai data), 1.817 item kelompok, 258 pohon, 55 tiang, 8/8 dinding berarah benar, START yaw 75,7° (ke mulut gang), 8/8 kamera berarah benar, gang utama bebas, rute 560,1 m dan 1.276,7 m (+0,86% dari data), persistensi lulus.
 
 ### Koordinat greybox v02 (meter, Y utara, titik nol dekat pos RT)
 
@@ -159,7 +169,7 @@ Utara = jalan raya. Titik nol = tengah kampung (dekat pos RT).
 
 ### A. Kedatangan · ±2 menit
 - Mobil DWARA berhenti di jalan raya karena gang terlalu sempit. Ketua RT menyambut di mulut gang.
-- **Landmark:** dari mulut gang, gang utama menurun lurus ke selatan dan **jembatan gantung kuning** terlihat di ujungnya, di atas kali. Pemain langsung tahu "kampung ini berujung di sungai".
+- **Landmark:** dari mulut gang, gang utama menurun lurus ke selatan sampai tanggul kali; **jembatan gantung kuning** ada ±80 m ke barat-daya dari ujung gang (terlihat dari bantaran, bukan tepat di ujung gang; koreksi 17 Okt). Pemain langsung tahu "kampung ini berujung di sungai".
 - Tutorial ulang singkat (kontrol, scanner) untuk pemain yang lupa setelah Ep 1.
 - **Batas:** jalan raya dibatasi garis polisi dan mobil pemadam di ujung timur dan barat.
 
@@ -176,7 +186,7 @@ Area semi-terbuka; urutan petunjuk bebas. Gang utama adalah "koridor" yang selal
 - Warga di teras (ibu-ibu, anak-anak, tukang ojek) memberi celetukan; tanpa sistem wawancara (itu Ep 4).
 
 ### C. Kejar-kejaran · ±5–6 menit · mekanik baru episode
-Setelah ★1 dan ★2 ditemukan, kawanan mencuri **kotak uang kas RT** di pos RT dan kabur. Kejar 5 tuyul lewat **rute melingkar** (±1270 m di v02, ±3,5 menit lari tanpa berhenti) dengan 5 titik:
+Setelah ★1 dan ★2 ditemukan, kawanan mencuri **kotak uang kas RT** di pos RT dan kabur. Kejar 5 tuyul lewat **rute melingkar** (±1270 m di v02, ±4,2 menit tanpa berhenti pada 5 m/s) dengan 5 titik:
 
 | Titik | Lokasi | Lapis | Isi |
 |---|---|---|---|
