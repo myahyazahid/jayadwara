@@ -87,10 +87,27 @@ const FJDAttackStep* UJDGA_LightAttack::ChooseOpener()
 {
 	OpenerTarget.Reset();
 	AActor* Avatar = GetAvatarActorFromActorInfo();
-	const UJDCombatComponent* Combat = GetCombat();
+	UJDCombatComponent* Combat = GetCombat();
 	const UJDCombatProfile* Profile = Combat ? Combat->GetCombatProfile() : nullptr;
+	if (!Avatar || !Profile)
+	{
+		return nullptr;
+	}
+
+	// Serangan balik setelah parry (docs/07 "Parry"): selalu ke penyerang yang di-parry, apa pun arah input.
+	if (AActor* Countered = Combat->ConsumeCounterTarget(); Countered && Profile->ParryCounterAttack.Montage)
+	{
+		const FVector ToCountered = (Countered->GetActorLocation() - Avatar->GetActorLocation()).GetSafeNormal2D();
+		if (!ToCountered.IsZero())
+		{
+			Avatar->SetActorRotation(FRotator(0.0f, ToCountered.Rotation().Yaw, 0.0f));
+		}
+		OpenerTarget = Countered;
+		return &Profile->ParryCounterAttack;
+	}
+
 	const FVector Input = GetInputDirection2D();
-	if (!Avatar || !Profile || Input.IsZero())
+	if (Input.IsZero())
 	{
 		return nullptr;
 	}

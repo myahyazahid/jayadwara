@@ -34,7 +34,8 @@ DECLARE_MULTICAST_DELEGATE_ThreeParams(FJDHitLandedEvent, AActor* /*Victim*/, co
  * dan pemain mendapat camera shake. Satu korban maksimal satu kali per serangan.
  *
  * Bertahan (Iterasi 3): komponen milik korban memutuskan hasilnya (ResolveIncomingHit) dari tag ASC-nya:
- * State.Invulnerable -> Dodged, State.ParryWindow -> Parried (penyerang stagger), State.Blocking -> Blocked/GuardBreak.
+ * State.Invulnerable -> Dodged, State.ParryWindow -> Parried (penyerang stagger, penangkis menepis lalu boleh serangan
+ * balik: HandleParrySuccess), State.Blocking -> Blocked/GuardBreak.
  * Tangkis & parry hanya berlaku untuk serangan dari depan (BlockAngle). Stagger sementara (ApplyStagger) membatalkan
  * ability combat, memasang State.Stagger, dan menahan gerak; reaksi lengkap (poise, knockdown) di Iterasi 4.
  */
@@ -91,6 +92,16 @@ public:
 	/** Dipanggil komponen penyerang saat pukulannya mengenai pemilik komponen ini. Mengurangi stamina kalau ditangkis. */
 	EJDHitOutcome ResolveIncomingHit(const AActor* Attacker);
 
+	/**
+	 * Pemilik komponen ini berhasil parry pukulan Attacker (dipanggil komponen penyerang): tangkis dibatalkan, tepisan
+	 * ParryMontages diputar bergantian menghadap penyerang, shake kamera, slow-mo setelah hit-stop (kalau pemain
+	 * terlibat), dan jendela serangan balik dibuka (docs/07 "Parry").
+	 */
+	void HandleParrySuccess(AActor* Attacker);
+
+	/** Penyerang yang baru di-parry kalau jendela serangan balik masih terbuka (sekali pakai), selain itu nullptr. */
+	AActor* ConsumeCounterTarget();
+
 	/** Stagger selama Duration detik (dibatalkan ability combat, gerak ditahan, StaggerMontage profil diputar). */
 	void ApplyStagger(float Duration);
 
@@ -118,8 +129,12 @@ private:
 	USkeletalMeshComponent* GetOwnerMesh() const;
 	FVector GetSocketLocation() const;
 	void ProcessHit(const FHitResult& Hit);
-	void StartHitStop(AActor* Victim, float DurationScale = 1.0f);
+	void StartHitStop(AActor* Victim);
+	void StartHitStop(AActor* Victim, float Duration, float TimeDilation);
 	void EndHitStop();
+	void PlayParryDeflect(TWeakObjectPtr<AActor> Attacker);
+	void StartParrySlowMo();
+	void EndParrySlowMo();
 	void EndStagger();
 	void ShowDebugMessage(const FString& Message, const FColor& Color) const;
 
@@ -139,6 +154,12 @@ private:
 	FTimerHandle HitStopTimer;
 
 	FTimerHandle StaggerTimer;
+
+	int32 ParryVariant = 0;
+	TWeakObjectPtr<AActor> CounterTarget;
+	double CounterExpireRealTime = 0.0;
+	FTimerHandle ParrySlowMoTimer;
+	bool bParrySlowMoActive = false;
 
 	int32 LightComboStep = INDEX_NONE;
 	int32 CancelledLightComboStep = INDEX_NONE;

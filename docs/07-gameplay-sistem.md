@@ -63,6 +63,19 @@ Keputusan developer 16 Okt 2026. Sama untuk Aksa dan Jayadwara; `UJDGA_Dodge` su
 
 Gerak dibedakan per arah, bukan per jarak ke musuh, supaya pemain selalu tahu hasil tombolnya.
 
+### Parry (tepis)
+
+Usulan 17 Okt 2026, dinilai lewat gate parry Iterasi 3 ([23](23-rencana-fase-1.md)). Sama untuk Aksa dan Jayadwara. Tekan tangkis tepat sebelum pukulan kena (jendela 0,2 s manusia / 0,25 s raksasa):
+
+| Urutan | Rasa |
+|---|---|
+| 1. Kena | Hit-stop khusus parry (±0,12 s, hampir beku) + percikan di titik kena + suara parry + shake kamera |
+| 2. Tepis | Tepisan cepat menghadap penyerang, **2 varian bergantian** (tepis luar / tepis dalam), bukan pose tangkis ditahan |
+| 3. Lambat | Slow-mo singkat seluruh dunia (±0,35 s di laju 0,35×), hanya kalau pemain terlibat |
+| 4. Balas | Penyerang stagger 1 s; **pukulan ringan dalam 0,8 s = serangan balik** ke penyerang itu (selalu ke dia, apa pun arah input), lalu combo lanjut dari pukulan 2 |
+
+Semua angka di `DA_CombatProfile_*` bagian Block|Parry (milik yang bertahan).
+
 ### Serangan udara
 
 Keputusan developer 16 Okt 2026. Sama untuk Aksa dan Jayadwara.
