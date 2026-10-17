@@ -14,7 +14,7 @@
 
 Keputusan developer 16 Okt 2026. Aksa dan Jayadwara memakai **sistem combo inti yang sama**: input, ability, dan aturan combo (bagian di bawah). Yang beda per skala:
 - **Rasa**: animasi, hit-stop, guncangan kamera, debu/puing (`DA_CombatProfile_Human` vs `DA_CombatProfile_Giant`).
-- **Jurus khas**: 2–3 jurus per skala, mulai **Fase 2** (beam Jayadwara dibahas terpisah).
+- **Jurus khas**: 2–3 jurus per skala, mulai **Fase 2** (beam Jayadwara dibahas terpisah). Usulan Jayadwara: [Jurus khas Jayadwara](#jurus-khas-jayadwara-usulan).
 
 Di Fase 1 combo kedua skala identik.
 
@@ -114,6 +114,24 @@ Pukulan "menempel" ke musuh searah input (Q3, gaya Arkham): musuh dalam kerucut 
 | **Kelemahan boss** | Terbuka dari hasil investigasi mode manusia |
 | **Destruction** | Gedung bisa hancur; kerusakan memengaruhi meter sinkronisasi |
 | **Kamera skala** | Rig kamera khusus + elemen pembanding (kendaraan, warga, fog) agar terasa raksasa |
+
+### Jurus khas Jayadwara (usulan)
+
+Usulan 17 Okt 2026, **Fase 2**, menunggu keputusan developer (JK1–JK4). Visual: [`visual/usulan-jurus-jayadwara.html`](visual/usulan-jurus-jayadwara.html). Tiga jurus yang hanya dimiliki Jayadwara, berangkat dari arca Dwarapala: kuda-kuda satu lutut terangkat, telapak penolak, gerbang yang ditutup. Beam tetap dibahas terpisah. Satu tombol, hasil dari konteks (pola sama dengan tangkis + parry).
+
+| Input (usulan) | Jurus | Gerak | Fungsi | Biaya (usulan) |
+|---|---|---|---|---|
+| **R** / **L2** | Tapak Penolak | Lutut kiri naik sebentar, lalu hentak maju dan telapak kanan didorong terbuka | Damage 25, poise 60, boss terdorong ±60 m: memindahkan boss keluar dari kampung ke zona aman | Stamina 35, cooldown 6 s |
+| Tahan **R** (sampai 0,6 s) | Injak Bumi | Kaki kanan diangkat setinggi pinggang, tangan terbuka ke samping, lalu dihentakkan | Gelombang kejut radius 50–80 m: musuh kecil jatuh, boss terhuyung, anggota tubuh Jerangkong yang merayap hancur. Gedung dalam radius ikut rusak (penalti Sync) | Stamina 50, cooldown 10 s |
+| **R** saat `Boss.WeakPoint.Exposed` | Tutup Lawang | Rentangkan tangan lebar, dua belahan gerbang emas (candi bentar) muncul di sisi boss, tangan diayun ke depan sampai telapak berdampingan dan gerbang menutup | Finisher segel; usulan **jurus spesial #1 Ep 1** ([11](11-vertical-slice-spec.md)) untuk tengkorak Jerangkong | Tanpa biaya, i-frame |
+
+Batas IP: lengan tidak menyilang / bentuk L, tidak ada sinar dari tangan, permata dada tetap statis (K1, K6 di [14](14-model-sheet-jayadwara.md)).
+
+**Keputusan yang ditunggu:**
+- **JK1 tombol:** R / L2. L1 atau R1 sendiri tidak dipakai karena L1+R1 untuk transformasi.
+- **JK2 biaya:** stamina + cooldown, atau bar baru "Tenaga Dwara".
+- **JK3 jurus Ep 1:** Tutup Lawang.
+- **JK4 nama:** nama-nama di atas masih sementara.
 
 ### Tameng Inten (perisai energi)
 
