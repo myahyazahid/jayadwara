@@ -11,7 +11,7 @@
       "aset": "/Game/Hermes/ComboIter2/Mixamo/A_Aksa_Mx_air",
       "gagal": [],
       "catatan": [
-        "puncak global hand_r 636 cm/s @1.08 s (bukan kaki) — auto strike_timings proyek akan memilih tulang ini"
+        "puncak global hand_r 637 cm/s @1.08 s (bukan kaki) — auto strike_timings proyek akan memilih tulang ini"
       ],
       "panjang_s": 1.5,
       "frame_ue": 91,
@@ -22,19 +22,19 @@
         {
           "tulang": "foot_l",
           "waktu_s": 0.65,
-          "kecepatan_cm_s": 612.8
+          "kecepatan_cm_s": 613.0
         }
       ],
       "puncak_global": {
         "tulang": "hand_r",
         "waktu_s": 1.083,
-        "kecepatan_cm_s": 636.4
+        "kecepatan_cm_s": 637.3
       },
       "kena_diharapkan": "kaki",
       "kena_jumlah_diharapkan": 1,
       "pinggul_min_cm": 74.34,
-      "lompat_maks_cm": 16.46,
-      "lompat_tulang": "foot_l",
+      "lompat_maks_cm": 15.19,
+      "lompat_tulang": "hand_r",
       "lulus": true
     },
     {
@@ -53,18 +53,18 @@
         {
           "tulang": "hand_l",
           "waktu_s": 1.25,
-          "kecepatan_cm_s": 1028.5
+          "kecepatan_cm_s": 1029.0
         }
       ],
       "puncak_global": {
         "tulang": "hand_l",
         "waktu_s": 1.25,
-        "kecepatan_cm_s": 1028.5
+        "kecepatan_cm_s": 1029.0
       },
       "kena_diharapkan": null,
       "kena_jumlah_diharapkan": 0,
       "pinggul_min_cm": 35.84,
-      "lompat_maks_cm": 20.11,
+      "lompat_maks_cm": 20.13,
       "lompat_tulang": "hand_r",
       "lulus": true
     },
@@ -82,18 +82,18 @@
         {
           "tulang": "hand_r",
           "waktu_s": 0.25,
-          "kecepatan_cm_s": 400.0
+          "kecepatan_cm_s": 389.6
         }
       ],
       "puncak_global": {
         "tulang": "hand_r",
         "waktu_s": 0.25,
-        "kecepatan_cm_s": 400.0
+        "kecepatan_cm_s": 389.6
       },
       "kena_diharapkan": "tangan",
       "kena_jumlah_diharapkan": 1,
-      "pinggul_min_cm": 81.94,
-      "lompat_maks_cm": 6.64,
+      "pinggul_min_cm": 81.96,
+      "lompat_maks_cm": 6.47,
       "lompat_tulang": "hand_r",
       "lulus": true
     },
@@ -110,19 +110,19 @@
       "puncak": [
         {
           "tulang": "foot_l",
-          "waktu_s": 0.5,
-          "kecepatan_cm_s": 608.4
+          "waktu_s": 0.817,
+          "kecepatan_cm_s": 603.9
         }
       ],
       "puncak_global": {
         "tulang": "foot_l",
-        "waktu_s": 0.5,
-        "kecepatan_cm_s": 608.4
+        "waktu_s": 0.817,
+        "kecepatan_cm_s": 603.9
       },
       "kena_diharapkan": "kaki",
       "kena_jumlah_diharapkan": 1,
-      "pinggul_min_cm": 85.86,
-      "lompat_maks_cm": 10.17,
+      "pinggul_min_cm": 85.85,
+      "lompat_maks_cm": 10.0,
       "lompat_tulang": "foot_l",
       "lulus": true
     },
@@ -139,24 +139,24 @@
       "puncak": [
         {
           "tulang": "foot_r",
-          "waktu_s": 0.767,
-          "kecepatan_cm_s": 973.7
+          "waktu_s": 0.6,
+          "kecepatan_cm_s": 840.1
         },
         {
           "tulang": "foot_r",
-          "waktu_s": 0.967,
-          "kecepatan_cm_s": 740.8
+          "waktu_s": 0.8,
+          "kecepatan_cm_s": 1039.8
         }
       ],
       "puncak_global": {
         "tulang": "foot_r",
-        "waktu_s": 0.767,
-        "kecepatan_cm_s": 973.7
+        "waktu_s": 0.8,
+        "kecepatan_cm_s": 1039.8
       },
       "kena_diharapkan": "kaki",
       "kena_jumlah_diharapkan": 2,
-      "pinggul_min_cm": 82.61,
-      "lompat_maks_cm": 15.78,
+      "pinggul_min_cm": 82.65,
+      "lompat_maks_cm": 17.06,
       "lompat_tulang": "foot_r",
       "lulus": true
     },
@@ -174,19 +174,19 @@
         {
           "tulang": "foot_r",
           "waktu_s": 1.417,
-          "kecepatan_cm_s": 1169.5
+          "kecepatan_cm_s": 1174.1
         }
       ],
       "puncak_global": {
         "tulang": "foot_r",
         "waktu_s": 1.417,
-        "kecepatan_cm_s": 1169.5
+        "kecepatan_cm_s": 1174.1
       },
       "kena_diharapkan": null,
       "kena_jumlah_diharapkan": 0,
       "pinggul_min_cm": 62.07,
-      "lompat_maks_cm": 18.93,
-      "lompat_tulang": "hand_r",
+      "lompat_maks_cm": 19.06,
+      "lompat_tulang": "foot_r",
       "lulus": true
     },
     {
@@ -203,18 +203,18 @@
         {
           "tulang": "hand_r",
           "waktu_s": 0.55,
-          "kecepatan_cm_s": 583.1
+          "kecepatan_cm_s": 588.5
         }
       ],
       "puncak_global": {
         "tulang": "hand_r",
         "waktu_s": 0.55,
-        "kecepatan_cm_s": 583.1
+        "kecepatan_cm_s": 588.5
       },
       "kena_diharapkan": "tangan",
       "kena_jumlah_diharapkan": 1,
-      "pinggul_min_cm": 69.97,
-      "lompat_maks_cm": 10.92,
+      "pinggul_min_cm": 70.07,
+      "lompat_maks_cm": 9.88,
       "lompat_tulang": "hand_r",
       "lulus": true
     },
@@ -231,19 +231,19 @@
       "puncak": [
         {
           "tulang": "hand_l",
-          "waktu_s": 0.633,
-          "kecepatan_cm_s": 707.3
+          "waktu_s": 0.667,
+          "kecepatan_cm_s": 709.6
         }
       ],
       "puncak_global": {
         "tulang": "hand_l",
-        "waktu_s": 0.633,
-        "kecepatan_cm_s": 707.3
+        "waktu_s": 0.667,
+        "kecepatan_cm_s": 709.6
       },
       "kena_diharapkan": "tangan",
       "kena_jumlah_diharapkan": 1,
-      "pinggul_min_cm": 71.46,
-      "lompat_maks_cm": 12.2,
+      "pinggul_min_cm": 71.54,
+      "lompat_maks_cm": 10.85,
       "lompat_tulang": "hand_l",
       "lulus": true
     },
@@ -263,18 +263,18 @@
         {
           "tulang": "hand_r",
           "waktu_s": 0.95,
-          "kecepatan_cm_s": 1052.1
+          "kecepatan_cm_s": 979.5
         }
       ],
       "puncak_global": {
         "tulang": "hand_r",
         "waktu_s": 0.95,
-        "kecepatan_cm_s": 1052.1
+        "kecepatan_cm_s": 979.5
       },
       "kena_diharapkan": "tangan",
       "kena_jumlah_diharapkan": 1,
-      "pinggul_min_cm": 76.94,
-      "lompat_maks_cm": 17.65,
+      "pinggul_min_cm": 77.03,
+      "lompat_maks_cm": 16.22,
       "lompat_tulang": "hand_r",
       "lulus": true,
       "gerak_identik_dengan": [
@@ -286,7 +286,7 @@
       "aset": "/Game/Hermes/ComboIter2/Mixamo/A_Aksa_Mx_light_04",
       "gagal": [],
       "catatan": [
-        "puncak global hand_l 1207 cm/s @0.58 s (bukan kaki) — auto strike_timings proyek akan memilih tulang ini"
+        "puncak global hand_l 1210 cm/s @0.58 s (bukan kaki) — auto strike_timings proyek akan memilih tulang ini"
       ],
       "panjang_s": 2.033,
       "frame_ue": 122,
@@ -297,18 +297,18 @@
         {
           "tulang": "foot_r",
           "waktu_s": 0.933,
-          "kecepatan_cm_s": 1074.1
+          "kecepatan_cm_s": 1075.7
         }
       ],
       "puncak_global": {
         "tulang": "hand_l",
         "waktu_s": 0.583,
-        "kecepatan_cm_s": 1207.4
+        "kecepatan_cm_s": 1209.7
       },
       "kena_diharapkan": "kaki",
       "kena_jumlah_diharapkan": 1,
       "pinggul_min_cm": 79.85,
-      "lompat_maks_cm": 19.54,
+      "lompat_maks_cm": 19.94,
       "lompat_tulang": "hand_l",
       "lulus": true
     },
@@ -328,18 +328,18 @@
         {
           "tulang": "hand_r",
           "waktu_s": 0.95,
-          "kecepatan_cm_s": 1052.1
+          "kecepatan_cm_s": 979.5
         }
       ],
       "puncak_global": {
         "tulang": "hand_r",
         "waktu_s": 0.95,
-        "kecepatan_cm_s": 1052.1
+        "kecepatan_cm_s": 979.5
       },
       "kena_diharapkan": "tangan",
       "kena_jumlah_diharapkan": 1,
-      "pinggul_min_cm": 76.94,
-      "lompat_maks_cm": 17.65,
+      "pinggul_min_cm": 77.03,
+      "lompat_maks_cm": 16.22,
       "lompat_tulang": "hand_r",
       "lulus": true,
       "gerak_identik_dengan": [
