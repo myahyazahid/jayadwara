@@ -1,0 +1,175 @@
+<title>Perluasan Kampung Kali</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: lembar banding level designer — empat denah mini berskala sama berjajar, tabel banding, lalu rincian opsi rekomendasi */
+:root{
+  --bg:#eef0ea; --panel:#e2e6dc; --ink:#1c231f; --muted:#59625b; --line:#b8bfb2;
+  --tanah:#b5582f; --andesit:#6c7871; --sawah:#7ea259; --desa:#c7a679; --hutan:#4f6b4a;
+  --kala:#c0262b; --emas:#c38d22; --air:#5b8fb0; --safe:#3f8f5a; --onfill:#ffffff;
+  --f-display:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;
+  --f-body:"Source Sans 3","Segoe UI",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121614; --panel:#1b201d; --ink:#e5e9e2; --muted:#9ba49c; --line:#3a423c;
+  --tanah:#c96b40; --andesit:#8d9890; --sawah:#6d924e; --desa:#a98b64; --hutan:#3f5a3b;
+  --kala:#e4484c; --emas:#e2ad46; --air:#6fa4c6; --safe:#5cb378; --onfill:#ffffff; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121614; --panel:#1b201d; --ink:#e5e9e2; --muted:#9ba49c; --line:#3a423c;
+  --tanah:#c96b40; --andesit:#8d9890; --sawah:#6d924e; --desa:#a98b64; --hutan:#3f5a3b;
+  --kala:#e4484c; --emas:#e2ad46; --air:#6fa4c6; --safe:#5cb378; --onfill:#ffffff; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 64px}
+.wrap{max-width:1120px;margin:0 auto;display:grid;gap:40px}
+header{display:grid;gap:8px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--f-display);font-weight:800;font-size:clamp(38px,6.5vw,64px);line-height:.95;margin:0;text-wrap:balance}
+h1 em{font-style:normal;color:var(--kala)}
+h2{font-family:var(--f-display);font-weight:800;font-size:30px;line-height:1;margin:0;letter-spacing:.02em;text-wrap:balance}
+h3{font-family:var(--f-display);font-weight:800;font-size:22px;margin:0;letter-spacing:.02em}
+.lede{max-width:68ch;color:var(--muted);margin:0}
+section{display:grid;gap:14px}
+.sec-head p{margin:4px 0 0;color:var(--muted);max-width:68ch}
+.panels{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.pn{background:var(--panel);border-radius:6px;padding:12px;display:grid;gap:8px;align-content:start;min-width:0;border:2px solid transparent}
+.pn.rec{border-color:var(--emas)}
+.pn .top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.tag{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:999px;background:var(--bg);color:var(--muted);white-space:nowrap}
+.rec .tag{background:var(--emas);color:#1c231f;font-weight:600}
+.pn p{margin:0;font-size:14px}
+.pn .dim{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+svg{display:block;width:100%;height:auto}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--muted)}
+.legend span{display:flex;align-items:center;gap:6px}
+.sw{width:12px;height:12px;border-radius:2px;flex:none}
+.tw{overflow-x:auto;background:var(--panel);border-radius:6px}
+table{border-collapse:collapse;width:100%;min-width:720px;font-size:14px;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+td:first-child{font-weight:600;white-space:nowrap}
+td.hl,th.hl{background:color-mix(in srgb,var(--emas) 14%,transparent)}
+tr:last-child td{border-bottom:0}
+.areas{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.ar{background:var(--panel);border-radius:6px;padding:10px 12px;display:grid;gap:4px;align-content:start;font-size:14px}
+.ar b{font-size:15px}
+.ar .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+.k.free{color:var(--tanah)} .k.safe{color:var(--safe)} .k.pen{color:var(--kala)} .k.aksa{color:var(--emas)}
+ul.plain{margin:0;padding-left:20px;display:grid;gap:4px;max-width:72ch}
+.note{font-size:14px;color:var(--muted);margin:0;max-width:72ch}
+</style>
+
+<div class="wrap">
+<header>
+  <div class="eyebrow">JAYADWARA · Episode 2 · Usulan perluasan · berdasar docs/31 v0.2</div>
+  <h1>Kampung Kali<br><em>diperluas</em></h1>
+  <p class="lede">Dari mata Jayadwara yang lari ±70 m/s, arena 500 × 380 m sekarang habis dilintasi dalam ±7 detik. Ep 1 sudah naik ke 1400 × 1220 m. Prinsip yang aku pakai sama dengan Ep 1 v02: ukuran objek tetap asli (gang tetap sempit, rumah tetap 3,5–6,5 m), yang bertambah adalah jarak dan area di sekeliling kampung.</p>
+</header>
+
+<section>
+  <div class="sec-head"><h2>Empat ukuran, skala sama</h2><p>Garis putus emas = luas Ep 1 v02 (1400 × 1220 m) sebagai pembanding. Grid 250 m.</p></div>
+  <div class="panels" id="panels"></div>
+  <div class="legend">
+    <span><i class="sw" style="background:var(--desa)"></i>Kampung (penalti tinggi)</span>
+    <span><i class="sw" style="background:var(--andesit)"></i>Ruko, pasar, stasiun</span>
+    <span><i class="sw" style="background:var(--tanah)"></i>Milik Adikara (tanpa penalti)</span>
+    <span><i class="sw" style="background:var(--air)"></i>Kali</span>
+    <span><i class="sw" style="background:var(--sawah)"></i>Bantaran, lapangan, sawah kota (aman)</span>
+    <span><i class="sw" style="background:var(--ink)"></i>Jalan, rel, jalan layang</span>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><h2>Banding cepat</h2><p>Waktu lintas memakai kecepatan lari Jayadwara ±70 m/s (PR #29). Angka rute dan durasi perkiraan kasar untuk greybox.</p></div>
+  <div class="tw"><table>
+    <thead><tr><th></th><th>Sekarang</th><th>A · Tarik jarak</th><th class="hl">B · Perluas + area baru</th><th>C · Dua kampung</th></tr></thead>
+    <tbody>
+      <tr><td>Medan</td><td>600 × 500 m</td><td>1000 × 850 m</td><td class="hl">1400 × 1000 m</td><td>2000 × 1600 m</td></tr>
+      <tr><td>Arena raksasa</td><td>500 × 380 m</td><td>850 × 650 m</td><td class="hl">±1300 × 950 m</td><td>±1900 × 1500 m</td></tr>
+      <tr><td>Jayadwara melintas</td><td>±7 detik</td><td>±12 detik</td><td class="hl">±19 detik (Ep 1: ±17)</td><td>±27 detik</td></tr>
+      <tr><td>Kampung inti</td><td>350 × 145 m</td><td>600 × 245 m (renggang)</td><td class="hl">455 × 320 m (tetap padat)</td><td>2 kampung penuh</td></tr>
+      <tr><td>Rute kejar Aksa</td><td>±650 m</td><td>±1100 m, banyak lari kosong</td><td class="hl">±900 m, lewat atap, jembatan gantung, pintu air</td><td>±1400 m</td></tr>
+      <tr><td>Durasi episode</td><td>20–25 mnt</td><td>20–25 mnt</td><td class="hl">23–28 mnt</td><td>30 mnt lebih</td></tr>
+      <tr><td>Tempat bertarung tanpa penalti</td><td>Kali saja</td><td>Kali saja</td><td class="hl">Kali, gudang Adikara, lapangan selatan</td><td>Kali, gudang, terminal</td></tr>
+      <tr><td>Kerja tambahan</td><td>—</td><td>Kecil: ubah angka generator</td><td class="hl">Sedang: 5 area baru, kebanyakan blok kasar</td><td>Besar: rumah ±2×, kit pasar terpakai duluan</td></tr>
+      <tr><td>Risiko FPS</td><td>Rendah</td><td>Sedang (rumah lebih banyak, kosong)</td><td class="hl">Sedang (sama dengan Ep 1 v02)</td><td>Tinggi</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <div class="sec-head"><h2>Rekomendasi: opsi B</h2><p>Kampung inti cuma dibesarkan ±1,3× supaya kejar-kejaran di gang tetap rapat. Ruang baru ditaruh di cincin luar, tempat Jayadwara bergerak, dan tiap area punya fungsi untuk boss.</p></div>
+  <div class="areas">
+    <div class="ar"><span class="k free">Timur · tanpa penalti</span><b>Gudang & pabrik Adikara</b>Gudang kontainer, pabrik, truk. Fase 1: tuyul raksasa membawa mobil curian ke sini, pemain memotong jalan lewat kali. Menyambung ke petunjuk "rekening penampung" di debrief.</div>
+    <div class="ar"><span class="k pen">Utara · penalti normal</span><b>Jalan layang di atas jalan raya</b>Pilar ±15 m dan gelagar. Jadi penghalang dan pembanding skala, mirip area pilar tol di Ep 1.</div>
+    <div class="ar"><span class="k pen">Barat · penalti normal</span><b>Stasiun kecil + jembatan rel</b>Batas barat yang jelas. Kereta lewat sesekali sebagai bahaya ringan saat bertarung di dekat rel.</div>
+    <div class="ar"><span class="k safe">Barat daya · aman</span><b>Pintu air + anak kali</b>Landmark kedua dari mulut gang. Untuk Aksa jadi titik T5 yang baru. Untuk Jayadwara jadi tempat berdiri yang aman.</div>
+    <div class="ar"><span class="k safe">Selatan · aman</span><b>Lapangan bola + sawah kota</b>Zona aman kedua di seberang kali. Fase 2: tiga tuyul besar menyebar ke gudang, stasiun, dan lapangan.</div>
+    <div class="ar"><span class="k aksa">Untuk Aksa</span><b>Pembanding skala</b>Menara air, tiang SUTET, tiang listrik, deret pohon, siluet gedung Adikara di horizon. Membuat ukuran terbaca dari ketinggian 45 m.</div>
+  </div>
+  <ul class="plain">
+    <li>Keputusan F1–F7 tetap berlaku. 8 blok Chaos tetap di pinggir kali dan jalan raya; gudang Adikara cukup memakai rumah tukar puing.</li>
+    <li>Pasar tetap tutup (F4). Posisinya bergeser ke timur kampung, di antara kampung dan gudang.</li>
+    <li>Kejar 5 tuyul tetap ±5–6 menit: T4 menyeberang jembatan gantung, T5 pindah ke pintu air, lalu kawanan bergabung di lapangan tepi kali.</li>
+  </ul>
+  <p class="note">A paling murah, tapi kampung jadi renggang dan kejar-kejaran terasa lari kosong. C paling megah, tapi menggandakan rumah, melewati target durasi, dan memakai kit pasar yang dijatahkan untuk Ep 4.</p>
+</section>
+</div>
+
+<script>
+const NS="http://www.w3.org/2000/svg";
+function el(t,a,p){const e=document.createElementNS(NS,t);for(const k in a){if(k==="text")e.textContent=a[k];else if(k==="css")e.setAttribute("style",a[k]);else e.setAttribute(k,a[k]);}if(p)p.appendChild(e);return e;}
+const V=n=>`var(--${n})`;
+const W=300,H=250,S=0.125; // px per meter, sama untuk semua panel (2400 × 2000 m)
+const X=x=>W/2+x*S, Y=y=>H/2-y*S;
+const R=(g,x1,y1,x2,y2,css)=>el("rect",{x:X(Math.min(x1,x2)),y:Y(Math.max(y1,y2)),width:Math.abs(x2-x1)*S,height:Math.abs(y2-y1)*S,css},g);
+const Lb=(g,x,y,t,c="ink",a="middle")=>el("text",{x:X(x),y:Y(y),"font-size":8.5,"text-anchor":a,css:`fill:${V(c)};font-weight:700;font-family:var(--f-body)`,text:t},g);
+const fill=n=>`fill:${V(n)}`;
+
+const now=[
+  ["rect",-260,145,260,126,"andesit"],["rect",-260,125,260,110,"ink"],["rect",-200,105,150,-40,"desa"],
+  ["rect",150,110,260,-20,"andesit",.6],["rect",-230,-40,260,-78,"sawah"],["rect",-280,-80,280,-122,"air"],
+  ["rect",-225,-128,260,-235,"desa",.5],["rect",-242,170,-230,-250,"ink"]];
+const scale=(arr,k)=>arr.map(a=>[a[0],a[1]*k,a[2]*k,a[3]*k,a[4]*k,a[5],a[6]]);
+const optB=[
+  ["rect",-700,360,700,350,"ink"],["rect",-640,335,640,305,"andesit"],["rect",-680,300,680,280,"ink"],
+  ["rect",-260,270,195,-50,"desa"],["rect",205,270,340,-30,"andesit",.6],["rect",360,280,690,-60,"tanah"],
+  ["rect",-700,-55,700,-110,"sawah"],["rect",-700,-115,700,-160,"air"],["rect",-560,400,-540,-600,"ink"],
+  ["rect",-640,180,-575,40,"andesit"],["rect",-430,-170,450,-380,"desa",.5],["rect",-430,-395,700,-600,"sawah"],
+  ["rect",-520,-160,-490,-600,"air"],["rect",-535,-130,-475,-170,"andesit"]];
+const optC=[
+  ["rect",-1000,560,1000,545,"ink"],["rect",-950,530,950,490,"andesit"],["rect",-1000,485,1000,460,"ink"],
+  ["rect",-420,440,320,-60,"desa"],["rect",340,440,560,-40,"andesit",.6],["rect",580,450,1000,-80,"tanah"],
+  ["rect",-1000,-70,1000,-140,"sawah"],["rect",-1000,-145,1000,-200,"air"],["rect",-820,600,-795,-1000,"ink"],
+  ["rect",-940,260,-840,60,"andesit"],["rect",-760,-210,600,-700,"desa"],["rect",620,-210,1000,-700,"andesit"],
+  ["rect",-1000,-720,1000,-1000,"sawah"]];
+const P=[
+  {id:"now",name:"Sekarang",tag:"v0.2",dim:"600 × 500 m · arena 500 × 380 m",txt:"Kampung, kali, kampung seberang. Pas untuk Aksa, sempit untuk Jayadwara.",zones:now,labels:[[0,40,"kampung"]]},
+  {id:"a",name:"A · Tarik jarak",tag:"murah",dim:"1000 × 850 m · arena 850 × 650 m",txt:"Semua jarak ×1,7 seperti Ep 1 v02 tanpa area baru. Gang jadi panjang dan renggang.",zones:scale(now,1.7),labels:[[0,60,"kampung ×1,7"]]},
+  {id:"b",name:"B · Perluas + area baru",tag:"rekomendasi",rec:true,dim:"1400 × 1000 m · arena ±1300 × 950 m",txt:"Kampung inti ±1,3× tetap padat. Cincin luar: gudang Adikara, jalan layang, stasiun, pintu air, lapangan.",zones:optB,labels:[[-30,110,"kampung"],[525,110,"gudang","onfill"],[135,-500,"lapangan + sawah"],[-610,270,"stasiun","ink","middle"]]},
+  {id:"c",name:"C · Dua kampung",tag:"mahal",dim:"2000 × 1600 m · arena ±1900 × 1500 m",txt:"B ditambah kampung kedua yang penuh di seberang kali dan terminal. Rumah ±2×.",zones:optC,labels:[[-50,190,"kampung 1"],[-80,-450,"kampung 2"],[790,190,"gudang","onfill"]]}];
+const host=document.getElementById("panels");
+P.forEach(p=>{
+  const d=document.createElement("div");d.className="pn"+(p.rec?" rec":"");
+  d.innerHTML=`<div class="top"><h3>${p.name}</h3><span class="tag">${p.tag}</span></div>`;
+  const svg=el("svg",{viewBox:`0 0 ${W} ${H}`,role:"img","aria-label":"Denah mini "+p.name});
+  el("rect",{x:0,y:0,width:W,height:H,css:fill("bg")},svg);
+  const g=el("g",{css:`stroke:${V("line")};stroke-width:.5`},svg);
+  for(let x=-1250;x<=1250;x+=250)el("line",{x1:X(x),y1:0,x2:X(x),y2:H},g);
+  for(let y=-1000;y<=1000;y+=250)el("line",{x1:0,y1:Y(y),x2:W,y2:Y(y)},g);
+  p.zones.forEach(z=>R(svg,z[1],z[2],z[3],z[4],`${fill(z[5])};opacity:${z[6]||.9}`));
+  if(p.id==="b"){for(let x=-650;x<=650;x+=130)R(svg,x-6,365,x+6,345,fill("ink"));}
+  el("rect",{x:X(-700),y:Y(610),width:1400*S,height:1220*S,css:`fill:none;stroke:${V("emas")};stroke-width:1.4;stroke-dasharray:5 4`},svg);
+  p.labels.forEach(l=>Lb(svg,l[0],l[1],l[2],l[3]||"ink",l[4]||"middle"));
+  // Jayadwara 45 m sebagai titik skala
+  el("circle",{cx:X(0),cy:Y(p.id==="c"?-172:p.id==="b"?-137:p.id==="a"?-172:-101),r:2.6,css:`${fill("kala")};stroke:${V("bg")};stroke-width:.8`},svg);
+  el("rect",{x:12,y:H-14,width:250*S,height:3,css:fill("ink")},svg);
+  el("text",{x:12,y:H-18,"font-size":8,css:`fill:${V("muted")};font-family:var(--f-mono)`,text:"250 m · ● Jayadwara"},svg);
+  d.appendChild(svg);
+  const dim=document.createElement("div");dim.className="dim";dim.textContent=p.dim;d.appendChild(dim);
+  const t=document.createElement("p");t.textContent=p.txt;d.appendChild(t);
+  host.appendChild(d);
+});
+</script>

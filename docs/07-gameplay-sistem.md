@@ -35,7 +35,7 @@ Arah dihitung **relatif ke musuh yang dituju**, bukan ke kamera, supaya "maju" s
 
 #### Daftar jurus (konsep pose)
 
-Disetujui developer 16 Okt 2026 dari konsep pose ("Usulan Jurus Aksa"). Patokan bentuk gerak untuk memilih animasi placeholder F1 dan brief mocap F2; tendangan memakai bentuk taekwondo. Gaya combat tidak harus silat murni; yang dikejar combat yang seru (keputusan developer 16 Okt 2026). Sama untuk Aksa dan Jayadwara.
+Disetujui developer 16 Okt 2026 dari konsep pose ([`visual/usulan-jurus-aksa.html`](visual/usulan-jurus-aksa.html), animasi stickman; daftar angka kedua karakter: [`visual/daftar-jurus.html`](visual/daftar-jurus.html); gerak asli dari Unreal: [`visual/gerak-jurus-aksa.html`](visual/gerak-jurus-aksa.html), butuh `combat_motion.json`). Patokan bentuk gerak untuk memilih animasi placeholder F1 dan brief mocap F2; tendangan memakai bentuk taekwondo. Gaya combat tidak harus silat murni; yang dikejar combat yang seru (keputusan developer 16 Okt 2026). Sama untuk Aksa dan Jayadwara.
 
 | Input | Jurus | Gerak |
 |---|---|---|
@@ -66,7 +66,7 @@ Gerak dibedakan per arah, bukan per jarak ke musuh, supaya pemain selalu tahu ha
 
 ### Parry (tepis)
 
-Usulan 17 Okt 2026, dinilai lewat gate parry Iterasi 3 ([23](23-rencana-fase-1.md)). Sama untuk Aksa dan Jayadwara. Tekan tangkis tepat sebelum pukulan kena (jendela 0,2 s manusia / 0,25 s raksasa):
+Usulan 17 Okt 2026, dinilai lewat gate parry Iterasi 3 ([23](23-rencana-fase-1.md); visual latihan: [`visual/latihan-parry-aksa.html`](visual/latihan-parry-aksa.html)). Sama untuk Aksa dan Jayadwara. Tekan tangkis tepat sebelum pukulan kena (jendela 0,2 s manusia / 0,25 s raksasa):
 
 | Urutan | Rasa |
 |---|---|
@@ -91,7 +91,7 @@ Bentuknya tendangan terbang memutar dan hantaman tinju ke bawah (lihat daftar ju
 
 ### Reaksi kena pukul
 
-Keputusan 17 Okt 2026 (Fase 1 Iterasi 4). Sama untuk Aksa, Jayadwara, dummy, dan musuh; angka di [23](23-rencana-fase-1.md) bagian 5.
+Keputusan 17 Okt 2026 (Fase 1 Iterasi 4; visual: [`visual/usulan-iterasi-4.html`](visual/usulan-iterasi-4.html)). Sama untuk Aksa, Jayadwara, dummy, dan musuh; angka di [23](23-rencana-fase-1.md) bagian 5.
 
 | Reaksi | Kapan | Hasil |
 |---|---|---|
@@ -117,7 +117,7 @@ Pukulan "menempel" ke musuh searah input (Q3, gaya Arkham): musuh dalam kerucut 
 
 ### Tameng Inten (perisai energi)
 
-Usulan 17 Okt 2026 (permintaan developer), **Fase 2**. Hanya Jayadwara; Aksa tidak punya walau kalungnya sama. Visual konsep: artifact "Tameng Inten".
+Usulan 17 Okt 2026 (permintaan developer), **Fase 2**. Hanya Jayadwara; Aksa tidak punya walau kalungnya sama. Visual konsep: [`visual/tameng-inten-jayadwara.html`](visual/tameng-inten-jayadwara.html).
 
 Serangan **kekuatan** (bola api, sinar, semburan; ditandai `Attack.Type.Energy`) tidak bisa ditangkis lengan. Saat tombol tangkis ditahan dan yang datang serangan energi, permata dada menyala dan melepas **16 keping berlian** bercahaya yang menyatu jadi perisai belah ketupat di depan badan, lalu kembali ke permata dan padam saat dilepas. Pukulan fisik tetap ditangkis lengan seperti biasa. Tombolnya tetap satu (tangkis).
 

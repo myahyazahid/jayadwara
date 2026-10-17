@@ -1,6 +1,6 @@
 # 31 — Desain Level Ep 2: `Ep02_KampungKali`
 
-> **Status: v0.4, tata letak v02 (16 Okt 2026), revisi 17 Okt 2026 setelah review greybox Hermes (bagian 2a)**: developer menilai map v01 (600 × 500 m) terlalu kecil untuk Jayadwara yang gesit (±70 m/s, PR #29) dan memilih **opsi B: perluas + area baru** (bagian 2a). Angka di bagian 2 adalah **v01 (arsip)**. F1–F7 tetap berlaku (bagian 9).
+> **Status: v0.4, tata letak v02 (16 Okt 2026), revisi 17 Okt 2026 setelah review greybox Hermes (bagian 2a)**: developer menilai map v01 (600 × 500 m) terlalu kecil untuk Jayadwara yang gesit (±70 m/s, PR #29) dan memilih **opsi B: perluas + area baru** (bagian 2a; banding opsi A–C: [`visual/ep02-perluasan-opsi.html`](visual/ep02-perluasan-opsi.html)). Angka di bagian 2 adalah **v01 (arsip)**. F1–F7 tetap berlaku (bagian 9).
 > v0.2 (15 Okt 2026): F1–F7 dijawab developer sesuai usulan. Rincian dari pola di [28](28-struktur-level-episode.md#ep-2--ep02_kampungkali--siang--sore), format sama dengan [30](30-desain-level-ep01.md) (Ep 1).
 > Sumber: [16 kartu Ep 2](16-panduan-arc-1.md#ep-2--tangan-tangan-kecil--tuyul) (isi episode), [27](27-rencana-model-tuyul.md) (ukuran Tuyul), [02](02-setting-dunia.md) (Kampung Kali). Skenario adegan Ep 2 belum ada ([17](17-skenario-arc-1.md#episode-210)), jadi urutan di sini juga jadi kerangka skenarionya.
 
