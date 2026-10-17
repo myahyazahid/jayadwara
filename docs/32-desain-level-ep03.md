@@ -1,6 +1,6 @@
 # 32 — Desain Level Ep 3: `Ep03_Adikara`
 
-> **Status: v0.2, tata letak memanjang (17 Okt 2026), usulan.** Developer memilih map **memanjang barat → timur ala RE4** (alur terus maju, balik arah minim) menggantikan draf v01 plaza-tengah (1400 × 1050 m, gardu urutan bebas). Keputusan H1 sudah dijawab; H2–H8 menunggu developer (bagian 8).
+> **Status: v0.3 (17 Okt 2026): kepadatan gedung dikurangi ±30% dengan ukuran gedung tetap asli (bagian 2a).** v0.2, tata letak memanjang (17 Okt 2026), usulan: Developer memilih map **memanjang barat → timur ala RE4** (alur terus maju, balik arah minim) menggantikan draf v01 plaza-tengah (1400 × 1050 m, gardu urutan bebas). Keputusan H1 sudah dijawab; H2–H8 menunggu developer (bagian 8).
 > Rincian dari pola di [28](28-struktur-level-episode.md#ep-3--ep03_adikara--malam-lampu-kota-padam-bertahap), format sama dengan [30](30-desain-level-ep01.md) dan [31](31-desain-level-ep02.md).
 > Sumber: [16 kartu Ep 3](16-panduan-arc-1.md#ep-3--lapar-listrik--jenglot) (isi episode), [16 bagian 4](16-panduan-arc-1.md#4-benang-merah-narasi) (benang merah), [02](02-setting-dunia.md) (Distrik Adikara). Skenario adegan Ep 3 belum ada di [17](17-skenario-arc-1.md), jadi urutan di sini juga jadi kerangka skenarionya.
 
@@ -43,6 +43,23 @@
    ░░░░░░░░░░░░░░░░░░░░ KAMPUNG KALI (latar, Ep 2) ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
    ← barat                    alur pemain →                                     timur →
 ```
+
+### 2a. Kepadatan v0.3 (17 Okt 2026, permintaan developer)
+
+Konsep realistis hasil prompt developer terlalu padat untuk dibangun dev solo. Kepadatan diturunkan **tanpa mengecilkan gedung** (tetap proporsional terhadap Jayadwara 45 m):
+
+| | v0.2 | **v0.3** |
+|---|---|---|
+| Gedung di medan (termasuk ruko zona A) | ±158 | **±114** |
+| Jarak antar-gedung | 5–10 m | **20–30 m** (ruko 12–14 m) |
+| Ruang terbuka di sela blok | — | **9 petak**: 4 parkir, 3 taman, 2 lahan kosong (±100 × 100 m) |
+| Deret gedung menghadap boulevard | acak | **sengaja dideretkan** di kedua sisi Jl. Adikara Raya supaya jalan tetap terasa kota dan jadi pembanding skala |
+
+**Aturan produksi** (berlaku untuk greybox dan level art):
+- **Gedung modular:** 4–5 jenis menara kaca + 3–4 jenis apartemen (Fab/kit), diulang dengan tinggi dan putaran berbeda lewat instancing. Aset unik hanya Menara Adikara, 3 gardu, pintu tol.
+- **Latar murah:** skyline utara, kampung di balik rel, dan sungai tidak bisa didatangi; cukup mesh kasar/HLOD/kartu. Kampung latar memakai ulang kit Kampung Kali (Ep 2).
+- **Gedung hancur dibatasi** ([28](28-struktur-level-episode.md#2-anatomi-satu-map-episode)): ±15–20 `AJDDestructibleBuilding` di pinggir boulevard dan di samping gardu; sisanya static.
+- Parkir, taman, dan lahan kosong menambah ruang gerak Jayadwara dan tempat berlindung skala manusia; taman dan parkir di arena = penalti rendah (diputuskan saat greybox).
 
 ### Koordinat greybox v02 (meter, X timur, Y utara, titik nol = tengah jalur di Jl. Adikara Raya)
 

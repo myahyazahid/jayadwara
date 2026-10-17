@@ -69,7 +69,7 @@ text{font-family:var(--f-body)}
 
 <div class="wrap">
 <header>
-  <div class="eyebrow">JAYADWARA · Episode 3 · Desain level v0.2 · tata letak memanjang (17 Okt 2026) · docs/32</div>
+  <div class="eyebrow">JAYADWARA · Episode 3 · Desain level v0.3 · tata letak memanjang, kepadatan dikurangi (17 Okt 2026) · docs/32</div>
   <h1>Ep03_Adikara<br><em>Lapar Listrik</em></h1>
   <p class="lede">Satu jalur panjang dari barat ke timur, seperti area RE4: pemain selalu didorong maju. Aksa turun di pintu tol, berjalan ke Menara Adikara dan menembusnya sampai atap. Jayadwara lalu mengejar jenglot ke timur, memutus gardu satu per satu. Sektor di belakang pemain sudah gelap, sektor di depan masih menyala, jadi cahaya sendiri yang menunjuk arah. Kembali ke belakang tetap bisa, tapi tidak ada yang perlu dicari di sana.</p>
   <div class="stats"><span>Area <b>±2200 × 700 m</b></span><span>Arena raksasa <b>±1830 × 600 m</b></span><span>Lintas arena memanjang <b>±26 detik</b> (Jayadwara ±70 m/s)</span><span>Durasi <b>±25–29 mnt</b></span><span>Jenglot <b>0,3 m</b> · fase 1 <b>25 m</b> · puncak <b>36 m</b> · Jayadwara <b>45 m</b></span></div>
@@ -150,6 +150,7 @@ text{font-family:var(--f-body)}
   <div class="sec-head"><h2>Keputusan</h2><p>H1 disetujui developer 17 Okt 2026; H2–H8 masih usulan. Rincian di docs/32.</p></div>
   <div class="dec">
     <div><code>H1 ✓</code>Peta memanjang 2200 × 700 m, alur barat → timur ala RE4, balik arah minim</div>
+    <div><code>v0.3 ✓</code>Kepadatan dikurangi ±30% (±114 gedung di area main), ukuran gedung tetap asli; sela diisi parkir, taman, lahan kosong</div>
     <div><code>H2</code>Interior menara: 4 set lantai dimainkan (B1+L1, L20–22, L38, L50+atap)</div>
     <div><code>H3</code>Gardu berurutan G1 → G2 → G3 (kartu docs/16 belum menyebut urutan)</div>
     <div><code>H6</code>Korban di briefing: petugas lemas, bukan tewas</div>
@@ -214,17 +215,27 @@ const KOS=[[PLAZA[0],PLAZA[1],PLAZA[2],PLAZA[3]],[MENARA[0]-25,MENARA[1]+25,MENA
 const GED=[];
 GARDU.forEach(g=>KOS.push([g.x-43,g.x+43,g.y-33,g.y+33]));
 [[180,105,40,40,180],[520,-100,40,60,70]].forEach(([tx,ty,tp,tl,h],i)=>{const r=[tx-tp/2,tx+tp/2,ty-tl/2,ty+tl/2];KOS.push(r);GED.push({r,h,k:i?"apt":null});});
-for(let y=-290;y<292;){let x=-1095;const st=[38,46,54][Math.floor(rnd()*3)];
-  while(x<1055){const p=[25,30,40,50][Math.floor(rnd()*4)],l=[25,30,40,50][Math.floor(rnd()*4)];const r=[x+5,x+5+p,y+5,y+5+l];
-    if(r[1]<1058&&r[3]<296&&!KOS.some(k=>hit(r,k,5))&&!GED.some(g=>hit(r,g.r,7))){const cx=(r[0]+r[1])/2;let h,k=null;
-      if(cx<-750)h=[8,10,14][Math.floor(rnd()*3)];
-      else if(cx<250)h=[60,90,120,150,180][Math.floor(rnd()*5)];
+// ruang terbuka di sela blok (v0.3: kepadatan dikurangi, ukuran gedung tetap asli)
+const TERBUKA=[[-280,-180,190,290,"parkir"],[-60,40,-290,-190,"taman"],[260,380,190,290,"lahan kosong"],[420,520,-290,-190,"parkir"],[-280,-130,-150,-60,"taman"],[60,170,-150,-40,"parkir"],[300,400,40,150,"taman"],[-1080,-960,190,290,"parkir"],[-900,-800,-290,-190,"lahan kosong"]];
+TERBUKA.forEach(t=>KOS.push([t[0],t[1],t[2],t[3]]));
+// deret gedung menghadap boulevard (bingkai jalan, pembanding skala dari mata Jayadwara)
+for(const [y0,y1] of [[30,80],[-80,-30],[100,150],[-150,-100]])for(let x=-290;x<690;x+=62){const apt=x>=250,w=apt?40:48;const r=[x,x+w,y0,y1];
+  if(!KOS.some(k=>hit(r,k,8))&&!GED.some(g=>hit(r,g.r,10))&&rnd()>.15)GED.push({r,h:apt?[40,55,70,85][Math.floor(rnd()*4)]:[60,90,120,150][Math.floor(rnd()*4)],k:apt?"apt":null});}
+for(let y=-290;y<292;){let x=-1095;const st=[50,56,62][Math.floor(rnd()*3)];
+  while(x<1055){const ruko=x<-750,apt=x>=250;
+    const p=ruko?[20,25,30][Math.floor(rnd()*3)]:apt?[30,40,50][Math.floor(rnd()*3)]:[40,50,60][Math.floor(rnd()*3)];
+    const l=ruko?[15,20][Math.floor(rnd()*2)]:apt?[20,25,30][Math.floor(rnd()*3)]:[40,50,60][Math.floor(rnd()*3)];
+    const r=[x+8,x+8+p,y+8,y+8+l];
+    if(rnd()>.08&&r[1]<1058&&r[3]<296&&!KOS.some(k=>hit(r,k,8))&&!GED.some(g=>hit(r,g.r,10))){let h,k=null;
+      if(ruko)h=[8,10,14][Math.floor(rnd()*3)];
+      else if(!apt)h=[60,90,120,150,180][Math.floor(rnd()*5)];
       else{h=[20,40,55,70,85][Math.floor(rnd()*5)];k="apt";}
       GED.push({r,h,k});}
-    x+=p+10;}
+    x+=p+(ruko?12:20);}
   y+=st;}
 const warnaG=g=>g.k==="apt"?`fill:${V("desa")}`:g.h>100?`fill:${V("air")}`:g.h>=45?`fill:${V("andesit")}`:`fill:${V("andesit")};opacity:.55`;
 GED.forEach(g=>R(base,g.r[0],g.r[3],g.r[1],g.r[2],`${warnaG(g)};stroke:${V("bg")};stroke-width:.5`));
+TERBUKA.forEach(([x0,x1,y0,y1,n])=>{R(base,x0,y1,x1,y0,`fill:${V(n==="taman"?"sawah":"andesit")};opacity:${n==="taman"?.45:.18};stroke:${V("line")};stroke-width:.6;stroke-dasharray:${n==="taman"?"0":"3 2"}`);L(base,(x0+x1)/2,(y0+y1)/2-3,n,{fs:7,w:600,c:V("muted")});});
 // plaza + menara
 R(base,PLAZA[0],PLAZA[3],PLAZA[1],PLAZA[2],`fill:${V("sawah")};opacity:.35;stroke:${V("ink")};stroke-width:.8`);
 el("circle",{cx:X(-600),cy:Y(0),r:22*K,css:`fill:${V("air")};opacity:.7;stroke:${V("ink")};stroke-width:.6`},base);
