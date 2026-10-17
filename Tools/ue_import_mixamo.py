@@ -39,6 +39,7 @@ ROLES = {
     "heavy": "Pukulan putar",
     "finisher_01": "Tendangan belakang (dwi chagi) — Mixamo: Back Kick",
     "finisher_02": "Tendangan ganda melompat (narae chagi) — Mixamo: Double Kick",
+    "finisher_03": "Finisher 3 (ringan x3 -> berat), dipilih developer",
     "air": "Tendangan terbang memutar — Mixamo: Tornado Kick",
     "air_slam": "Hantaman ke bawah",
     "dodge_back": "Salto belakang — Mixamo: Back Flip",

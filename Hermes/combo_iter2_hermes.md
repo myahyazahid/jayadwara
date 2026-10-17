@@ -174,7 +174,7 @@ Tulis `Hermes/Tools/combo_iter2_setup.py`. Isinya salinan bagian `Tools/ue_setup
    |---|---|
    | `light_01..04` | `light_combo[0..3].montage` (langkah lain dan damage tetap) |
    | `lunge`, `back` | `lunge_attack.montage`, `back_attack.montage`. `lunge_attack.move_height` = 60, `move_duration` = 0,35 |
-   | `finisher_01/02` | `heavy_finishers[0/1].montage` |
+   | `finisher_01/02/03` | `heavy_finishers[0/1/2].montage` (`finisher_03` hanya kalau file-nya ada; kalau tidak, slot 2 dibiarkan kosong) |
    | `heavy` | `heavy_attack.montage` |
    | `air`, `air_slam` | `air_attack.montage`, `air_slam.montage` |
    | `dodge_forward/back/left/right` | `dodge_montages.forward/backward/left/right` |
