@@ -42,29 +42,30 @@
       "aset": "/Game/Hermes/ComboIter2/Mixamo/A_Aksa_Mx_air_slam",
       "gagal": [],
       "catatan": [
+        "dipangkas sengaja: 0.40 s (FBX 2.67 s)",
         "peran boleh pinggul rendah (dodge/air_slam)"
       ],
-      "panjang_s": 2.667,
-      "frame_ue": 161,
+      "panjang_s": 0.4,
+      "frame_ue": 25,
       "skeleton": "/Game/Characters/Mannequins/Meshes/SK_Mannequin.SK_Mannequin",
       "panjang_fbx_s": 2.667,
       "frame_fbx": 81,
       "puncak": [
         {
-          "tulang": "hand_l",
-          "waktu_s": 1.25,
-          "kecepatan_cm_s": 1029.0
+          "tulang": "hand_r",
+          "waktu_s": 0.167,
+          "kecepatan_cm_s": 458.7
         }
       ],
       "puncak_global": {
-        "tulang": "hand_l",
-        "waktu_s": 1.25,
-        "kecepatan_cm_s": 1029.0
+        "tulang": "hand_r",
+        "waktu_s": 0.167,
+        "kecepatan_cm_s": 458.7
       },
       "kena_diharapkan": null,
       "kena_jumlah_diharapkan": 0,
       "pinggul_min_cm": 35.84,
-      "lompat_maks_cm": 20.13,
+      "lompat_maks_cm": 10.21,
       "lompat_tulang": "hand_r",
       "lulus": true
     },

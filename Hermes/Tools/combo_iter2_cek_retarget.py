@@ -22,6 +22,9 @@ KENA_BONE = {"tangan": ("hand_l", "hand_r"), "kaki": ("foot_l", "foot_r")}
 # peran yang boleh pinggulnya rendah (dodge/air_slam) — panduan §5
 PINGGUL_RENDAH_OK = ("dodge_", "air_slam")
 TOLERANSI_FRAME = 1.0 / 30.0 + 0.005
+# peran yang sengaja dipangkas (combo_iter2_pangkas.py) -> panjang yang diharapkan, bukan panjang FBX.
+# air_slam: kode memakainya sebagai pose menukik singkat (JDGA_HeavyAttack baris 108).
+DIPANGKAS = {"air_slam": 0.40}
 
 EAL = unreal.EditorAssetLibrary
 AL = unreal.AnimationLibrary
@@ -109,12 +112,15 @@ def cek_satu(nama_peran, fbx):
     if not sk or sk.get_name() != "SK_Mannequin":
         h["gagal"].append(f"skeleton bukan SK_Mannequin ({h['skeleton']})")
 
-    # panjang vs FBX
+    # panjang vs FBX (atau vs panjang pangkasan kalau peran ini sengaja dipangkas)
     if fbx:
         h["panjang_fbx_s"] = fbx.get("detik")
         h["frame_fbx"] = fbx.get("frame_jumlah")
-        if fbx.get("detik") is not None and abs(length - fbx["detik"]) > TOLERANSI_FRAME:
-            h["gagal"].append(f"panjang {length:.3f} s vs FBX {fbx['detik']:.3f} s (beda > 1 frame)")
+        acuan = DIPANGKAS.get(nama_peran, fbx.get("detik"))
+        if nama_peran in DIPANGKAS:
+            h["catatan"].append(f"dipangkas sengaja: {acuan:.2f} s (FBX {fbx.get('detik'):.2f} s)")
+        if acuan is not None and abs(length - acuan) > TOLERANSI_FRAME:
+            h["gagal"].append(f"panjang {length:.3f} s vs acuan {acuan:.3f} s (beda > 1 frame)")
     else:
         h["catatan"].append("tidak ada data cek_fbx.json untuk file ini")
 

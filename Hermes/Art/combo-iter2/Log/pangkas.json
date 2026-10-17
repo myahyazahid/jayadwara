@@ -1,0 +1,41 @@
+[
+ {
+  "peran": "air_slam",
+  "potong": [
+   1.5,
+   0.4
+  ],
+  "frame": 12,
+  "tulang": 89,
+  "sebelum": {
+   "panjang": 2.667,
+   "kepala_z": [
+    52.0,
+    248.5
+   ],
+   "pelvis_z": [
+    36.9,
+    188.3
+   ],
+   "pelvis_y": [
+    -0.3,
+    1.3
+   ]
+  },
+  "sesudah": {
+   "panjang": 0.4,
+   "kepala_z": [
+    46.6,
+    149.2
+   ],
+   "pelvis_z": [
+    36.0,
+    101.0
+   ],
+   "pelvis_y": [
+    -0.1,
+    1.3
+   ]
+  }
+ }
+]
