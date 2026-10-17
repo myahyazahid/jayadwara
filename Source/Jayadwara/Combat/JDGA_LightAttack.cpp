@@ -3,6 +3,7 @@
 #include "Abilities/JDAbilitySystemComponent.h"
 #include "Abilities/JDGameplayTags.h"
 #include "Abilities/Tasks/AbilityTask_ApplyRootMotionConstantForce.h"
+#include "Abilities/Tasks/AbilityTask_ApplyRootMotionJumpForce.h"
 #include "Abilities/Tasks/AbilityTask_PlayMontageAndWait.h"
 #include "Combat/JDCombatComponent.h"
 #include "Combat/JDCombatProfile.h"
@@ -87,10 +88,27 @@ const FJDAttackStep* UJDGA_LightAttack::ChooseOpener()
 {
 	OpenerTarget.Reset();
 	AActor* Avatar = GetAvatarActorFromActorInfo();
-	const UJDCombatComponent* Combat = GetCombat();
+	UJDCombatComponent* Combat = GetCombat();
 	const UJDCombatProfile* Profile = Combat ? Combat->GetCombatProfile() : nullptr;
+	if (!Avatar || !Profile)
+	{
+		return nullptr;
+	}
+
+	// Serangan balik setelah parry (docs/07 "Parry"): selalu ke penyerang yang di-parry, apa pun arah input.
+	if (AActor* Countered = Combat->ConsumeCounterTarget(); Countered && Profile->ParryCounterAttack.Montage)
+	{
+		const FVector ToCountered = (Countered->GetActorLocation() - Avatar->GetActorLocation()).GetSafeNormal2D();
+		if (!ToCountered.IsZero())
+		{
+			Avatar->SetActorRotation(FRotator(0.0f, ToCountered.Rotation().Yaw, 0.0f));
+		}
+		OpenerTarget = Countered;
+		return &Profile->ParryCounterAttack;
+	}
+
 	const FVector Input = GetInputDirection2D();
-	if (!Avatar || !Profile || Input.IsZero())
+	if (Input.IsZero())
 	{
 		return nullptr;
 	}
@@ -243,9 +261,21 @@ void UJDGA_LightAttack::PlayAttack(const FJDAttackStep& Step, bool bFaceInput)
 	{
 		// Override root motion animasi selama MoveDuration (sama dengan dodge), lalu kecepatan dijepit supaya tidak meluncur.
 		const FVector Direction = Character->GetActorForwardVector().GetSafeNormal2D() * FMath::Sign(Distance);
-		MoveTask = UAbilityTask_ApplyRootMotionConstantForce::ApplyRootMotionConstantForce(
-			this, NAME_None, Direction, FMath::Abs(Distance) / Step.MoveDuration, Step.MoveDuration, false, nullptr,
-			ERootMotionFinishVelocityMode::ClampVelocity, FVector::ZeroVector, Character->GetCharacterMovement()->MaxWalkSpeed * 0.3f, true);
+		const float ClampSpeed = Character->GetCharacterMovement()->MaxWalkSpeed * 0.3f;
+		if (Step.MoveHeight > 0.0f)
+		{
+			// Lompat kecil melengkung ke arah hadap (terjang); selesai saat mendarat atau MoveDuration habis.
+			MoveTask = UAbilityTask_ApplyRootMotionJumpForce::ApplyRootMotionJumpForce(
+				this, NAME_None, Direction.Rotation(), FMath::Abs(Distance), Step.MoveHeight, Step.MoveDuration,
+				Step.MoveDuration * 0.5f, true, ERootMotionFinishVelocityMode::ClampVelocity, FVector::ZeroVector, ClampSpeed,
+				nullptr, nullptr);
+		}
+		else
+		{
+			MoveTask = UAbilityTask_ApplyRootMotionConstantForce::ApplyRootMotionConstantForce(
+				this, NAME_None, Direction, FMath::Abs(Distance) / Step.MoveDuration, Step.MoveDuration, false, nullptr,
+				ERootMotionFinishVelocityMode::ClampVelocity, FVector::ZeroVector, ClampSpeed, true);
+		}
 		MoveTask->ReadyForActivation();
 	}
 }

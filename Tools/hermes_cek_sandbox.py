@@ -11,7 +11,7 @@ import argparse
 import subprocess
 import sys
 
-SANDBOX = ("Content/Hermes/", "Source/Jayadwara/Hermes/", "Hermes/")
+SANDBOX = ("Content/Hermes/", "Source/Jayadwara/Hermes/", "Hermes/", "mixamo/asset/")   # mixamo/: mixamo/README.md
 INSTRUKSI = ("Hermes/aksa_hermes.md", "Hermes/panduan_model_3d.md", "Hermes/panduan_kerja_claude.md")   # di dalam sandbox tapi milik Claude: read-only
 # instruksi khusus model lain dari Claude juga read-only: Hermes/<model>_hermes.md, dan semua skill di Hermes/skills/
 # aset rawan: kalau berubah, hampir pasti merusak proyek (insiden SK_Mannequin 13-14 Okt 2026, docs/25 R7)

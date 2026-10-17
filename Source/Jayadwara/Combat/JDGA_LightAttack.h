@@ -4,7 +4,7 @@
 #include "Abilities/JDGameplayAbility.h"
 #include "JDGA_LightAttack.generated.h"
 
-class UAbilityTask_ApplyRootMotionConstantForce;
+class UAbilityTask;
 class UAbilityTask_PlayMontageAndWait;
 struct FJDAttackStep;
 
@@ -19,7 +19,8 @@ struct FJDAttackStep;
  *
  * Arah (docs/07 "Combo & arah"): saat combo dimulai, arah input dibandingkan dengan arah ke target terdekat. Maju +
  * target jauh -> LungeAttack (terjang ke target), mundur -> BackAttack; keduanya menggantikan langkah 1 dan combo
- * berlanjut dari langkah 2. Kiri/kanan atau tanpa target -> combo biasa.
+ * berlanjut dari langkah 2. Kiri/kanan atau tanpa target -> combo biasa. Dalam ParryCounterWindow setelah parry ->
+ * ParryCounterAttack ke penyerang yang di-parry (docs/07 "Parry"), juga menggantikan langkah 1.
  *
  * Di udara (docs/07 "Serangan udara"): UJDCombatProfile::AirAttack, maks. AirComboMax per lompatan, tiap pukulan
  * "ngambang" sebentar (gravitasi dikurangi). Slot AirAttack kosong = combo darat seperti dulu.
@@ -62,7 +63,7 @@ private:
 	TObjectPtr<UAbilityTask_PlayMontageAndWait> MontageTask;
 
 	UPROPERTY(Transient)
-	TObjectPtr<UAbilityTask_ApplyRootMotionConstantForce> MoveTask;
+	TObjectPtr<UAbilityTask> MoveTask;
 
 	TWeakObjectPtr<AActor> OpenerTarget;
 

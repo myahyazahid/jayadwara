@@ -18,7 +18,8 @@ Membuat / mengisi ulang (aman diulang):
   Data/DA_AbilitySet_Aksa                    + JDGA_LightAttack pada Input.Attack.Light
   Data/DA_AbilitySet_Dummy, Characters/Dummy/BP_TrainingDummy (Manny, ABP_Unarmed)
   BP_Aksa: combat_profile;  Test_Combat: 1 dummy di tengah arena menghadap PlayerStart
-Animasi placeholder: ganti dengan Jab/Cross/Hook Mixamo cukup dengan mengganti SOURCE + waktu di STEPS lalu jalankan ulang.
+Animasi Mixamo: jalankan Tools/ue_import_mixamo.py dulu; langkah yang punya A_Aksa_Mx_<peran> (kunci "mx") otomatis
+memakainya dengan waktu hit otomatis, sisanya tetap placeholder Mannequin. Terjang = lompat kecil (move_height).
 "hit": "auto" = tulang & waktu dicari dari puncak kecepatan tangan/kaki (relatif pelvis); hasilnya di-log, salin ke STEPS
 supaya tetap. Pembuka & finisher memakai ulang animasi langkah (placeholder) sampai animasi Mixamo khusus ada (docs/23 6.1).
 """
@@ -40,36 +41,40 @@ MAP = "/Game/Jayadwara/Maps/Test_Combat"
 # Combo 4 pukulan (keputusan developer 16 Okt 2026, docs/07): langkah 4 = finisher, sementara MM_ChargedAttack.
 STEPS = [
     {"name": "AM_Aksa_Light_01", "seq": "A_Aksa_Attack_01", "source": f"{ATTACK}/MM_Attack_01", "damage": 10.0, "poise": 5.0,
-     "hit": ("hand_r", 0.28, 0.20), "combo": (0.45, 0.35)},
+     "hit": ("hand_r", 0.28, 0.20), "combo": (0.45, 0.35), "mx": "light_01"},
     {"name": "AM_Aksa_Light_02", "seq": "A_Aksa_Attack_02", "source": f"{ATTACK}/MM_Attack_02", "damage": 10.0, "poise": 5.0,
-     "hit": ("hand_l", 0.30, 0.20), "combo": (0.48, 0.34)},
+     "hit": ("hand_l", 0.30, 0.20), "combo": (0.48, 0.34), "mx": "light_02"},
     {"name": "AM_Aksa_Light_03", "seq": "A_Aksa_Attack_03", "source": f"{ATTACK}/MM_Attack_03", "damage": 12.0, "poise": 8.0,
-     "hit": ("foot_r", 0.24, 0.48), "combo": (0.69, 0.35)},
+     "hit": ("foot_r", 0.24, 0.48), "combo": (0.69, 0.35), "mx": "light_03"},
     {"name": "AM_Aksa_Light_04", "seq": "A_Aksa_Attack_04", "source": f"{ATTACK}/MM_ChargedAttack", "damage": 20.0, "poise": 20.0,
-     "hit": "auto", "combo": None},
+     "hit": "auto", "combo": None, "mx": "light_04"},
 ]
 # Pembuka arah (docs/07 "Combo & arah"): menggantikan langkah 1, combo lanjut ke langkah 2. Gerak dari root motion source.
 OPENERS = {
     "lunge_attack": {"name": "AM_Aksa_Lunge", "seq": "A_Aksa_Attack_01", "damage": 10.0, "poise": 8.0,
                      "hit": ("hand_r", 0.28, 0.20), "combo": (0.45, 0.35),
-                     "move_distance": 600.0, "move_duration": 0.22, "stop_at_target": True},
+                     "move_distance": 600.0, "move_duration": 0.35, "move_height": 60.0, "stop_at_target": True,
+                     "mx": "lunge"},
     "back_attack": {"name": "AM_Aksa_Back", "seq": "A_Aksa_Attack_03", "damage": 10.0, "poise": 8.0,
                     "hit": ("foot_r", 0.24, 0.48), "radius": 50.0, "combo": (0.69, 0.35),
-                    "move_distance": -150.0, "move_duration": 0.25, "stop_at_target": False},
+                    "move_distance": -150.0, "move_duration": 0.25, "stop_at_target": False, "mx": "back"},
 }
 DIRECTION = {"target_search_radius": 800.0, "lunge_min_distance": 250.0, "lunge_stop_distance": 100.0,
              "direction_threshold": 0.5}
 # Cabang finisher pukulan berat setelah langkah 1 / 2 (slot langkah 3–4 kosong = AM_Aksa_Heavy dari ue_setup_defense.py).
 # Stamina & damage sama dengan pukulan berat (docs/23 bagian 5).
 FINISHERS = [
-    {"name": "AM_Aksa_Finisher_01", "seq": "A_Aksa_Attack_03", "hit": ("foot_r", 0.24, 0.48), "rate": 0.8},
-    {"name": "AM_Aksa_Finisher_02", "seq": "A_Aksa_Attack_04", "hit": "auto", "rate": 0.85},
+    {"name": "AM_Aksa_Finisher_01", "seq": "A_Aksa_Attack_03", "hit": ("foot_r", 0.24, 0.48), "rate": 0.8, "mx": "finisher_01"},
+    {"name": "AM_Aksa_Finisher_02", "seq": "A_Aksa_Attack_04", "hit": "auto", "rate": 0.85, "mx": "finisher_02", "mx_hits": 2},
 ]
 HEAVY = {"damage": 30.0, "poise": 40.0, "stamina": 25.0}
 # Serangan udara (docs/07 "Serangan udara", 16 Okt 2026). Salinan animasi tanpa root motion supaya tidak melayang/tertahan.
 AIR = {"name": "AM_Aksa_Air", "seq": "A_Aksa_Air", "source": f"{ATTACK}/MM_Attack_03", "damage": 10.0, "poise": 5.0,
-       "hit": ("foot_r", 0.24, 0.48), "combo": (0.40, 0.40)}
-AIR_SLAM = {"name": "AM_Aksa_AirSlam", "seq": "A_Aksa_AirSlam", "source": f"{ATTACK}/MM_ChargedAttack"}
+       "hit": ("foot_r", 0.24, 0.48), "combo": (0.40, 0.40), "mx": "air"}
+AIR_SLAM = {"name": "AM_Aksa_AirSlam", "seq": "A_Aksa_AirSlam", "source": f"{ATTACK}/MM_ChargedAttack", "mx": "air_slam"}
+# Animasi Mixamo hasil Tools/ue_import_mixamo.py (peran = kunci "mx"). Kalau ada, menggantikan placeholder: waktu hit
+# dicari otomatis ("mx_hits" = jumlah kena, mis. narae chagi 2x), jendela combo tepat setelah hit terakhir.
+MIXAMO = "/Game/Jayadwara/Characters/Aksa/Anims/Mixamo"
 AIR_VALUES = {"air_combo_max": 2, "air_hang_time": 0.3, "air_hang_gravity_scale": 0.1,
               "air_slam_speed": 2000.0, "air_slam_radius": 250.0, "air_slam_recovery": 0.35}
 STRIKE_BONES = ("hand_r", "hand_l", "foot_r", "foot_l")
@@ -134,6 +139,20 @@ def compile_save(bp):
     EAL.save_loaded_asset(bp, only_if_is_dirty=False)
 
 
+def apply_mixamo(steps):
+    """Pakai animasi Mixamo untuk langkah yang punya hasil retarget di MIXAMO (dict langkah diubah di tempat)."""
+    for step in steps:
+        path = f"{MIXAMO}/A_Aksa_Mx_{step.get('mx')}"
+        if step.get("mx") and EAL.does_asset_exist(path):
+            step["seq_path"] = path
+            if "hit" in step:                                     # hantaman ke bawah: kena area, tanpa hit window
+                step["hit"] = "auto"
+                step["hits"] = step.get("mx_hits", 1)
+            if step.get("combo"):
+                step["combo"] = "auto"
+            log(f"{step['name']}: animasi Mixamo {step['mx']}")
+
+
 # ------------------------------------------------------------------ foot IK
 def setup_leg_ik():
     """Lepas node Control Rig foot IK dari ABP_Aksa (sama seperti ABP Jerangkong, docs/20).
@@ -153,7 +172,7 @@ def setup_leg_ik():
 
 def ensure_sequence(step):
     """Salinan animasi sumber di folder Aksa + curve DisableLegIK = 1 sepanjang animasi (sumber Mannequin tidak diubah)."""
-    path = f"{SEQS}/{step['seq']}"
+    path = step.get("seq_path") or f"{SEQS}/{step['seq']}"
     if EAL.does_asset_exist(path):
         seq = EAL.load_asset(path)
     else:
@@ -169,33 +188,41 @@ def ensure_sequence(step):
 
 
 # ------------------------------------------------------------------ waktu hit otomatis
-def strike_timing(seq):
-    """(tulang, mulai, durasi) hit window dari puncak kecepatan tangan/kaki relatif pelvis (root motion tidak ikut)."""
+def strike_timings(seq, count=1):
+    """[(tulang, mulai, durasi)] hit window dari puncak kecepatan tangan/kaki relatif pelvis (root motion tidak ikut).
+    count > 1: puncak berikutnya yang berjarak >= 0,2 s dari puncak sebelumnya (jurus 2x kena)."""
     length = AL.get_sequence_length(seq)
     opts = unreal.AnimPoseEvaluationOptions()
     world = unreal.AnimPoseSpaces.WORLD
     dt = 1.0 / 60.0
-    prev, best = None, (0.0, "hand_r", length * 0.4)
+    prev, samples = None, []          # (kecepatan, tulang, waktu): tulang tercepat tiap frame
     for i in range(int(length / dt) + 1):
         t = min(i * dt, length)
         pose = unreal.AnimPoseExtensions.get_anim_pose_at_time(seq, t, opts)
         pelvis = unreal.AnimPoseExtensions.get_bone_pose(pose, "pelvis", world).translation
         pos = {b: unreal.AnimPoseExtensions.get_bone_pose(pose, b, world).translation - pelvis for b in STRIKE_BONES}
         if prev:
-            for b in STRIKE_BONES:
-                v = (pos[b] - prev[b]).length() / dt
-                if v > best[0]:
-                    best = (v, b, t)
+            samples.append(max(((pos[b] - prev[b]).length() / dt, b, t) for b in STRIKE_BONES))
         prev = pos
-    speed, bone, peak = best
-    start = max(0.0, peak - 0.12)
-    timing = (bone, round(start, 2), round(min(0.22, length - start), 2))
-    log(f"{seq.get_name()}: puncak {bone} {speed:.0f} cm/s pada {peak:.2f} s -> hit {timing} (salin ke STEPS supaya tetap)")
-    return timing
+    peaks = []
+    for speed, bone, peak in sorted(samples, reverse=True):
+        if len(peaks) >= count:
+            break
+        if all(abs(peak - p[2]) >= 0.2 for p in peaks):
+            peaks.append((speed, bone, peak))
+    if not peaks:
+        peaks = [(0.0, "hand_r", length * 0.4)]
+    timings = []
+    for speed, bone, peak in sorted(peaks, key=lambda p: p[2]):
+        start = max(0.0, peak - 0.12)
+        timings.append((bone, round(start, 2), round(min(0.22, length - start), 2)))
+        log(f"{seq.get_name()}: puncak {bone} {speed:.0f} cm/s pada {peak:.2f} s -> hit {timings[-1]} (salin ke STEPS supaya tetap)")
+    return timings
 
 
-def resolve_hit(hit, seq):
-    return strike_timing(seq) if hit == "auto" else hit
+def resolve_hits(step, seq):
+    hit = step["hit"]
+    return strike_timings(seq, step.get("hits", 1)) if hit == "auto" else [hit]
 
 
 def combo_after(hit, seq):
@@ -208,7 +235,7 @@ def combo_after(hit, seq):
 def ensure_montage(step):
     path = f"{MONTAGES}/{step['name']}"
     src = ensure_sequence(step)
-    seq_path = f"{SEQS}/{step['seq']}"
+    seq_path = step.get("seq_path") or f"{SEQS}/{step['seq']}"
     if EAL.does_asset_exist(path) and path not in [p.split(".")[0] for p in EAL.find_package_referencers_for_asset(seq_path, False)]:
         EAL.delete_asset(path)                                   # montage lama masih menunjuk animasi Mannequin asli
         log(f"{step['name']} dibuat ulang dari salinan")
@@ -239,11 +266,14 @@ def add_combat_notifies(m, step, seq):
         AL.remove_animation_notify_events_by_track(m, track)
     else:
         AL.add_animation_notify_track(m, track, unreal.LinearColor(1.0, 0.3, 0.2, 1.0))
-    socket, start, dur = resolve_hit(step["hit"], seq)
-    hit = AL.add_animation_notify_state_event(m, track, start, dur, unreal.JDAnimNotifyState_HitWindow)
-    hit.set_editor_property("socket_name", socket)
-    if step.get("radius"):
-        hit.set_editor_property("radius_override", step["radius"])
+    hits = resolve_hits(step, seq)
+    for i, (socket, start, dur) in enumerate(hits):
+        hit = AL.add_animation_notify_state_event(m, track, start, dur, unreal.JDAnimNotifyState_HitWindow)
+        hit.set_editor_property("socket_name", socket)
+        hit.set_editor_property("new_hit", i > 0)          # kena ke-2 dst. boleh mengenai korban yang sama
+        if step.get("radius"):
+            hit.set_editor_property("radius_override", step["radius"])
+    socket, start, dur = hits[-1]
     combo = step.get("combo")
     if combo:
         if combo == "auto":
@@ -254,7 +284,7 @@ def add_combat_notifies(m, step, seq):
 def ensure_extra_montage(step):
     """Montage pembuka/finisher dari salinan animasi langkah (A_Aksa_Attack_0x); dibuat ulang tiap jalan."""
     path = f"{MONTAGES}/{step['name']}"
-    seq = load(f"{SEQS}/{step['seq']}")
+    seq = load(step.get("seq_path") or f"{SEQS}/{step['seq']}")
     if not seq:
         return None
     if EAL.does_asset_exist(path):
@@ -274,7 +304,7 @@ def ensure_extra_montage(step):
 
 def ensure_air_montage(step):
     """Salinan animasi tanpa root motion + montage (dibuat ulang tiap jalan). Tanpa "hit" = tanpa notify (hantaman area)."""
-    path, seq_path = f"{MONTAGES}/{step['name']}", f"{SEQS}/{step['seq']}"
+    path, seq_path = f"{MONTAGES}/{step['name']}", step.get("seq_path") or f"{SEQS}/{step['seq']}"
     if EAL.does_asset_exist(path):
         EAL.delete_asset(path)
     if not EAL.does_asset_exist(seq_path):
@@ -334,6 +364,7 @@ def setup_profile(montages):
         s.set_editor_property("hit_cue", tag("GameplayCue.Hit.Light"))
         s.set_editor_property("move_distance", o["move_distance"])
         s.set_editor_property("move_duration", o["move_duration"])
+        s.set_editor_property("move_height", o.get("move_height", 0.0))
         s.set_editor_property("stop_at_target", o["stop_at_target"])
         prof.set_editor_property(prop, s)
     for k, v in DIRECTION.items():
@@ -446,6 +477,7 @@ def main():
         unreal.log_error("[Jayadwara] C++ Iterasi 2 belum ter-build (JDGA_LightAttack tidak ada)")
         return
     setup_leg_ik()
+    apply_mixamo(STEPS + list(OPENERS.values()) + FINISHERS + [AIR, AIR_SLAM])
     montages = [ensure_montage(s) for s in STEPS]
     setup_cues()
     prof = setup_profile(montages)

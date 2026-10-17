@@ -46,6 +46,10 @@ struct FJDAttackStep
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attack|Move", meta = (ClampMin = "0.05", Units = "s"))
 	float MoveDuration = 0.2f;
 
+	/** Tinggi lompatan selama gerak (cm). 0 = meluncur datar; > 0 = lompat kecil melengkung (terjang, docs/07). */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attack|Move", meta = (ClampMin = "0", Units = "cm"))
+	float MoveHeight = 0.0f;
+
 	/** Gerak maju berhenti UJDCombatProfile::LungeStopDistance sebelum target (MoveDistance jadi batas atas). */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attack|Move")
 	bool bStopAtTarget = false;
@@ -252,6 +256,45 @@ public:
 	/** Lama penyerang stagger setelah di-parry. */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Block", meta = (ClampMin = "0", Units = "s"))
 	float ParryStaggerDuration = 1.0f;
+
+	// ------------------------------------------------------------------ parry tepis (docs/07 "Parry")
+
+	/** Tepisan saat parry berhasil, dipakai bergantian (2 varian). Kosong = tanpa animasi. Tanpa notify hit. */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Block|Parry")
+	TArray<TObjectPtr<UAnimMontage>> ParryMontages;
+
+	/** Laju montage tepisan yang terlihat (placeholder dipercepat supaya terasa tepisan, bukan pukulan). */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Block|Parry", meta = (ClampMin = "0.05"))
+	float ParryMontageRate = 1.0f;
+
+	/** Hit-stop khusus parry (lebih panjang & lebih "beku" dari hit biasa). 0 = tanpa hit-stop. */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Block|Parry", meta = (ClampMin = "0", Units = "s"))
+	float ParryHitStopDuration = 0.12f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Block|Parry", meta = (ClampMin = "0.001", ClampMax = "1"))
+	float ParryHitStopTimeDilation = 0.02f;
+
+	/** Slow-mo seluruh dunia setelah hit-stop parry (detik nyata), hanya kalau pemain terlibat. 0 = tanpa slow-mo. */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Block|Parry", meta = (ClampMin = "0", Units = "s"))
+	float ParrySlowMoDuration = 0.35f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Block|Parry", meta = (ClampMin = "0.05", ClampMax = "1"))
+	float ParrySlowMoTimeDilation = 0.35f;
+
+	/** Shake kamera pemain yang berhasil parry (kosong = tanpa shake). */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Block|Parry")
+	TSubclassOf<UCameraShakeBase> ParryCameraShake;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Block|Parry", meta = (ClampMin = "0"))
+	float ParryCameraShakeScale = 1.0f;
+
+	/** Pukulan ringan dalam waktu ini (detik nyata) setelah parry = serangan balik ke penyerang yang di-parry. */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Block|Parry", meta = (ClampMin = "0", Units = "s"))
+	float ParryCounterWindow = 0.8f;
+
+	/** Serangan balik setelah parry; combo berlanjut dari langkah 2. Montage kosong = combo biasa. */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Block|Parry")
+	FJDAttackStep ParryCounterAttack;
 
 	// ------------------------------------------------------------------ stagger
 

@@ -20,6 +20,7 @@
 #include "GameFramework/PlayerController.h"
 #include "HAL/IConsoleManager.h"
 #include "Jayadwara.h"
+#include "Kismet/GameplayStatics.h"
 #include "TimerManager.h"
 
 static TAutoConsoleVariable<bool> CVarDebugHitbox(
@@ -121,6 +122,7 @@ void UJDCombatComponent::PlayHitCameraShake() const
 void UJDCombatComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
 	EndHitStop();
+	EndParrySlowMo();
 	if (UWorld* World = GetWorld())
 	{
 		World->GetTimerManager().ClearTimer(StaggerTimer);
@@ -210,11 +212,15 @@ int32 UJDCombatComponent::GetComboStepForFinisher() const
 	return CancelledLightComboFrame == GFrameCounter ? CancelledLightComboStep : INDEX_NONE;
 }
 
-void UJDCombatComponent::BeginHitWindow(FName SocketName, float RadiusOverride)
+void UJDCombatComponent::BeginHitWindow(FName SocketName, float RadiusOverride, bool bNewHit)
 {
 	if (!bAttackActive)
 	{
 		return;
+	}
+	if (bNewHit)
+	{
+		HitActors.Reset();
 	}
 	bHitWindowOpen = true;
 	HitSocket = SocketName;
@@ -332,8 +338,20 @@ void UJDCombatComponent::ProcessHit(const FHitResult& Hit)
 		ExecuteCue(JDGameplayTags::GameplayCue_Parry);
 		SendEvent(Victim, JDGameplayTags::Event_Hit_Parried, FGameplayEffectContextHandle());
 		SendEvent(Owner, JDGameplayTags::Event_Hit_Parried, FGameplayEffectContextHandle());
-		StartHitStop(Victim, 2.0f);
+		// Hit-stop parry milik penangkis (angka parry milik pihak yang bertahan).
+		if (VictimProfile)
+		{
+			StartHitStop(Victim, VictimProfile->ParryHitStopDuration, VictimProfile->ParryHitStopTimeDilation);
+		}
+		else if (CombatProfile)
+		{
+			StartHitStop(Victim, CombatProfile->HitStopDuration * 2.0f, CombatProfile->HitStopTimeDilation);
+		}
 		EndHitWindow();
+		if (VictimCombat)
+		{
+			VictimCombat->HandleParrySuccess(Owner);
+		}
 		// Stagger penyerang di frame berikutnya: membatalkan ability & montage di tengah tick notify tidak aman.
 		const float StaggerTime = VictimProfile ? VictimProfile->ParryStaggerDuration : 1.0f;
 		GetWorld()->GetTimerManager().SetTimerForNextTick(FTimerDelegate::CreateWeakLambda(this, [this, StaggerTime]()
@@ -449,6 +467,124 @@ EJDHitOutcome UJDCombatComponent::ResolveIncomingHit(const AActor* Attacker)
 	return ASC->GetNumericAttribute(UJDAttributeSet::GetStaminaAttribute()) <= 0.0f ? EJDHitOutcome::GuardBreak : EJDHitOutcome::Blocked;
 }
 
+void UJDCombatComponent::HandleParrySuccess(AActor* Attacker)
+{
+	UWorld* World = GetWorld();
+	if (!World || !CombatProfile)
+	{
+		return;
+	}
+
+	CounterTarget = Attacker;
+	CounterExpireRealTime = World->GetRealTimeSeconds() + CombatProfile->ParryCounterWindow;
+
+	const APawn* OwnerPawn = Cast<APawn>(GetOwner());
+	APlayerController* PC = OwnerPawn ? Cast<APlayerController>(OwnerPawn->GetController()) : nullptr;
+	if (PC && CombatProfile->ParryCameraShake)
+	{
+		PC->ClientStartCameraShake(CombatProfile->ParryCameraShake, CombatProfile->ParryCameraShakeScale);
+	}
+
+	// Slow-mo dimulai setelah hit-stop selesai supaya keduanya terbaca terpisah (beku sesaat -> lambat -> normal).
+	if (CombatProfile->ParrySlowMoDuration > 0.0f && (IsPlayerActor(GetOwner()) || IsPlayerActor(Attacker)))
+	{
+		if (CombatProfile->ParryHitStopDuration > 0.0f)
+		{
+			World->GetTimerManager().SetTimer(ParrySlowMoTimer, this, &UJDCombatComponent::StartParrySlowMo,
+				CombatProfile->ParryHitStopDuration, false);
+		}
+		else
+		{
+			StartParrySlowMo();
+		}
+	}
+
+	// Tangkis dibatalkan & tepisan diputar di frame berikutnya: kita masih di dalam tick notify milik penyerang.
+	World->GetTimerManager().SetTimerForNextTick(FTimerDelegate::CreateWeakLambda(this,
+		[this, WeakAttacker = TWeakObjectPtr<AActor>(Attacker)]()
+	{
+		PlayParryDeflect(WeakAttacker);
+	}));
+}
+
+void UJDCombatComponent::PlayParryDeflect(TWeakObjectPtr<AActor> Attacker)
+{
+	AActor* Owner = GetOwner();
+	UAbilitySystemComponent* ASC = UAbilitySystemGlobals::GetAbilitySystemComponentFromActor(Owner);
+	if (!Owner || !ASC || !CombatProfile || IsStaggered())
+	{
+		return;
+	}
+
+	// Tepisan menggantikan pose tangkis; tangkis harus berakhir supaya serangan balik (pukulan ringan) bisa aktif.
+	const FGameplayTagContainer BlockTag(JDGameplayTags::Ability_Block);
+	ASC->CancelAbilities(&BlockTag);
+
+	if (Attacker.IsValid())
+	{
+		const FVector ToAttacker = (Attacker->GetActorLocation() - Owner->GetActorLocation()).GetSafeNormal2D();
+		if (!ToAttacker.IsZero())
+		{
+			Owner->SetActorRotation(FRotator(0.0f, ToAttacker.Rotation().Yaw, 0.0f));
+		}
+	}
+
+	const TArray<TObjectPtr<UAnimMontage>>& Montages = CombatProfile->ParryMontages;
+	USkeletalMeshComponent* Mesh = GetOwnerMesh();
+	UAnimInstance* Anim = Mesh ? Mesh->GetAnimInstance() : nullptr;
+	if (Anim && !Montages.IsEmpty())
+	{
+		UAnimMontage* Montage = Montages[ParryVariant % Montages.Num()];
+		ParryVariant = (ParryVariant + 1) % Montages.Num();
+		if (Montage)
+		{
+			Anim->Montage_Play(Montage, CombatProfile->ParryMontageRate * CompensatedRate(Mesh));
+		}
+	}
+}
+
+AActor* UJDCombatComponent::ConsumeCounterTarget()
+{
+	const UWorld* World = GetWorld();
+	AActor* Target = CounterTarget.Get();
+	CounterTarget.Reset();
+	if (!World || !Target || World->GetRealTimeSeconds() > CounterExpireRealTime)
+	{
+		return nullptr;
+	}
+	const UAbilitySystemComponent* ASC = UAbilitySystemGlobals::GetAbilitySystemComponentFromActor(Target);
+	return ASC && !ASC->HasMatchingGameplayTag(JDGameplayTags::State_Dead) ? Target : nullptr;
+}
+
+void UJDCombatComponent::StartParrySlowMo()
+{
+	UWorld* World = GetWorld();
+	if (!World || !CombatProfile)
+	{
+		return;
+	}
+	const float Dilation = CombatProfile->ParrySlowMoTimeDilation;
+	UGameplayStatics::SetGlobalTimeDilation(this, Dilation);
+	bParrySlowMoActive = true;
+	// Timer dunia ikut melambat oleh global time dilation: durasi nyata = waktu dunia / dilation.
+	World->GetTimerManager().SetTimer(ParrySlowMoTimer, this, &UJDCombatComponent::EndParrySlowMo,
+		CombatProfile->ParrySlowMoDuration * Dilation, false);
+}
+
+void UJDCombatComponent::EndParrySlowMo()
+{
+	UWorld* World = GetWorld();
+	if (World)
+	{
+		World->GetTimerManager().ClearTimer(ParrySlowMoTimer);
+	}
+	if (bParrySlowMoActive && World)
+	{
+		UGameplayStatics::SetGlobalTimeDilation(this, 1.0f);
+	}
+	bParrySlowMoActive = false;
+}
+
 void UJDCombatComponent::ApplyStagger(float Duration)
 {
 	UWorld* World = GetWorld();
@@ -512,10 +648,18 @@ void UJDCombatComponent::ShowDebugMessage(const FString& Message, const FColor& 
 #endif
 }
 
-void UJDCombatComponent::StartHitStop(AActor* Victim, float DurationScale)
+void UJDCombatComponent::StartHitStop(AActor* Victim)
+{
+	if (CombatProfile)
+	{
+		StartHitStop(Victim, CombatProfile->HitStopDuration, CombatProfile->HitStopTimeDilation);
+	}
+}
+
+void UJDCombatComponent::StartHitStop(AActor* Victim, float Duration, float TimeDilation)
 {
 	UWorld* World = GetWorld();
-	if (!CombatProfile || CombatProfile->HitStopDuration <= 0.0f || !World)
+	if (Duration <= 0.0f || !World)
 	{
 		return;
 	}
@@ -526,11 +670,11 @@ void UJDCombatComponent::StartHitStop(AActor* Victim, float DurationScale)
 	{
 		if (Actor.IsValid())
 		{
-			Actor->CustomTimeDilation = CombatProfile->HitStopTimeDilation;
+			Actor->CustomTimeDilation = TimeDilation;
 		}
 	}
 	// Timer berjalan dengan waktu dunia, tidak ikut melambat oleh CustomTimeDilation aktor.
-	World->GetTimerManager().SetTimer(HitStopTimer, this, &UJDCombatComponent::EndHitStop, CombatProfile->HitStopDuration * DurationScale, false);
+	World->GetTimerManager().SetTimer(HitStopTimer, this, &UJDCombatComponent::EndHitStop, Duration, false);
 }
 
 void UJDCombatComponent::EndHitStop()
