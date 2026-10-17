@@ -1,0 +1,399 @@
+<title>Distrik Adikara Ep 3</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: lembar kerja level designer — satu kolom lebar, tiap diagram punya kartu sendiri, legenda di samping peta saat layar lebar */
+:root{
+  --bg:#eef0ea; --panel:#e2e6dc; --ink:#1c231f; --muted:#59625b; --line:#b8bfb2;
+  --tanah:#b5582f; --andesit:#6c7871; --sawah:#7ea259; --desa:#c7a679; --hutan:#4f6b4a;
+  --kala:#c0262b; --emas:#c38d22; --air:#5b8fb0; --route:#1c231f; --safe:#3f8f5a; --adikara:#7d5c8e;
+  --f-display:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;
+  --f-body:"Source Sans 3","Segoe UI",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121614; --panel:#1b201d; --ink:#e5e9e2; --muted:#9ba49c; --line:#3a423c;
+  --tanah:#c96b40; --andesit:#8d9890; --sawah:#6d924e; --desa:#a98b64; --hutan:#3f5a3b;
+  --kala:#e4484c; --emas:#e2ad46; --air:#6fa4c6; --route:#e5e9e2; --safe:#5cb378; --adikara:#a283b4; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121614; --panel:#1b201d; --ink:#e5e9e2; --muted:#9ba49c; --line:#3a423c;
+  --tanah:#c96b40; --andesit:#8d9890; --sawah:#6d924e; --desa:#a98b64; --hutan:#3f5a3b;
+  --kala:#e4484c; --emas:#e2ad46; --air:#6fa4c6; --route:#e5e9e2; --safe:#5cb378; --adikara:#a283b4; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 64px}
+.wrap{max-width:1120px;margin:0 auto;display:grid;gap:40px}
+header{display:grid;gap:8px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--f-display);font-weight:800;font-size:clamp(40px,7vw,72px);line-height:.95;margin:0;letter-spacing:.01em;text-wrap:balance}
+h1 em{font-style:normal;color:var(--kala)}
+h2{font-family:var(--f-display);font-weight:800;font-size:30px;line-height:1;margin:0;letter-spacing:.02em;text-wrap:balance}
+.lede{max-width:66ch;color:var(--muted);margin:0}
+.stats{display:flex;flex-wrap:wrap;gap:8px 24px;font-family:var(--f-mono);font-size:13px;color:var(--muted)}
+.stats b{color:var(--ink);font-weight:600}
+section{display:grid;gap:14px}
+.sec-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 20px}
+.sec-head p{margin:0;color:var(--muted);max-width:62ch}
+.card{background:var(--panel);border-radius:6px;padding:14px}
+.scroll{overflow-x:auto}
+svg{display:block}
+.mapgrid{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:16px;align-items:start}
+@media (max-width:860px){.mapgrid{grid-template-columns:minmax(0,1fr)}}
+.legend{display:grid;gap:14px;font-size:14px}
+.legend h3{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 6px;font-weight:600}
+.legend ul{list-style:none;margin:0;padding:0;display:grid;gap:5px}
+.legend li{display:flex;gap:8px;align-items:center;line-height:1.3}
+.sw{width:14px;height:14px;border-radius:2px;flex:none}
+.toggles{display:flex;flex-wrap:wrap;gap:8px}
+.toggles label{display:flex;align-items:center;gap:6px;font-size:14px;padding:5px 10px;border:1px solid var(--line);border-radius:999px;cursor:pointer;user-select:none;background:var(--bg)}
+.toggles input{accent-color:var(--kala)}
+.toggles label:focus-within{outline:2px solid var(--emas);outline-offset:2px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.seg button{font:inherit;font-size:14px;padding:5px 12px;border:0;background:var(--bg);color:var(--ink);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.seg button:focus-visible{outline:2px solid var(--emas);outline-offset:-2px}
+.note{font-size:14px;color:var(--muted);margin:0;max-width:70ch}
+.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.step{background:var(--panel);border-radius:6px;padding:12px 14px;display:grid;gap:4px;align-content:start;border-top:4px solid var(--c,var(--line))}
+.step .k{font-family:var(--f-mono);font-size:12px;color:var(--muted);letter-spacing:.06em}
+.step b{font-family:var(--f-display);font-size:22px;font-weight:800;letter-spacing:.02em}
+.step p{margin:0;font-size:14px}
+.dec{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.dec div{background:var(--panel);border-radius:6px;padding:10px 12px;font-size:14px;display:grid;gap:2px}
+.dec code{font-family:var(--f-mono);font-weight:600;color:var(--kala)}
+.mono{font-family:var(--f-mono)}
+text{font-family:var(--f-body)}
+@media (prefers-reduced-motion:no-preference){.pulse{animation:p 2.4s ease-in-out infinite}@keyframes p{50%{opacity:.45}}}
+</style>
+
+<div class="wrap">
+<header>
+  <div class="eyebrow">JAYADWARA · Episode 3 · Desain level v0.2 · tata letak memanjang (17 Okt 2026) · docs/32</div>
+  <h1>Ep03_Adikara<br><em>Lapar Listrik</em></h1>
+  <p class="lede">Satu jalur panjang dari barat ke timur, seperti area RE4: pemain selalu didorong maju. Aksa turun di pintu tol, berjalan ke Menara Adikara dan menembusnya sampai atap. Jayadwara lalu mengejar jenglot ke timur, memutus gardu satu per satu. Sektor di belakang pemain sudah gelap, sektor di depan masih menyala, jadi cahaya sendiri yang menunjuk arah. Kembali ke belakang tetap bisa, tapi tidak ada yang perlu dicari di sana.</p>
+  <div class="stats"><span>Area <b>±2200 × 700 m</b></span><span>Arena raksasa <b>±1830 × 600 m</b></span><span>Lintas arena memanjang <b>±26 detik</b> (Jayadwara ±70 m/s)</span><span>Durasi <b>±25–29 mnt</b></span><span>Jenglot <b>0,3 m</b> · fase 1 <b>25 m</b> · puncak <b>36 m</b> · Jayadwara <b>45 m</b></span></div>
+</header>
+
+<section id="peta">
+  <div class="sec-head"><h2>Denah tampak atas</h2>
+    <div class="toggles" role="group" aria-label="Lapisan peta">
+      <label><input type="checkbox" id="lyr-route" checked> Jalur Aksa</label>
+      <label><input type="checkbox" id="lyr-arena" checked> Kejar raksasa &amp; meter</label>
+      <label><input type="checkbox" id="lyr-sektor"> Sektor lampu</label>
+      <label><input type="checkbox" id="lyr-sight"> Garis pandang</label>
+    </div>
+  </div>
+  <div class="card scroll"><svg id="map" viewBox="0 0 896 300" width="100%" style="min-width:760px" role="img" aria-label="Denah tampak atas Ep03_Adikara tata letak memanjang v02"></svg></div>
+  <div class="legend" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+    <div><h3>Tempat</h3><ul>
+      <li><span class="sw" style="background:var(--andesit);opacity:.55"></span>Gedung &lt; 45 m (di bawah mata Jayadwara)</li>
+      <li><span class="sw" style="background:var(--andesit)"></span>Gedung 45–100 m</li>
+      <li><span class="sw" style="background:var(--air)"></span>Menara kaca &gt; 100 m, kanal</li>
+      <li><span class="sw" style="background:var(--desa)"></span>Apartemen &amp; hunian</li>
+      <li><span class="sw" style="background:var(--adikara)"></span>Menara Adikara 220 m, lahan proyek</li>
+      <li><span class="sw" style="background:var(--ink)"></span>Jalan, jalan layang tol, rel layang</li>
+    </ul></div>
+    <div><h3>Jalur &amp; gardu</h3><ul>
+      <li><span class="sw" style="background:var(--emas);border-radius:50%"></span>★ Petunjuk (○ opsional)</li>
+      <li><span class="sw" style="background:var(--emas);outline:2px solid var(--ink)"></span>G1–G3 gardu, urutan tetap barat → timur</li>
+      <li><span class="sw" style="border:2px solid var(--ink);border-radius:50%"></span>Checkpoint</li>
+      <li><span class="sw" style="background:var(--kala);border-radius:50%"></span>Posisi jenglot per tahap</li>
+    </ul></div>
+    <div><h3>Arena raksasa</h3><ul>
+      <li><span class="sw" style="background:var(--safe);opacity:.5"></span>Zona aman (plaza, boulevard, kanal)</li>
+      <li><span class="sw" style="border:2px dashed var(--adikara)"></span>Tanpa penalti (lahan proyek Adikara)</li>
+      <li><span class="sw" style="background:var(--kala);opacity:.45"></span>Penalti tinggi (kaca, apartemen)</li>
+      <li><span class="sw" style="background:var(--kala);opacity:.2"></span>Penalti normal</li>
+    </ul></div>
+    <p class="note">Grid 100 m. Utara di atas, alur dari kiri ke kanan. Titik nol = tengah jalur di Jl. Adikara Raya. Batas utara jalan layang tol, batas selatan rel layang (Kampung Kali Ep 2 di baliknya), batas timur Kanal Banjir Timur.</p>
+  </div>
+</section>
+
+<section id="memanjang">
+  <div class="sec-head"><h2>Potongan memanjang barat → timur</h2><p>Sepanjang Jl. Adikara Raya, vertikal dibesarkan ×2. Lampu mati dari kiri ke kanan seiring gardu diputus.</p></div>
+  <div class="seg" role="group" aria-label="Tahap lampu" style="justify-self:start">
+    <button type="button" id="st0" aria-pressed="true">Awal E</button>
+    <button type="button" id="st1" aria-pressed="false">G1 putus</button>
+    <button type="button" id="st2" aria-pressed="false">G2 putus</button>
+    <button type="button" id="st3" aria-pressed="false">Fase 2</button>
+  </div>
+  <div class="card scroll"><svg id="long" viewBox="0 0 900 250" width="100%" style="min-width:640px" role="img" aria-label="Potongan memanjang seluruh jalur dengan status lampu per sektor"></svg></div>
+</section>
+
+<section id="potongan">
+  <div class="sec-head"><h2>Potongan Menara Adikara</h2><p>Plaza di kiri, menara di kanan, skala asli. Lantai yang dimainkan Aksa saja yang dibangun.</p></div>
+  <div class="card scroll"><svg id="prof" viewBox="0 0 900 430" width="100%" style="min-width:640px" role="img" aria-label="Potongan plaza dan Menara Adikara dengan lantai yang dimainkan dan figur berskala"></svg></div>
+</section>
+
+<section id="ukuran">
+  <div class="sec-head"><h2>Berdiri berjajar</h2><p>Jenglot tumbuh per tahap (0,55× → 0,8×) tapi tidak pernah setinggi Jayadwara. Untuk pertama kalinya, sebagian besar gedung lebih tinggi dari sang raksasa.</p></div>
+  <div class="card scroll"><svg id="lineup" viewBox="0 0 900 360" width="100%" style="min-width:640px" role="img" aria-label="Perbandingan tinggi karakter dan bangunan Ep 3"></svg></div>
+</section>
+
+<section id="alur">
+  <div class="sec-head"><h2>Alur dan cahaya</h2><p>Malam. Lampu padam bertahap dari barat ke timur. Setelah segel, lampu kembali menyala dari timur, dari tempat pemain berdiri, ke arah menara.</p></div>
+  <div class="card scroll"><svg id="time" viewBox="0 0 900 150" width="100%" style="min-width:640px" role="img" aria-label="Linimasa zona dan pencahayaan Ep 3"></svg></div>
+  <div class="flow">
+    <div class="step" style="--c:var(--andesit)"><span class="k">A · ±2 mnt · 21.00</span><b>Pintu tol</b><p>Mobil DWARA berhenti di barikade polisi di pintu keluar tol. Aksa berjalan ±300 m ke timur di Jl. Adikara Raya; Menara Adikara berdiri di ujung jalan. Tiang lampu meredup ke arah menara.</p></div>
+    <div class="step" style="--c:var(--emas)"><span class="k">B · ±5–7 mnt</span><b>Plaza &amp; lobi</b><p>Videotron memutar berita Entitas D. Masuk lobi, turun ke B1: ★1 grafik listrik membuka 3 gardu di timur. ○ L38 lewat tangga darurat.</p></div>
+    <div class="step" style="--c:var(--kala)"><span class="k">C · ±5–6 mnt</span><b>Lantai kantor</b><p>L20–22: gelombang kabel hidup, Sekar membuka pintu tangga per lantai. Lift dari L22 jadi jalan pintas turun (satu-satunya balik arah).</p></div>
+    <div class="step" style="--c:var(--emas)"><span class="k">C' + D · ±2 mnt</span><b>Server &amp; atap</b><p>L50: ★2 jimat pecah, jenglot menjebol kaca ke plaza. Di atap Aksa menghadap timur: tiga gardu menyala di sepanjang jalur. Transformasi.</p></div>
+    <div class="step" style="--c:var(--kala)"><span class="k">E1 · ±2–3 mnt</span><b>Sektor kaca</b><p>Braja Lawang diserap (scripted). Jenglot lari ke G1 dan membesar ke 36 m. Putus G1 tanpa menjatuhkan menara kaca; sektor barat gelap, jenglot kabur ke timur.</p></div>
+    <div class="step" style="--c:var(--kala)"><span class="k">E2 · ±2–3 mnt</span><b>Sektor apartemen</b><p>Warga masih mengungsi lewat boulevard. Putus G2; jenglot menyusut ke 31 m dan lari ke lahan proyek.</p></div>
+    <div class="step" style="--c:var(--emas)"><span class="k">E3 · ±3 mnt</span><b>Lahan proyek</b><p>G3 (gardu induk utama) di area tanpa penalti. Setelah putus, kota gelap total: fase 2 di tepi kanal, cahaya satu-satunya inti di dada jenglot.</p></div>
+    <div class="step" style="--c:var(--air)"><span class="k">±2 mnt</span><b>Segel &amp; debrief</b><p>Segel di tepi kanal. Lampu kembali dari timur ke barat sampai menara. Nadia: irama energi sama dengan Ep 1 dan 2. Ratna menekan Kol. Bagas.</p></div>
+  </div>
+</section>
+
+<section id="keputusan">
+  <div class="sec-head"><h2>Keputusan</h2><p>H1 disetujui developer 17 Okt 2026; H2–H8 masih usulan. Rincian di docs/32.</p></div>
+  <div class="dec">
+    <div><code>H1 ✓</code>Peta memanjang 2200 × 700 m, alur barat → timur ala RE4, balik arah minim</div>
+    <div><code>H2</code>Interior menara: 4 set lantai dimainkan (B1+L1, L20–22, L38, L50+atap)</div>
+    <div><code>H3</code>Gardu berurutan G1 → G2 → G3 (kartu docs/16 belum menyebut urutan)</div>
+    <div><code>H6</code>Korban di briefing: petugas lemas, bukan tewas</div>
+    <div><code>H4</code>★2 di ruang server L50, sesudah zona C</div>
+    <div><code>H5</code>Transformasi di atap menghadap timur, Jayadwara muncul di plaza</div>
+    <div><code>H7</code>Keris Jayadwara muncul di fase 2 sebagai finisher tusuk inti</div>
+    <div><code>H8</code>Kujang Aksa ditemukan di koleksi L38 (cabang opsional)</div>
+  </div>
+</section>
+</div>
+
+<script>
+const NS="http://www.w3.org/2000/svg";
+function el(tag,a,p){const e=document.createElementNS(NS,tag);for(const k in a){if(k==="text")e.textContent=a[k];else if(k==="css")e.setAttribute("style",a[k]);else e.setAttribute(k,a[k]);}if(p)p.appendChild(e);return e;}
+const V=n=>`var(--${n})`;
+
+/* ---------- PETA v02 memanjang (meter; X timur+, Y utara+; medan x -1100..1100, y -350..350) ---------- */
+const K=0.4,XMIN=-1100,YMAX=350,PAD=8,MW=896,MH=300;
+const X=x=>(x-XMIN)*K+PAD, Y=y=>(YMAX-y)*K+PAD;
+function R(g,x1,y1,x2,y2,css,extra={}){return el("rect",Object.assign({x:X(Math.min(x1,x2)),y:Y(Math.max(y1,y2)),width:Math.abs(x2-x1)*K,height:Math.abs(y2-y1)*K,css},extra),g);}
+function L(g,x,y,t,o={}){return el("text",Object.assign({x:X(x),y:Y(y),"font-size":o.fs||9,"text-anchor":o.a||"middle",css:`fill:${o.c||V("ink")};font-weight:${o.w||600}`,text:t},o.attrs||{}),g);}
+function P(g,pts,css){return el("path",{d:pts.map((p,i)=>(i?"L":"M")+X(p[0]).toFixed(1)+" "+Y(p[1]).toFixed(1)).join(" "),css},g);}
+const map=document.getElementById("map");
+const defs=el("defs",{},map);
+[["arr","ink"],["arrK","kala"],["arrS","safe"]].forEach(([id,c])=>{const m=el("marker",{id,viewBox:"0 0 10 10",refX:8,refY:5,markerWidth:6,markerHeight:6,orient:"auto-start-reverse"},defs);el("path",{d:"M0 0 L10 5 L0 10 Z",css:`fill:${V(c)}`},m);});
+const base=el("g",{},map);
+el("rect",{x:0,y:0,width:MW,height:MH,css:`fill:${V("bg")}`},base);
+const grid=el("g",{css:`stroke:${V("line")};stroke-width:.5;opacity:.7`},base);
+for(let x=-1100;x<=1100;x+=100)el("line",{x1:X(x),y1:0,x2:X(x),y2:MH},grid);
+for(let y=-300;y<=300;y+=100)el("line",{x1:0,y1:Y(y),x2:MW,y2:Y(y)},grid);
+let seed=23;const rnd=()=>{seed=(seed*16807)%2147483647;return seed/2147483647;};
+
+// tata letak
+const ZA=[-1100,-750], PLAZA=[-750,-450,-150,150], MENARA=[-430,-360,-35,35];
+const SEG=[["SEKTOR KACA",-300,250],["SEKTOR APARTEMEN",250,700],["LAHAN PROYEK",700,1060]];
+const PROYEK=[700,1060,-280,280], KANAL=[1060,1100];
+const JALAN=[[-1100,1060,-12,12],[-1100,1060,165,180],[-1100,1060,-180,-165],[-120,-100,-300,300],[240,260,-300,300],[690,700,-300,300]];
+const GARDU=[{id:"G1",x:100,y:105,n:"di samping menara kaca 180 m"},{id:"G2",x:600,y:-100,n:"di samping apartemen 70 m"},{id:"G3",x:900,y:60,n:"gardu induk utama · aman"}];
+const hit=(a,b,j=0)=>a[1]+j>b[0]&&a[0]-j<b[1]&&a[3]+j>b[2]&&a[2]-j<b[3];
+
+// latar + batas
+R(base,-1100,350,1100,320,`fill:${V("andesit")};opacity:.3`);
+for(let x=-1090;x<1090;x+=26){if(rnd()>.3)R(base,x,326,x+15+rnd()*8,344,`fill:${V("air")};opacity:.7`);}
+R(base,-1100,320,1100,300,`fill:${V("ink")};opacity:.9`);
+for(let x=-1080;x<=1090;x+=60)R(base,x-4,314,x+4,306,`fill:${V("ink")};stroke:${V("bg")};stroke-width:.6`);
+L(base,-560,337,"MENARA KACA (latar)",{fs:8.5,w:800});L(base,0,306,"JALAN LAYANG TOL (batas utara)",{fs:8,c:"#fff",w:700});
+R(base,-1100,-300,1100,-312,`fill:${V("ink")};opacity:.85`);
+for(let x=-1095;x<1100;x+=12)el("line",{x1:X(x),y1:Y(-300),x2:X(x),y2:Y(-312),css:`stroke:${V("bg")};stroke-width:.5`},base);
+R(base,-1100,-312,1100,-350,`fill:${V("desa")};opacity:.35`);
+for(let x=-1095;x<1095;x+=10)for(let y=-346;y<-316;y+=9)if(rnd()>.45)R(base,x,y,x+6,y+5,`fill:${V("desa")};stroke:${V("bg")};stroke-width:.3`);
+L(base,-560,-338,"KAMPUNG KALI (latar, Ep 2)",{fs:8.5,w:800});L(base,300,-308,"REL LAYANG (batas selatan)",{fs:8,c:"#fff",w:700});
+R(base,KANAL[0],300,KANAL[1],-300,`fill:${V("air")};opacity:.85`);
+L(base,1080,0,"KANAL BANJIR TIMUR",{fs:8,c:"#fff",w:800,attrs:{transform:`rotate(-90 ${X(1080)} ${Y(0)})`}});
+// pintu tol (zona A)
+el("path",{d:`M${X(-1100)} ${Y(-255)} C${X(-1050)} ${Y(-255)} ${X(-1030)} ${Y(-120)} ${X(-1020)} ${Y(-12)}`,css:`fill:none;stroke:${V("ink")};stroke-width:6;opacity:.75`},base);
+L(base,-1090,-240,"pintu keluar tol",{fs:8,a:"start",w:700});
+// jalan
+JALAN.forEach(j=>R(base,j[0],j[3],j[1],j[2],`fill:${V("ink")};opacity:.72`));
+L(base,-880,-4,"Jl. Adikara Raya →",{fs:8,c:"#fff",w:700});
+// blok gedung
+const KOS=[[PLAZA[0],PLAZA[1],PLAZA[2],PLAZA[3]],[MENARA[0]-25,MENARA[1]+25,MENARA[2]-25,MENARA[3]+25],PROYEK,...JALAN.map(j=>[j[0],j[1],j[2],j[3]])];
+const GED=[];
+GARDU.forEach(g=>KOS.push([g.x-43,g.x+43,g.y-33,g.y+33]));
+[[180,105,40,40,180],[520,-100,40,60,70]].forEach(([tx,ty,tp,tl,h],i)=>{const r=[tx-tp/2,tx+tp/2,ty-tl/2,ty+tl/2];KOS.push(r);GED.push({r,h,k:i?"apt":null});});
+for(let y=-290;y<292;){let x=-1095;const st=[38,46,54][Math.floor(rnd()*3)];
+  while(x<1055){const p=[25,30,40,50][Math.floor(rnd()*4)],l=[25,30,40,50][Math.floor(rnd()*4)];const r=[x+5,x+5+p,y+5,y+5+l];
+    if(r[1]<1058&&r[3]<296&&!KOS.some(k=>hit(r,k,5))&&!GED.some(g=>hit(r,g.r,7))){const cx=(r[0]+r[1])/2;let h,k=null;
+      if(cx<-750)h=[8,10,14][Math.floor(rnd()*3)];
+      else if(cx<250)h=[60,90,120,150,180][Math.floor(rnd()*5)];
+      else{h=[20,40,55,70,85][Math.floor(rnd()*5)];k="apt";}
+      GED.push({r,h,k});}
+    x+=p+10;}
+  y+=st;}
+const warnaG=g=>g.k==="apt"?`fill:${V("desa")}`:g.h>100?`fill:${V("air")}`:g.h>=45?`fill:${V("andesit")}`:`fill:${V("andesit")};opacity:.55`;
+GED.forEach(g=>R(base,g.r[0],g.r[3],g.r[1],g.r[2],`${warnaG(g)};stroke:${V("bg")};stroke-width:.5`));
+// plaza + menara
+R(base,PLAZA[0],PLAZA[3],PLAZA[1],PLAZA[2],`fill:${V("sawah")};opacity:.35;stroke:${V("ink")};stroke-width:.8`);
+el("circle",{cx:X(-600),cy:Y(0),r:22*K,css:`fill:${V("air")};opacity:.7;stroke:${V("ink")};stroke-width:.6`},base);
+L(base,-600,132,"PLAZA CBD 300 × 300 m",{fs:8.5,w:800});
+R(base,MENARA[0],MENARA[3],MENARA[1],MENARA[2],`fill:${V("adikara")};stroke:${V("ink")};stroke-width:1.4`);
+L(base,-395,60,"MENARA ADIKARA",{fs:8.5,w:800});L(base,-395,46,"220 m · tidak hancur",{fs:7.5,w:600});
+// lahan proyek
+R(base,PROYEK[0],PROYEK[3],PROYEK[1],PROYEK[2],`fill:${V("adikara")};opacity:.25`);
+[[760,200],[980,-150],[820,-230]].forEach(([x,y])=>{P(base,[[x,y],[x+55,y]],`fill:none;stroke:${V("emas")};stroke-width:2.2`);R(base,x-5,y+5,x+5,y-5,`fill:${V("emas")};stroke:${V("ink")};stroke-width:.5`);});
+R(base,760,-60,820,-120,`fill:${V("andesit")};opacity:.6`);
+L(base,880,258,"LAHAN PROYEK ADIKARA · derek",{fs:8.5,w:800});
+// label segmen
+L(base,-925,262,"A · PINTU TOL",{fs:9.5,w:800});L(base,-925,250,"ruko 8–14 m, barikade",{fs:7.5,w:600});
+L(base,-20,262,"SEKTOR KACA",{fs:9.5,w:800});L(base,-20,250,"menara keuangan 60–180 m",{fs:7.5,w:600});
+L(base,470,262,"SEKTOR APARTEMEN",{fs:9.5,w:800});L(base,470,250,"hunian 20–85 m",{fs:7.5,w:600});
+// gardu
+GARDU.forEach(g=>{R(base,g.x-35,g.y+25,g.x+35,g.y-25,`fill:${V("emas")};stroke:${V("ink")};stroke-width:1.3`);
+  for(let i=0;i<3;i++)R(base,g.x-28+i*22,g.y+18,g.x-20+i*22,g.y-18,`fill:${V("ink")};opacity:.55`);
+  L(base,g.id==="G1"?g.x-48:g.x,g.id==="G1"?g.y-4:g.y+31,g.id,{fs:9.5,w:800});L(base,g.x,g.id==="G1"?g.y+44:g.y-38,g.n,{fs:7.5,w:700});});
+
+// ----- sektor lampu -----
+const sek=el("g",{id:"g-sektor"},map);
+[[-750,250,"G1"],[250,700,"G2"],[700,1060,"G3"]].forEach(([x0,x1,n],i)=>{R(sek,x0,296,x1,-296,`fill:none;stroke:${V("emas")};stroke-width:2;stroke-dasharray:7 5`);L(sek,(x0+x1)/2,-283,`padam saat ${n} putus (${i+1})`,{fs:8,c:V("emas"),w:800});});
+
+// ----- arena -----
+const arena=el("g",{id:"g-arena"},map);
+R(arena,-300,296,250,-296,`fill:${V("kala")};opacity:.3`);
+R(arena,250,296,690,-296,`fill:${V("kala")};opacity:.3`);
+R(arena,-750,296,-300,150,`fill:${V("kala")};opacity:.14`);R(arena,-750,-150,-300,-296,`fill:${V("kala")};opacity:.14`);
+R(arena,PLAZA[0],PLAZA[3],PLAZA[1],PLAZA[2],`fill:${V("safe")};opacity:.45`);
+R(arena,-450,12,1060,-12,`fill:${V("safe")};opacity:.55`);
+R(arena,PROYEK[0],PROYEK[3],PROYEK[1],PROYEK[2],`fill:none;stroke:${V("adikara")};stroke-width:2;stroke-dasharray:5 3`);
+el("rect",{x:X(-750),y:Y(296),width:1810*K,height:592*K,rx:5,css:`fill:none;stroke:${V("kala")};stroke-width:2;stroke-dasharray:8 5`},arena);
+L(arena,-745,284,"BATAS ARENA ±1830 × 600 m",{fs:8,a:"start",w:700,c:V("kala")});
+L(arena,10,-24,"boulevard = koridor aman",{fs:7.5,w:800});
+// jalur boss + posisi
+const BOSS=[[-560,40,"muncul 25 m"],[30,60,"36 m"],[540,-50,"31 m"],[960,-200,"fase 2 · 27 m"]];
+el("path",{d:`M${X(-560)} ${Y(40)} C${X(-300)} ${Y(80)} ${X(-100)} ${Y(70)} ${X(30)} ${Y(60)} C${X(300)} ${Y(50)} ${X(400)} ${Y(-60)} ${X(540)} ${Y(-50)} C${X(700)} ${Y(-40)} ${X(850)} ${Y(-120)} ${X(950)} ${Y(-195)}`,css:`fill:none;stroke:${V("kala")};stroke-width:2.2;marker-end:url(#arrK)`},arena);
+BOSS.forEach(([x,y,t],i)=>{el("circle",{cx:X(x),cy:Y(y),r:i===0?7:6,class:i===0?"pulse":"",css:`fill:${V("kala")}`},arena);L(arena,x,i===1?y-20:y+14,t,{fs:8,c:V("kala"),w:800});});
+el("circle",{cx:X(-650),cy:Y(-40),r:6,css:`fill:${V("emas")};stroke:${V("ink")};stroke-width:1`},arena);L(arena,-650,-62,"Jayadwara muncul",{fs:8,w:800});
+[[-650,-40],[100,40],[600,-160],[900,-200]].forEach(([x,y],i)=>{if(i)el("circle",{cx:X(x),cy:Y(y),r:8,css:`fill:none;stroke:${V("ink")};stroke-width:1.4`},arena);});
+L(arena,600,-180,"CP gardu ke-2",{fs:7.5,w:700});L(arena,900,-222,"CP fase 2",{fs:7.5,w:700});
+
+// ----- jalur Aksa -----
+const route=el("g",{id:"g-route"},map);
+P(route,[[-1020,-12],[-1020,0],[-760,0],[-600,-60],[-470,0],[-432,0]],`fill:none;stroke:${V("route")};stroke-width:2;marker-end:url(#arr)`);
+for(let i=0;i<7;i++)el("circle",{cx:X(-960+i*80),cy:Y(20),r:2.4,css:`fill:${V("emas")};opacity:${1-i*.12}`},route);
+L(route,-860,40,"tiang lampu meredup ke arah menara",{fs:7.5,w:700});
+el("circle",{cx:X(-1020),cy:Y(-20),r:8,css:`fill:none;stroke:${V("ink")};stroke-width:1.4`},route);
+R(route,-1028,-34,-1012,-46,`fill:${V("ink")}`);L(route,-1012,-62,"START · mobil DWARA",{fs:8,a:"start",w:800});
+[[-1050,-12],[-1050,12]].forEach(([x,y])=>R(route,x-3,y+10,x+3,y-10,`fill:${V("kala")}`));L(route,-1095,-24,"barikade",{fs:7.5,a:"start",w:600});
+R(route,-560,-110,-520,-130,`fill:${V("ink")};opacity:.85`);L(route,-540,-142,"videotron",{fs:7.5,w:700});
+el("circle",{cx:X(-432),cy:Y(0),r:8,css:`fill:none;stroke:${V("ink")};stroke-width:1.4`},route);
+const clue=(x,y,n,t,ta)=>{el("circle",{cx:X(x),cy:Y(y),r:6.5,css:`fill:${V("emas")};stroke:${V("ink")};stroke-width:1`},route);L(route,x,y-8,n,{fs:7.5,w:800});L(route,ta[0],ta[1],t,{fs:7.5,a:ta[2]||"start",w:700});};
+clue(-410,-70,"★1","B1 grafik listrik",[-395,-74]);clue(-410,-105,"○","L38 nota",[-395,-109]);clue(-410,-140,"★2","L50 jimat",[-395,-144]);
+L(route,-410,-162,"(di dalam menara, lihat potongan)",{fs:7,w:600});
+
+// ----- garis pandang -----
+const sight=el("g",{id:"g-sight"},map);
+el("line",{x1:X(-1020),y1:Y(5),x2:X(-430),y2:Y(5),css:`stroke:${V("air")};stroke-width:1.6;stroke-dasharray:2 4`},sight);
+L(sight,-900,-30,"menara terlihat di ujung jalan sejak START",{fs:7.5,c:V("air"),w:800});
+GARDU.forEach(g=>el("line",{x1:X(-395),y1:Y(0),x2:X(g.x),y2:Y(g.y),css:`stroke:${V("air")};stroke-width:1.2;stroke-dasharray:2 4`},sight));
+L(sight,300,130,"dari atap: 3 gardu berderet ke timur",{fs:8,c:V("air"),w:800});
+
+// kompas + skala
+el("path",{d:`M${X(1020)} ${Y(-250)} l-6 15 l6 -4 l6 4 Z`,css:`fill:${V("ink")}`},map);L(map,1020,-268,"U",{fs:9,w:800});
+el("rect",{x:X(-1080),y:Y(-280),width:100*K,height:3.5,css:`fill:${V("ink")}`},map);L(map,-1055,-273,"100 m",{fs:7.5,w:500,a:"middle"});
+
+const tg=(id,g)=>{const c=document.getElementById(id),G=document.getElementById(g);const f=()=>{G.style.display=c.checked?"":"none"};c.addEventListener("change",f);f();};
+tg("lyr-route","g-route");tg("lyr-arena","g-arena");tg("lyr-sektor","g-sektor");tg("lyr-sight","g-sight");
+
+/* ---------- POTONGAN MEMANJANG (barat kiri → timur kanan, vertikal ×2) ---------- */
+(()=>{const lg=document.getElementById("long");const Lf=40,Rt=890,B=205,sx=(Rt-Lf)/2200,sz=sx*2;
+  const px=x=>Lf+(x+1100)*sx, pz=z=>B-z*sz;
+  const ged=[];let s2=5;const r2=()=>{s2=(s2*16807)%2147483647;return s2/2147483647;};
+  for(let x=-1090;x<1050;x+=22){if(x>-750&&x<-450)continue;if(x>-440&&x<-350)continue;if(x>700)continue;
+    let h=x<-750?8+r2()*6:x<250?60+r2()*120:20+r2()*65;ged.push([x,h,x<-750?"andesit":x<250?"air":"desa",x<-750?0:x<250?1:2]);}
+  function draw(st){lg.innerHTML="";
+    el("rect",{x:0,y:0,width:900,height:250,css:`fill:${V("bg")}`},lg);
+    for(let z=0;z<=220;z+=40){const yy=pz(z);if(yy<10)break;el("line",{x1:Lf,y1:yy,x2:Rt,y2:yy,css:`stroke:${V("line")};stroke-width:.5`},lg);el("text",{x:Lf-5,y:yy+3,"font-size":8.5,"text-anchor":"end",css:`fill:${V("muted")};font-family:var(--f-mono)`,text:z+" m"},lg);}
+    const gelap=sec=>sec>=1&&sec<=st;
+    ged.forEach(([x,h,c,sec])=>{const off=gelap(sec);el("rect",{x:px(x),y:pz(h),width:16*sx*1.2,height:h*sz,css:`fill:${V(c)};opacity:${off?.25:.85}`},lg);
+      if(!off&&sec)for(let w=8;w<h;w+=18)el("rect",{x:px(x)+2,y:pz(w)-2,width:3,height:2,css:`fill:${V("emas")}`},lg);});
+    el("rect",{x:px(-430),y:pz(220),width:70*sx,height:220*sz,css:`fill:${V("adikara")};opacity:${st>=1?.45:.9}`},lg);
+    el("rect",{x:px(700),y:pz(4),width:360*sx,height:4*sz,css:`fill:${V("adikara")};opacity:.5`},lg);
+    el("rect",{x:px(1060),y:pz(0),width:40*sx,height:10,css:`fill:${V("air")}`},lg);
+    el("line",{x1:Lf,y1:B,x2:Rt,y2:B,css:`stroke:${V("ink")};stroke-width:1.2`},lg);
+    [[100,"G1",1],[600,"G2",2],[900,"G3",3]].forEach(([x,n,i])=>{const off=st>=i;el("rect",{x:px(x-35),y:pz(30),width:70*sx,height:30*sz,css:`fill:${V(off?"line":"emas")};stroke:${V("ink")};stroke-width:1`},lg);el("text",{x:px(x),y:pz(30)-4,"font-size":9,"text-anchor":"middle",css:`fill:${V("ink")};font-weight:800`,text:n+(off?" putus":"")},lg);});
+    const bx=[30,540,960,960][st],bh=[36,31,27,27][st],jx=[-150,330,780,860][st];
+    const fig=(x,h,c,w,t)=>{const bxp=px(x),top=pz(h),ww=w*sx*2.2,hr=(B-top)*.1;el("rect",{x:bxp-ww/2,y:top+hr*2,width:ww,height:B-top-hr*2,rx:3,css:`fill:${V(c)}`},lg);el("circle",{cx:bxp,cy:top+hr,r:hr,css:`fill:${V(c)}`},lg);el("text",{x:bxp,y:top-5,"font-size":9,"text-anchor":"middle",css:`fill:${V(c==="kala"?"kala":"ink")};font-weight:800`,text:t},lg);};
+    fig(jx,45,"kala",11,"Jayadwara");fig(bx,bh,"andesit",14,"jenglot "+bh+" m");
+    if(st===3)el("circle",{cx:px(bx),cy:pz(bh*.62),r:3.5,class:"pulse",css:`fill:${V("kala")}`},lg);
+    const lab=(x,t)=>el("text",{x:px(x),y:B+15,"font-size":9,"text-anchor":"middle",css:`fill:${V("muted")};font-weight:700`,text:t},lg);
+    lab(-925,"A PINTU TOL");lab(-600,"PLAZA");lab(-395,"MENARA");lab(-20,"SEKTOR KACA");lab(470,"APARTEMEN");lab(880,"LAHAN PROYEK");
+    el("text",{x:Lf,y:236,"font-size":9,css:`fill:${V("muted")};font-family:var(--f-mono)`,text:"← barat · ±2200 m · vertikal ×2 · jendela kuning = lampu menyala"},lg);
+    el("text",{x:Rt,y:236,"font-size":9,"text-anchor":"end",css:`fill:${V("muted")};font-family:var(--f-mono)`,text:"kanal →"},lg);}
+  const bs=[0,1,2,3].map(i=>document.getElementById("st"+i));
+  bs.forEach((b,i)=>b.onclick=()=>{bs.forEach((o,j)=>o.setAttribute("aria-pressed",i===j));draw(i);});draw(0);
+})();
+
+/* ---------- POTONGAN MENARA (plaza barat kiri → menara kanan, skala asli) ---------- */
+(()=>{const pr=document.getElementById("prof");
+  const Y0=-780,Y1=-250,Lf=46,Rt=880,B=392,s=(Rt-Lf)/(Y1-Y0);
+  const px=y=>Lf+(y-Y0)*s, pz=z=>B-z*s;
+  el("rect",{x:0,y:0,width:900,height:430,css:`fill:${V("bg")}`},pr);
+  const gl=el("g",{},pr);
+  for(let z=0;z<=220;z+=20){const yy=pz(z);el("line",{x1:Lf,y1:yy,x2:Rt,y2:yy,css:`stroke:${V("line")};stroke-width:.5`},gl);el("text",{x:Lf-6,y:yy+3,"font-size":9,"text-anchor":"end",css:`fill:${V("muted")};font-family:var(--f-mono)`,text:z+" m"},gl);}
+  el("rect",{x:Lf,y:B,width:Rt-Lf,height:24,css:`fill:${V("tanah")};opacity:.45`},pr);
+  el("line",{x1:Lf,y1:B,x2:Rt,y2:B,css:`stroke:${V("ink")};stroke-width:1.2`},pr);
+  el("rect",{x:px(-750),y:B-1.5,width:300*s,height:1.5,css:`fill:${V("sawah")}`},pr);
+  el("rect",{x:px(-290),y:pz(150),width:30*s,height:150*s,css:`fill:${V("air")};opacity:.5`},pr);
+  const mx=px(-430),mw=70*s;
+  el("rect",{x:mx,y:pz(220),width:mw,height:220*s,css:`fill:${V("adikara")};opacity:.35;stroke:${V("ink")};stroke-width:1`},pr);
+  el("rect",{x:mx,y:B,width:mw,height:8*s,css:`fill:${V("adikara")};opacity:.55;stroke:${V("ink")};stroke-width:1`},pr);
+  const LT=[[-8,0,"B1 ruang kontrol listrik","★1 grafik listrik → 3 gardu di timur","emas",404],[0,8,"L1 lobi","masuk dari plaza, lampu berkedip","andesit",372],[80,92,"L20–22 lantai kantor","C: 3 gelombang kabel hidup · Sekar buka pintu","kala",250],[150,158,"L38 lantai eksekutif","○ nota kolektor (+ kujang?) · tangga darurat","air",160],[200,212,"L50 ruang server","★2 jimat pecah → inti di dada","emas",86],[212,220,"Atap","D: menghadap timur → transformasi","ink",44]];
+  LT.forEach(([z0,z1,n,c,w,ty])=>{const y0=pz(z1),h=(z1-z0)*s;el("rect",{x:mx,y:y0,width:mw,height:h,css:`fill:${V(w)}`},pr);
+    const lx=mx-14;el("path",{d:`M${mx} ${y0+h/2} L${lx} ${ty-4}`,css:`fill:none;stroke:${V(w)};stroke-width:1.2`},pr);
+    el("text",{x:lx-4,y:ty-1,"font-size":11,"text-anchor":"end",css:`fill:${V("ink")};font-weight:700`,text:n},pr);
+    el("text",{x:lx-4,y:ty+12,"font-size":10,"text-anchor":"end",css:`fill:${V("muted")}`,text:c},pr);});
+  el("rect",{x:mx+6,y:pz(212),width:6,height:212*s,css:`fill:none;stroke:${V("ink")};stroke-width:1;stroke-dasharray:3 2`},pr);
+  el("rect",{x:mx+mw-12,y:pz(212),width:6,height:212*s,css:`fill:none;stroke:${V("air")};stroke-width:1;stroke-dasharray:3 2`},pr);
+  el("text",{x:mx+mw/2,y:pz(120),"font-size":9,"text-anchor":"middle",css:`fill:${V("ink")};font-weight:600`,text:"tidak dibangun"},pr);
+  el("text",{x:mx+mw/2,y:pz(60),"font-size":9.5,"text-anchor":"middle",css:`fill:${V("ink")};font-weight:700`,text:"lift rusak:"},pr);
+  el("text",{x:mx+mw/2,y:pz(60)+12,"font-size":9,"text-anchor":"middle",css:`fill:${V("ink")}`,text:"pintas dari L22"},pr);
+  el("path",{d:`M${mx+mw+8} ${pz(216)} l40 0`,css:`stroke:${V("kala")};stroke-width:2;fill:none;marker-end:url(#arrK2)`},pr);
+  const d2=el("defs",{},pr);const m=el("marker",{id:"arrK2",viewBox:"0 0 10 10",refX:8,refY:5,markerWidth:7,markerHeight:7,orient:"auto"},d2);el("path",{d:"M0 0 L10 5 L0 10 Z",css:`fill:${V("kala")}`},m);
+  el("text",{x:mx+mw+8,y:pz(216)-6,"font-size":9.5,css:`fill:${V("kala")};font-weight:700`,text:"timur: 3 gardu"},pr);
+  const fig=(y,h,c,label,o={})=>{const bx=px(y),by=B,top=pz(h);const w=Math.max(1.4,(o.w||h*.3)*s),hr=Math.max(.9,(by-top)*.09);
+    el("rect",{x:bx-w/2,y:top+hr*2,width:w,height:Math.max(1,by-top-hr*2),rx:Math.min(w/2,4),css:`fill:${V(c)}`},pr);el("circle",{cx:bx,cy:top+hr,r:hr,css:`fill:${V(c)}`},pr);
+    if(label)el("text",{x:bx,y:top-6,"font-size":10,"text-anchor":"middle",css:`fill:${V(o.lc||"ink")};font-weight:700`,text:label},pr);};
+  fig(-745,45,"kala","Jayadwara 45 m",{w:11,lc:"kala"});
+  fig(-670,25,"andesit","jenglot muncul 25 m",{w:9});
+  el("text",{x:px(-600),y:B+16,"font-size":10,"text-anchor":"middle",css:`fill:${V("muted")};font-weight:600`,text:"PLAZA (air mancur di −600)"},pr);
+  el("text",{x:px(-275),y:pz(150)-6,"font-size":10,"text-anchor":"middle",css:`fill:${V("ink")};font-weight:700`,text:"menara kaca 150 m"},pr);
+  el("text",{x:Lf,y:16,"font-size":10,css:`fill:${V("muted")};font-family:var(--f-mono)`,text:"← barat (pintu tol) · ±530 m · skala asli 1:1"},pr);
+})();
+
+/* ---------- BERJAJAR ---------- */
+(()=>{const lu=document.getElementById("lineup");const B=318,T=18,s=(B-T)/230,items=[
+  ["Aksa",1.75,"emas","fig"],["kabel hidup",2.5,"kala","fig"],["jalan layang",15,"ink","deck"],["jenglot f1",25,"andesit","fat"],["gardu induk",30,"emas","tower"],["jenglot puncak",36,"andesit","fat"],["Jayadwara",45,"kala","fig"],["apartemen",70,"desa","blk"],["kantor",110,"andesit","blk"],["menara kaca",180,"air","blk"],["M. Adikara",220,"adikara","blk"]];
+  el("rect",{x:0,y:0,width:900,height:360,css:`fill:${V("bg")}`},lu);
+  for(let z=0;z<=220;z+=20){const y=B-z*s;el("line",{x1:40,y1:y,x2:890,y2:y,css:`stroke:${V("line")};stroke-width:.5`},lu);el("text",{x:34,y:y+3,"font-size":9,"text-anchor":"end",css:`fill:${V("muted")};font-family:var(--f-mono)`,text:z+" m"},lu);}
+  el("line",{x1:40,y1:B-45*s,x2:890,y2:B-45*s,css:`stroke:${V("kala")};stroke-width:1;stroke-dasharray:4 3`},lu);
+  el("text",{x:560,y:B-45*s-4,"font-size":9.5,"text-anchor":"middle",css:`fill:${V("kala")};font-weight:700`,text:"tinggi Jayadwara"},lu);
+  el("line",{x1:40,y1:B,x2:890,y2:B,css:`stroke:${V("ink")};stroke-width:1.2`},lu);
+  const cx=[72,140,210,282,352,424,496,570,650,738,836];
+  items.forEach((it,i)=>{const [n,h,c,k]=it,x=cx[i],top=B-h*s;
+    if(k==="fig"||k==="fat"){const w=Math.max(2,h*(k==="fat"?.42:.27)*s),hr=Math.max(1.2,h*s*(k==="fat"?.13:.09));el("rect",{x:x-w/2,y:top+hr*2,width:w,height:Math.max(1,h*s-hr*2),rx:Math.min(w/2,6),css:`fill:${V(c)}`},lu);el("circle",{cx:x,cy:top+hr,r:hr,css:`fill:${V(c)}`},lu);}
+    else if(k==="deck"){el("rect",{x:x-4,y:top,width:8,height:h*s,css:`fill:${V(c)};opacity:.7`},lu);el("rect",{x:x-30,y:top-4,width:60,height:5,css:`fill:${V(c)}`},lu);}
+    else if(k==="tower"){el("rect",{x:x-22,y:top,width:44,height:h*s,css:`fill:none;stroke:${V(c)};stroke-width:2`},lu);for(let j=0;j<3;j++)el("rect",{x:x-16+j*12,y:top+4,width:6,height:h*s-4,css:`fill:${V(c)}`},lu);}
+    else{const w=n==="M. Adikara"?52:44;el("rect",{x:x-w/2,y:top,width:w,height:h*s,css:`fill:${V(c)};opacity:.9`},lu);}
+    el("text",{x,y:B+16,"font-size":11,"text-anchor":"middle",css:`fill:${V("ink")};font-weight:700`,text:n},lu);
+    el("text",{x,y:B+29,"font-size":10,"text-anchor":"middle",css:`fill:${V("muted")};font-family:var(--f-mono)`,text:String(h).replace(".",",")+" m"},lu);
+  });
+})();
+
+/* ---------- LINIMASA ---------- */
+(()=>{const tm=document.getElementById("time");const segs=[["A",2,"#3b4a6b","21.00"],["B Plaza & lobi",6,"#34405e","menara redup"],["C Kantor",6,"#262e45","gelap per lantai"],["C'D",2,"#c0262b",""],["E1 Kaca",2.5,"#202638","barat padam"],["E2 Apt",2.5,"#171c2b","tengah padam"],["E3 Proyek",3,"#0f121c","gelap total"],["Segel",2,"#e2ad46","lampu kembali"]];
+  const tot=segs.reduce((a,s)=>a+s[1],0),Lf=10,W=880;let x=Lf;
+  el("rect",{x:0,y:0,width:900,height:150,css:`fill:${V("bg")}`},tm);
+  const d=el("defs",{},tm);const gr=el("linearGradient",{id:"sky",x1:0,x2:1,y1:0,y2:0},d);
+  let acc=0;segs.forEach(s=>{el("stop",{offset:((acc+s[1]/2)/tot*100)+"%","stop-color":s[2]},gr);acc+=s[1];});
+  el("rect",{x:Lf,y:16,width:W,height:46,rx:4,fill:"url(#sky)"},tm);
+  segs.forEach((s,i)=>{const w=s[1]/tot*W;
+    if(i)el("line",{x1:x,y1:12,x2:x,y2:120,css:`stroke:${V("ink")};stroke-width:1;opacity:.5`},tm);
+    el("text",{x:x+6,y:84,"font-size":12,css:`fill:${V("ink")};font-weight:700`,text:s[0]},tm);
+    if(w>45)el("text",{x:x+6,y:100,"font-size":10,css:`fill:${V("muted")};font-family:var(--f-mono)`,text:"±"+String(s[1]).replace(".",",")+" mnt"},tm);
+    el("text",{x:x+6,y:116,"font-size":10,css:`fill:${V("muted")}`,text:s[3]},tm);x+=w;});
+  el("text",{x:Lf+W,y:140,"font-size":10,"text-anchor":"end",css:`fill:${V("muted")};font-family:var(--f-mono)`,text:"total ±26 mnt (tanpa wayang & briefing di hub)"},tm);
+  [[8,"CP L20"],[14,"CP L22"],[16,"CP E1"],[21,"CP G2"],[22,"CP fase 2"]].forEach(([t,n],i)=>{const cx=Lf+t/tot*W;el("circle",{cx,cy:39,r:5,css:`fill:none;stroke:#f2efe6;stroke-width:2`},tm);el("text",{x:cx+(i===4?24:0),y:12,"font-size":9,"text-anchor":"middle",css:`fill:${V("ink")};font-family:var(--f-mono)`,text:n},tm);});
+})();
+</script>

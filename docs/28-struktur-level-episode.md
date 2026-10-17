@@ -113,6 +113,7 @@ Format: **Map** · **Suasana** · alur zona A → E · elemen RE4 · arena raksa
 - **E. Arena:** plaza CBD dengan **3 gardu listrik** di tiga sudut, gedung tinggi di antaranya. Batas: jalan layang, menara kaca. Gedung kaca = kerusakan mahal.
 - **Elemen RE4:** progres vertikal yang terkunci per lantai, lift sebagai jalan pintas.
 - **Pakai ulang:** membangun kit **Adikara (CBD)** + interior kantor.
+- **Rincian:** [32](32-desain-level-ep03.md). Tata letak v02 (17 Okt 2026) mengubah rancangan di atas jadi **map memanjang barat → timur** (pintu tol → plaza + Menara Adikara → sektor kaca → sektor apartemen → lahan proyek), gardu berurutan, ★2 di ruang server L50.
 
 ### Ep 4 — `Ep04_PasarKali` · pasar malam
 - **A. Parkiran pasar:** tukang parkir (salah satu saksi).
