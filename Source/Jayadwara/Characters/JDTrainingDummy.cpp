@@ -129,7 +129,7 @@ void AJDTrainingDummy::FaceTarget(const APawn* Target)
 void AJDTrainingDummy::AttackTick()
 {
 	const APawn* Target = GetAttackTarget();
-	if (!Target || !AbilitySystemComponent || AbilitySystemComponent->HasMatchingGameplayTag(JDGameplayTags::State_Stagger)
+	if (!Target || !AbilitySystemComponent || IsActionLocked()
 		|| AbilitySystemComponent->HasMatchingGameplayTag(JDGameplayTags::State_Attacking))
 	{
 		return;
@@ -159,7 +159,7 @@ void AJDTrainingDummy::FlashTelegraph()
 void AJDTrainingDummy::ReleaseAttack()
 {
 	GetWorldTimerManager().ClearTimer(FlashTimer);
-	if (!AbilitySystemComponent || AbilitySystemComponent->HasMatchingGameplayTag(JDGameplayTags::State_Stagger))
+	if (!AbilitySystemComponent || IsActionLocked())
 	{
 		return;
 	}

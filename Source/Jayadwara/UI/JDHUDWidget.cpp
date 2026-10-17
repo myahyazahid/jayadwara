@@ -1,6 +1,8 @@
 #include "UI/JDHUDWidget.h"
 
 #include "Abilities/JDAttributeSet.h"
+#include "Blueprint/WidgetLayoutLibrary.h"
+#include "Combat/JDTargetingComponent.h"
 #include "AbilitySystemComponent.h"
 #include "AbilitySystemGlobals.h"
 #include "Blueprint/WidgetTree.h"
@@ -40,8 +42,24 @@ void UJDHUDWidget::BuildDefaultLayout()
 
 	AddDefaultRow(Box, NSLOCTEXT("JDHUD", "Health", "Health"), FLinearColor(0.80f, 0.12f, 0.10f), HealthBar, HealthText);
 	AddDefaultRow(Box, NSLOCTEXT("JDHUD", "Stamina", "Stamina"), FLinearColor(0.20f, 0.70f, 0.25f), StaminaBar, StaminaText);
+	AddDefaultRow(Box, NSLOCTEXT("JDHUD", "Poise", "Poise"), FLinearColor(0.85f, 0.60f, 0.20f), PoiseBar, PoiseText);
 	AddDefaultRow(Box, NSLOCTEXT("JDHUD", "Sync", "Sync"), FLinearColor(0.95f, 0.70f, 0.15f), SyncBar, SyncText);
 	AddDefaultRow(Box, NSLOCTEXT("JDHUD", "Energy", "Energi"), FLinearColor(0.25f, 0.55f, 0.95f), TransformEnergyBar, TransformEnergyText);
+
+	// Penanda soft target: segitiga merah, ujung bawahnya di titik yang diproyeksikan (atas kepala target).
+	UTextBlock* Marker = WidgetTree->ConstructWidget<UTextBlock>(UTextBlock::StaticClass(), TEXT("TargetMarker"));
+	Marker->SetText(FText::FromString(TEXT("\u25BC")));
+	Marker->SetColorAndOpacity(FSlateColor(FLinearColor(0.90f, 0.15f, 0.10f)));
+	FSlateFontInfo Font = Marker->GetFont();
+	Font.Size = 20;
+	Marker->SetFont(Font);
+	Marker->SetShadowOffset(FVector2D(1.0f, 1.0f));
+	Marker->SetShadowColorAndOpacity(FLinearColor(0.0f, 0.0f, 0.0f, 0.8f));
+	Marker->SetVisibility(ESlateVisibility::Collapsed);
+	UCanvasPanelSlot* MarkerSlot = Root->AddChildToCanvas(Marker);
+	MarkerSlot->SetAutoSize(true);
+	MarkerSlot->SetAlignment(FVector2D(0.5f, 1.0f));
+	TargetMarker = Marker;
 }
 
 void UJDHUDWidget::AddDefaultRow(UVerticalBox* Box, const FText& Label, const FLinearColor& Color, TObjectPtr<UProgressBar>& OutBar, TObjectPtr<UTextBlock>& OutText)
@@ -116,8 +134,38 @@ void UJDHUDWidget::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
 
 	UpdateRow(HealthBar, HealthText, UJDAttributeSet::GetHealthAttribute(), UJDAttributeSet::GetMaxHealthAttribute());
 	UpdateRow(StaminaBar, StaminaText, UJDAttributeSet::GetStaminaAttribute(), UJDAttributeSet::GetMaxStaminaAttribute());
+	UpdateRow(PoiseBar, PoiseText, UJDAttributeSet::GetPoiseAttribute(), UJDAttributeSet::GetMaxPoiseAttribute());
 	UpdateRow(SyncBar, SyncText, UJDAttributeSet::GetSyncAttribute(), UJDAttributeSet::GetMaxSyncAttribute());
 	UpdateRow(TransformEnergyBar, TransformEnergyText, UJDAttributeSet::GetTransformEnergyAttribute(), UJDAttributeSet::GetMaxTransformEnergyAttribute());
+	UpdateTargetMarker();
+}
+
+void UJDHUDWidget::UpdateTargetMarker()
+{
+	if (!TargetMarker)
+	{
+		return;
+	}
+	APlayerController* PC = GetOwningPlayer();
+	const APawn* Pawn = PC ? PC->GetPawn() : nullptr;
+	const UJDTargetingComponent* Targeting = Pawn ? Pawn->FindComponentByClass<UJDTargetingComponent>() : nullptr;
+	const AActor* Target = Targeting ? Targeting->GetSoftTarget() : nullptr;
+	UCanvasPanelSlot* MarkerSlot = Cast<UCanvasPanelSlot>(TargetMarker->Slot);
+	FVector2D ScreenPosition;
+	if (!Target || !MarkerSlot)
+	{
+		TargetMarker->SetVisibility(ESlateVisibility::Collapsed);
+		return;
+	}
+	// Sedikit di atas kepala (kapsul berskala, jadi ikut dummy raksasa).
+	const FVector Head = Target->GetActorLocation() + FVector(0.0f, 0.0f, Target->GetSimpleCollisionHalfHeight() * 1.25f);
+	if (!UWidgetLayoutLibrary::ProjectWorldLocationToWidgetPosition(PC, Head, ScreenPosition, false))
+	{
+		TargetMarker->SetVisibility(ESlateVisibility::Collapsed);
+		return;
+	}
+	MarkerSlot->SetPosition(ScreenPosition);
+	TargetMarker->SetVisibility(ESlateVisibility::HitTestInvisible);
 }
 
 void UJDHUDWidget::UpdateRow(UProgressBar* Bar, UTextBlock* Text, const FGameplayAttribute& Value, const FGameplayAttribute& Max) const

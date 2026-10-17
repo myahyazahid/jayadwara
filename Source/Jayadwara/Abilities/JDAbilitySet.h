@@ -71,6 +71,14 @@ struct FJDAttributeDefaults
 	/** Jeda setelah stamina terpakai sebelum regen mulai (s). */
 	UPROPERTY(EditAnywhere, Category = "Attributes|Stamina", meta = (ClampMin = "0"))
 	float StaminaRegenDelay = 0.8f;
+
+	/** Poise per detik setelah jeda tanpa kena (docs/23 Iterasi 4: 20/s). 0 = tanpa regen. */
+	UPROPERTY(EditAnywhere, Category = "Attributes|Poise", meta = (ClampMin = "0"))
+	float PoiseRegenPerSecond = 20.0f;
+
+	/** Jeda setelah poise berkurang sebelum regen mulai (s). */
+	UPROPERTY(EditAnywhere, Category = "Attributes|Poise", meta = (ClampMin = "0"))
+	float PoiseRegenDelay = 1.5f;
 };
 
 /** Yang sudah diberikan, untuk dicabut lagi (mis. ganti set). */

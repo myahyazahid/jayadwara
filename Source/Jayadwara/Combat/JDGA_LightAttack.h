@@ -14,10 +14,10 @@ struct FJDAttackStep;
  *
  * Tiap langkah = satu montage. Tekan pukulan ringan lagi selama JD Combo Window (atau sesaat sebelumnya, sebatas
  * buffer input ASC) -> langkah berikutnya. Berhenti menekan -> montage selesai -> ability berakhir. Arah pukulan:
- * arah input gerak saat langkah dimulai (soft target menyusul di Iterasi 4). Tidak bisa dimulai saat serangan lain
+ * arah input gerak saat langkah dimulai, lalu menempel ke soft target (warp, UJDTargetingComponent). Tidak bisa dimulai saat serangan lain
  * (pukulan berat) masih berjalan; tekanannya di-buffer ASC.
  *
- * Arah (docs/07 "Combo & arah"): saat combo dimulai, arah input dibandingkan dengan arah ke target terdekat. Maju +
+ * Arah (docs/07 "Combo & arah"): saat combo dimulai, arah input dibandingkan dengan arah ke soft target (atau terdekat). Maju +
  * target jauh -> LungeAttack (terjang ke target), mundur -> BackAttack; keduanya menggantikan langkah 1 dan combo
  * berlanjut dari langkah 2. Kiri/kanan atau tanpa target -> combo biasa. Dalam ParryCounterWindow setelah parry ->
  * ParryCounterAttack ke penyerang yang di-parry (docs/07 "Parry"), juga menggantikan langkah 1.

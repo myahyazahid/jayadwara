@@ -22,6 +22,19 @@ enum class EJDHitOutcome : uint8
 	Parried
 };
 
+/** Reaksi korban yang kena pukul (docs/23 Iterasi 4, UJDGA_HitReact). Urutan = prioritas (tidak pernah diturunkan). */
+UENUM(BlueprintType)
+enum class EJDHitReaction : uint8
+{
+	None,
+	/** Poise masih ada: sentak sebentar. */
+	Light,
+	/** Poise habis (atau guard break / di-parry): terhuyung, tidak bisa apa-apa. */
+	Stagger,
+	/** Poise habis oleh serangan bertanda Jatuh: jatuh, terbaring, bangun kebal. */
+	Knockdown
+};
+
 /** Pukulan kena: korban, titik kena, langkah serangan. */
 DECLARE_MULTICAST_DELEGATE_ThreeParams(FJDHitLandedEvent, AActor* /*Victim*/, const FHitResult& /*Hit*/, const FJDAttackStep& /*Attack*/);
 
@@ -36,8 +49,11 @@ DECLARE_MULTICAST_DELEGATE_ThreeParams(FJDHitLandedEvent, AActor* /*Victim*/, co
  * Bertahan (Iterasi 3): komponen milik korban memutuskan hasilnya (ResolveIncomingHit) dari tag ASC-nya:
  * State.Invulnerable -> Dodged, State.ParryWindow -> Parried (penyerang stagger, penangkis menepis lalu boleh serangan
  * balik: HandleParrySuccess), State.Blocking -> Blocked/GuardBreak.
- * Tangkis & parry hanya berlaku untuk serangan dari depan (BlockAngle). Stagger sementara (ApplyStagger) membatalkan
- * ability combat, memasang State.Stagger, dan menahan gerak; reaksi lengkap (poise, knockdown) di Iterasi 4.
+ * Tangkis & parry hanya berlaku untuk serangan dari depan (BlockAngle).
+ *
+ * Reaksi (Iterasi 4): pukulan yang kena (tidak ditangkis) memilih reaksi korban dari poise-nya (ChooseHitReaction):
+ * poise masih ada = ringan, poise habis = stagger, habis oleh serangan bertanda Jatuh = knockdown. Reaksi dijalankan
+ * UJDGA_HitReact lewat Gameplay Event (ApplyHitReaction), di frame berikutnya.
  */
 UCLASS(ClassGroup = (Jayadwara), meta = (BlueprintSpawnableComponent))
 class JAYADWARA_API UJDCombatComponent : public UActorComponent
@@ -59,10 +75,13 @@ public:
 	bool IsAttacking() const { return bAttackActive; }
 
 	/**
-	 * Target terdekat untuk arah combo (docs/07 "Combo & arah"): karakter lain yang terlihat, hidup, beda pihak, dalam
-	 * Radius. Sementara sampai UJDTargetingComponent (Iterasi 4).
+	 * Target terdekat dalam Radius, ke segala arah. Dipakai pembuka arah (pukul mundur) kalau soft target tidak menemukan
+	 * apa pun searah input (UJDTargetingComponent).
 	 */
 	AActor* FindNearestTarget(float Radius) const;
+
+	/** Other boleh dijadikan target oleh Owner: terlihat, hidup, beda pihak (dikendalikan pemain vs tidak), punya combat. */
+	static bool IsValidTarget(const APawn* Owner, const APawn* Other);
 
 	/** Langkah combo ringan yang sedang jalan (dipanggil UJDGA_LightAttack; INDEX_NONE = combo berakhir). */
 	void SetLightComboStep(int32 Step, bool bWasCancelled = false);
@@ -102,10 +121,20 @@ public:
 	/** Penyerang yang baru di-parry kalau jendela serangan balik masih terbuka (sekali pakai), selain itu nullptr. */
 	AActor* ConsumeCounterTarget();
 
-	/** Stagger selama Duration detik (dibatalkan ability combat, gerak ditahan, StaggerMontage profil diputar). */
-	void ApplyStagger(float Duration);
+	/** Stagger selama Duration detik (guard break, di-parry), lewat UJDGA_HitReact. Instigator = arah hadap & dorongan. */
+	void ApplyStagger(float Duration, AActor* Instigator = nullptr);
+
+	/** Jalankan reaksi kena pada pemilik (UJDGA_HitReact). Duration > 0 menimpa durasi profil. */
+	void ApplyHitReaction(EJDHitReaction Reaction, AActor* Instigator, float Duration = 0.0f);
+
+	/**
+	 * Reaksi pemilik untuk pukulan yang baru kena (tidak ditangkis). bPoiseBroken = pukulan ini menghabiskan poise;
+	 * bKnockdownAttack = serangan bertanda Jatuh. None = tanpa reaksi (mati, sedang knockdown, atau tahan sentak).
+	 */
+	EJDHitReaction ChooseHitReaction(bool bPoiseBroken, bool bKnockdownAttack) const;
 
 	bool IsStaggered() const;
+	bool IsKnockedDown() const;
 
 	/** bNewHit = korban jendela sebelumnya boleh kena lagi (jurus 2× kena). */
 	void BeginHitWindow(FName SocketName, float RadiusOverride, bool bNewHit = false);
@@ -136,7 +165,6 @@ private:
 	void PlayParryDeflect(TWeakObjectPtr<AActor> Attacker);
 	void StartParrySlowMo();
 	void EndParrySlowMo();
-	void EndStagger();
 	void ShowDebugMessage(const FString& Message, const FColor& Color) const;
 
 	FJDAttackStep CurrentAttack;
@@ -153,8 +181,6 @@ private:
 
 	TArray<TWeakObjectPtr<AActor>> HitStopActors;
 	FTimerHandle HitStopTimer;
-
-	FTimerHandle StaggerTimer;
 
 	int32 ParryVariant = 0;
 	TWeakObjectPtr<AActor> CounterTarget;

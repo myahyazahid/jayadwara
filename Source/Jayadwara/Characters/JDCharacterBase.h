@@ -11,6 +11,7 @@ class UJDAbilitySet;
 class UJDAbilitySystemComponent;
 class UJDAttributeSet;
 class UJDCombatComponent;
+class UJDTargetingComponent;
 class UJDInputConfig;
 struct FInputActionValue;
 
@@ -21,7 +22,8 @@ struct FInputActionValue;
  *
  * GAS (docs/23 Iterasi 1, R1): ASC + UJDAttributeSet ada di karakter. AbilitySet diberikan saat BeginPlay
  * (atribut awal, ability, regen). Aksi combat diikat lewat InputConfig ke input tag ASC. UJDCombatComponent (hitbox,
- * hit-stop, profil combat per skala) dipakai semua karakter (Iterasi 2).
+ * hit-stop, profil combat per skala) dipakai semua karakter (Iterasi 2). UJDGA_HitReact diberikan otomatis dan
+ * UJDTargetingComponent (soft target, warp; hanya bekerja saat dikendalikan pemain) dipasang di semua karakter (Iterasi 4).
  */
 UCLASS(Abstract)
 class JAYADWARA_API AJDCharacterBase : public ACharacter, public IAbilitySystemInterface
@@ -42,12 +44,19 @@ public:
 	UFUNCTION(BlueprintPure, Category = "Combat")
 	UJDCombatComponent* GetCombatComponent() const { return CombatComponent; }
 
+	UFUNCTION(BlueprintPure, Category = "Combat")
+	UJDTargetingComponent* GetTargetingComponent() const { return TargetingComponent; }
+
+	/** Stagger, knockdown, atau mati: gerak & lompat ditahan. */
+	bool IsActionLocked() const;
+
 	virtual void PossessedBy(AController* NewController) override;
 	virtual void UnPossessed() override;
 
 protected:
 	virtual void BeginPlay() override;
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
+	virtual bool CanJumpInternal_Implementation() const override;
 
 	/** Health habis. Basis: pasang State.Dead + log; mati/checkpoint/roboh ditangani turunan (Iterasi 5, 6). */
 	virtual void HandleOutOfHealth(AActor* DamageInstigator, float DamageAmount);
@@ -63,6 +72,9 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Combat")
 	TObjectPtr<UJDCombatComponent> CombatComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Combat")
+	TObjectPtr<UJDTargetingComponent> TargetingComponent;
 
 	/** Atribut awal, ability, dan buffer input karakter ini (DA_AbilitySet_*). */
 	UPROPERTY(EditDefaultsOnly, Category = "Abilities")
