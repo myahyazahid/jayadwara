@@ -2,7 +2,7 @@
  "versi": "ep01_layout_v02 (16 Okt 2026, dari docs/30 bagian 2a). Dibuat oleh Art/Level/buat_layout_ep01_v02.py — jangan sunting manual",
  "medan_modul": "ep01_medan_v02",
  "satuan": "meter; x = timur, y = utara, z = atas (0 = muka desa). UE: X = x*100, Y = -y*100, Z = z*100 (cm)",
- "z_otomatis": "objek tanpa 'z' diletakkan di atas medan: alas = elev terendah di tapak; 'z' = tinggi alas absolut",
+ "z_otomatis": "objek tanpa 'z' diletakkan di atas medan: alas = elev titik tengah tapak (nilainya ada di 'alas_m'; dinding = titik tengah garis, tangga = z 'dari'); 'z' = tinggi alas absolut. Tinggi akhir = alas_m (atau z) + z_dasar_relatif; 'pondasi_m' = perpanjang objek ke bawah sebanyak itu (puncak tetap) supaya sisi rendah di lereng tidak melayang",
  "medan": {
   "x_min": -620,
   "x_max": 780,
@@ -42,7 +42,8 @@
     ]
    ],
    "mi": "Andesit",
-   "hancur": false
+   "hancur": false,
+   "alas_m": 35.0
   },
   {
    "id": "CANDI_GerbangTiangKiri",
@@ -57,7 +58,8 @@
     8
    ],
    "mi": "Andesit",
-   "hancur": false
+   "hancur": false,
+   "alas_m": 35.0
   },
   {
    "id": "CANDI_GerbangTiangKanan",
@@ -72,7 +74,8 @@
     8
    ],
    "mi": "Andesit",
-   "hancur": false
+   "hancur": false,
+   "alas_m": 35.0
   },
   {
    "id": "CANDI_GerbangAmbang",
@@ -88,7 +91,8 @@
    ],
    "mi": "Andesit",
    "hancur": false,
-   "z_dasar_relatif": 6
+   "z_dasar_relatif": 6,
+   "alas_m": 35.0
   },
   {
    "id": "CANDI_AlasArcaKiri",
@@ -103,7 +107,8 @@
     1
    ],
    "mi": "Andesit",
-   "hancur": false
+   "hancur": false,
+   "alas_m": 35.0
   },
   {
    "id": "CANDI_ArcaKiri",
@@ -119,7 +124,8 @@
    ],
    "mi": "Arca",
    "hancur": false,
-   "z_dasar_relatif": 1
+   "z_dasar_relatif": 1,
+   "alas_m": 35.0
   },
   {
    "id": "CANDI_AlasArcaKanan",
@@ -134,7 +140,8 @@
     1
    ],
    "mi": "Andesit",
-   "hancur": false
+   "hancur": false,
+   "alas_m": 35.0
   },
   {
    "id": "CANDI_ArcaKanan",
@@ -151,7 +158,8 @@
    "mi": "Arca",
    "hancur": false,
    "z_dasar_relatif": 1,
-   "catatan": "dililit tali derek (adegan 4)"
+   "catatan": "dililit tali derek (adegan 4)",
+   "alas_m": 35.0
   },
   {
    "id": "CANDI_Prasasti",
@@ -166,7 +174,8 @@
     2
    ],
    "mi": "Andesit",
-   "hancur": false
+   "hancur": false,
+   "alas_m": 35.0
   },
   {
    "id": "CANDI_Tangga",
@@ -184,7 +193,8 @@
    "lebar": 10,
    "anak_tangga": 28,
    "mi": "Andesit",
-   "hancur": false
+   "hancur": false,
+   "alas_m": 28.0
   },
   {
    "id": "PERWARA_Reruntuhan1",
@@ -200,7 +210,9 @@
    ],
    "mi": "Andesit",
    "hancur": false,
-   "yaw": 12
+   "yaw": 12,
+   "alas_m": 40.4,
+   "pondasi_m": 0.53
   },
   {
    "id": "PERWARA_Reruntuhan2",
@@ -216,7 +228,9 @@
    ],
    "mi": "Andesit",
    "hancur": false,
-   "yaw": -20
+   "yaw": -20,
+   "alas_m": 42.8,
+   "pondasi_m": 0.56
   },
   {
    "id": "PERWARA_Reruntuhan3",
@@ -232,7 +246,9 @@
    ],
    "mi": "Andesit",
    "hancur": false,
-   "yaw": 35
+   "yaw": 35,
+   "alas_m": 48.2,
+   "pondasi_m": 0.6
   },
   {
    "id": "PERWARA_Reruntuhan4",
@@ -248,7 +264,9 @@
    ],
    "mi": "Andesit",
    "hancur": false,
-   "yaw": 5
+   "yaw": 5,
+   "alas_m": 38.6,
+   "pondasi_m": 0.49
   },
   {
    "id": "PROYEK_Tenda1",
@@ -263,14 +281,15 @@
     2.5
    ],
    "mi": "Terpal",
-   "hancur": false
+   "hancur": false,
+   "alas_m": -5.0
   },
   {
    "id": "PROYEK_Tenda2",
    "jenis": "kotak",
    "pos": [
     -75,
-    0
+    7
    ],
    "ukuran": [
     4,
@@ -278,14 +297,15 @@
     2.5
    ],
    "mi": "Terpal",
-   "hancur": false
+   "hancur": false,
+   "alas_m": 10.0
   },
   {
    "id": "PROYEK_Tenda3",
    "jenis": "kotak",
    "pos": [
-    -55,
-    -45
+    -50,
+    -38
    ],
    "ukuran": [
     4,
@@ -293,14 +313,15 @@
     2.5
    ],
    "mi": "Terpal",
-   "hancur": false
+   "hancur": false,
+   "alas_m": 10.0
   },
   {
    "id": "PROYEK_Ekskavator",
    "jenis": "kotak",
    "pos": [
-    128,
-    -30
+    136,
+    -28
    ],
    "ukuran": [
     9,
@@ -309,13 +330,14 @@
    ],
    "mi": "Alat",
    "hancur": false,
-   "yaw": 20
+   "yaw": 20,
+   "alas_m": 20.0
   },
   {
    "id": "PROYEK_Buldoser",
    "jenis": "kotak",
    "pos": [
-    130,
+    138,
     30
    ],
    "ukuran": [
@@ -325,7 +347,8 @@
    ],
    "mi": "Alat",
    "hancur": false,
-   "yaw": -10
+   "yaw": -10,
+   "alas_m": 20.0
   },
   {
    "id": "PROYEK_TrukDerek",
@@ -342,7 +365,8 @@
    "mi": "Alat",
    "hancur": false,
    "yaw": 30,
-   "catatan": "keluar lewat jalan proyek di adegan 6"
+   "catatan": "keluar lewat jalan proyek di adegan 6",
+   "alas_m": 35.0
   },
   {
    "id": "PROYEK_BatuLatihan",
@@ -358,7 +382,8 @@
    ],
    "mi": "Andesit",
    "hancur": false,
-   "catatan": "di samping jalan setapak, menghadap desa"
+   "catatan": "di samping jalan setapak, menghadap desa",
+   "alas_m": 2.91
   },
   {
    "id": "BASECAMP_Kantor1",
@@ -374,7 +399,8 @@
    ],
    "mi": "Alat",
    "hancur": true,
-   "milik": "Adikara"
+   "milik": "Adikara",
+   "alas_m": 25.0
   },
   {
    "id": "BASECAMP_Kantor2",
@@ -390,7 +416,8 @@
    ],
    "mi": "Alat",
    "hancur": true,
-   "milik": "Adikara"
+   "milik": "Adikara",
+   "alas_m": 25.0
   },
   {
    "id": "BASECAMP_Kantor3",
@@ -406,7 +433,8 @@
    ],
    "mi": "Alat",
    "hancur": true,
-   "milik": "Adikara"
+   "milik": "Adikara",
+   "alas_m": 25.0
   },
   {
    "id": "BASECAMP_PosMandor",
@@ -422,7 +450,8 @@
    ],
    "mi": "Alat",
    "hancur": true,
-   "milik": "Adikara"
+   "milik": "Adikara",
+   "alas_m": 25.0
   },
   {
    "id": "BASECAMP_GudangAlat",
@@ -438,7 +467,8 @@
    ],
    "mi": "Kendaraan",
    "hancur": true,
-   "milik": "Adikara"
+   "milik": "Adikara",
+   "alas_m": 25.0
   },
   {
    "id": "BASECAMP_Truk1",
@@ -455,7 +485,8 @@
    "mi": "Alat",
    "hancur": true,
    "yaw": 90,
-   "milik": "Adikara"
+   "milik": "Adikara",
+   "alas_m": 25.0
   },
   {
    "id": "BASECAMP_Truk2",
@@ -472,7 +503,8 @@
    "mi": "Alat",
    "hancur": true,
    "yaw": 90,
-   "milik": "Adikara"
+   "milik": "Adikara",
+   "alas_m": 25.0
   },
   {
    "id": "BASECAMP_Truk3",
@@ -489,7 +521,8 @@
    "mi": "Alat",
    "hancur": true,
    "yaw": 90,
-   "milik": "Adikara"
+   "milik": "Adikara",
+   "alas_m": 25.0
   },
   {
    "id": "BASECAMP_TumpukanPipa",
@@ -505,7 +538,8 @@
    ],
    "mi": "Andesit",
    "hancur": true,
-   "milik": "Adikara"
+   "milik": "Adikara",
+   "alas_m": 25.0
   },
   {
    "id": "BASECAMP_TumpukanBesi",
@@ -521,7 +555,8 @@
    ],
    "mi": "Kendaraan",
    "hancur": true,
-   "milik": "Adikara"
+   "milik": "Adikara",
+   "alas_m": 25.0
   },
   {
    "id": "BASECAMP_PagarUtara",
@@ -537,7 +572,8 @@
    "tinggi": 2.5,
    "tebal": 0.2,
    "mi": "Alat",
-   "hancur": false
+   "hancur": false,
+   "alas_m": 25.0
   },
   {
    "id": "BASECAMP_PagarTimurA",
@@ -553,7 +589,8 @@
    "tinggi": 2.5,
    "tebal": 0.2,
    "mi": "Alat",
-   "hancur": false
+   "hancur": false,
+   "alas_m": 25.0
   },
   {
    "id": "BASECAMP_PagarTimurB",
@@ -569,7 +606,8 @@
    "tinggi": 2.5,
    "tebal": 0.2,
    "mi": "Alat",
-   "hancur": false
+   "hancur": false,
+   "alas_m": 25.0
   },
   {
    "id": "BASECAMP_PagarSelatan",
@@ -585,25 +623,27 @@
    "tinggi": 2.5,
    "tebal": 0.2,
    "mi": "Alat",
-   "hancur": false
+   "hancur": false,
+   "alas_m": 25.0
   },
   {
    "id": "PROYEK_GarisPolisi",
    "jenis": "dinding",
    "dari": [
     470,
-    -48
+    -42
    ],
    "ke": [
     470,
-    -12
+    -18
    ],
    "tinggi": 1.0,
    "tebal": 0.1,
    "mi": "Penanda",
    "hancur": false,
    "tanpa_tabrakan": true,
-   "catatan": "jalan ke atas ditutup polisi; mobil DWARA lewat jalan desa"
+   "catatan": "jalan ke atas ditutup polisi; mobil DWARA lewat jalan desa",
+   "alas_m": 25.0
   },
   {
    "id": "DESA_D1_Rumah",
@@ -618,7 +658,8 @@
     6
    ],
    "mi": "Desa",
-   "hancur": true
+   "hancur": true,
+   "alas_m": 0.0
   },
   {
    "id": "DESA_D2_Rumah",
@@ -633,7 +674,8 @@
     6
    ],
    "mi": "Desa",
-   "hancur": true
+   "hancur": true,
+   "alas_m": 0.0
   },
   {
    "id": "DESA_D3_Rumah",
@@ -648,7 +690,8 @@
     6
    ],
    "mi": "Desa",
-   "hancur": true
+   "hancur": true,
+   "alas_m": 0.0
   },
   {
    "id": "DESA_D4_Rumah",
@@ -663,7 +706,8 @@
     6
    ],
    "mi": "Desa",
-   "hancur": true
+   "hancur": true,
+   "alas_m": 0.0
   },
   {
    "id": "DESA_D5_Warung",
@@ -678,7 +722,8 @@
     4
    ],
    "mi": "Kayu",
-   "hancur": true
+   "hancur": true,
+   "alas_m": 0.0
   },
   {
    "id": "DESA_D6_Warung",
@@ -693,7 +738,8 @@
     4
    ],
    "mi": "Kayu",
-   "hancur": true
+   "hancur": true,
+   "alas_m": 0.0
   },
   {
    "id": "DESA_D7_MenaraAir",
@@ -708,7 +754,8 @@
     15
    ],
    "mi": "Alat",
-   "hancur": true
+   "hancur": true,
+   "alas_m": 0.0
   },
   {
    "id": "DESA_D8_GarduRonda",
@@ -723,7 +770,8 @@
     4
    ],
    "mi": "Kayu",
-   "hancur": true
+   "hancur": true,
+   "alas_m": 0.0
   },
   {
    "id": "DESA_D9_Cadangan",
@@ -739,7 +787,8 @@
    ],
    "mi": "Desa",
    "hancur": true,
-   "cadangan": true
+   "cadangan": true,
+   "alas_m": 0.0
   },
   {
    "id": "DESA_D10_Cadangan",
@@ -755,7 +804,8 @@
    ],
    "mi": "Desa",
    "hancur": true,
-   "cadangan": true
+   "cadangan": true,
+   "alas_m": 0.0
   },
   {
    "id": "DESA_Musala",
@@ -770,7 +820,8 @@
     7
    ],
    "mi": "Musala",
-   "hancur": false
+   "hancur": false,
+   "alas_m": 0.0
   },
   {
    "id": "DESA_Lapangan",
@@ -784,7 +835,8 @@
     20
    ],
    "mi": "Sawah",
-   "hancur": false
+   "hancur": false,
+   "alas_m": 0.0
   },
   {
    "id": "DESA_MobilDWARA",
@@ -800,7 +852,8 @@
    ],
    "mi": "Kendaraan",
    "hancur": false,
-   "yaw": 180
+   "yaw": 180,
+   "alas_m": 0.23
   },
   {
    "id": "DESA_RumahLatar1",
@@ -816,7 +869,8 @@
    ],
    "mi": "Desa",
    "hancur": false,
-   "catatan": "rumah warga tanpa fisika (pengisi desa)"
+   "catatan": "rumah warga tanpa fisika (pengisi desa)",
+   "alas_m": 0.0
   },
   {
    "id": "DESA_RumahLatar2",
@@ -832,7 +886,8 @@
    ],
    "mi": "Desa",
    "hancur": false,
-   "catatan": "rumah warga tanpa fisika (pengisi desa)"
+   "catatan": "rumah warga tanpa fisika (pengisi desa)",
+   "alas_m": 0.0
   },
   {
    "id": "DESA_RumahLatar3",
@@ -848,7 +903,8 @@
    ],
    "mi": "Desa",
    "hancur": false,
-   "catatan": "rumah warga tanpa fisika (pengisi desa)"
+   "catatan": "rumah warga tanpa fisika (pengisi desa)",
+   "alas_m": 0.0
   },
   {
    "id": "DESA_RumahLatar4",
@@ -864,7 +920,8 @@
    ],
    "mi": "Desa",
    "hancur": false,
-   "catatan": "rumah warga tanpa fisika (pengisi desa)"
+   "catatan": "rumah warga tanpa fisika (pengisi desa)",
+   "alas_m": 0.0
   },
   {
    "id": "DESA_RumahLatar5",
@@ -880,7 +937,8 @@
    ],
    "mi": "Desa",
    "hancur": false,
-   "catatan": "rumah warga tanpa fisika (pengisi desa)"
+   "catatan": "rumah warga tanpa fisika (pengisi desa)",
+   "alas_m": 0.0
   },
   {
    "id": "DESA_RumahLatar6",
@@ -896,7 +954,8 @@
    ],
    "mi": "Desa",
    "hancur": false,
-   "catatan": "rumah warga tanpa fisika (pengisi desa)"
+   "catatan": "rumah warga tanpa fisika (pengisi desa)",
+   "alas_m": 0.0
   },
   {
    "id": "DESA_RumahLatar7",
@@ -912,7 +971,8 @@
    ],
    "mi": "Desa",
    "hancur": false,
-   "catatan": "rumah warga tanpa fisika (pengisi desa)"
+   "catatan": "rumah warga tanpa fisika (pengisi desa)",
+   "alas_m": 0.0
   },
   {
    "id": "DESA_RumahLatar8",
@@ -928,7 +988,8 @@
    ],
    "mi": "Desa",
    "hancur": false,
-   "catatan": "rumah warga tanpa fisika (pengisi desa)"
+   "catatan": "rumah warga tanpa fisika (pengisi desa)",
+   "alas_m": 0.0
   },
   {
    "id": "SAWAH_Gubuk1",
@@ -943,7 +1004,8 @@
     3
    ],
    "mi": "Kayu",
-   "hancur": false
+   "hancur": false,
+   "alas_m": 2.36
   },
   {
    "id": "SAWAH_Gubuk2",
@@ -958,7 +1020,8 @@
     3
    ],
    "mi": "Kayu",
-   "hancur": false
+   "hancur": false,
+   "alas_m": 1.93
   },
   {
    "id": "SAWAH_Gubuk3",
@@ -973,7 +1036,8 @@
     3
    ],
    "mi": "Kayu",
-   "hancur": false
+   "hancur": false,
+   "alas_m": 0.87
   },
   {
    "id": "SAWAH_Gubuk4",
@@ -988,7 +1052,8 @@
     3
    ],
    "mi": "Kayu",
-   "hancur": false
+   "hancur": false,
+   "alas_m": 0.35
   },
   {
    "id": "SAWAH_Gubuk5",
@@ -1003,7 +1068,8 @@
     3
    ],
    "mi": "Kayu",
-   "hancur": false
+   "hancur": false,
+   "alas_m": 2.46
   },
   {
    "id": "SAWAH_LapanganBola",
@@ -1017,7 +1083,8 @@
     40
    ],
    "mi": "Penanda",
-   "hancur": false
+   "hancur": false,
+   "alas_m": 2.73
   },
   {
    "id": "TOL_Pilar1",
@@ -1033,7 +1100,8 @@
    ],
    "mi": "Andesit",
    "hancur": true,
-   "milik": "Adikara"
+   "milik": "Adikara",
+   "alas_m": 1.08
   },
   {
    "id": "TOL_Pilar2",
@@ -1049,7 +1117,8 @@
    ],
    "mi": "Andesit",
    "hancur": true,
-   "milik": "Adikara"
+   "milik": "Adikara",
+   "alas_m": 0.0
   },
   {
    "id": "TOL_Pilar3",
@@ -1065,7 +1134,8 @@
    ],
    "mi": "Andesit",
    "hancur": true,
-   "milik": "Adikara"
+   "milik": "Adikara",
+   "alas_m": 0.0
   },
   {
    "id": "TOL_Pilar4",
@@ -1081,7 +1151,8 @@
    ],
    "mi": "Andesit",
    "hancur": true,
-   "milik": "Adikara"
+   "milik": "Adikara",
+   "alas_m": 0.0
   },
   {
    "id": "TOL_Pilar5",
@@ -1097,7 +1168,8 @@
    ],
    "mi": "Andesit",
    "hancur": true,
-   "milik": "Adikara"
+   "milik": "Adikara",
+   "alas_m": 0.0
   },
   {
    "id": "TOL_Pilar6",
@@ -1113,7 +1185,9 @@
    ],
    "mi": "Andesit",
    "hancur": true,
-   "milik": "Adikara"
+   "milik": "Adikara",
+   "alas_m": 22.81,
+   "pondasi_m": 1.15
   },
   {
    "id": "TOL_Pilar7",
@@ -1129,7 +1203,9 @@
    ],
    "mi": "Andesit",
    "hancur": true,
-   "milik": "Adikara"
+   "milik": "Adikara",
+   "alas_m": 5.73,
+   "pondasi_m": 1.43
   },
   {
    "id": "TOL_Pilar8",
@@ -1145,7 +1221,8 @@
    ],
    "mi": "Andesit",
    "hancur": true,
-   "milik": "Adikara"
+   "milik": "Adikara",
+   "alas_m": 0.0
   },
   {
    "id": "TOL_Gelagar1",
@@ -3269,9 +3346,9 @@
     1.1
    ],
    [
-    -464.0,
-    -37.9,
-    1.17
+    -112.3,
+    -61.1,
+    0.96
    ],
    [
     -383.8,
@@ -5485,7 +5562,7 @@
   {
    "id": "CLUE_1_JejakEnergi",
    "pos": [
-    -118,
+    -110,
     -20
    ],
    "jenis": "titik",
@@ -5560,8 +5637,8 @@
   {
    "id": "BOSS_Bangkit",
    "pos": [
-    0,
-    0
+    20,
+    10
    ],
    "jenis": "titik",
    "label": "Jerangkong bangkit (31 m)"
@@ -5665,14 +5742,14 @@
   {
    "id": "C1_START_Desa",
    "pos": [
-    -160,
-    -425
+    -150,
+    -450
    ],
-   "tinggi_di_atas_tanah": 1.6,
+   "tinggi_di_atas_tanah": 2.0,
    "lihat_ke": [
-    0,
-    180,
-    37
+    -250,
+    -100,
+    30
    ],
    "fov": 70,
    "cahaya": "sore"
@@ -5680,14 +5757,14 @@
   {
    "id": "C2_BibirGalianBarat",
    "pos": [
-    -118,
+    -110,
     -20
    ],
    "tinggi_di_atas_tanah": 1.6,
    "lihat_ke": [
-    0,
-    0,
-    15
+    20,
+    10,
+    -5
    ],
    "fov": 70,
    "cahaya": "sore"
@@ -5696,13 +5773,13 @@
    "id": "C3_GerbangKeTimur",
    "pos": [
     0,
-    180
+    226
    ],
    "tinggi_di_atas_tanah": 1.6,
    "lihat_ke": [
     250,
-    100,
-    28
+    200,
+    32
    ],
    "fov": 70,
    "cahaya": "sore"
@@ -5729,7 +5806,7 @@
     -20
    ],
    "ortho": true,
-   "lebar_ortho": 1450,
+   "lebar_ortho": 2200,
    "cahaya": "sore"
   },
   {
@@ -5750,14 +5827,14 @@
   {
    "id": "C7_BaseCamp",
    "pos": [
-    320,
-    -20
+    326,
+    -56
    ],
-   "tinggi_di_atas_tanah": 1.6,
+   "tinggi_di_atas_tanah": 9.0,
    "lihat_ke": [
-    0,
-    0,
-    15
+    225,
+    45,
+    24
    ],
    "fov": 70,
    "cahaya": "sore"
@@ -5765,14 +5842,14 @@
   {
    "id": "C8_PilarTolRaksasa",
    "pos": [
-    640,
-    120
+    760,
+    -250
    ],
    "tinggi_di_atas_tanah": 42,
    "lihat_ke": [
-    0,
-    60,
-    30
+    560,
+    96,
+    35
    ],
    "fov": 70,
    "cahaya": "senja"
@@ -5828,16 +5905,20 @@
    -110
   ],
   [
-   -118,
+   -125,
+   -55
+  ],
+  [
+   -110,
    -20
   ],
   [
    -112,
-   -8
+   -5
   ],
   [
-   -50,
-   -3
+   -28,
+   -2
   ],
   [
    -15,
@@ -5845,11 +5926,11 @@
   ],
   [
    0,
-   42
+   52
   ],
   [
    0,
-   98
+   124
   ],
   [
    0,

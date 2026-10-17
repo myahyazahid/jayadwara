@@ -1,12 +1,17 @@
 """Membuat Art/Level/ep02_layout_v02.json dari daftar di bawah + medan ep02_medan_v02.py, lalu memeriksanya.
 Pakai: python -I Art/Level/buat_layout_ep02_v02.py   (menulis JSON dan mencetak hasil cek; harus berakhir SEMUA LULUS)
 Ubah tata letak di file INI (bukan di JSON), lalu jalankan ulang. Sumber desain: docs/31 bagian 2a (tata letak v02).
+Revisi 17 Okt 2026 (review hermes/maps_ep2, keputusan K1-K4): START dan C1 menghadap gang, C5 lebar 1800 m, alas objek = elev titik tengah
+tapak (`alas_m`, `pondasi_m`), rute dihitung pada 5 m/s (MaxWalkSpeed Aksa 500 cm/s), panjang rute ditulis ke JSON.
 """
 import json
 import math
 import os
 import random
 import sys
+
+if hasattr(sys.stdout, "reconfigure"):   # console Windows (cp1252) tidak bisa mencetak ★
+    sys.stdout.reconfigure(encoding="utf-8")
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import ep02_medan_v02 as M  # noqa: E402
@@ -48,6 +53,28 @@ def alas(pos, P, L, yaw=0.0):
             lx, ly = P / 2 * i / 2, L / 2 * j / 2
             zs.append(M.elev(x + lx * c - ly * s, y + lx * s + ly * c))
     return min(zs), max(zs)
+
+
+def tapak_elev(o):
+    """Elev di 25 titik tapak (kotak/rumah/kerucut/bidang) atau 11 titik sepanjang garis (dinding)."""
+    if o["jenis"] == "dinding":
+        (ax, ay), (bx, by) = o["dari"], o["ke"]
+        return [M.elev(ax + (bx - ax) * k / 10, ay + (by - ay) * k / 10) for k in range(11)]
+    lo, hi = alas(o["pos"], o["ukuran"][0], o["ukuran"][1], o.get("yaw", 0))
+    x, y = o["pos"]
+    P, L = o["ukuran"][0], o["ukuran"][1]
+    c, s_ = math.cos(math.radians(o.get("yaw", 0))), math.sin(math.radians(o.get("yaw", 0)))
+    return [M.elev(x + (P / 4 * i) * c - (L / 4 * j) * s_, y + (P / 4 * i) * s_ + (L / 4 * j) * c) for i in range(-2, 3) for j in range(-2, 3)]
+
+
+def alas_pusat(o):
+    """Alas objek (m) = elev titik tengah tapak (K3, docs/31 revisi 17 Okt; sama dengan Ep 1 G4). Objek ber-'z' memakai z absolut itu.
+    Dinding = titik tengah garis. 'z_dasar_relatif' ditambahkan oleh pembaca."""
+    if o.get("z") is not None:
+        return float(o["z"])
+    if o["jenis"] == "dinding":
+        return M.elev((o["dari"][0] + o["ke"][0]) / 2, (o["dari"][1] + o["ke"][1]) / 2)
+    return M.elev(o["pos"][0], o["pos"][1])
 
 
 OBJEK = []
@@ -336,7 +363,7 @@ KELOMPOK = [
 ]
 
 PENANDA = [
-    {"id": "START", "pos": [-40, 155], "jenis": "PlayerStart", "hadap_ke": [-105, -105]},
+    {"id": "START", "pos": [-40, 155], "jenis": "PlayerStart", "hadap_ke": [-26, 100]},
     {"id": "CLUE_1_JejakKaki", "pos": [-170, 72], "jenis": "titik", "label": "★1 jejak kaki naik atap (rumah kemalingan)"},
     {"id": "CLUE_2_CCTV", "pos": [143, 106], "jenis": "titik", "label": "★2 CCTV warung + mainan"},
     {"id": "CLUE_O_Sesajen", "pos": [-218, -27], "jenis": "titik", "label": "○ sesajen (gang buntu, opsional)"},
@@ -372,13 +399,13 @@ ZONA = [
      "label": "milik Adikara: hancur tanpa penalti"},
 ]
 KAMERA = [
-    {"id": "C1_START_MulutGang", "pos": [-40, 155], "tinggi_di_atas_tanah": 1.6, "lihat_ke": [-105, -105, 4], "fov": 70, "cahaya": "siang"},
+    {"id": "C1_START_MulutGang", "pos": [-40, 155], "tinggi_di_atas_tanah": 1.6, "lihat_ke": [-26, 60, 16], "fov": 70, "cahaya": "siang"},
     {"id": "C2_AtapT2", "pos": [-96, 52], "tinggi_di_atas_tanah": 5.1, "lihat_ke": [117, 26, 8], "fov": 75, "cahaya": "sore"},
     {"id": "C3_JembatanGantung", "pos": [-105, -82], "tinggi_di_atas_tanah": 1.6, "lihat_ke": [-505, -128, 8], "fov": 70, "cahaya": "sore"},
     {"id": "C4_MataJayadwara", "pos": [-380, -105], "tinggi_di_atas_tanah": 42, "lihat_ke": [525, 60, 6], "fov": 70, "cahaya": "keemasan"},
-    {"id": "C5_TampakAtas", "pos": [0, -100], "ortho": True, "lebar_ortho": 1450, "cahaya": "siang"},
-    {"id": "C6_DariLapanganBola", "pos": [-200, -414], "tinggi_di_atas_tanah": 1.6, "lihat_ke": [-26, 80, 10], "fov": 70, "cahaya": "keemasan"},
-    {"id": "C7_GudangAdikara", "pos": [400, -20], "tinggi_di_atas_tanah": 1.6, "lihat_ke": [600, 100, 10], "fov": 70, "cahaya": "sore"},
+    {"id": "C5_TampakAtas", "pos": [0, -100], "ortho": True, "lebar_ortho": 1800, "cahaya": "siang"},
+    {"id": "C6_DariLapanganBola", "pos": [-200, -414], "tinggi_di_atas_tanah": 1.6, "lihat_ke": [-26, 80, 40], "fov": 70, "cahaya": "keemasan"},
+    {"id": "C7_GudangAdikara", "pos": [400, -20], "tinggi_di_atas_tanah": 1.6, "lihat_ke": [600, 100, 25], "fov": 70, "cahaya": "sore"},
     {"id": "C8_JalanLayangRaksasa", "pos": [-300, 120], "tinggi_di_atas_tanah": 42, "lihat_ke": [400, 155, 24], "fov": 70, "cahaya": "keemasan"},
 ]
 RUTE_INVESTIGASI = [[-40, 155], [-26, 145], [-26, 91], [-26, 86], [-80, 91], [-140, 91], [-170, 86], [-170, 72],
@@ -401,7 +428,7 @@ DATA = {
     "versi": "ep02_layout_v02 (16 Okt 2026, dari docs/31 bagian 2a). Dibuat oleh Art/Level/buat_layout_ep02_v02.py — jangan sunting manual",
     "medan_modul": "ep02_medan_v02",
     "satuan": "meter; x = timur, y = utara, z = atas (0 = muka air kali). UE: X = x*100, Y = -y*100, Z = z*100 (cm)",
-    "z_otomatis": "objek/item tanpa 'z' diletakkan di atas medan: alas = elev terendah di tapak; 'z' = tinggi alas absolut",
+    "z_otomatis": "objek tanpa 'z': alas = elev titik tengah tapak, nilainya di 'alas_m' (dinding = titik tengah garis); 'pondasi_m' = perpanjang objek ke bawah sebanyak itu (puncak tetap) supaya sisi rendah di lereng tidak melayang (bidang tidak diberi pondasi); 'z' = tinggi alas absolut. Item kelompok tanpa 'z': alas = elev titik tengah item (selisih ke titik terendah maks 0,11 m). Tinggi akhir objek = alas_m (atau z) + z_dasar_relatif",
     "medan": {"x_min": M.BATAS_MEDAN[0], "x_max": M.BATAS_MEDAN[1], "y_min": M.BATAS_MEDAN[2], "y_max": M.BATAS_MEDAN[3],
               "sel": 2.5, "material_zona": "pakai fungsi zona_material(x, y) di ep02_medan_v02.py "
                                           "(Air, Rel, Jalan, Gudang, Paving, Kampung, Bantaran, Sawah)"},
@@ -427,6 +454,8 @@ DATA = {
     },
     "rute_investigasi": RUTE_INVESTIGASI,
     "rute_kejar": RUTE_KEJAR,
+    "kecepatan_rute_ms": 5.0,
+    "kecepatan_catatan": "MaxWalkSpeed Aksa 500 cm/s (tidak ada sprint); rute investigasi dan kejar diukur pada kecepatan ini. Sprint 6 m/s = backlog",
 }
 
 
@@ -509,8 +538,9 @@ def periksa():
     print("kelompok " + ", ".join(f"{k['id']} {len(k['item'])}" for k in KELOMPOK))
     print(f"pohon {n_pohon}, tiang {len(TIANG)}, penanda {len(PENANDA)}, zona {len(ZONA)}, kamera {len(KAMERA)}")
     ri, rk = panjang(RUTE_INVESTIGASI), panjang(RUTE_KEJAR)
-    print(f"rute investigasi START -> ★1 -> ★2: {ri:.0f} m (jalan 5 m/s: {ri / 5 / 60:.1f} menit)")
-    print(f"rute kejar pos RT -> T5: {rk:.0f} m (lari 6 m/s: {rk / 6 / 60:.1f} menit)")
+    v = DATA["kecepatan_rute_ms"]
+    print(f"rute investigasi START -> ★1 -> ★2: {ri:.0f} m (jalan {v:.0f} m/s: {ri / v / 60:.1f} menit)")
+    print(f"rute kejar pos RT -> T5: {rk:.0f} m (lari {v:.0f} m/s: {rk / v / 60:.1f} menit)")
     if n_chaos != 8:
         print("GAGAL blok Chaos harus 8 (F2)")
         gagal += 1
@@ -519,6 +549,14 @@ def periksa():
 
 
 if __name__ == "__main__":
+    for o in OBJEK:
+        if o.get("z") is None:
+            o["alas_m"] = round(alas_pusat(o), 2)
+            if o["jenis"] in ("kotak", "rumah", "kerucut"):
+                melayang = o["alas_m"] - min(tapak_elev(o))
+                if melayang > 0.3:
+                    o["pondasi_m"] = round(melayang + 0.1, 2)
+    DATA["rute_panjang_m"] = {"investigasi": round(panjang(RUTE_INVESTIGASI), 2), "kejar": round(panjang(RUTE_KEJAR), 2)}
     g = periksa()
     with open(OUT, "w", encoding="utf-8", newline="\n") as f:   # LF juga di Windows (git status tetap bersih)
         json.dump(DATA, f, ensure_ascii=False, indent=1)

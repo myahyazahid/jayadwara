@@ -1,12 +1,16 @@
 """Membuat Art/Level/ep01_layout_v02.json dari daftar di bawah + medan ep01_medan_v02.py, lalu memeriksanya.
 Pakai: python -I Art/Level/buat_layout_ep01_v02.py   (menulis JSON dan mencetak hasil cek; harus berakhir SEMUA LULUS)
 Ubah tata letak di file INI (bukan di JSON), lalu jalankan ulang.
+Revisi 17 Okt 2026: galian 260 x 230 m (G1), kamera C1/C3/C5/C7/C8 dipindah (G2), alas objek = elev titik tengah tapak (G4).
 """
 import json
 import math
 import os
 import random
 import sys
+
+if hasattr(sys.stdout, "reconfigure"):   # console Windows (cp1252) tidak bisa mencetak ★
+    sys.stdout.reconfigure(encoding="utf-8")
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import ep01_medan_v02 as M  # noqa: E402
@@ -33,6 +37,36 @@ def dinding(id_, a, b, tinggi, tebal, mi, **kw):
 
 
 OBJEK = []
+
+
+def alas(o):
+    """Alas objek (m) = elev di titik tengah tapak (G4; sebelumnya titik terendah, sehingga di lereng objek tenggelam >1 m).
+    Objek ber-'z' memakai z absolut itu. 'z_dasar_relatif' ditambahkan oleh pembaca."""
+    if o.get("z") is not None:
+        return float(o["z"])
+    if o["jenis"] == "tangga":
+        return o["dari"][2]
+    if o["jenis"] == "dinding":
+        return M.elev((o["dari"][0] + o["ke"][0]) / 2, (o["dari"][1] + o["ke"][1]) / 2)
+    return M.elev(o["pos"][0], o["pos"][1])
+
+
+def tapak_elev(o):
+    """Elev di 25 titik tapak (kotak/rumah/kerucut/bidang) atau sepanjang garis (dinding)."""
+    if o["jenis"] == "dinding":
+        (ax, ay), (bx, by) = o["dari"], o["ke"]
+        return [M.elev(ax + (bx - ax) * k / 10, ay + (by - ay) * k / 10) for k in range(11)]
+    x, y = o["pos"]
+    P, Lb = o.get("ukuran", [4, 4])[:2]
+    yaw = math.radians(o.get("yaw", 0))
+    zs = []
+    for i in range(-2, 3):
+        for j in range(-2, 3):
+            lx, ly = P / 2 * i / 2, Lb / 2 * j / 2
+            zs.append(M.elev(x + lx * math.cos(yaw) - ly * math.sin(yaw), y + lx * math.sin(yaw) + ly * math.cos(yaw)))
+    return zs
+
+
 # ---------- candi (plato +35) ----------
 OBJEK += [
     {"id": "CANDI_Induk", "jenis": "candi_bertingkat", "pos": [0, 320], "tingkat": [[18, 18, 6], [14, 14, 6], [9, 9, 5], [4, 4, 3]],
@@ -54,10 +88,10 @@ for i, (p, yaw) in enumerate([((-70, 420), 12), ((60, 440), -20), ((-20, 485), 3
 # ---------- galian & sekitarnya ----------
 OBJEK += [
     kotak("PROYEK_Tenda1", (45, 30), (4, 4, 2.5), "Terpal"),
-    kotak("PROYEK_Tenda2", (-75, 0), (4, 4, 2.5), "Terpal"),
-    kotak("PROYEK_Tenda3", (-55, -45), (4, 4, 2.5), "Terpal"),
-    kotak("PROYEK_Ekskavator", (128, -30), (9, 4, 4), "Alat", yaw=20),
-    kotak("PROYEK_Buldoser", (130, 30), (7, 4, 3.5), "Alat", yaw=-10),
+    kotak("PROYEK_Tenda2", (-75, 7), (4, 4, 2.5), "Terpal"),
+    kotak("PROYEK_Tenda3", (-50, -38), (4, 4, 2.5), "Terpal"),
+    kotak("PROYEK_Ekskavator", (136, -28), (9, 4, 4), "Alat", yaw=20),
+    kotak("PROYEK_Buldoser", (138, 30), (7, 4, 3.5), "Alat", yaw=-10),
     kotak("PROYEK_TrukDerek", (60, 190), (12, 3, 4), "Alat", yaw=30, catatan="keluar lewat jalan proyek di adegan 6"),
     kotak("PROYEK_BatuLatihan", (-196, -205), (2, 1.5, 0.6), "Andesit", catatan="di samping jalan setapak, menghadap desa"),
 ]
@@ -77,7 +111,7 @@ OBJEK += [
     dinding("BASECAMP_PagarTimurA", (330, 120), (330, -5), 2.5, 0.2, "Alat"),
     dinding("BASECAMP_PagarTimurB", (330, -35), (330, -60), 2.5, 0.2, "Alat"),
     dinding("BASECAMP_PagarSelatan", (330, -60), (150, -60), 2.5, 0.2, "Alat"),
-    dinding("PROYEK_GarisPolisi", (470, -48), (470, -12), 1.0, 0.1, "Penanda", tanpa_tabrakan=True,
+    dinding("PROYEK_GarisPolisi", (470, -42), (470, -18), 1.0, 0.1, "Penanda", tanpa_tabrakan=True,
             catatan="jalan ke atas ditutup polisi; mobil DWARA lewat jalan desa"),
 ]
 # ---------- desa (titik mulai v02, penalti) ----------
@@ -178,7 +212,7 @@ for x in range(-420, -169, 40):   # jalan desa utama
 
 PENANDA = [
     {"id": "START", "pos": [-160, -425], "jenis": "PlayerStart", "hadap_ke": [0, 180]},
-    {"id": "CLUE_1_JejakEnergi", "pos": [-118, -20], "jenis": "titik", "label": "★1 jejak energi (bibir galian barat)"},
+    {"id": "CLUE_1_JejakEnergi", "pos": [-110, -20], "jenis": "titik", "label": "★1 jejak energi (bibir galian barat)"},
     {"id": "CLUE_2_Tulang", "pos": [-15, 10], "jenis": "titik", "label": "★2 tulang bergeser"},
     {"id": "CLUE_3_Prasasti", "pos": [0, 173], "jenis": "titik", "label": "★3 prasasti"},
     {"id": "LORE_Perwara", "pos": [60, 450], "jenis": "titik", "label": "○ relief candi perwara (opsional, usulan)"},
@@ -186,7 +220,7 @@ PENANDA = [
     {"id": "WAVE_1", "pos": [25, 105], "jenis": "area", "radius": 15, "label": "W1 · 3 kerangka · undakan atas"},
     {"id": "WAVE_2", "pos": [0, 155], "jenis": "area", "radius": 6, "label": "W2 · 5 kerangka · tangga"},
     {"id": "WAVE_3", "pos": [0, 200], "jenis": "area", "radius": 20, "label": "W3 · 6 kerangka · halaman (checkpoint)"},
-    {"id": "BOSS_Bangkit", "pos": [0, 0], "jenis": "titik", "label": "Jerangkong bangkit (31 m)"},
+    {"id": "BOSS_Bangkit", "pos": [20, 10], "jenis": "titik", "label": "Jerangkong bangkit (31 m)"},
     {"id": "TRANSFORMASI", "pos": [-8, 178], "jenis": "titik", "label": "transformasi di arca kiri"},
     {"id": "JAYADWARA_Mulai", "pos": [0, 225], "jenis": "titik", "label": "Jayadwara mulai (45 m)"},
     {"id": "WARGA_Kumpul", "pos": [-250, -445], "jenis": "area", "radius": 20, "label": "titik kumpul warga"},
@@ -199,23 +233,23 @@ ZONA = [
     {"id": "ZONA_Penalti_Desa", "x": [M.DESA[0], M.DESA[1]], "y": [M.DESA[2], M.DESA[3]], "warna": "merah", "label": "penalti meter"},
 ]
 KAMERA = [
-    {"id": "C1_START_Desa", "pos": [-160, -425], "tinggi_di_atas_tanah": 1.6, "lihat_ke": [0, 180, 37], "fov": 70, "cahaya": "sore"},
-    {"id": "C2_BibirGalianBarat", "pos": [-118, -20], "tinggi_di_atas_tanah": 1.6, "lihat_ke": [0, 0, 15], "fov": 70, "cahaya": "sore"},
-    {"id": "C3_GerbangKeTimur", "pos": [0, 180], "tinggi_di_atas_tanah": 1.6, "lihat_ke": [250, 100, 28], "fov": 70, "cahaya": "sore"},
+    {"id": "C1_START_Desa", "pos": [-150, -450], "tinggi_di_atas_tanah": 2.0, "lihat_ke": [-250, -100, 30], "fov": 70, "cahaya": "sore"},
+    {"id": "C2_BibirGalianBarat", "pos": [-110, -20], "tinggi_di_atas_tanah": 1.6, "lihat_ke": [20, 10, -5], "fov": 70, "cahaya": "sore"},
+    {"id": "C3_GerbangKeTimur", "pos": [0, 226], "tinggi_di_atas_tanah": 1.6, "lihat_ke": [250, 200, 32], "fov": 70, "cahaya": "sore"},
     {"id": "C4_MataJayadwara", "pos": [0, 225], "tinggi_di_atas_tanah": 42, "lihat_ke": [-150, -400, 0], "fov": 70, "cahaya": "senja"},
-    {"id": "C5_TampakAtas", "pos": [80, -20], "ortho": True, "lebar_ortho": 1450, "cahaya": "sore"},
+    {"id": "C5_TampakAtas", "pos": [80, -20], "ortho": True, "lebar_ortho": 2200, "cahaya": "sore"},
     {"id": "C6_DariSawah", "pos": [100, -350], "tinggi_di_atas_tanah": 3, "lihat_ke": [0, 100, 45], "fov": 70, "cahaya": "senja"},
-    {"id": "C7_BaseCamp", "pos": [320, -20], "tinggi_di_atas_tanah": 1.6, "lihat_ke": [0, 0, 15], "fov": 70, "cahaya": "sore"},
-    {"id": "C8_PilarTolRaksasa", "pos": [640, 120], "tinggi_di_atas_tanah": 42, "lihat_ke": [0, 60, 30], "fov": 70, "cahaya": "senja"},
+    {"id": "C7_BaseCamp", "pos": [326, -56], "tinggi_di_atas_tanah": 9.0, "lihat_ke": [225, 45, 24], "fov": 70, "cahaya": "sore"},
+    {"id": "C8_PilarTolRaksasa", "pos": [760, -250], "tinggi_di_atas_tanah": 42, "lihat_ke": [560, 96, 35], "fov": 70, "cahaya": "senja"},
 ]
-RUTE_AKSA = [[-160, -425], [-175, -430], [-170, -330], [-200, -260], [-190, -180], [-150, -110], [-118, -20], [-112, -8],
-             [-50, -3], [-15, 10], [0, 42], [0, 98], [0, 142], [0, 167], [0, 173]]
+RUTE_AKSA = [[-160, -425], [-175, -430], [-170, -330], [-200, -260], [-190, -180], [-150, -110], [-125, -55], [-110, -20],
+             [-112, -5], [-28, -2], [-15, 10], [0, 52], [0, 124], [0, 142], [0, 167], [0, 173]]
 
 DATA = {
     "versi": "ep01_layout_v02 (16 Okt 2026, dari docs/30 bagian 2a). Dibuat oleh Art/Level/buat_layout_ep01_v02.py — jangan sunting manual",
     "medan_modul": "ep01_medan_v02",
     "satuan": "meter; x = timur, y = utara, z = atas (0 = muka desa). UE: X = x*100, Y = -y*100, Z = z*100 (cm)",
-    "z_otomatis": "objek tanpa 'z' diletakkan di atas medan: alas = elev terendah di tapak; 'z' = tinggi alas absolut",
+    "z_otomatis": "objek tanpa 'z' diletakkan di atas medan: alas = elev titik tengah tapak (nilainya ada di 'alas_m'; dinding = titik tengah garis, tangga = z 'dari'); 'z' = tinggi alas absolut. Tinggi akhir = alas_m (atau z) + z_dasar_relatif; 'pondasi_m' = perpanjang objek ke bawah sebanyak itu (puncak tetap) supaya sisi rendah di lereng tidak melayang",
     "medan": {"x_min": M.BATAS_MEDAN[0], "x_max": M.BATAS_MEDAN[1], "y_min": M.BATAS_MEDAN[2], "y_max": M.BATAS_MEDAN[3],
               "sel": 2.5, "material_zona": "pakai fungsi zona_material(x, y) di ep01_medan_v02.py (Air, Galian, Jalan, Plato, Sawah, Desa, Hutan)"},
     "objek": OBJEK,
@@ -248,16 +282,20 @@ def periksa():
             print(f"GAGAL di luar medan: {o['id']}")
             gagal += 1
             continue
-        P, Lb = o.get("ukuran", [4, 4])[:2]
-        yaw = math.radians(o.get("yaw", 0))
-        zs = []
-        for i in range(-2, 3):
-            for j in range(-2, 3):
-                lx, ly = P / 2 * i / 2, Lb / 2 * j / 2
-                zs.append(M.elev(x + lx * math.cos(yaw) - ly * math.sin(yaw), y + lx * math.sin(yaw) + ly * math.cos(yaw)))
+        zs = tapak_elev(o)
         beda = max(zs) - min(zs)
         if beda > 2.0 and o["jenis"] != "candi_bertingkat":
             print(f"TEMUAN {o['id']}: selisih tanah di tapak {beda:.2f} m")
+        a = alas(o)
+        if a - min(zs) > 1.0 and o["jenis"] != "candi_bertingkat":
+            print(f"TEMUAN {o['id']}: melayang {a - min(zs):.2f} m di sisi rendah tapak (alas {a:.2f} m) -> pondasi_m {o.get('pondasi_m')}")
+        if max(zs) - a > 1.0 and o["jenis"] != "candi_bertingkat":
+            print(f"TEMUAN {o['id']}: tertanam {max(zs) - a:.2f} m di sisi tinggi tapak (alas {a:.2f} m)")
+    for o in OBJEK:
+        if o["jenis"] == "dinding" and o.get("z") is None:
+            zs = tapak_elev(o)
+            if max(zs) - min(zs) > 1.0:
+                print(f"TEMUAN {o['id']}: dinding di lereng, selisih sepanjang garis {max(zs) - min(zs):.2f} m")
     # tumpang tindih tapak (kasar, lingkaran)
     tapak = [(o["id"], o["pos"], max(o.get("ukuran", [1, 1])[:2]) / 2) for o in OBJEK if "pos" in o and o.get("z") is None
              and o["jenis"] in ("kotak", "rumah") and not o["id"].startswith(("CANDI_", "LATAR_"))]
@@ -289,6 +327,13 @@ def periksa():
 
 
 if __name__ == "__main__":
+    for o in OBJEK:
+        if o.get("z") is None:
+            o["alas_m"] = round(alas(o), 2)
+            if o["jenis"] in ("kotak", "rumah", "kerucut"):   # sisi rendah tapak melayang -> perpanjang ke bawah, puncak tetap
+                melayang = o["alas_m"] - min(tapak_elev(o))
+                if melayang > 0.3:
+                    o["pondasi_m"] = round(melayang + 0.1, 2)
     g = periksa()
     with open(OUT, "w", encoding="utf-8", newline="\n") as f:   # LF juga di Windows (git status tetap bersih)
         json.dump(DATA, f, ensure_ascii=False, indent=1)
