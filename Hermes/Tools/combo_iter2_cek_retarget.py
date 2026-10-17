@@ -97,7 +97,7 @@ def puncak(samples, dt, jumlah=1, keluarga=None):
 
 def cek_satu(nama_peran, fbx):
     path = f"{MX}/A_Aksa_Mx_{nama_peran}"
-    seq = EAL.load_asset(path)
+    seq = unreal.load_asset(path)
     h = {"peran": nama_peran, "aset": path, "gagal": [], "catatan": []}
     if not isinstance(seq, unreal.AnimSequence):
         h["gagal"].append("AnimSequence tidak ada / bukan AnimSequence")
@@ -182,7 +182,10 @@ def cek_satu(nama_peran, fbx):
 
 def main():
     fbx_data = muat_cek_fbx()
-    aset = [p.split(".")[0] for p in EAL.list_assets(MX, recursive=False, include_folder=False)]
+    # pakai registry langsung: EditorAssetLibrary.list_assets bisa kosong setelah editor dibuka ulang
+    ar = unreal.AssetRegistryHelpers.get_asset_registry()
+    ar.scan_paths_synchronous([MX], True, True)
+    aset = [str(a.package_name) for a in ar.get_assets_by_path(MX, recursive=False)]
     peran = sorted(os.path.basename(p).replace("A_Aksa_Mx_", "") for p in aset
                    if os.path.basename(p).startswith("A_Aksa_Mx_"))
     log(f"{len(peran)} animasi di {MX}: {peran}")

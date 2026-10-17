@@ -40,13 +40,14 @@ RATAKAN = {
     "finisher_01": (False, True, False),
     "finisher_02": (False, True, False),
     "finisher_03": (False, True, False),
-    "air": (True, True, False),
+    "air": (True, True, True),      # Z ikut diratakan: klipnya menambah lompatan 64 cm -> "terlalu tinggi"
     "air_slam": (True, True, False),
 }
 
 EAL = unreal.EditorAssetLibrary
 AL = unreal.AnimationLibrary
 hasil = []
+HANYA = set()   # isi nama peran untuk menjalankan sebagian saja
 
 
 def log(msg):
@@ -106,8 +107,10 @@ def ratakan(seq, sumbu):
 
 def main():
     for peran, sumbu in RATAKAN.items():
+        if HANYA and peran not in HANYA:
+            continue
         path = f"{MX}/A_Aksa_Mx_{peran}"
-        seq = EAL.load_asset(path)
+        seq = unreal.load_asset(path)   # load_asset EAL bergantung registry yang bisa belum siap
         if not seq:
             log(f"LEWAT {peran}: aset tidak ada")
             continue

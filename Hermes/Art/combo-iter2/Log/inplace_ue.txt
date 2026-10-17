@@ -1,0 +1,12 @@
+[Info] [inplace_ue] light_01     [Y] root Y [-0.4, -0.4] -> [-0.4, -0.4] | pelvis Y [-0.4, 0.4] -> [-0.4, 0.5] | kepala Z [137.2, 152.4] | ok=True
+[Info] [inplace_ue] light_02     [Y] root Y [-0.4, -0.4] -> [-0.4, -0.4] | pelvis Y [-0.3, 0.4] -> [-0.3, 0.5] | kepala Z [136.5, 153.7] | ok=True
+[Info] [inplace_ue] light_03     [Y] root Y [-0.9, -0.9] -> [-0.9, -0.9] | pelvis Y [-0.8, -0.2] -> [-0.8, -0.1] | kepala Z [143.6, 154.8] | ok=True
+[Info] [inplace_ue] light_04     [XY] root Y [0.5, 0.5] -> [0.5, 0.5] | pelvis Y [0.2, 0.8] -> [0.2, 0.8] | kepala Z [95.0, 158.6] | ok=True
+[Info] [inplace_ue] lunge        [Y] root Y [-0.9, -0.9] -> [-0.9, -0.9] | pelvis Y [-0.8, -0.2] -> [-0.8, -0.1] | kepala Z [143.6, 154.8] | ok=True
+[Info] [inplace_ue] back         [Y] root Y [-0.5, -0.5] -> [-0.5, -0.5] | pelvis Y [-0.2, 0.2] -> [-0.2, 0.2] | kepala Z [146.8, 149.1] | ok=True
+[Info] [inplace_ue] finisher_01  [Y] root Y [0.5, 0.5] -> [0.5, 0.5] | pelvis Y [0.0, 1.0] -> [-0.0, 1.0] | kepala Z [117.4, 157.6] | ok=True
+[Info] [inplace_ue] finisher_02  [Y] root Y [0.5, 0.5] -> [0.5, 0.5] | pelvis Y [-0.1, 1.0] -> [0.0, 1.1] | kepala Z [95.9, 152.9] | ok=True
+[Info] [inplace_ue] finisher_03  [Y] root Y [-5.2, -5.2] -> [-5.2, -5.2] | pelvis Y [-5.7, -4.4] -> [-5.7, -4.4] | kepala Z [107.4, 188.2] | ok=True
+[Info] [inplace_ue] air          [XYZ] root Y [0.8, 0.8] -> [0.8, 0.8] | pelvis Y [0.3, 1.5] -> [0.3, 1.5] | kepala Z [115.5, 146.8] | ok=True
+[Info] [inplace_ue] air_slam     [XY] root Y [0.4, 0.4] -> [0.4, 0.4] | pelvis Y [-0.1, 1.3] -> [-0.2, 1.3] | kepala Z [45.6, 149.2] | ok=True
+[Info] [inplace_ue] selesai: 11 animasi -> C:/repository/unreal_engine/jayadwara_hermes_combo/Hermes/Art/combo-iter2/Log/inplace_ue.json

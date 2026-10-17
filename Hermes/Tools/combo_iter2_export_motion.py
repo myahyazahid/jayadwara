@@ -89,9 +89,9 @@ def main():
     os.makedirs(OUT, exist_ok=True)
     result = {"fps": FPS, "units": "cm, X depan, Y kanan, Z atas", "moves": []}
     for move_id, title, montage_path, seq_path, fallback in MOVES:
-        montage = EAL.load_asset(montage_path) if EAL.does_asset_exist(montage_path) else None
-        path = seq_path if EAL.does_asset_exist(seq_path) else fallback if fallback and EAL.does_asset_exist(fallback) else None
-        seq = EAL.load_asset(path) if path else None
+        # unreal.load_asset langsung: EditorAssetLibrary bisa kosong setelah editor dibuka ulang
+        montage = unreal.load_asset(montage_path)
+        seq = unreal.load_asset(seq_path) or (unreal.load_asset(fallback) if fallback else None)
         if seq is None:
             log(f"{title}: animasi belum ada, dilewati")
             continue

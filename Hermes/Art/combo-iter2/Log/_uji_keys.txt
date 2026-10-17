@@ -1,0 +1,8 @@
+model AnimationSequencerDataModel frames 67
+ctrl dibuat
+set_model OK
+model interface sekarang: <Object '/Game/Hermes/ComboIter2/_uji/A_uji_keys_v2.A_uji_keys_v2:AnimationSequencerDataModel' (0x000001EE56A43000) Class 'AnimationSequencerDataModel'>
+disampel 67 kunci; Y awal -0.36 max 71.93
+set_bone_track_keys -> True
+disimpan
+HASIL pelvis world Y -0.3..0.4 | kepala Z 137.4..152.6
