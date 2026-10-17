@@ -99,6 +99,27 @@ Bentuknya tendangan terbang memutar dan hantaman tinju ke bawah (lihat daftar ju
 | **Destruction** | Gedung bisa hancur; kerusakan memengaruhi meter sinkronisasi |
 | **Kamera skala** | Rig kamera khusus + elemen pembanding (kendaraan, warga, fog) agar terasa raksasa |
 
+### Tameng Inten (perisai energi)
+
+Usulan 17 Okt 2026 (permintaan developer), **Fase 2**. Hanya Jayadwara; Aksa tidak punya walau kalungnya sama. Visual konsep: artifact "Tameng Inten".
+
+Serangan **kekuatan** (bola api, sinar, semburan; ditandai `Attack.Type.Energy`) tidak bisa ditangkis lengan. Saat tombol tangkis ditahan dan yang datang serangan energi, permata dada menyala dan melepas **16 keping berlian** bercahaya yang menyatu jadi perisai belah ketupat di depan badan, lalu kembali ke permata dan padam saat dilepas. Pukulan fisik tetap ditangkis lengan seperti biasa. Tombolnya tetap satu (tangkis).
+
+| Kasus | Hasil (angka usulan) |
+|---|---|
+| Ditahan sebelum energi tiba | **Serap**: keping menyatu dalam 0,25 s, tanpa damage; bola api −2 keping |
+| Ditekan dalam 0,25 s terakhir | **Pantul**: keping langsung menyatu, proyektil berbalik ke pengirimnya, tanpa kehilangan keping; anti spam 0,5 s (sama parry) |
+| Sinar ditahan | Tidak bisa dipantul; −1 keping tiap 0,15 s, Jayadwara terdorong mundur |
+| Keping habis | **Pecah**: keping berhamburan, stagger 1,2 s, sisa serangan kena badan; keping penuh lagi 8 s |
+| Tanpa perisai / telat | Energi kena penuh (±15 HP) |
+| Menghindar | Jayadwara aman, tapi energi yang lolos mengenai gedung di belakangnya → kerusakan + penalti Sync. Perisai = cara melindungi kota |
+
+- Pulih 1 keping / 1,5 s, mulai 1 s setelah tombol dilepas. Arah sama dengan tangkis (depan 140°). **Tidak memakai stamina**: sumber dayanya keping, terlihat dari jumlah berlian di perisai dan di HUD.
+- **Bentuk:** belah ketupat besar dari belah ketupat kecil (bentuk kalung pecahan arca Ki Zahid), emas hangat, celah tipis antar keping. Pose: tangan kiri terbuka ke depan, tangan kanan di sisi dada.
+- **Batas IP** ([01](01-konsep-dan-pilar.md#wajib-dihindari)): bukan dinding bulat/heksagon transparan, tidak keluar dari lengan, tanpa silang lengan atau pose L. Permata dada menyala **hanya selama perisai keluar** lalu padam, tidak berkedip, dan tidak menunjukkan sisa keping (K1, K6 di [14](14-model-sheet-jayadwara.md)).
+- **Kode (perkiraan):** hasil baru di `UJDCombatComponent::ResolveIncomingHit` (`ShieldAbsorbed`, `Reflected`, `ShieldBroken`), komponen keping, cabang di `UJDGA_Block` (`bEnergyShield` di profil raksasa), `AJDEnergyProjectile` (bisa dipantul), `AJDEnergyBeam` (berhenti di perisai atau gedung). Developer: Niagara keping dari socket permata, material emissive, SFX.
+- **Kapan:** bukan Fase 1 (kerangka & Jerangkong tidak punya serangan energi; puing Jerangkong fisik). Dibuat bersama musuh energi pertama, kandidat Kemamang Ep 6 (bola api, cocok untuk pantul); sinar untuk Banaspati Ep 10.
+
 ## Meter Sinkronisasi
 
 Pengganti timer transformasi.

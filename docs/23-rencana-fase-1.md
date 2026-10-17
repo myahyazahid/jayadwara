@@ -53,6 +53,7 @@ Kalau G1–G3 gagal: **perbaiki combat dulu** sebelum masuk Fase 2 ([18](18-kebu
 | Menu utama, pause, setting grafis | F2 | Play In Editor / build dev |
 | Model final, animasi silat final, VFX final, audio final | F2 | Manny, proxy, Mixamo, kotak, SFX kandidat |
 | Jubah upacara Jayadwara (model, animasi pakai/lepas, Niagara, C++ pakai/lepas) — [07](07-gameplay-sistem.md#jubah-upacara), iterasi [26](26-rencana-jubah-jayadwara.md) | F2 (bareng cutscene transformasi) | Tanpa jubah |
+| Tameng Inten Jayadwara (perisai keping berlian melawan serangan energi: serap, pantul, pecah) — [07](07-gameplay-sistem.md#tameng-inten-perisai-energi) | F2 (bareng musuh energi pertama) | Tidak perlu: musuh F1 tidak punya serangan energi |
 | Motion Matching, Mass AI, skill tree, upgrade | Backlog / F4 | — |
 
 ## 3. Titik awal (12 Okt 2026)
