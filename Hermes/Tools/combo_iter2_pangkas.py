@@ -35,10 +35,14 @@ PANGKAS = {
     # Dua bagian itu yang terbaca "bergerak ke belakang" -> dibuang.
     "light_01": (0.10, 1.30),
     "light_02": (0.10, 1.35),
+    # light_03/light_04: 0,45 s ancang-ancang + 0,5 s ekor diam. Dipotong supaya
+    # sambungan pukulan 2->3 dan 3->4 tidak berhenti lama di pose netral.
+    "light_03": (0.45, 1.20),
+    "light_04": (0.50, 1.05),
 }
 # jalankan hanya peran tertentu (klip lain sudah dipangkas, memangkas ulang akan
 # mengambil rentang dari klip yang sudah pendek)
-HANYA = {"light_01", "light_02"}
+HANYA = {"light_03", "light_04"}
 
 EAL = unreal.EditorAssetLibrary
 AL = unreal.AnimationLibrary

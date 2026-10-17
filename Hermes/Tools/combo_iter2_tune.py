@@ -38,7 +38,7 @@ LOG_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 # laju main per peran. finisher_02 sengaja 0,85: dua tendangannya hanya berjarak 0,15 s,
 # kalau dipercepat keduanya jatuh hampir bersamaan (lihat laporan, temuan 5).
 LAJU = {
-    "light_01": 1.35, "light_02": 1.35, "light_03": 1.60, "light_04": 1.45,
+    "light_01": 1.35, "light_02": 1.35, "light_03": 1.45, "light_04": 1.35,
     "lunge": 1.50, "back": 1.50,
     "finisher_01": 1.25, "finisher_02": 0.85, "finisher_03": 1.15,
     "air": 1.20, "air_slam": 1.00,
@@ -63,7 +63,8 @@ LEWATI = {"air_slam"}
 BLEND_IN = 0.05
 BLEND_OUT = 0.22
 # transisi lompat -> tendangan butuh blend lebih panjang; 0,05 s terasa menyentak.
-BLEND_KHUSUS = {"air": (0.15, 0.30), "light_01": (0.12, 0.28), "light_02": (0.12, 0.28)}
+BLEND_KHUSUS = {"air": (0.15, 0.30), "light_01": (0.12, 0.28), "light_02": (0.12, 0.28),
+                "light_03": (0.24, 0.30), "light_04": (0.22, 0.30)}
 EKOR_JENDELA = 0.55   # jendela combo = EKOR_JENDELA terakhir dari klip (bukan di hantaman!)
 SISA_UJUNG = 0.02     # sisa di ujung montage
 
