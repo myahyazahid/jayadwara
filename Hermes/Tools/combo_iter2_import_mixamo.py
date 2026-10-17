@@ -36,6 +36,8 @@ MESH_NAME = "SK_Mixamo_YBot"
 # dengan tulang terotasi 90 derajat (skeleton SK_Mixamo_YBot dipakai bersama, sumbu bone beda),
 # hasil retarget jadi rebah (kepala 33,8 cm, seharusnya 144 cm). Lihat laporan temuan 8.
 INPLACE = set()
+# jalankan hanya peran tertentu (klip lain sudah dipangkas/disetel, jangan diimpor ulang)
+HANYA = {"light_01", "light_02"}
 
 # peran (nama file tanpa .fbx) -> jurus (docs/07). Yang tidak ada dilewati; skrip setup tetap pakai placeholder.
 ROLES = {
@@ -166,7 +168,7 @@ def main():
     log(f"{MESH_NAME}: skeleton {skeleton.get_name()}")
 
     anims = []
-    for role in ROLES:
+    for role in (HANYA or ROLES):
         if role not in files:
             continue
         name = f"A_Aksa_Mx_{role}"

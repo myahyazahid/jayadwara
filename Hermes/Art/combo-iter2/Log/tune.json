@@ -1,11 +1,11 @@
 [
   {
     "peran": "light_01",
-    "panjang": 1.1,
-    "panjang_nyata": 0.688,
+    "panjang": 1.267,
+    "panjang_nyata": 0.938,
     "hantaman": [
       [
-        0.26,
+        0.33,
         0.22,
         "hand_r",
         false
@@ -13,15 +13,15 @@
     ],
     "combo_lama": [
       [
-        0.55,
-        0.53
+        0.52,
+        0.35
       ]
     ],
     "combo_baru": [
-      0.55,
+      0.717,
       0.53
     ],
-    "laju": 1.6,
+    "laju": 1.35,
     "blend": [
       0.12,
       0.28
@@ -29,11 +29,11 @@
   },
   {
     "peran": "light_02",
-    "panjang": 1.133,
-    "panjang_nyata": 0.708,
+    "panjang": 1.333,
+    "panjang_nyata": 0.988,
     "hantaman": [
       [
-        0.35,
+        0.41,
         0.22,
         "hand_l",
         false
@@ -41,15 +41,15 @@
     ],
     "combo_lama": [
       [
-        0.583,
-        0.53
+        0.6,
+        0.35
       ]
     ],
     "combo_baru": [
-      0.583,
+      0.783,
       0.53
     ],
-    "laju": 1.6,
+    "laju": 1.35,
     "blend": [
       0.12,
       0.28
@@ -69,8 +69,8 @@
     ],
     "combo_lama": [
       [
-        1.617,
-        0.53
+        1.02,
+        0.35
       ]
     ],
     "combo_baru": [
@@ -95,12 +95,7 @@
         false
       ]
     ],
-    "combo_lama": [
-      [
-        1.483,
-        0.53
-      ]
-    ],
+    "combo_lama": [],
     "combo_baru": [
       1.483,
       0.53
@@ -125,8 +120,8 @@
     ],
     "combo_lama": [
       [
-        1.617,
-        0.53
+        1.02,
+        0.35
       ]
     ],
     "combo_baru": [
@@ -153,8 +148,8 @@
     ],
     "combo_lama": [
       [
-        0.317,
-        0.53
+        0.32,
+        0.35
       ]
     ],
     "combo_baru": [
@@ -256,8 +251,8 @@
     ],
     "combo_lama": [
       [
-        0.317,
-        0.53
+        0.7,
+        0.17
       ]
     ],
     "combo_baru": [

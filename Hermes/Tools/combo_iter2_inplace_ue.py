@@ -47,7 +47,7 @@ RATAKAN = {
 EAL = unreal.EditorAssetLibrary
 AL = unreal.AnimationLibrary
 hasil = []
-HANYA = set()   # isi nama peran untuk menjalankan sebagian saja
+HANYA = {"light_01", "light_02"}   # isi nama peran untuk menjalankan sebagian saja
 
 
 def log(msg):

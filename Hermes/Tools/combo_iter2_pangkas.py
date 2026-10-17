@@ -33,8 +33,8 @@ PANGKAS = {
     # light_01/light_02: kaki belakang geser 33 cm ke belakang saat ancang-ancang
     # (0-0,6 s) dan kaki depan geser balik 34 cm saat recovery (1,4-1,6 s).
     # Dua bagian itu yang terbaca "bergerak ke belakang" -> dibuang.
-    "light_01": (0.00, 1.10),
-    "light_02": (0.00, 1.15),
+    "light_01": (0.10, 1.30),
+    "light_02": (0.10, 1.35),
 }
 # jalankan hanya peran tertentu (klip lain sudah dipangkas, memangkas ulang akan
 # mengambil rentang dari klip yang sudah pendek)
