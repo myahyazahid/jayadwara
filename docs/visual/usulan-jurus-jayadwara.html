@@ -2,31 +2,30 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@600;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: panggung 3D (Jayadwara + gedung + boss proxy) + strip pose kunci di kiri, daftar jurus, angka & keputusan di kanan. Gaya sama dengan "Usulan Jurus Aksa" dan "Tameng Inten". */
+/* Layout: panggung 3D + strip pose kunci di kiri, daftar jurus & kontrol putar di kanan; satu kolom di HP. */
 :root {
   --bg: #eef0ee; --panel: #f8f9f7; --ink: #1d2422; --muted: #5d6865; --line: #cdd3cf;
-  --stage: #e3e7e4; --bone: #8e2a22; --dummy: #7d8784; --bldg: #b9c1bd; --gold: #b07a12; --hit: #b8402e; --move: #2f6b8a;
+  --stage: #e3e7e4; --bone: #8e2a22; --gold: #b07a12; --hit: #d9661c; --move: #2f6b8a;
   --font-display: "Saira Condensed", "Arial Narrow", sans-serif;
   --font-body: "IBM Plex Sans", system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
   --bg: #161b1a; --panel: #1e2523; --ink: #e6ebe8; --muted: #9aa6a2; --line: #34403c;
-  --stage: #121716; --bone: #e0705f; --dummy: #7f8b87; --bldg: #3c4945; --gold: #e0ad48; --hit: #e57a63; --move: #6fb0d2; color-scheme: dark } }
+  --stage: #121716; --bone: #e0705f; --gold: #e0ad48; --hit: #ffb347; --move: #6fb0d2; color-scheme: dark } }
 :root[data-theme="dark"] {
   --bg: #161b1a; --panel: #1e2523; --ink: #e6ebe8; --muted: #9aa6a2; --line: #34403c;
-  --stage: #121716; --bone: #e0705f; --dummy: #7f8b87; --bldg: #3c4945; --gold: #e0ad48; --hit: #e57a63; --move: #6fb0d2; color-scheme: dark }
+  --stage: #121716; --bone: #e0705f; --gold: #e0ad48; --hit: #ffb347; --move: #6fb0d2; color-scheme: dark }
 * { box-sizing: border-box; }
 body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.5; }
 .wrap { max-width: 1120px; margin: 0 auto; padding-block: 24px 48px;
   padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
   display: grid; gap: 18px; }
 h1 { font: 800 clamp(30px, 5vw, 44px)/1 var(--font-display); text-transform: uppercase; margin: 0; text-wrap: balance; }
-h2 { font: 800 26px/1.1 var(--font-display); text-transform: uppercase; margin: 0; }
 .eyebrow { font: 12px var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--gold); }
 .lead { color: var(--muted); max-width: 72ch; margin: 0; }
-.layout { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 16px; align-items: start; }
-@media (max-width: 860px) { .layout { grid-template-columns: minmax(0, 1fr); } }
+.layout { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 16px; align-items: start; }
+@media (max-width: 820px) { .layout { grid-template-columns: minmax(0, 1fr); } }
 .main { display: grid; gap: 12px; min-width: 0; }
 .stage { position: relative; background: var(--stage); border: 1px solid var(--line); border-radius: 6px; aspect-ratio: 16 / 10; max-width: 100%; overflow: hidden; }
 .stage canvas { display: block; width: 100%; height: 100%; touch-action: none; cursor: grab; }
@@ -34,26 +33,19 @@ h2 { font: 800 26px/1.1 var(--font-display); text-transform: uppercase; margin: 
 .hud b { font: 800 22px var(--font-display); text-transform: uppercase; }
 .hud .state { font: 12px var(--font-mono); padding: 2px 8px; border-radius: 999px; background: var(--panel); border: 1px solid var(--line); height: max-content; white-space: nowrap; }
 .hud .state.hit { color: var(--hit); border-color: var(--hit); }
-.hud .state.charge { color: var(--gold); border-color: var(--gold); }
-.scale { position: absolute; left: 12px; bottom: 10px; font: 11px var(--font-mono); color: var(--muted); pointer-events: none; }
-.desc { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 12px 14px; display: grid; gap: 8px; }
-.desc h2 { font-size: 22px; }
+.hud .state.combo { color: var(--gold); border-color: var(--gold); }
+.desc { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 12px 14px; display: grid; gap: 6px; }
+.desc h2 { margin: 0; font: 800 22px var(--font-display); text-transform: uppercase; }
 .desc p { margin: 0; }
 .kbd { font: 500 12px var(--font-mono); padding: 1px 7px; border: 1px solid var(--line); border-bottom-width: 2.5px; border-radius: 4px; background: var(--bg); white-space: nowrap; }
-.meta { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 13px; color: var(--muted); align-items: center; }
-.stats { display: flex; flex-wrap: wrap; gap: 6px 18px; }
-.stat { display: grid; }
-.stat small { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
-.stat span { font: 14px var(--font-mono); font-variant-numeric: tabular-nums; }
-.why { font-size: 14px; color: var(--muted); }
-.why b { color: var(--ink); font-weight: 600; }
+.meta { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 13px; color: var(--muted); }
 .strip { display: grid; grid-template-columns: repeat(auto-fill, minmax(112px, 1fr)); gap: 8px; }
 .strip figure { margin: 0; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 6px; display: grid; gap: 2px; cursor: pointer; }
 .strip figure.on { border-color: var(--ink); }
 .strip canvas { width: 100%; aspect-ratio: 1; display: block; }
 .strip figcaption { font: 12px var(--font-mono); color: var(--muted); text-align: center; }
 .strip figure.hit figcaption { color: var(--hit); }
-.side { display: grid; gap: 14px; min-width: 0; }
+.side { display: grid; gap: 14px; }
 .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 12px; display: grid; gap: 10px; }
 .panel h3 { margin: 0; font: 600 13px var(--font-mono); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
 .list { display: grid; gap: 4px; }
@@ -61,17 +53,25 @@ h2 { font: 800 26px/1.1 var(--font-display); text-transform: uppercase; margin: 
 button { font: 600 14px var(--font-body); border: 1.5px solid var(--ink); background: var(--panel); color: var(--ink); border-radius: 4px; padding: 6px 12px; cursor: pointer; }
 button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
 button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
-.list button { text-align: left; border-width: 1px; border-color: var(--line); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 8px; }
+.list button { text-align: left; border-width: 1px; border-color: var(--line); display: flex; justify-content: space-between; gap: 8px; }
 .list button small { font: 12px var(--font-mono); opacity: .7; }
-.list button .sub { flex-basis: 100%; font: 400 12px var(--font-mono); color: var(--muted); }
-.list button[aria-pressed="true"] .sub { color: inherit; opacity: .8; }
-.tag { font: 11px var(--font-mono); padding: 0 6px; border-radius: 999px; border: 1px solid var(--gold); color: var(--gold); white-space: nowrap; }
+.list button { flex-wrap: wrap; }
+.list button .mx { flex-basis: 100%; display: flex; justify-content: space-between; gap: 8px; font: 400 12px var(--font-mono); color: var(--muted); }
+.list button[aria-pressed="true"] .mx { color: inherit; opacity: .8; }
+.list button .mx code { color: var(--gold); }
+.list button[aria-pressed="true"] .mx code { color: inherit; }
+.tag { font: 11px var(--font-mono); padding: 0 6px; border-radius: 999px; border: 1px solid var(--hit); color: var(--hit); white-space: nowrap; }
+.files { display: grid; gap: 6px; font-size: 13px; }
+.files div { display: grid; gap: 1px; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
+.files div:last-child { border-bottom: 0; padding-bottom: 0; }
+.files code { font: 500 12px var(--font-mono); color: var(--gold); }
+.files span { color: var(--muted); font-size: 12px; }
 .row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
 .tl { position: relative; height: 24px; background: var(--bg); border-radius: 3px; overflow: hidden; }
 .tl i { position: absolute; }
-.tl i.hit { background: var(--hit); opacity: .6; top: 0; height: 50%; }
-.tl i.charge { background: var(--gold); opacity: .65; top: 50%; height: 50%; }
-.tl i.move { background: var(--move); opacity: .7; top: 50%; height: 50%; }
+.tl i.hit { background: var(--hit); opacity: .6; top: 0; height: 33%; }
+.tl i.combo { background: var(--gold); opacity: .65; top: 33%; height: 33%; }
+.tl i.move { background: var(--move); opacity: .7; top: 66%; height: 34%; }
 .tl .head { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--ink); }
 input[type=range] { width: 100%; accent-color: var(--gold); }
 .mono { font: 13px var(--font-mono); }
@@ -79,52 +79,43 @@ input[type=range] { width: 100%; accent-color: var(--gold); }
 .legend span { display: inline-flex; align-items: center; gap: 5px; }
 .sw { width: 12px; height: 8px; border-radius: 2px; display: inline-block; }
 .note { font-size: 13px; color: var(--muted); margin: 0; }
-.qs { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; font-size: 14px; }
-.qs li { display: grid; gap: 2px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
-.qs li:last-child { border-bottom: 0; padding-bottom: 0; }
-.qs b { font: 600 12px var(--font-mono); color: var(--gold); }
-.qs span { color: var(--muted); font-size: 13px; }
-.bottom { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
-.card { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 14px 16px; display: grid; gap: 8px; align-content: start; min-width: 0; }
-.card h3 { margin: 0; font: 800 19px var(--font-display); text-transform: uppercase; }
-.card ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; font-size: 14px; }
-.tw { overflow-x: auto; }
-table { border-collapse: collapse; width: 100%; font-size: 14px; }
-th, td { text-align: left; padding: 6px 8px 6px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
-th { font: 600 11px var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
-td.n { font-family: var(--font-mono); font-size: 13px; font-variant-numeric: tabular-nums; white-space: nowrap; }
-tr:last-child td { border-bottom: 0; }
 </style>
 
 <div class="wrap">
   <div>
-    <div class="eyebrow">Usulan · Fase 2 · jurus khas raksasa</div>
+    <div class="eyebrow">Konsep · bukan animasi final · pendamping Usulan Jurus Aksa</div>
     <h1>Usulan Jurus Jayadwara</h1>
   </div>
-  <p class="lead">Di Fase 1 Jayadwara memakai combo yang sama dengan Aksa. Halaman ini mengusulkan tiga jurus yang hanya dimiliki Jayadwara. Ketiganya berangkat dari arca Dwarapala penjaga gerbang: kuda-kuda satu lutut terangkat, telapak penolak, dan gerbang yang ditutup. Tidak ada sinar, karena beam dibahas terpisah. Seret panggung untuk memutar kamera. Ukuran di panggung memakai skala Jayadwara 45 m.</p>
+  <p class="lead">Pukulan dan tendangan Jayadwara untuk slot combo yang sama dengan Aksa: tombol, ability, dan aturan combo tidak berubah, hanya animasinya yang lain. Aksa cepat dan lincah (jab, cross, hook, tendangan putar). Jayadwara memakai gerak yang lebih pendek, lurus, dan menghantam: siku, dengkul, tendangan samping, palu dua tangan, dan tabrakan bahu. Rasa raksasa tetap dari hit-stop, guncangan, dan debu (ala Mebius), bukan dari animasi lambat. Seret panggung untuk memutar kamera, klik pose kunci untuk melompat ke pose itu.</p>
 
   <div class="layout">
     <div class="main">
       <div class="stage" id="stage">
-        <canvas id="cv" aria-label="Panggung 3D animasi konsep jurus Jayadwara"></canvas>
+        <canvas id="cv" aria-label="Panggung 3D animasi konsep jurus"></canvas>
         <div class="hud"><b id="hud-title"></b><span class="state" id="hud-state">—</span></div>
-        <div class="scale">grid 25 m · Jayadwara 45 m · gedung 7–25 m</div>
       </div>
       <div class="desc">
         <h2 id="d-title"></h2>
         <div class="meta" id="d-meta"></div>
         <p id="d-text"></p>
-        <div class="stats" id="d-stats"></div>
-        <p class="why" id="d-why"></p>
       </div>
       <div class="strip" id="strip" aria-label="Pose kunci"></div>
     </div>
 
     <div class="side">
       <div class="panel">
-        <h3>Jurus khas</h3>
+        <h3>Jurus</h3>
         <div class="list" id="list"></div>
       </div>
+      <div class="panel">
+        <h3>Catatan pipeline</h3>
+        <div class="files">
+          <div><code>jd_*.fbx</code><span>Nama file usulan untuk animasi khusus Jayadwara. <code>Tools/ue_import_mixamo.py</code> baru mengenal peran Aksa, jadi perlu ditambah jalur ke <code>A_JD2_*</code> lewat RTG Jayadwara yang sudah ada</span></div>
+          <div><code>dodge_*, parry_*</code><span>Dodge dan parry tetap memakai animasi Aksa yang di-retarget</span></div>
+          <div><code>ybot.fbx</code><span>Sama dengan Aksa, tidak perlu unduh ulang</span></div>
+        </div>
+      </div>
+      <p class="note">Kata kunci "cari:" belum dicek ke daftar Mixamo; kalau tidak ada yang cocok, slot itu tetap memakai animasi Aksa dulu. Semua file nanti masuk <code>mixamo\result\</code> dengan aturan unduh yang sama.</p>
       <div class="panel">
         <h3>Putar</h3>
         <div class="row">
@@ -138,60 +129,11 @@ tr:last-child td { border-bottom: 0; }
         <div class="mono" id="time">0,00 s</div>
         <div class="legend">
           <span><i class="sw" style="background:var(--hit)"></i> kena</span>
-          <span><i class="sw" style="background:var(--gold)"></i> ancang / tahan</span>
+          <span><i class="sw" style="background:var(--gold)"></i> sambung combo</span>
           <span><i class="sw" style="background:var(--move)"></i> bergerak</span>
         </div>
       </div>
-      <div class="panel">
-        <h3>Perlu kamu putuskan</h3>
-        <ul class="qs">
-          <li><b>JK1 · Tombol</b><span>Usulan: <span class="kbd">R</span> / <span class="kbd">L2</span> (LT). Dua-duanya masih kosong; L1 dan R1 tidak dipakai sendiri supaya tidak bentrok dengan transformasi L1+R1.</span></li>
-          <li><b>JK2 · Biaya</b><span>Usulan: stamina + cooldown, tanpa bar baru di HUD. Alternatif: bar "Tenaga Dwara" yang terisi dari pukulan dan parry.</span></li>
-          <li><b>JK3 · Jurus untuk Ep 1</b><span>Vertical slice butuh 1 jurus spesial. Usulan: Tutup Lawang, untuk menghabisi tengkorak Jerangkong di fase 2.</span></li>
-          <li><b>JK4 · Nama</b><span>Tapak Penolak, Injak Bumi, Tutup Lawang. Nama sementara, bebas diganti.</span></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="bottom">
-    <div class="card">
-      <h3>Ringkas</h3>
-      <div class="tw"><table>
-        <thead><tr><th>Jurus</th><th>Input</th><th>Fungsi</th><th>Biaya</th></tr></thead>
-        <tbody>
-          <tr><td>Tapak Penolak</td><td class="n">R</td><td>Dorong boss menjauh, poise besar</td><td class="n">35 st · 6 s</td></tr>
-          <tr><td>Injak Bumi</td><td class="n">tahan R</td><td>Gelombang kejut, jatuhkan musuh kecil</td><td class="n">50 st · 10 s</td></tr>
-          <tr><td>Tutup Lawang</td><td class="n">R saat titik lemah terbuka</td><td>Finisher segel</td><td class="n">tanpa biaya</td></tr>
-        </tbody>
-      </table></div>
-      <p class="note">Satu tombol, tiga hasil, mengikuti pola tangkis + parry yang satu tombol (Q5). st = stamina dari 100.</p>
-    </div>
-    <div class="card">
-      <h3>Kenapa tiga ini</h3>
-      <ul>
-        <li><b>Tapak Penolak</b> memberi pemain alat untuk <b>memindahkan boss</b> keluar dari kampung ke zona aman. Ini sambung langsung ke meter sinkronisasi.</li>
-        <li><b>Injak Bumi</b> kuat tapi ikut merusak gedung di sekitar. Pemain harus memilih kapan memakainya.</li>
-        <li><b>Tutup Lawang</b> adalah tugas Dwarapala dalam lore: menyegel Kala. Cocok jadi penutup tiap boss dan jurus spesial Ep 1.</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>Batas IP</h3>
-      <ul>
-        <li>Lengan tidak pernah menyilang dan tidak membentuk huruf L.</li>
-        <li>Tidak ada sinar dari tangan atau lengan. Cahaya hanya pada gerbang segel.</li>
-        <li>Permata dada tetap statis. Hanya menyala saat Tameng Inten keluar (K1, K6).</li>
-        <li>Gerbang segel memakai bentuk candi bentar (gerbang terbelah), bukan dinding cahaya.</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>Untuk kode nanti</h3>
-      <ul>
-        <li><span class="mono">UJDGA_GiantSpecial</span> memilih jurus dari konteks: tap, tahan, atau target ber-tag <span class="mono">Boss.WeakPoint.Exposed</span>.</li>
-        <li>Tapak memakai <span class="mono">FJDAttackStep</span> + knockback ke target. Injak memakai <span class="mono">ApplyAreaHit</span> yang sudah ada untuk hantaman udara.</li>
-        <li>Gedung di radius Injak kena lewat jalur kerusakan Iterasi 7, jadi penalti Sync otomatis.</li>
-        <li>Placeholder animasi: Mixamo, kata kunci <i>push</i>, <i>stomp</i>, <i>clap</i>. Nama persis belum dicek.</li>
-      </ul>
+      <p class="note">Durasi perkiraan rasa pada laju 1,0, sama cepat dengan Aksa. Jarak di panggung skala manusia; di game dikali skala raksasa (±23,7). Batas IP: lengan tidak menyilang atau membentuk L, tidak ada tebasan tangan ala jurus Ultra, dan gerak tendang memakai bentuk taekwondo/muay thai.</p>
     </div>
   </div>
 </div>
@@ -199,57 +141,126 @@ tr:last-child td { border-bottom: 0; }
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 (function () {
-  // Rig konsep dalam cm manusia (180). Di panggung 1 cm rig = 25 cm dunia, jadi tinggi 180 = 45 m.
-  var SCALE = 25;
+  // ---------------------------------------------------------------- rig konsep (cm). x kanan, y atas, z depan.
   var S = { root: [0, 0], ah: 0, ph: 86, yaw: 0, lean: 5, twist: 15,
             lh: [10, 8, 26], rh: [-8, 4, 18], lf: [-14, 0, 16], rf: [14, 0, -16] };
   function K(t, o) { var k = { t: t }; for (var n in o) k[n] = o[n]; return k; }
 
-  // Gedung kotak di sekitar Jayadwara: [x, z, lebar, dalam, tinggi] dalam cm rig.
-  var BLDG = [[-220, 120, 60, 60, 40], [240, 60, 50, 50, 28], [-150, -230, 36, 36, 100], [200, -200, 60, 44, 36], [330, 250, 70, 50, 50], [-360, -40, 50, 70, 30]];
-
   var MOVES = [
-    { id: "tapak", title: "Tapak Penolak", input: ["R"], label: "Tapak",
-      text: "Lutut kiri diangkat sebentar seperti kuda-kuda arca Dwarapala, tangan kanan ditarik ke pinggang. Lalu kaki kiri dihentakkan ke depan dan telapak kanan didorong lurus terbuka, seperti menutup daun pintu. Boss terdorong jauh ke belakang.",
-      stats: [["Damage", "25"], ["Poise", "60"], ["Dorong boss", "±60 m"], ["Stamina", "−35"], ["Cooldown", "6 s"]],
-      why: "<b>Dipakai untuk:</b> memindahkan boss keluar dari kampung ke zona aman (sawah, kali, gudang Adikara) dan memutus rangkaian serangan boss. Bisa langsung disambung pukulan ringan.",
-      hit: [[0.30, 0.42, ["rh"]]], charge: [0.05, 0.22], move: [0.22, 0.32], cam: 560,
-      target: { z: 150, push: [0.32, 0.62, 240] },
-      keys: [K(0, {}),
-             K(0.16, { ph: 84, twist: 30, lean: -2, lf: [-12, 46, 34], lkp: [0, 0.2, 1], rh: [-6, -28, -12], lh: [14, 6, 24] }),
-             K(0.22, { ph: 84, twist: 30, lean: -2, lf: [-12, 46, 34], lkp: [0, 0.2, 1], rh: [-6, -28, -12], lh: [14, 6, 24] }),
-             K(0.30, { root: [0, 40], ph: 72, twist: -15, lean: 14, lf: [-16, 0, 62], rf: [14, 0, -26], rh: [-4, 12, 60], rpole: [1, -0.2, -0.4], lh: [8, -28, -6] }),
-             K(0.42, { root: [0, 40], ph: 72, twist: -15, lean: 14, lf: [-16, 0, 62], rf: [14, 0, -26], rh: [-4, 12, 60], rpole: [1, -0.2, -0.4], lh: [8, -28, -6] }),
-             K(0.80, { root: [0, 40] })] },
+    { id: "p1", file: "jd_light_01", mx: "cari: Jab · Lead Jab", wajib: false, group: "Combo ringan", title: "Pukulan 1 · Jab berat", input: ["LMB"], label: "Jab",
+      text: "Pukulan lurus tangan kiri dengan langkah kecil ke depan. Sama dengan jab Aksa, tapi kaki depan ikut menapak keras supaya terasa berat. Pembuka combo.",
+      hit: [0.08, 0.20], combo: [0.18, 0.50], limb: ["lh"],
+      keys: [K(0, {}), K(0.12, { twist: -5, lean: 10, lh: [16, 6, 56], lf: [-14, 0, 26] }), K(0.20, { twist: -5, lean: 10, lh: [16, 6, 56], lf: [-14, 0, 26] }), K(0.46, {})] },
+    { id: "p2", file: "jd_light_02", mx: "cari: Elbow Strike · Horizontal Elbow", wajib: false, group: "Combo ringan", title: "Pukulan 2 · Siku kanan", input: ["LMB", "LMB"], label: "Siku",
+      text: "Pinggul diputar dan siku kanan diayun mendatar setinggi bahu. Jarak pendek, untuk musuh yang sudah menempel. Siku lebih cocok dengan badan raksasa berlapis armor daripada cross.",
+      hit: [0.16, 0.30], combo: [0.28, 0.60], limb: ["rh"],
+      keys: [K(0, {}), K(0.08, { twist: 40, rh: [-4, 10, -2], rpole: [1, 0, -0.5] }),
+             K(0.20, { twist: -40, lean: 8, rh: [-34, 10, 14], rpole: [0.2, 0, 1] }), K(0.30, { twist: -40, lean: 8, rh: [-34, 10, 14], rpole: [0.2, 0, 1] }), K(0.56, {})] },
+    { id: "p3", file: "jd_light_03", mx: "cari: Knee Strike · Muay Thai Knee", wajib: false, group: "Combo ringan", title: "Pukulan 3 · Dengkul", input: ["LMB", "×3"], label: "Dengkul",
+      text: "Kedua tangan menarik kepala musuh ke bawah, lalu lutut kanan dihantamkan ke atas. Lutut terangkat ini mengambil pose arca Dwarapala.",
+      hit: [0.16, 0.28], combo: [0.26, 0.60], limb: ["rf"],
+      keys: [K(0, {}), K(0.10, { rf: [14, 30, 0], lh: [8, 6, 44], rh: [-8, 6, 44] }),
+             K(0.18, { lean: -4, rf: [14, 62, 26], rkp: [0, 0.3, 1], lh: [8, -8, 42], rh: [-8, -8, 42] }),
+             K(0.28, { lean: -4, rf: [14, 62, 26], rkp: [0, 0.3, 1], lh: [8, -8, 42], rh: [-8, -8, 42] }), K(0.56, {})] },
+    { id: "p4", file: "jd_light_04", mx: "cari: Side Kick", wajib: true, group: "Combo ringan", title: "Pukulan 4 · Tendangan samping", input: ["LMB", "×4"], label: "Samping",
+      text: "Akhir combo: badan dimiringkan menyamping, lutut kanan ditarik ke dada, lalu telapak kaki didorong lurus ke samping setinggi dada (yop chagi). Musuh terpental jauh, cocok untuk menjauhkan boss dari gedung.",
+      hit: [0.26, 0.36], combo: null, limb: ["rf"],
+      keys: [K(0, {}), K(0.12, { yaw: -60, twist: -20, lf: [-6, 0, 6], rf: [24, 60, 0], rkp: [1, 0.5, 0] }),
+             K(0.26, { yaw: -90, twist: -10, lean: -15, lf: [-6, 0, 6], rf: [92, 82, 0], rkp: [1, 0.3, 0], lh: [10, 4, 20], rh: [-30, -10, -6] }),
+             K(0.36, { yaw: -90, twist: -10, lean: -15, lf: [-6, 0, 6], rf: [92, 82, 0], rkp: [1, 0.3, 0], lh: [10, 4, 20], rh: [-30, -10, -6] }),
+             K(0.56, { yaw: -60, lf: [-6, 0, 6], rf: [20, 14, -6] }), K(0.80, { yaw: 0 })] },
+    { id: "combo", group: "Combo ringan", title: "Combo penuh", input: ["LMB", "×4"], label: "Combo", combine: ["p1", "p2", "p3", "p4"],
+      text: "Empat serangan beruntun: jab, siku, dengkul, lalu tendangan samping. Jarak makin dekat lalu diakhiri dorongan jauh." },
 
-    { id: "injak", title: "Injak Bumi", input: ["tahan", "R"], label: "Injak",
-      text: "Tahan tombol: kaki kanan diangkat tinggi, lutut setinggi pinggang, kedua tangan terbuka ke samping bawah. Lepas tombol (atau tahan sampai penuh): kaki dihentakkan ke tanah dan gelombang kejut melebar. Semakin lama ditahan sampai 0,6 s, radiusnya semakin besar.",
-      stats: [["Damage", "20"], ["Radius", "50–80 m"], ["Efek", "musuh kecil jatuh, boss terhuyung"], ["Stamina", "−50"], ["Cooldown", "10 s"]],
-      why: "<b>Dipakai untuk:</b> membersihkan banyak musuh kecil sekaligus (anak api, tuyul kecil) dan, di Ep 1, menghancurkan lengan dan kaki Jerangkong yang sedang merayap balik supaya susun ulang tertunda. <b>Risiko:</b> gedung di dalam radius ikut rusak, jadi meter sinkronisasi turun. Di panggung, gedung yang menyala merah adalah yang kena.",
-      hit: [[0.70, 0.92, ["rf"]]], charge: [0.10, 0.62], cam: 900, ring: 320,
-      crawl: [[150, 60], [-120, 110], [40, -160]],
-      keys: [K(0, {}),
-             K(0.28, { ph: 90, lean: -4, twist: 5, rf: [14, 58, 32], rkp: [0, 0.3, 1], lh: [-26, -18, 6], rh: [26, -18, 6], lf: [-12, 0, 6] }),
-             K(0.62, { ph: 90, lean: -4, twist: 5, rf: [14, 62, 34], rkp: [0, 0.3, 1], lh: [-28, -16, 6], rh: [28, -16, 6], lf: [-12, 0, 6] }),
-             K(0.70, { ph: 70, lean: 16, twist: 0, rf: [18, 0, 10], lf: [-18, 0, 8], lh: [-10, -34, 20], rh: [10, -34, 20] }),
-             K(1.00, { ph: 70, lean: 16, twist: 0, rf: [18, 0, 10], lf: [-18, 0, 8], lh: [-10, -34, 20], rh: [10, -34, 20] }),
-             K(1.40, {})] },
+    { id: "lunge", file: "jd_lunge", mx: "cari: Shoulder Charge · Tackle", wajib: false, group: "Pembuka arah", title: "Terjang · Tabrak bahu", input: ["W", "+", "LMB"], label: "Tabrak",
+      text: "Pengganti lompat-pukul Aksa. Dua langkah lari berat lalu bahu kiri ditabrakkan ke dada musuh, lengan dilipat di depan badan. Pada skala 45 m tanah ikut bergetar tiap langkah. Di game jaraknya sampai ±140 m; di sini dipendekkan.",
+      hit: [0.34, 0.48], combo: [0.46, 0.78], move: [0, 0.36], limb: ["lh"],
+      keys: [K(0, {}), K(0.12, { root: [0, 60], ph: 82, lean: 20, lf: [-14, 10, 40], rf: [14, 0, -30] }),
+             K(0.24, { root: [0, 160], ph: 82, lean: 22, lf: [-14, 0, -20], rf: [14, 12, 40] }),
+             K(0.36, { root: [0, 280], ph: 78, lean: 20, twist: -55, lf: [-16, 0, 50], rf: [14, 0, -34], lh: [2, -4, 8], rh: [-10, 0, 22] }),
+             K(0.48, { root: [0, 280], ph: 78, lean: 20, twist: -55, lf: [-16, 0, 50], rf: [14, 0, -34], lh: [2, -4, 8], rh: [-10, 0, 22] }),
+             K(0.80, { root: [0, 280] })] },
+    { id: "back", file: "jd_back", mx: "cari: Front Kick · Push Kick", wajib: false, group: "Pembuka arah", title: "Mundur · Tendangan dorong", input: ["S", "+", "LMB"], label: "Dorong",
+      text: "Langkah mundur, lalu telapak kaki kanan didorong lurus ke perut musuh (tendangan dorong). Untuk membuka jarak tanpa kehilangan serangan. Lanjut LMB = pukulan 2.",
+      hit: [0.36, 0.48], combo: [0.46, 0.74], move: [0, 0.22], limb: ["rf"],
+      keys: [K(0, {}), K(0.22, { root: [0, -150], ph: 82, lean: -4, lf: [-14, 0, 26], rf: [14, 0, -30] }),
+             K(0.30, { root: [0, -150], lean: -8, rf: [14, 50, 20], rkp: [0, 0.4, 1] }),
+             K(0.38, { root: [0, -150], lean: -14, rf: [14, 74, 62], rkp: [0, 0.4, 1] }),
+             K(0.48, { root: [0, -150], lean: -14, rf: [14, 74, 62], rkp: [0, 0.4, 1] }), K(0.75, { root: [0, -150] })] },
 
-    { id: "tutup", title: "Tutup Lawang", input: ["R", "saat titik lemah terbuka"], label: "Tutup Lawang", rec: true,
-      text: "Hanya bisa saat titik lemah boss terbuka (Ep 1: tengkorak Jerangkong di fase 2). Jayadwara melangkah maju dan merentangkan kedua tangan lebar ke samping. Dua belahan gerbang emas berbentuk candi bentar muncul di kiri dan kanan boss. Kedua tangan diayun ke depan sampai telapak berdampingan, dan gerbang ikut menutup menjepit boss. Sifat Kala tersegel, boss runtuh.",
-      stats: [["Damage", "habisi (boss di fase akhir)"], ["Syarat", "Boss.WeakPoint.Exposed"], ["i-frame", "selama jurus"], ["Biaya", "tanpa"]],
-      why: "<b>Dipakai untuk:</b> penutup setiap boss, mengganti pukulan berat ke tengkorak di Fase 1. Ini usulan jurus spesial #1 untuk vertical slice Ep 1 ([11] \"1 jurus spesial Jayadwara\"). Gerbangnya adalah tugas Dwarapala di lore: menyegel Kala.",
-      hit: [[1.00, 1.30, ["lh", "rh"]]], charge: [0.30, 0.90], move: [0, 0.28], cam: 620,
-      target: { z: 150, seal: [1.30, 1.75] }, gates: [0.35, 0.70, 1.05],
-      keys: [K(0, {}),
-             K(0.28, { root: [0, 30], ph: 80, lean: -6, twist: 0, lf: [-20, 0, 26], rf: [20, 0, -20], lh: [-50, 2, 4], rh: [50, 2, 4] }),
-             K(0.75, { root: [0, 30], ph: 80, lean: -6, twist: 0, lf: [-20, 0, 26], rf: [20, 0, -20], lh: [-52, 6, 2], rh: [52, 6, 2] }),
-             K(1.00, { root: [0, 30], ph: 76, lean: 10, twist: 0, lf: [-20, 0, 34], rf: [20, 0, -24], lh: [6, 10, 54], rh: [-6, 10, 54], lpole: [-1, -0.3, 0], rpole: [1, -0.3, 0] }),
-             K(1.30, { root: [0, 30], ph: 76, lean: 12, twist: 0, lf: [-20, 0, 34], rf: [20, 0, -24], lh: [6, 10, 58], rh: [-6, 10, 58], lpole: [-1, -0.3, 0], rpole: [1, -0.3, 0] }),
-             K(1.70, { root: [0, 30], ph: 80, lean: 0, twist: 0, lf: [-20, 0, 26], rf: [20, 0, -20], lh: [8, -20, 30], rh: [-8, -20, 30] }),
-             K(2.10, { root: [0, 30] })] }
+    { id: "heavy", file: "jd_heavy", mx: "cari: Double Fist Hammer · Overhead Smash", wajib: false, group: "Pukulan berat", title: "Pukulan berat · Palu dua tangan", input: ["E"], label: "Palu",
+      text: "Kedua tangan digenggam jadi satu di atas kepala, lalu dihantamkan ke bawah sambil melangkah maju. Gerak paling 'raksasa' di daftar ini: lambat diangkat, cepat turun, hit-stop panjang.",
+      hit: [0.43, 0.58], combo: null, move: [0.25, 0.45], limb: ["lh", "rh"],
+      keys: [K(0, {}), K(0.25, { ph: 88, lean: -12, lh: [16, 50, 4], rh: [-16, 50, 4], lpole: [-1, 0.2, -0.4], rpole: [1, 0.2, -0.4] }),
+             K(0.45, { root: [0, 40], ph: 72, lean: 28, lh: [14, -20, 42], rh: [-14, -20, 42], lf: [-14, 0, 46], rf: [14, 0, -28] }),
+             K(0.58, { root: [0, 40], ph: 72, lean: 28, lh: [14, -20, 42], rh: [-14, -20, 42], lf: [-14, 0, 46], rf: [14, 0, -28] }),
+             K(1.00, { root: [0, 40] })] },
+    { id: "fin1", file: "jd_finisher_01", mx: "cari: Uppercut · Jumping Uppercut", wajib: true, group: "Pukulan berat", title: "Finisher 1 · Uppercut lompat", input: ["LMB", "E"], label: "Uppercut",
+      text: "Setelah pukulan 1: jongkok sebentar, lalu tinju kanan dilontarkan ke atas sambil badan ikut melompat kecil. Musuh kecil terangkat ke udara, bisa dikejar dengan serangan udara.",
+      hit: [0.24, 0.38], combo: null, limb: ["rh"],
+      keys: [K(0, {}), K(0.12, { ph: 66, lean: 14, twist: 20, rh: [-6, -24, 18] }),
+             K(0.28, { ah: 30, ph: 90, lean: -12, twist: -30, rh: [-8, 62, 24], rpole: [1, -0.4, 0.2], lf: [-14, 20, 10], rf: [14, 10, -14] }),
+             K(0.38, { ah: 30, ph: 90, lean: -12, twist: -30, rh: [-8, 62, 24], rpole: [1, -0.4, 0.2], lf: [-14, 20, 10], rf: [14, 10, -14] }),
+             K(0.62, { ah: 0 }), K(0.85, {})] },
+    { id: "fin2", file: "jd_finisher_02", mx: "cari: Leg Sweep · Sweep Kick", wajib: true, group: "Pukulan berat", title: "Finisher 2 · Sapuan kaki", input: ["LMB", "LMB", "E"], label: "Sapuan",
+      text: "Setelah pukulan 2: badan turun rendah, tangan menapak tanah, lalu kaki kanan disapukan memutar satu putaran di atas tanah. Boss yang berdiri dengan dua kaki jatuh; di Ep 1 bisa merontokkan kaki Jerangkong.",
+      hit: [0.24, 0.48], combo: null, limb: ["rf"],
+      keys: [K(0, {}), K(0.12, { ph: 52, lean: 30, lf: [-20, 0, 20], rf: [30, 0, -10], lh: [0, -44, 30], rh: [0, -44, 30] }),
+             K(0.26, { yaw: -120, ph: 46, lean: 30, lf: [-18, 0, 10], rf: [86, 4, 10], rkp: [1, 0.8, 0], lh: [0, -50, 30], rh: [0, -50, 30] }),
+             K(0.40, { yaw: -250, ph: 46, lean: 30, lf: [-18, 0, 10], rf: [86, 4, 10], rkp: [1, 0.8, 0], lh: [0, -50, 30], rh: [0, -50, 30] }),
+             K(0.52, { yaw: -330, ph: 50, lean: 26, lf: [-18, 0, 10], rf: [40, 0, -10], lh: [0, -44, 30], rh: [0, -44, 30] }),
+             K(0.75, { yaw: -360, ph: 72 }), K(1.00, { yaw: -360 })] },
+    { id: "fin3", file: "jd_finisher_03", mx: "cari: Axe Kick", wajib: true, group: "Pukulan berat", title: "Finisher 3 · Tendangan kapak", input: ["LMB", "×3", "E"], label: "Kapak",
+      text: "Setelah pukulan 3: kaki kanan diayun lurus ke atas melewati kepala, lalu tumitnya dijatuhkan ke bahu atau kepala musuh (neryo chagi). Tumit menghantam tanah dengan guncangan kecil.",
+      hit: [0.30, 0.42], combo: null, limb: ["rf"],
+      keys: [K(0, {}), K(0.18, { lean: -16, rf: [16, 150, 40], rkp: [0, 0.2, 1], lh: [14, 6, 20], rh: [-20, -10, 0] }),
+             K(0.32, { lean: 16, ph: 76, rf: [16, 10, 56], rkp: [0, 0.4, 1], lh: [12, 0, 26], rh: [-14, -6, 6] }),
+             K(0.42, { lean: 16, ph: 76, rf: [16, 10, 56], rkp: [0, 0.4, 1], lh: [12, 0, 26], rh: [-14, -6, 6] }), K(0.72, {})] },
+
+    { id: "air", file: "jd_air", mx: "cari: Flying Side Kick", wajib: true, group: "Serangan udara", title: "Tendangan samping terbang", input: ["Space", "+", "LMB"], label: "Terbang",
+      text: "Di udara badan dimiringkan, lalu kaki kanan didorong lurus ke samping seperti tendangan pukulan 4. Lurus dan berat, tanpa putaran, supaya beda dengan tendangan putar Aksa. Maks. 2 kali per lompatan.",
+      hit: [0.46, 0.60], combo: [0.58, 0.85], limb: ["rf"],
+      keys: [K(0, {}), K(0.15, { ph: 70, lean: 10 }),
+             K(0.30, { ah: 90, yaw: -40, lf: [-14, 40, -5], rf: [14, 40, 5] }),
+             K(0.46, { ah: 110, yaw: -90, lean: -12, lf: [-10, 40, -4], rf: [94, 84, 0], rkp: [1, 0.3, 0] }),
+             K(0.60, { ah: 110, yaw: -90, lean: -12, lf: [-10, 40, -4], rf: [94, 84, 0], rkp: [1, 0.3, 0] }),
+             K(0.85, { ah: 40, yaw: -40, lf: [-14, 20, 5], rf: [14, 10, -5] }), K(1.00, { ph: 74 }), K(1.20, {})] },
+    { id: "slam", file: "jd_air_slam", mx: "cari: Ground Smash · Double Fist Slam", wajib: false, group: "Serangan udara", title: "Hantaman dua tinju", input: ["Space", "+", "E"], label: "Hantam",
+      text: "Di udara kedua tangan digenggam di atas kepala, lalu menukik dan menghantam tanah dengan dua tinju sekaligus (versi udara dari palu dua tangan). Gelombang kejut ±60 m merusak gedung di sekitar.",
+      hit: [0.60, 0.72], combo: null, move: [0.40, 0.60], limb: ["lh", "rh"], ring: 250,
+      keys: [K(0, {}), K(0.15, { ph: 70 }),
+             K(0.40, { ah: 130, lean: -12, lh: [16, 50, 4], rh: [-16, 50, 4], lpole: [-1, 0.2, -0.4], rpole: [1, 0.2, -0.4], lf: [-14, 30, -10], rf: [14, 30, -10] }),
+             K(0.55, { ah: 40, lean: 35, lh: [10, -50, 32], rh: [-10, -50, 32], lf: [-14, 25, 10], rf: [14, 15, -20] }),
+             K(0.62, { ah: 0, ph: 55, lean: 38, lh: [8, -66, 34], rh: [-8, -66, 34], lf: [-16, 0, 24], rf: [16, 0, -30] }),
+             K(0.90, { ah: 0, ph: 55, lean: 38, lh: [8, -66, 34], rh: [-8, -66, 34], lf: [-16, 0, 24], rf: [16, 0, -30] }), K(1.25, {})] }
   ];
-  MOVES.forEach(function (m) { m.length = m.keys[m.keys.length - 1].t; });
+
+  // Combo penuh = gabungan beberapa jurus berurutan.
+  MOVES.forEach(function (m) {
+    if (!m.combine) return;
+    var off = 0, keys = [], hits = [], combos = [];
+    m.combine.forEach(function (id, i) {
+      var src = MOVES.find(function (x) { return x.id === id; });
+      var end = i < m.combine.length - 1 && src.combo ? src.combo[0] + 0.06 : src.keys[src.keys.length - 1].t;
+      src.keys.forEach(function (k) { if (k.t <= end + 1e-6 && !(i > 0 && k.t === 0)) keys.push(K(k.t + off, k)); });
+      hits.push([src.hit[0] + off, src.hit[1] + off, src.limb]);
+      off += end;
+    });
+    keys.forEach(function (k, i) { k.t = keys[i].t; });
+    m.keys = keys.map(function (k) { var c = {}; for (var n in k) c[n] = k[n]; return c; });
+    // waktu yang benar (K() menimpa t dengan nilai sumber): hitung ulang
+    var o2 = 0, out = [];
+    m.combine.forEach(function (id, i) {
+      var src = MOVES.find(function (x) { return x.id === id; });
+      var end = i < m.combine.length - 1 && src.combo ? src.combo[0] + 0.06 : src.keys[src.keys.length - 1].t;
+      src.keys.forEach(function (k) {
+        if (k.t <= end + 1e-6 && !(i > 0 && k.t === 0)) { var c = {}; for (var n in k) c[n] = k[n]; c.t = k.t + o2; out.push(c); }
+      });
+      o2 += end;
+    });
+    m.keys = out; m.hits = hits; m.combo = null;
+  });
+  MOVES.forEach(function (m) { if (!m.hits) m.hits = [[m.hit[0], m.hit[1], m.limb]]; m.length = m.keys[m.keys.length - 1].t; });
 
   // ---------------------------------------------------------------- pose
   var FIELDS = ["ah", "ph", "yaw", "lean", "twist"], VEC = ["root", "lh", "rh", "lf", "rf", "lpole", "rpole", "lkp", "rkp"];
@@ -267,6 +278,7 @@ tr:last-child td { border-bottom: 0; }
     });
     return p;
   }
+
   var V = THREE.Vector3;
   function rotY(v, deg) { var a = deg * Math.PI / 180, c = Math.cos(a), s = Math.sin(a); return new V(v.x * c + v.z * s, v.y, -v.x * s + v.z * c); }
   function ik(root, target, a, b, pole) {
@@ -278,7 +290,8 @@ tr:last-child td { border-bottom: 0; }
   function solve(p) {
     var O = new V(p.root ? p.root[0] : 0, 0, p.root ? p.root[1] : 0);
     function body(x, y, z) { return O.clone().add(rotY(new V(x, y, z), p.yaw)); }
-    var pelvis = body(0, p.ph + p.ah, 0), l = p.lean * Math.PI / 180;
+    var pelvis = body(0, p.ph + p.ah, 0);
+    var l = p.lean * Math.PI / 180;
     var up = rotY(rotY(new V(0, Math.cos(l), Math.sin(l)), -p.twist), p.yaw);
     var fw = rotY(rotY(new V(0, -Math.sin(l), Math.cos(l)), -p.twist), p.yaw);
     var rt = rotY(rotY(new V(1, 0, 0), -p.twist), p.yaw);
@@ -306,62 +319,37 @@ tr:last-child td { border-bottom: 0; }
   var LINKS = [["pelvis", "chest"], ["chest", "neck"], ["lsh", "rsh"], ["lsh", "lel"], ["lel", "lha"], ["rsh", "rel"], ["rel", "rha"],
     ["lhip", "rhip"], ["lhip", "lkn"], ["lkn", "lan"], ["lan", "lto"], ["rhip", "rkn"], ["rkn", "ran"], ["ran", "rto"]];
   var LIMB = { lh: ["lsh", "lel", "lha"], rh: ["rsh", "rel", "rha"], lf: ["lhip", "lkn", "lan", "lto"], rf: ["rhip", "rkn", "ran", "rto"] };
-  function inWin(w, t) { return w && t >= w[0] && t <= w[1]; }
   function hotAt(m, t) {
-    var h = m.hit.find(function (w) { return inWin(w, t); }), hot = {};
+    var h = m.hits.find(function (w) { return t >= w[0] && t <= w[1]; }), hot = {};
     if (h) h[2].forEach(function (l) { LIMB[l].forEach(function (b) { hot[b] = true; }); });
-    return { hit: h, hot: hot };
+    return { hit: !!h, hot: hot };
   }
 
   // ---------------------------------------------------------------- 3D
   function css(n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim() || "#888"; }
   var C;
-  function colors() {
-    C = {}; ["bone", "hit", "line", "move", "gold", "dummy", "bldg"].forEach(function (n) { C[n] = new THREE.Color(css("--" + n)); });
-  }
+  function colors() { C = { bone: new THREE.Color(css("--bone")), hit: new THREE.Color(css("--hit")), line: new THREE.Color(css("--line")), move: new THREE.Color(css("--move")) }; }
   var stage = document.getElementById("stage"), canvas = document.getElementById("cv");
   var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-  var scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(38, 16 / 10, 1, 8000);
-  var joints = {}, segs = [], ring, bldgs = [], boss, gates = [], crawlers = [];
-  function mat(c, o) { var m = new THREE.MeshBasicMaterial({ color: c }); if (o !== undefined) { m.transparent = true; m.opacity = o; } return m; }
-  function gateShape(sign) {
-    // Belahan candi bentar: sisi dalam lurus, sisi luar bertingkat.
-    var s = new THREE.Shape(), w = 34, steps = [[0, 0], [w, 0], [w, 60], [w - 6, 60], [w - 6, 82], [w - 12, 82], [w - 12, 100], [w - 18, 100], [w - 18, 114], [w - 24, 114], [w - 24, 124], [0, 124]];
-    steps.forEach(function (p, i) { var x = sign * p[0]; if (i === 0) s.moveTo(x, p[1]); else s.lineTo(x, p[1]); });
-    return new THREE.ShapeGeometry(s);
-  }
+  var scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(38, 16 / 10, 1, 6000);
+  var joints = {}, segs = [], ring, groundGrid;
   function build() {
     colors();
     while (scene.children.length) scene.remove(scene.children[0]);
-    scene.add(new THREE.GridHelper(1000, 10, C.line, C.line));
-    joints = {}; segs = []; bldgs = []; gates = []; crawlers = [];
+    groundGrid = new THREE.GridHelper(1000, 20, C.line, C.line); scene.add(groundGrid);
+    joints = {}; segs = [];
     ["pelvis", "chest", "neck", "lsh", "rsh", "lel", "rel", "lha", "rha", "lhip", "rhip", "lkn", "rkn", "lan", "ran", "lto", "rto", "head"].forEach(function (b) {
       var g = b === "head" ? new THREE.SphereGeometry(11, 18, 12) : new THREE.SphereGeometry(b === "lha" || b === "rha" ? 5.5 : 4, 12, 8);
-      var mesh = new THREE.Mesh(g, mat(C.bone)); scene.add(mesh); joints[b] = mesh;
+      var mesh = new THREE.Mesh(g, new THREE.MeshBasicMaterial({ color: C.bone })); scene.add(mesh); joints[b] = mesh;
     });
     LINKS.forEach(function (l) {
       var g = new THREE.CylinderGeometry(2.8, 2.8, 1, 8); g.translate(0, 0.5, 0); g.rotateX(Math.PI / 2);
-      var mesh = new THREE.Mesh(g, mat(C.bone)); scene.add(mesh); segs.push({ a: l[0], b: l[1], m: mesh });
+      var mesh = new THREE.Mesh(g, new THREE.MeshBasicMaterial({ color: C.bone })); scene.add(mesh); segs.push({ a: l[0], b: l[1], m: mesh });
     });
-    BLDG.forEach(function (b) {
-      var mesh = new THREE.Mesh(new THREE.BoxGeometry(b[2], b[4], b[3]), mat(C.bldg));
-      mesh.position.set(b[0], b[4] / 2, b[1]); scene.add(mesh);
-      var edge = new THREE.LineSegments(new THREE.EdgesGeometry(mesh.geometry), new THREE.LineBasicMaterial({ color: C.dummy }));
-      mesh.add(edge); bldgs.push({ m: mesh, d: Math.hypot(b[0], b[1]) });
-    });
-    // Boss proxy (Jerangkong ±30 m) = kotak tinggi 120.
-    boss = new THREE.Mesh(new THREE.BoxGeometry(46, 120, 30), mat(C.dummy, 0.9)); boss.geometry.translate(0, 60, 0); scene.add(boss);
-    [-1, 1].forEach(function (sign) {
-      var g = new THREE.Mesh(gateShape(sign), new THREE.MeshBasicMaterial({ color: C.gold, transparent: true, opacity: 0.85, side: THREE.DoubleSide }));
-      scene.add(g); gates.push({ m: g, sign: sign });
-    });
-    for (var i = 0; i < 3; i++) { var c = new THREE.Mesh(new THREE.BoxGeometry(26, 6, 8), mat(C.dummy)); scene.add(c); crawlers.push(c); }
-    ring = new THREE.Mesh(new THREE.RingGeometry(0.92, 1, 72), new THREE.MeshBasicMaterial({ color: C.hit, transparent: true, side: THREE.DoubleSide }));
+    ring = new THREE.Mesh(new THREE.RingGeometry(0.92, 1, 64), new THREE.MeshBasicMaterial({ color: C.hit, transparent: true, side: THREE.DoubleSide }));
     ring.rotation.x = -Math.PI / 2; ring.visible = false; scene.add(ring);
   }
-  function lerp(a, b, u) { return a + (b - a) * u; }
-  function prog(w, t) { return Math.max(0, Math.min(1, (t - w[0]) / (w[1] - w[0]))); }
   function draw3d(m, t) {
     var J = solve(sample(m, t)), h = hotAt(m, t);
     Object.keys(joints).forEach(function (b) { joints[b].position.copy(J[b]); joints[b].material.color = h.hot[b] ? C.hit : C.bone; });
@@ -369,42 +357,14 @@ tr:last-child td { border-bottom: 0; }
       var a = J[s.a], b = J[s.b]; s.m.position.copy(a); s.m.lookAt(b); s.m.scale.set(1, 1, Math.max(0.01, a.distanceTo(b)));
       s.m.material.color = h.hot[s.b] && h.hot[s.a] ? C.hit : C.bone;
     });
-    // boss
-    boss.visible = !!m.target;
-    if (m.target) {
-      var z = m.target.z, sy = 1;
-      if (m.target.push) z += ease(prog(m.target.push, t)) * m.target.push[2];
-      if (m.target.seal) sy = 1 - ease(prog(m.target.seal, t)) * 0.97;
-      boss.position.set(0, 0, z); boss.scale.set(1, sy, 1);
-      boss.material.color = (h.hit && !m.target.seal) || (m.target.push && t > m.target.push[0] && t < m.target.push[0] + 0.12) ? C.hit : C.dummy;
-    }
-    // gerbang segel
-    gates.forEach(function (g) {
-      if (!m.gates) { g.m.visible = false; return; }
-      var gr = m.gates, rise = ease(prog([gr[0], gr[1]], t)), close = ease(prog([gr[1], gr[2]], t));
-      var fade = m.target.seal ? 1 - prog([m.target.seal[1] - 0.15, m.target.seal[1] + 0.25], t) : 1;
-      g.m.visible = rise > 0 && fade > 0;
-      g.m.scale.set(1, Math.max(0.01, rise), 1);
-      g.m.position.set(g.sign * lerp(110, 0, close), 0, m.target.z - 22);
-      g.m.material.opacity = 0.85 * fade;
-    });
-    // gelombang + gedung kena
-    var r = 0;
     if (m.ring && h.hit) {
-      var u = prog(h.hit, t); r = 30 + u * m.ring;
-      ring.visible = true; ring.scale.set(r, r, r); ring.position.set(J.pelvis.x, 1, J.pelvis.z); ring.material.opacity = 1 - u * 0.6;
+      var w = m.hits[0], u = (t - w[0]) / (w[1] - w[0]), r = 30 + u * m.ring;
+      ring.visible = true; ring.scale.set(r, r, r); ring.position.set(J.pelvis.x, 1, J.pelvis.z); ring.material.opacity = 1 - u * 0.7;
     } else ring.visible = false;
-    var after = m.ring && t > m.hit[0][1];
-    bldgs.forEach(function (b) { b.m.material.color = m.ring && ((h.hit && b.d < r) || (after && b.d < m.ring + 30)) ? C.hit : C.bldg; });
-    crawlers.forEach(function (c, i) {
-      if (!m.crawl) { c.visible = false; return; }
-      var p = m.crawl[i], d = Math.hypot(p[0], p[1]), hitNow = (h.hit && d < r) || (after && d < m.ring);
-      c.visible = true; c.position.set(p[0], hitNow ? 1 : 3, p[1]); c.scale.set(1, hitNow ? 0.3 : 1, 1);
-      c.material.color = hitNow ? C.hit : C.dummy;
-    });
-    var inCharge = inWin(m.charge, t), st = document.getElementById("hud-state");
-    st.className = "state" + (h.hit ? " hit" : inCharge ? " charge" : "");
-    st.textContent = h.hit ? "KENA" : inCharge ? (m.id === "injak" ? "tahan" : "ancang") : "—";
+    var inCombo = m.combo && t >= m.combo[0] && t <= m.combo[1];
+    var st = document.getElementById("hud-state");
+    st.className = "state" + (h.hit ? " hit" : inCombo ? " combo" : "");
+    st.textContent = h.hit ? "KENA" : inCombo ? "bisa disambung" : "—";
     return J;
   }
 
@@ -414,8 +374,8 @@ tr:last-child td { border-bottom: 0; }
     var dpr = Math.min(window.devicePixelRatio || 1, 2), w = cv.clientWidth || 110;
     cv.width = w * dpr; cv.height = w * dpr;
     var g = cv.getContext("2d"); g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, w, w);
-    var p = sample(m, t), J = solve(p), h = hotAt(m, t), O = p.root || [0, 0];
-    var s = w / 260, cx = w / 2 - (O[0] * Math.cos(0.6) + O[1] * Math.sin(0.6)) * s, cy = w * 0.9;
+    var J = solve(sample(m, t)), h = hotAt(m, t), O = sample(m, t).root || [0, 0];
+    var cx = w / 2 - (O[0] * Math.cos(0.6) + O[1] * Math.sin(0.6)) * (w / 260), cy = w * 0.9, s = w / 260;
     g.strokeStyle = css("--line"); g.lineWidth = 1; g.beginPath(); g.moveTo(4, cy); g.lineTo(w - 4, cy); g.stroke();
     g.lineCap = "round";
     LINKS.forEach(function (l) {
@@ -423,47 +383,47 @@ tr:last-child td { border-bottom: 0; }
       g.strokeStyle = h.hot[l[0]] && h.hot[l[1]] ? css("--hit") : css("--bone"); g.lineWidth = 3.2;
       g.beginPath(); g.moveTo(a[0], a[1]); g.lineTo(b[0], b[1]); g.stroke();
     });
-    var hd = proj(J.head, cx, cy, s); g.fillStyle = css("--bone"); g.beginPath(); g.arc(hd[0], hd[1], 12 * s, 0, Math.PI * 2); g.fill();
+    var hd = proj(J.head, cx, cy, s); g.fillStyle = css("--bone"); g.beginPath(); g.arc(hd[0], hd[1], 11 * s * 1.1, 0, Math.PI * 2); g.fill();
   }
   function keyLabel(m, i) {
-    var t = m.keys[i].t;
+    var t = m.keys[i].t, h = m.hits.some(function (w) { return t >= w[0] && t <= w[1]; });
     if (i === 0) return ["jaga", false];
     if (i === m.keys.length - 1) return ["kembali", false];
-    if (m.hit.some(function (w) { return inWin(w, t); })) return ["kena", true];
-    if (inWin(m.charge, t)) return [m.id === "injak" ? "tahan" : m.id === "tutup" ? "buka" : "ancang", false];
-    return ["lanjut", false];
+    if (h) return ["kena", true];
+    var nextHit = m.hits.some(function (w) { return w[0] > t; });
+    return [nextHit ? "ancang" : "lanjut", false];
   }
 
   // ---------------------------------------------------------------- UI
   var cur = MOVES[0], t = 0, speed = 0.5, playing = true;
-  var yaw = 0.75, pitch = 0.22, dist = 560, target = new V(0, 95, 0);
+  var yaw = 0.75, pitch = 0.16, dist = 520, target = new V(0, 95, 0);
   function fmt(x) { return x.toFixed(2).replace(".", ","); }
-  var list = document.getElementById("list");
+  var list = document.getElementById("list"), lastGroup = "";
   MOVES.forEach(function (m) {
+    if (m.group !== lastGroup) { var gh = document.createElement("div"); gh.className = "group"; gh.textContent = m.group; list.appendChild(gh); lastGroup = m.group; }
     var b = document.createElement("button"); b.type = "button"; b.dataset.id = m.id;
-    b.innerHTML = "<span>" + m.title + (m.rec ? ' <span class="tag">Ep 1</span>' : "") + "</span><small>" + fmt(m.length) + " s</small>" +
-      '<span class="sub">' + m.input.join(" ") + "</span>";
+    b.innerHTML = "<span>" + m.title + "</span><small>" + fmt(m.length) + " s</small>" +
+      (m.file ? '<span class="mx"><span>' + m.mx + '</span><code>' + m.file + ".fbx</code></span>" : "");
     b.addEventListener("click", function () { select(m.id); });
     list.appendChild(b);
   });
   function select(id) {
-    cur = MOVES.find(function (m) { return m.id === id; }); t = 0; dist = cur.cam;
+    cur = MOVES.find(function (m) { return m.id === id; }); t = 0;
     list.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.id === id); });
-    document.getElementById("hud-title").textContent = cur.title;
+    document.getElementById("hud-title").textContent = cur.title.split(" · ").pop();
     document.getElementById("d-title").textContent = cur.title;
     document.getElementById("d-text").textContent = cur.text;
-    document.getElementById("d-why").innerHTML = cur.why;
-    document.getElementById("d-meta").innerHTML = "<span>" + cur.input.map(function (k) { return k === "R" ? '<span class="kbd">R</span> / <span class="kbd">L2</span>' : k; }).join(" ") + "</span>" +
-      "<span>" + fmt(cur.length) + " s</span>" + (cur.rec ? '<span class="tag">usulan jurus spesial Ep 1</span>' : "");
-    document.getElementById("d-stats").innerHTML = cur.stats.map(function (s) { return '<div class="stat"><small>' + s[0] + "</small><span>" + s[1] + "</span></div>"; }).join("");
+    document.getElementById("d-meta").innerHTML = "<span>" + cur.input.map(function (k) { return /^[+×]/.test(k) ? k : '<span class="kbd">' + k + "</span>"; }).join(" ") + "</span>" +
+      "<span>" + fmt(cur.length) + " s</span>" + (cur.ring ? "<span>radius ±2,5 m</span>" : "") +
+      (cur.file ? "<span>Mixamo: <b>" + cur.mx + "</b></span><span>File: <b>" + cur.file + ".fbx</b></span>" + (cur.wajib ? '<span class="tag">wajib</span>' : "") : "");
     var tl = document.getElementById("tl"), L = cur.length, html = "";
-    function bar(cls, w) { return '<i class="' + cls + '" style="left:' + (w[0] / L * 100) + "%;width:" + ((Math.min(w[1], L) - w[0]) / L * 100) + '%"></i>'; }
-    cur.hit.forEach(function (w) { html += bar("hit", w); });
-    if (cur.charge) html += bar("charge", cur.charge);
-    if (cur.move) html += bar("move", cur.move);
+    cur.hits.forEach(function (w) { html += '<i class="hit" style="left:' + (w[0] / L * 100) + '%;width:' + ((w[1] - w[0]) / L * 100) + '%"></i>'; });
+    if (cur.combo) html += '<i class="combo" style="left:' + (cur.combo[0] / L * 100) + '%;width:' + ((Math.min(cur.combo[1], L) - cur.combo[0]) / L * 100) + '%"></i>';
+    if (cur.move) html += '<i class="move" style="left:' + (cur.move[0] / L * 100) + '%;width:' + ((cur.move[1] - cur.move[0]) / L * 100) + '%"></i>';
     tl.innerHTML = html + '<span class="head" id="tl-head"></span>';
     var strip = document.getElementById("strip"); strip.innerHTML = "";
     cur.keys.forEach(function (k, i) {
+      if (cur.combine && i > 0 && i < cur.keys.length - 1 && !cur.hits.some(function (w) { return k.t >= w[0] && k.t <= w[1]; })) return;
       var lab = keyLabel(cur, i), fig = document.createElement("figure"), cv = document.createElement("canvas"), cap = document.createElement("figcaption");
       fig.className = lab[1] ? "hit" : ""; cap.textContent = lab[0] + " · " + fmt(k.t) + " s";
       fig.appendChild(cv); fig.appendChild(cap); fig.dataset.t = k.t;
@@ -471,7 +431,6 @@ tr:last-child td { border-bottom: 0; }
       strip.appendChild(fig);
     });
     requestAnimationFrame(function () { strip.querySelectorAll("figure").forEach(function (f) { drawThumb(f.querySelector("canvas"), cur, parseFloat(f.dataset.t)); }); });
-    try { localStorage.setItem("jurus-jd", id); } catch (e) {}
   }
   function setPlaying(v) { playing = v; var b = document.getElementById("play"); b.textContent = v ? "Jeda" : "Putar"; b.setAttribute("aria-pressed", v); }
   document.getElementById("play").addEventListener("click", function () { setPlaying(!playing); });
@@ -482,9 +441,9 @@ tr:last-child td { border-bottom: 0; }
   scrub.addEventListener("input", function () { t = scrub.value / 1000 * cur.length; setPlaying(false); });
   var drag = null;
   canvas.addEventListener("pointerdown", function (e) { drag = { x: e.clientX, y: e.clientY }; canvas.setPointerCapture(e.pointerId); });
-  canvas.addEventListener("pointermove", function (e) { if (!drag) return; yaw -= (e.clientX - drag.x) * 0.008; pitch = Math.max(-0.05, Math.min(1.3, pitch + (e.clientY - drag.y) * 0.006)); drag = { x: e.clientX, y: e.clientY }; });
+  canvas.addEventListener("pointermove", function (e) { if (!drag) return; yaw -= (e.clientX - drag.x) * 0.008; pitch = Math.max(-0.05, Math.min(1.2, pitch + (e.clientY - drag.y) * 0.006)); drag = { x: e.clientX, y: e.clientY }; });
   canvas.addEventListener("pointerup", function () { drag = null; });
-  canvas.addEventListener("wheel", function (e) { e.preventDefault(); dist = Math.max(250, Math.min(1500, dist + e.deltaY * 0.6)); }, { passive: false });
+  canvas.addEventListener("wheel", function (e) { e.preventDefault(); dist = Math.max(250, Math.min(1100, dist + e.deltaY * 0.5)); }, { passive: false });
   function resize() { var w = stage.clientWidth, h = stage.clientHeight; renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); }
   window.addEventListener("resize", function () { resize(); select(cur.id); });
   if (window.matchMedia) window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function () { build(); select(cur.id); });
@@ -493,10 +452,9 @@ tr:last-child td { border-bottom: 0; }
   var last = performance.now();
   function tick(now) {
     var dt = Math.min(0.05, (now - last) / 1000); last = now;
-    if (playing) { t += dt * speed; if (t > cur.length + 0.6) t = 0; }
+    if (playing) { t += dt * speed; if (t > cur.length + 0.5) t = 0; }
     var tt = Math.min(t, cur.length), J = draw3d(cur, tt);
-    var focusZ = cur.target ? (J.pelvis.z + cur.target.z) / 2 : J.pelvis.z;
-    target.lerp(new V(J.pelvis.x, 90, focusZ), 0.12);
+    target.lerp(new V(J.pelvis.x, 95 + Math.min(J.pelvis.y - 86, 60) * 0.5, J.pelvis.z), 0.12);
     scrub.value = Math.round(tt / cur.length * 1000);
     var head = document.getElementById("tl-head"); if (head) head.style.left = (tt / cur.length * 100) + "%";
     document.getElementById("time").textContent = fmt(tt) + " / " + fmt(cur.length) + " s";
@@ -506,9 +464,6 @@ tr:last-child td { border-bottom: 0; }
     renderer.render(scene, camera);
     requestAnimationFrame(tick);
   }
-  var start = "tutup";
-  try { start = localStorage.getItem("jurus-jd") || "tutup"; } catch (e) {}
-  if (!MOVES.some(function (m) { return m.id === start; })) start = "tutup";
-  build(); resize(); select(start); requestAnimationFrame(tick);
+  build(); resize(); select("combo"); requestAnimationFrame(tick);
 })();
 </script>
