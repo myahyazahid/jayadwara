@@ -13,6 +13,12 @@ DerivedDataCache/
 *.blend2
 *.blend@
 
+# Tuyul: perantara pipeline tekstur (Art/Scripts/tuyul_paths.py). Tidak semuanya bisa dibangun ulang dari skrip
+# (atlas _src, _k2, uv_pos.npy dibuat Hermes; ada di branch hermes/tuyul). Yang di-commit hanya tekstur FINAL.
+Art/Export/Textures_Tuyul/_work/
+Art/Export/Textures_Tuyul/*_src.png
+Art/Export/Textures_Tuyul/*_k4brown.png
+
 # Python (script di Art/Scripts, Tools)
 __pycache__/
 *.pyc

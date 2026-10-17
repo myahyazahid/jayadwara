@@ -201,7 +201,7 @@ Batas scope ada di [11-vertical-slice-spec.md](11-vertical-slice-spec.md); skena
   - Fase 1: lari dan mencuri properti warga (mobil, gerobak). Kejar dan pukul untuk menjatuhkan.
   - Fase 2: tubuhnya pecah lagi jadi 3 tuyul besar, hanya satu yang asli. **Kelemahan:** pola rute dari CCTV menandai yang asli.
 - **Meter:** gang sempit = mudah merusak rumah. Mengajarkan pemain bahwa mengejar membabi buta itu mahal.
-- **Catatan:** tuyul boleh lucu dan jahil, cocok untuk episode kedua yang ringan.
+- **Catatan (diperbarui 16 Okt 2026, keputusan developer):** tuyul **seram dan body-horror**, bukan lucu. Model ([27](27-rencana-model-tuyul.md)) sengaja memuat sosok kecil menyerupai bayi/tengkorak dan tangan kecil yang menempel di perut, bahu, dan punggung. Ini **pengecualian** atas "seram boleh, gore tidak" di tabel Tema: tidak ada darah atau luka basah, merah hanya emissive (energi Kala). Nada jahil-kejam diatur lewat animasi dan SFX, bukan model. Catat untuk rating (target remaja) dan formulir Steam. Kemiripan visual dengan Wewe Gombel ([Ep 8](#ep-8--kentongan-tengah-malam--wewe-gombel), anak-anak di tubuh boss) **dibiarkan**; kalau terbaca membingungkan di game, pembeda visual jadi tugas polish.
 
 ### Ep 3 — Lapar Listrik · Jenglot
 - **Pembuka wayang:** jenglot sebagai sosok kecil yang "haus" dan disimpan sebagai jimat.

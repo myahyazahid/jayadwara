@@ -46,6 +46,9 @@ Desain map (denah, alur, zona, konsep) dan **greybox UE** dikerjakan terpisah da
 ### Jalur art paralel — Model Aksa *(Iterasi 0 berjalan sejak 12 Okt 2026; jadwal menunggu konfirmasi developer)*
 Model Aksa dibuat sendiri di Blender; rencana & iterasi di [19-rencana-model-aksa.md](19-rencana-model-aksa.md) (±90–115 jam), model sheet di [21-model-sheet-aksa.md](21-model-sheet-aksa.md). Sementara, MetaHuman dipakai sebagai placeholder visual. Persiapan (reference plane, model sheet, scene Blender) sudah jadi; spike skeleton menunggu editor UE. Mulai penuh sekarang (menggeser Fase 0–1) atau di pengadaan aset Fase 2 (Apr–Mei 2027) tetap keputusan developer (A9).
 
+### Jalur art paralel — Model Tuyul *(persiapan Ep 2; selesai 16 Okt 2026)*
+Model boss + kawanan Ep 2 dikerjakan Hermes di sandbox dari GLB Tripo developer (K0–K7 lulus) dan aset art-nya sudah dimigrasi ke `Art/` dan `Tools/`; rencana dan hasil di [27-rencana-model-tuyul.md](27-rencana-model-tuyul.md). **Tetap di luar scope fase aktif:** `BP_Tuyul`, `ABP_Tuyul`, AI kawanan dan boss, serta level Ep 2 masuk Fase 4 (tabel Ep 2 di bawah). Aset hanya diimpor ke UE untuk uji visual.
+
 ## Fase 1 — Prototype Greybox (Des 2026 – Mar 2027)
 
 Tujuan: membuktikan **inti gameplay seru** sebelum membuat aset mahal. Semua visual masih kotak, mannequin, dan Mixamo.
