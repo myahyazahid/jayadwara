@@ -72,7 +72,7 @@ HUMAN_HIT_RADIUS = 30.0     # x skala raksasa
 BLEND_IN_S, BLEND_OUT_S = 0.12, 0.3   # detik nyata; blend montage ikut diperlambat GlobalAnimRateScale
 HIT_STOP = 0.15            # rasa berat dari momen kena, bukan dari kelambatan (docs/07)
 SHAKE_SCALE = 2.5
-GIANT_ATTRIBUTES = {"max_health": 100.0, "max_stamina": 100.0, "max_poise": 100.0, "max_sync": 100.0,
+GIANT_ATTRIBUTES = {"max_health": 100.0, "max_stamina": 100.0, "max_poise": 50.0, "max_sync": 100.0,
                     "max_transform_energy": 0.0, "stamina_regen_per_second": 25.0, "stamina_regen_delay": 0.8}
 INPUT_BUFFER = 0.3
 DUMMY_SCALE = 20.0          # Manny 1,8 m -> ±36 m (Jayadwara 45 m)
@@ -327,6 +327,7 @@ def setup_profile(montages, giant_scale, mesh_rate):
         st.set_editor_property("stamina_cost", HEAVY["stamina"])
         st.set_editor_property("play_rate", fin["rate"])
         st.set_editor_property("hit_cue", tag("GameplayCue.Hit.Heavy"))
+        st.set_editor_property("knockdown", True)          # Jatuh (docs/07 "Reaksi kena pukul", Iterasi 4)
         finishers.append(st)
     prof.set_editor_property("heavy_finishers", finishers)
 
@@ -342,6 +343,7 @@ def setup_profile(montages, giant_scale, mesh_rate):
     slam.set_editor_property("poise_damage", HEAVY["poise"])
     slam.set_editor_property("stamina_cost", HEAVY["stamina"])
     slam.set_editor_property("hit_cue", tag("GameplayCue.Hit.Heavy"))
+    slam.set_editor_property("knockdown", True)
     prof.set_editor_property("air_slam", slam)
     for k, v in AIR_VALUES.items():
         prof.set_editor_property(k, v)

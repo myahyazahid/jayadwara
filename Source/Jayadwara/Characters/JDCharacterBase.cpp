@@ -6,6 +6,8 @@
 #include "Abilities/JDGameplayTags.h"
 #include "Abilities/JDInputConfig.h"
 #include "Combat/JDCombatComponent.h"
+#include "Combat/JDGA_HitReact.h"
+#include "Combat/JDTargetingComponent.h"
 #include "EnhancedInputComponent.h"
 #include "GameFramework/Controller.h"
 #include "InputActionValue.h"
@@ -20,6 +22,7 @@ AJDCharacterBase::AJDCharacterBase()
 	// Subobject AttributeSet milik actor pemilik ASC otomatis terdaftar di ASC saat InitializeComponent.
 	AttributeSet = CreateDefaultSubobject<UJDAttributeSet>(TEXT("AttributeSet"));
 	CombatComponent = CreateDefaultSubobject<UJDCombatComponent>(TEXT("Combat"));
+	TargetingComponent = CreateDefaultSubobject<UJDTargetingComponent>(TEXT("Targeting"));
 }
 
 UAbilitySystemComponent* AJDCharacterBase::GetAbilitySystemComponent() const
@@ -47,6 +50,24 @@ void AJDCharacterBase::BeginPlay()
 	{
 		UE_LOG(LogJayadwara, Warning, TEXT("%s: Ability Set kosong; atribut tetap 0 (Class Defaults > Abilities)."), *GetName());
 	}
+
+	// Reaksi kena dipakai semua karakter, jadi tidak perlu ada di tiap DA_AbilitySet_* (Iterasi 4).
+	if (!AbilitySystemComponent->FindAbilitySpecFromClass(UJDGA_HitReact::StaticClass()))
+	{
+		AbilitySystemComponent->GiveAbility(FGameplayAbilitySpec(UJDGA_HitReact::StaticClass(), 1, INDEX_NONE, this));
+	}
+}
+
+bool AJDCharacterBase::IsActionLocked() const
+{
+	return AbilitySystemComponent && (AbilitySystemComponent->HasMatchingGameplayTag(JDGameplayTags::State_Stagger)
+		|| AbilitySystemComponent->HasMatchingGameplayTag(JDGameplayTags::State_Knockdown)
+		|| AbilitySystemComponent->HasMatchingGameplayTag(JDGameplayTags::State_Dead));
+}
+
+bool AJDCharacterBase::CanJumpInternal_Implementation() const
+{
+	return !IsActionLocked() && Super::CanJumpInternal_Implementation();
 }
 
 void AJDCharacterBase::PossessedBy(AController* NewController)
@@ -148,9 +169,8 @@ void AJDCharacterBase::Move(const FInputActionValue& Value)
 	{
 		return;
 	}
-	// Stagger (guard break, di-parry) dan mati menahan gerak.
-	if (AbilitySystemComponent && (AbilitySystemComponent->HasMatchingGameplayTag(JDGameplayTags::State_Stagger)
-		|| AbilitySystemComponent->HasMatchingGameplayTag(JDGameplayTags::State_Dead)))
+	// Stagger, knockdown, dan mati menahan gerak.
+	if (IsActionLocked())
 	{
 		return;
 	}

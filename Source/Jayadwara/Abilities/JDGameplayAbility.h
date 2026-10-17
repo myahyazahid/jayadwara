@@ -62,6 +62,12 @@ protected:
 	/** Arah input gerak di bidang datar (ternormalisasi), nol kalau tidak ada input. */
 	FVector GetInputDirection2D() const;
 
+	/**
+	 * Putar & tarik avatar ke soft target searah input sebelum pukulan (UJDTargetingComponent, Iterasi 4). Hanya pemain;
+	 * tanpa target = tetap menghadap input. Return target (boleh null).
+	 */
+	AActor* WarpToSoftTarget() const;
+
 	/** Gagal aktif kalau Stamina < Cost (docs/23 Iterasi 3: tidak bisa spam dodge/tangkis/berat). */
 	static bool HasStamina(const FGameplayAbilityActorInfo* ActorInfo, float Cost);
 	void SpendStamina(float Cost) const;

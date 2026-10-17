@@ -39,6 +39,18 @@ public:
 	static constexpr float TickPeriod = 0.1f;
 };
 
+/** Regen poise (Infinite, periodik), pola sama dengan UJDGE_StaminaRegen; besar per tick = SetByCaller Data.PoiseRegen. */
+UCLASS()
+class JAYADWARA_API UJDGE_PoiseRegen : public UGameplayEffect
+{
+	GENERATED_BODY()
+
+public:
+	UJDGE_PoiseRegen();
+
+	static constexpr float TickPeriod = 0.1f;
+};
+
 /**
  * Damage (Instant) ke meta-attribute IncomingDamage & IncomingPoiseDamage; UJDAttributeSet memindahkannya ke Health
  * dan Poise. Pakai MakeSpec supaya kedua SetByCaller selalu terisi.

@@ -89,6 +89,22 @@ Keputusan developer 16 Okt 2026. Sama untuk Aksa dan Jayadwara.
 
 Bentuknya tendangan terbang memutar dan hantaman tinju ke bawah (lihat daftar jurus di atas), bukan pose tendangan terbang khas Ultraman.
 
+### Reaksi kena pukul
+
+Keputusan 17 Okt 2026 (Fase 1 Iterasi 4). Sama untuk Aksa, Jayadwara, dummy, dan musuh; angka di [23](23-rencana-fase-1.md) bagian 5.
+
+| Reaksi | Kapan | Hasil |
+|---|---|---|
+| Ringan | Kena pukul, poise belum pecah | Tersentak ±0,3 s, serangan musuh terpotong. Pemain yang sedang menyerang tidak tersentak (combo tidak putus), damage tetap masuk |
+| Stagger | Poise pecah (0) | Terhuyung 1,2 s, terdorong ±3 m menjauhi penyerang, semua aksi terkunci. Poise kembali penuh setelahnya |
+| Jatuh | Poise pecah oleh serangan bertanda **Jatuh** (finisher berat, hantaman ke bawah), atau serangan Jatuh mengenai yang sedang stagger | Terlempar ±6 m, rebah, lalu bangun dengan i-frame (tidak bisa dipukuli terus di tanah) |
+
+Poise beregenerasi setelah jeda tanpa kena pukul. Raksasa memakai aturan yang sama; beratnya dari hit-stop, shake, debu, dan gedung, bukan dari reaksi yang lebih lambat (ala Mebius).
+
+### Soft target
+
+Pukulan "menempel" ke musuh searah input (Q3, gaya Arkham): musuh dalam kerucut ±30° dari arah stik/WASD (tanpa input: arah hadap) dan dalam radius cari target, dipilih yang paling dekat dan paling lurus. Saat pukulan dimulai badan berputar ke target, dan kalau celahnya dekat (≤ 2,2 m) badan meluncur sampai jarak pukul (maks. 2 m, 0,1 s). Lebih jauh dari itu tidak disedot: pakai terjang (Combo & arah). Penanda kecil di atas kepala target di HUD. Lock-on kamera hanya untuk boss raksasa ([23](23-rencana-fase-1.md) Iterasi 6). Raksasa: jarak × skala.
+
 ## Mode Raksasa (Jayadwara)
 
 | Sistem | Deskripsi |

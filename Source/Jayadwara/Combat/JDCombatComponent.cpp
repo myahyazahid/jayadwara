@@ -6,6 +6,7 @@
 #include "Abilities/JDAttributeSet.h"
 #include "Abilities/JDGameplayEffects.h"
 #include "Abilities/JDGameplayTags.h"
+#include "Combat/JDGA_HitReact.h"
 #include "Animation/AnimInstance.h"
 #include "Camera/CameraShakeBase.h"
 #include "CoreGlobals.h"
@@ -123,10 +124,6 @@ void UJDCombatComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
 	EndHitStop();
 	EndParrySlowMo();
-	if (UWorld* World = GetWorld())
-	{
-		World->GetTimerManager().ClearTimer(StaggerTimer);
-	}
 	Super::EndPlay(EndPlayReason);
 }
 
@@ -172,14 +169,7 @@ AActor* UJDCombatComponent::FindNearestTarget(float Radius) const
 	for (TActorIterator<APawn> It(World); It; ++It)
 	{
 		APawn* Other = *It;
-		// Pihak lawan = beda status dikendalikan pemain; Aksa yang disembunyikan saat transformasi dilewati.
-		if (Other == Owner || Other->IsHidden() || Other->IsPlayerControlled() == Owner->IsPlayerControlled()
-			|| !Other->FindComponentByClass<UJDCombatComponent>())
-		{
-			continue;
-		}
-		const UAbilitySystemComponent* ASC = UAbilitySystemGlobals::GetAbilitySystemComponentFromActor(Other);
-		if (!ASC || ASC->HasMatchingGameplayTag(JDGameplayTags::State_Dead))
+		if (!IsValidTarget(Owner, Other))
 		{
 			continue;
 		}
@@ -191,6 +181,18 @@ AActor* UJDCombatComponent::FindNearestTarget(float Radius) const
 		}
 	}
 	return Best;
+}
+
+bool UJDCombatComponent::IsValidTarget(const APawn* Owner, const APawn* Other)
+{
+	// Pihak lawan = beda status dikendalikan pemain; Aksa yang disembunyikan saat transformasi dilewati.
+	if (!Owner || !Other || Other == Owner || Other->IsHidden() || Other->IsPlayerControlled() == Owner->IsPlayerControlled()
+		|| !Other->FindComponentByClass<UJDCombatComponent>())
+	{
+		return false;
+	}
+	const UAbilitySystemComponent* ASC = UAbilitySystemGlobals::GetAbilitySystemComponentFromActor(Other);
+	return ASC && !ASC->HasMatchingGameplayTag(JDGameplayTags::State_Dead);
 }
 
 void UJDCombatComponent::SetLightComboStep(int32 Step, bool bWasCancelled)
@@ -354,9 +356,10 @@ void UJDCombatComponent::ProcessHit(const FHitResult& Hit)
 		}
 		// Stagger penyerang di frame berikutnya: membatalkan ability & montage di tengah tick notify tidak aman.
 		const float StaggerTime = VictimProfile ? VictimProfile->ParryStaggerDuration : 1.0f;
-		GetWorld()->GetTimerManager().SetTimerForNextTick(FTimerDelegate::CreateWeakLambda(this, [this, StaggerTime]()
+		GetWorld()->GetTimerManager().SetTimerForNextTick(FTimerDelegate::CreateWeakLambda(this,
+			[this, StaggerTime, WeakVictim = TWeakObjectPtr<AActor>(Victim)]()
 		{
-			ApplyStagger(StaggerTime);
+			ApplyStagger(StaggerTime, WeakVictim.Get());
 		}));
 		if (bPlayerInvolved)
 		{
@@ -375,6 +378,7 @@ void UJDCombatComponent::ProcessHit(const FHitResult& Hit)
 	}
 
 	// Damage lewat GE (jalur yang sama untuk semua sumber), dengan hit result di context untuk cue & reaksi.
+	const float PoiseBefore = TargetASC->GetNumericAttribute(UJDAttributeSet::GetPoiseAttribute());
 	FGameplayEffectSpecHandle Spec = UJDGE_Damage::MakeSpec(SourceASC, Damage, PoiseDamage);
 	if (Spec.IsValid())
 	{
@@ -396,9 +400,10 @@ void UJDCombatComponent::ProcessHit(const FHitResult& Hit)
 		if (Outcome == EJDHitOutcome::GuardBreak && VictimCombat)
 		{
 			const float StaggerTime = VictimProfile ? VictimProfile->GuardBreakStaggerDuration : 1.0f;
-			GetWorld()->GetTimerManager().SetTimerForNextTick(FTimerDelegate::CreateWeakLambda(VictimCombat, [VictimCombat, StaggerTime]()
+			GetWorld()->GetTimerManager().SetTimerForNextTick(FTimerDelegate::CreateWeakLambda(VictimCombat,
+				[VictimCombat, StaggerTime, WeakOwner = TWeakObjectPtr<AActor>(Owner)]()
 			{
-				VictimCombat->ApplyStagger(StaggerTime);
+				VictimCombat->ApplyStagger(StaggerTime, WeakOwner.Get());
 			}));
 		}
 		if (bPlayerInvolved)
@@ -410,10 +415,32 @@ void UJDCombatComponent::ProcessHit(const FHitResult& Hit)
 	}
 	else
 	{
-		// Event untuk reaksi kena (UJDGA_HitReact, Iterasi 4).
 		SendEvent(Victim, JDGameplayTags::Event_Hit, Context);
 		ExecuteCue(CurrentAttack.HitCue);
-		if (IsPlayerActor(Victim))
+
+		// Reaksi dari poise (Iterasi 4). Poise yang sudah 0 (sedang stagger) tidak "habis" lagi.
+		const float PoiseAfter = TargetASC->GetNumericAttribute(UJDAttributeSet::GetPoiseAttribute());
+		const bool bPoiseBroken = PoiseBefore > 0.0f && PoiseAfter <= 0.0f;
+		if (bPoiseBroken)
+		{
+			SendEvent(Victim, JDGameplayTags::Event_Poise_Broken, Context);
+		}
+		const EJDHitReaction Reaction = VictimCombat ? VictimCombat->ChooseHitReaction(bPoiseBroken, CurrentAttack.bKnockdown) : EJDHitReaction::None;
+		if (Reaction != EJDHitReaction::None)
+		{
+			// Frame berikutnya: membatalkan ability & montage korban di tengah tick notify penyerang tidak aman.
+			GetWorld()->GetTimerManager().SetTimerForNextTick(FTimerDelegate::CreateWeakLambda(VictimCombat,
+				[VictimCombat, Reaction, WeakOwner = TWeakObjectPtr<AActor>(Owner)]()
+			{
+				VictimCombat->ApplyHitReaction(Reaction, WeakOwner.Get());
+			}));
+		}
+		if (bPlayerInvolved && Reaction >= EJDHitReaction::Stagger)
+		{
+			ShowDebugMessage(Reaction == EJDHitReaction::Knockdown ? FString(TEXT("KNOCKDOWN")) : FString(TEXT("STAGGER")),
+				Reaction == EJDHitReaction::Knockdown ? FColor::Red : FColor::Orange);
+		}
+		else if (IsPlayerActor(Victim))
 		{
 			ShowDebugMessage(FString::Printf(TEXT("Kena -%.0f"), Damage), FColor::Orange);
 		}
@@ -585,37 +612,48 @@ void UJDCombatComponent::EndParrySlowMo()
 	bParrySlowMoActive = false;
 }
 
-void UJDCombatComponent::ApplyStagger(float Duration)
+void UJDCombatComponent::ApplyStagger(float Duration, AActor* Instigator)
 {
-	UWorld* World = GetWorld();
-	UAbilitySystemComponent* ASC = UAbilitySystemGlobals::GetAbilitySystemComponentFromActor(GetOwner());
-	if (!World || !ASC || Duration <= 0.0f)
+	ApplyHitReaction(EJDHitReaction::Stagger, Instigator, Duration);
+}
+
+void UJDCombatComponent::ApplyHitReaction(EJDHitReaction Reaction, AActor* Instigator, float Duration)
+{
+	AActor* Owner = GetOwner();
+	const FGameplayTag EventTag = UJDGA_HitReact::GetEventTag(Reaction);
+	if (!Owner || !EventTag.IsValid())
 	{
 		return;
 	}
+	FGameplayEventData Payload;
+	Payload.EventTag = EventTag;
+	Payload.Instigator = Instigator;
+	Payload.Target = Owner;
+	Payload.EventMagnitude = FMath::Max(Duration, 0.0f);
+	UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(Owner, EventTag, Payload);
+}
 
-	const FGameplayTag CombatAbilities[] = { JDGameplayTags::Ability_Attack_Light, JDGameplayTags::Ability_Attack_Heavy,
-		JDGameplayTags::Ability_Dodge, JDGameplayTags::Ability_Block };
-	for (const FGameplayTag& Tag : CombatAbilities)
+EJDHitReaction UJDCombatComponent::ChooseHitReaction(bool bPoiseBroken, bool bKnockdownAttack) const
+{
+	const UAbilitySystemComponent* ASC = UAbilitySystemGlobals::GetAbilitySystemComponentFromActor(GetOwner());
+	if (!ASC || ASC->HasMatchingGameplayTag(JDGameplayTags::State_Dead) || IsKnockedDown())
 	{
-		const FGameplayTagContainer WithTag(Tag);
-		ASC->CancelAbilities(&WithTag);
+		return EJDHitReaction::None;
 	}
-	EndAttack();
-
-	ASC->SetLooseGameplayTagCount(JDGameplayTags::State_Stagger, 1);
-	World->GetTimerManager().SetTimer(StaggerTimer, this, &UJDCombatComponent::EndStagger, Duration, false);
-
-	if (ACharacter* Character = Cast<ACharacter>(GetOwner()))
+	if (bPoiseBroken)
 	{
-		Character->GetCharacterMovement()->StopMovementImmediately();
+		return bKnockdownAttack ? EJDHitReaction::Knockdown : EJDHitReaction::Stagger;
 	}
-	USkeletalMeshComponent* Mesh = GetOwnerMesh();
-	UAnimInstance* Anim = Mesh ? Mesh->GetAnimInstance() : nullptr;
-	if (Anim && CombatProfile && CombatProfile->StaggerMontage)
+	if (IsStaggered())
 	{
-		Anim->Montage_Play(CombatProfile->StaggerMontage, CompensatedRate(Mesh));
+		// Serangan bertanda Jatuh ke yang sedang terhuyung = jatuh; pukulan lain tidak mengubah stagger.
+		return bKnockdownAttack ? EJDHitReaction::Knockdown : EJDHitReaction::None;
 	}
+	if (CombatProfile && CombatProfile->bHitReactArmorWhileAttacking && ASC->HasMatchingGameplayTag(JDGameplayTags::State_Attacking))
+	{
+		return EJDHitReaction::None;
+	}
+	return EJDHitReaction::Light;
 }
 
 bool UJDCombatComponent::IsStaggered() const
@@ -624,18 +662,10 @@ bool UJDCombatComponent::IsStaggered() const
 	return ASC && ASC->HasMatchingGameplayTag(JDGameplayTags::State_Stagger);
 }
 
-void UJDCombatComponent::EndStagger()
+bool UJDCombatComponent::IsKnockedDown() const
 {
-	if (UAbilitySystemComponent* ASC = UAbilitySystemGlobals::GetAbilitySystemComponentFromActor(GetOwner()))
-	{
-		ASC->SetLooseGameplayTagCount(JDGameplayTags::State_Stagger, 0);
-	}
-	USkeletalMeshComponent* Mesh = GetOwnerMesh();
-	UAnimInstance* Anim = Mesh ? Mesh->GetAnimInstance() : nullptr;
-	if (Anim && CombatProfile && CombatProfile->StaggerMontage)
-	{
-		Anim->Montage_Stop(0.2f, CombatProfile->StaggerMontage);
-	}
+	const UAbilitySystemComponent* ASC = UAbilitySystemGlobals::GetAbilitySystemComponentFromActor(GetOwner());
+	return ASC && ASC->HasMatchingGameplayTag(JDGameplayTags::State_Knockdown);
 }
 
 void UJDCombatComponent::ShowDebugMessage(const FString& Message, const FColor& Color) const

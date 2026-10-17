@@ -73,7 +73,7 @@ void UJDAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallback
 		SetIncomingPoiseDamage(0.0f);
 		if (PoiseDamage > 0.0f)
 		{
-			// Poise habis -> Event.Poise.Broken (stagger) menyusul di Iterasi 4.
+			// Poise habis -> reaksi dipilih UJDCombatComponent (punya info serangannya, mis. tanda Jatuh).
 			SetPoise(FMath::Clamp(GetPoise() - PoiseDamage, 0.0f, GetMaxPoise()));
 		}
 	}

@@ -383,6 +383,7 @@ def setup_profile(montages):
         s.set_editor_property("stamina_cost", HEAVY["stamina"])
         s.set_editor_property("play_rate", fin["rate"])
         s.set_editor_property("hit_cue", tag("GameplayCue.Hit.Heavy"))
+        s.set_editor_property("knockdown", True)           # Jatuh (docs/07 "Reaksi kena pukul", Iterasi 4)
         finishers.append(s)
     prof.set_editor_property("heavy_finishers", finishers)
 
@@ -398,6 +399,7 @@ def setup_profile(montages):
     slam.set_editor_property("poise_damage", HEAVY["poise"])
     slam.set_editor_property("stamina_cost", HEAVY["stamina"])
     slam.set_editor_property("hit_cue", tag("GameplayCue.Hit.Heavy"))
+    slam.set_editor_property("knockdown", True)
     prof.set_editor_property("air_slam", slam)
     for k, v in AIR_VALUES.items():
         prof.set_editor_property(k, v)

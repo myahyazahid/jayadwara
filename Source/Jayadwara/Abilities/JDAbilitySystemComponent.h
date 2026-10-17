@@ -4,6 +4,25 @@
 #include "AbilitySystemComponent.h"
 #include "JDAbilitySystemComponent.generated.h"
 
+/** Satu atribut yang pulih sendiri setelah jeda (stamina, poise); dipakai UJDAbilitySystemComponent. */
+struct FJDAttributeRegen
+{
+	FGameplayAttribute Attribute;
+	TSubclassOf<UGameplayEffect> Effect;
+	FGameplayTag DataTag;
+	float TickPeriod = 0.1f;
+	float PerSecond = 0.0f;
+	float Delay = 0.0f;
+	FActiveGameplayEffectHandle Handle;
+	FTimerHandle DelayTimer;
+	FDelegateHandle ChangedHandle;
+};
+
+namespace JDRegen
+{
+	enum Index : int32 { Stamina = 0, Poise = 1, Count = 2 };
+}
+
 /**
  * ASC Jayadwara (docs/23 bagian 4.1, R1: dipasang di karakter, bukan PlayerState).
  *
@@ -12,7 +31,8 @@
  * EJDAbilityActivationPolicy. Tekanan yang gagal mengaktifkan ability (mis. animasi serangan masih jalan) disimpan
  * sebagai buffer dan dicoba ulang selama InputBufferTime; hanya tekanan terakhir yang diingat.
  *
- * Stamina: regen (UJDGE_StaminaRegen) dilepas setiap Stamina berkurang dan dipasang lagi setelah jeda.
+ * Stamina & poise: regen (UJDGE_StaminaRegen / UJDGE_PoiseRegen) dilepas setiap atributnya berkurang dan dipasang lagi
+ * setelah jeda.
  */
 UCLASS(ClassGroup = (Jayadwara), meta = (BlueprintSpawnableComponent))
 class JAYADWARA_API UJDAbilitySystemComponent : public UAbilitySystemComponent
@@ -36,6 +56,9 @@ public:
 	/** Laju regen (per detik) & jeda setelah stamina terpakai. Laju 0 = tanpa regen. */
 	void ConfigureStaminaRegen(float PerSecond, float Delay);
 
+	/** Laju regen poise (per detik) & jeda setelah kena (docs/23 Iterasi 4). Laju 0 = tanpa regen. */
+	void ConfigurePoiseRegen(float PerSecond, float Delay);
+
 	virtual void OnUnregister() override;
 
 protected:
@@ -43,9 +66,10 @@ protected:
 	virtual void AbilitySpecInputReleased(FGameplayAbilitySpec& Spec) override;
 
 private:
-	void OnStaminaChanged(const FOnAttributeChangeData& Data);
-	void StartStaminaRegen();
-	void StopStaminaRegen();
+	void ConfigureRegen(int32 Index, float PerSecond, float Delay);
+	void OnRegenAttributeChanged(const FOnAttributeChangeData& Data, int32 Index);
+	void StartRegen(int32 Index);
+	void StopRegen(int32 Index);
 
 	/** Ability yang terikat InputTag (tag ada di dynamic spec source tags, dipasang UJDAbilitySet). */
 	void FindSpecsWithInputTag(const FGameplayTag& InputTag, TArray<FGameplayAbilitySpecHandle>& OutHandles) const;
@@ -58,9 +82,5 @@ private:
 	double BufferedAtTime = 0.0;
 	float InputBufferTime = 0.2f;
 
-	float StaminaRegenPerSecond = 0.0f;
-	float StaminaRegenDelay = 0.8f;
-	FActiveGameplayEffectHandle StaminaRegenHandle;
-	FTimerHandle StaminaRegenDelayTimer;
-	FDelegateHandle StaminaChangedHandle;
+	FJDAttributeRegen Regens[JDRegen::Count];
 };

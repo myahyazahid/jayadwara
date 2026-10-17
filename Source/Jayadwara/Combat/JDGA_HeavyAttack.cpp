@@ -78,6 +78,7 @@ void UJDGA_HeavyAttack::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
 
 	SpendStamina(Step.StaminaCost);
 	FaceInputDirection();
+	WarpToSoftTarget();
 	Combat->BeginAttack(Step);
 
 	UAbilityTask_PlayMontageAndWait* Task = UAbilityTask_PlayMontageAndWait::CreatePlayMontageAndWaitProxy(
