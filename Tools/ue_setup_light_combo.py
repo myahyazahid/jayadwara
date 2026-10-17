@@ -10,7 +10,7 @@ Membuat / mengisi ulang (aman diulang):
                                               JD Hit Window (tulang & waktu dari analisis kecepatan tangan/kaki) +
                                               JD Combo Window (langkah 1–3)
   Aksa/Anims/Montages/AM_Aksa_Lunge, AM_Aksa_Back   pembuka maju (terjang) & mundur (docs/07 "Combo & arah")
-  Aksa/Anims/Montages/AM_Aksa_Finisher_01..02       cabang finisher pukulan berat setelah langkah 1 / 2
+  Aksa/Anims/Montages/AM_Aksa_Finisher_01..03       cabang finisher pukulan berat setelah langkah 1 / 2 / 3
   Aksa/Anims/Attack/A_Aksa_Air, A_Aksa_AirSlam      salinan tanpa root motion (gerak dari lompatan) untuk serangan udara
   Aksa/Anims/Montages/AM_Aksa_Air, AM_Aksa_AirSlam  pukulan udara & hantaman ke bawah (docs/07 "Serangan udara")
   Abilities/GameplayCues/GC_Hit_Light, GC_Hit_Heavy   JDGameplayCueNotify_Sound + S_Combat_Punch_*
@@ -61,11 +61,13 @@ OPENERS = {
 }
 DIRECTION = {"target_search_radius": 800.0, "lunge_min_distance": 250.0, "lunge_stop_distance": 100.0,
              "direction_threshold": 0.5}
-# Cabang finisher pukulan berat setelah langkah 1 / 2 (slot langkah 3–4 kosong = AM_Aksa_Heavy dari ue_setup_defense.py).
+# Cabang finisher pukulan berat setelah langkah 1 / 2 / 3 (slot kosong = AM_Aksa_Heavy dari ue_setup_defense.py).
+# Finisher 3 tanpa placeholder: hanya terisi kalau animasi Mixamo finisher_03 ada ("mx_only").
 # Stamina & damage sama dengan pukulan berat (docs/23 bagian 5).
 FINISHERS = [
     {"name": "AM_Aksa_Finisher_01", "seq": "A_Aksa_Attack_03", "hit": ("foot_r", 0.24, 0.48), "rate": 0.8, "mx": "finisher_01"},
     {"name": "AM_Aksa_Finisher_02", "seq": "A_Aksa_Attack_04", "hit": "auto", "rate": 0.85, "mx": "finisher_02", "mx_hits": 2},
+    {"name": "AM_Aksa_Finisher_03", "hit": "auto", "rate": 1.0, "mx": "finisher_03", "mx_only": True},
 ]
 HEAVY = {"damage": 30.0, "poise": 40.0, "stamina": 25.0}
 # Serangan udara (docs/07 "Serangan udara", 16 Okt 2026). Salinan animasi tanpa root motion supaya tidak melayang/tertahan.
@@ -298,7 +300,7 @@ def ensure_extra_montage(step):
         m.set_editor_property(prop, b)
     add_combat_notifies(m, step, seq)
     EAL.save_loaded_asset(m, only_if_is_dirty=False)
-    log(f"{step['name']} dari {step['seq']}")
+    log(f"{step['name']} dari {(step.get('seq_path') or step['seq']).rsplit('/', 1)[-1]}")
     return m
 
 
@@ -372,6 +374,9 @@ def setup_profile(montages):
     finishers = []
     for fin in FINISHERS:
         s = unreal.JDAttackStep()
+        if fin.get("mx_only") and not fin.get("seq_path"):
+            finishers.append(s)                                   # slot kosong -> pukulan berat biasa
+            continue
         s.set_editor_property("montage", ensure_extra_montage(fin))
         s.set_editor_property("damage", HEAVY["damage"])
         s.set_editor_property("poise_damage", HEAVY["poise"])

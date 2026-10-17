@@ -29,7 +29,7 @@ Keputusan developer 16 Okt 2026. Berlaku sama untuk Aksa dan Jayadwara (satu abi
 | **Mundur** + pukul | Pembuka **sapuan / pukulan sambil mundur**, lalu combo lanjut dari pukulan 2 |
 | Netral, atau maju saat musuh sudah dekat | Combo biasa |
 | **Kiri/kanan** + pukul | Untuk **memilih target** (soft target ala Arkham, [23](23-rencana-fase-1.md) Iterasi 4), bukan jurus |
-| Pukulan berat di tengah combo | **Cabang finisher**: setelah pukulan 1 dan setelah pukulan 2 masing-masing punya pukulan berat sendiri; dari diam / langkah lain = pukulan berat biasa |
+| Pukulan berat di tengah combo | **Cabang finisher**: setelah pukulan 1, 2 dan 3 masing-masing punya pukulan berat sendiri; dari diam / setelah pukulan 4 = pukulan berat biasa |
 
 Arah dihitung **relatif ke musuh yang dituju**, bukan ke kamera, supaya "maju" selalu berarti mendekati musuh. Combo sengaja tidak lebih dari 4 pukulan: referensinya Arkham + Sekiro ringan, dan combo yang lebih panjang membuat pemain terkunci animasi sehingga telat menangkis. Variasi datang dari pembuka arah dan cabang finisher, bukan dari panjang combo.
 
@@ -45,9 +45,10 @@ Disetujui developer 16 Okt 2026 dari konsep pose ("Usulan Jurus Aksa"). Patokan 
 | Ringan ×4 | Tendangan putar belakang (*dwi huryeo chagi*) | Badan berputar membelakangi musuh, tumit kanan disabetkan melengkung; akhir combo |
 | Maju + ringan | Terjang | Lompat kecil ke dekat musuh, tangan kanan dari atas dihantamkan ke dada |
 | Mundur + ringan | Pukul mundur | Langkah mundur ±1,5 m lalu jab balasan |
-| Berat (diam, atau setelah pukulan 3) | Pukulan putar | Satu tangan: badan diputar menjauh sambil menarik tangan, lalu melangkah maju dan memutar balik melepas pukulan lurus keras |
+| Berat (diam, atau setelah pukulan 4) | Pukulan putar | Satu tangan: badan diputar menjauh sambil menarik tangan, lalu melangkah maju dan memutar balik melepas pukulan lurus keras |
 | Ringan ×1 → berat | Finisher 1: tendangan belakang (*dwi chagi*) | Berputar membelakangi musuh, telapak kaki didorong lurus ke belakang |
 | Ringan ×2 → berat | Finisher 2: tendangan ganda melompat (*narae chagi*) | Lompat kecil, dua tendangan melingkar beruntun (kanan lalu kiri), dua kali kena |
+| Ringan ×3 → berat | Finisher 3 | Animasi dipilih developer langsung di Mixamo (`finisher_03.fbx`, keputusan 17 Okt 2026); selama belum ada, slot ini = pukulan putar |
 | Udara + ringan | Tendangan terbang memutar | Satu putaran penuh di udara, lalu kaki kanan menendang lurus, kaki kiri terlipat |
 | Udara + berat | Hantaman ke bawah | Menukik, tinju kanan ke tanah sampai berlutut, gelombang kejut |
 
