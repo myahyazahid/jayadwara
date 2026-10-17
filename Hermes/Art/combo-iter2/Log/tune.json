@@ -1,0 +1,288 @@
+[
+  {
+    "peran": "light_01",
+    "panjang": 2.233,
+    "panjang_nyata": 1.396,
+    "hantaman": [
+      [
+        0.43,
+        0.22,
+        "hand_r",
+        false
+      ]
+    ],
+    "combo_lama": [
+      [
+        0.38,
+        1.833
+      ]
+    ],
+    "combo_baru": [
+      0.38,
+      1.833
+    ],
+    "laju": 1.6,
+    "blend": [
+      0.05,
+      0.22
+    ]
+  },
+  {
+    "peran": "light_02",
+    "panjang": 2.267,
+    "panjang_nyata": 1.417,
+    "hantaman": [
+      [
+        0.51,
+        0.22,
+        "hand_l",
+        false
+      ]
+    ],
+    "combo_lama": [
+      [
+        0.46,
+        1.787
+      ]
+    ],
+    "combo_baru": [
+      0.46,
+      1.787
+    ],
+    "laju": 1.6,
+    "blend": [
+      0.05,
+      0.22
+    ]
+  },
+  {
+    "peran": "light_03",
+    "panjang": 2.167,
+    "panjang_nyata": 1.354,
+    "hantaman": [
+      [
+        0.83,
+        0.22,
+        "hand_r",
+        false
+      ]
+    ],
+    "combo_lama": [
+      [
+        0.78,
+        1.367
+      ]
+    ],
+    "combo_baru": [
+      0.78,
+      1.367
+    ],
+    "laju": 1.6,
+    "blend": [
+      0.05,
+      0.22
+    ]
+  },
+  {
+    "peran": "light_04",
+    "panjang": 2.033,
+    "panjang_nyata": 1.402,
+    "hantaman": [
+      [
+        0.81,
+        0.22,
+        "foot_r",
+        false
+      ]
+    ],
+    "combo_lama": [
+      [
+        0.76,
+        1.253
+      ]
+    ],
+    "combo_baru": [
+      0.76,
+      1.253
+    ],
+    "laju": 1.45,
+    "blend": [
+      0.05,
+      0.22
+    ]
+  },
+  {
+    "peran": "lunge",
+    "panjang": 2.167,
+    "panjang_nyata": 1.444,
+    "hantaman": [
+      [
+        0.83,
+        0.22,
+        "hand_r",
+        false
+      ]
+    ],
+    "combo_lama": [
+      [
+        0.78,
+        1.367
+      ]
+    ],
+    "combo_baru": [
+      0.78,
+      1.367
+    ],
+    "laju": 1.5,
+    "blend": [
+      0.05,
+      0.22
+    ]
+  },
+  {
+    "peran": "back",
+    "panjang": 0.867,
+    "panjang_nyata": 0.578,
+    "hantaman": [
+      [
+        0.13,
+        0.22,
+        "hand_r",
+        false
+      ]
+    ],
+    "combo_lama": [
+      [
+        0.08,
+        0.767
+      ]
+    ],
+    "combo_baru": [
+      0.08,
+      0.767
+    ],
+    "laju": 1.5,
+    "blend": [
+      0.05,
+      0.22
+    ]
+  },
+  {
+    "peran": "finisher_01",
+    "panjang": 1.6,
+    "panjang_nyata": 1.28,
+    "hantaman": [
+      [
+        0.38,
+        0.22,
+        "foot_l",
+        false
+      ]
+    ],
+    "combo_lama": [
+      [
+        0.33,
+        1.25
+      ]
+    ],
+    "combo_baru": [
+      null,
+      null
+    ],
+    "laju": 1.25,
+    "blend": [
+      0.05,
+      0.22
+    ]
+  },
+  {
+    "peran": "finisher_02",
+    "panjang": 1.667,
+    "panjang_nyata": 1.961,
+    "hantaman": [
+      [
+        0.65,
+        0.19,
+        "foot_r",
+        false
+      ],
+      [
+        0.85,
+        0.22,
+        "foot_r",
+        true
+      ]
+    ],
+    "combo_lama": [
+      [
+        0.6,
+        1.047
+      ]
+    ],
+    "combo_baru": [
+      null,
+      null
+    ],
+    "laju": 0.85,
+    "blend": [
+      0.05,
+      0.22
+    ]
+  },
+  {
+    "peran": "finisher_03",
+    "panjang": 2.667,
+    "panjang_nyata": 2.319,
+    "hantaman": [
+      [
+        1.3,
+        0.22,
+        "foot_r",
+        false
+      ]
+    ],
+    "combo_lama": [
+      [
+        1.25,
+        1.397
+      ]
+    ],
+    "combo_baru": [
+      null,
+      null
+    ],
+    "laju": 1.15,
+    "blend": [
+      0.05,
+      0.22
+    ]
+  },
+  {
+    "peran": "air",
+    "panjang": 1.5,
+    "panjang_nyata": 1.25,
+    "hantaman": [
+      [
+        0.53,
+        0.22,
+        "foot_l",
+        false
+      ]
+    ],
+    "combo_lama": [
+      [
+        0.48,
+        1.0
+      ]
+    ],
+    "combo_baru": [
+      0.48,
+      1.0
+    ],
+    "laju": 1.2,
+    "blend": [
+      0.05,
+      0.22
+    ]
+  }
+]
