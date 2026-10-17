@@ -22,3 +22,7 @@ Art/Export/Textures_Tuyul/*_k4brown.png
 # Python (script di Art/Scripts, Tools)
 __pycache__/
 *.pyc
+
+# Mixamo: hasil download developer, sementara sampai dipindah agent ke Art/Mixamo/ (mixamo/README.md)
+mixamo/result/*
+!mixamo/result/.gitkeep

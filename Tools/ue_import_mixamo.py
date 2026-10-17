@@ -3,10 +3,8 @@
 Revisi jurus Iterasi 2–3 (docs/07 "Daftar jurus", "Dodge per arah", "Parry"). Animasi placeholder Fase 1 dari Mixamo
 (docs/23 bagian 6.1); skrip combo/dodge/parry memakai hasilnya otomatis kalau ada.
 
-Persiapan (developer):
-  1. mixamo.com: download karakter **Y Bot** sekali (FBX Binary, **With Skin**, T-pose), simpan sebagai ybot.fbx.
-  2. Tiap animasi: FBX Binary, **Without Skin**, 30 fps, centang **In Place** kalau ada (gerak diatur kode).
-  3. Ganti nama file sesuai peran (ROLES di bawah), taruh semua di <proyek>/Saved/Mixamo/ (folder Saved di-ignore git).
+Alur file (mixamo/README.md): developer download dari mixamo.com ke mixamo/result/ (nama file = peran di ROLES,
+plus ybot.fbx = Y Bot With Skin), agent memeriksa lalu memindahkan ke Art/Mixamo/ (LFS) — folder yang dibaca skrip ini.
 Pakai: python Tools/ue_remote.py Tools/ue_import_mixamo.py
 Lalu jalankan ulang: ue_setup_light_combo.py, ue_setup_defense.py, ue_setup_parry.py (urutan itu).
 
@@ -26,6 +24,7 @@ RIG = f"{AKSA}/Rig"
 MX = f"{AKSA}/Anims/Mixamo"
 RAW = f"{MX}/Raw"
 MANNY = "/Game/Characters/Mannequins/Meshes/SKM_Manny_Simple"
+SOURCE_DIR = "Art/Mixamo"            # relatif ke folder proyek; diisi agent dari mixamo/result/
 MESH_FILE = "ybot.fbx"
 MESH_NAME = "SK_Mixamo_YBot"
 
@@ -129,7 +128,7 @@ def main():
     if unreal.EditorLevelLibrary.get_pie_worlds(False):
         unreal.log_error("[Jayadwara] PIE sedang jalan — hentikan Play dulu")
         return
-    folder = os.path.join(unreal.Paths.project_saved_dir(), "Mixamo")
+    folder = os.path.normpath(os.path.join(unreal.Paths.project_dir(), SOURCE_DIR))
     files = {f[:-4].lower(): os.path.join(folder, f) for f in (os.listdir(folder) if os.path.isdir(folder) else [])
              if f.lower().endswith(".fbx")}
     if MESH_FILE[:-4] not in files:
