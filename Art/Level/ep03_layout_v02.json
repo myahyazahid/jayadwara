@@ -1,0 +1,6780 @@
+{
+ "versi": "ep03_layout_v02 (18 Okt 2026, docs/32 v1.0, kepadatan v0.3). Dibuat oleh Art/Level/buat_layout_ep03_v02.py — jangan sunting manual",
+ "medan_modul": "ep03_medan",
+ "satuan": "meter; x = timur, y = utara, z = atas (0 = permukaan Jl. Adikara Raya). UE: X = x*100, Y = -y*100, Z = z*100 (cm)",
+ "koreksi": "Menara Adikara digeser ke y +15...+85 (docs/32 tabel lama y -35...+35 menutup boulevard). Semua angka lain mengikuti docs/32 v1.0.",
+ "z_otomatis": "objek tanpa 'z': alas = elev titik tengah tapak, nilainya di 'alas_m' (dinding = titik tengah garis); 'pondasi_m' = perpanjang objek ke bawah; 'z' = tinggi alas absolut. Item kelompok tanpa 'z': alas = elev titik tengah item. Tinggi akhir = alas_m (atau z) + z_dasar_relatif",
+ "medan": {
+  "x_min": -1100.0,
+  "x_max": 1100.0,
+  "y_min": -350.0,
+  "y_max": 350.0,
+  "sel": 2.5,
+  "material_zona": "pakai fungsi zona_material(x, y) di ep03_medan.py (Air, Rel, Jalan, Paving, Kaca, Apartemen, Proyek, Latar)"
+ },
+ "mi_warna": {
+  "Air": [
+   70,
+   110,
+   150
+  ],
+  "Rel": [
+   80,
+   75,
+   70
+  ],
+  "Jalan": [
+   55,
+   57,
+   60
+  ],
+  "Paving": [
+   160,
+   162,
+   158
+  ],
+  "Kaca": [
+   95,
+   140,
+   175
+  ],
+  "Apartemen": [
+   170,
+   140,
+   110
+  ],
+  "Proyek": [
+   150,
+   120,
+   90
+  ],
+  "Latar": [
+   90,
+   95,
+   100
+  ],
+  "MenaraKaca": [
+   110,
+   160,
+   190
+  ],
+  "MenaraAdikara": [
+   120,
+   90,
+   140
+  ],
+  "Ruko": [
+   190,
+   170,
+   140
+  ],
+  "Gardu": [
+   230,
+   180,
+   40
+  ],
+  "Derek": [
+   245,
+   200,
+   50
+  ],
+  "Alat": [
+   220,
+   170,
+   40
+  ],
+  "Kendaraan": [
+   40,
+   40,
+   45
+  ],
+  "Mobil": [
+   200,
+   60,
+   60
+  ],
+  "Pohon": [
+   70,
+   110,
+   65
+  ],
+  "Penanda": [
+   225,
+   50,
+   50
+  ],
+  "Interior": [
+   200,
+   200,
+   195
+  ],
+  "Lantai": [
+   140,
+   140,
+   145
+  ],
+  "Dinding": [
+   180,
+   180,
+   175
+  ],
+  "Tangga": [
+   160,
+   120,
+   80
+  ],
+  "Lift": [
+   80,
+   80,
+   90
+  ],
+  "Atap": [
+   120,
+   120,
+   125
+  ],
+  "Videotron": [
+   60,
+   200,
+   220
+  ],
+  "AirMancur": [
+   90,
+   150,
+   190
+  ],
+  "Tol": [
+   95,
+   100,
+   105
+  ],
+  "RelLayang": [
+   85,
+   85,
+   90
+  ],
+  "RumahLatar": [
+   185,
+   160,
+   120
+  ],
+  "AtapLatar": [
+   150,
+   150,
+   155
+  ],
+  "Kayu": [
+   140,
+   100,
+   60
+  ]
+ },
+ "objek": [
+  {
+   "id": "BLOK1_Gedung1",
+   "jenis": "kotak",
+   "pos": [
+    94.5,
+    36.2
+   ],
+   "ukuran": [
+    29.07,
+    29.66,
+    180
+   ],
+   "mi": "MenaraKaca",
+   "hancur": true,
+   "penalti": "tinggi",
+   "blok_chaos": "BLOK1",
+   "tukar_puing": true,
+   "catatan": "satu Geometry Collection per blok 3 gedung (F2)",
+   "alas_m": 0.0
+  },
+  {
+   "id": "BLOK1_Gedung2",
+   "jenis": "kotak",
+   "pos": [
+    590.8,
+    -32.7
+   ],
+   "ukuran": [
+    31.53,
+    28.52,
+    35
+   ],
+   "mi": "Apartemen",
+   "hancur": true,
+   "penalti": "tinggi",
+   "blok_chaos": "BLOK1",
+   "tukar_puing": true,
+   "catatan": "anggota blok Chaos",
+   "alas_m": 0.0
+  },
+  {
+   "id": "BLOK1_Gedung3",
+   "jenis": "kotak",
+   "pos": [
+    635.3,
+    -34.6
+   ],
+   "ukuran": [
+    30.53,
+    31.13,
+    70
+   ],
+   "mi": "Apartemen",
+   "hancur": true,
+   "penalti": "tinggi",
+   "blok_chaos": "BLOK1",
+   "tukar_puing": true,
+   "catatan": "anggota blok Chaos",
+   "alas_m": 0.0
+  },
+  {
+   "id": "BLOK2_Gedung1",
+   "jenis": "kotak",
+   "pos": [
+    139.3,
+    38.9
+   ],
+   "ukuran": [
+    28.51,
+    29.39,
+    110
+   ],
+   "mi": "MenaraKaca",
+   "hancur": true,
+   "penalti": "tinggi",
+   "blok_chaos": "BLOK2",
+   "tukar_puing": true,
+   "catatan": "satu Geometry Collection per blok 3 gedung (F2)",
+   "alas_m": 0.0
+  },
+  {
+   "id": "BLOK2_Gedung2",
+   "jenis": "kotak",
+   "pos": [
+    4.3,
+    122.0
+   ],
+   "ukuran": [
+    38.64,
+    43.94,
+    75
+   ],
+   "mi": "MenaraKaca",
+   "hancur": true,
+   "penalti": "tinggi",
+   "blok_chaos": "BLOK2",
+   "tukar_puing": true,
+   "catatan": "anggota blok Chaos",
+   "alas_m": 0.0
+  },
+  {
+   "id": "BLOK2_Gedung3",
+   "jenis": "kotak",
+   "pos": [
+    597.6,
+    -211.7
+   ],
+   "ukuran": [
+    35.13,
+    36.65,
+    85
+   ],
+   "mi": "Apartemen",
+   "hancur": true,
+   "penalti": "tinggi",
+   "blok_chaos": "BLOK2",
+   "tukar_puing": true,
+   "catatan": "anggota blok Chaos",
+   "alas_m": 0.0
+  },
+  {
+   "id": "BLOK3_Gedung1",
+   "jenis": "kotak",
+   "pos": [
+    51.7,
+    35.0
+   ],
+   "ukuran": [
+    33.4,
+    31.72,
+    130
+   ],
+   "mi": "MenaraKaca",
+   "hancur": true,
+   "penalti": "tinggi",
+   "blok_chaos": "BLOK3",
+   "tukar_puing": true,
+   "catatan": "satu Geometry Collection per blok 3 gedung (F2)",
+   "alas_m": 0.0
+  },
+  {
+   "id": "BLOK3_Gedung2",
+   "jenis": "kotak",
+   "pos": [
+    545.1,
+    -34.6
+   ],
+   "ukuran": [
+    30.22,
+    31.26,
+    50
+   ],
+   "mi": "Apartemen",
+   "hancur": true,
+   "penalti": "tinggi",
+   "blok_chaos": "BLOK3",
+   "tukar_puing": true,
+   "catatan": "anggota blok Chaos",
+   "alas_m": 0.0
+  },
+  {
+   "id": "BLOK3_Gedung3",
+   "jenis": "kotak",
+   "pos": [
+    5.8,
+    67.4
+   ],
+   "ukuran": [
+    41.51,
+    44.84,
+    75
+   ],
+   "mi": "MenaraKaca",
+   "hancur": true,
+   "penalti": "tinggi",
+   "blok_chaos": "BLOK3",
+   "tukar_puing": true,
+   "catatan": "anggota blok Chaos",
+   "alas_m": 0.0
+  },
+  {
+   "id": "BLOK4_Gedung1",
+   "jenis": "kotak",
+   "pos": [
+    114.5,
+    232.9
+   ],
+   "ukuran": [
+    39.0,
+    45.78,
+    130
+   ],
+   "mi": "MenaraKaca",
+   "hancur": true,
+   "penalti": "tinggi",
+   "blok_chaos": "BLOK4",
+   "tukar_puing": true,
+   "catatan": "satu Geometry Collection per blok 3 gedung (F2)",
+   "alas_m": 0.0
+  },
+  {
+   "id": "BLOK4_Gedung2",
+   "jenis": "kotak",
+   "pos": [
+    186.8,
+    40.6
+   ],
+   "ukuran": [
+    33.62,
+    31.0,
+    90
+   ],
+   "mi": "MenaraKaca",
+   "hancur": true,
+   "penalti": "tinggi",
+   "blok_chaos": "BLOK4",
+   "tukar_puing": true,
+   "catatan": "anggota blok Chaos",
+   "alas_m": 0.0
+  },
+  {
+   "id": "BLOK4_Gedung3",
+   "jenis": "kotak",
+   "pos": [
+    490.6,
+    -47.0
+   ],
+   "ukuran": [
+    41.2,
+    36.04,
+    20
+   ],
+   "mi": "Apartemen",
+   "hancur": true,
+   "penalti": "tinggi",
+   "blok_chaos": "BLOK4",
+   "tukar_puing": true,
+   "catatan": "anggota blok Chaos",
+   "alas_m": 0.0
+  },
+  {
+   "id": "BLOK5_Gedung1",
+   "jenis": "kotak",
+   "pos": [
+    652.6,
+    -210.6
+   ],
+   "ukuran": [
+    35.21,
+    38.72,
+    20
+   ],
+   "mi": "Apartemen",
+   "hancur": true,
+   "penalti": "tinggi",
+   "blok_chaos": "BLOK5",
+   "tukar_puing": true,
+   "catatan": "satu Geometry Collection per blok 3 gedung (F2)",
+   "alas_m": 0.0
+  },
+  {
+   "id": "BLOK5_Gedung2",
+   "jenis": "kotak",
+   "pos": [
+    598.4,
+    63.1
+   ],
+   "ukuran": [
+    36.87,
+    36.13,
+    70
+   ],
+   "mi": "Apartemen",
+   "hancur": true,
+   "penalti": "tinggi",
+   "blok_chaos": "BLOK5",
+   "tukar_puing": true,
+   "catatan": "anggota blok Chaos",
+   "alas_m": 0.0
+  },
+  {
+   "id": "BLOK5_Gedung3",
+   "jenis": "kotak",
+   "pos": [
+    -50.0,
+    120.8
+   ],
+   "ukuran": [
+    40.01,
+    41.65,
+    130
+   ],
+   "mi": "MenaraKaca",
+   "hancur": true,
+   "penalti": "tinggi",
+   "blok_chaos": "BLOK5",
+   "tukar_puing": true,
+   "catatan": "anggota blok Chaos",
+   "alas_m": 0.0
+  },
+  {
+   "id": "BLOK6_Gedung1",
+   "jenis": "kotak",
+   "pos": [
+    59.9,
+    232.0
+   ],
+   "ukuran": [
+    39.78,
+    43.96,
+    180
+   ],
+   "mi": "MenaraKaca",
+   "hancur": true,
+   "penalti": "tinggi",
+   "blok_chaos": "BLOK6",
+   "tukar_puing": true,
+   "catatan": "satu Geometry Collection per blok 3 gedung (F2)",
+   "alas_m": 0.0
+  },
+  {
+   "id": "BLOK6_Gedung2",
+   "jenis": "kotak",
+   "pos": [
+    433.9,
+    -101.5
+   ],
+   "ukuran": [
+    37.84,
+    37.06,
+    35
+   ],
+   "mi": "Apartemen",
+   "hancur": true,
+   "penalti": "tinggi",
+   "blok_chaos": "BLOK6",
+   "tukar_puing": true,
+   "catatan": "anggota blok Chaos",
+   "alas_m": 0.0
+  },
+  {
+   "id": "BLOK6_Gedung3",
+   "jenis": "kotak",
+   "pos": [
+    599.6,
+    -267.5
+   ],
+   "ukuran": [
+    39.24,
+    34.99,
+    85
+   ],
+   "mi": "Apartemen",
+   "hancur": true,
+   "penalti": "tinggi",
+   "blok_chaos": "BLOK6",
+   "tukar_puing": true,
+   "catatan": "anggota blok Chaos",
+   "alas_m": 0.0
+  },
+  {
+   "id": "MENARA_DindingSelatanKiri",
+   "jenis": "dinding",
+   "dari": [
+    -430.0,
+    15.0
+   ],
+   "ke": [
+    -412.0,
+    15.0
+   ],
+   "tinggi": 8.0,
+   "tebal": 1.2,
+   "mi": "MenaraAdikara",
+   "hancur": false,
+   "alas_m": 0.0
+  },
+  {
+   "id": "MENARA_DindingSelatanKanan",
+   "jenis": "dinding",
+   "dari": [
+    -378.0,
+    15.0
+   ],
+   "ke": [
+    -360.0,
+    15.0
+   ],
+   "tinggi": 8.0,
+   "tebal": 1.2,
+   "mi": "MenaraAdikara",
+   "hancur": false,
+   "alas_m": 0.0
+  },
+  {
+   "id": "MENARA_DindingSelatanAtas",
+   "jenis": "dinding",
+   "dari": [
+    -430.0,
+    15.0
+   ],
+   "ke": [
+    -360.0,
+    15.0
+   ],
+   "tinggi": 212.0,
+   "tebal": 1.2,
+   "mi": "MenaraAdikara",
+   "hancur": false,
+   "z": 8.0
+  },
+  {
+   "id": "MENARA_DindingUtara",
+   "jenis": "dinding",
+   "dari": [
+    -430.0,
+    85.0
+   ],
+   "ke": [
+    -360.0,
+    85.0
+   ],
+   "tinggi": 220.0,
+   "tebal": 1.2,
+   "mi": "MenaraAdikara",
+   "hancur": false,
+   "alas_m": 0.0
+  },
+  {
+   "id": "MENARA_DindingBarat",
+   "jenis": "dinding",
+   "dari": [
+    -430.0,
+    15.0
+   ],
+   "ke": [
+    -430.0,
+    85.0
+   ],
+   "tinggi": 220.0,
+   "tebal": 1.2,
+   "mi": "MenaraAdikara",
+   "hancur": false,
+   "alas_m": 0.0
+  },
+  {
+   "id": "MENARA_DindingTimur",
+   "jenis": "dinding",
+   "dari": [
+    -360.0,
+    15.0
+   ],
+   "ke": [
+    -360.0,
+    85.0
+   ],
+   "tinggi": 220.0,
+   "tebal": 1.2,
+   "mi": "MenaraAdikara",
+   "hancur": false,
+   "alas_m": 0.0
+  },
+  {
+   "id": "MENARA_PelatB1",
+   "jenis": "kotak",
+   "pos": [
+    -395.0,
+    50.0
+   ],
+   "ukuran": [
+    70,
+    70,
+    0.4
+   ],
+   "mi": "Lantai",
+   "hancur": false,
+   "z": -8.0,
+   "catatan": "pelat lantai"
+  },
+  {
+   "id": "MENARA_PelatL20",
+   "jenis": "kotak",
+   "pos": [
+    -395.0,
+    50.0
+   ],
+   "ukuran": [
+    70,
+    70,
+    0.4
+   ],
+   "mi": "Lantai",
+   "hancur": false,
+   "z": 80.0,
+   "catatan": "pelat lantai"
+  },
+  {
+   "id": "MENARA_PelatL21",
+   "jenis": "kotak",
+   "pos": [
+    -395.0,
+    50.0
+   ],
+   "ukuran": [
+    70,
+    70,
+    0.4
+   ],
+   "mi": "Lantai",
+   "hancur": false,
+   "z": 86.0,
+   "catatan": "pelat lantai"
+  },
+  {
+   "id": "MENARA_PelatL22",
+   "jenis": "kotak",
+   "pos": [
+    -395.0,
+    50.0
+   ],
+   "ukuran": [
+    70,
+    70,
+    0.4
+   ],
+   "mi": "Lantai",
+   "hancur": false,
+   "z": 92.0,
+   "catatan": "pelat lantai"
+  },
+  {
+   "id": "MENARA_PelatL38",
+   "jenis": "kotak",
+   "pos": [
+    -395.0,
+    50.0
+   ],
+   "ukuran": [
+    70,
+    70,
+    0.4
+   ],
+   "mi": "Lantai",
+   "hancur": false,
+   "z": 150.0,
+   "catatan": "pelat lantai"
+  },
+  {
+   "id": "MENARA_PelatL38b",
+   "jenis": "kotak",
+   "pos": [
+    -395.0,
+    50.0
+   ],
+   "ukuran": [
+    70,
+    70,
+    0.4
+   ],
+   "mi": "Lantai",
+   "hancur": false,
+   "z": 158.0,
+   "catatan": "pelat lantai"
+  },
+  {
+   "id": "MENARA_PelatL50",
+   "jenis": "kotak",
+   "pos": [
+    -395.0,
+    50.0
+   ],
+   "ukuran": [
+    70,
+    70,
+    0.4
+   ],
+   "mi": "Lantai",
+   "hancur": false,
+   "z": 200.0,
+   "catatan": "pelat lantai"
+  },
+  {
+   "id": "MENARA_PelatL50b",
+   "jenis": "kotak",
+   "pos": [
+    -395.0,
+    50.0
+   ],
+   "ukuran": [
+    70,
+    70,
+    0.4
+   ],
+   "mi": "Lantai",
+   "hancur": false,
+   "z": 212.0,
+   "catatan": "pelat lantai"
+  },
+  {
+   "id": "MENARA_PelatAtap",
+   "jenis": "kotak",
+   "pos": [
+    -395.0,
+    50.0
+   ],
+   "ukuran": [
+    70,
+    70,
+    0.4
+   ],
+   "mi": "Lantai",
+   "hancur": false,
+   "z": 220.0,
+   "catatan": "pelat lantai"
+  },
+  {
+   "id": "MENARA_IntiBarat",
+   "jenis": "dinding",
+   "dari": [
+    -402.0,
+    43.0
+   ],
+   "ke": [
+    -402.0,
+    57.0
+   ],
+   "tinggi": 228.0,
+   "tebal": 0.8,
+   "mi": "Dinding",
+   "hancur": false,
+   "z": -8.0
+  },
+  {
+   "id": "MENARA_IntiTimur",
+   "jenis": "dinding",
+   "dari": [
+    -388.0,
+    43.0
+   ],
+   "ke": [
+    -388.0,
+    57.0
+   ],
+   "tinggi": 228.0,
+   "tebal": 0.8,
+   "mi": "Dinding",
+   "hancur": false,
+   "z": -8.0
+  },
+  {
+   "id": "MENARA_IntiUtara",
+   "jenis": "dinding",
+   "dari": [
+    -402.0,
+    57.0
+   ],
+   "ke": [
+    -388.0,
+    57.0
+   ],
+   "tinggi": 228.0,
+   "tebal": 0.8,
+   "mi": "Dinding",
+   "hancur": false,
+   "z": -8.0
+  },
+  {
+   "id": "MENARA_IntiSelatan",
+   "jenis": "dinding",
+   "dari": [
+    -402.0,
+    43.0
+   ],
+   "ke": [
+    -388.0,
+    43.0
+   ],
+   "tinggi": 228.0,
+   "tebal": 0.8,
+   "mi": "Dinding",
+   "hancur": false,
+   "z": -8.0
+  },
+  {
+   "id": "MENARA_LiftKabin",
+   "jenis": "kotak",
+   "pos": [
+    -395.0,
+    50.0
+   ],
+   "ukuran": [
+    6,
+    6,
+    3
+   ],
+   "mi": "Lift",
+   "hancur": false,
+   "z": 0.5,
+   "catatan": "kabin lift greybox"
+  },
+  {
+   "id": "MENARA_TanggaB1_01",
+   "jenis": "kotak",
+   "pos": [
+    -395.0,
+    17.0
+   ],
+   "ukuran": [
+    6,
+    0.6,
+    0.5
+   ],
+   "mi": "Tangga",
+   "hancur": false,
+   "z": 0.0,
+   "catatan": "turun ke B1"
+  },
+  {
+   "id": "MENARA_TanggaB1_02",
+   "jenis": "kotak",
+   "pos": [
+    -395.0,
+    17.6
+   ],
+   "ukuran": [
+    6,
+    0.6,
+    0.5
+   ],
+   "mi": "Tangga",
+   "hancur": false,
+   "z": -0.5,
+   "catatan": "turun ke B1"
+  },
+  {
+   "id": "MENARA_TanggaB1_03",
+   "jenis": "kotak",
+   "pos": [
+    -395.0,
+    18.2
+   ],
+   "ukuran": [
+    6,
+    0.6,
+    0.5
+   ],
+   "mi": "Tangga",
+   "hancur": false,
+   "z": -1.0,
+   "catatan": "turun ke B1"
+  },
+  {
+   "id": "MENARA_TanggaB1_04",
+   "jenis": "kotak",
+   "pos": [
+    -395.0,
+    18.8
+   ],
+   "ukuran": [
+    6,
+    0.6,
+    0.5
+   ],
+   "mi": "Tangga",
+   "hancur": false,
+   "z": -1.5,
+   "catatan": "turun ke B1"
+  },
+  {
+   "id": "MENARA_TanggaB1_05",
+   "jenis": "kotak",
+   "pos": [
+    -395.0,
+    19.4
+   ],
+   "ukuran": [
+    6,
+    0.6,
+    0.5
+   ],
+   "mi": "Tangga",
+   "hancur": false,
+   "z": -2.0,
+   "catatan": "turun ke B1"
+  },
+  {
+   "id": "MENARA_TanggaB1_06",
+   "jenis": "kotak",
+   "pos": [
+    -395.0,
+    20.0
+   ],
+   "ukuran": [
+    6,
+    0.6,
+    0.5
+   ],
+   "mi": "Tangga",
+   "hancur": false,
+   "z": -2.5,
+   "catatan": "turun ke B1"
+  },
+  {
+   "id": "MENARA_TanggaB1_07",
+   "jenis": "kotak",
+   "pos": [
+    -395.0,
+    20.6
+   ],
+   "ukuran": [
+    6,
+    0.6,
+    0.5
+   ],
+   "mi": "Tangga",
+   "hancur": false,
+   "z": -3.0,
+   "catatan": "turun ke B1"
+  },
+  {
+   "id": "MENARA_TanggaB1_08",
+   "jenis": "kotak",
+   "pos": [
+    -395.0,
+    21.2
+   ],
+   "ukuran": [
+    6,
+    0.6,
+    0.5
+   ],
+   "mi": "Tangga",
+   "hancur": false,
+   "z": -3.5,
+   "catatan": "turun ke B1"
+  },
+  {
+   "id": "MENARA_TanggaB1_09",
+   "jenis": "kotak",
+   "pos": [
+    -395.0,
+    21.8
+   ],
+   "ukuran": [
+    6,
+    0.6,
+    0.5
+   ],
+   "mi": "Tangga",
+   "hancur": false,
+   "z": -4.0,
+   "catatan": "turun ke B1"
+  },
+  {
+   "id": "MENARA_TanggaB1_10",
+   "jenis": "kotak",
+   "pos": [
+    -395.0,
+    22.4
+   ],
+   "ukuran": [
+    6,
+    0.6,
+    0.5
+   ],
+   "mi": "Tangga",
+   "hancur": false,
+   "z": -4.5,
+   "catatan": "turun ke B1"
+  },
+  {
+   "id": "MENARA_TanggaB1_11",
+   "jenis": "kotak",
+   "pos": [
+    -395.0,
+    23.0
+   ],
+   "ukuran": [
+    6,
+    0.6,
+    0.5
+   ],
+   "mi": "Tangga",
+   "hancur": false,
+   "z": -5.0,
+   "catatan": "turun ke B1"
+  },
+  {
+   "id": "MENARA_TanggaB1_12",
+   "jenis": "kotak",
+   "pos": [
+    -395.0,
+    23.6
+   ],
+   "ukuran": [
+    6,
+    0.6,
+    0.5
+   ],
+   "mi": "Tangga",
+   "hancur": false,
+   "z": -5.5,
+   "catatan": "turun ke B1"
+  },
+  {
+   "id": "MENARA_TanggaB1_13",
+   "jenis": "kotak",
+   "pos": [
+    -395.0,
+    24.2
+   ],
+   "ukuran": [
+    6,
+    0.6,
+    0.5
+   ],
+   "mi": "Tangga",
+   "hancur": false,
+   "z": -6.0,
+   "catatan": "turun ke B1"
+  },
+  {
+   "id": "MENARA_TanggaB1_14",
+   "jenis": "kotak",
+   "pos": [
+    -395.0,
+    24.8
+   ],
+   "ukuran": [
+    6,
+    0.6,
+    0.5
+   ],
+   "mi": "Tangga",
+   "hancur": false,
+   "z": -6.5,
+   "catatan": "turun ke B1"
+  },
+  {
+   "id": "MENARA_TanggaB1_15",
+   "jenis": "kotak",
+   "pos": [
+    -395.0,
+    25.4
+   ],
+   "ukuran": [
+    6,
+    0.6,
+    0.5
+   ],
+   "mi": "Tangga",
+   "hancur": false,
+   "z": -7.0,
+   "catatan": "turun ke B1"
+  },
+  {
+   "id": "MENARA_TanggaB1_16",
+   "jenis": "kotak",
+   "pos": [
+    -395.0,
+    26.0
+   ],
+   "ukuran": [
+    6,
+    0.6,
+    0.5
+   ],
+   "mi": "Tangga",
+   "hancur": false,
+   "z": -7.5,
+   "catatan": "turun ke B1"
+  },
+  {
+   "id": "INT_L20_Partisi1",
+   "jenis": "dinding",
+   "dari": [
+    -424.0,
+    30.0
+   ],
+   "ke": [
+    -424.0,
+    70.0
+   ],
+   "tinggi": 3.0,
+   "tebal": 0.3,
+   "mi": "Interior",
+   "hancur": false,
+   "z": 80.4
+  },
+  {
+   "id": "INT_L20_Partisi2",
+   "jenis": "dinding",
+   "dari": [
+    -424.0,
+    70.0
+   ],
+   "ke": [
+    -366.0,
+    70.0
+   ],
+   "tinggi": 3.0,
+   "tebal": 0.3,
+   "mi": "Interior",
+   "hancur": false,
+   "z": 80.4
+  },
+  {
+   "id": "INT_L21_Partisi1",
+   "jenis": "dinding",
+   "dari": [
+    -424.0,
+    30.0
+   ],
+   "ke": [
+    -424.0,
+    70.0
+   ],
+   "tinggi": 3.0,
+   "tebal": 0.3,
+   "mi": "Interior",
+   "hancur": false,
+   "z": 86.4
+  },
+  {
+   "id": "INT_L21_Partisi2",
+   "jenis": "dinding",
+   "dari": [
+    -424.0,
+    70.0
+   ],
+   "ke": [
+    -366.0,
+    70.0
+   ],
+   "tinggi": 3.0,
+   "tebal": 0.3,
+   "mi": "Interior",
+   "hancur": false,
+   "z": 86.4
+  },
+  {
+   "id": "INT_L22_Partisi1",
+   "jenis": "dinding",
+   "dari": [
+    -424.0,
+    30.0
+   ],
+   "ke": [
+    -424.0,
+    70.0
+   ],
+   "tinggi": 3.0,
+   "tebal": 0.3,
+   "mi": "Interior",
+   "hancur": false,
+   "z": 92.4
+  },
+  {
+   "id": "INT_L22_Partisi2",
+   "jenis": "dinding",
+   "dari": [
+    -424.0,
+    70.0
+   ],
+   "ke": [
+    -366.0,
+    70.0
+   ],
+   "tinggi": 3.0,
+   "tebal": 0.3,
+   "mi": "Interior",
+   "hancur": false,
+   "z": 92.4
+  },
+  {
+   "id": "INT_L38_Partisi1",
+   "jenis": "dinding",
+   "dari": [
+    -424.0,
+    30.0
+   ],
+   "ke": [
+    -424.0,
+    70.0
+   ],
+   "tinggi": 3.0,
+   "tebal": 0.3,
+   "mi": "Interior",
+   "hancur": false,
+   "z": 150.4
+  },
+  {
+   "id": "INT_L38_Partisi2",
+   "jenis": "dinding",
+   "dari": [
+    -424.0,
+    70.0
+   ],
+   "ke": [
+    -366.0,
+    70.0
+   ],
+   "tinggi": 3.0,
+   "tebal": 0.3,
+   "mi": "Interior",
+   "hancur": false,
+   "z": 150.4
+  },
+  {
+   "id": "INT_L50_Partisi1",
+   "jenis": "dinding",
+   "dari": [
+    -424.0,
+    30.0
+   ],
+   "ke": [
+    -424.0,
+    70.0
+   ],
+   "tinggi": 3.0,
+   "tebal": 0.3,
+   "mi": "Interior",
+   "hancur": false,
+   "z": 200.4
+  },
+  {
+   "id": "INT_L50_Partisi2",
+   "jenis": "dinding",
+   "dari": [
+    -424.0,
+    70.0
+   ],
+   "ke": [
+    -366.0,
+    70.0
+   ],
+   "tinggi": 3.0,
+   "tebal": 0.3,
+   "mi": "Interior",
+   "hancur": false,
+   "z": 200.4
+  },
+  {
+   "id": "INT_B1_Panel1",
+   "jenis": "kotak",
+   "pos": [
+    -420.0,
+    27.0
+   ],
+   "ukuran": [
+    2,
+    1,
+    2.5
+   ],
+   "mi": "Alat",
+   "hancur": false,
+   "z": -8.0,
+   "catatan": "panel listrik ★1"
+  },
+  {
+   "id": "INT_B1_Panel2",
+   "jenis": "kotak",
+   "pos": [
+    -414.0,
+    27.0
+   ],
+   "ukuran": [
+    2,
+    1,
+    2.5
+   ],
+   "mi": "Alat",
+   "hancur": false,
+   "z": -8.0,
+   "catatan": "panel listrik ★1"
+  },
+  {
+   "id": "INT_B1_Panel3",
+   "jenis": "kotak",
+   "pos": [
+    -408.0,
+    27.0
+   ],
+   "ukuran": [
+    2,
+    1,
+    2.5
+   ],
+   "mi": "Alat",
+   "hancur": false,
+   "z": -8.0,
+   "catatan": "panel listrik ★1"
+  },
+  {
+   "id": "INT_B1_Panel4",
+   "jenis": "kotak",
+   "pos": [
+    -402.0,
+    27.0
+   ],
+   "ukuran": [
+    2,
+    1,
+    2.5
+   ],
+   "mi": "Alat",
+   "hancur": false,
+   "z": -8.0,
+   "catatan": "panel listrik ★1"
+  },
+  {
+   "id": "INT_L38_Koleksi1",
+   "jenis": "kotak",
+   "pos": [
+    -372.0,
+    42.0
+   ],
+   "ukuran": [
+    3,
+    3,
+    2
+   ],
+   "mi": "Kayu",
+   "hancur": false,
+   "z": 150.4,
+   "catatan": "lemari koleksi ○ + kujang (H8)"
+  },
+  {
+   "id": "INT_L38_Koleksi2",
+   "jenis": "kotak",
+   "pos": [
+    -372.0,
+    50.0
+   ],
+   "ukuran": [
+    3,
+    3,
+    2
+   ],
+   "mi": "Kayu",
+   "hancur": false,
+   "z": 150.4,
+   "catatan": "lemari koleksi ○ + kujang (H8)"
+  },
+  {
+   "id": "INT_L38_Koleksi3",
+   "jenis": "kotak",
+   "pos": [
+    -372.0,
+    58.0
+   ],
+   "ukuran": [
+    3,
+    3,
+    2
+   ],
+   "mi": "Kayu",
+   "hancur": false,
+   "z": 150.4,
+   "catatan": "lemari koleksi ○ + kujang (H8)"
+  },
+  {
+   "id": "INT_L50_Server1",
+   "jenis": "kotak",
+   "pos": [
+    -420.0,
+    68.0
+   ],
+   "ukuran": [
+    1.2,
+    2.4,
+    3
+   ],
+   "mi": "Alat",
+   "hancur": false,
+   "z": 200.4,
+   "catatan": "rak server ★2"
+  },
+  {
+   "id": "INT_L50_Server2",
+   "jenis": "kotak",
+   "pos": [
+    -416.0,
+    68.0
+   ],
+   "ukuran": [
+    1.2,
+    2.4,
+    3
+   ],
+   "mi": "Alat",
+   "hancur": false,
+   "z": 200.4,
+   "catatan": "rak server ★2"
+  },
+  {
+   "id": "INT_L50_Server3",
+   "jenis": "kotak",
+   "pos": [
+    -412.0,
+    68.0
+   ],
+   "ukuran": [
+    1.2,
+    2.4,
+    3
+   ],
+   "mi": "Alat",
+   "hancur": false,
+   "z": 200.4,
+   "catatan": "rak server ★2"
+  },
+  {
+   "id": "INT_L50_Server4",
+   "jenis": "kotak",
+   "pos": [
+    -408.0,
+    68.0
+   ],
+   "ukuran": [
+    1.2,
+    2.4,
+    3
+   ],
+   "mi": "Alat",
+   "hancur": false,
+   "z": 200.4,
+   "catatan": "rak server ★2"
+  },
+  {
+   "id": "INT_L50_Server5",
+   "jenis": "kotak",
+   "pos": [
+    -404.0,
+    68.0
+   ],
+   "ukuran": [
+    1.2,
+    2.4,
+    3
+   ],
+   "mi": "Alat",
+   "hancur": false,
+   "z": 200.4,
+   "catatan": "rak server ★2"
+  },
+  {
+   "id": "INT_L50_Server6",
+   "jenis": "kotak",
+   "pos": [
+    -400.0,
+    68.0
+   ],
+   "ukuran": [
+    1.2,
+    2.4,
+    3
+   ],
+   "mi": "Alat",
+   "hancur": false,
+   "z": 200.4,
+   "catatan": "rak server ★2"
+  },
+  {
+   "id": "MENARA_ParapetSelatan",
+   "jenis": "kotak",
+   "pos": [
+    -395.0,
+    15.0
+   ],
+   "ukuran": [
+    70,
+    1,
+    1.2
+   ],
+   "mi": "Dinding",
+   "hancur": false,
+   "z": 220.0
+  },
+  {
+   "id": "MENARA_ParapetUtara",
+   "jenis": "kotak",
+   "pos": [
+    -395.0,
+    85.0
+   ],
+   "ukuran": [
+    70,
+    1,
+    1.2
+   ],
+   "mi": "Dinding",
+   "hancur": false,
+   "z": 220.0
+  },
+  {
+   "id": "MENARA_ParapetBarat",
+   "jenis": "kotak",
+   "pos": [
+    -430.0,
+    50.0
+   ],
+   "ukuran": [
+    1,
+    70,
+    1.2
+   ],
+   "mi": "Dinding",
+   "hancur": false,
+   "z": 220.0
+  },
+  {
+   "id": "MENARA_ParapetTimur",
+   "jenis": "kotak",
+   "pos": [
+    -360.0,
+    50.0
+   ],
+   "ukuran": [
+    1,
+    70,
+    1.2
+   ],
+   "mi": "Dinding",
+   "hancur": false,
+   "z": 220.0
+  },
+  {
+   "id": "MENARA_Antena",
+   "jenis": "kotak",
+   "pos": [
+    -395.0,
+    50.0
+   ],
+   "ukuran": [
+    2,
+    2,
+    18
+   ],
+   "mi": "Alat",
+   "hancur": false,
+   "z": 220.0,
+   "catatan": "antena atap"
+  },
+  {
+   "id": "KACA_Menara180",
+   "jenis": "kotak",
+   "pos": [
+    180.0,
+    105.0
+   ],
+   "ukuran": [
+    40.0,
+    40.0,
+    180.0
+   ],
+   "mi": "MenaraKaca",
+   "hancur": false,
+   "catatan": "landmark 180 m; jangan dijatuhkan saat mencabut G1",
+   "alas_m": 0.0
+  },
+  {
+   "id": "APARTEMEN_70",
+   "jenis": "kotak",
+   "pos": [
+    520.0,
+    -100.0
+   ],
+   "ukuran": [
+    40.0,
+    60.0,
+    70.0
+   ],
+   "mi": "Apartemen",
+   "hancur": false,
+   "catatan": "landmark 70 m di samping G2",
+   "alas_m": 0.0
+  },
+  {
+   "id": "GARDU_G1_Bangunan",
+   "jenis": "kotak",
+   "pos": [
+    100.0,
+    105.0
+   ],
+   "ukuran": [
+    70.0,
+    50.0,
+    30
+   ],
+   "mi": "Gardu",
+   "hancur": false,
+   "gardu": "G1",
+   "objektif": true,
+   "catatan": "G1: gardu bisa diputus",
+   "alas_m": 0.0
+  },
+  {
+   "id": "GARDU_G1_Trafo1",
+   "jenis": "kotak",
+   "pos": [
+    80.0,
+    95.0
+   ],
+   "ukuran": [
+    10,
+    8,
+    4
+   ],
+   "mi": "Alat",
+   "hancur": false,
+   "gardu": "G1",
+   "catatan": "trafo",
+   "alas_m": 0.0
+  },
+  {
+   "id": "GARDU_G1_Trafo2",
+   "jenis": "kotak",
+   "pos": [
+    100.0,
+    95.0
+   ],
+   "ukuran": [
+    10,
+    8,
+    4
+   ],
+   "mi": "Alat",
+   "hancur": false,
+   "gardu": "G1",
+   "catatan": "trafo",
+   "alas_m": 0.0
+  },
+  {
+   "id": "GARDU_G1_Trafo3",
+   "jenis": "kotak",
+   "pos": [
+    120.0,
+    95.0
+   ],
+   "ukuran": [
+    10,
+    8,
+    4
+   ],
+   "mi": "Alat",
+   "hancur": false,
+   "gardu": "G1",
+   "catatan": "trafo",
+   "alas_m": 0.0
+  },
+  {
+   "id": "GARDU_G1_PagarU",
+   "jenis": "dinding",
+   "dari": [
+    61.0,
+    134.0
+   ],
+   "ke": [
+    139.0,
+    134.0
+   ],
+   "tinggi": 3,
+   "tebal": 0.3,
+   "mi": "Alat",
+   "hancur": false,
+   "gardu": "G1",
+   "alas_m": 0.0
+  },
+  {
+   "id": "GARDU_G1_PagarS",
+   "jenis": "dinding",
+   "dari": [
+    61.0,
+    76.0
+   ],
+   "ke": [
+    139.0,
+    76.0
+   ],
+   "tinggi": 3,
+   "tebal": 0.3,
+   "mi": "Alat",
+   "hancur": false,
+   "gardu": "G1",
+   "alas_m": 0.0
+  },
+  {
+   "id": "GARDU_G1_PagarB",
+   "jenis": "dinding",
+   "dari": [
+    61.0,
+    76.0
+   ],
+   "ke": [
+    61.0,
+    134.0
+   ],
+   "tinggi": 3,
+   "tebal": 0.3,
+   "mi": "Alat",
+   "hancur": false,
+   "gardu": "G1",
+   "alas_m": 0.0
+  },
+  {
+   "id": "GARDU_G1_PagarT",
+   "jenis": "dinding",
+   "dari": [
+    139.0,
+    76.0
+   ],
+   "ke": [
+    139.0,
+    134.0
+   ],
+   "tinggi": 3,
+   "tebal": 0.3,
+   "mi": "Alat",
+   "hancur": false,
+   "gardu": "G1",
+   "alas_m": 0.0
+  },
+  {
+   "id": "GARDU_G1_Tiang1",
+   "jenis": "kotak",
+   "pos": [
+    67.0,
+    128.0
+   ],
+   "ukuran": [
+    2,
+    2,
+    22
+   ],
+   "mi": "Alat",
+   "hancur": false,
+   "gardu": "G1",
+   "alas_m": 0.0
+  },
+  {
+   "id": "GARDU_G1_Tiang2",
+   "jenis": "kotak",
+   "pos": [
+    133.0,
+    82.0
+   ],
+   "ukuran": [
+    2,
+    2,
+    22
+   ],
+   "mi": "Alat",
+   "hancur": false,
+   "gardu": "G1",
+   "alas_m": 0.0
+  },
+  {
+   "id": "GARDU_G2_Bangunan",
+   "jenis": "kotak",
+   "pos": [
+    600.0,
+    -100.0
+   ],
+   "ukuran": [
+    70.0,
+    50.0,
+    30
+   ],
+   "mi": "Gardu",
+   "hancur": false,
+   "gardu": "G2",
+   "objektif": true,
+   "catatan": "G2: gardu bisa diputus",
+   "alas_m": 0.0
+  },
+  {
+   "id": "GARDU_G2_Trafo1",
+   "jenis": "kotak",
+   "pos": [
+    580.0,
+    -110.0
+   ],
+   "ukuran": [
+    10,
+    8,
+    4
+   ],
+   "mi": "Alat",
+   "hancur": false,
+   "gardu": "G2",
+   "catatan": "trafo",
+   "alas_m": 0.0
+  },
+  {
+   "id": "GARDU_G2_Trafo2",
+   "jenis": "kotak",
+   "pos": [
+    600.0,
+    -110.0
+   ],
+   "ukuran": [
+    10,
+    8,
+    4
+   ],
+   "mi": "Alat",
+   "hancur": false,
+   "gardu": "G2",
+   "catatan": "trafo",
+   "alas_m": 0.0
+  },
+  {
+   "id": "GARDU_G2_Trafo3",
+   "jenis": "kotak",
+   "pos": [
+    620.0,
+    -110.0
+   ],
+   "ukuran": [
+    10,
+    8,
+    4
+   ],
+   "mi": "Alat",
+   "hancur": false,
+   "gardu": "G2",
+   "catatan": "trafo",
+   "alas_m": 0.0
+  },
+  {
+   "id": "GARDU_G2_PagarU",
+   "jenis": "dinding",
+   "dari": [
+    561.0,
+    -71.0
+   ],
+   "ke": [
+    639.0,
+    -71.0
+   ],
+   "tinggi": 3,
+   "tebal": 0.3,
+   "mi": "Alat",
+   "hancur": false,
+   "gardu": "G2",
+   "alas_m": 0.0
+  },
+  {
+   "id": "GARDU_G2_PagarS",
+   "jenis": "dinding",
+   "dari": [
+    561.0,
+    -129.0
+   ],
+   "ke": [
+    639.0,
+    -129.0
+   ],
+   "tinggi": 3,
+   "tebal": 0.3,
+   "mi": "Alat",
+   "hancur": false,
+   "gardu": "G2",
+   "alas_m": 0.0
+  },
+  {
+   "id": "GARDU_G2_PagarB",
+   "jenis": "dinding",
+   "dari": [
+    561.0,
+    -129.0
+   ],
+   "ke": [
+    561.0,
+    -71.0
+   ],
+   "tinggi": 3,
+   "tebal": 0.3,
+   "mi": "Alat",
+   "hancur": false,
+   "gardu": "G2",
+   "alas_m": 0.0
+  },
+  {
+   "id": "GARDU_G2_PagarT",
+   "jenis": "dinding",
+   "dari": [
+    639.0,
+    -129.0
+   ],
+   "ke": [
+    639.0,
+    -71.0
+   ],
+   "tinggi": 3,
+   "tebal": 0.3,
+   "mi": "Alat",
+   "hancur": false,
+   "gardu": "G2",
+   "alas_m": 0.0
+  },
+  {
+   "id": "GARDU_G2_Tiang1",
+   "jenis": "kotak",
+   "pos": [
+    567.0,
+    -77.0
+   ],
+   "ukuran": [
+    2,
+    2,
+    22
+   ],
+   "mi": "Alat",
+   "hancur": false,
+   "gardu": "G2",
+   "alas_m": 0.0
+  },
+  {
+   "id": "GARDU_G2_Tiang2",
+   "jenis": "kotak",
+   "pos": [
+    633.0,
+    -123.0
+   ],
+   "ukuran": [
+    2,
+    2,
+    22
+   ],
+   "mi": "Alat",
+   "hancur": false,
+   "gardu": "G2",
+   "alas_m": 0.0
+  },
+  {
+   "id": "GARDU_G3_Bangunan",
+   "jenis": "kotak",
+   "pos": [
+    900.0,
+    60.0
+   ],
+   "ukuran": [
+    70.0,
+    50.0,
+    30
+   ],
+   "mi": "Gardu",
+   "hancur": false,
+   "gardu": "G3",
+   "objektif": true,
+   "catatan": "G3: gardu bisa diputus",
+   "alas_m": 0.0
+  },
+  {
+   "id": "GARDU_G3_Trafo1",
+   "jenis": "kotak",
+   "pos": [
+    880.0,
+    50.0
+   ],
+   "ukuran": [
+    10,
+    8,
+    4
+   ],
+   "mi": "Alat",
+   "hancur": false,
+   "gardu": "G3",
+   "catatan": "trafo",
+   "alas_m": 0.0
+  },
+  {
+   "id": "GARDU_G3_Trafo2",
+   "jenis": "kotak",
+   "pos": [
+    900.0,
+    50.0
+   ],
+   "ukuran": [
+    10,
+    8,
+    4
+   ],
+   "mi": "Alat",
+   "hancur": false,
+   "gardu": "G3",
+   "catatan": "trafo",
+   "alas_m": 0.0
+  },
+  {
+   "id": "GARDU_G3_Trafo3",
+   "jenis": "kotak",
+   "pos": [
+    920.0,
+    50.0
+   ],
+   "ukuran": [
+    10,
+    8,
+    4
+   ],
+   "mi": "Alat",
+   "hancur": false,
+   "gardu": "G3",
+   "catatan": "trafo",
+   "alas_m": 0.0
+  },
+  {
+   "id": "GARDU_G3_PagarU",
+   "jenis": "dinding",
+   "dari": [
+    861.0,
+    89.0
+   ],
+   "ke": [
+    939.0,
+    89.0
+   ],
+   "tinggi": 3,
+   "tebal": 0.3,
+   "mi": "Alat",
+   "hancur": false,
+   "gardu": "G3",
+   "alas_m": 0.0
+  },
+  {
+   "id": "GARDU_G3_PagarS",
+   "jenis": "dinding",
+   "dari": [
+    861.0,
+    31.0
+   ],
+   "ke": [
+    939.0,
+    31.0
+   ],
+   "tinggi": 3,
+   "tebal": 0.3,
+   "mi": "Alat",
+   "hancur": false,
+   "gardu": "G3",
+   "alas_m": 0.0
+  },
+  {
+   "id": "GARDU_G3_PagarB",
+   "jenis": "dinding",
+   "dari": [
+    861.0,
+    31.0
+   ],
+   "ke": [
+    861.0,
+    89.0
+   ],
+   "tinggi": 3,
+   "tebal": 0.3,
+   "mi": "Alat",
+   "hancur": false,
+   "gardu": "G3",
+   "alas_m": 0.0
+  },
+  {
+   "id": "GARDU_G3_PagarT",
+   "jenis": "dinding",
+   "dari": [
+    939.0,
+    31.0
+   ],
+   "ke": [
+    939.0,
+    89.0
+   ],
+   "tinggi": 3,
+   "tebal": 0.3,
+   "mi": "Alat",
+   "hancur": false,
+   "gardu": "G3",
+   "alas_m": 0.0
+  },
+  {
+   "id": "GARDU_G3_Tiang1",
+   "jenis": "kotak",
+   "pos": [
+    867.0,
+    83.0
+   ],
+   "ukuran": [
+    2,
+    2,
+    22
+   ],
+   "mi": "Alat",
+   "hancur": false,
+   "gardu": "G3",
+   "alas_m": 0.0
+  },
+  {
+   "id": "GARDU_G3_Tiang2",
+   "jenis": "kotak",
+   "pos": [
+    933.0,
+    37.0
+   ],
+   "ukuran": [
+    2,
+    2,
+    22
+   ],
+   "mi": "Alat",
+   "hancur": false,
+   "gardu": "G3",
+   "alas_m": 0.0
+  },
+  {
+   "id": "PLAZA_AirMancurBak",
+   "jenis": "kotak",
+   "pos": [
+    -600,
+    -70
+   ],
+   "ukuran": [
+    24,
+    24,
+    1
+   ],
+   "mi": "AirMancur",
+   "hancur": false,
+   "catatan": "air mancur plaza (digeser ke selatan boulevard)",
+   "alas_m": 0.0
+  },
+  {
+   "id": "PLAZA_AirMancurAir",
+   "jenis": "bidang",
+   "pos": [
+    -600,
+    -70
+   ],
+   "ukuran": [
+    20,
+    20
+   ],
+   "mi": "AirMancur",
+   "hancur": false,
+   "z": 1.05,
+   "tanpa_tabrakan": true
+  },
+  {
+   "id": "PLAZA_AirMancurPilar",
+   "jenis": "kotak",
+   "pos": [
+    -600,
+    -70
+   ],
+   "ukuran": [
+    2,
+    2,
+    7
+   ],
+   "mi": "AirMancur",
+   "hancur": false,
+   "z": 1.0
+  },
+  {
+   "id": "PLAZA_VideotronLayar",
+   "jenis": "kotak",
+   "pos": [
+    -540,
+    -120
+   ],
+   "ukuran": [
+    20,
+    2,
+    12
+   ],
+   "mi": "Videotron",
+   "hancur": false,
+   "z": 8.0,
+   "catatan": "berita Entitas D"
+  },
+  {
+   "id": "PLAZA_VideotronKaki1",
+   "jenis": "kotak",
+   "pos": [
+    -548,
+    -120
+   ],
+   "ukuran": [
+    1,
+    1,
+    8
+   ],
+   "mi": "Alat",
+   "hancur": false,
+   "alas_m": 0.0
+  },
+  {
+   "id": "PLAZA_VideotronKaki2",
+   "jenis": "kotak",
+   "pos": [
+    -532,
+    -120
+   ],
+   "ukuran": [
+    1,
+    1,
+    8
+   ],
+   "mi": "Alat",
+   "hancur": false,
+   "alas_m": 0.0
+  },
+  {
+   "id": "TOLGATE_Kanopi",
+   "jenis": "kotak",
+   "pos": [
+    -1020,
+    310
+   ],
+   "ukuran": [
+    70,
+    28,
+    1.5
+   ],
+   "mi": "Tol",
+   "hancur": false,
+   "z": 22.0,
+   "catatan": "gerbang tol barat"
+  },
+  {
+   "id": "JALAN_MobilDWARA",
+   "jenis": "kotak",
+   "pos": [
+    -1005,
+    -18
+   ],
+   "ukuran": [
+    5,
+    2,
+    1.8
+   ],
+   "mi": "Mobil",
+   "hancur": false,
+   "catatan": "START di sampingnya",
+   "alas_m": 0.0
+  },
+  {
+   "id": "TOLGATE_Bilik1",
+   "jenis": "kotak",
+   "pos": [
+    -1050,
+    310
+   ],
+   "ukuran": [
+    6,
+    8,
+    3
+   ],
+   "mi": "Tol",
+   "hancur": false,
+   "z": 0.0
+  },
+  {
+   "id": "TOLGATE_Bilik2",
+   "jenis": "kotak",
+   "pos": [
+    -1038,
+    310
+   ],
+   "ukuran": [
+    6,
+    8,
+    3
+   ],
+   "mi": "Tol",
+   "hancur": false,
+   "z": 0.0
+  },
+  {
+   "id": "TOLGATE_Bilik3",
+   "jenis": "kotak",
+   "pos": [
+    -1026,
+    310
+   ],
+   "ukuran": [
+    6,
+    8,
+    3
+   ],
+   "mi": "Tol",
+   "hancur": false,
+   "z": 0.0
+  },
+  {
+   "id": "TOLGATE_Bilik4",
+   "jenis": "kotak",
+   "pos": [
+    -1014,
+    310
+   ],
+   "ukuran": [
+    6,
+    8,
+    3
+   ],
+   "mi": "Tol",
+   "hancur": false,
+   "z": 0.0
+  },
+  {
+   "id": "TOLGATE_Bilik5",
+   "jenis": "kotak",
+   "pos": [
+    -1002,
+    310
+   ],
+   "ukuran": [
+    6,
+    8,
+    3
+   ],
+   "mi": "Tol",
+   "hancur": false,
+   "z": 0.0
+  },
+  {
+   "id": "TOLGATE_Bilik6",
+   "jenis": "kotak",
+   "pos": [
+    -990,
+    310
+   ],
+   "ukuran": [
+    6,
+    8,
+    3
+   ],
+   "mi": "Tol",
+   "hancur": false,
+   "z": 0.0
+  },
+  {
+   "id": "JALAN_Barikade1",
+   "jenis": "kotak",
+   "pos": [
+    -1050,
+    -8
+   ],
+   "ukuran": [
+    3,
+    1,
+    1.2
+   ],
+   "mi": "Penanda",
+   "hancur": false,
+   "catatan": "barikade polisi",
+   "alas_m": 0.0
+  },
+  {
+   "id": "JALAN_Barikade2",
+   "jenis": "kotak",
+   "pos": [
+    -1050,
+    0
+   ],
+   "ukuran": [
+    3,
+    1,
+    1.2
+   ],
+   "mi": "Penanda",
+   "hancur": false,
+   "catatan": "barikade polisi",
+   "alas_m": 0.0
+  },
+  {
+   "id": "JALAN_Barikade3",
+   "jenis": "kotak",
+   "pos": [
+    -1050,
+    8
+   ],
+   "ukuran": [
+    3,
+    1,
+    1.2
+   ],
+   "mi": "Penanda",
+   "hancur": false,
+   "catatan": "barikade polisi",
+   "alas_m": 0.0
+  },
+  {
+   "id": "RAMP_Tol01",
+   "jenis": "kotak",
+   "pos": [
+    -1093.8,
+    -243.4
+   ],
+   "ukuran": [
+    26.79,
+    12,
+    0.6
+   ],
+   "mi": "Jalan",
+   "hancur": false,
+   "z": 7.6,
+   "yaw": 61.61,
+   "catatan": "ramp turun dari jalan layang tol"
+  },
+  {
+   "id": "RAMP_Tol02",
+   "jenis": "kotak",
+   "pos": [
+    -1081.8,
+    -220.2
+   ],
+   "ukuran": [
+    26.56,
+    12,
+    0.6
+   ],
+   "mi": "Jalan",
+   "hancur": false,
+   "z": 6.8,
+   "yaw": 63.82,
+   "catatan": "ramp turun dari jalan layang tol"
+  },
+  {
+   "id": "RAMP_Tol03",
+   "jenis": "kotak",
+   "pos": [
+    -1070.8,
+    -196.7
+   ],
+   "ukuran": [
+    26.38,
+    12,
+    0.6
+   ],
+   "mi": "Jalan",
+   "hancur": false,
+   "z": 6.0,
+   "yaw": 66.06,
+   "catatan": "ramp turun dari jalan layang tol"
+  },
+  {
+   "id": "RAMP_Tol04",
+   "jenis": "kotak",
+   "pos": [
+    -1060.8,
+    -172.9
+   ],
+   "ukuran": [
+    26.23,
+    12,
+    0.6
+   ],
+   "mi": "Jalan",
+   "hancur": false,
+   "z": 5.2,
+   "yaw": 68.33,
+   "catatan": "ramp turun dari jalan layang tol"
+  },
+  {
+   "id": "RAMP_Tol05",
+   "jenis": "kotak",
+   "pos": [
+    -1051.8,
+    -148.8
+   ],
+   "ukuran": [
+    26.12,
+    12,
+    0.6
+   ],
+   "mi": "Jalan",
+   "hancur": false,
+   "z": 4.4,
+   "yaw": 70.62,
+   "catatan": "ramp turun dari jalan layang tol"
+  },
+  {
+   "id": "RAMP_Tol06",
+   "jenis": "kotak",
+   "pos": [
+    -1043.8,
+    -124.5
+   ],
+   "ukuran": [
+    26.06,
+    12,
+    0.6
+   ],
+   "mi": "Jalan",
+   "hancur": false,
+   "z": 3.6,
+   "yaw": 72.93,
+   "catatan": "ramp turun dari jalan layang tol"
+  },
+  {
+   "id": "RAMP_Tol07",
+   "jenis": "kotak",
+   "pos": [
+    -1036.8,
+    -100.0
+   ],
+   "ukuran": [
+    26.03,
+    12,
+    0.6
+   ],
+   "mi": "Jalan",
+   "hancur": false,
+   "z": 2.8,
+   "yaw": 75.25,
+   "catatan": "ramp turun dari jalan layang tol"
+  },
+  {
+   "id": "RAMP_Tol08",
+   "jenis": "kotak",
+   "pos": [
+    -1030.8,
+    -75.2
+   ],
+   "ukuran": [
+    26.05,
+    12,
+    0.6
+   ],
+   "mi": "Jalan",
+   "hancur": false,
+   "z": 2.0,
+   "yaw": 77.57,
+   "catatan": "ramp turun dari jalan layang tol"
+  },
+  {
+   "id": "RAMP_Tol09",
+   "jenis": "kotak",
+   "pos": [
+    -1025.8,
+    -50.1
+   ],
+   "ukuran": [
+    26.11,
+    12,
+    0.6
+   ],
+   "mi": "Jalan",
+   "hancur": false,
+   "z": 1.2,
+   "yaw": 79.88,
+   "catatan": "ramp turun dari jalan layang tol"
+  },
+  {
+   "id": "RAMP_Tol10",
+   "jenis": "kotak",
+   "pos": [
+    -1021.8,
+    -24.7
+   ],
+   "ukuran": [
+    26.21,
+    12,
+    0.6
+   ],
+   "mi": "Jalan",
+   "hancur": false,
+   "z": 0.4,
+   "yaw": 82.18,
+   "catatan": "ramp turun dari jalan layang tol"
+  },
+  {
+   "id": "PROYEK_Derek1_Mast",
+   "jenis": "kotak",
+   "pos": [
+    780,
+    150
+   ],
+   "ukuran": [
+    3,
+    3,
+    60
+   ],
+   "mi": "Derek",
+   "hancur": false,
+   "catatan": "derek tower 60 m",
+   "alas_m": 0.0
+  },
+  {
+   "id": "PROYEK_Derek1_Jib",
+   "jenis": "kotak",
+   "pos": [
+    800,
+    150
+   ],
+   "ukuran": [
+    40,
+    2,
+    2
+   ],
+   "mi": "Derek",
+   "hancur": false,
+   "z": 60.0
+  },
+  {
+   "id": "PROYEK_Derek1_Penyeimbang",
+   "jenis": "kotak",
+   "pos": [
+    772,
+    150
+   ],
+   "ukuran": [
+    10,
+    3,
+    3
+   ],
+   "mi": "Derek",
+   "hancur": false,
+   "z": 58.0
+  },
+  {
+   "id": "PROYEK_Derek2_Mast",
+   "jenis": "kotak",
+   "pos": [
+    880,
+    -80
+   ],
+   "ukuran": [
+    3,
+    3,
+    60
+   ],
+   "mi": "Derek",
+   "hancur": false,
+   "catatan": "derek tower 60 m",
+   "alas_m": 0.0
+  },
+  {
+   "id": "PROYEK_Derek2_Jib",
+   "jenis": "kotak",
+   "pos": [
+    900,
+    -80
+   ],
+   "ukuran": [
+    40,
+    2,
+    2
+   ],
+   "mi": "Derek",
+   "hancur": false,
+   "z": 60.0
+  },
+  {
+   "id": "PROYEK_Derek2_Penyeimbang",
+   "jenis": "kotak",
+   "pos": [
+    872,
+    -80
+   ],
+   "ukuran": [
+    10,
+    3,
+    3
+   ],
+   "mi": "Derek",
+   "hancur": false,
+   "z": 58.0
+  },
+  {
+   "id": "PROYEK_Derek3_Mast",
+   "jenis": "kotak",
+   "pos": [
+    980,
+    180
+   ],
+   "ukuran": [
+    3,
+    3,
+    60
+   ],
+   "mi": "Derek",
+   "hancur": false,
+   "catatan": "derek tower 60 m",
+   "alas_m": 0.0
+  },
+  {
+   "id": "PROYEK_Derek3_Jib",
+   "jenis": "kotak",
+   "pos": [
+    1000,
+    180
+   ],
+   "ukuran": [
+    40,
+    2,
+    2
+   ],
+   "mi": "Derek",
+   "hancur": false,
+   "z": 60.0
+  },
+  {
+   "id": "PROYEK_Derek3_Penyeimbang",
+   "jenis": "kotak",
+   "pos": [
+    972,
+    180
+   ],
+   "ukuran": [
+    10,
+    3,
+    3
+   ],
+   "mi": "Derek",
+   "hancur": false,
+   "z": 58.0
+  },
+  {
+   "id": "AIR_KanalBanjir",
+   "jenis": "bidang",
+   "pos": [
+    1080,
+    0
+   ],
+   "ukuran": [
+    40,
+    592
+   ],
+   "mi": "Air",
+   "hancur": false,
+   "z": -1.5,
+   "tanpa_tabrakan": true,
+   "catatan": "Kanal Banjir Timur; dangkal untuk raksasa, zona aman"
+  }
+ ],
+ "kelompok": [
+  {
+   "id": "KACA_Menara",
+   "bentuk": "kotak",
+   "mi": "MenaraKaca",
+   "hancur": false,
+   "item": [
+    [
+     -270.05,
+     -263.82,
+     39.9,
+     42.35,
+     90,
+     2.58
+    ],
+    [
+     -267.34,
+     -209.1,
+     45.33,
+     41.79,
+     130,
+     1.66
+    ],
+    [
+     -270.4,
+     66.54,
+     39.2,
+     43.08,
+     180,
+     0.38
+    ],
+    [
+     -267.3,
+     120.56,
+     45.41,
+     41.12,
+     60,
+     2.6
+    ],
+    [
+     -214.11,
+     -263.12,
+     41.78,
+     43.75,
+     110,
+     0.88
+    ],
+    [
+     -214.32,
+     67.33,
+     41.37,
+     44.67,
+     130,
+     -3.79
+    ],
+    [
+     -214.6,
+     121.34,
+     40.81,
+     42.68,
+     130,
+     1.13
+    ],
+    [
+     -159.69,
+     -263.83,
+     40.61,
+     42.33,
+     130,
+     1.06
+    ],
+    [
+     -158.72,
+     -208.14,
+     42.55,
+     43.71,
+     75,
+     1.66
+    ],
+    [
+     -160.92,
+     65.71,
+     38.16,
+     41.42,
+     110,
+     -0.76
+    ],
+    [
+     -157.51,
+     119.18,
+     44.98,
+     38.35,
+     130,
+     0.09
+    ],
+    [
+     -48.47,
+     -99.67,
+     43.07,
+     40.66,
+     90,
+     2.14
+    ],
+    [
+     -48.28,
+     -44.59,
+     43.43,
+     40.82,
+     150,
+     -0.41
+    ],
+    [
+     -50.76,
+     66.7,
+     38.48,
+     43.41,
+     90,
+     3.39
+    ],
+    [
+     -49.75,
+     230.48,
+     40.5,
+     40.95,
+     130,
+     0.18
+    ],
+    [
+     5.31,
+     -98.29,
+     40.62,
+     43.42,
+     150,
+     3.27
+    ],
+    [
+     6.79,
+     -45.59,
+     43.58,
+     38.81,
+     90,
+     2.0
+    ],
+    [
+     7.15,
+     229.14,
+     44.3,
+     38.27,
+     75,
+     -2.04
+    ],
+    [
+     117.85,
+     -263.82,
+     45.71,
+     42.35,
+     75,
+     2.93
+    ],
+    [
+     170.41,
+     -265.21,
+     40.81,
+     39.58,
+     130,
+     1.41
+    ],
+    [
+     172.55,
+     -210.52,
+     45.1,
+     38.95,
+     75,
+     3.28
+    ],
+    [
+     169.2,
+     230.93,
+     38.4,
+     41.86,
+     60,
+     3.13
+    ],
+    [
+     95.61,
+     -209.81,
+     31.23,
+     33.54,
+     180,
+     2.02
+    ],
+    [
+     -218.93,
+     -217.32,
+     32.15,
+     32.88,
+     180,
+     -3.73
+    ],
+    [
+     -219.96,
+     -35.84,
+     30.08,
+     30.59,
+     75,
+     -0.29
+    ],
+    [
+     4.58,
+     -142.83,
+     29.17,
+     29.19,
+     180,
+     1.54
+    ],
+    [
+     -39.25,
+     -141.51,
+     31.5,
+     31.31,
+     180,
+     -1.04
+    ],
+    [
+     -174.34,
+     -33.46,
+     31.32,
+     28.95,
+     75,
+     -3.07
+    ],
+    [
+     -264.42,
+     -33.68,
+     31.16,
+     28.37,
+     130,
+     -3.13
+    ]
+   ]
+  },
+  {
+   "id": "APARTEMEN_Blok",
+   "bentuk": "kotak",
+   "mi": "Apartemen",
+   "hancur": false,
+   "item": [
+    [
+     323.5,
+     -264.72,
+     37.01,
+     40.56,
+     50,
+     -1.6
+    ],
+    [
+     325.37,
+     -212.51,
+     40.73,
+     34.97,
+     20,
+     2.47
+    ],
+    [
+     324.32,
+     -99.81,
+     38.63,
+     40.39,
+     20,
+     1.68
+    ],
+    [
+     325.98,
+     -45.75,
+     41.97,
+     38.51,
+     85,
+     -0.72
+    ],
+    [
+     380.76,
+     -265.77,
+     41.51,
+     38.45,
+     20,
+     -1.07
+    ],
+    [
+     378.5,
+     -212.06,
+     37.0,
+     35.88,
+     70,
+     -1.28
+    ],
+    [
+     379.76,
+     -99.98,
+     39.53,
+     40.05,
+     85,
+     -3.27
+    ],
+    [
+     379.74,
+     -47.38,
+     39.48,
+     35.25,
+     70,
+     1.94
+    ],
+    [
+     434.28,
+     -47.04,
+     38.56,
+     35.91,
+     70,
+     2.44
+    ],
+    [
+     434.81,
+     62.82,
+     39.61,
+     35.65,
+     85,
+     -0.76
+    ],
+    [
+     435.34,
+     120.29,
+     40.68,
+     40.57,
+     85,
+     -1.71
+    ],
+    [
+     435.43,
+     228.6,
+     40.85,
+     37.2,
+     20,
+     3.69
+    ],
+    [
+     487.47,
+     63.06,
+     34.94,
+     36.11,
+     50,
+     2.41
+    ],
+    [
+     487.14,
+     118.81,
+     34.29,
+     37.62,
+     50,
+     -0.98
+    ],
+    [
+     488.52,
+     227.31,
+     37.04,
+     34.62,
+     85,
+     -0.59
+    ],
+    [
+     544.69,
+     64.14,
+     39.38,
+     38.29,
+     20,
+     1.81
+    ],
+    [
+     544.67,
+     119.03,
+     39.34,
+     38.07,
+     20,
+     3.1
+    ],
+    [
+     544.97,
+     229.58,
+     39.94,
+     39.17,
+     35,
+     2.5
+    ],
+    [
+     597.21,
+     117.55,
+     34.43,
+     35.09,
+     70,
+     -0.21
+    ],
+    [
+     598.42,
+     228.33,
+     36.83,
+     36.66,
+     70,
+     -2.65
+    ],
+    [
+     652.28,
+     -266.01,
+     34.55,
+     37.98,
+     20,
+     3.62
+    ],
+    [
+     655.19,
+     64.18,
+     40.39,
+     38.36,
+     35,
+     -2.09
+    ],
+    [
+     654.27,
+     117.81,
+     38.55,
+     35.62,
+     50,
+     1.86
+    ],
+    [
+     655.56,
+     230.8,
+     41.13,
+     41.59,
+     70,
+     0.03
+    ],
+    [
+     545.62,
+     -222.02,
+     31.24,
+     33.03,
+     50,
+     -0.58
+    ],
+    [
+     411.99,
+     -144.29,
+     33.98,
+     28.85,
+     50,
+     -1.64
+    ],
+    [
+     321.57,
+     -143.4,
+     33.13,
+     28.87,
+     70,
+     1.62
+    ],
+    [
+     365.66,
+     -139.58,
+     31.33,
+     28.63,
+     35,
+     -1.27
+    ],
+    [
+     546.95,
+     -260.69,
+     33.9,
+     30.36,
+     20,
+     -2.36
+    ],
+    [
+     454.59,
+     -139.97,
+     29.18,
+     31.12,
+     50,
+     1.49
+    ],
+    [
+     499.59,
+     265.09,
+     29.19,
+     30.82,
+     85,
+     2.95
+    ]
+   ]
+  },
+  {
+   "id": "RUKO_Baris",
+   "bentuk": "kotak",
+   "mi": "Ruko",
+   "hancur": false,
+   "item": [
+    [
+     -915.0,
+     33.0,
+     26.0,
+     22.0,
+     14,
+     0.39
+    ],
+    [
+     -877.0,
+     33.0,
+     26.0,
+     22.0,
+     14,
+     -2.61
+    ],
+    [
+     -839.0,
+     33.0,
+     26.0,
+     22.0,
+     10,
+     0.49
+    ],
+    [
+     -801.0,
+     33.0,
+     26.0,
+     22.0,
+     14,
+     -2.16
+    ],
+    [
+     -915.0,
+     -36.0,
+     26.0,
+     22.0,
+     14,
+     1.43
+    ],
+    [
+     -877.0,
+     -36.0,
+     26.0,
+     22.0,
+     8,
+     -0.3
+    ],
+    [
+     -839.0,
+     -36.0,
+     26.0,
+     22.0,
+     8,
+     -3.17
+    ],
+    [
+     -801.0,
+     -36.0,
+     26.0,
+     22.0,
+     14,
+     2.03
+    ],
+    [
+     -1065.0,
+     111.0,
+     30.0,
+     22.0,
+     10,
+     2.03
+    ],
+    [
+     -1005.0,
+     111.0,
+     30.0,
+     22.0,
+     8,
+     -2.24
+    ],
+    [
+     -945.0,
+     111.0,
+     30.0,
+     22.0,
+     14,
+     -1.64
+    ],
+    [
+     -885.0,
+     111.0,
+     30.0,
+     22.0,
+     14,
+     3.79
+    ],
+    [
+     -825.0,
+     111.0,
+     30.0,
+     22.0,
+     10,
+     -3.17
+    ],
+    [
+     -945.0,
+     -114.0,
+     30.0,
+     22.0,
+     14,
+     0.77
+    ],
+    [
+     -885.0,
+     -114.0,
+     30.0,
+     22.0,
+     8,
+     1.09
+    ],
+    [
+     -825.0,
+     -114.0,
+     30.0,
+     22.0,
+     8,
+     -1.52
+    ]
+   ],
+   "penalti": "tanpa"
+  },
+  {
+   "id": "PLAZA_Gedung",
+   "bentuk": "kotak",
+   "mi": "MenaraKaca",
+   "hancur": false,
+   "item": [
+    [
+     -711.0,
+     217.5,
+     48,
+     45,
+     110,
+     -0.09
+    ],
+    [
+     -711.0,
+     -217.5,
+     48,
+     45,
+     45,
+     -1.91
+    ],
+    [
+     -655.0,
+     217.5,
+     48,
+     45,
+     80,
+     2.15
+    ],
+    [
+     -655.0,
+     -217.5,
+     48,
+     45,
+     60,
+     -3.83
+    ],
+    [
+     -599.0,
+     217.5,
+     48,
+     45,
+     60,
+     0.23
+    ],
+    [
+     -599.0,
+     -217.5,
+     48,
+     45,
+     110,
+     -3.27
+    ],
+    [
+     -543.0,
+     217.5,
+     48,
+     45,
+     45,
+     -2.8
+    ],
+    [
+     -543.0,
+     -217.5,
+     48,
+     45,
+     45,
+     -2.03
+    ],
+    [
+     -487.0,
+     217.5,
+     48,
+     45,
+     45,
+     -3.13
+    ],
+    [
+     -487.0,
+     -217.5,
+     48,
+     45,
+     80,
+     0.9
+    ]
+   ],
+   "penalti": "normal"
+  },
+  {
+   "id": "PROYEK_Bangunan",
+   "bentuk": "kotak",
+   "mi": "Alat",
+   "hancur": false,
+   "item": [
+    [
+     760.0,
+     -60.0,
+     20.0,
+     12.0,
+     6,
+     1.72
+    ],
+    [
+     820.0,
+     150.0,
+     30.0,
+     25.0,
+     9,
+     0.87
+    ],
+    [
+     950.0,
+     -210.0,
+     35.0,
+     25.0,
+     12,
+     0.69
+    ],
+    [
+     1000.0,
+     120.0,
+     25.0,
+     20.0,
+     6,
+     -0.89
+    ]
+   ],
+   "penalti": "tanpa"
+  },
+  {
+   "id": "LATAR_Utara",
+   "bentuk": "kotak",
+   "mi": "MenaraKaca",
+   "hancur": false,
+   "tanpa_tabrakan": true,
+   "item": [
+    [
+     -1000.0,
+     336.0,
+     70.0,
+     46.0,
+     60.0,
+     0.0
+    ],
+    [
+     -800.0,
+     336.0,
+     70.0,
+     46.0,
+     85.0,
+     0.0
+    ],
+    [
+     -600.0,
+     336.0,
+     70.0,
+     46.0,
+     110.0,
+     0.0
+    ],
+    [
+     -400.0,
+     336.0,
+     70.0,
+     46.0,
+     135.0,
+     0.0
+    ],
+    [
+     -200.0,
+     336.0,
+     70.0,
+     46.0,
+     160.0,
+     0.0
+    ],
+    [
+     0.0,
+     336.0,
+     70.0,
+     46.0,
+     185.0,
+     0.0
+    ],
+    [
+     200.0,
+     336.0,
+     70.0,
+     46.0,
+     60.0,
+     0.0
+    ],
+    [
+     400.0,
+     336.0,
+     70.0,
+     46.0,
+     85.0,
+     0.0
+    ],
+    [
+     600.0,
+     336.0,
+     70.0,
+     46.0,
+     110.0,
+     0.0
+    ],
+    [
+     800.0,
+     336.0,
+     70.0,
+     46.0,
+     135.0,
+     0.0
+    ],
+    [
+     1000.0,
+     336.0,
+     70.0,
+     46.0,
+     160.0,
+     0.0
+    ]
+   ]
+  },
+  {
+   "id": "LATAR_Selatan",
+   "bentuk": "rumah",
+   "mi": "RumahLatar",
+   "mi_atap": "AtapLatar",
+   "hancur": false,
+   "tanpa_tabrakan": true,
+   "item": [
+    [
+     -1000.0,
+     -334.0,
+     14.0,
+     11.0,
+     6.5,
+     0.0
+    ],
+    [
+     -850.0,
+     -334.0,
+     14.0,
+     11.0,
+     3.5,
+     0.0
+    ],
+    [
+     -700.0,
+     -334.0,
+     14.0,
+     11.0,
+     3.5,
+     0.0
+    ],
+    [
+     -550.0,
+     -334.0,
+     14.0,
+     11.0,
+     6.5,
+     0.0
+    ],
+    [
+     -400.0,
+     -334.0,
+     14.0,
+     11.0,
+     3.5,
+     0.0
+    ],
+    [
+     -250.0,
+     -334.0,
+     14.0,
+     11.0,
+     3.5,
+     0.0
+    ],
+    [
+     -100.0,
+     -334.0,
+     14.0,
+     11.0,
+     6.5,
+     0.0
+    ],
+    [
+     50.0,
+     -334.0,
+     14.0,
+     11.0,
+     3.5,
+     0.0
+    ],
+    [
+     200.0,
+     -334.0,
+     14.0,
+     11.0,
+     3.5,
+     0.0
+    ],
+    [
+     350.0,
+     -334.0,
+     14.0,
+     11.0,
+     6.5,
+     0.0
+    ],
+    [
+     500.0,
+     -334.0,
+     14.0,
+     11.0,
+     3.5,
+     0.0
+    ],
+    [
+     650.0,
+     -334.0,
+     14.0,
+     11.0,
+     3.5,
+     0.0
+    ],
+    [
+     800.0,
+     -334.0,
+     14.0,
+     11.0,
+     6.5,
+     0.0
+    ],
+    [
+     950.0,
+     -334.0,
+     14.0,
+     11.0,
+     3.5,
+     0.0
+    ]
+   ]
+  },
+  {
+   "id": "TOL_Pilar",
+   "bentuk": "kotak",
+   "mi": "Tol",
+   "hancur": false,
+   "penalti": "normal",
+   "z": 0.0,
+   "item": [
+    [
+     -1080.0,
+     310.0,
+     3.0,
+     3.0,
+     15.0,
+     0.0
+    ],
+    [
+     -1020.0,
+     310.0,
+     3.0,
+     3.0,
+     15.0,
+     0.0
+    ],
+    [
+     -960.0,
+     310.0,
+     3.0,
+     3.0,
+     15.0,
+     0.0
+    ],
+    [
+     -900.0,
+     310.0,
+     3.0,
+     3.0,
+     15.0,
+     0.0
+    ],
+    [
+     -840.0,
+     310.0,
+     3.0,
+     3.0,
+     15.0,
+     0.0
+    ],
+    [
+     -780.0,
+     310.0,
+     3.0,
+     3.0,
+     15.0,
+     0.0
+    ],
+    [
+     -720.0,
+     310.0,
+     3.0,
+     3.0,
+     15.0,
+     0.0
+    ],
+    [
+     -660.0,
+     310.0,
+     3.0,
+     3.0,
+     15.0,
+     0.0
+    ],
+    [
+     -600.0,
+     310.0,
+     3.0,
+     3.0,
+     15.0,
+     0.0
+    ],
+    [
+     -540.0,
+     310.0,
+     3.0,
+     3.0,
+     15.0,
+     0.0
+    ],
+    [
+     -480.0,
+     310.0,
+     3.0,
+     3.0,
+     15.0,
+     0.0
+    ],
+    [
+     -420.0,
+     310.0,
+     3.0,
+     3.0,
+     15.0,
+     0.0
+    ],
+    [
+     -360.0,
+     310.0,
+     3.0,
+     3.0,
+     15.0,
+     0.0
+    ],
+    [
+     -300.0,
+     310.0,
+     3.0,
+     3.0,
+     15.0,
+     0.0
+    ],
+    [
+     -240.0,
+     310.0,
+     3.0,
+     3.0,
+     15.0,
+     0.0
+    ],
+    [
+     -180.0,
+     310.0,
+     3.0,
+     3.0,
+     15.0,
+     0.0
+    ],
+    [
+     -120.0,
+     310.0,
+     3.0,
+     3.0,
+     15.0,
+     0.0
+    ],
+    [
+     -60.0,
+     310.0,
+     3.0,
+     3.0,
+     15.0,
+     0.0
+    ],
+    [
+     0.0,
+     310.0,
+     3.0,
+     3.0,
+     15.0,
+     0.0
+    ],
+    [
+     60.0,
+     310.0,
+     3.0,
+     3.0,
+     15.0,
+     0.0
+    ],
+    [
+     120.0,
+     310.0,
+     3.0,
+     3.0,
+     15.0,
+     0.0
+    ],
+    [
+     180.0,
+     310.0,
+     3.0,
+     3.0,
+     15.0,
+     0.0
+    ],
+    [
+     240.0,
+     310.0,
+     3.0,
+     3.0,
+     15.0,
+     0.0
+    ],
+    [
+     300.0,
+     310.0,
+     3.0,
+     3.0,
+     15.0,
+     0.0
+    ],
+    [
+     360.0,
+     310.0,
+     3.0,
+     3.0,
+     15.0,
+     0.0
+    ],
+    [
+     420.0,
+     310.0,
+     3.0,
+     3.0,
+     15.0,
+     0.0
+    ],
+    [
+     480.0,
+     310.0,
+     3.0,
+     3.0,
+     15.0,
+     0.0
+    ],
+    [
+     540.0,
+     310.0,
+     3.0,
+     3.0,
+     15.0,
+     0.0
+    ],
+    [
+     600.0,
+     310.0,
+     3.0,
+     3.0,
+     15.0,
+     0.0
+    ],
+    [
+     660.0,
+     310.0,
+     3.0,
+     3.0,
+     15.0,
+     0.0
+    ],
+    [
+     720.0,
+     310.0,
+     3.0,
+     3.0,
+     15.0,
+     0.0
+    ],
+    [
+     780.0,
+     310.0,
+     3.0,
+     3.0,
+     15.0,
+     0.0
+    ],
+    [
+     840.0,
+     310.0,
+     3.0,
+     3.0,
+     15.0,
+     0.0
+    ],
+    [
+     900.0,
+     310.0,
+     3.0,
+     3.0,
+     15.0,
+     0.0
+    ],
+    [
+     960.0,
+     310.0,
+     3.0,
+     3.0,
+     15.0,
+     0.0
+    ],
+    [
+     1020.0,
+     310.0,
+     3.0,
+     3.0,
+     15.0,
+     0.0
+    ],
+    [
+     1080.0,
+     310.0,
+     3.0,
+     3.0,
+     15.0,
+     0.0
+    ]
+   ]
+  },
+  {
+   "id": "TOL_Dek",
+   "bentuk": "kotak",
+   "mi": "Tol",
+   "hancur": false,
+   "penalti": "normal",
+   "z": 15.0,
+   "item": [
+    [
+     -1050.0,
+     310.0,
+     60.0,
+     20.0,
+     1.5,
+     0.0
+    ],
+    [
+     -990.0,
+     310.0,
+     60.0,
+     20.0,
+     1.5,
+     0.0
+    ],
+    [
+     -930.0,
+     310.0,
+     60.0,
+     20.0,
+     1.5,
+     0.0
+    ],
+    [
+     -870.0,
+     310.0,
+     60.0,
+     20.0,
+     1.5,
+     0.0
+    ],
+    [
+     -810.0,
+     310.0,
+     60.0,
+     20.0,
+     1.5,
+     0.0
+    ],
+    [
+     -750.0,
+     310.0,
+     60.0,
+     20.0,
+     1.5,
+     0.0
+    ],
+    [
+     -690.0,
+     310.0,
+     60.0,
+     20.0,
+     1.5,
+     0.0
+    ],
+    [
+     -630.0,
+     310.0,
+     60.0,
+     20.0,
+     1.5,
+     0.0
+    ],
+    [
+     -570.0,
+     310.0,
+     60.0,
+     20.0,
+     1.5,
+     0.0
+    ],
+    [
+     -510.0,
+     310.0,
+     60.0,
+     20.0,
+     1.5,
+     0.0
+    ],
+    [
+     -450.0,
+     310.0,
+     60.0,
+     20.0,
+     1.5,
+     0.0
+    ],
+    [
+     -390.0,
+     310.0,
+     60.0,
+     20.0,
+     1.5,
+     0.0
+    ],
+    [
+     -330.0,
+     310.0,
+     60.0,
+     20.0,
+     1.5,
+     0.0
+    ],
+    [
+     -270.0,
+     310.0,
+     60.0,
+     20.0,
+     1.5,
+     0.0
+    ],
+    [
+     -210.0,
+     310.0,
+     60.0,
+     20.0,
+     1.5,
+     0.0
+    ],
+    [
+     -150.0,
+     310.0,
+     60.0,
+     20.0,
+     1.5,
+     0.0
+    ],
+    [
+     -90.0,
+     310.0,
+     60.0,
+     20.0,
+     1.5,
+     0.0
+    ],
+    [
+     -30.0,
+     310.0,
+     60.0,
+     20.0,
+     1.5,
+     0.0
+    ],
+    [
+     30.0,
+     310.0,
+     60.0,
+     20.0,
+     1.5,
+     0.0
+    ],
+    [
+     90.0,
+     310.0,
+     60.0,
+     20.0,
+     1.5,
+     0.0
+    ],
+    [
+     150.0,
+     310.0,
+     60.0,
+     20.0,
+     1.5,
+     0.0
+    ],
+    [
+     210.0,
+     310.0,
+     60.0,
+     20.0,
+     1.5,
+     0.0
+    ],
+    [
+     270.0,
+     310.0,
+     60.0,
+     20.0,
+     1.5,
+     0.0
+    ],
+    [
+     330.0,
+     310.0,
+     60.0,
+     20.0,
+     1.5,
+     0.0
+    ],
+    [
+     390.0,
+     310.0,
+     60.0,
+     20.0,
+     1.5,
+     0.0
+    ],
+    [
+     450.0,
+     310.0,
+     60.0,
+     20.0,
+     1.5,
+     0.0
+    ],
+    [
+     510.0,
+     310.0,
+     60.0,
+     20.0,
+     1.5,
+     0.0
+    ],
+    [
+     570.0,
+     310.0,
+     60.0,
+     20.0,
+     1.5,
+     0.0
+    ],
+    [
+     630.0,
+     310.0,
+     60.0,
+     20.0,
+     1.5,
+     0.0
+    ],
+    [
+     690.0,
+     310.0,
+     60.0,
+     20.0,
+     1.5,
+     0.0
+    ],
+    [
+     750.0,
+     310.0,
+     60.0,
+     20.0,
+     1.5,
+     0.0
+    ],
+    [
+     810.0,
+     310.0,
+     60.0,
+     20.0,
+     1.5,
+     0.0
+    ],
+    [
+     870.0,
+     310.0,
+     60.0,
+     20.0,
+     1.5,
+     0.0
+    ],
+    [
+     930.0,
+     310.0,
+     60.0,
+     20.0,
+     1.5,
+     0.0
+    ],
+    [
+     990.0,
+     310.0,
+     60.0,
+     20.0,
+     1.5,
+     0.0
+    ],
+    [
+     1050.0,
+     310.0,
+     60.0,
+     20.0,
+     1.5,
+     0.0
+    ]
+   ]
+  },
+  {
+   "id": "REL_Pilar",
+   "bentuk": "kotak",
+   "mi": "RelLayang",
+   "hancur": false,
+   "z": 0.0,
+   "item": [
+    [
+     -1080.0,
+     -306.0,
+     3.0,
+     3.0,
+     12.0,
+     0.0
+    ],
+    [
+     -1020.0,
+     -306.0,
+     3.0,
+     3.0,
+     12.0,
+     0.0
+    ],
+    [
+     -960.0,
+     -306.0,
+     3.0,
+     3.0,
+     12.0,
+     0.0
+    ],
+    [
+     -900.0,
+     -306.0,
+     3.0,
+     3.0,
+     12.0,
+     0.0
+    ],
+    [
+     -840.0,
+     -306.0,
+     3.0,
+     3.0,
+     12.0,
+     0.0
+    ],
+    [
+     -780.0,
+     -306.0,
+     3.0,
+     3.0,
+     12.0,
+     0.0
+    ],
+    [
+     -720.0,
+     -306.0,
+     3.0,
+     3.0,
+     12.0,
+     0.0
+    ],
+    [
+     -660.0,
+     -306.0,
+     3.0,
+     3.0,
+     12.0,
+     0.0
+    ],
+    [
+     -600.0,
+     -306.0,
+     3.0,
+     3.0,
+     12.0,
+     0.0
+    ],
+    [
+     -540.0,
+     -306.0,
+     3.0,
+     3.0,
+     12.0,
+     0.0
+    ],
+    [
+     -480.0,
+     -306.0,
+     3.0,
+     3.0,
+     12.0,
+     0.0
+    ],
+    [
+     -420.0,
+     -306.0,
+     3.0,
+     3.0,
+     12.0,
+     0.0
+    ],
+    [
+     -360.0,
+     -306.0,
+     3.0,
+     3.0,
+     12.0,
+     0.0
+    ],
+    [
+     -300.0,
+     -306.0,
+     3.0,
+     3.0,
+     12.0,
+     0.0
+    ],
+    [
+     -240.0,
+     -306.0,
+     3.0,
+     3.0,
+     12.0,
+     0.0
+    ],
+    [
+     -180.0,
+     -306.0,
+     3.0,
+     3.0,
+     12.0,
+     0.0
+    ],
+    [
+     -120.0,
+     -306.0,
+     3.0,
+     3.0,
+     12.0,
+     0.0
+    ],
+    [
+     -60.0,
+     -306.0,
+     3.0,
+     3.0,
+     12.0,
+     0.0
+    ],
+    [
+     0.0,
+     -306.0,
+     3.0,
+     3.0,
+     12.0,
+     0.0
+    ],
+    [
+     60.0,
+     -306.0,
+     3.0,
+     3.0,
+     12.0,
+     0.0
+    ],
+    [
+     120.0,
+     -306.0,
+     3.0,
+     3.0,
+     12.0,
+     0.0
+    ],
+    [
+     180.0,
+     -306.0,
+     3.0,
+     3.0,
+     12.0,
+     0.0
+    ],
+    [
+     240.0,
+     -306.0,
+     3.0,
+     3.0,
+     12.0,
+     0.0
+    ],
+    [
+     300.0,
+     -306.0,
+     3.0,
+     3.0,
+     12.0,
+     0.0
+    ],
+    [
+     360.0,
+     -306.0,
+     3.0,
+     3.0,
+     12.0,
+     0.0
+    ],
+    [
+     420.0,
+     -306.0,
+     3.0,
+     3.0,
+     12.0,
+     0.0
+    ],
+    [
+     480.0,
+     -306.0,
+     3.0,
+     3.0,
+     12.0,
+     0.0
+    ],
+    [
+     540.0,
+     -306.0,
+     3.0,
+     3.0,
+     12.0,
+     0.0
+    ],
+    [
+     600.0,
+     -306.0,
+     3.0,
+     3.0,
+     12.0,
+     0.0
+    ],
+    [
+     660.0,
+     -306.0,
+     3.0,
+     3.0,
+     12.0,
+     0.0
+    ],
+    [
+     720.0,
+     -306.0,
+     3.0,
+     3.0,
+     12.0,
+     0.0
+    ],
+    [
+     780.0,
+     -306.0,
+     3.0,
+     3.0,
+     12.0,
+     0.0
+    ],
+    [
+     840.0,
+     -306.0,
+     3.0,
+     3.0,
+     12.0,
+     0.0
+    ],
+    [
+     900.0,
+     -306.0,
+     3.0,
+     3.0,
+     12.0,
+     0.0
+    ],
+    [
+     960.0,
+     -306.0,
+     3.0,
+     3.0,
+     12.0,
+     0.0
+    ],
+    [
+     1020.0,
+     -306.0,
+     3.0,
+     3.0,
+     12.0,
+     0.0
+    ],
+    [
+     1080.0,
+     -306.0,
+     3.0,
+     3.0,
+     12.0,
+     0.0
+    ]
+   ]
+  },
+  {
+   "id": "REL_Dek",
+   "bentuk": "kotak",
+   "mi": "RelLayang",
+   "hancur": false,
+   "z": 12.0,
+   "item": [
+    [
+     -1050.0,
+     -306.0,
+     60.0,
+     12.0,
+     1.2,
+     0.0
+    ],
+    [
+     -990.0,
+     -306.0,
+     60.0,
+     12.0,
+     1.2,
+     0.0
+    ],
+    [
+     -930.0,
+     -306.0,
+     60.0,
+     12.0,
+     1.2,
+     0.0
+    ],
+    [
+     -870.0,
+     -306.0,
+     60.0,
+     12.0,
+     1.2,
+     0.0
+    ],
+    [
+     -810.0,
+     -306.0,
+     60.0,
+     12.0,
+     1.2,
+     0.0
+    ],
+    [
+     -750.0,
+     -306.0,
+     60.0,
+     12.0,
+     1.2,
+     0.0
+    ],
+    [
+     -690.0,
+     -306.0,
+     60.0,
+     12.0,
+     1.2,
+     0.0
+    ],
+    [
+     -630.0,
+     -306.0,
+     60.0,
+     12.0,
+     1.2,
+     0.0
+    ],
+    [
+     -570.0,
+     -306.0,
+     60.0,
+     12.0,
+     1.2,
+     0.0
+    ],
+    [
+     -510.0,
+     -306.0,
+     60.0,
+     12.0,
+     1.2,
+     0.0
+    ],
+    [
+     -450.0,
+     -306.0,
+     60.0,
+     12.0,
+     1.2,
+     0.0
+    ],
+    [
+     -390.0,
+     -306.0,
+     60.0,
+     12.0,
+     1.2,
+     0.0
+    ],
+    [
+     -330.0,
+     -306.0,
+     60.0,
+     12.0,
+     1.2,
+     0.0
+    ],
+    [
+     -270.0,
+     -306.0,
+     60.0,
+     12.0,
+     1.2,
+     0.0
+    ],
+    [
+     -210.0,
+     -306.0,
+     60.0,
+     12.0,
+     1.2,
+     0.0
+    ],
+    [
+     -150.0,
+     -306.0,
+     60.0,
+     12.0,
+     1.2,
+     0.0
+    ],
+    [
+     -90.0,
+     -306.0,
+     60.0,
+     12.0,
+     1.2,
+     0.0
+    ],
+    [
+     -30.0,
+     -306.0,
+     60.0,
+     12.0,
+     1.2,
+     0.0
+    ],
+    [
+     30.0,
+     -306.0,
+     60.0,
+     12.0,
+     1.2,
+     0.0
+    ],
+    [
+     90.0,
+     -306.0,
+     60.0,
+     12.0,
+     1.2,
+     0.0
+    ],
+    [
+     150.0,
+     -306.0,
+     60.0,
+     12.0,
+     1.2,
+     0.0
+    ],
+    [
+     210.0,
+     -306.0,
+     60.0,
+     12.0,
+     1.2,
+     0.0
+    ],
+    [
+     270.0,
+     -306.0,
+     60.0,
+     12.0,
+     1.2,
+     0.0
+    ],
+    [
+     330.0,
+     -306.0,
+     60.0,
+     12.0,
+     1.2,
+     0.0
+    ],
+    [
+     390.0,
+     -306.0,
+     60.0,
+     12.0,
+     1.2,
+     0.0
+    ],
+    [
+     450.0,
+     -306.0,
+     60.0,
+     12.0,
+     1.2,
+     0.0
+    ],
+    [
+     510.0,
+     -306.0,
+     60.0,
+     12.0,
+     1.2,
+     0.0
+    ],
+    [
+     570.0,
+     -306.0,
+     60.0,
+     12.0,
+     1.2,
+     0.0
+    ],
+    [
+     630.0,
+     -306.0,
+     60.0,
+     12.0,
+     1.2,
+     0.0
+    ],
+    [
+     690.0,
+     -306.0,
+     60.0,
+     12.0,
+     1.2,
+     0.0
+    ],
+    [
+     750.0,
+     -306.0,
+     60.0,
+     12.0,
+     1.2,
+     0.0
+    ],
+    [
+     810.0,
+     -306.0,
+     60.0,
+     12.0,
+     1.2,
+     0.0
+    ],
+    [
+     870.0,
+     -306.0,
+     60.0,
+     12.0,
+     1.2,
+     0.0
+    ],
+    [
+     930.0,
+     -306.0,
+     60.0,
+     12.0,
+     1.2,
+     0.0
+    ],
+    [
+     990.0,
+     -306.0,
+     60.0,
+     12.0,
+     1.2,
+     0.0
+    ],
+    [
+     1050.0,
+     -306.0,
+     60.0,
+     12.0,
+     1.2,
+     0.0
+    ]
+   ]
+  }
+ ],
+ "kelompok_catatan": "satu actor per kelompok berisi ISM; item = [x, y, P, L, T, yaw]; bentuk 'rumah' = dinding (T-0,5) + atap 0,5 m (P+0,4 x L+0,4); 'z' kelompok = alas absolut semua item",
+ "pohon_kelompok": {
+  "Boulevard": [
+   [
+    -980.0,
+    -18.0,
+    0.94
+   ],
+   [
+    -980.0,
+    18.0,
+    0.86
+   ],
+   [
+    -930.0,
+    -18.0,
+    0.95
+   ],
+   [
+    -930.0,
+    18.0,
+    0.89
+   ],
+   [
+    -880.0,
+    -18.0,
+    0.96
+   ],
+   [
+    -880.0,
+    18.0,
+    1.09
+   ],
+   [
+    -830.0,
+    -18.0,
+    0.93
+   ],
+   [
+    -830.0,
+    18.0,
+    0.99
+   ],
+   [
+    -780.0,
+    -18.0,
+    0.85
+   ],
+   [
+    -780.0,
+    18.0,
+    0.99
+   ],
+   [
+    -730.0,
+    -18.0,
+    0.92
+   ],
+   [
+    -730.0,
+    18.0,
+    0.96
+   ],
+   [
+    -680.0,
+    -18.0,
+    0.84
+   ],
+   [
+    -680.0,
+    18.0,
+    0.81
+   ],
+   [
+    -630.0,
+    -18.0,
+    0.83
+   ],
+   [
+    -630.0,
+    18.0,
+    0.83
+   ],
+   [
+    -580.0,
+    -18.0,
+    0.9
+   ],
+   [
+    -580.0,
+    18.0,
+    0.86
+   ],
+   [
+    -530.0,
+    -18.0,
+    0.9
+   ],
+   [
+    -530.0,
+    18.0,
+    1.0
+   ],
+   [
+    -480.0,
+    -18.0,
+    1.01
+   ],
+   [
+    -480.0,
+    18.0,
+    0.81
+   ],
+   [
+    -430.0,
+    -18.0,
+    0.91
+   ],
+   [
+    -430.0,
+    18.0,
+    0.86
+   ],
+   [
+    -380.0,
+    -18.0,
+    1.05
+   ],
+   [
+    -380.0,
+    18.0,
+    1.03
+   ],
+   [
+    -330.0,
+    -18.0,
+    0.85
+   ],
+   [
+    -330.0,
+    18.0,
+    1.03
+   ],
+   [
+    -280.0,
+    -18.0,
+    1.0
+   ],
+   [
+    -280.0,
+    18.0,
+    1.08
+   ],
+   [
+    -230.0,
+    -18.0,
+    1.01
+   ],
+   [
+    -230.0,
+    18.0,
+    0.84
+   ],
+   [
+    -180.0,
+    -18.0,
+    1.02
+   ],
+   [
+    -180.0,
+    18.0,
+    0.85
+   ],
+   [
+    -130.0,
+    -18.0,
+    0.84
+   ],
+   [
+    -130.0,
+    18.0,
+    0.84
+   ],
+   [
+    -80.0,
+    -18.0,
+    0.86
+   ],
+   [
+    -80.0,
+    18.0,
+    0.81
+   ],
+   [
+    -30.0,
+    -18.0,
+    0.94
+   ],
+   [
+    -30.0,
+    18.0,
+    0.91
+   ],
+   [
+    20.0,
+    -18.0,
+    0.86
+   ],
+   [
+    20.0,
+    18.0,
+    0.92
+   ],
+   [
+    170.0,
+    -18.0,
+    0.93
+   ],
+   [
+    170.0,
+    18.0,
+    1.03
+   ],
+   [
+    220.0,
+    -18.0,
+    0.81
+   ],
+   [
+    220.0,
+    18.0,
+    1.02
+   ],
+   [
+    270.0,
+    -18.0,
+    1.1
+   ],
+   [
+    270.0,
+    18.0,
+    0.86
+   ],
+   [
+    320.0,
+    -18.0,
+    0.93
+   ],
+   [
+    320.0,
+    18.0,
+    0.86
+   ],
+   [
+    370.0,
+    -18.0,
+    1.02
+   ],
+   [
+    370.0,
+    18.0,
+    0.84
+   ],
+   [
+    420.0,
+    -18.0,
+    0.95
+   ],
+   [
+    420.0,
+    18.0,
+    0.83
+   ],
+   [
+    470.0,
+    -18.0,
+    0.93
+   ],
+   [
+    470.0,
+    18.0,
+    1.08
+   ],
+   [
+    520.0,
+    -18.0,
+    0.93
+   ],
+   [
+    520.0,
+    18.0,
+    1.04
+   ],
+   [
+    670.0,
+    -18.0,
+    0.83
+   ],
+   [
+    670.0,
+    18.0,
+    0.85
+   ],
+   [
+    720.0,
+    -18.0,
+    1.1
+   ],
+   [
+    720.0,
+    18.0,
+    0.95
+   ],
+   [
+    770.0,
+    -18.0,
+    1.06
+   ],
+   [
+    770.0,
+    18.0,
+    1.08
+   ],
+   [
+    820.0,
+    -18.0,
+    1.08
+   ],
+   [
+    820.0,
+    18.0,
+    0.95
+   ],
+   [
+    970.0,
+    -18.0,
+    0.89
+   ],
+   [
+    970.0,
+    18.0,
+    1.06
+   ],
+   [
+    1020.0,
+    -18.0,
+    0.89
+   ],
+   [
+    1020.0,
+    18.0,
+    1.1
+   ]
+  ],
+  "Plaza": [
+   [
+    -740.0,
+    -140.0,
+    0.97
+   ],
+   [
+    -740.0,
+    140.0,
+    1.09
+   ],
+   [
+    -700.0,
+    -140.0,
+    1.05
+   ],
+   [
+    -700.0,
+    140.0,
+    1.17
+   ],
+   [
+    -660.0,
+    -140.0,
+    1.14
+   ],
+   [
+    -660.0,
+    140.0,
+    1.14
+   ],
+   [
+    -620.0,
+    -140.0,
+    0.96
+   ],
+   [
+    -620.0,
+    140.0,
+    0.92
+   ],
+   [
+    -580.0,
+    -140.0,
+    1.16
+   ],
+   [
+    -580.0,
+    140.0,
+    1.11
+   ],
+   [
+    -540.0,
+    -140.0,
+    0.95
+   ],
+   [
+    -540.0,
+    140.0,
+    0.99
+   ],
+   [
+    -500.0,
+    -140.0,
+    0.97
+   ],
+   [
+    -500.0,
+    140.0,
+    0.9
+   ],
+   [
+    -460.0,
+    -140.0,
+    0.93
+   ],
+   [
+    -460.0,
+    140.0,
+    0.94
+   ]
+  ],
+  "Proyek": [
+   [
+    848.8,
+    -160.0,
+    1.0
+   ],
+   [
+    1035.0,
+    -29.4,
+    1.03
+   ],
+   [
+    848.1,
+    108.4,
+    1.02
+   ],
+   [
+    1022.7,
+    -123.4,
+    0.82
+   ],
+   [
+    730.6,
+    40.2,
+    1.1
+   ],
+   [
+    895.4,
+    -216.1,
+    0.86
+   ],
+   [
+    852.5,
+    133.3,
+    0.91
+   ],
+   [
+    1037.3,
+    -222.3,
+    0.99
+   ],
+   [
+    820.6,
+    35.7,
+    0.93
+   ],
+   [
+    885.6,
+    -229.5,
+    0.97
+   ],
+   [
+    955.9,
+    -90.3,
+    0.81
+   ],
+   [
+    942.0,
+    -185.1,
+    0.97
+   ],
+   [
+    1005.6,
+    -100.0,
+    0.92
+   ],
+   [
+    912.0,
+    143.7,
+    0.93
+   ],
+   [
+    890.6,
+    147.5,
+    0.98
+   ],
+   [
+    833.1,
+    95.8,
+    0.86
+   ],
+   [
+    896.5,
+    -201.4,
+    0.99
+   ],
+   [
+    836.7,
+    189.4,
+    0.92
+   ]
+  ]
+ },
+ "pohon_bentuk": {
+  "batang": {
+   "diameter": 0.5,
+   "tinggi": 7.0,
+   "mi": "Kayu"
+  },
+  "tajuk": {
+   "diameter": 7.0,
+   "tinggi": 8.0,
+   "z_relatif": 5.0,
+   "mi": "Pohon"
+  },
+  "catatan": "ukuran x faktor skala (angka ketiga di tiap titik); batang BlockAll, tajuk NoCollision"
+ },
+ "tiang_listrik": {
+  "titik": [
+   [
+    -1000.0,
+    14.0
+   ],
+   [
+    -1000.0,
+    -14.0
+   ],
+   [
+    -960.0,
+    14.0
+   ],
+   [
+    -960.0,
+    -14.0
+   ],
+   [
+    -920.0,
+    14.0
+   ],
+   [
+    -920.0,
+    -14.0
+   ],
+   [
+    -880.0,
+    14.0
+   ],
+   [
+    -880.0,
+    -14.0
+   ],
+   [
+    -840.0,
+    14.0
+   ],
+   [
+    -840.0,
+    -14.0
+   ],
+   [
+    -800.0,
+    14.0
+   ],
+   [
+    -800.0,
+    -14.0
+   ],
+   [
+    -760.0,
+    14.0
+   ],
+   [
+    -760.0,
+    -14.0
+   ],
+   [
+    -720.0,
+    14.0
+   ],
+   [
+    -720.0,
+    -14.0
+   ],
+   [
+    -680.0,
+    14.0
+   ],
+   [
+    -680.0,
+    -14.0
+   ],
+   [
+    -640.0,
+    14.0
+   ],
+   [
+    -640.0,
+    -14.0
+   ],
+   [
+    -600.0,
+    14.0
+   ],
+   [
+    -600.0,
+    -14.0
+   ],
+   [
+    -560.0,
+    14.0
+   ],
+   [
+    -560.0,
+    -14.0
+   ],
+   [
+    -520.0,
+    14.0
+   ],
+   [
+    -520.0,
+    -14.0
+   ],
+   [
+    -480.0,
+    14.0
+   ],
+   [
+    -480.0,
+    -14.0
+   ],
+   [
+    -440.0,
+    14.0
+   ],
+   [
+    -440.0,
+    -14.0
+   ],
+   [
+    -400.0,
+    14.0
+   ],
+   [
+    -400.0,
+    -14.0
+   ],
+   [
+    -360.0,
+    14.0
+   ],
+   [
+    -360.0,
+    -14.0
+   ],
+   [
+    -320.0,
+    14.0
+   ],
+   [
+    -320.0,
+    -14.0
+   ],
+   [
+    -280.0,
+    14.0
+   ],
+   [
+    -280.0,
+    -14.0
+   ],
+   [
+    -240.0,
+    14.0
+   ],
+   [
+    -240.0,
+    -14.0
+   ],
+   [
+    -200.0,
+    14.0
+   ],
+   [
+    -200.0,
+    -14.0
+   ],
+   [
+    -160.0,
+    14.0
+   ],
+   [
+    -160.0,
+    -14.0
+   ],
+   [
+    -120.0,
+    14.0
+   ],
+   [
+    -120.0,
+    -14.0
+   ],
+   [
+    -80.0,
+    14.0
+   ],
+   [
+    -80.0,
+    -14.0
+   ],
+   [
+    -40.0,
+    14.0
+   ],
+   [
+    -40.0,
+    -14.0
+   ],
+   [
+    0.0,
+    14.0
+   ],
+   [
+    0.0,
+    -14.0
+   ],
+   [
+    40.0,
+    14.0
+   ],
+   [
+    40.0,
+    -14.0
+   ],
+   [
+    80.0,
+    14.0
+   ],
+   [
+    80.0,
+    -14.0
+   ],
+   [
+    120.0,
+    14.0
+   ],
+   [
+    120.0,
+    -14.0
+   ],
+   [
+    160.0,
+    14.0
+   ],
+   [
+    160.0,
+    -14.0
+   ],
+   [
+    200.0,
+    14.0
+   ],
+   [
+    200.0,
+    -14.0
+   ],
+   [
+    240.0,
+    14.0
+   ],
+   [
+    240.0,
+    -14.0
+   ],
+   [
+    280.0,
+    14.0
+   ],
+   [
+    280.0,
+    -14.0
+   ],
+   [
+    320.0,
+    14.0
+   ],
+   [
+    320.0,
+    -14.0
+   ],
+   [
+    360.0,
+    14.0
+   ],
+   [
+    360.0,
+    -14.0
+   ],
+   [
+    400.0,
+    14.0
+   ],
+   [
+    400.0,
+    -14.0
+   ],
+   [
+    440.0,
+    14.0
+   ],
+   [
+    440.0,
+    -14.0
+   ],
+   [
+    480.0,
+    14.0
+   ],
+   [
+    480.0,
+    -14.0
+   ],
+   [
+    520.0,
+    14.0
+   ],
+   [
+    520.0,
+    -14.0
+   ],
+   [
+    560.0,
+    14.0
+   ],
+   [
+    560.0,
+    -14.0
+   ],
+   [
+    600.0,
+    14.0
+   ],
+   [
+    600.0,
+    -14.0
+   ],
+   [
+    640.0,
+    14.0
+   ],
+   [
+    640.0,
+    -14.0
+   ],
+   [
+    680.0,
+    14.0
+   ],
+   [
+    680.0,
+    -14.0
+   ],
+   [
+    720.0,
+    14.0
+   ],
+   [
+    720.0,
+    -14.0
+   ],
+   [
+    760.0,
+    14.0
+   ],
+   [
+    760.0,
+    -14.0
+   ],
+   [
+    800.0,
+    14.0
+   ],
+   [
+    800.0,
+    -14.0
+   ],
+   [
+    840.0,
+    14.0
+   ],
+   [
+    840.0,
+    -14.0
+   ],
+   [
+    880.0,
+    14.0
+   ],
+   [
+    880.0,
+    -14.0
+   ],
+   [
+    920.0,
+    14.0
+   ],
+   [
+    920.0,
+    -14.0
+   ],
+   [
+    960.0,
+    14.0
+   ],
+   [
+    960.0,
+    -14.0
+   ],
+   [
+    1000.0,
+    14.0
+   ],
+   [
+    1000.0,
+    -14.0
+   ],
+   [
+    1040.0,
+    14.0
+   ],
+   [
+    1040.0,
+    -14.0
+   ],
+   [
+    -1000.0,
+    300.0
+   ],
+   [
+    -1000.0,
+    -300.0
+   ],
+   [
+    -900.0,
+    300.0
+   ],
+   [
+    -900.0,
+    -300.0
+   ],
+   [
+    -800.0,
+    300.0
+   ],
+   [
+    -800.0,
+    -300.0
+   ],
+   [
+    -700.0,
+    300.0
+   ],
+   [
+    -700.0,
+    -300.0
+   ],
+   [
+    -600.0,
+    300.0
+   ],
+   [
+    -600.0,
+    -300.0
+   ],
+   [
+    -500.0,
+    300.0
+   ],
+   [
+    -500.0,
+    -300.0
+   ],
+   [
+    -400.0,
+    300.0
+   ],
+   [
+    -400.0,
+    -300.0
+   ],
+   [
+    -300.0,
+    300.0
+   ],
+   [
+    -300.0,
+    -300.0
+   ],
+   [
+    -200.0,
+    300.0
+   ],
+   [
+    -200.0,
+    -300.0
+   ],
+   [
+    -100.0,
+    300.0
+   ],
+   [
+    -100.0,
+    -300.0
+   ],
+   [
+    0.0,
+    300.0
+   ],
+   [
+    0.0,
+    -300.0
+   ],
+   [
+    100.0,
+    300.0
+   ],
+   [
+    100.0,
+    -300.0
+   ],
+   [
+    200.0,
+    300.0
+   ],
+   [
+    200.0,
+    -300.0
+   ],
+   [
+    300.0,
+    300.0
+   ],
+   [
+    300.0,
+    -300.0
+   ],
+   [
+    400.0,
+    300.0
+   ],
+   [
+    400.0,
+    -300.0
+   ],
+   [
+    500.0,
+    300.0
+   ],
+   [
+    500.0,
+    -300.0
+   ],
+   [
+    600.0,
+    300.0
+   ],
+   [
+    600.0,
+    -300.0
+   ],
+   [
+    700.0,
+    300.0
+   ],
+   [
+    700.0,
+    -300.0
+   ],
+   [
+    800.0,
+    300.0
+   ],
+   [
+    800.0,
+    -300.0
+   ],
+   [
+    900.0,
+    300.0
+   ],
+   [
+    900.0,
+    -300.0
+   ],
+   [
+    1000.0,
+    300.0
+   ],
+   [
+    1000.0,
+    -300.0
+   ]
+  ],
+  "diameter": 0.3,
+  "tinggi": 9.0,
+  "mi": "Kendaraan"
+ },
+ "penanda": [
+  {
+   "id": "START",
+   "pos": [
+    -1020,
+    -20
+   ],
+   "jenis": "PlayerStart",
+   "hadap_ke": [
+    -430,
+    50
+   ]
+  },
+  {
+   "id": "CLUE_1_GrafikListrik",
+   "pos": [
+    -395,
+    50
+   ],
+   "jenis": "titik",
+   "z": -7.5,
+   "label": "★1 grafik listrik (B1)"
+  },
+  {
+   "id": "CLUE_2_JimatPecah",
+   "pos": [
+    -395,
+    50
+   ],
+   "jenis": "titik",
+   "z": 200.5,
+   "label": "★2 jimat pecah (L50)"
+  },
+  {
+   "id": "CLUE_O_NotaKolektor",
+   "pos": [
+    -395,
+    50
+   ],
+   "jenis": "titik",
+   "z": 150.5,
+   "label": "○ nota kolektor + kujang (L38)"
+  },
+  {
+   "id": "CP_Lobi",
+   "pos": [
+    -395,
+    -5
+   ],
+   "jenis": "area",
+   "radius": 10,
+   "label": "checkpoint · lobi"
+  },
+  {
+   "id": "CP_L22",
+   "pos": [
+    -395,
+    50
+   ],
+   "jenis": "titik",
+   "z": 92.5,
+   "label": "checkpoint · setelah L22"
+  },
+  {
+   "id": "CP_Fase1",
+   "pos": [
+    -395,
+    0
+   ],
+   "jenis": "area",
+   "radius": 25,
+   "label": "checkpoint · awal fase 1"
+  },
+  {
+   "id": "CP_G2",
+   "pos": [
+    600,
+    -100
+   ],
+   "jenis": "area",
+   "radius": 25,
+   "label": "checkpoint · setelah G2"
+  },
+  {
+   "id": "CP_Fase2",
+   "pos": [
+    950,
+    -200
+   ],
+   "jenis": "area",
+   "radius": 25,
+   "label": "checkpoint · awal fase 2"
+  },
+  {
+   "id": "G1",
+   "pos": [
+    100,
+    105
+   ],
+   "jenis": "titik",
+   "label": "G1 gardu · putus 1"
+  },
+  {
+   "id": "G2",
+   "pos": [
+    600,
+    -100
+   ],
+   "jenis": "titik",
+   "label": "G2 gardu · putus 2"
+  },
+  {
+   "id": "G3",
+   "pos": [
+    900,
+    60
+   ],
+   "jenis": "titik",
+   "label": "G3 gardu induk · putus 3"
+  },
+  {
+   "id": "TRANSFORMASI",
+   "pos": [
+    -395,
+    50
+   ],
+   "jenis": "titik",
+   "z": 220.5,
+   "label": "transformasi di atap (H5)"
+  },
+  {
+   "id": "JAYADWARA_MUNCUL",
+   "pos": [
+    -650,
+    -40
+   ],
+   "jenis": "titik",
+   "label": "Jayadwara muncul di plaza"
+  },
+  {
+   "id": "BOSS_F1_G1",
+   "pos": [
+    100,
+    105
+   ],
+   "jenis": "titik",
+   "label": "fase 1 · jenglot 36 m di G1"
+  },
+  {
+   "id": "BOSS_F1_G2",
+   "pos": [
+    600,
+    -100
+   ],
+   "jenis": "titik",
+   "label": "fase 1 · jenglot 31 m di G2"
+  },
+  {
+   "id": "BOSS_F1_G3",
+   "pos": [
+    900,
+    60
+   ],
+   "jenis": "titik",
+   "label": "fase 1 · jenglot 27 m di G3"
+  },
+  {
+   "id": "BOSS_F2",
+   "pos": [
+    950,
+    -200
+   ],
+   "jenis": "titik",
+   "label": "fase 2 · gelap total di tepi kanal"
+  },
+  {
+   "id": "SEGEL",
+   "pos": [
+    1035,
+    -200
+   ],
+   "jenis": "titik",
+   "label": "segel di tepi kanal"
+  },
+  {
+   "id": "PS_B1",
+   "pos": [
+    -395,
+    50
+   ],
+   "jenis": "titik",
+   "z": -7.5,
+   "label": "Play From Here B1"
+  },
+  {
+   "id": "PS_L1",
+   "pos": [
+    -395,
+    50
+   ],
+   "jenis": "titik",
+   "z": 1.0,
+   "label": "Play From Here L1"
+  },
+  {
+   "id": "PS_L20",
+   "pos": [
+    -395,
+    50
+   ],
+   "jenis": "titik",
+   "z": 80.5,
+   "label": "Play From Here L20"
+  },
+  {
+   "id": "PS_L21",
+   "pos": [
+    -395,
+    50
+   ],
+   "jenis": "titik",
+   "z": 86.5,
+   "label": "Play From Here L21"
+  },
+  {
+   "id": "PS_L22",
+   "pos": [
+    -395,
+    50
+   ],
+   "jenis": "titik",
+   "z": 92.5,
+   "label": "Play From Here L22"
+  },
+  {
+   "id": "PS_L38",
+   "pos": [
+    -395,
+    50
+   ],
+   "jenis": "titik",
+   "z": 150.5,
+   "label": "Play From Here L38"
+  },
+  {
+   "id": "PS_L50",
+   "pos": [
+    -395,
+    50
+   ],
+   "jenis": "titik",
+   "z": 200.5,
+   "label": "Play From Here L50"
+  },
+  {
+   "id": "PS_Atap",
+   "pos": [
+    -395,
+    50
+   ],
+   "jenis": "titik",
+   "z": 220.5,
+   "label": "Play From Here Atap"
+  }
+ ],
+ "zona": [
+  {
+   "id": "ZONA_Aman_Boulevard",
+   "x": [
+    -750,
+    1060
+   ],
+   "y": [
+    -12,
+    12
+   ],
+   "warna": "hijau",
+   "label": "zona aman: boulevard (koridor kejar)"
+  },
+  {
+   "id": "ZONA_Aman_Plaza",
+   "x": [
+    -750.0,
+    -450.0
+   ],
+   "y": [
+    -150.0,
+    150.0
+   ],
+   "warna": "hijau",
+   "label": "zona aman: plaza CBD"
+  },
+  {
+   "id": "ZONA_Aman_Kanal",
+   "x": [
+    1050,
+    1100
+   ],
+   "y": [
+    -296,
+    296
+   ],
+   "warna": "hijau",
+   "label": "zona aman: Kanal Banjir Timur"
+  },
+  {
+   "id": "ZONA_TanpaPenalti_Proyek",
+   "x": [
+    700,
+    1060
+   ],
+   "y": [
+    -280,
+    280
+   ],
+   "warna": "ungu",
+   "label": "lahan proyek: tanpa penalti"
+  },
+  {
+   "id": "ZONA_PenaltiTinggi_Kaca",
+   "x": [
+    -300,
+    250
+   ],
+   "y": [
+    -296,
+    296
+   ],
+   "warna": "merah",
+   "label": "penalti tinggi: sektor kaca"
+  },
+  {
+   "id": "ZONA_PenaltiTinggi_Apartemen",
+   "x": [
+    250,
+    690
+   ],
+   "y": [
+    -296,
+    296
+   ],
+   "warna": "merah",
+   "label": "penalti tinggi: sektor apartemen"
+  }
+ ],
+ "batas_arena": {
+  "x": [
+   -750.0,
+   1060.0
+  ],
+  "y": [
+   -296.0,
+   296.0
+  ],
+  "tinggi": 120,
+  "catatan": "dinding tak terlihat, menghalangi Aksa dan Jayadwara"
+ },
+ "kamera": [
+  {
+   "id": "C1_START_PintuTol",
+   "pos": [
+    -1035,
+    0
+   ],
+   "tinggi_di_atas_tanah": 1.6,
+   "lihat_ke": [
+    -430,
+    50,
+    60
+   ],
+   "fov": 70,
+   "cahaya": "malam"
+  },
+  {
+   "id": "C2_Plaza_Menara",
+   "pos": [
+    -700,
+    -100
+   ],
+   "tinggi_di_atas_tanah": 1.6,
+   "lihat_ke": [
+    -395,
+    50,
+    120
+   ],
+   "fov": 75,
+   "cahaya": "malam"
+  },
+  {
+   "id": "C3_Lobi",
+   "pos": [
+    -395,
+    -15
+   ],
+   "tinggi_di_atas_tanah": 1.6,
+   "lihat_ke": [
+    -395,
+    50,
+    10
+   ],
+   "fov": 75,
+   "cahaya": "malam"
+  },
+  {
+   "id": "C4_L20_Kantor",
+   "pos": [
+    -420,
+    35
+   ],
+   "z": 82.0,
+   "lihat_ke": [
+    -370,
+    60,
+    82
+   ],
+   "fov": 75,
+   "cahaya": "malam"
+  },
+  {
+   "id": "C5_TampakAtas",
+   "pos": [
+    0,
+    0
+   ],
+   "ortho": true,
+   "lebar_ortho": 2400,
+   "cahaya": "malam"
+  },
+  {
+   "id": "C6_Atap",
+   "pos": [
+    -362,
+    50
+   ],
+   "z": 222.5,
+   "lihat_ke": [
+    900,
+    60,
+    0
+   ],
+   "fov": 70,
+   "cahaya": "malam"
+  },
+  {
+   "id": "C7_MataJayadwara",
+   "pos": [
+    0,
+    0
+   ],
+   "z": 42.0,
+   "lihat_ke": [
+    900,
+    60,
+    10
+   ],
+   "fov": 70,
+   "cahaya": "malam"
+  },
+  {
+   "id": "C8_Kanal",
+   "pos": [
+    1035,
+    -150
+   ],
+   "z": 1.6,
+   "lihat_ke": [
+    1080,
+    100,
+    0
+   ],
+   "fov": 70,
+   "cahaya": "malam"
+  }
+ ],
+ "cahaya": {
+  "malam": {
+   "pitch": -35,
+   "yaw": 200,
+   "warna": [
+    0.45,
+    0.55,
+    0.85
+   ],
+   "intensitas_lux": 2.0,
+   "catatan": "21.00, bulan; lampu kota menyala"
+  },
+  "padam": {
+   "pitch": -35,
+   "yaw": 200,
+   "warna": [
+    0.18,
+    0.22,
+    0.4
+   ],
+   "intensitas_lux": 0.4,
+   "catatan": "setelah gardu putus; hampir gelap"
+  },
+  "darurat": {
+   "pitch": -35,
+   "yaw": 200,
+   "warna": [
+    0.9,
+    0.3,
+    0.2
+   ],
+   "intensitas_lux": 0.8,
+   "catatan": "lampu darurat merah"
+  }
+ },
+ "rute_aksa_tanah": [
+  [
+   -1020,
+   -20
+  ],
+  [
+   -1020,
+   0
+  ],
+  [
+   -760,
+   0
+  ],
+  [
+   -700,
+   -40
+  ],
+  [
+   -600,
+   -20
+  ],
+  [
+   -470,
+   0
+  ],
+  [
+   -432,
+   0
+  ],
+  [
+   -395,
+   10
+  ]
+ ],
+ "rute_interior": [
+  [
+   -395,
+   10,
+   0
+  ],
+  [
+   -395,
+   50,
+   -8
+  ],
+  [
+   -395,
+   50,
+   0
+  ],
+  [
+   -395,
+   50,
+   80
+  ],
+  [
+   -395,
+   50,
+   86
+  ],
+  [
+   -395,
+   50,
+   92
+  ],
+  [
+   -395,
+   50,
+   150
+  ],
+  [
+   -395,
+   50,
+   200
+  ],
+  [
+   -395,
+   50,
+   220
+  ]
+ ],
+ "rute_kejar": [
+  [
+   -395,
+   0
+  ],
+  [
+   0,
+   0
+  ],
+  [
+   100,
+   55
+  ],
+  [
+   100,
+   0
+  ],
+  [
+   600,
+   0
+  ],
+  [
+   600,
+   -55
+  ],
+  [
+   600,
+   0
+  ],
+  [
+   900,
+   0
+  ],
+  [
+   900,
+   15
+  ],
+  [
+   900,
+   0
+  ],
+  [
+   1035,
+   -200
+  ]
+ ],
+ "kecepatan_rute_ms": 5.0,
+ "kecepatan_jayadwara_ms": 70.0,
+ "kecepatan_catatan": "Aksa MaxWalkSpeed 500 cm/s; Jayadwara ±70 m/s (PR #29). Lintas arena 1810 m ±26 detik.",
+ "bangunan_target": 114,
+ "rute_panjang_m": {
+  "aksa_tanah": 661.95,
+  "kejar": 1745.43
+ }
+}

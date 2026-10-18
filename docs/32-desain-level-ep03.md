@@ -1,12 +1,12 @@
 # 32 — Desain Level Ep 3: `Ep03_Adikara`
 
-> **Status: v0.3 (17 Okt 2026): kepadatan gedung dikurangi ±30% dengan ukuran gedung tetap asli (bagian 2a).** v0.2, tata letak memanjang (17 Okt 2026), usulan: Developer memilih map **memanjang barat → timur ala RE4** (alur terus maju, balik arah minim) menggantikan draf v01 plaza-tengah (1400 × 1050 m, gardu urutan bebas). Keputusan H1 sudah dijawab; H2–H8 menunggu developer (bagian 8).
+> **Status: v1.0 (18 Okt 2026): H1–H8 disetujui developer; tata letak v02 dan kepadatan v0.3 berlaku.** H1 (map memanjang barat → timur ala RE4) disetujui 17 Okt 2026; H2–H8 disetujui 18 Okt 2026 (bagian 8). v0.3 mengurangi kepadatan gedung ±30% dengan ukuran gedung tetap asli (bagian 2a). v0.2 menggantikan draf v01 plaza-tengah (1400 × 1050 m, gardu urutan bebas). Data generator dan greybox dibangun dari dokumen ini (lihat bagian 9).
 > Rincian dari pola di [28](28-struktur-level-episode.md#ep-3--ep03_adikara--malam-lampu-kota-padam-bertahap), format sama dengan [30](30-desain-level-ep01.md) dan [31](31-desain-level-ep02.md).
 > Sumber: [16 kartu Ep 3](16-panduan-arc-1.md#ep-3--lapar-listrik--jenglot) (isi episode), [16 bagian 4](16-panduan-arc-1.md#4-benang-merah-narasi) (benang merah), [02](02-setting-dunia.md) (Distrik Adikara). Skenario adegan Ep 3 belum ada di [17](17-skenario-arc-1.md), jadi urutan di sini juga jadi kerangka skenarionya.
 
 **Visual:** [`visual/ep03-adikara.html`](visual/ep03-adikara.html) (buka di browser): denah berlapis, potongan memanjang dengan status lampu per tahap, potongan Menara Adikara, perbandingan tinggi, linimasa cahaya.
 
-**Posisi di roadmap:** Ep 3 = Fase 4 ([10](10-roadmap.md#fase-4--produksi-season-1-ep-210-apr-2028--akhir-2029)). Dokumen ini **tidak memajukan jadwal**; tujuannya supaya kit Adikara (CBD) dan interior kantor dirancang sejak awal untuk dipakai ulang di Ep 10. Semua angka titik awal greybox; data generator (`Art/Level/ep03_*`) dan greybox belum dibuat.
+**Posisi di roadmap:** Ep 3 = Fase 4 ([10](10-roadmap.md#fase-4--produksi-season-1-ep-210-apr-2028--akhir-2029)). Dokumen ini **tidak memajukan jadwal**; tujuannya supaya kit Adikara (CBD) dan interior kantor dirancang sejak awal untuk dipakai ulang di Ep 10. Semua angka titik awal greybox; data generator (`Art/Level/ep03_*`) dan greybox sudah dibuat 18 Okt 2026 (bagian 9).
 
 ---
 
@@ -45,7 +45,7 @@
 ```
 
 ### 2a. Kepadatan v0.3 (17 Okt 2026, permintaan developer)
-
+> **Koreksi teknis 18 Okt 2026 (dipakai generator):** Menara Adikara digeser ke **y +15 … +85** dan air mancur ke **(−600, −70)** supaya boulevard y −12 … +12 benar-benar bebas. Tanpa koreksi ini, tabel lama (menara y −35 … +35, air mancur y 0) menutup koridor aman.
 Konsep realistis hasil prompt developer terlalu padat untuk dibangun dev solo. Kepadatan diturunkan **tanpa mengecilkan gedung** (tetap proporsional terhadap Jayadwara 45 m):
 
 | | v0.2 | **v0.3** |
@@ -75,8 +75,8 @@ Konsep realistis hasil prompt developer terlalu padat untuk dibangun dev solo. K
 | **Pintu keluar tol** | lengkung dari (−1100, −255) ke (−1020, −12) | — | Kedatangan |
 | START + mobil DWARA | (−1020, −20) | — | Barikade polisi di x −1050 |
 | Zona A (ruko) | x −1100 … −750 | 8–14 m | Penalti tidak berlaku (di luar arena) |
-| **Plaza CBD** | x −750 … −450, y −150 … +150 | 300 × 300 | Air mancur (−600, 0); zona aman |
-| **Menara Adikara** | x −430 … −360, y −35 … +35 | 70 × 70, tinggi 220 m | **Tidak bisa hancur** (dipakai Ep 10/33); fasad retak scripted |
+| **Plaza CBD** | x −750 … −450, y −150 … +150 | 300 × 300 | Air mancur (−600, −70); zona aman |
+| **Menara Adikara** | x −430 … −360, y +15 … +85 | 70 × 70, tinggi 220 m | **Tidak bisa hancur** (dipakai Ep 10/33); fasad retak scripted. *Koreksi 18 Okt: digeser 50 m ke utara agar boulevard tidak terpotong* |
 | Videotron | (−540, −120) | — | Berita Entitas D |
 | **Sektor kaca** | x −300 … +250 | 60–180 m | Penalti tinggi (kaca mahal) |
 | **G1** | (+100, +105) | 70 × 50, 30 m | Menara kaca 180 m di (+180, +105) |
@@ -226,10 +226,31 @@ Plaza CBD di tengah medan 1400 × 1050 m, Menara Adikara di utara plaza, tiga ga
 | # | Pertanyaan | Status |
 |---|---|---|
 | **H1** | Map memanjang barat → timur ala RE4 (2200 × 700 m), menggantikan v01 plaza-tengah? | ✅ **Ya** (developer, 17 Okt 2026) |
-| **H2** | Interior menara cukup 4 set lantai (B1+L1, L20–22, L38, L50+atap)? | Usulan: ya |
-| **H3** | Gardu berurutan G1 → G2 → G3 (kartu [16](16-panduan-arc-1.md#ep-3--lapar-listrik--jenglot) belum menyebut urutan)? | Usulan: ya, konsekuensi H1 |
-| **H4** | ★2 dipindah ke ruang server L50, sesudah zona C (di [28](28-struktur-level-episode.md#ep-3--ep03_adikara--malam-lampu-kota-padam-bertahap) ★2 ada di zona B)? | Usulan: ya |
-| **H5** | Transformasi di atap, Jayadwara muncul di plaza? | Usulan: ya |
-| **H6** | Korban di briefing: petugas lemas, bukan tewas? | Usulan: ya |
-| **H7** | Keris Jayadwara muncul di fase 2 sebagai finisher, atau baru dibuka di debrief? | Usulan: fase 2 |
-| **H8** | Kujang Aksa ditemukan di koleksi L38, atau dibuat Nadia? | Usulan: L38 |
+| **H2** | Interior menara cukup 4 set lantai (B1+L1, L20–22, L38, L50+atap)? | ✅ **Ya** (developer, 18 Okt 2026) |
+| **H3** | Gardu berurutan G1 → G2 → G3 (kartu [16](16-panduan-arc-1.md#ep-3--lapar-listrik--jenglot) belum menyebut urutan)? | ✅ **Ya**, konsekuensi H1 (developer, 18 Okt 2026) |
+| **H4** | ★2 dipindah ke ruang server L50, sesudah zona C (di [28](28-struktur-level-episode.md#ep-3--ep03_adikara--malam-lampu-kota-padam-bertahap) ★2 ada di zona B)? | ✅ **Ya** (developer, 18 Okt 2026) |
+| **H5** | Transformasi di atap, Jayadwara muncul di plaza? | ✅ **Ya** (developer, 18 Okt 2026) |
+| **H6** | Korban di briefing: petugas lemas, bukan tewas? | ✅ **Ya** (developer, 18 Okt 2026) |
+| **H7** | Keris Jayadwara muncul di fase 2 sebagai finisher, atau baru dibuka di debrief? | ✅ **Fase 2** (developer, 18 Okt 2026) |
+| **H8** | Kujang Aksa ditemukan di koleksi L38, atau dibuat Nadia? | ✅ **L38** (developer, 18 Okt 2026) |
+
+---
+
+## 9. Data dan greybox (18 Okt 2026)
+
+**Data (sumber kebenaran, jangan sunting JSON manual):**
+- [`Art/Level/ep03_medan.py`](../Art/Level/ep03_medan.py) — `elev`, `zona_material` (8 slot: Air, Rel, Jalan, Paving, Kaca, Apartemen, Proyek, Latar), 16 `TITIK_UJI`. Uji: `python -I Art/Level/ep03_medan.py` → `SEMUA LULUS`.
+- [`Art/Level/buat_layout_ep03_v02.py`](../Art/Level/buat_layout_ep03_v02.py) → [`ep03_layout_v02.json`](../Art/Level/ep03_layout_v02.json): 151 objek, 11 kelompok (261 item ISM), 104 pohon, 146 tiang, 27 penanda, 6 zona, 8 kamera; **114 bangunan**, 18 hancur (6 blok Chaos × 3), 30 objek gardu, 3 objektif; rute Aksa 662 m, rute kejar 1.745 m.
+- [`Art/Level/pratinjau_ep03_v02.py`](../Art/Level/pratinjau_ep03_v02.py) → [`docs/visual/ep03_layout_v02_atas.png`](visual/ep03_layout_v02_atas.png) (2200 × 700 px).
+- [`Art/Scripts/ep03_medan_blender.py`](../Art/Scripts/ep03_medan_blender.py) → `Art/Export/Level/SM_Ep03_Medan.fbx` + `Art/Blender/ep03/ep03_medan.blend`: grid 2,5 m, **247.561 vertex**, 16/16 titik uji ±0,05 m.
+
+**Greybox UE:**
+- [`Tools/ue_greybox_ep03.py`](../Tools/ue_greybox_ep03.py) → `/Game/Jayadwara/Maps/Ep03_Adikara_Greybox`; aset `/Game/Jayadwara/Environment/Ep03Greybox/` (M_Greybox + 31 MI_Ep03_*).
+- Hasil uji: bounds 220.000 × 70.000 cm, trace 16/16, 151 objek (tag `hancur` 18, `penalti_tinggi` 18, `blok_chaos` 18, `gardu` 30, `objektif` 3), 261 item ISM, 104 pohon, 146 tiang, 27 penanda, 6 zona, 9 dinding batas, 8 kamera, boulevard bebas, rute 662,4 m dan 1.745,4 m, persistensi lulus → `CEK EP03 GREYBOX: LULUS`.
+- Render: [`Tools/ue_greybox_ep03_render.py`](../Tools/ue_greybox_ep03_render.py) → `Hermes/Art/maps_ep3/Render/C1..C8_*_malam.png` (1920 × 1080).
+
+**Batas greybox yang disengaja:**
+- Interior menara memakai **pelat lantai bertumpuk + inti lift**; belum ada logika lift/teleport. Untuk playtest tiap lantai, pakai penanda `PS_B1`, `PS_L1`, `PS_L20`, `PS_L21`, `PS_L22`, `PS_L38`, `PS_L50`, `PS_Atap` dengan **Play From Here** (atau console `tp`).
+- Fasad retak, gardu putus, kabel hidup, dan fase boss baru berupa tag/penanda; gameplay-nya Fase 4.
+- 18 gedung hancur masih kotak bertag `blok_chaos`/`tukar_puing`; Geometry Collection (Chaos) belum dibuat.
+- Koreksi koordinat yang dipakai generator: Menara Adikara **y +15 … +85**, air mancur **(−600, −70)**, dan dinding batas arena barat punya **gap 40 m** di boulevard.
