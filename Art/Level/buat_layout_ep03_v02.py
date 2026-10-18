@@ -457,21 +457,21 @@ for x in range(-1000, 1041, 100):
 # ================================================================== penanda
 PENANDA = [
     {"id": "START", "pos": [-1020, -20], "jenis": "PlayerStart", "hadap_ke": [-430, 50]},
-    {"id": "CLUE_1_GrafikListrik", "pos": [-395, 50], "jenis": "titik", "z": -7.5,
+    {"id": "CLUE_1_GrafikListrik", "pos": [-410, 35], "jenis": "titik", "z": -7.5,
      "label": "★1 grafik listrik (B1)"},
-    {"id": "CLUE_2_JimatPecah", "pos": [-395, 50], "jenis": "titik", "z": 200.5,
+    {"id": "CLUE_2_JimatPecah", "pos": [-410, 62], "jenis": "titik", "z": 200.5,
      "label": "★2 jimat pecah (L50)"},
-    {"id": "CLUE_O_NotaKolektor", "pos": [-395, 50], "jenis": "titik", "z": 150.5,
+    {"id": "CLUE_O_NotaKolektor", "pos": [-380, 50], "jenis": "titik", "z": 150.5,
      "label": "○ nota kolektor + kujang (L38)"},
-    {"id": "CP_Lobi", "pos": [-395, -5], "jenis": "area", "radius": 10, "label": "checkpoint · lobi"},
-    {"id": "CP_L22", "pos": [-395, 50], "jenis": "titik", "z": 92.5, "label": "checkpoint · setelah L22"},
+    {"id": "CP_Lobi", "pos": [-395, 30], "jenis": "area", "radius": 10, "label": "checkpoint · lobi"},
+    {"id": "CP_L22", "pos": [-410, 35], "jenis": "titik", "z": 92.5, "label": "checkpoint · setelah L22"},
     {"id": "CP_Fase1", "pos": [-395, 0], "jenis": "area", "radius": 25, "label": "checkpoint · awal fase 1"},
     {"id": "CP_G2", "pos": [600, -100], "jenis": "area", "radius": 25, "label": "checkpoint · setelah G2"},
     {"id": "CP_Fase2", "pos": [950, -200], "jenis": "area", "radius": 25, "label": "checkpoint · awal fase 2"},
     {"id": "G1", "pos": [100, 105], "jenis": "titik", "label": "G1 gardu · putus 1"},
     {"id": "G2", "pos": [600, -100], "jenis": "titik", "label": "G2 gardu · putus 2"},
     {"id": "G3", "pos": [900, 60], "jenis": "titik", "label": "G3 gardu induk · putus 3"},
-    {"id": "TRANSFORMASI", "pos": [-395, 50], "jenis": "titik", "z": 220.5, "label": "transformasi di atap (H5)"},
+    {"id": "TRANSFORMASI", "pos": [-410, 35], "jenis": "titik", "z": 220.5, "label": "transformasi di atap (H5)"},
     {"id": "JAYADWARA_MUNCUL", "pos": [-650, -40], "jenis": "titik", "label": "Jayadwara muncul di plaza"},
     {"id": "BOSS_F1_G1", "pos": [100, 105], "jenis": "titik", "label": "fase 1 · jenglot 36 m di G1"},
     {"id": "BOSS_F1_G2", "pos": [600, -100], "jenis": "titik", "label": "fase 1 · jenglot 31 m di G2"},
@@ -479,10 +479,17 @@ PENANDA = [
     {"id": "BOSS_F2", "pos": [950, -200], "jenis": "titik", "label": "fase 2 · gelap total di tepi kanal"},
     {"id": "SEGEL", "pos": [1035, -200], "jenis": "titik", "label": "segel di tepi kanal"},
 ]
-# penanda interior (Play From Here)
-for nama, z in (("B1", -7.5), ("L1", 1.0), ("L20", 80.5), ("L21", 86.5), ("L22", 92.5),
-                ("L38", 150.5), ("L50", 200.5), ("Atap", 220.5)):
-    PENANDA.append({"id": f"PS_{nama}", "pos": [-395, 50], "jenis": "titik", "z": z,
+# penanda interior (Play From Here) — di luar inti lift 14x14 m, bukan di (-395, 50)
+for nama, pos, z in (
+        ("B1", [-410, 35], -7.5),
+        ("L1", [-395, 30], 1.0),
+        ("L20", [-410, 35], 80.5),
+        ("L21", [-410, 35], 86.5),
+        ("L22", [-410, 35], 92.5),
+        ("L38", [-410, 35], 150.5),
+        ("L50", [-410, 35], 200.5),
+        ("Atap", [-410, 35], 220.5)):
+    PENANDA.append({"id": f"PS_{nama}", "pos": pos, "jenis": "titik", "z": z,
                     "label": f"Play From Here {nama}"})
 
 # ================================================================== zona
