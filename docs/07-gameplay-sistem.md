@@ -73,6 +73,8 @@ Disetujui developer 16 Okt 2026 dari konsep pose ([`visual/usulan-jurus-aksa.htm
 
 Dodge dan parry tetap memakai animasi Aksa yang di-retarget. Nama file Mixamo usulan `jd_<peran>.fbx`; `Tools/ue_import_mixamo.py` perlu jalur baru ke `A_JD2_*` lewat RTG Jayadwara. Batas IP: tanpa tebasan tangan ala jurus Ultra, lengan tidak menyilang / bentuk L.
 
+> **Iterasi 2b (18 Okt 2026):** bagian "retarget animasi Aksa" dikerjakan **sekarang**, bukan menunggu F2 — lihat [`23`](23-rencana-fase-1.md#iterasi-2b--combat-jayadwara--aksa-paritas-animasi). Yang disamakan: montage, tabel notify, dan isi `DA_CombatProfile_Giant`; angka yang berskala (radius, jarak, shake, hit-stop, jendela parry) tetap berbeda. Tabel jurus khas di atas tetap ditunda sampai ada hasil uji tangan Iterasi 6.
+
 ### Dodge per arah
 
 Keputusan developer 16 Okt 2026. Sama untuk Aksa dan Jayadwara; `UJDGA_Dodge` sudah memilih montage per arah.
