@@ -18,8 +18,9 @@ Membuat / mengisi ulang (aman diulang):
   Data/DA_AbilitySet_Aksa                    + JDGA_LightAttack pada Input.Attack.Light
   Data/DA_AbilitySet_Dummy, Characters/Dummy/BP_TrainingDummy (Manny, ABP_Unarmed)
   BP_Aksa: combat_profile;  Test_Combat: 1 dummy di tengah arena menghadap PlayerStart
-Animasi Mixamo: jalankan Tools/ue_import_mixamo.py dulu; langkah yang punya A_Aksa_Mx_<peran> (kunci "mx") otomatis
-memakainya dengan waktu hit otomatis, sisanya tetap placeholder Mannequin. Terjang = lompat kecil (move_height).
+Animasi Mixamo: jalankan Tools/ue_import_mixamo.py lalu Tools/ue_mixamo_postproses.py (pangkas + in-place) dulu; langkah
+yang punya A_Aksa_Mx_<peran> (kunci "mx") otomatis memakainya (waktu hit otomatis per keluarga tulang, jendela combo di
+ekor klip, laju & blend per peran dari hasil tes tangan Hermes 17 Okt), sisanya tetap placeholder Mannequin. Terjang = lompat kecil (move_height).
 "hit": "auto" = tulang & waktu dicari dari puncak kecepatan tangan/kaki (relatif pelvis); hasilnya di-log, salin ke STEPS
 supaya tetap. Pembuka & finisher memakai ulang animasi langkah (placeholder) sampai animasi Mixamo khusus ada (docs/23 6.1).
 """
@@ -47,7 +48,7 @@ STEPS = [
     {"name": "AM_Aksa_Light_03", "seq": "A_Aksa_Attack_03", "source": f"{ATTACK}/MM_Attack_03", "damage": 12.0, "poise": 8.0,
      "hit": ("foot_r", 0.24, 0.48), "combo": (0.69, 0.35), "mx": "light_03"},
     {"name": "AM_Aksa_Light_04", "seq": "A_Aksa_Attack_04", "source": f"{ATTACK}/MM_ChargedAttack", "damage": 20.0, "poise": 20.0,
-     "hit": "auto", "combo": None, "mx": "light_04"},
+     "hit": "auto", "combo": None, "combo_mx": True, "mx": "light_04"},
 ]
 # Pembuka arah (docs/07 "Combo & arah"): menggantikan langkah 1, combo lanjut ke langkah 2. Gerak dari root motion source.
 OPENERS = {
@@ -66,19 +67,42 @@ DIRECTION = {"target_search_radius": 800.0, "lunge_min_distance": 250.0, "lunge_
 # Stamina & damage sama dengan pukulan berat (docs/23 bagian 5).
 FINISHERS = [
     {"name": "AM_Aksa_Finisher_01", "seq": "A_Aksa_Attack_03", "hit": ("foot_r", 0.24, 0.48), "rate": 0.8, "mx": "finisher_01"},
-    {"name": "AM_Aksa_Finisher_02", "seq": "A_Aksa_Attack_04", "hit": "auto", "rate": 0.85, "mx": "finisher_02", "mx_hits": 2},
+    {"name": "AM_Aksa_Finisher_02", "seq": "A_Aksa_Attack_04", "hit": "auto", "rate": 0.85, "mx": "finisher_02", "mx_hits": 2,
+     # narae chagi (klip 18 Okt): dua tendangan berjarak < 0,2 s (batas auto) -> jendela dipasang tangan, tidak bertumpuk
+     "mx_hit": [("foot_r", 0.40, 0.24), ("foot_r", 0.70, 0.24)]},
     {"name": "AM_Aksa_Finisher_03", "hit": "auto", "rate": 1.0, "mx": "finisher_03", "mx_only": True},
 ]
 HEAVY = {"damage": 30.0, "poise": 40.0, "stamina": 25.0}
 # Serangan udara (docs/07 "Serangan udara", 16 Okt 2026). Salinan animasi tanpa root motion supaya tidak melayang/tertahan.
 AIR = {"name": "AM_Aksa_Air", "seq": "A_Aksa_Air", "source": f"{ATTACK}/MM_Attack_03", "damage": 10.0, "poise": 5.0,
        "hit": ("foot_r", 0.24, 0.48), "combo": (0.40, 0.40), "mx": "air"}
-AIR_SLAM = {"name": "AM_Aksa_AirSlam", "seq": "A_Aksa_AirSlam", "source": f"{ATTACK}/MM_ChargedAttack", "mx": "air_slam"}
+# Hantaman udara = berputar di tempat (tanpa menukik, tanpa damage area): damage dari 1 hit window di sabetan kaki kanan.
+# Montage dipertahankan penuh sampai ujung klip (blend out di ujung, bukan di panjang - blend_out) supaya sabetan tidak terpotong.
+AIR_SLAM = {"name": "AM_Aksa_AirSlam", "seq": "A_Aksa_AirSlam", "source": f"{ATTACK}/MM_ChargedAttack", "mx": "air_slam",
+            "damage": 10.0, "poise": 5.0, "hit": "auto", "mx_hit": [("foot_r", 0.40, 0.18)], "blend_out_at_end": True}
 # Animasi Mixamo hasil Tools/ue_import_mixamo.py (peran = kunci "mx"). Kalau ada, menggantikan placeholder: waktu hit
 # dicari otomatis ("mx_hits" = jumlah kena, mis. narae chagi 2x), jendela combo tepat setelah hit terakhir.
 MIXAMO = "/Game/Jayadwara/Characters/Aksa/Anims/Mixamo"
-AIR_VALUES = {"air_combo_max": 2, "air_hang_time": 0.3, "air_hang_gravity_scale": 0.1,
+# Revisi 18 Okt 2026 (docs/07 "Serangan udara"): 1 serangan udara per lompatan (LMB atau E berbagi jatah), tanpa "ngambang".
+AIR_VALUES = {"air_combo_max": 1, "air_hang_time": 0.0, "air_hang_gravity_scale": 1.0,
               "air_slam_speed": 2000.0, "air_slam_radius": 250.0, "air_slam_recovery": 0.35}
+# Hasil tes tangan combo Mixamo (Hermes, 17 Okt 2026; Hermes/Laporan/2026-10-17-combo-iter2.md). Dipakai hanya untuk
+# langkah yang memakai animasi Mixamo; placeholder Mannequin tetap dengan nilai di atas.
+# Laju main: wind-up ~0,43 s -> ~0,27 s tanpa memotong klip.
+MX_LAJU = {"light_01": 1.35, "light_02": 1.35, "light_03": 1.45, "light_04": 1.0, "lunge": 1.5, "back": 1.5,
+           "finisher_01": 1.25, "finisher_02": 1.25, "finisher_03": 1.15, "air": 1.2, "air_slam": 1.45}
+MX_BLEND = {"air": (0.15, 0.30), "light_01": (0.12, 0.28), "light_02": (0.12, 0.28),
+            "light_03": (0.24, 0.30), "light_04": (0.22, 0.30), "air_slam": (0.15, 0.11)}
+MX_BLEND_DEFAULT = (0.05, 0.22)
+# Keluarga tulang yang kena per jurus: puncak kecepatan global kadang jatuh di tangan walau jurusnya tendangan.
+MX_KENA = {"light_01": "tangan", "light_02": "tangan", "light_03": "tangan", "lunge": "tangan", "back": "tangan",
+           "light_04": "kaki", "air_slam": "kaki", "finisher_01": "kaki", "finisher_02": "kaki", "finisher_03": "kaki", "air": "kaki"}
+KENA_BONES = {"tangan": ("hand_l", "hand_r"), "kaki": ("foot_l", "foot_r")}
+MIN_PEAK_T = 0.10          # puncak < 0,1 s = transisi masuk animasi (blend_in), bukan hantaman
+COMBO_EKOR = 0.55          # jendela combo = 0,55 s terakhir klip: tekanan cepat tidak memotong animasi yang jalan
+# Klip Mixamo pukulan 1-2 menggeser kaki belakang ke belakang (ancang-ancang); root motion sudah diratakan, jadi kapsul
+# didorong maju sedikit supaya tidak terbaca mundur (move_height 0 = meluncur datar).
+MX_MAJU = {"light_01": (12.0, 0.30), "light_02": (12.0, 0.30)}
 STRIKE_BONES = ("hand_r", "hand_l", "foot_r", "foot_l")
 CUE_SETS = {"GC_Hit_Light": ("GameplayCue.Hit.Light", "S_Combat_Punch_Light"),
             "GC_Hit_Heavy": ("GameplayCue.Hit.Heavy", "S_Combat_Punch_Heavy")}
@@ -147,11 +171,16 @@ def apply_mixamo(steps):
         path = f"{MIXAMO}/A_Aksa_Mx_{step.get('mx')}"
         if step.get("mx") and EAL.does_asset_exist(path):
             step["seq_path"] = path
+            step["rate"] = MX_LAJU.get(step["mx"], 1.0)
+            step["blend"] = MX_BLEND.get(step["mx"], MX_BLEND_DEFAULT)
             if "hit" in step:                                     # hantaman ke bawah: kena area, tanpa hit window
-                step["hit"] = "auto"
+                step["hit"] = step.get("mx_hit") or "auto"
                 step["hits"] = step.get("mx_hits", 1)
-            if step.get("combo"):
-                step["combo"] = "auto"
+                step["kena"] = MX_KENA.get(step["mx"])
+            if step.get("combo") or step.get("combo_mx"):
+                step["combo"] = "ekor"
+            if step["mx"] in MX_MAJU:
+                step["maju"] = MX_MAJU[step["mx"]]
             log(f"{step['name']}: animasi Mixamo {step['mx']}")
 
 
@@ -190,9 +219,11 @@ def ensure_sequence(step):
 
 
 # ------------------------------------------------------------------ waktu hit otomatis
-def strike_timings(seq, count=1):
+def strike_timings(seq, count=1, kena=None):
     """[(tulang, mulai, durasi)] hit window dari puncak kecepatan tangan/kaki relatif pelvis (root motion tidak ikut).
-    count > 1: puncak berikutnya yang berjarak >= 0,2 s dari puncak sebelumnya (jurus 2x kena)."""
+    count > 1: puncak berikutnya yang berjarak >= 0,2 s dari puncak sebelumnya (jurus 2x kena).
+    kena = "tangan" / "kaki" (animasi Mixamo): hanya tulang keluarga itu, puncak < MIN_PEAK_T diabaikan."""
+    bones = KENA_BONES[kena] if kena else STRIKE_BONES
     length = AL.get_sequence_length(seq)
     opts = unreal.AnimPoseEvaluationOptions()
     world = unreal.AnimPoseSpaces.WORLD
@@ -203,8 +234,8 @@ def strike_timings(seq, count=1):
         pose = unreal.AnimPoseExtensions.get_anim_pose_at_time(seq, t, opts)
         pelvis = unreal.AnimPoseExtensions.get_bone_pose(pose, "pelvis", world).translation
         pos = {b: unreal.AnimPoseExtensions.get_bone_pose(pose, b, world).translation - pelvis for b in STRIKE_BONES}
-        if prev:
-            samples.append(max(((pos[b] - prev[b]).length() / dt, b, t) for b in STRIKE_BONES))
+        if prev and (not kena or t >= MIN_PEAK_T):
+            samples.append(max(((pos[b] - prev[b]).length() / dt, b, t) for b in bones))
         prev = pos
     peaks = []
     for speed, bone, peak in sorted(samples, reverse=True):
@@ -224,13 +255,30 @@ def strike_timings(seq, count=1):
 
 def resolve_hits(step, seq):
     hit = step["hit"]
-    return strike_timings(seq, step.get("hits", 1)) if hit == "auto" else [hit]
+    if isinstance(hit, list):
+        return hit
+    return strike_timings(seq, step.get("hits", 1), step.get("kena")) if hit == "auto" else [hit]
 
 
 def combo_after(hit, seq):
     """Jendela combo mulai sesaat sebelum hit window tutup, sampai ±0,35 s (dibatasi panjang animasi)."""
     start = hit[1] + hit[2] - 0.03
     return (round(start, 2), round(max(0.1, min(0.35, AL.get_sequence_length(seq) - start)), 2))
+
+
+def combo_ekor(seq):
+    """Jendela combo di COMBO_EKOR terakhir klip (sisa 0,02 s di ujung)."""
+    length = AL.get_sequence_length(seq)
+    start = max(0.05, length - COMBO_EKOR)
+    return (round(start, 2), round(length - start - 0.02, 2))
+
+
+def set_blend(m, step, default):
+    blend_in, blend_out = step.get("blend", default)
+    for prop, t in (("blend_in", blend_in), ("blend_out", blend_out)):
+        b = m.get_editor_property(prop)
+        b.set_editor_property("blend_time", t)
+        m.set_editor_property(prop, b)
 
 
 # ------------------------------------------------------------------ montage
@@ -252,10 +300,7 @@ def ensure_montage(step):
         log(f"{step['name']} dibuat dari {src.get_name()}")
 
     # Masuk cepat supaya combo terasa responsif, keluar agak halus.
-    for prop, t in (("blend_in", 0.08), ("blend_out", 0.2)):
-        b = m.get_editor_property(prop)
-        b.set_editor_property("blend_time", t)
-        m.set_editor_property(prop, b)
+    set_blend(m, step, (0.08, 0.2))
 
     add_combat_notifies(m, step, src)
     EAL.save_loaded_asset(m, only_if_is_dirty=False)
@@ -280,6 +325,8 @@ def add_combat_notifies(m, step, seq):
     if combo:
         if combo == "auto":
             combo = combo_after((socket, start, dur), seq)
+        elif combo == "ekor":
+            combo = combo_ekor(seq)
         AL.add_animation_notify_state_event(m, track, combo[0], combo[1], unreal.JDAnimNotifyState_ComboWindow)
 
 
@@ -294,10 +341,7 @@ def ensure_extra_montage(step):
     f = unreal.AnimMontageFactory()
     f.set_editor_property("source_animation", seq)
     m = asset_tools.create_asset(step["name"], MONTAGES, unreal.AnimMontage, f)
-    for prop, t in (("blend_in", 0.08), ("blend_out", 0.2)):
-        b = m.get_editor_property(prop)
-        b.set_editor_property("blend_time", t)
-        m.set_editor_property(prop, b)
+    set_blend(m, step, (0.08, 0.2))
     add_combat_notifies(m, step, seq)
     EAL.save_loaded_asset(m, only_if_is_dirty=False)
     log(f"{step['name']} dari {(step.get('seq_path') or step['seq']).rsplit('/', 1)[-1]}")
@@ -319,10 +363,10 @@ def ensure_air_montage(step):
     f = unreal.AnimMontageFactory()
     f.set_editor_property("source_animation", seq)
     m = asset_tools.create_asset(step["name"], MONTAGES, unreal.AnimMontage, f)
-    for prop, t in (("blend_in", 0.06), ("blend_out", 0.2)):
-        b = m.get_editor_property(prop)
-        b.set_editor_property("blend_time", t)
-        m.set_editor_property(prop, b)
+    set_blend(m, step, (0.06, 0.2))
+    if step.get("blend_out_at_end"):
+        m.set_editor_property("enable_auto_blend_out", True)
+        m.set_editor_property("blend_out_trigger_time", 0.0)
     if step.get("hit"):
         add_combat_notifies(m, step, seq)
     EAL.save_loaded_asset(m, only_if_is_dirty=False)
@@ -346,6 +390,15 @@ def setup_cues():
         log(f"{name}: {cue_tag}, {len(sounds)} variasi suara")
 
 
+def set_rate_move(s, step):
+    s.set_editor_property("play_rate", step.get("rate", 1.0))
+    if step.get("maju"):
+        s.set_editor_property("move_distance", step["maju"][0])
+        s.set_editor_property("move_duration", step["maju"][1])
+        s.set_editor_property("move_height", 0.0)
+        s.set_editor_property("stop_at_target", True)
+
+
 def setup_profile(montages):
     prof = ensure_data_asset("DA_CombatProfile_Human", unreal.JDCombatProfile)
     steps = []
@@ -355,6 +408,7 @@ def setup_profile(montages):
         s.set_editor_property("damage", step["damage"])
         s.set_editor_property("poise_damage", step["poise"])
         s.set_editor_property("hit_cue", tag("GameplayCue.Hit.Light"))
+        set_rate_move(s, step)
         steps.append(s)
     prof.set_editor_property("light_combo", steps)
 
@@ -368,6 +422,7 @@ def setup_profile(montages):
         s.set_editor_property("move_duration", o["move_duration"])
         s.set_editor_property("move_height", o.get("move_height", 0.0))
         s.set_editor_property("stop_at_target", o["stop_at_target"])
+        s.set_editor_property("play_rate", o.get("rate", 1.0))
         prof.set_editor_property(prop, s)
     for k, v in DIRECTION.items():
         prof.set_editor_property(k, v)
@@ -391,13 +446,15 @@ def setup_profile(montages):
     air.set_editor_property("damage", AIR["damage"])
     air.set_editor_property("poise_damage", AIR["poise"])
     air.set_editor_property("hit_cue", tag("GameplayCue.Hit.Light"))
+    air.set_editor_property("play_rate", AIR.get("rate", 1.0))
     prof.set_editor_property("air_attack", air)
     slam = unreal.JDAttackStep()
     slam.set_editor_property("montage", ensure_air_montage(AIR_SLAM))
-    slam.set_editor_property("damage", HEAVY["damage"])
-    slam.set_editor_property("poise_damage", HEAVY["poise"])
+    slam.set_editor_property("damage", AIR_SLAM["damage"])
+    slam.set_editor_property("poise_damage", AIR_SLAM["poise"])
     slam.set_editor_property("stamina_cost", HEAVY["stamina"])
     slam.set_editor_property("hit_cue", tag("GameplayCue.Hit.Heavy"))
+    slam.set_editor_property("play_rate", AIR_SLAM.get("rate", 1.0))
     prof.set_editor_property("air_slam", slam)
     for k, v in AIR_VALUES.items():
         prof.set_editor_property(k, v)
