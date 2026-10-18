@@ -251,6 +251,7 @@ Plaza CBD di tengah medan 1400 × 1050 m, Menara Adikara di utara plaza, tiga ga
 
 **Batas greybox yang disengaja:**
 - Interior menara memakai **pelat lantai bertumpuk + inti lift**; belum ada logika lift/teleport. Untuk playtest tiap lantai, pakai penanda `PS_B1`, `PS_L1`, `PS_L20`, `PS_L21`, `PS_L22`, `PS_L38`, `PS_L50`, `PS_Atap` dengan **Play From Here** (atau console `tp`). Penanda berada **di luar inti lift 14×14 m** (pusat x −402…−388, y 43…57): `PS_L1` di (−395, 30) [selatan inti], `PS_B1`/`L20`/`L21`/`L22`/`L38`/`L50`/`Atap` di (−410, 35) [barat-daya inti]. *(Koreksi v02 18 Okt: versi awal salah menempatkan semua PS di pusat −395,50 → spawn di dalam shaft tertutup.)*
+- **Lampu playtest** 28 `PointLight` (4 per lantai B1/L1/L20/L21/L22/L38/L50, tag `lampu_playtest`, tanpa shadow, 120.000 lumen) ditambahkan agar interior terbaca saat review. Ini bukan lighting final; mood `malam` tetap dari directional light 2 lux. Kalau masih gelap, di PIE tekan `~` lalu `viewmode unlit`.
 - Fasad retak, gardu putus, kabel hidup, dan fase boss baru berupa tag/penanda; gameplay-nya Fase 4.
 - 18 gedung hancur masih kotak bertag `blok_chaos`/`tukar_puing`; Geometry Collection (Chaos) belum dibuat.
 - Koreksi koordinat yang dipakai generator: Menara Adikara **y +15 … +85**, air mancur **(−600, −70)**, dan dinding batas arena barat punya **gap 40 m** di boulevard.

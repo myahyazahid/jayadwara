@@ -223,7 +223,7 @@ def build_level():
             return False
         log(f"level baru: {MAP} (template {TEMPLATE})")
     mine = (unreal.StaticMeshActor, unreal.TextRenderActor, unreal.TargetPoint, unreal.TriggerBox, unreal.PlayerStart,
-            unreal.CameraActor, unreal.SceneCapture2D)
+            unreal.CameraActor, unreal.SceneCapture2D, unreal.PointLight)
     n = 0
     for a in list(EAS.get_all_level_actors()):
         if isinstance(a, mine) or a.get_class().get_name() == "Actor":
@@ -603,6 +603,38 @@ def build_kamera():
             cc.set_editor_property("ortho_width", float(k["lebar_ortho"]) * 100.0)
 
 
+def build_lampu_interior():
+    """Lampu playtest sementara: 4 titik per lantai, tanpa shadow, tag lampu_playtest."""
+    lantai = (
+        ("B1", -4.0, ((-415, 27), (-375, 27), (-415, 73), (-375, 73))),
+        ("L1", 6.0, ((-415, 27), (-375, 27), (-415, 73), (-375, 73))),
+        ("L20", 84.0, ((-415, 35), (-375, 35), (-415, 65), (-375, 65))),
+        ("L21", 89.5, ((-415, 35), (-375, 35), (-415, 65), (-375, 65))),
+        ("L22", 95.5, ((-415, 35), (-375, 35), (-415, 65), (-375, 65))),
+        ("L38", 154.0, ((-415, 35), (-375, 35), (-415, 65), (-375, 65))),
+        ("L50", 204.0, ((-415, 35), (-375, 35), (-415, 65), (-375, 65))),
+    )
+    n = 0
+    for nama, z, titik in lantai:
+        for i, (x, y) in enumerate(titik, 1):
+            a = EAS.spawn_actor_from_class(unreal.PointLight, ue(x, y, z), rot(0.0, 0.0, 0.0))
+            a.set_actor_label(f"LAMPU_{nama}_{i}")
+            a.set_folder_path("LAMPU_PLAYTEST")
+            a.set_editor_property("tags", ["lampu_playtest", nama])
+            c = a.get_component_by_class(unreal.PointLightComponent)
+            try:
+                c.set_editor_property("intensity_units", unreal.LightUnits.LUMENS)
+            except Exception:
+                pass
+            c.set_editor_property("intensity", 120000.0)
+            c.set_editor_property("attenuation_radius", 4500.0)
+            c.set_editor_property("cast_shadows", False)
+            c.set_editor_property("mobility", unreal.ComponentMobility.MOVABLE)
+            c.set_light_color(unreal.LinearColor(r=1.0, g=0.94, b=0.84, a=1.0))
+            n += 1
+    log(f"lampu playtest: {n} PointLight (4 per lantai, tag lampu_playtest)")
+
+
 # ================================================================== 6. uji
 def uji_medan(medan):
     ignore = [a for a in EAS.get_all_level_actors() if a is not medan]
@@ -815,6 +847,7 @@ def main():
     build_penanda(mis, hc)           # setelah objek: titik di_atap memakai trace ke atap
     build_walls()
     build_kamera()                   # setelah objek: C2 berdiri di atap
+    build_lampu_interior()           # lampu playtest 4 per lantai (tag lampu_playtest)
     set_gamemode()
     set_cahaya(CAHAYA_UTAMA)
     LES.save_current_level()
