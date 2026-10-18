@@ -1,0 +1,9 @@
+feat(pawn): varian Aksa v2 untuk tes combo
+
+- BP_Aksa2_Hermes: duplikat BP_Aksa_Hermes dengan mesh SK_Aksa2
+- tanpa retarget ulang: SKEL_Aksa2 punya 171 tulang dan SK_Mannequin tercatat
+  sebagai compatible skeleton, jadi montage hasil retarget Manny langsung jalan
+- AnimBP tetap ABP_Aksa_C (target SK_Mannequin); material MI_Aksa2_Body
+- level Test_Hermes_ComboIter2: pawn BP_Aksa_Hermes diganti BP_Aksa2_Hermes
+  di posisi sama (-1200, 0, 102), Auto Possess Player 0
+- laporan: bagian "Model Aksa v2 untuk tes" + cara kembali ke v1

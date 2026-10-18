@@ -1,0 +1,12 @@
+fix(light): pukulan 1-2 tidak lagi terasa mundur
+
+Klip light_01/light_02 menggeser kaki belakang 21,8/33,5 cm ke belakang saat
+ancang-ancang; root motion sudah diratakan jadi kapsul diam dan kaki meluncur.
+
+- pangkas light_01 2,233 -> 1,100 s dan light_02 2,267 -> 1,133 s
+  (buang geseran recovery di ekor klip)
+- profil: MoveDistance 15 cm / 0,30 s, MoveHeight 0, bStopAtTarget true untuk
+  light_01 & light_02 -> kapsul maju, net gerak jadi melangkah maju
+- blend_in pukulan 1-2 0,05 -> 0,12 s
+- hantaman 0,26 s (hand_r) / 0,35 s (hand_l); jendela combo 0,55-1,08 / 0,58-1,11
+- tune.py: STEP_MAJU idempoten; cek_retarget 11/11 lulus; laporan "Umpan balik 6"

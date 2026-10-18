@@ -47,7 +47,28 @@ RATAKAN = {
 EAL = unreal.EditorAssetLibrary
 AL = unreal.AnimationLibrary
 hasil = []
-HANYA = {"light_01", "light_02"}   # isi nama peran untuk menjalankan sebagian saja
+HANYA = {"air_slam"}   # isi nama peran untuk menjalankan sebagian saja
+
+# peran -> kunci yaw tulang root (putaran badan ke samping).
+# Dulu air_slam dikunci di sini karena "gerak ke samping kiri". Ternyata geseran itu
+# berasal dari translasi pelvis (NOL), sedangkan mengunci yaw membuat badan BERHENTI
+# menyamping sepanjang montage -> umpan balik berikutnya: "tendangannya memutar selesai
+# di samping". Jadi kunci yaw tidak dipakai lagi untuk air_slam.
+KUNCI_YAW = {}
+
+# peran -> total putaran badan yang diinginkan (derajat), mulai menghadap depan.
+# air_slam: kurva asli root 106,7 -> 293,3 derajat (monoton, +186,6). Kalau dibiarkan,
+# badan mulai membelakangi pemain lalu berhenti di 0 (menghadap depan) tetapi masuknya
+# menyentak 186 derajat dalam 0,15 s blend. Kalau dikunci, badan menyamping terus.
+# Jalan tengah: skalakan kurvanya jadi tepat 360 derajat -> mulai depan, satu putaran
+# penuh, berakhir depan. Bentuk (percepatan/perlambatan) putaran tetap seperti aslinya.
+PUTAR = {}
+
+# peran -> paksa posisi horizontal root ke 0 (bukan ke frame pertama).
+# air_slam: hasil retarget menaruh pelvis di X 125,7 cm padahal klip lain ~0 cm
+# (light_01 0,2 / air -0,9). Offset 1,25 m ini membuat badan terseret ke samping
+# saat blend masuk dari pose lompat -> "gerakan seperti ke samping kiri".
+NOL = {"air_slam": True}
 
 
 def log(msg):
@@ -55,29 +76,34 @@ def log(msg):
 
 
 def ukur(seq, sumbu_bone=BONE):
-    """Rentang translasi lokal root + rentang WORLD pelvis/kepala (untuk verifikasi)."""
+    """Rentang translasi lokal root + rentang WORLD pelvis/kepala + yaw root (untuk verifikasi)."""
     o = unreal.AnimPoseEvaluationOptions()
     L = AL.get_sequence_length(seq)
-    lx, ly, lz, py, pz, hz = [], [], [], [], [], []
+    lx, ly, lz, py, pz, hz, hx, yaw = [], [], [], [], [], [], [], []
     for i in range(0, 21):
         t = min(L * i / 20.0, L)
         p = unreal.AnimPoseExtensions.get_anim_pose_at_time(seq, t, o)
         v = unreal.AnimPoseExtensions.get_bone_pose(p, sumbu_bone, unreal.AnimPoseSpaces.LOCAL).translation
+        r = unreal.AnimPoseExtensions.get_bone_pose(p, sumbu_bone, unreal.AnimPoseSpaces.LOCAL).rotation
         pv = unreal.AnimPoseExtensions.get_bone_pose(p, "pelvis", unreal.AnimPoseSpaces.WORLD).translation
         hv = unreal.AnimPoseExtensions.get_bone_pose(p, "head", unreal.AnimPoseSpaces.WORLD).translation
         lx.append(v.x); ly.append(v.y); lz.append(v.z)
-        py.append(pv.y); pz.append(pv.z); hz.append(hv.z)
+        py.append(pv.y); pz.append(pv.z)
+        hz.append(hv.z); hx.append(hv.x)
+        yaw.append(r.rotator().yaw)
     return {
         "root_x": [round(min(lx), 1), round(max(lx), 1)],
         "root_y": [round(min(ly), 1), round(max(ly), 1)],
         "root_z": [round(min(lz), 1), round(max(lz), 1)],
+        "root_yaw": [round(min(yaw), 1), round(max(yaw), 1)],
         "pelvis_y": [round(min(py), 1), round(max(py), 1)],
         "pelvis_z": [round(min(pz), 1), round(max(pz), 1)],
+        "kepala_x": [round(min(hx), 1), round(max(hx), 1)],
         "kepala_z": [round(min(hz), 1), round(max(hz), 1)],
     }
 
 
-def ratakan(seq, sumbu):
+def ratakan(seq, sumbu, kunci_yaw=False, nol=False, putar=None):
     model = seq.get_editor_property("data_model_interface")
     n = model.get_number_of_frames()
     L = AL.get_sequence_length(seq)
@@ -94,12 +120,38 @@ def ratakan(seq, sumbu):
         rot.append(tr.rotation)
         scl.append(tr.scale3d)
 
-    dasar = pos[0]
+    dasar = unreal.Vector(0.0, 0.0, pos[0].z) if nol else pos[0]
     baru = [unreal.Vector(
         dasar.x if sumbu[0] else k.x,
         dasar.y if sumbu[1] else k.y,
         dasar.z if sumbu[2] else k.z,
     ) for k in pos]
+
+    if putar:
+        # Putaran badan diskalakan: yaw_0 -> yaw_0 + putar, mengikuti bentuk kurva asli.
+        # Yaw dibuka dulu (unwrap) karena kurva melewati +-180 derajat di tengah klip.
+        mentah = [q.rotator().yaw for q in rot]
+        buka = [mentah[0]]
+        for y in mentah[1:]:
+            buka.append(buka[-1] + ((y - buka[-1] + 180.0) % 360.0 - 180.0))
+        rentang = buka[-1] - buka[0]
+        baru_rot = []
+        for i, q in enumerate(rot):
+            r = q.rotator()
+            y = buka[0] + (putar * ((buka[i] - buka[0]) / rentang) if rentang else 0.0)
+            baru_rot.append(unreal.Rotator(roll=r.roll, pitch=r.pitch, yaw=y).quaternion())
+        rot = baru_rot
+        log(f"putaran badan {rentang:.1f} -> {putar:.1f} derajat")
+    elif kunci_yaw:
+        # Badan tidak boleh berputar: yaw root dibekukan di frame pertama,
+        # pitch & roll dibiarkan supaya badan tetap bisa melipat/menunduk.
+        y0 = rot[0].rotator().yaw
+        baru_rot = []
+        for q in rot:
+            r = q.rotator()
+            baru_rot.append(unreal.Rotator(roll=r.roll, pitch=r.pitch, yaw=y0).quaternion())
+        rot = baru_rot
+
     ok = ctrl.set_bone_track_keys(BONE, baru, rot, scl)
     EAL.save_loaded_asset(seq, only_if_is_dirty=False)
     return ok, n
@@ -115,19 +167,27 @@ def main():
             log(f"LEWAT {peran}: aset tidak ada")
             continue
         sebelum = ukur(seq)
-        ok, n = ratakan(seq, sumbu)
+        kunci = KUNCI_YAW.get(peran, False)
+        nol = NOL.get(peran, False)
+        ok, n = ratakan(seq, sumbu, kunci, nol, PUTAR.get(peran))
         sesudah = ukur(seq)
         baris = {
             "peran": peran,
             "sumbu_diratakan": "".join(a for a, v in zip("XYZ", sumbu) if v) or "-",
+            "yaw_dikunci": kunci,
+            "putaran_penuh": PUTAR.get(peran),
+            "horizontal_dinolkan": nol,
             "kunci": n,
             "ok": bool(ok),
             "sebelum": sebelum,
             "sesudah": sesudah,
         }
         hasil.append(baris)
-        log(f"{peran:12s} [{baris['sumbu_diratakan']}] root Y {sebelum['root_y']} -> {sesudah['root_y']} "
+        log(f"{peran:12s} [{baris['sumbu_diratakan']}{' + yaw' if kunci else ''}] "
+            f"root Y {sebelum['root_y']} -> {sesudah['root_y']} "
             f"| pelvis Y {sebelum['pelvis_y']} -> {sesudah['pelvis_y']} "
+            f"| yaw {sebelum['root_yaw']} -> {sesudah['root_yaw']} "
+            f"| kepala X {sebelum['kepala_x']} -> {sesudah['kepala_x']} "
             f"| kepala Z {sesudah['kepala_z']} | ok={ok}")
 
     os.makedirs(os.path.dirname(LOG), exist_ok=True)

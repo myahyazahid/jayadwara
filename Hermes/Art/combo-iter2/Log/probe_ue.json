@@ -1,0 +1,351 @@
+[
+ {
+  "peran": "air_slam",
+  "panjang": 0.633,
+  "frame": 19,
+  "rentang": {
+   "pelvis_wx": [
+    -0.8,
+    0.4,
+    1.2
+   ],
+   "pelvis_wy": [
+    -0.5,
+    0.7,
+    1.2
+   ],
+   "pelvis_wz": [
+    70.0,
+    90.7,
+    20.7
+   ],
+   "pelvis_lx": [
+    0.3,
+    3.8,
+    3.5
+   ],
+   "pelvis_ly": [
+    1.8,
+    2.8,
+    1.0
+   ],
+   "root_lx": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "root_ly": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "root_yaw": [
+    106.7,
+    106.8,
+    0.1
+   ],
+   "pelvis_yaw": [
+    -91.0,
+    -90.0,
+    1.0
+   ],
+   "head_wx": [
+    -66.4,
+    -43.2,
+    23.2
+   ],
+   "head_wy": [
+    -30.4,
+    7.3,
+    37.7
+   ]
+  },
+  "sampel": [
+   {
+    "frame": 0,
+    "t": 0.0,
+    "pelvis_wx": -0.2,
+    "pelvis_wy": -0.2,
+    "pelvis_wz": 70.0,
+    "pelvis_lx": 0.3,
+    "pelvis_ly": 2.7,
+    "root_lx": 0.0,
+    "root_ly": 0.0,
+    "root_yaw": 106.7,
+    "pelvis_yaw": -90.0,
+    "head_wx": -43.2,
+    "head_wy": -7.9
+   },
+   {
+    "frame": 1,
+    "t": 0.035,
+    "pelvis_wx": -0.1,
+    "pelvis_wy": -0.1,
+    "pelvis_wz": 71.9,
+    "pelvis_lx": 0.4,
+    "pelvis_ly": 2.7,
+    "root_lx": 0.0,
+    "root_ly": 0.0,
+    "root_yaw": 106.7,
+    "pelvis_yaw": -90.0,
+    "head_wx": -43.9,
+    "head_wy": -9.6
+   },
+   {
+    "frame": 2,
+    "t": 0.07,
+    "pelvis_wx": 0.0,
+    "pelvis_wy": 0.0,
+    "pelvis_wz": 74.1,
+    "pelvis_lx": 0.5,
+    "pelvis_ly": 2.6,
+    "root_lx": 0.0,
+    "root_ly": 0.0,
+    "root_yaw": 106.7,
+    "pelvis_yaw": -90.1,
+    "head_wx": -44.5,
+    "head_wy": -10.9
+   },
+   {
+    "frame": 3,
+    "t": 0.106,
+    "pelvis_wx": 0.2,
+    "pelvis_wy": -0.2,
+    "pelvis_wz": 77.1,
+    "pelvis_lx": 0.5,
+    "pelvis_ly": 2.6,
+    "root_lx": 0.0,
+    "root_ly": 0.0,
+    "root_yaw": 106.7,
+    "pelvis_yaw": -90.1,
+    "head_wx": -46.3,
+    "head_wy": -9.6
+   },
+   {
+    "frame": 4,
+    "t": 0.141,
+    "pelvis_wx": 0.3,
+    "pelvis_wy": -0.4,
+    "pelvis_wz": 80.9,
+    "pelvis_lx": 0.8,
+    "pelvis_ly": 2.7,
+    "root_lx": 0.0,
+    "root_ly": 0.0,
+    "root_yaw": 106.8,
+    "pelvis_yaw": -90.1,
+    "head_wx": -49.9,
+    "head_wy": -5.9
+   },
+   {
+    "frame": 5,
+    "t": 0.176,
+    "pelvis_wx": 0.2,
+    "pelvis_wy": -0.4,
+    "pelvis_wz": 84.8,
+    "pelvis_lx": 1.6,
+    "pelvis_ly": 2.8,
+    "root_lx": 0.0,
+    "root_ly": 0.0,
+    "root_yaw": 106.8,
+    "pelvis_yaw": -90.1,
+    "head_wx": -54.2,
+    "head_wy": -3.7
+   },
+   {
+    "frame": 6,
+    "t": 0.211,
+    "pelvis_wx": 0.3,
+    "pelvis_wy": -0.3,
+    "pelvis_wz": 88.1,
+    "pelvis_lx": 2.5,
+    "pelvis_ly": 2.8,
+    "root_lx": 0.0,
+    "root_ly": 0.0,
+    "root_yaw": 106.8,
+    "pelvis_yaw": -90.1,
+    "head_wx": -57.3,
+    "head_wy": -5.9
+   },
+   {
+    "frame": 7,
+    "t": 0.246,
+    "pelvis_wx": 0.4,
+    "pelvis_wy": -0.4,
+    "pelvis_wz": 90.1,
+    "pelvis_lx": 3.2,
+    "pelvis_ly": 2.7,
+    "root_lx": 0.0,
+    "root_ly": 0.0,
+    "root_yaw": 106.8,
+    "pelvis_yaw": -90.1,
+    "head_wx": -58.2,
+    "head_wy": -10.8
+   },
+   {
+    "frame": 8,
+    "t": 0.281,
+    "pelvis_wx": 0.4,
+    "pelvis_wy": -0.5,
+    "pelvis_wz": 90.7,
+    "pelvis_lx": 3.6,
+    "pelvis_ly": 2.5,
+    "root_lx": 0.0,
+    "root_ly": 0.0,
+    "root_yaw": 106.8,
+    "pelvis_yaw": -90.2,
+    "head_wx": -58.0,
+    "head_wy": -15.4
+   },
+   {
+    "frame": 9,
+    "t": 0.317,
+    "pelvis_wx": 0.4,
+    "pelvis_wy": -0.5,
+    "pelvis_wz": 90.2,
+    "pelvis_lx": 3.8,
+    "pelvis_ly": 2.3,
+    "root_lx": 0.0,
+    "root_ly": 0.0,
+    "root_yaw": 106.8,
+    "pelvis_yaw": -90.3,
+    "head_wx": -57.8,
+    "head_wy": -20.9
+   },
+   {
+    "frame": 10,
+    "t": 0.352,
+    "pelvis_wx": 0.3,
+    "pelvis_wy": -0.2,
+    "pelvis_wz": 89.4,
+    "pelvis_lx": 3.7,
+    "pelvis_ly": 2.1,
+    "root_lx": 0.0,
+    "root_ly": 0.0,
+    "root_yaw": 106.7,
+    "pelvis_yaw": -90.3,
+    "head_wx": -57.1,
+    "head_wy": -27.3
+   },
+   {
+    "frame": 11,
+    "t": 0.387,
+    "pelvis_wx": 0.1,
+    "pelvis_wy": -0.1,
+    "pelvis_wz": 88.6,
+    "pelvis_lx": 3.6,
+    "pelvis_ly": 2.0,
+    "root_lx": 0.0,
+    "root_ly": 0.0,
+    "root_yaw": 106.7,
+    "pelvis_yaw": -90.2,
+    "head_wx": -57.1,
+    "head_wy": -30.4
+   },
+   {
+    "frame": 12,
+    "t": 0.422,
+    "pelvis_wx": -0.3,
+    "pelvis_wy": -0.2,
+    "pelvis_wz": 87.8,
+    "pelvis_lx": 3.4,
+    "pelvis_ly": 2.0,
+    "root_lx": 0.0,
+    "root_ly": 0.0,
+    "root_yaw": 106.7,
+    "pelvis_yaw": -90.3,
+    "head_wx": -59.2,
+    "head_wy": -28.2
+   },
+   {
+    "frame": 13,
+    "t": 0.457,
+    "pelvis_wx": -0.6,
+    "pelvis_wy": -0.3,
+    "pelvis_wz": 87.4,
+    "pelvis_lx": 3.2,
+    "pelvis_ly": 2.1,
+    "root_lx": 0.0,
+    "root_ly": 0.0,
+    "root_yaw": 106.7,
+    "pelvis_yaw": -90.3,
+    "head_wx": -62.5,
+    "head_wy": -21.4
+   },
+   {
+    "frame": 14,
+    "t": 0.493,
+    "pelvis_wx": -0.8,
+    "pelvis_wy": -0.2,
+    "pelvis_wz": 87.1,
+    "pelvis_lx": 3.1,
+    "pelvis_ly": 2.1,
+    "root_lx": 0.0,
+    "root_ly": 0.0,
+    "root_yaw": 106.8,
+    "pelvis_yaw": -90.5,
+    "head_wx": -64.8,
+    "head_wy": -13.2
+   },
+   {
+    "frame": 15,
+    "t": 0.528,
+    "pelvis_wx": -0.8,
+    "pelvis_wy": 0.4,
+    "pelvis_wz": 86.2,
+    "pelvis_lx": 3.1,
+    "pelvis_ly": 2.0,
+    "root_lx": 0.0,
+    "root_ly": 0.0,
+    "root_yaw": 106.8,
+    "pelvis_yaw": -90.7,
+    "head_wx": -65.6,
+    "head_wy": -6.9
+   },
+   {
+    "frame": 16,
+    "t": 0.563,
+    "pelvis_wx": -0.5,
+    "pelvis_wy": 0.7,
+    "pelvis_wz": 85.8,
+    "pelvis_lx": 3.2,
+    "pelvis_ly": 1.8,
+    "root_lx": 0.0,
+    "root_ly": 0.0,
+    "root_yaw": 106.7,
+    "pelvis_yaw": -90.9,
+    "head_wx": -66.1,
+    "head_wy": -3.0
+   },
+   {
+    "frame": 17,
+    "t": 0.598,
+    "pelvis_wx": -0.2,
+    "pelvis_wy": 0.7,
+    "pelvis_wz": 85.6,
+    "pelvis_lx": 3.3,
+    "pelvis_ly": 1.9,
+    "root_lx": 0.0,
+    "root_ly": 0.0,
+    "root_yaw": 106.7,
+    "pelvis_yaw": -91.0,
+    "head_wx": -66.4,
+    "head_wy": 1.6
+   },
+   {
+    "frame": 18,
+    "t": 0.633,
+    "pelvis_wx": 0.0,
+    "pelvis_wy": 0.4,
+    "pelvis_wz": 85.3,
+    "pelvis_lx": 3.3,
+    "pelvis_ly": 2.3,
+    "root_lx": 0.0,
+    "root_ly": 0.0,
+    "root_yaw": 106.7,
+    "pelvis_yaw": -90.9,
+    "head_wx": -66.2,
+    "head_wy": 7.3
+   }
+  ]
+ }
+]

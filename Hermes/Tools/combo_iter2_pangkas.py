@@ -25,7 +25,15 @@ FPS = 30
 
 # peran -> (mulai_detik_di_klip_asli, durasi_detik)
 PANGKAS = {
-    "air_slam": (1.50, 0.40),
+    # air_slam (FBX baru 18 Okt, 2,367 s / 72 frame): AMBIL BAGIAN HANTAMAN.
+    # Hasil ukur probe_air_slam_halus.json: tangan kanan terangkat 66,5 -> 135 cm
+    # (1,40-1,63 s), kaki kanan menyabet naik 27 -> 139,7 cm sambil badan melipat
+    # (1,63-1,90 s), HANTAMAN di 1,90 s (kepala 121,7 -> 88,6 cm, tangan kiri
+    # 36,2 cm = hampir menyentuh tanah), lalu badan berdiri lagi 1,93-2,30 s.
+    # Mulai di 1,40 s (bukan 1,50): di 1,40 tangan masih rendah (66,5 cm = pose
+    # netral), jadi blend dari pose lompat tidak melompat ke pose sabetan
+    # (umpan balik 18 Okt: "lompat + E masih kaku"). 1,40-2,05 s = 0,65 s.
+    "air_slam": (1.40, 0.65),
     # air: ekor 0,65 s hanya recovery diam -> memutar penuh terasa kaku setelah
     # tendangan. Dipotong di 0,90 s supaya montage selesai saat masih di udara
     # lalu blend balik ke animasi lompat/jatuh.
@@ -42,7 +50,7 @@ PANGKAS = {
 }
 # jalankan hanya peran tertentu (klip lain sudah dipangkas, memangkas ulang akan
 # mengambil rentang dari klip yang sudah pendek)
-HANYA = {"light_03", "light_04"}
+HANYA = {"air_slam"}
 
 EAL = unreal.EditorAssetLibrary
 AL = unreal.AnimationLibrary

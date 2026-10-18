@@ -23,8 +23,9 @@ KENA_BONE = {"tangan": ("hand_l", "hand_r"), "kaki": ("foot_l", "foot_r")}
 PINGGUL_RENDAH_OK = ("dodge_", "air_slam")
 TOLERANSI_FRAME = 1.0 / 30.0 + 0.005
 # peran yang sengaja dipangkas (combo_iter2_pangkas.py) -> panjang yang diharapkan, bukan panjang FBX.
-# air_slam: kode memakainya sebagai pose menukik singkat (JDGA_HeavyAttack baris 108).
-DIPANGKAS = {"air_slam": 0.40, "air": 0.867, "light_01": 1.267, "light_02": 1.333,
+# air_slam: kode memutar montage hantaman singkat (JDGA_HeavyAttack), 18 Okt diganti klip baru
+# 2,367 s -> diambil 1,50-2,05 s (0,55 s = 16 frame) berisi sabetan + hantaman.
+DIPANGKAS = {"air_slam": 0.633, "air": 0.867, "light_01": 1.267, "light_02": 1.333,
              "light_03": 1.20, "light_04": 1.033}
 
 EAL = unreal.EditorAssetLibrary

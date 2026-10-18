@@ -33,7 +33,11 @@ public:
 
 private:
 	void ActivateAirSlam(const FJDAttackStep& Step);
-	void OnSlamLanded();
+	void StartSlamHang();
+	void EndSlamHang();
+	/** E yang ditekan sebelum puncak lompatan ditahan dulu, dijalankan saat sudah mentok. */
+	void StartApexWait();
+	void CheckApex();
 
 	UFUNCTION()
 	void OnMontageFinished();
@@ -42,10 +46,9 @@ private:
 	void OnMontageInterrupted();
 
 	bool bSlam = false;
-	bool bSlamLanded = false;
-	FDelegateHandle LandedHandle;
-	FTimerHandle SlamTimer;
-
-	UPROPERTY(Transient)
-	TObjectPtr<UAnimMontage> SlamMontage;
+	bool bSlamHang = false;
+	float SavedGravityScale = 1.0f;
+	FTimerHandle HangTimer;
+	FTimerHandle ApexTimer;
+	float ApexWaitElapsed = 0.0f;
 };

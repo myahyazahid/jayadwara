@@ -1,0 +1,11 @@
+fix(light): sambungan pukulan 2->3 dan 3->4 lebih mulus
+
+Selisih pose di sambungan 02->03 28,3 cm dan 03->04 35,9 cm (01->02 hanya 6,6 cm).
+
+- pangkas light_03 2,167 -> 1,200 s dan light_04 2,033 -> 1,033 s
+  (buang ancang-ancang 0,45 s dan ekor diam 0,5 s)
+- laju light_03 1,60 -> 1,45, light_04 1,45 -> 1,35
+- blend_in 0,05 -> 0,24 s (light_03) dan 0,22 s (light_04), blend_out 0,30 s;
+  blend selesai sebelum hantaman 0,36 / 0,33 s
+- jendela combo 0,65-1,18 / 0,48-1,01
+- cek_retarget 11/11 lulus; laporan bagian "Umpan balik 8"

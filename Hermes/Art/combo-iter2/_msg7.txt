@@ -1,0 +1,8 @@
+fix(light): perlambat pukulan ke-4 (1,35x -> 1,00x)
+
+Pukulan terakhir jadi 0,77 s (paling pendek) setelah pemangkasan di umpan balik 8.
+
+- light_04 play_rate 1,35 -> 1,00: 1,03 s nyata, hantaman 0,33 s
+- blend_in tetap 0,22 s (selesai 0,11 s sebelum hantaman), jendela combo 0,48-1,01
+- panjang combo: 0,94 / 0,99 / 0,83 / 1,03 s
+- laporan bagian "Umpan balik 9"

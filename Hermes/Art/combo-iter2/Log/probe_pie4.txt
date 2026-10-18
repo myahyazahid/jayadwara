@@ -1,0 +1,9 @@
+L0 mulai probe; jeda tekan 0.15 s
+L0 lompat z=98.1
+L2 t=0.000 z=  98.1 vz=   0.0 montage=- pos=-1.000
+L2 t=0.125 z= 210.4 vz= 173.3 montage=- pos=-1.000
+L1 tembak E t=0.25 asc=ada ok=True
+L2 t=0.250 z= 213.7 vz=-153.3 montage=- pos=-1.000
+L2 t=0.375 z= 108.1 vz=   0.0 montage=JALAN pos=0.000
+L2 t=0.500 z=  98.2 vz=   0.0 montage=JALAN pos=0.417
+L3 MENDARAT t=0.500 z=98.2

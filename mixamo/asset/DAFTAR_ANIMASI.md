@@ -71,5 +71,6 @@ Aku yang cek tiap FBX (1 armature `mixamorig`, ada Hips/Spine/LeftHand/RightFoot
 
 - 17 Okt 2026 — Hermes sudah cek 12 file di `result/`: **semua lulus** (1 armature, 65 tulang `mixamorig:` sama persis dengan `ybot.fbx`, 30 fps, action ≥ 10 frame, ybot 180,5 cm + berskin). Angka lengkap: `Hermes/Art/combo-iter2/Log/cek_fbx.json`.
 - **Belum ada file (7):** `dodge_back.fbx`, `dodge_left.fbx`, `dodge_right.fbx`, `dodge_forward.fbx`, `heavy.fbx`, `parry_01.fbx`, `parry_02.fbx`. Selama belum ada, jurus itu tetap pakai animasi placeholder/gerak kode.
-- **Tidak In Place** (bukan gagal, tapi bikin karakter bergeser saat montage): `air.fbx` 210,7 cm, `air_slam.fbx` 383,4 cm, `light_04.fbx` 51,3 cm. Kalau mau rapi, download ulang dengan centang **In Place**.
+- **Tidak In Place** (bukan gagal, tapi bikin karakter bergeser saat montage): `air.fbx` 210,7 cm, `light_04.fbx` 51,3 cm, `air_slam.fbx` 82,9 cm (versi 18 Okt; versi lama 383,4 cm). Kalau mau rapi, download ulang dengan centang **In Place**.
+- 18 Okt 2026 — `air_slam.fbx` **diganti** versi baru (72 frame / 2,367 s, Without Skin, geser pinggul 82,9 cm). Yang dipakai di sandbox: potongan 1,50–2,05 s (0,533 s). Versi lama disimpan di `Hermes/Art/combo-iter2/Mixamo/_lama/air_slam_2m4_skin.fbx`.
 - `finisher_03.fbx` = animasi pilihan developer sendiri (81 frame, 2,67 s), masuk ke `heavy_finishers[2]`.

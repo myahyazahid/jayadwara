@@ -10,6 +10,7 @@
 #include "Components/SkeletalMeshComponent.h"
 #include "Engine/World.h"
 #include "GameFramework/Character.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "TimerManager.h"
 
 UJDGA_HeavyAttack::UJDGA_HeavyAttack()
@@ -51,6 +52,12 @@ bool UJDGA_HeavyAttack::CanActivateAbility(const FGameplayAbilitySpecHandle Hand
 	{
 		return false;
 	}
+	// Serangan udara berbagi jatah dengan pukulan ringan: lompat = 1 serangan saja (LMB atau E).
+	// Kalau masih naik, input ditahan dan baru dijalankan di puncak (lihat StartApexWait).
+	if (IsAvatarFalling(ActorInfo) && Profile->AirSlam.Montage && !Combat->CanAirAttack())
+	{
+		return false;
+	}
 	const UAbilitySystemComponent* ASC = ActorInfo->AbilitySystemComponent.Get();
 	return IsAttackCancelable(ActorInfo) || (ASC && ASC->HasMatchingGameplayTag(JDGameplayTags::State_Combat_ComboWindow));
 }
@@ -66,10 +73,10 @@ void UJDGA_HeavyAttack::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
 		return;
 	}
 	bSlam = false;
-	bSlamLanded = false;
+	bSlamHang = false;
 	if (IsAvatarFalling(ActorInfo) && Profile->AirSlam.Montage)
 	{
-		ActivateAirSlam(Profile->AirSlam);
+		StartApexWait();
 		return;
 	}
 
@@ -89,13 +96,58 @@ void UJDGA_HeavyAttack::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
 	Task->ReadyForActivation();
 }
 
+void UJDGA_HeavyAttack::StartApexWait()
+{
+	UWorld* World = GetWorld();
+	const UJDCombatProfile* Profile = GetCombatProfile();
+	if (!World || !Profile)
+	{
+		EndAbility(CurrentSpecHandle, CurrentActorInfo, CurrentActivationInfo, true, true);
+		return;
+	}
+	// Tombol E yang ditekan sebelum puncak tetap dicatat: ability aktif tapi montage
+	// belum diputar, lalu CheckApex menunggu sampai karakter berhenti naik.
+	ApexWaitElapsed = 0.0f;
+	World->GetTimerManager().SetTimer(ApexTimer,
+		FTimerDelegate::CreateUObject(this, &UJDGA_HeavyAttack::CheckApex), 0.02f, true);
+}
+
+void UJDGA_HeavyAttack::CheckApex()
+{
+	UWorld* World = GetWorld();
+	ACharacter* Character = Cast<ACharacter>(GetAvatarActorFromActorInfo());
+	const UJDCombatProfile* Profile = GetCombatProfile();
+	if (!World || !Character || !Profile)
+	{
+		if (World)
+		{
+			World->GetTimerManager().ClearTimer(ApexTimer);
+		}
+		EndAbility(CurrentSpecHandle, CurrentActorInfo, CurrentActivationInfo, true, true);
+		return;
+	}
+	ApexWaitElapsed += 0.02f;
+	const UCharacterMovementComponent* Movement = Character->GetCharacterMovement();
+	const bool bAtApex = Character->GetVelocity().Z <= Profile->AirSlamApexVelocity;
+	const bool bLanded = Movement && Movement->IsMovingOnGround();
+	if (bAtApex || ApexWaitElapsed >= 1.5f)
+	{
+		World->GetTimerManager().ClearTimer(ApexTimer);
+		ActivateAirSlam(Profile->AirSlam);
+	}
+	else if (bLanded)
+	{
+		World->GetTimerManager().ClearTimer(ApexTimer);
+		EndAbility(CurrentSpecHandle, CurrentActorInfo, CurrentActivationInfo, true, true);
+	}
+}
+
 void UJDGA_HeavyAttack::ActivateAirSlam(const FJDAttackStep& Step)
 {
 	ACharacter* Character = Cast<ACharacter>(GetAvatarActorFromActorInfo());
 	UJDCombatComponent* Combat = GetCombat();
 	const UJDCombatProfile* Profile = GetCombatProfile();
-	UWorld* World = GetWorld();
-	if (!Character || !Combat || !Profile || !World)
+	if (!Character || !Combat || !Profile)
 	{
 		EndAbility(CurrentSpecHandle, CurrentActorInfo, CurrentActivationInfo, true, true);
 		return;
@@ -103,45 +155,65 @@ void UJDGA_HeavyAttack::ActivateAirSlam(const FJDAttackStep& Step)
 	bSlam = true;
 	SpendStamina(Step.StaminaCost);
 	FaceInputDirection();
+	Combat->NoteAirAttack();          // pakai jatah serangan udara (sama dengan LMB)
 	Combat->BeginAttack(Step);
 
-	// Montage hanya pose menukik: selesai/blend out sebelum mendarat tidak mengakhiri ability, pendaratan yang mengakhiri.
-	UAnimInstance* Anim = Character->GetMesh() ? Character->GetMesh()->GetAnimInstance() : nullptr;
-	if (Anim && Anim->Montage_Play(Step.Montage, GetMontageRate(Step.PlayRate)) > 0.0f)
-	{
-		SlamMontage = Step.Montage;
-	}
-	Character->LaunchCharacter(FVector(0.0f, 0.0f, -Profile->AirSlamSpeed), true, true);
-	LandedHandle = Combat->OnLanded.AddUObject(this, &UJDGA_HeavyAttack::OnSlamLanded);
+	// Konsepnya sama dengan pukulan udara ringan: badan "ngambang" sebentar lalu montage
+	// diputar di tempat. Tidak ada dash ke depan dan tidak ada hantaman ke tanah.
+	StartSlamHang();
 
-	// Pengaman kalau tidak pernah mendarat (mis. tersangkut di tepi).
-	World->GetTimerManager().SetTimer(SlamTimer, FTimerDelegate::CreateWeakLambda(this, [this]()
-	{
-		EndAbility(CurrentSpecHandle, CurrentActorInfo, CurrentActivationInfo, true, true);
-	}), 3.0f, false);
+	UAbilityTask_PlayMontageAndWait* Task = UAbilityTask_PlayMontageAndWait::CreatePlayMontageAndWaitProxy(
+		this, NAME_None, Step.Montage, GetMontageRate(Step.PlayRate));
+	Task->OnBlendOut.AddDynamic(this, &UJDGA_HeavyAttack::OnMontageFinished);
+	Task->OnCompleted.AddDynamic(this, &UJDGA_HeavyAttack::OnMontageFinished);
+	Task->OnInterrupted.AddDynamic(this, &UJDGA_HeavyAttack::OnMontageInterrupted);
+	Task->OnCancelled.AddDynamic(this, &UJDGA_HeavyAttack::OnMontageInterrupted);
+	Task->ReadyForActivation();
 }
 
-void UJDGA_HeavyAttack::OnSlamLanded()
+void UJDGA_HeavyAttack::StartSlamHang()
 {
-	UJDCombatComponent* Combat = GetCombat();
+	ACharacter* Character = Cast<ACharacter>(GetAvatarActorFromActorInfo());
 	const UJDCombatProfile* Profile = GetCombatProfile();
-	const ACharacter* Character = Cast<ACharacter>(GetAvatarActorFromActorInfo());
 	UWorld* World = GetWorld();
-	if (!IsActive() || bSlamLanded || !Combat || !Profile || !Character || !World)
+	if (!Character || !Profile || !World || Profile->AirHangTime <= 0.0f)
 	{
 		return;
 	}
-	bSlamLanded = true;
-	Combat->OnLanded.Remove(LandedHandle);
-	LandedHandle.Reset();
-
-	const float HalfHeight = Character->GetCapsuleComponent()->GetScaledCapsuleHalfHeight();
-	Combat->ApplyAreaHit(Character->GetActorLocation() - FVector(0.0f, 0.0f, HalfHeight), Profile->AirSlamRadius);
-
-	World->GetTimerManager().SetTimer(SlamTimer, FTimerDelegate::CreateWeakLambda(this, [this]()
+	UCharacterMovementComponent* Movement = Character->GetCharacterMovement();
+	if (!Movement)
 	{
-		EndAbility(CurrentSpecHandle, CurrentActorInfo, CurrentActivationInfo, true, false);
-	}), FMath::Max(Profile->AirSlamRecovery, 0.01f), false);
+		return;
+	}
+	if (!bSlamHang)
+	{
+		SavedGravityScale = Movement->GravityScale;
+		bSlamHang = true;
+	}
+	Movement->GravityScale = SavedGravityScale * Profile->AirHangGravityScale;
+	Movement->Velocity.Z = FMath::Max(Movement->Velocity.Z, 0.0f);
+	World->GetTimerManager().SetTimer(HangTimer,
+		FTimerDelegate::CreateUObject(this, &UJDGA_HeavyAttack::EndSlamHang), Profile->AirHangTime, false);
+}
+
+void UJDGA_HeavyAttack::EndSlamHang()
+{
+	if (UWorld* World = GetWorld())
+	{
+		World->GetTimerManager().ClearTimer(HangTimer);
+	}
+	if (!bSlamHang)
+	{
+		return;
+	}
+	bSlamHang = false;
+	if (ACharacter* Character = Cast<ACharacter>(GetAvatarActorFromActorInfo()))
+	{
+		if (UCharacterMovementComponent* Movement = Character->GetCharacterMovement())
+		{
+			Movement->GravityScale = SavedGravityScale;
+		}
+	}
 }
 
 void UJDGA_HeavyAttack::OnMontageFinished()
@@ -159,6 +231,10 @@ void UJDGA_HeavyAttack::EndAbility(const FGameplayAbilitySpecHandle Handle, cons
 {
 	if (IsActive())
 	{
+		if (UWorld* World = GetWorld())
+		{
+			World->GetTimerManager().ClearTimer(ApexTimer);
+		}
 		UJDCombatComponent* Combat = GetCombat();
 		if (Combat)
 		{
@@ -166,22 +242,7 @@ void UJDGA_HeavyAttack::EndAbility(const FGameplayAbilitySpecHandle Handle, cons
 		}
 		if (bSlam)
 		{
-			if (Combat && LandedHandle.IsValid())
-			{
-				Combat->OnLanded.Remove(LandedHandle);
-			}
-			LandedHandle.Reset();
-			if (UWorld* World = GetWorld())
-			{
-				World->GetTimerManager().ClearTimer(SlamTimer);
-			}
-			const ACharacter* Character = Cast<ACharacter>(GetAvatarActorFromActorInfo());
-			UAnimInstance* Anim = Character && Character->GetMesh() ? Character->GetMesh()->GetAnimInstance() : nullptr;
-			if (Anim && SlamMontage)
-			{
-				Anim->Montage_Stop(0.2f, SlamMontage);
-			}
-			SlamMontage = nullptr;
+			EndSlamHang();
 			bSlam = false;
 		}
 	}

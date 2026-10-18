@@ -1,0 +1,4 @@
+MULAI montage_play rate 1.45, panjang 0.633
+t=0.125 pos=0.000 jalan=YA
+t=0.250 pos=-1.000 jalan=-
+AKHIR: pos_terakhir=-1.000

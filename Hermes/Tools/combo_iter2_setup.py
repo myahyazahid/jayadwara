@@ -33,6 +33,10 @@ STRIKE_BONES = ("hand_r", "hand_l", "foot_r", "foot_l")
 KENA_BONE = {"tangan": ("hand_l", "hand_r"), "kaki": ("foot_l", "foot_r")}
 T_AWAL = 0.10
 
+# Jalankan hanya peran tertentu (montage lain jangan dibuat ulang: notify + laju sudah disetel).
+# Kosongkan set() kalau mau membuat ulang semua montage dari nol.
+HANYA = {"air_slam"}
+
 # peran -> pengaturan montage (docs/07 + Hermes/combo_iter2_hermes.md §6)
 PERAN = {
     "light_01": {"kena": "tangan", "hits": 1, "combo": True},
@@ -45,7 +49,13 @@ PERAN = {
     "finisher_02": {"kena": "kaki", "hits": 2, "combo": False},
     "finisher_03": {"kena": "kaki", "hits": 1, "combo": False},
     "air": {"kena": "kaki", "hits": 1, "combo": True},
-    "air_slam": {"kena": None, "hits": 0, "combo": False},
+    # air_slam: dulu tanpa hit window karena damage diharapkan dari ApplyAreaHit di C++
+    # (JDGA_HeavyAttack). Versi C++ di worktree sekarang tidak memanggilnya lagi, jadi
+    # hantaman tidak memberi damage sama sekali -> umpan balik: "kok ga bisa ngehit musuh".
+    # Jendela hit eksplisit: kaki kanan menyabet naik 10,7 -> 139,7 cm dan memuncak di
+    # 1,867 s klip asli (= 0,45 s montage), jadi 0,40-0,58 s menutup seluruh sabetan.
+    "air_slam": {"kena": "kaki", "hits": 1, "combo": False,
+                 "hit_manual": [("foot_r", 0.40, 0.18)]},
     # belum ada FBX-nya (dilaporkan): heavy, dodge_forward/back/left/right, parry_01/02
     "dodge_forward": {"kena": None, "hits": 0, "combo": False, "blend": (0.05, 0.15)},
     "dodge_back": {"kena": None, "hits": 0, "combo": False, "blend": (0.05, 0.15)},
@@ -124,7 +134,10 @@ def add_notifies(m, cfg, seq, info):
         info["hit"] = []
         info["combo"] = None
         return
-    hits = strike_timings(seq, cfg["hits"], KENA_BONE.get(cfg["kena"]))
+    # hit_manual: waktu jendela ditentukan tangan (untuk jurus yang puncak kecepatannya
+    # bukan sabetan, mis. hantaman udara yang memutar). Isinya [(tulang, mulai, durasi)].
+    hits = ([(s, st, d) for s, st, d in cfg["hit_manual"]] if cfg.get("hit_manual")
+            else strike_timings(seq, cfg["hits"], KENA_BONE.get(cfg["kena"])))
     # dua jendela tidak boleh bertumpuk: kalau bertumpuk, satu jurus bisa mencatat 2 damage dalam 0,02 s
     for i in range(len(hits) - 1):
         socket, start, dur = hits[i]
@@ -214,7 +227,7 @@ def isi_profil(prof, montages):
             s = fins[i]
             s.set_editor_property("montage", montages[peran])
             if peran == "finisher_02":
-                s.set_editor_property("play_rate", 0.85)
+                s.set_editor_property("play_rate", 1.25)
             fins[i] = s
     prof.set_editor_property("heavy_finishers", fins)
 
@@ -300,6 +313,9 @@ def main():
 
     montages, infos = {}, []
     for peran, cfg in PERAN.items():
+        if HANYA and peran not in HANYA:
+            log(f"LEWAT {peran}: di luar HANYA, montage-nya tidak dibuat ulang")
+            continue
         if not ada(f"{MX}/A_Aksa_Mx_{peran}"):
             continue
         hasil = buat_montage(peran, cfg)
@@ -313,10 +329,11 @@ def main():
         prof = isi_profil(prof, montages)
         isi = baca_balik(prof)
         buat_pawn(prof)
-        with open(os.path.join(LOG_DIR, "montage.json"), "w", encoding="utf-8") as fh:
+        nama_log = "montage.json" if not HANYA else "montage_" + "_".join(sorted(HANYA)) + ".json"
+        with open(os.path.join(LOG_DIR, nama_log), "w", encoding="utf-8") as fh:
             json.dump({"montages": infos, "profil": isi,
                        "level": "dibuat oleh combo_iter2_level.py"}, fh, indent=2, ensure_ascii=False)
-        log(f"montage.json ditulis ({len(infos)} montage)")
+        log(f"{nama_log} ditulis ({len(infos)} montage)")
 
     if problems:
         unreal.log_warning(f"[combo_setup] {len(problems)} masalah:")

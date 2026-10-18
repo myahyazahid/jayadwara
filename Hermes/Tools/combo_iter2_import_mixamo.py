@@ -37,7 +37,7 @@ MESH_NAME = "SK_Mixamo_YBot"
 # hasil retarget jadi rebah (kepala 33,8 cm, seharusnya 144 cm). Lihat laporan temuan 8.
 INPLACE = set()
 # jalankan hanya peran tertentu (klip lain sudah dipangkas/disetel, jangan diimpor ulang)
-HANYA = {"light_01", "light_02"}
+HANYA = {"air_slam"}
 
 # peran (nama file tanpa .fbx) -> jurus (docs/07). Yang tidak ada dilewati; skrip setup tetap pakai placeholder.
 ROLES = {
@@ -172,8 +172,32 @@ def main():
         if role not in files:
             continue
         name = f"A_Aksa_Mx_{role}"
+        # hapus sisa nama yang sama (termasuk mesh/skeleton dari FBX "With Skin") supaya import bersih
+        for p in list(EAL.list_assets(RAW, True, False)):
+            base = p.split("/")[-1].split(".")[0]
+            if base == name or base.startswith(name + "_"):
+                EAL.delete_asset(p)
         import_fbx(files[role], RAW, name, skeleton)
         seq = EAL.load_asset(f"{RAW}/{name}")
+        if not isinstance(seq, unreal.AnimSequence):
+            # FBX "With Skin" (bawa mesh karakter): UE mengimpor mesh ke <name> dan
+            # animasinya ke <name>_Anim_<stack>. Ambil animasinya, buang mesh-nya,
+            # lalu ganti nama supaya jalur aset sama seperti biasa.
+            kandidat = []
+            for p in EAL.list_assets(RAW, True, False):
+                if p.startswith(f"{RAW}/{name}_Anim_"):
+                    a = EAL.load_asset(p)
+                    if isinstance(a, unreal.AnimSequence):
+                        kandidat.append((0 if "mixamo_com" in p else 1, a.get_play_length(), p))
+            if kandidat:
+                kandidat.sort()
+                asal = kandidat[0][2]
+                for buang in (f"{RAW}/{name}", f"{RAW}/{name}_Skeleton"):
+                    if EAL.does_asset_exist(buang):
+                        EAL.delete_asset(buang)
+                EAL.rename_asset(asal, f"{RAW}/{name}")
+                log(f"{role}: FBX With Skin — animasi diambil dari {asal.split('/')[-1]}, mesh dibuang")
+                seq = EAL.load_asset(f"{RAW}/{name}")
         if not isinstance(seq, unreal.AnimSequence):
             fail(f"{role}.fbx: tidak menghasilkan AnimSequence")
             continue

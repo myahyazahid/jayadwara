@@ -1,0 +1,12 @@
+fix(light): kembalikan sedikit ancang-ancang, laju 1,60 -> 1,35
+
+Versi pangkas sebelumnya terlalu pendek (0,69/0,71 s nyata) sehingga terasa
+terlalu cepat.
+
+- impor ulang light_01/light_02 dari FBX, ratakan root, lalu pangkas 0,10-1,40 s
+  (light_01 1,267 s) dan 0,10-1,45 s (light_02 1,333 s)
+- laju 1,60 -> 1,35x: 0,94 s / 0,99 s nyata, hantaman 0,24 / 0,30 s
+- MoveDistance 15 -> 12 cm (net gerak tetap tidak terbaca mundur)
+- jendela combo 0,72-1,25 / 0,78-1,31
+- import_mixamo.py: HANYA untuk impor sebagian; cek_retarget 11/11 lulus
+- laporan bagian "Umpan balik 7"

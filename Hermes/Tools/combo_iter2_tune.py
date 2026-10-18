@@ -35,13 +35,17 @@ MONTAGE_DIR = "/Game/Hermes/ComboIter2/Montages"
 PROFIL = "/Game/Hermes/ComboIter2/Data/DA_CombatProfile_Human_Hermes"
 LOG_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "Art", "combo-iter2", "Log")
 
-# laju main per peran. finisher_02 sengaja 0,85: dua tendangannya hanya berjarak 0,15 s,
-# kalau dipercepat keduanya jatuh hampir bersamaan (lihat laporan, temuan 5).
+# laju main per peran. finisher_02 dulu 0,85 (dua tendangannya berjarak dekat), tapi
+# montage 1,67 s dengan hit terakhir di 1,07 s -> ada 0,6 s ekor kosong dan terasa lambat.
+# Dinaikkan ke 1,25 (1,33 s nyata); jarak dua tendangan tetap 0,16 s dan jendela hit tidak tumpang tindih.
 LAJU = {
     "light_01": 1.35, "light_02": 1.35, "light_03": 1.45, "light_04": 1.00,
     "lunge": 1.50, "back": 1.50,
-    "finisher_01": 1.25, "finisher_02": 0.85, "finisher_03": 1.15,
-    "air": 1.20, "air_slam": 1.00,
+    "finisher_01": 1.25, "finisher_02": 1.25, "finisher_03": 1.15,
+    # air_slam 1,25: lompat 500 cm/s -> puncak ~127 cm, sisa waktu jatuh hanya ~0,51 s
+    # setelah ngambang 0,10 s. Montage 0,633 s pada 1,00x tidak selesai sebelum mendarat
+    # ("belum sempat menendang sudah sampai tanah", umpan balik 18 Okt). 1,25x -> 0,51 s.
+    "air": 1.20, "air_slam": 1.45,
 }
 
 # (nama properti profil, indeks dalam array atau None, peran)
@@ -63,8 +67,15 @@ LEWATI = {"air_slam"}
 BLEND_IN = 0.05
 BLEND_OUT = 0.22
 # transisi lompat -> tendangan butuh blend lebih panjang; 0,05 s terasa menyentak.
+# air_slam: masuk dari pose jatuh ke pose sabetan itu beda jauh (tangan 66 -> 135 cm),
+# blend 0,08 s terbaca "patah" (umpan balik 18 Okt). 0,22/0,32 membuatnya meluncur.
 BLEND_KHUSUS = {"air": (0.15, 0.30), "light_01": (0.12, 0.28), "light_02": (0.12, 0.28),
-                "light_03": (0.24, 0.30), "light_04": (0.22, 0.30)}
+                "light_03": (0.24, 0.30), "light_04": (0.22, 0.30),
+                # air_slam: masuk 0,17 s (= 0,22 s pada laju 1,00x, proporsi sama) supaya
+                # tetap meluncur dari pose jatuh. Keluar 0,12 s: 0,32 s terlalu panjang untuk
+                # montage 0,51 s -> blend mulai di 0,19 s dan pose hantaman (0,40 s) ikut
+                # dipudarkan, jadi tendangannya tidak terlihat.
+                "air_slam": (0.15, 0.11)}
 EKOR_JENDELA = 0.55   # jendela combo = EKOR_JENDELA terakhir dari klip (bukan di hantaman!)
 SISA_UJUNG = 0.02     # sisa di ujung montage
 
@@ -108,12 +119,36 @@ def baca_notify(m):
 
 def tune_montage(peran, laju):
     path = f"{MONTAGE_DIR}/AM_Hermes_{peran}"
+    # finisher_02 diganti montage baru (animasi Mixamo lain) dan profil menunjuk ke _v2
+    if peran == "finisher_02" and EAL.does_asset_exist(path + "_v2"):
+        path = path + "_v2"
     m = EAL.load_asset(path)
     if not m:
         catat(f"GAGAL  {peran}: montage tidak ada di {path}")
         return None
     if peran in LEWATI:
-        catat(f"LEWAT  {peran:12s} tanpa notify HitWindow (damage area saat mendarat), tidak disetel")
+        # tanpa hit window, tapi blend tetap disetel: transisi lompat -> hantaman
+        # dan hantaman -> jatuh lagi yang bikin terasa kaku (umpan balik 18 Okt).
+        bi, bo = BLEND_KHUSUS.get(peran, (BLEND_IN, BLEND_OUT))
+        for prop, t in (("blend_in", bi), ("blend_out", bo)):
+            b = m.get_editor_property(prop)
+            b.set_editor_property("blend_time", t)
+            m.set_editor_property(prop, b)
+        # Auto blend out dimatikan: dengan opsi ini ability menerima OnBlendOut di
+        # (panjang - blend_out) lalu menghentikan montage, sehingga sabetan terakhir
+        # (hantaman di 0,50 dari 0,63) tidak pernah tampil. Rekaman 60 fps menunjukkan
+        # montage selalu mati di pos 0,459 walau karakter masih 124 cm di atas tanah.
+        m.set_editor_property("enable_auto_blend_out", True)
+        # BlendOutTriggerTime = 0 -> blend out baru mulai di UJUNG klip. Dengan nilai
+        # -1 (default) UE memulai blend out di (panjang - blend_out), ability menerima
+        # OnBlendOut lalu menghentikan montage sebelum sabetan terakhir tampil.
+        m.set_editor_property("blend_out_trigger_time", 0.0)
+        EAL.save_loaded_asset(m, only_if_is_dirty=False)
+        panjang = m.get_editor_property("sequence_length")
+        hit, _ = baca_notify(m)
+        catat(f"OK     {peran:12s} panjang {panjang:.2f} s ({panjang / laju:.2f} s nyata) | "
+              f"hit window {len(hit)} ({', '.join(h[2] for h in hit) or '-'}) | "
+              f"blend {bi}/{bo} | laju {laju:.2f}x")
         return None
     panjang = m.get_editor_property("sequence_length")
     hits, combo = baca_notify(m)
@@ -171,8 +206,15 @@ def tune_montage(peran, laju):
 PROFIL_TETAP = {
     "air_slam_speed": 500.0,      # pose menukik: turun cepat tapi tidak melesat
     "air_slam_recovery": 0.45,
-    "air_hang_time": 0.10,        # tahan di udara sesaat, tidak melayang
-    "air_hang_gravity_scale": 0.6,
+    # NGAMBANG DIMATIKAN (umpan balik 16: "lompat + LMB malah nambah tinggi").
+    # StartAirHang (JDGA_LightAttack.cpp:174-175) melakukan Velocity.Z = Max(Velocity.Z, 0)
+    # lalu GravityScale = asli * AirHangGravityScale. Dengan 0,06 gravitasi praktis hilang,
+    # jadi kalau LMB ditekan saat masih naik, karakter terus naik -> terlihat "nambah tinggi".
+    # Nilai 0,55/0,06 itu sisa eksperimen umpan balik 12-13 (waktu itu penyebab montage
+    # terpotong belum ketemu; ternyata auto blend out, bukan kurang waktu di udara).
+    # Sekarang fisika dibiarkan normal: jatuh mengikuti gravitasi, tidak melayang.
+    "air_hang_time": 0.0,
+    "air_hang_gravity_scale": 1.0,
 }
 
 
@@ -233,8 +275,10 @@ def main():
             s = list(prof.get_editor_property(prop))[idx]
         m = s.get_editor_property("montage")
         hits, combo = baca_notify(m)
+        bi = m.get_editor_property("blend_in").get_editor_property("blend_time")
+        bo = m.get_editor_property("blend_out").get_editor_property("blend_time")
         catat(f"     {peran:12s} play_rate {s.get_editor_property('play_rate'):.2f} | "
-              f"montage {m.get_name()} | combo {combo} | hit {hits}")
+              f"montage {m.get_name()} | blend {bi:.2f}/{bo:.2f} | combo {combo} | hit {hits}")
 
     os.makedirs(LOG_DIR, exist_ok=True)
     with open(os.path.join(LOG_DIR, "tune.json"), "w", encoding="utf-8") as f:

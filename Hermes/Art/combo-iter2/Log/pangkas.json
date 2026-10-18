@@ -1,79 +1,40 @@
 [
  {
-  "peran": "light_03",
+  "peran": "air_slam",
   "potong": [
-   0.45,
-   1.2
+   1.4,
+   0.65
   ],
-  "frame": 36,
+  "frame": 19,
   "tulang": 89,
   "sebelum": {
-   "panjang": 2.167,
+   "panjang": 2.367,
    "kepala_z": [
-    146.5,
-    155.0
+    90.3,
+    131.3
    ],
    "pelvis_z": [
-    81.1,
-    89.2
+    70.3,
+    90.5
    ],
    "pelvis_y": [
-    -0.7,
-    -0.1
+    0.8,
+    63.1
    ]
   },
   "sesudah": {
-   "panjang": 1.2,
+   "panjang": 0.633,
    "kepala_z": [
-    143.7,
-    151.1
+    86.8,
+    124.0
    ],
    "pelvis_z": [
-    78.0,
-    88.4
+    70.0,
+    91.1
    ],
    "pelvis_y": [
-    -0.7,
-    -0.2
-   ]
-  }
- },
- {
-  "peran": "light_04",
-  "potong": [
-   0.5,
-   1.05
-  ],
-  "frame": 31,
-  "tulang": 89,
-  "sebelum": {
-   "panjang": 2.033,
-   "kepala_z": [
-    105.3,
-    156.6
-   ],
-   "pelvis_z": [
-    80.6,
-    97.6
-   ],
-   "pelvis_y": [
-    0.2,
-    0.8
-   ]
-  },
-  "sesudah": {
-   "panjang": 1.033,
-   "kepala_z": [
-    95.5,
-    147.9
-   ],
-   "pelvis_z": [
-    81.0,
-    97.3
-   ],
-   "pelvis_y": [
-    0.2,
-    0.6
+    54.1,
+    68.1
    ]
   }
  }

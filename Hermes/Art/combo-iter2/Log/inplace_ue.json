@@ -1,117 +1,78 @@
 [
  {
-  "peran": "light_01",
-  "sumbu_diratakan": "Y",
-  "kunci": 67,
+  "peran": "air_slam",
+  "sumbu_diratakan": "XY",
+  "yaw_dikunci": false,
+  "putaran_penuh": null,
+  "horizontal_dinolkan": true,
+  "kunci": 19,
   "ok": true,
   "sebelum": {
    "root_x": [
-    -1.7,
-    10.7
+    76.0,
+    125.9
    ],
    "root_y": [
-    -0.4,
-    -0.4
+    54.3,
+    68.0
    ],
    "root_z": [
-    74.4,
-    91.4
+    74.1,
+    95.7
+   ],
+   "root_yaw": [
+    -172.0,
+    175.3
    ],
    "pelvis_y": [
-    -0.4,
-    0.4
+    54.1,
+    67.9
    ],
    "pelvis_z": [
-    70.3,
-    87.0
+    70.0,
+    91.1
+   ],
+   "kepala_x": [
+    79.9,
+    146.6
    ],
    "kepala_z": [
-    137.2,
-    152.6
+    86.6,
+    124.0
    ]
   },
   "sesudah": {
    "root_x": [
-    -1.7,
-    10.6
+    0.0,
+    0.0
    ],
    "root_y": [
-    -0.4,
-    -0.4
+    0.0,
+    0.0
    ],
    "root_z": [
-    74.4,
-    91.4
+    74.1,
+    95.5
+   ],
+   "root_yaw": [
+    -179.8,
+    165.8
    ],
    "pelvis_y": [
-    -0.4,
-    0.5
+    -0.6,
+    0.2
    ],
    "pelvis_z": [
-    70.2,
-    87.0
+    70.0,
+    91.0
+   ],
+   "kepala_x": [
+    -43.2,
+    66.6
    ],
    "kepala_z": [
-    137.2,
-    152.4
-   ]
-  }
- },
- {
-  "peran": "light_02",
-  "sumbu_diratakan": "Y",
-  "kunci": 68,
-  "ok": true,
-  "sebelum": {
-   "root_x": [
-    -1.9,
-    15.3
-   ],
-   "root_y": [
-    -0.4,
-    -0.4
-   ],
-   "root_z": [
-    75.4,
-    92.1
-   ],
-   "pelvis_y": [
-    -0.3,
-    0.4
-   ],
-   "pelvis_z": [
-    71.6,
-    87.9
-   ],
-   "kepala_z": [
-    136.5,
-    153.7
-   ]
-  },
-  "sesudah": {
-   "root_x": [
-    -1.9,
-    15.3
-   ],
-   "root_y": [
-    -0.4,
-    -0.4
-   ],
-   "root_z": [
-    75.4,
-    92.2
-   ],
-   "pelvis_y": [
-    -0.3,
-    0.5
-   ],
-   "pelvis_z": [
-    71.6,
-    88.0
-   ],
-   "kepala_z": [
-    136.5,
-    153.7
+    87.9,
+    123.7
    ]
   }
  }

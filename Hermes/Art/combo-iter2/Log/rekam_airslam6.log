@@ -1,0 +1,568 @@
+perekam aktif
+S1 MULAI LMB dt=0.016 z=188.1
+S1 LMB dt=0.016 z= 188.1 vz= 271.3 pos=0.020 mode=<MovementMode.MOVE_FALLING: 3>
+S1 LMB dt=0.018 z= 192.5 vz= 255.0 pos=0.040 mode=<MovementMode.MOVE_FALLING: 3>
+S1 LMB dt=0.016 z= 196.6 vz= 238.7 pos=0.060 mode=<MovementMode.MOVE_FALLING: 3>
+S1 LMB dt=0.016 z= 200.5 vz= 222.3 pos=0.080 mode=<MovementMode.MOVE_FALLING: 3>
+S1 LMB dt=0.016 z= 204.1 vz= 206.0 pos=0.100 mode=<MovementMode.MOVE_FALLING: 3>
+S1 LMB dt=0.017 z= 207.3 vz= 189.7 pos=0.120 mode=<MovementMode.MOVE_FALLING: 3>
+S1 LMB dt=0.016 z= 210.4 vz= 173.3 pos=0.140 mode=<MovementMode.MOVE_FALLING: 3>
+S1 LMB dt=0.017 z= 213.1 vz= 157.0 pos=0.160 mode=<MovementMode.MOVE_FALLING: 3>
+S1 LMB dt=0.016 z= 215.6 vz= 140.7 pos=0.180 mode=<MovementMode.MOVE_FALLING: 3>
+S1 LMB dt=0.017 z= 217.8 vz= 124.3 pos=0.200 mode=<MovementMode.MOVE_FALLING: 3>
+S1 LMB dt=0.017 z= 219.8 vz= 108.0 pos=0.220 mode=<MovementMode.MOVE_FALLING: 3>
+S1 LMB dt=0.017 z= 221.4 vz=  91.7 pos=0.240 mode=<MovementMode.MOVE_FALLING: 3>
+S1 LMB dt=0.016 z= 222.8 vz=  75.3 pos=0.260 mode=<MovementMode.MOVE_FALLING: 3>
+S1 LMB dt=0.016 z= 223.9 vz=  59.0 pos=0.280 mode=<MovementMode.MOVE_FALLING: 3>
+S1 LMB dt=0.017 z= 224.8 vz=  42.7 pos=0.300 mode=<MovementMode.MOVE_FALLING: 3>
+S1 LMB dt=0.017 z= 225.3 vz=  26.3 pos=0.320 mode=<MovementMode.MOVE_FALLING: 3>
+S1 LMB dt=0.017 z= 225.7 vz=  10.0 pos=0.340 mode=<MovementMode.MOVE_FALLING: 3>
+S1 LMB dt=0.016 z= 225.7 vz=  -6.3 pos=0.360 mode=<MovementMode.MOVE_FALLING: 3>
+S1 LMB dt=0.017 z= 225.4 vz= -22.7 pos=0.380 mode=<MovementMode.MOVE_FALLING: 3>
+S1 LMB dt=0.017 z= 224.9 vz= -39.0 pos=0.400 mode=<MovementMode.MOVE_FALLING: 3>
+S1 LMB dt=0.017 z= 224.1 vz= -55.3 pos=0.420 mode=<MovementMode.MOVE_FALLING: 3>
+S1 LMB dt=0.016 z= 223.1 vz= -71.7 pos=0.440 mode=<MovementMode.MOVE_FALLING: 3>
+S1 LMB dt=0.017 z= 221.7 vz= -88.0 pos=0.460 mode=<MovementMode.MOVE_FALLING: 3>
+S1 LMB dt=0.017 z= 220.1 vz=-104.3 pos=0.480 mode=<MovementMode.MOVE_FALLING: 3>
+S1 LMB dt=0.016 z= 218.3 vz=-120.7 pos=0.500 mode=<MovementMode.MOVE_FALLING: 3>
+S1 LMB dt=0.017 z= 216.1 vz=-137.0 pos=-1.000 mode=<MovementMode.MOVE_FALLING: 3>
+S1 AKHIR LMB: naik 37.5 cm dari mulai, z puncak 225.7, posisi montage terakhir 0.500
+---
+S2 MULAI LMB dt=0.017 z=217.8
+S2 LMB dt=0.017 z= 217.8 vz= 124.3 pos=0.020 mode=<MovementMode.MOVE_FALLING: 3>
+S2 LMB dt=0.018 z= 219.8 vz= 108.0 pos=0.040 mode=<MovementMode.MOVE_FALLING: 3>
+S2 LMB dt=0.015 z= 221.4 vz=  91.7 pos=0.060 mode=<MovementMode.MOVE_FALLING: 3>
+S2 LMB dt=0.017 z= 222.8 vz=  75.3 pos=0.080 mode=<MovementMode.MOVE_FALLING: 3>
+S2 LMB dt=0.017 z= 223.9 vz=  59.0 pos=0.100 mode=<MovementMode.MOVE_FALLING: 3>
+S2 LMB dt=0.017 z= 224.8 vz=  42.7 pos=0.120 mode=<MovementMode.MOVE_FALLING: 3>
+S2 LMB dt=0.016 z= 225.3 vz=  26.3 pos=0.140 mode=<MovementMode.MOVE_FALLING: 3>
+S2 LMB dt=0.016 z= 225.7 vz=  10.0 pos=0.160 mode=<MovementMode.MOVE_FALLING: 3>
+S2 LMB dt=0.017 z= 225.7 vz=  -6.3 pos=0.180 mode=<MovementMode.MOVE_FALLING: 3>
+S2 LMB dt=0.016 z= 225.4 vz= -22.7 pos=0.200 mode=<MovementMode.MOVE_FALLING: 3>
+S2 LMB dt=0.017 z= 224.9 vz= -39.0 pos=0.220 mode=<MovementMode.MOVE_FALLING: 3>
+S2 LMB dt=0.016 z= 224.1 vz= -55.3 pos=0.240 mode=<MovementMode.MOVE_FALLING: 3>
+S2 LMB dt=0.017 z= 223.1 vz= -71.7 pos=0.260 mode=<MovementMode.MOVE_FALLING: 3>
+S2 LMB dt=0.016 z= 221.7 vz= -88.0 pos=0.280 mode=<MovementMode.MOVE_FALLING: 3>
+S2 LMB dt=0.017 z= 220.1 vz=-104.3 pos=0.300 mode=<MovementMode.MOVE_FALLING: 3>
+S2 LMB dt=0.016 z= 218.3 vz=-120.7 pos=0.320 mode=<MovementMode.MOVE_FALLING: 3>
+S2 LMB dt=0.017 z= 216.1 vz=-137.0 pos=0.340 mode=<MovementMode.MOVE_FALLING: 3>
+S2 LMB dt=0.016 z= 213.7 vz=-153.3 pos=0.360 mode=<MovementMode.MOVE_FALLING: 3>
+S2 LMB dt=0.017 z= 211.0 vz=-169.7 pos=0.380 mode=<MovementMode.MOVE_FALLING: 3>
+S2 LMB dt=0.017 z= 208.0 vz=-186.0 pos=0.400 mode=<MovementMode.MOVE_FALLING: 3>
+S2 LMB dt=0.017 z= 204.8 vz=-202.3 pos=0.420 mode=<MovementMode.MOVE_FALLING: 3>
+S2 LMB dt=0.017 z= 201.3 vz=-218.7 pos=0.440 mode=<MovementMode.MOVE_FALLING: 3>
+S2 LMB dt=0.017 z= 197.5 vz=-235.0 pos=0.460 mode=<MovementMode.MOVE_FALLING: 3>
+S2 LMB dt=0.017 z= 193.5 vz=-251.3 pos=0.480 mode=<MovementMode.MOVE_FALLING: 3>
+S2 LMB dt=0.017 z= 189.1 vz=-267.7 pos=0.500 mode=<MovementMode.MOVE_FALLING: 3>
+S2 LMB dt=0.017 z= 184.5 vz=-284.0 pos=-1.000 mode=<MovementMode.MOVE_FALLING: 3>
+S2 AKHIR LMB: naik 7.9 cm dari mulai, z puncak 225.7, posisi montage terakhir 0.500
+---
+S3 MULAI E dt=0.017 z=225.7
+S3 E dt=0.017 z= 225.7 vz=  -6.3 pos=0.000 mode=<MovementMode.MOVE_FALLING: 3>
+S3 E dt=0.017 z= 225.4 vz= -22.7 pos=0.024 mode=<MovementMode.MOVE_FALLING: 3>
+S3 E dt=0.017 z= 224.9 vz= -39.0 pos=0.048 mode=<MovementMode.MOVE_FALLING: 3>
+S3 E dt=0.017 z= 224.1 vz= -55.3 pos=0.073 mode=<MovementMode.MOVE_FALLING: 3>
+S3 E dt=0.017 z= 223.1 vz= -71.7 pos=0.097 mode=<MovementMode.MOVE_FALLING: 3>
+S3 E dt=0.017 z= 221.7 vz= -88.0 pos=0.121 mode=<MovementMode.MOVE_FALLING: 3>
+S3 E dt=0.017 z= 220.1 vz=-104.3 pos=0.145 mode=<MovementMode.MOVE_FALLING: 3>
+S3 E dt=0.017 z= 218.3 vz=-120.7 pos=0.169 mode=<MovementMode.MOVE_FALLING: 3>
+S3 E dt=0.016 z= 216.1 vz=-137.0 pos=0.193 mode=<MovementMode.MOVE_FALLING: 3>
+S3 E dt=0.017 z= 213.7 vz=-153.3 pos=0.218 mode=<MovementMode.MOVE_FALLING: 3>
+S3 E dt=0.017 z= 211.0 vz=-169.7 pos=0.242 mode=<MovementMode.MOVE_FALLING: 3>
+S3 E dt=0.017 z= 208.0 vz=-186.0 pos=0.266 mode=<MovementMode.MOVE_FALLING: 3>
+S3 E dt=0.017 z= 204.8 vz=-202.3 pos=0.290 mode=<MovementMode.MOVE_FALLING: 3>
+S3 E dt=0.016 z= 201.3 vz=-218.7 pos=0.314 mode=<MovementMode.MOVE_FALLING: 3>
+S3 E dt=0.017 z= 197.5 vz=-235.0 pos=0.338 mode=<MovementMode.MOVE_FALLING: 3>
+S3 E dt=0.017 z= 193.5 vz=-251.3 pos=0.363 mode=<MovementMode.MOVE_FALLING: 3>
+S3 E dt=0.017 z= 189.1 vz=-267.7 pos=0.387 mode=<MovementMode.MOVE_FALLING: 3>
+S3 E dt=0.016 z= 184.5 vz=-284.0 pos=0.411 mode=<MovementMode.MOVE_FALLING: 3>
+S3 E dt=0.017 z= 179.7 vz=-300.3 pos=0.435 mode=<MovementMode.MOVE_FALLING: 3>
+S3 E dt=0.017 z= 174.5 vz=-316.7 pos=0.459 mode=<MovementMode.MOVE_FALLING: 3>
+S3 E dt=0.017 z= 169.1 vz=-333.0 pos=0.483 mode=<MovementMode.MOVE_FALLING: 3>
+S3 E dt=0.017 z= 163.4 vz=-349.3 pos=0.508 mode=<MovementMode.MOVE_FALLING: 3>
+S3 E dt=0.017 z= 157.5 vz=-365.7 pos=0.532 mode=<MovementMode.MOVE_FALLING: 3>
+S3 E dt=0.017 z= 151.2 vz=-382.0 pos=0.556 mode=<MovementMode.MOVE_FALLING: 3>
+S3 E dt=0.017 z= 144.7 vz=-398.3 pos=0.580 mode=<MovementMode.MOVE_FALLING: 3>
+S3 E dt=0.017 z= 138.0 vz=-414.7 pos=0.604 mode=<MovementMode.MOVE_FALLING: 3>
+S3 E dt=0.017 z= 130.9 vz=-431.0 pos=0.628 mode=<MovementMode.MOVE_FALLING: 3>
+S3 E dt=0.017 z= 123.6 vz=-447.3 pos=-1.000 mode=<MovementMode.MOVE_FALLING: 3>
+S3 AKHIR E: naik 0.0 cm dari mulai, z puncak 225.7, posisi montage terakhir 0.628
+---
+S4 MULAI E dt=0.017 z=225.7
+S4 E dt=0.017 z= 225.7 vz=  -6.3 pos=0.000 mode=<MovementMode.MOVE_FALLING: 3>
+S4 E dt=0.017 z= 225.4 vz= -22.7 pos=0.024 mode=<MovementMode.MOVE_FALLING: 3>
+S4 E dt=0.017 z= 224.9 vz= -39.0 pos=0.048 mode=<MovementMode.MOVE_FALLING: 3>
+S4 E dt=0.017 z= 224.1 vz= -55.3 pos=0.073 mode=<MovementMode.MOVE_FALLING: 3>
+S4 E dt=0.017 z= 223.1 vz= -71.7 pos=0.097 mode=<MovementMode.MOVE_FALLING: 3>
+S4 E dt=0.016 z= 221.7 vz= -88.0 pos=0.121 mode=<MovementMode.MOVE_FALLING: 3>
+S4 E dt=0.017 z= 220.1 vz=-104.3 pos=0.145 mode=<MovementMode.MOVE_FALLING: 3>
+S4 E dt=0.016 z= 218.3 vz=-120.7 pos=0.169 mode=<MovementMode.MOVE_FALLING: 3>
+S4 E dt=0.017 z= 216.1 vz=-137.0 pos=0.193 mode=<MovementMode.MOVE_FALLING: 3>
+S4 E dt=0.016 z= 213.7 vz=-153.3 pos=0.218 mode=<MovementMode.MOVE_FALLING: 3>
+S4 E dt=0.017 z= 211.0 vz=-169.7 pos=0.242 mode=<MovementMode.MOVE_FALLING: 3>
+S4 E dt=0.017 z= 208.0 vz=-186.0 pos=0.266 mode=<MovementMode.MOVE_FALLING: 3>
+S4 E dt=0.017 z= 204.8 vz=-202.3 pos=0.290 mode=<MovementMode.MOVE_FALLING: 3>
+S4 E dt=0.017 z= 201.3 vz=-218.7 pos=0.314 mode=<MovementMode.MOVE_FALLING: 3>
+S4 E dt=0.017 z= 197.5 vz=-235.0 pos=0.338 mode=<MovementMode.MOVE_FALLING: 3>
+S4 E dt=0.016 z= 193.5 vz=-251.3 pos=0.363 mode=<MovementMode.MOVE_FALLING: 3>
+S4 E dt=0.017 z= 189.1 vz=-267.7 pos=0.387 mode=<MovementMode.MOVE_FALLING: 3>
+S4 E dt=0.017 z= 184.5 vz=-284.0 pos=0.411 mode=<MovementMode.MOVE_FALLING: 3>
+S4 E dt=0.017 z= 179.7 vz=-300.3 pos=0.435 mode=<MovementMode.MOVE_FALLING: 3>
+S4 E dt=0.016 z= 174.5 vz=-316.7 pos=0.459 mode=<MovementMode.MOVE_FALLING: 3>
+S4 E dt=0.017 z= 169.1 vz=-333.0 pos=0.483 mode=<MovementMode.MOVE_FALLING: 3>
+S4 E dt=0.017 z= 163.4 vz=-349.3 pos=0.508 mode=<MovementMode.MOVE_FALLING: 3>
+S4 E dt=0.017 z= 157.5 vz=-365.7 pos=0.532 mode=<MovementMode.MOVE_FALLING: 3>
+S4 E dt=0.017 z= 151.2 vz=-382.0 pos=0.556 mode=<MovementMode.MOVE_FALLING: 3>
+S4 E dt=0.016 z= 144.7 vz=-398.3 pos=0.580 mode=<MovementMode.MOVE_FALLING: 3>
+S4 E dt=0.017 z= 138.0 vz=-414.7 pos=0.604 mode=<MovementMode.MOVE_FALLING: 3>
+S4 E dt=0.017 z= 130.9 vz=-431.0 pos=0.628 mode=<MovementMode.MOVE_FALLING: 3>
+S4 E dt=0.017 z= 123.6 vz=-447.3 pos=-1.000 mode=<MovementMode.MOVE_FALLING: 3>
+S4 AKHIR E: naik 0.0 cm dari mulai, z puncak 225.7, posisi montage terakhir 0.628
+---
+S5 MULAI E dt=0.017 z=225.3
+S5 E dt=0.017 z= 225.3 vz= -22.7 pos=0.000 mode=<MovementMode.MOVE_FALLING: 3>
+S5 E dt=0.016 z= 224.8 vz= -39.0 pos=0.024 mode=<MovementMode.MOVE_FALLING: 3>
+S5 E dt=0.017 z= 224.0 vz= -51.8 pos=0.048 mode=<MovementMode.MOVE_FALLING: 3>
+S5 E dt=0.017 z= 223.0 vz= -68.2 pos=0.073 mode=<MovementMode.MOVE_FALLING: 3>
+S5 E dt=0.017 z= 221.7 vz= -84.5 pos=0.097 mode=<MovementMode.MOVE_FALLING: 3>
+S5 E dt=0.017 z= 220.1 vz=-100.0 pos=0.121 mode=<MovementMode.MOVE_FALLING: 3>
+S5 E dt=0.016 z= 218.3 vz=-116.4 pos=0.145 mode=<MovementMode.MOVE_FALLING: 3>
+S5 E dt=0.016 z= 216.2 vz=-132.7 pos=0.169 mode=<MovementMode.MOVE_FALLING: 3>
+S5 E dt=0.017 z= 213.8 vz=-149.0 pos=0.193 mode=<MovementMode.MOVE_FALLING: 3>
+S5 E dt=0.017 z= 211.2 vz=-165.4 pos=0.218 mode=<MovementMode.MOVE_FALLING: 3>
+S5 E dt=0.017 z= 208.3 vz=-181.7 pos=0.242 mode=<MovementMode.MOVE_FALLING: 3>
+S5 E dt=0.016 z= 205.2 vz=-198.0 pos=0.266 mode=<MovementMode.MOVE_FALLING: 3>
+S5 E dt=0.017 z= 201.7 vz=-214.4 pos=0.290 mode=<MovementMode.MOVE_FALLING: 3>
+S5 E dt=0.016 z= 198.0 vz=-230.7 pos=0.314 mode=<MovementMode.MOVE_FALLING: 3>
+S5 E dt=0.017 z= 194.0 vz=-247.0 pos=0.338 mode=<MovementMode.MOVE_FALLING: 3>
+S5 E dt=0.017 z= 189.8 vz=-263.4 pos=0.363 mode=<MovementMode.MOVE_FALLING: 3>
+S5 E dt=0.017 z= 185.3 vz=-279.7 pos=0.387 mode=<MovementMode.MOVE_FALLING: 3>
+S5 E dt=0.016 z= 180.5 vz=-296.0 pos=0.411 mode=<MovementMode.MOVE_FALLING: 3>
+S5 E dt=0.016 z= 175.4 vz=-312.4 pos=0.435 mode=<MovementMode.MOVE_FALLING: 3>
+S5 E dt=0.017 z= 175.1 vz=-313.2 pos=0.436 mode=<MovementMode.MOVE_FALLING: 3>
+S5 E dt=0.017 z= 174.9 vz=-314.0 pos=0.437 mode=<MovementMode.MOVE_FALLING: 3>
+S5 E dt=0.017 z= 174.6 vz=-314.8 pos=0.439 mode=<MovementMode.MOVE_FALLING: 3>
+S5 E dt=0.017 z= 174.3 vz=-315.6 pos=0.440 mode=<MovementMode.MOVE_FALLING: 3>
+S5 E dt=0.017 z= 169.0 vz=-332.0 pos=0.464 mode=<MovementMode.MOVE_FALLING: 3>
+S5 E dt=0.017 z= 163.3 vz=-348.3 pos=0.488 mode=<MovementMode.MOVE_FALLING: 3>
+S5 E dt=0.017 z= 157.3 vz=-364.6 pos=0.512 mode=<MovementMode.MOVE_FALLING: 3>
+S5 E dt=0.017 z= 151.1 vz=-381.0 pos=0.537 mode=<MovementMode.MOVE_FALLING: 3>
+S5 E dt=0.016 z= 144.6 vz=-397.3 pos=0.561 mode=<MovementMode.MOVE_FALLING: 3>
+S5 E dt=0.017 z= 137.9 vz=-413.6 pos=0.585 mode=<MovementMode.MOVE_FALLING: 3>
+S5 E dt=0.017 z= 130.9 vz=-430.0 pos=0.609 mode=<MovementMode.MOVE_FALLING: 3>
+S5 E dt=0.017 z= 123.6 vz=-446.3 pos=0.633 mode=<MovementMode.MOVE_FALLING: 3>
+S5 E dt=0.016 z= 116.0 vz=-462.6 pos=-1.000 mode=<MovementMode.MOVE_FALLING: 3>
+S5 AKHIR E: naik 0.0 cm dari mulai, z puncak 225.3, posisi montage terakhir 0.633
+---
+S6 MULAI E dt=0.017 z=225.7
+S6 E dt=0.017 z= 225.7 vz=  -9.8 pos=0.000 mode=<MovementMode.MOVE_FALLING: 3>
+S6 E dt=0.017 z= 225.4 vz= -26.1 pos=0.024 mode=<MovementMode.MOVE_FALLING: 3>
+S6 E dt=0.017 z= 224.8 vz= -42.5 pos=0.048 mode=<MovementMode.MOVE_FALLING: 3>
+S6 E dt=0.017 z= 223.9 vz= -58.8 pos=0.073 mode=<MovementMode.MOVE_FALLING: 3>
+S6 E dt=0.017 z= 222.8 vz= -75.1 pos=0.097 mode=<MovementMode.MOVE_FALLING: 3>
+S6 E dt=0.017 z= 221.4 vz= -91.5 pos=0.121 mode=<MovementMode.MOVE_FALLING: 3>
+S6 E dt=0.017 z= 219.8 vz=-107.8 pos=0.145 mode=<MovementMode.MOVE_FALLING: 3>
+S6 E dt=0.017 z= 217.8 vz=-124.1 pos=0.169 mode=<MovementMode.MOVE_FALLING: 3>
+S6 E dt=0.017 z= 215.6 vz=-140.5 pos=0.193 mode=<MovementMode.MOVE_FALLING: 3>
+S6 E dt=0.017 z= 213.2 vz=-156.8 pos=0.218 mode=<MovementMode.MOVE_FALLING: 3>
+S6 E dt=0.017 z= 210.4 vz=-173.1 pos=0.242 mode=<MovementMode.MOVE_FALLING: 3>
+S6 E dt=0.017 z= 207.4 vz=-189.5 pos=0.266 mode=<MovementMode.MOVE_FALLING: 3>
+S6 E dt=0.017 z= 204.1 vz=-205.8 pos=0.290 mode=<MovementMode.MOVE_FALLING: 3>
+S6 E dt=0.017 z= 200.5 vz=-222.1 pos=0.314 mode=<MovementMode.MOVE_FALLING: 3>
+S6 E dt=0.017 z= 196.7 vz=-238.5 pos=0.338 mode=<MovementMode.MOVE_FALLING: 3>
+S6 E dt=0.017 z= 192.6 vz=-254.8 pos=0.363 mode=<MovementMode.MOVE_FALLING: 3>
+S6 E dt=0.017 z= 188.2 vz=-271.1 pos=0.387 mode=<MovementMode.MOVE_FALLING: 3>
+S6 E dt=0.017 z= 183.5 vz=-287.5 pos=0.411 mode=<MovementMode.MOVE_FALLING: 3>
+S6 E dt=0.017 z= 178.6 vz=-303.8 pos=0.435 mode=<MovementMode.MOVE_FALLING: 3>
+S6 E dt=0.017 z= 173.4 vz=-320.1 pos=0.459 mode=<MovementMode.MOVE_FALLING: 3>
+S6 E dt=0.017 z= 173.1 vz=-321.0 pos=0.460 mode=<MovementMode.MOVE_FALLING: 3>
+S6 E dt=0.016 z= 172.9 vz=-321.8 pos=0.462 mode=<MovementMode.MOVE_FALLING: 3>
+S6 E dt=0.017 z= 172.6 vz=-322.6 pos=0.463 mode=<MovementMode.MOVE_FALLING: 3>
+S6 E dt=0.017 z= 172.3 vz=-323.4 pos=0.464 mode=<MovementMode.MOVE_FALLING: 3>
+S6 E dt=0.016 z= 166.8 vz=-339.7 pos=0.488 mode=<MovementMode.MOVE_FALLING: 3>
+S6 E dt=0.017 z= 161.0 vz=-356.1 pos=0.512 mode=<MovementMode.MOVE_FALLING: 3>
+S6 E dt=0.017 z= 154.9 vz=-372.4 pos=0.537 mode=<MovementMode.MOVE_FALLING: 3>
+S6 E dt=0.017 z= 148.6 vz=-388.7 pos=0.561 mode=<MovementMode.MOVE_FALLING: 3>
+S6 E dt=0.016 z= 142.0 vz=-405.1 pos=0.585 mode=<MovementMode.MOVE_FALLING: 3>
+S6 E dt=0.017 z= 135.1 vz=-421.4 pos=0.609 mode=<MovementMode.MOVE_FALLING: 3>
+S6 E dt=0.017 z= 127.9 vz=-437.7 pos=0.633 mode=<MovementMode.MOVE_FALLING: 3>
+S6 E dt=0.017 z= 120.5 vz=-454.1 pos=-1.000 mode=<MovementMode.MOVE_FALLING: 3>
+S6 AKHIR E: naik 0.0 cm dari mulai, z puncak 225.7, posisi montage terakhir 0.633
+---
+S7 MULAI E dt=0.016 z=225.4
+S7 E dt=0.016 z= 225.4 vz= -22.9 pos=0.000 mode=<MovementMode.MOVE_FALLING: 3>
+S7 E dt=0.017 z= 224.9 vz= -39.2 pos=0.024 mode=<MovementMode.MOVE_FALLING: 3>
+S7 E dt=0.017 z= 224.1 vz= -55.5 pos=0.048 mode=<MovementMode.MOVE_FALLING: 3>
+S7 E dt=0.016 z= 223.1 vz= -71.9 pos=0.073 mode=<MovementMode.MOVE_FALLING: 3>
+S7 E dt=0.017 z= 221.7 vz= -88.2 pos=0.097 mode=<MovementMode.MOVE_FALLING: 3>
+S7 E dt=0.016 z= 220.1 vz=-104.5 pos=0.121 mode=<MovementMode.MOVE_FALLING: 3>
+S7 E dt=0.017 z= 218.2 vz=-120.9 pos=0.145 mode=<MovementMode.MOVE_FALLING: 3>
+S7 E dt=0.017 z= 216.1 vz=-137.2 pos=0.169 mode=<MovementMode.MOVE_FALLING: 3>
+S7 E dt=0.017 z= 213.7 vz=-153.5 pos=0.193 mode=<MovementMode.MOVE_FALLING: 3>
+S7 E dt=0.017 z= 211.0 vz=-169.9 pos=0.218 mode=<MovementMode.MOVE_FALLING: 3>
+S7 E dt=0.017 z= 208.0 vz=-186.2 pos=0.242 mode=<MovementMode.MOVE_FALLING: 3>
+S7 E dt=0.017 z= 204.8 vz=-202.5 pos=0.266 mode=<MovementMode.MOVE_FALLING: 3>
+S7 E dt=0.017 z= 201.3 vz=-218.9 pos=0.290 mode=<MovementMode.MOVE_FALLING: 3>
+S7 E dt=0.017 z= 197.5 vz=-235.2 pos=0.314 mode=<MovementMode.MOVE_FALLING: 3>
+S7 E dt=0.016 z= 193.4 vz=-251.5 pos=0.338 mode=<MovementMode.MOVE_FALLING: 3>
+S7 E dt=0.017 z= 189.1 vz=-267.9 pos=0.363 mode=<MovementMode.MOVE_FALLING: 3>
+S7 E dt=0.017 z= 184.5 vz=-284.2 pos=0.387 mode=<MovementMode.MOVE_FALLING: 3>
+S7 E dt=0.017 z= 179.6 vz=-300.5 pos=0.411 mode=<MovementMode.MOVE_FALLING: 3>
+S7 E dt=0.017 z= 174.5 vz=-316.9 pos=0.435 mode=<MovementMode.MOVE_FALLING: 3>
+S7 E dt=0.017 z= 169.1 vz=-333.2 pos=0.459 mode=<MovementMode.MOVE_FALLING: 3>
+S7 E dt=0.016 z= 168.8 vz=-334.0 pos=0.460 mode=<MovementMode.MOVE_FALLING: 3>
+S7 E dt=0.017 z= 168.5 vz=-334.8 pos=0.462 mode=<MovementMode.MOVE_FALLING: 3>
+S7 E dt=0.017 z= 168.2 vz=-335.6 pos=0.463 mode=<MovementMode.MOVE_FALLING: 3>
+S7 E dt=0.017 z= 167.9 vz=-336.5 pos=0.464 mode=<MovementMode.MOVE_FALLING: 3>
+S7 E dt=0.017 z= 162.2 vz=-352.8 pos=0.488 mode=<MovementMode.MOVE_FALLING: 3>
+S7 E dt=0.017 z= 156.2 vz=-369.1 pos=0.512 mode=<MovementMode.MOVE_FALLING: 3>
+S7 E dt=0.017 z= 149.9 vz=-385.5 pos=0.537 mode=<MovementMode.MOVE_FALLING: 3>
+S7 E dt=0.016 z= 143.3 vz=-401.8 pos=0.561 mode=<MovementMode.MOVE_FALLING: 3>
+S7 E dt=0.017 z= 136.5 vz=-418.1 pos=0.585 mode=<MovementMode.MOVE_FALLING: 3>
+S7 E dt=0.017 z= 129.4 vz=-434.5 pos=0.609 mode=<MovementMode.MOVE_FALLING: 3>
+S7 E dt=0.017 z= 122.0 vz=-450.8 pos=0.633 mode=<MovementMode.MOVE_FALLING: 3>
+S7 E dt=0.017 z= 114.4 vz=-467.1 pos=-1.000 mode=<MovementMode.MOVE_FALLING: 3>
+S7 AKHIR E: naik 0.0 cm dari mulai, z puncak 225.4, posisi montage terakhir 0.633
+---
+S8 MULAI E dt=0.017 z=225.7
+S8 E dt=0.017 z= 225.7 vz=  -9.6 pos=0.000 mode=<MovementMode.MOVE_FALLING: 3>
+S8 E dt=0.017 z= 225.4 vz= -25.9 pos=0.024 mode=<MovementMode.MOVE_FALLING: 3>
+S8 E dt=0.017 z= 224.8 vz= -42.3 pos=0.048 mode=<MovementMode.MOVE_FALLING: 3>
+S8 E dt=0.017 z= 223.9 vz= -58.6 pos=0.073 mode=<MovementMode.MOVE_FALLING: 3>
+S8 E dt=0.017 z= 222.8 vz= -74.9 pos=0.097 mode=<MovementMode.MOVE_FALLING: 3>
+S8 E dt=0.017 z= 221.5 vz= -91.3 pos=0.121 mode=<MovementMode.MOVE_FALLING: 3>
+S8 E dt=0.017 z= 219.8 vz=-107.6 pos=0.145 mode=<MovementMode.MOVE_FALLING: 3>
+S8 E dt=0.017 z= 217.9 vz=-123.9 pos=0.169 mode=<MovementMode.MOVE_FALLING: 3>
+S8 E dt=0.017 z= 215.7 vz=-140.3 pos=0.193 mode=<MovementMode.MOVE_FALLING: 3>
+S8 E dt=0.017 z= 213.2 vz=-156.6 pos=0.218 mode=<MovementMode.MOVE_FALLING: 3>
+S8 E dt=0.017 z= 210.4 vz=-172.9 pos=0.242 mode=<MovementMode.MOVE_FALLING: 3>
+S8 E dt=0.016 z= 207.4 vz=-189.3 pos=0.266 mode=<MovementMode.MOVE_FALLING: 3>
+S8 E dt=0.017 z= 204.1 vz=-205.6 pos=0.290 mode=<MovementMode.MOVE_FALLING: 3>
+S8 E dt=0.017 z= 200.6 vz=-221.9 pos=0.314 mode=<MovementMode.MOVE_FALLING: 3>
+S8 E dt=0.017 z= 196.7 vz=-238.3 pos=0.338 mode=<MovementMode.MOVE_FALLING: 3>
+S8 E dt=0.017 z= 192.6 vz=-254.6 pos=0.363 mode=<MovementMode.MOVE_FALLING: 3>
+S8 E dt=0.017 z= 188.2 vz=-270.9 pos=0.387 mode=<MovementMode.MOVE_FALLING: 3>
+S8 E dt=0.017 z= 183.6 vz=-287.3 pos=0.411 mode=<MovementMode.MOVE_FALLING: 3>
+S8 E dt=0.017 z= 178.7 vz=-303.6 pos=0.435 mode=<MovementMode.MOVE_FALLING: 3>
+S8 E dt=0.017 z= 173.5 vz=-319.9 pos=0.459 mode=<MovementMode.MOVE_FALLING: 3>
+S8 E dt=0.016 z= 173.2 vz=-320.8 pos=0.460 mode=<MovementMode.MOVE_FALLING: 3>
+S8 E dt=0.016 z= 172.9 vz=-321.6 pos=0.462 mode=<MovementMode.MOVE_FALLING: 3>
+S8 E dt=0.017 z= 172.7 vz=-322.4 pos=0.463 mode=<MovementMode.MOVE_FALLING: 3>
+S8 E dt=0.017 z= 172.4 vz=-323.2 pos=0.464 mode=<MovementMode.MOVE_FALLING: 3>
+S8 E dt=0.017 z= 166.9 vz=-339.5 pos=0.488 mode=<MovementMode.MOVE_FALLING: 3>
+S8 E dt=0.017 z= 161.1 vz=-355.9 pos=0.512 mode=<MovementMode.MOVE_FALLING: 3>
+S8 E dt=0.017 z= 155.0 vz=-372.2 pos=0.537 mode=<MovementMode.MOVE_FALLING: 3>
+S8 E dt=0.016 z= 148.7 vz=-388.5 pos=0.561 mode=<MovementMode.MOVE_FALLING: 3>
+S8 E dt=0.017 z= 142.1 vz=-404.9 pos=0.585 mode=<MovementMode.MOVE_FALLING: 3>
+S8 E dt=0.016 z= 135.2 vz=-421.2 pos=0.609 mode=<MovementMode.MOVE_FALLING: 3>
+S8 E dt=0.017 z= 128.0 vz=-437.5 pos=0.633 mode=<MovementMode.MOVE_FALLING: 3>
+S8 E dt=0.017 z= 120.6 vz=-453.9 pos=-1.000 mode=<MovementMode.MOVE_FALLING: 3>
+S8 AKHIR E: naik 0.0 cm dari mulai, z puncak 225.7, posisi montage terakhir 0.633
+---
+S9 MULAI LMB dt=0.018 z=205.7
+S9 LMB dt=0.018 z= 205.7 vz= 198.0 pos=0.021 mode=<MovementMode.MOVE_FALLING: 3>
+S9 LMB dt=0.019 z= 209.1 vz= 180.1 pos=0.043 mode=<MovementMode.MOVE_FALLING: 3>
+S9 LMB dt=0.017 z= 212.0 vz= 163.8 pos=0.063 mode=<MovementMode.MOVE_FALLING: 3>
+S9 LMB dt=0.017 z= 214.6 vz= 147.4 pos=0.083 mode=<MovementMode.MOVE_FALLING: 3>
+S9 LMB dt=0.017 z= 217.1 vz= 130.1 pos=0.104 mode=<MovementMode.MOVE_FALLING: 3>
+S9 LMB dt=0.018 z= 219.1 vz= 113.8 pos=0.124 mode=<MovementMode.MOVE_FALLING: 3>
+S9 LMB dt=0.017 z= 220.9 vz=  97.0 pos=0.144 mode=<MovementMode.MOVE_FALLING: 3>
+S9 LMB dt=0.017 z= 222.4 vz=  80.4 pos=0.165 mode=<MovementMode.MOVE_FALLING: 3>
+S9 LMB dt=0.018 z= 223.6 vz=  63.6 pos=0.185 mode=<MovementMode.MOVE_FALLING: 3>
+S9 LMB dt=0.016 z= 224.6 vz=  46.8 pos=0.206 mode=<MovementMode.MOVE_FALLING: 3>
+S9 LMB dt=0.017 z= 225.2 vz=  29.9 pos=0.227 mode=<MovementMode.MOVE_FALLING: 3>
+S9 LMB dt=0.017 z= 225.6 vz=  13.1 pos=0.247 mode=<MovementMode.MOVE_FALLING: 3>
+S9 LMB dt=0.017 z= 225.7 vz=  -3.6 pos=0.268 mode=<MovementMode.MOVE_FALLING: 3>
+S9 LMB dt=0.017 z= 225.5 vz= -20.1 pos=0.288 mode=<MovementMode.MOVE_FALLING: 3>
+S9 LMB dt=0.017 z= 225.0 vz= -37.6 pos=0.309 mode=<MovementMode.MOVE_FALLING: 3>
+S9 LMB dt=0.018 z= 224.2 vz= -54.8 pos=0.330 mode=<MovementMode.MOVE_FALLING: 3>
+S9 LMB dt=0.018 z= 223.0 vz= -72.6 pos=0.352 mode=<MovementMode.MOVE_FALLING: 3>
+S9 LMB dt=0.018 z= 221.6 vz= -89.6 pos=0.373 mode=<MovementMode.MOVE_FALLING: 3>
+S9 LMB dt=0.017 z= 220.0 vz=-105.9 pos=0.393 mode=<MovementMode.MOVE_FALLING: 3>
+S9 LMB dt=0.017 z= 218.0 vz=-122.9 pos=0.414 mode=<MovementMode.MOVE_FALLING: 3>
+S9 LMB dt=0.017 z= 215.8 vz=-139.2 pos=0.434 mode=<MovementMode.MOVE_FALLING: 3>
+S9 LMB dt=0.017 z= 213.3 vz=-155.6 pos=0.454 mode=<MovementMode.MOVE_FALLING: 3>
+S9 LMB dt=0.017 z= 210.6 vz=-172.3 pos=0.474 mode=<MovementMode.MOVE_FALLING: 3>
+S9 LMB dt=0.017 z= 207.5 vz=-188.8 pos=0.494 mode=<MovementMode.MOVE_FALLING: 3>
+S9 LMB dt=0.017 z= 204.1 vz=-205.5 pos=-1.000 mode=<MovementMode.MOVE_FALLING: 3>
+S9 AKHIR LMB: naik 20.0 cm dari mulai, z puncak 225.7, posisi montage terakhir 0.494
+---
+S10 MULAI LMB dt=0.017 z=202.0
+S10 LMB dt=0.017 z= 202.0 vz= 215.6 pos=0.020 mode=<MovementMode.MOVE_FALLING: 3>
+S10 LMB dt=0.019 z= 205.6 vz= 198.5 pos=0.041 mode=<MovementMode.MOVE_FALLING: 3>
+S10 LMB dt=0.016 z= 208.8 vz= 181.8 pos=0.062 mode=<MovementMode.MOVE_FALLING: 3>
+S10 LMB dt=0.017 z= 211.8 vz= 164.9 pos=0.082 mode=<MovementMode.MOVE_FALLING: 3>
+S10 LMB dt=0.017 z= 214.6 vz= 147.5 pos=0.104 mode=<MovementMode.MOVE_FALLING: 3>
+S10 LMB dt=0.018 z= 217.0 vz= 130.9 pos=0.124 mode=<MovementMode.MOVE_FALLING: 3>
+S10 LMB dt=0.017 z= 219.2 vz= 112.9 pos=0.146 mode=<MovementMode.MOVE_FALLING: 3>
+S10 LMB dt=0.019 z= 221.0 vz=  95.8 pos=0.167 mode=<MovementMode.MOVE_FALLING: 3>
+S10 LMB dt=0.017 z= 222.5 vz=  79.3 pos=0.187 mode=<MovementMode.MOVE_FALLING: 3>
+S10 LMB dt=0.017 z= 223.7 vz=  62.4 pos=0.208 mode=<MovementMode.MOVE_FALLING: 3>
+S10 LMB dt=0.017 z= 224.6 vz=  45.6 pos=0.228 mode=<MovementMode.MOVE_FALLING: 3>
+S10 LMB dt=0.018 z= 225.3 vz=  28.7 pos=0.249 mode=<MovementMode.MOVE_FALLING: 3>
+S10 LMB dt=0.017 z= 225.6 vz=  11.4 pos=0.270 mode=<MovementMode.MOVE_FALLING: 3>
+S10 LMB dt=0.018 z= 225.7 vz=  -5.0 pos=0.290 mode=<MovementMode.MOVE_FALLING: 3>
+S10 LMB dt=0.017 z= 225.5 vz= -21.4 pos=0.310 mode=<MovementMode.MOVE_FALLING: 3>
+S10 LMB dt=0.017 z= 225.0 vz= -38.2 pos=0.331 mode=<MovementMode.MOVE_FALLING: 3>
+S10 LMB dt=0.017 z= 224.2 vz= -54.5 pos=0.351 mode=<MovementMode.MOVE_FALLING: 3>
+S10 LMB dt=0.017 z= 223.1 vz= -70.9 pos=0.371 mode=<MovementMode.MOVE_FALLING: 3>
+S10 LMB dt=0.017 z= 221.8 vz= -87.5 pos=0.391 mode=<MovementMode.MOVE_FALLING: 3>
+S10 LMB dt=0.017 z= 220.1 vz=-104.4 pos=0.412 mode=<MovementMode.MOVE_FALLING: 3>
+S10 LMB dt=0.017 z= 218.0 vz=-122.6 pos=0.434 mode=<MovementMode.MOVE_FALLING: 3>
+S10 LMB dt=0.018 z= 215.7 vz=-140.3 pos=0.456 mode=<MovementMode.MOVE_FALLING: 3>
+S10 LMB dt=0.018 z= 213.1 vz=-157.5 pos=0.477 mode=<MovementMode.MOVE_FALLING: 3>
+S10 LMB dt=0.017 z= 210.1 vz=-174.8 pos=0.498 mode=<MovementMode.MOVE_FALLING: 3>
+S10 LMB dt=0.018 z= 207.0 vz=-191.7 pos=-1.000 mode=<MovementMode.MOVE_FALLING: 3>
+S10 AKHIR LMB: naik 23.7 cm dari mulai, z puncak 225.7, posisi montage terakhir 0.498
+---
+S11 MULAI LMB dt=0.017 z=221.6
+S11 LMB dt=0.017 z= 221.6 vz=  90.0 pos=0.020 mode=<MovementMode.MOVE_FALLING: 3>
+S11 LMB dt=0.018 z= 223.1 vz=  71.8 pos=0.042 mode=<MovementMode.MOVE_FALLING: 3>
+S11 LMB dt=0.017 z= 224.2 vz=  54.7 pos=0.063 mode=<MovementMode.MOVE_FALLING: 3>
+S11 LMB dt=0.017 z= 225.0 vz=  38.3 pos=0.083 mode=<MovementMode.MOVE_FALLING: 3>
+S11 LMB dt=0.017 z= 225.5 vz=  22.0 pos=0.103 mode=<MovementMode.MOVE_FALLING: 3>
+S11 LMB dt=0.017 z= 225.7 vz=   5.6 pos=0.123 mode=<MovementMode.MOVE_FALLING: 3>
+S11 LMB dt=0.017 z= 225.6 vz= -10.8 pos=0.143 mode=<MovementMode.MOVE_FALLING: 3>
+S11 LMB dt=0.017 z= 225.3 vz= -27.5 pos=0.164 mode=<MovementMode.MOVE_FALLING: 3>
+S11 LMB dt=0.017 z= 224.7 vz= -44.7 pos=0.185 mode=<MovementMode.MOVE_FALLING: 3>
+S11 LMB dt=0.017 z= 223.8 vz= -61.1 pos=0.205 mode=<MovementMode.MOVE_FALLING: 3>
+S11 LMB dt=0.017 z= 222.6 vz= -77.4 pos=0.225 mode=<MovementMode.MOVE_FALLING: 3>
+S11 LMB dt=0.017 z= 221.2 vz= -93.7 pos=0.245 mode=<MovementMode.MOVE_FALLING: 3>
+S11 LMB dt=0.017 z= 219.5 vz=-110.1 pos=0.265 mode=<MovementMode.MOVE_FALLING: 3>
+S11 LMB dt=0.017 z= 217.5 vz=-126.4 pos=0.285 mode=<MovementMode.MOVE_FALLING: 3>
+S11 LMB dt=0.017 z= 215.3 vz=-142.7 pos=0.305 mode=<MovementMode.MOVE_FALLING: 3>
+S11 LMB dt=0.017 z= 212.8 vz=-159.1 pos=0.325 mode=<MovementMode.MOVE_FALLING: 3>
+S11 LMB dt=0.017 z= 209.9 vz=-176.2 pos=0.346 mode=<MovementMode.MOVE_FALLING: 3>
+S11 LMB dt=0.019 z= 206.5 vz=-193.8 pos=0.368 mode=<MovementMode.MOVE_FALLING: 3>
+S11 LMB dt=0.016 z= 203.2 vz=-210.2 pos=0.388 mode=<MovementMode.MOVE_FALLING: 3>
+S11 LMB dt=0.017 z= 199.5 vz=-226.5 pos=0.408 mode=<MovementMode.MOVE_FALLING: 3>
+S11 LMB dt=0.017 z= 195.6 vz=-242.8 pos=0.428 mode=<MovementMode.MOVE_FALLING: 3>
+S11 LMB dt=0.017 z= 191.3 vz=-259.5 pos=0.448 mode=<MovementMode.MOVE_FALLING: 3>
+S11 LMB dt=0.017 z= 186.9 vz=-275.9 pos=0.468 mode=<MovementMode.MOVE_FALLING: 3>
+S11 LMB dt=0.017 z= 182.1 vz=-292.4 pos=0.488 mode=<MovementMode.MOVE_FALLING: 3>
+S11 LMB dt=0.017 z= 177.1 vz=-308.7 pos=-1.000 mode=<MovementMode.MOVE_FALLING: 3>
+S11 AKHIR LMB: naik 4.1 cm dari mulai, z puncak 225.7, posisi montage terakhir 0.488
+---
+S12 MULAI LMB dt=0.017 z=207.8
+S12 LMB dt=0.017 z= 207.8 vz= 187.5 pos=0.020 mode=<MovementMode.MOVE_FALLING: 3>
+S12 LMB dt=0.019 z= 210.8 vz= 171.1 pos=0.040 mode=<MovementMode.MOVE_FALLING: 3>
+S12 LMB dt=0.015 z= 213.5 vz= 154.8 pos=0.060 mode=<MovementMode.MOVE_FALLING: 3>
+S12 LMB dt=0.016 z= 215.9 vz= 138.5 pos=0.080 mode=<MovementMode.MOVE_FALLING: 3>
+S12 LMB dt=0.017 z= 218.1 vz= 122.1 pos=0.100 mode=<MovementMode.MOVE_FALLING: 3>
+S12 LMB dt=0.017 z= 220.0 vz= 105.8 pos=0.120 mode=<MovementMode.MOVE_FALLING: 3>
+S12 LMB dt=0.017 z= 221.6 vz=  89.5 pos=0.140 mode=<MovementMode.MOVE_FALLING: 3>
+S12 LMB dt=0.017 z= 223.0 vz=  73.1 pos=0.160 mode=<MovementMode.MOVE_FALLING: 3>
+S12 LMB dt=0.017 z= 224.1 vz=  56.4 pos=0.181 mode=<MovementMode.MOVE_FALLING: 3>
+S12 LMB dt=0.017 z= 224.9 vz=  40.1 pos=0.201 mode=<MovementMode.MOVE_FALLING: 3>
+S12 LMB dt=0.016 z= 225.4 vz=  23.5 pos=0.221 mode=<MovementMode.MOVE_FALLING: 3>
+S12 LMB dt=0.017 z= 225.7 vz=   7.2 pos=0.241 mode=<MovementMode.MOVE_FALLING: 3>
+S12 LMB dt=0.017 z= 225.7 vz=  -9.7 pos=0.262 mode=<MovementMode.MOVE_FALLING: 3>
+S12 LMB dt=0.018 z= 225.3 vz= -27.0 pos=0.283 mode=<MovementMode.MOVE_FALLING: 3>
+S12 LMB dt=0.017 z= 224.7 vz= -43.5 pos=0.303 mode=<MovementMode.MOVE_FALLING: 3>
+S12 LMB dt=0.017 z= 223.9 vz= -60.0 pos=0.323 mode=<MovementMode.MOVE_FALLING: 3>
+S12 LMB dt=0.017 z= 222.7 vz= -76.4 pos=0.343 mode=<MovementMode.MOVE_FALLING: 3>
+S12 LMB dt=0.017 z= 221.3 vz= -92.9 pos=0.364 mode=<MovementMode.MOVE_FALLING: 3>
+S12 LMB dt=0.017 z= 219.6 vz=-109.3 pos=0.384 mode=<MovementMode.MOVE_FALLING: 3>
+S12 LMB dt=0.017 z= 217.6 vz=-125.8 pos=0.404 mode=<MovementMode.MOVE_FALLING: 3>
+S12 LMB dt=0.017 z= 215.4 vz=-142.1 pos=0.424 mode=<MovementMode.MOVE_FALLING: 3>
+S12 LMB dt=0.017 z= 212.9 vz=-158.5 pos=0.444 mode=<MovementMode.MOVE_FALLING: 3>
+S12 LMB dt=0.016 z= 210.1 vz=-174.8 pos=0.464 mode=<MovementMode.MOVE_FALLING: 3>
+S12 LMB dt=0.017 z= 207.1 vz=-191.1 pos=0.484 mode=<MovementMode.MOVE_FALLING: 3>
+S12 LMB dt=0.017 z= 203.7 vz=-207.5 pos=0.504 mode=<MovementMode.MOVE_FALLING: 3>
+S12 LMB dt=0.017 z= 200.0 vz=-224.5 pos=-1.000 mode=<MovementMode.MOVE_FALLING: 3>
+S12 AKHIR LMB: naik 17.9 cm dari mulai, z puncak 225.7, posisi montage terakhir 0.504
+---
+S13 MULAI E dt=0.017 z=225.6
+S13 E dt=0.017 z= 225.6 vz= -10.2 pos=0.000 mode=<MovementMode.MOVE_FALLING: 3>
+S13 E dt=0.016 z= 225.3 vz= -26.6 pos=0.024 mode=<MovementMode.MOVE_FALLING: 3>
+S13 E dt=0.017 z= 224.8 vz= -42.9 pos=0.048 mode=<MovementMode.MOVE_FALLING: 3>
+S13 E dt=0.016 z= 223.9 vz= -59.2 pos=0.073 mode=<MovementMode.MOVE_FALLING: 3>
+S13 E dt=0.017 z= 222.8 vz= -75.6 pos=0.097 mode=<MovementMode.MOVE_FALLING: 3>
+S13 E dt=0.017 z= 221.4 vz= -91.9 pos=0.121 mode=<MovementMode.MOVE_FALLING: 3>
+S13 E dt=0.017 z= 219.7 vz=-108.2 pos=0.145 mode=<MovementMode.MOVE_FALLING: 3>
+S13 E dt=0.016 z= 217.8 vz=-124.6 pos=0.169 mode=<MovementMode.MOVE_FALLING: 3>
+S13 E dt=0.017 z= 215.5 vz=-141.3 pos=0.194 mode=<MovementMode.MOVE_FALLING: 3>
+S13 E dt=0.017 z= 213.0 vz=-157.9 pos=0.218 mode=<MovementMode.MOVE_FALLING: 3>
+S13 E dt=0.017 z= 210.2 vz=-174.3 pos=0.243 mode=<MovementMode.MOVE_FALLING: 3>
+S13 E dt=0.017 z= 207.1 vz=-190.8 pos=0.267 mode=<MovementMode.MOVE_FALLING: 3>
+S13 E dt=0.017 z= 203.8 vz=-207.1 pos=0.291 mode=<MovementMode.MOVE_FALLING: 3>
+S13 E dt=0.016 z= 200.2 vz=-223.5 pos=0.315 mode=<MovementMode.MOVE_FALLING: 3>
+S13 E dt=0.017 z= 196.4 vz=-239.8 pos=0.340 mode=<MovementMode.MOVE_FALLING: 3>
+S13 E dt=0.017 z= 192.2 vz=-256.2 pos=0.364 mode=<MovementMode.MOVE_FALLING: 3>
+S13 E dt=0.017 z= 187.8 vz=-272.5 pos=0.388 mode=<MovementMode.MOVE_FALLING: 3>
+S13 E dt=0.017 z= 183.0 vz=-289.2 pos=0.413 mode=<MovementMode.MOVE_FALLING: 3>
+S13 E dt=0.017 z= 182.8 vz=-290.1 pos=0.414 mode=<MovementMode.MOVE_FALLING: 3>
+S13 E dt=0.016 z= 182.5 vz=-290.9 pos=0.415 mode=<MovementMode.MOVE_FALLING: 3>
+S13 E dt=0.017 z= 182.3 vz=-291.7 pos=0.416 mode=<MovementMode.MOVE_FALLING: 3>
+S13 E dt=0.017 z= 182.0 vz=-292.5 pos=0.418 mode=<MovementMode.MOVE_FALLING: 3>
+S13 E dt=0.017 z= 177.0 vz=-308.8 pos=0.442 mode=<MovementMode.MOVE_FALLING: 3>
+S13 E dt=0.017 z= 171.4 vz=-326.4 pos=0.468 mode=<MovementMode.MOVE_FALLING: 3>
+S13 E dt=0.018 z= 165.6 vz=-343.3 pos=0.493 mode=<MovementMode.MOVE_FALLING: 3>
+S13 E dt=0.017 z= 159.4 vz=-360.4 pos=0.518 mode=<MovementMode.MOVE_FALLING: 3>
+S13 E dt=0.018 z= 153.2 vz=-377.0 pos=0.543 mode=<MovementMode.MOVE_FALLING: 3>
+S13 E dt=0.017 z= 146.8 vz=-393.3 pos=0.567 mode=<MovementMode.MOVE_FALLING: 3>
+S13 E dt=0.017 z= 140.1 vz=-409.7 pos=0.591 mode=<MovementMode.MOVE_FALLING: 3>
+S13 E dt=0.017 z= 133.0 vz=-426.3 pos=0.616 mode=<MovementMode.MOVE_FALLING: 3>
+S13 E dt=0.017 z= 125.7 vz=-442.7 pos=-1.000 mode=<MovementMode.MOVE_FALLING: 3>
+S13 AKHIR E: naik 0.0 cm dari mulai, z puncak 225.6, posisi montage terakhir 0.616
+---
+S14 MULAI E dt=0.016 z=225.7
+S14 E dt=0.016 z= 225.7 vz=  -8.3 pos=0.000 mode=<MovementMode.MOVE_FALLING: 3>
+S14 E dt=0.017 z= 225.4 vz= -24.6 pos=0.024 mode=<MovementMode.MOVE_FALLING: 3>
+S14 E dt=0.017 z= 224.8 vz= -41.0 pos=0.048 mode=<MovementMode.MOVE_FALLING: 3>
+S14 E dt=0.017 z= 224.0 vz= -57.3 pos=0.073 mode=<MovementMode.MOVE_FALLING: 3>
+S14 E dt=0.017 z= 222.9 vz= -73.6 pos=0.097 mode=<MovementMode.MOVE_FALLING: 3>
+S14 E dt=0.017 z= 221.5 vz= -90.2 pos=0.121 mode=<MovementMode.MOVE_FALLING: 3>
+S14 E dt=0.017 z= 219.9 vz=-107.0 pos=0.146 mode=<MovementMode.MOVE_FALLING: 3>
+S14 E dt=0.017 z= 217.9 vz=-123.5 pos=0.171 mode=<MovementMode.MOVE_FALLING: 3>
+S14 E dt=0.017 z= 215.7 vz=-139.9 pos=0.195 mode=<MovementMode.MOVE_FALLING: 3>
+S14 E dt=0.016 z= 213.3 vz=-156.2 pos=0.219 mode=<MovementMode.MOVE_FALLING: 3>
+S14 E dt=0.017 z= 210.4 vz=-173.2 pos=0.244 mode=<MovementMode.MOVE_FALLING: 3>
+S14 E dt=0.017 z= 207.4 vz=-189.6 pos=0.268 mode=<MovementMode.MOVE_FALLING: 3>
+S14 E dt=0.017 z= 204.0 vz=-206.2 pos=0.293 mode=<MovementMode.MOVE_FALLING: 3>
+S14 E dt=0.017 z= 200.4 vz=-222.5 pos=0.317 mode=<MovementMode.MOVE_FALLING: 3>
+S14 E dt=0.016 z= 196.6 vz=-238.9 pos=0.341 mode=<MovementMode.MOVE_FALLING: 3>
+S14 E dt=0.017 z= 192.5 vz=-255.2 pos=0.365 mode=<MovementMode.MOVE_FALLING: 3>
+S14 E dt=0.017 z= 188.1 vz=-271.5 pos=0.389 mode=<MovementMode.MOVE_FALLING: 3>
+S14 E dt=0.017 z= 183.4 vz=-287.9 pos=0.414 mode=<MovementMode.MOVE_FALLING: 3>
+S14 E dt=0.016 z= 183.2 vz=-288.7 pos=0.415 mode=<MovementMode.MOVE_FALLING: 3>
+S14 E dt=0.016 z= 182.9 vz=-289.5 pos=0.416 mode=<MovementMode.MOVE_FALLING: 3>
+S14 E dt=0.017 z= 182.7 vz=-290.4 pos=0.417 mode=<MovementMode.MOVE_FALLING: 3>
+S14 E dt=0.018 z= 182.4 vz=-291.2 pos=0.419 mode=<MovementMode.MOVE_FALLING: 3>
+S14 E dt=0.017 z= 177.1 vz=-308.6 pos=0.444 mode=<MovementMode.MOVE_FALLING: 3>
+S14 E dt=0.018 z= 171.8 vz=-324.9 pos=0.468 mode=<MovementMode.MOVE_FALLING: 3>
+S14 E dt=0.017 z= 166.3 vz=-341.2 pos=0.493 mode=<MovementMode.MOVE_FALLING: 3>
+S14 E dt=0.017 z= 160.5 vz=-357.6 pos=0.517 mode=<MovementMode.MOVE_FALLING: 3>
+S14 E dt=0.017 z= 154.4 vz=-373.9 pos=0.541 mode=<MovementMode.MOVE_FALLING: 3>
+S14 E dt=0.017 z= 148.0 vz=-390.2 pos=0.565 mode=<MovementMode.MOVE_FALLING: 3>
+S14 E dt=0.017 z= 141.4 vz=-406.6 pos=0.589 mode=<MovementMode.MOVE_FALLING: 3>
+S14 E dt=0.017 z= 134.5 vz=-422.9 pos=0.613 mode=<MovementMode.MOVE_FALLING: 3>
+S14 E dt=0.016 z= 127.3 vz=-439.2 pos=-1.000 mode=<MovementMode.MOVE_FALLING: 3>
+S14 AKHIR E: naik 0.0 cm dari mulai, z puncak 225.7, posisi montage terakhir 0.613
+---
+S15 MULAI E dt=0.017 z=225.7
+S15 E dt=0.017 z= 225.7 vz=  -9.1 pos=0.000 mode=<MovementMode.MOVE_FALLING: 3>
+S15 E dt=0.016 z= 225.4 vz= -25.4 pos=0.024 mode=<MovementMode.MOVE_FALLING: 3>
+S15 E dt=0.017 z= 224.8 vz= -41.8 pos=0.048 mode=<MovementMode.MOVE_FALLING: 3>
+S15 E dt=0.016 z= 224.0 vz= -58.1 pos=0.073 mode=<MovementMode.MOVE_FALLING: 3>
+S15 E dt=0.017 z= 222.9 vz= -74.4 pos=0.097 mode=<MovementMode.MOVE_FALLING: 3>
+S15 E dt=0.017 z= 221.5 vz= -90.8 pos=0.121 mode=<MovementMode.MOVE_FALLING: 3>
+S15 E dt=0.017 z= 219.8 vz=-107.1 pos=0.145 mode=<MovementMode.MOVE_FALLING: 3>
+S15 E dt=0.017 z= 217.9 vz=-123.6 pos=0.169 mode=<MovementMode.MOVE_FALLING: 3>
+S15 E dt=0.017 z= 215.7 vz=-140.0 pos=0.194 mode=<MovementMode.MOVE_FALLING: 3>
+S15 E dt=0.017 z= 213.2 vz=-156.3 pos=0.218 mode=<MovementMode.MOVE_FALLING: 3>
+S15 E dt=0.017 z= 210.5 vz=-172.6 pos=0.242 mode=<MovementMode.MOVE_FALLING: 3>
+S15 E dt=0.017 z= 207.5 vz=-189.0 pos=0.266 mode=<MovementMode.MOVE_FALLING: 3>
+S15 E dt=0.017 z= 204.2 vz=-205.4 pos=0.290 mode=<MovementMode.MOVE_FALLING: 3>
+S15 E dt=0.017 z= 200.6 vz=-221.7 pos=0.315 mode=<MovementMode.MOVE_FALLING: 3>
+S15 E dt=0.017 z= 196.8 vz=-238.1 pos=0.339 mode=<MovementMode.MOVE_FALLING: 3>
+S15 E dt=0.016 z= 192.5 vz=-255.3 pos=0.364 mode=<MovementMode.MOVE_FALLING: 3>
+S15 E dt=0.018 z= 188.0 vz=-271.7 pos=0.389 mode=<MovementMode.MOVE_FALLING: 3>
+S15 E dt=0.017 z= 183.4 vz=-288.0 pos=0.413 mode=<MovementMode.MOVE_FALLING: 3>
+S15 E dt=0.017 z= 183.1 vz=-288.8 pos=0.414 mode=<MovementMode.MOVE_FALLING: 3>
+S15 E dt=0.017 z= 182.9 vz=-289.7 pos=0.415 mode=<MovementMode.MOVE_FALLING: 3>
+S15 E dt=0.016 z= 182.7 vz=-290.5 pos=0.416 mode=<MovementMode.MOVE_FALLING: 3>
+S15 E dt=0.017 z= 182.4 vz=-291.3 pos=0.418 mode=<MovementMode.MOVE_FALLING: 3>
+S15 E dt=0.017 z= 177.3 vz=-308.1 pos=0.442 mode=<MovementMode.MOVE_FALLING: 3>
+S15 E dt=0.017 z= 171.9 vz=-324.6 pos=0.467 mode=<MovementMode.MOVE_FALLING: 3>
+S15 E dt=0.017 z= 166.2 vz=-341.5 pos=0.492 mode=<MovementMode.MOVE_FALLING: 3>
+S15 E dt=0.017 z= 160.4 vz=-357.9 pos=0.516 mode=<MovementMode.MOVE_FALLING: 3>
+S15 E dt=0.017 z= 154.3 vz=-374.2 pos=0.540 mode=<MovementMode.MOVE_FALLING: 3>
+S15 E dt=0.017 z= 147.9 vz=-390.5 pos=0.564 mode=<MovementMode.MOVE_FALLING: 3>
+S15 E dt=0.017 z= 141.2 vz=-406.9 pos=0.589 mode=<MovementMode.MOVE_FALLING: 3>
+S15 E dt=0.017 z= 134.2 vz=-423.5 pos=0.613 mode=<MovementMode.MOVE_FALLING: 3>
+S15 E dt=0.017 z= 127.0 vz=-439.8 pos=-1.000 mode=<MovementMode.MOVE_FALLING: 3>
+S15 AKHIR E: naik 0.0 cm dari mulai, z puncak 225.7, posisi montage terakhir 0.613
+---
+S16 MULAI E dt=0.017 z=225.7
+S16 E dt=0.017 z= 225.7 vz=  -6.8 pos=0.000 mode=<MovementMode.MOVE_FALLING: 3>
+S16 E dt=0.017 z= 225.4 vz= -23.2 pos=0.024 mode=<MovementMode.MOVE_FALLING: 3>
+S16 E dt=0.016 z= 224.9 vz= -39.5 pos=0.048 mode=<MovementMode.MOVE_FALLING: 3>
+S16 E dt=0.017 z= 224.1 vz= -55.8 pos=0.073 mode=<MovementMode.MOVE_FALLING: 3>
+S16 E dt=0.017 z= 223.0 vz= -72.2 pos=0.097 mode=<MovementMode.MOVE_FALLING: 3>
+S16 E dt=0.017 z= 221.7 vz= -88.5 pos=0.121 mode=<MovementMode.MOVE_FALLING: 3>
+S16 E dt=0.016 z= 220.1 vz=-104.9 pos=0.145 mode=<MovementMode.MOVE_FALLING: 3>
+S16 E dt=0.017 z= 218.1 vz=-122.0 pos=0.170 mode=<MovementMode.MOVE_FALLING: 3>
+S16 E dt=0.017 z= 215.9 vz=-138.9 pos=0.195 mode=<MovementMode.MOVE_FALLING: 3>
+S16 E dt=0.017 z= 213.3 vz=-155.7 pos=0.220 mode=<MovementMode.MOVE_FALLING: 3>
+S16 E dt=0.017 z= 210.6 vz=-172.0 pos=0.244 mode=<MovementMode.MOVE_FALLING: 3>
+S16 E dt=0.017 z= 207.6 vz=-188.4 pos=0.269 mode=<MovementMode.MOVE_FALLING: 3>
+S16 E dt=0.017 z= 204.3 vz=-204.7 pos=0.293 mode=<MovementMode.MOVE_FALLING: 3>
+S16 E dt=0.017 z= 200.8 vz=-221.0 pos=0.317 mode=<MovementMode.MOVE_FALLING: 3>
+S16 E dt=0.016 z= 197.0 vz=-237.4 pos=0.341 mode=<MovementMode.MOVE_FALLING: 3>
+S16 E dt=0.017 z= 192.9 vz=-253.7 pos=0.365 mode=<MovementMode.MOVE_FALLING: 3>
+S16 E dt=0.017 z= 188.5 vz=-270.1 pos=0.390 mode=<MovementMode.MOVE_FALLING: 3>
+S16 E dt=0.017 z= 183.8 vz=-286.4 pos=0.414 mode=<MovementMode.MOVE_FALLING: 3>
+S16 E dt=0.017 z= 183.6 vz=-287.3 pos=0.415 mode=<MovementMode.MOVE_FALLING: 3>
+S16 E dt=0.017 z= 183.4 vz=-288.1 pos=0.416 mode=<MovementMode.MOVE_FALLING: 3>
+S16 E dt=0.017 z= 183.1 vz=-288.9 pos=0.417 mode=<MovementMode.MOVE_FALLING: 3>
+S16 E dt=0.017 z= 182.9 vz=-289.7 pos=0.419 mode=<MovementMode.MOVE_FALLING: 3>
+S16 E dt=0.017 z= 177.9 vz=-306.1 pos=0.443 mode=<MovementMode.MOVE_FALLING: 3>
+S16 E dt=0.016 z= 172.2 vz=-323.7 pos=0.469 mode=<MovementMode.MOVE_FALLING: 3>
+S16 E dt=0.019 z= 166.5 vz=-340.7 pos=0.494 mode=<MovementMode.MOVE_FALLING: 3>
+S16 E dt=0.017 z= 160.5 vz=-357.4 pos=0.519 mode=<MovementMode.MOVE_FALLING: 3>
+S16 E dt=0.017 z= 154.4 vz=-373.9 pos=0.543 mode=<MovementMode.MOVE_FALLING: 3>
+S16 E dt=0.017 z= 148.0 vz=-390.3 pos=0.567 mode=<MovementMode.MOVE_FALLING: 3>
+S16 E dt=0.017 z= 141.2 vz=-406.9 pos=0.592 mode=<MovementMode.MOVE_FALLING: 3>
+S16 E dt=0.017 z= 134.3 vz=-423.2 pos=0.616 mode=<MovementMode.MOVE_FALLING: 3>
+S16 E dt=0.016 z= 127.1 vz=-439.5 pos=-1.000 mode=<MovementMode.MOVE_FALLING: 3>
+S16 AKHIR E: naik 0.0 cm dari mulai, z puncak 225.7, posisi montage terakhir 0.616
+---
+S17 MULAI LMB dt=0.017 z=196.6
+S17 LMB dt=0.017 z= 196.6 vz= 238.7 pos=0.020 mode=<MovementMode.MOVE_FALLING: 3>
+S17 LMB dt=0.020 z= 200.5 vz= 222.3 pos=0.040 mode=<MovementMode.MOVE_FALLING: 3>
+S17 LMB dt=0.015 z= 204.1 vz= 206.0 pos=0.060 mode=<MovementMode.MOVE_FALLING: 3>
+S17 LMB dt=0.015 z= 207.3 vz= 189.7 pos=0.080 mode=<MovementMode.MOVE_FALLING: 3>
+S17 LMB dt=0.016 z= 210.4 vz= 173.3 pos=0.100 mode=<MovementMode.MOVE_FALLING: 3>
+S17 LMB dt=0.017 z= 213.1 vz= 157.0 pos=0.120 mode=<MovementMode.MOVE_FALLING: 3>
+S17 LMB dt=0.017 z= 215.6 vz= 140.7 pos=0.140 mode=<MovementMode.MOVE_FALLING: 3>
+S17 LMB dt=0.018 z= 217.8 vz= 124.3 pos=0.160 mode=<MovementMode.MOVE_FALLING: 3>
+S17 LMB dt=0.017 z= 219.8 vz= 108.0 pos=0.180 mode=<MovementMode.MOVE_FALLING: 3>
+S17 LMB dt=0.017 z= 221.4 vz=  91.7 pos=0.200 mode=<MovementMode.MOVE_FALLING: 3>
+S17 LMB dt=0.016 z= 222.8 vz=  75.3 pos=0.220 mode=<MovementMode.MOVE_FALLING: 3>
+S17 LMB dt=0.015 z= 223.9 vz=  59.0 pos=0.240 mode=<MovementMode.MOVE_FALLING: 3>
+S17 LMB dt=0.017 z= 224.8 vz=  42.7 pos=0.260 mode=<MovementMode.MOVE_FALLING: 3>
+S17 LMB dt=0.017 z= 225.3 vz=  26.3 pos=0.280 mode=<MovementMode.MOVE_FALLING: 3>
+S17 LMB dt=0.017 z= 225.7 vz=  10.0 pos=0.300 mode=<MovementMode.MOVE_FALLING: 3>
+S17 LMB dt=0.017 z= 225.7 vz=  -6.3 pos=0.320 mode=<MovementMode.MOVE_FALLING: 3>
+S17 LMB dt=0.017 z= 225.4 vz= -22.7 pos=0.340 mode=<MovementMode.MOVE_FALLING: 3>
+S17 LMB dt=0.017 z= 224.9 vz= -39.0 pos=0.360 mode=<MovementMode.MOVE_FALLING: 3>
+S17 LMB dt=0.017 z= 224.1 vz= -55.3 pos=0.380 mode=<MovementMode.MOVE_FALLING: 3>
+S17 LMB dt=0.017 z= 223.1 vz= -71.7 pos=0.400 mode=<MovementMode.MOVE_FALLING: 3>
+S17 LMB dt=0.017 z= 221.7 vz= -88.0 pos=0.420 mode=<MovementMode.MOVE_FALLING: 3>
+S17 LMB dt=0.018 z= 220.1 vz=-104.3 pos=0.440 mode=<MovementMode.MOVE_FALLING: 3>
+S17 LMB dt=0.015 z= 218.3 vz=-120.7 pos=0.460 mode=<MovementMode.MOVE_FALLING: 3>
+S17 LMB dt=0.017 z= 216.1 vz=-137.0 pos=0.480 mode=<MovementMode.MOVE_FALLING: 3>
+S17 LMB dt=0.017 z= 213.7 vz=-153.3 pos=0.500 mode=<MovementMode.MOVE_FALLING: 3>
+S17 LMB dt=0.017 z= 211.0 vz=-169.7 pos=-1.000 mode=<MovementMode.MOVE_FALLING: 3>
+S17 AKHIR LMB: naik 29.0 cm dari mulai, z puncak 225.7, posisi montage terakhir 0.500
+---
+S18 MULAI LMB dt=0.017 z=196.6
+S18 LMB dt=0.017 z= 196.6 vz= 238.7 pos=0.020 mode=<MovementMode.MOVE_FALLING: 3>
+S18 LMB dt=0.018 z= 200.5 vz= 222.3 pos=0.040 mode=<MovementMode.MOVE_FALLING: 3>
+S18 LMB dt=0.016 z= 204.1 vz= 206.0 pos=0.060 mode=<MovementMode.MOVE_FALLING: 3>
+S18 LMB dt=0.016 z= 207.3 vz= 189.7 pos=0.080 mode=<MovementMode.MOVE_FALLING: 3>
+S18 LMB dt=0.017 z= 210.5 vz= 172.8 pos=0.101 mode=<MovementMode.MOVE_FALLING: 3>
+S18 LMB dt=0.017 z= 213.2 vz= 156.5 pos=0.121 mode=<MovementMode.MOVE_FALLING: 3>
+S18 LMB dt=0.016 z= 215.7 vz= 140.2 pos=0.141 mode=<MovementMode.MOVE_FALLING: 3>
+S18 LMB dt=0.017 z= 217.9 vz= 123.8 pos=0.161 mode=<MovementMode.MOVE_FALLING: 3>
+S18 LMB dt=0.017 z= 219.8 vz= 107.5 pos=0.181 mode=<MovementMode.MOVE_FALLING: 3>
+S18 LMB dt=0.016 z= 221.5 vz=  91.2 pos=0.201 mode=<MovementMode.MOVE_FALLING: 3>
+S18 LMB dt=0.017 z= 222.8 vz=  74.8 pos=0.221 mode=<MovementMode.MOVE_FALLING: 3>
+S18 LMB dt=0.016 z= 224.0 vz=  58.5 pos=0.241 mode=<MovementMode.MOVE_FALLING: 3>
+S18 LMB dt=0.017 z= 224.8 vz=  42.2 pos=0.261 mode=<MovementMode.MOVE_FALLING: 3>
+S18 LMB dt=0.017 z= 225.4 vz=  25.8 pos=0.281 mode=<MovementMode.MOVE_FALLING: 3>
+S18 LMB dt=0.016 z= 225.7 vz=   9.5 pos=0.301 mode=<MovementMode.MOVE_FALLING: 3>
+S18 LMB dt=0.017 z= 225.7 vz=  -6.8 pos=0.321 mode=<MovementMode.MOVE_FALLING: 3>
+S18 LMB dt=0.017 z= 225.4 vz= -23.2 pos=0.341 mode=<MovementMode.MOVE_FALLING: 3>
+S18 LMB dt=0.017 z= 224.9 vz= -39.5 pos=0.361 mode=<MovementMode.MOVE_FALLING: 3>
+S18 LMB dt=0.017 z= 224.1 vz= -56.0 pos=0.381 mode=<MovementMode.MOVE_FALLING: 3>
+S18 LMB dt=0.016 z= 223.0 vz= -72.5 pos=0.401 mode=<MovementMode.MOVE_FALLING: 3>
+S18 LMB dt=0.017 z= 221.7 vz= -88.9 pos=0.421 mode=<MovementMode.MOVE_FALLING: 3>
+S18 LMB dt=0.016 z= 220.1 vz=-105.2 pos=0.441 mode=<MovementMode.MOVE_FALLING: 3>
+S18 LMB dt=0.017 z= 218.2 vz=-121.5 pos=0.461 mode=<MovementMode.MOVE_FALLING: 3>
+S18 LMB dt=0.016 z= 215.9 vz=-138.3 pos=0.482 mode=<MovementMode.MOVE_FALLING: 3>
+S18 LMB dt=0.018 z= 213.5 vz=-154.6 pos=0.502 mode=<MovementMode.MOVE_FALLING: 3>
+S18 LMB dt=0.016 z= 210.7 vz=-171.5 pos=-1.000 mode=<MovementMode.MOVE_FALLING: 3>
+S18 AKHIR LMB: naik 29.0 cm dari mulai, z puncak 225.7, posisi montage terakhir 0.502
+---

@@ -1,0 +1,12 @@
+fix(air): lompat+LMB tidak lagi terlalu tinggi
+
+Umpan balik: "lompat + lmb ternyata jadi tinggi banget, tidak realistis".
+Dua penyebab menumpuk:
+- klip air masih membawa lompatan 64,5 cm di tulang root (kepala sampai 192,9 cm)
+- JDGA_LightAttack::StartAirHang menolkan kecepatan jatuh dan gravitasi x0,1 selama 0,3 s
+
+- inplace_ue: RATAKAN air = (True, True, True) -> kepala 118,5-192,9 jadi 115,5-146,8 cm
+- profil: air_hang_time 0,30 -> 0,10 s; air_hang_gravity_scale 0,1 -> 0,6
+- HANYA (filter peran) + unreal.load_asset: EditorAssetLibrary kosong setelah editor dibuka ulang
+- cek_retarget dan export_motion: pakai registry langsung / unreal.load_asset
+- cek_retarget 11/11, combat_motion.json 11 animasi (193 KB)

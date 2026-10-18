@@ -117,7 +117,7 @@
       "kena": null,
       "gagal": [],
       "catatan": [
-        "tidak In Place: pinggul geser 383.4 cm (dx 0.4, dy -383.4)"
+        "tidak In Place: pinggul geser 82.9 cm (dx 73.3, dy -38.6)"
       ],
       "armature_count": 1,
       "mesh_count": 0,
@@ -204,13 +204,13 @@
       "action_jumlah": 1,
       "action_nama": "Armature|mixamo.com|Layer0",
       "frame_awal": 1.0,
-      "frame_akhir": 81.0,
-      "frame_jumlah": 81,
-      "detik": 2.667,
-      "geser_pinggul_cm": 383.42,
+      "frame_akhir": 72.0,
+      "frame_jumlah": 72,
+      "detik": 2.367,
+      "geser_pinggul_cm": 82.88,
       "geser_xy_cm": [
-        0.44,
-        -383.42
+        73.33,
+        -38.62
       ],
       "in_place": false,
       "lulus": true,
@@ -432,7 +432,7 @@
       "gagal": [],
       "catatan": [],
       "armature_count": 1,
-      "mesh_count": 0,
+      "mesh_count": 2,
       "tulang_jumlah": 65,
       "tulang_contoh": [
         "mixamorig:Hips",
@@ -516,9 +516,9 @@
       "action_jumlah": 1,
       "action_nama": "Armature|mixamo.com|Layer0",
       "frame_awal": 1.0,
-      "frame_akhir": 51.0,
-      "frame_jumlah": 51,
-      "detik": 1.667,
+      "frame_akhir": 44.0,
+      "frame_jumlah": 44,
+      "detik": 1.433,
       "geser_pinggul_cm": 0.0,
       "geser_xy_cm": [
         0.0,

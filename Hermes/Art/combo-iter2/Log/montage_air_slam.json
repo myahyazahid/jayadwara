@@ -1,0 +1,80 @@
+{
+  "montages": [
+    {
+      "peran": "air_slam",
+      "montage": "/Game/Hermes/ComboIter2/Montages/AM_Hermes_air_slam",
+      "animasi": "/Game/Hermes/ComboIter2/Mixamo/A_Aksa_Mx_air_slam",
+      "panjang_s": 0.633,
+      "blend": [
+        0.08,
+        0.2
+      ],
+      "laju": 1.0,
+      "hit": [
+        {
+          "tulang": "foot_r",
+          "mulai": 0.4,
+          "durasi": 0.18
+        }
+      ],
+      "combo": null
+    }
+  ],
+  "profil": {
+    "light_combo": [
+      "AM_Hermes_light_01",
+      "AM_Hermes_light_02",
+      "AM_Hermes_light_03",
+      "AM_Hermes_light_04"
+    ],
+    "lunge_attack": {
+      "montage": "AM_Hermes_lunge",
+      "move_height": 60.0,
+      "move_duration": 0.35
+    },
+    "back_attack": {
+      "montage": "AM_Hermes_back",
+      "move_height": 0.0,
+      "move_duration": 0.2
+    },
+    "heavy_attack": {
+      "montage": "AM_Aksa_Heavy",
+      "move_height": 0.0,
+      "move_duration": 0.2
+    },
+    "air_attack": {
+      "montage": "AM_Hermes_air",
+      "move_height": 0.0,
+      "move_duration": 0.2
+    },
+    "air_slam": {
+      "montage": "AM_Hermes_air_slam",
+      "move_height": 0.0,
+      "move_duration": 0.2
+    },
+    "heavy_finishers": [
+      {
+        "montage": "AM_Hermes_finisher_01",
+        "play_rate": 1.25
+      },
+      {
+        "montage": "AM_Hermes_finisher_02_v2",
+        "play_rate": 1.25
+      },
+      {
+        "montage": "AM_Hermes_finisher_03",
+        "play_rate": 1.15
+      }
+    ],
+    "dodge_montages": {
+      "forward": null,
+      "backward": null,
+      "left": null,
+      "right": null
+    },
+    "parry_montages": [],
+    "parry_montage_rate": 1.0,
+    "montage_play_rate": 1.0
+  },
+  "level": "dibuat oleh combo_iter2_level.py"
+}

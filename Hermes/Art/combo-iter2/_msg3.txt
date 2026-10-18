@@ -1,0 +1,13 @@
+fix(air): transisi lompat -> tendangan lebih mulus
+
+Klip air 1,5 s: tendangan 0-0,55 s lalu 0,65 s recovery diam, ditambah blend_in
+0,05 s dari pose lompat -> terasa kaku/nyentak saat lompat + LMB.
+
+- pangkas air jadi 0,00-0,90 s (0,867 s, 26 frame @30 fps) supaya montage selesai
+  tepat setelah tendangan lalu blend balik ke state lompat/jatuh
+- blend_in 0,05 -> 0,15 s dan blend_out 0,22 -> 0,30 s khusus peran air
+- jendela combo ikut ekor baru: 0,32-0,85 s; hantaman 0,51 s klip (0,43 s nyata)
+- tune.py: PROFIL_TETAP menulis air_slam_speed/recovery + air_hang_time/gravity
+  agar penyetelan tidak hilang saat setup.py dijalankan ulang
+- pangkas.py: HANYA = {"air"} supaya klip yang sudah dipangkas tidak dipotong lagi
+- cek_retarget 11/11 lulus; laporan bagian "Umpan balik 5"
