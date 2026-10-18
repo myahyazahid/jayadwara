@@ -7,6 +7,7 @@
 #include "Abilities/Tasks/AbilityTask_PlayMontageAndWait.h"
 #include "Combat/JDCombatComponent.h"
 #include "Combat/JDCombatProfile.h"
+#include "Combat/JDTargetingComponent.h"
 #include "Engine/World.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -112,7 +113,13 @@ const FJDAttackStep* UJDGA_LightAttack::ChooseOpener()
 	{
 		return nullptr;
 	}
-	AActor* Target = Combat->FindNearestTarget(Profile->TargetSearchRadius);
+	// Soft target searah input (Iterasi 4); tidak ada (mis. input menjauhi musuh) = terdekat, untuk pukul mundur.
+	const UJDTargetingComponent* Targeting = Avatar->FindComponentByClass<UJDTargetingComponent>();
+	AActor* Target = Targeting ? Targeting->FindTarget(Input) : nullptr;
+	if (!Target)
+	{
+		Target = Combat->FindNearestTarget(Profile->TargetSearchRadius);
+	}
 	if (!Target)
 	{
 		return nullptr;
@@ -238,6 +245,11 @@ void UJDGA_LightAttack::PlayAttack(const FJDAttackStep& Step, bool bFaceInput)
 	if (bFaceInput)
 	{
 		FaceInputDirection();
+		// Pukulan "menempel" ke soft target; langkah yang punya gerak sendiri (terjang/mundur) tidak di-warp.
+		if (FMath::IsNearlyZero(Step.MoveDistance) && !bAirMode)
+		{
+			WarpToSoftTarget();
+		}
 	}
 	Combat->BeginAttack(Step);
 	Combat->SetLightComboStep(ComboIndex);

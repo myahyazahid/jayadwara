@@ -1,0 +1,806 @@
+<title>Tameng Inten Jayadwara</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@600;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: panggung 3D (musuh vs Jayadwara + gedung) + jalur waktu di kiri, skenario & rencana di kanan; rencana lengkap di bawah. Gaya sama dengan "Latihan Parry Aksa". */
+:root {
+  --bg: #eef0ee; --panel: #f8f9f7; --ink: #1d2422; --muted: #5d6865; --line: #cdd3cf;
+  --stage: #e3e7e4; --bone: #8e2a22; --dummy: #7d8784; --gold: #b07a12; --hit: #b8402e; --move: #2f6b8a;
+  --parry: #2f7d5b; --iframe: #6b5aa6; --fire: #d9661c; --shard: #c9900f; --bldg: #b9c1bd;
+  --console: rgba(20, 26, 24, .82); --console-ink: #dfe7e3;
+  --font-display: "Saira Condensed", "Arial Narrow", sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #161b1a; --panel: #1e2523; --ink: #e6ebe8; --muted: #9aa6a2; --line: #34403c;
+  --stage: #121716; --bone: #e0705f; --dummy: #7f8b87; --gold: #e0ad48; --hit: #e57a63; --move: #6fb0d2;
+  --parry: #6cc59a; --iframe: #a597e0; --fire: #ff9a4a; --shard: #ffd27a; --bldg: #3c4945;
+  --console: rgba(8, 11, 10, .85); color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #161b1a; --panel: #1e2523; --ink: #e6ebe8; --muted: #9aa6a2; --line: #34403c;
+  --stage: #121716; --bone: #e0705f; --dummy: #7f8b87; --gold: #e0ad48; --hit: #e57a63; --move: #6fb0d2;
+  --parry: #6cc59a; --iframe: #a597e0; --fire: #ff9a4a; --shard: #ffd27a; --bldg: #3c4945;
+  --console: rgba(8, 11, 10, .85); color-scheme: dark }
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.5; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-block: 24px 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 18px; }
+h1 { font: 800 clamp(30px, 5vw, 44px)/1 var(--font-display); text-transform: uppercase; margin: 0; text-wrap: balance; }
+.eyebrow { font: 12px var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--gold); }
+.lead { color: var(--muted); max-width: 72ch; margin: 0; }
+.layout { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 16px; align-items: start; }
+@media (max-width: 820px) { .layout { grid-template-columns: minmax(0, 1fr); } }
+.main { display: grid; gap: 12px; min-width: 0; }
+.stage { position: relative; background: var(--stage); border: 1px solid var(--line); border-radius: 6px; aspect-ratio: 16 / 10; max-width: 100%; overflow: hidden; user-select: none; -webkit-user-select: none; }
+.stage canvas { display: block; width: 100%; height: 100%; touch-action: none; cursor: grab; }
+.hud { position: absolute; left: 12px; top: 10px; right: 12px; display: flex; justify-content: space-between; gap: 8px; pointer-events: none; align-items: start; }
+.hud b { font: 800 22px var(--font-display); text-transform: uppercase; }
+.hud .right { display: grid; gap: 4px; justify-items: end; }
+.state { font: 12px var(--font-mono); padding: 2px 8px; border-radius: 999px; background: var(--panel); border: 1px solid var(--line); white-space: nowrap; }
+.state.hit { color: var(--hit); border-color: var(--hit); }
+.state.parry { color: var(--parry); border-color: var(--parry); }
+.state.block { color: var(--move); border-color: var(--move); }
+.state.iframe { color: var(--iframe); border-color: var(--iframe); }
+.state.slow, .state.shield { color: var(--gold); border-color: var(--gold); }
+.bars { display: grid; gap: 3px; width: 180px; }
+.bar { display: grid; grid-template-columns: 34px 1fr 26px; gap: 6px; align-items: center; font: 11px var(--font-mono); color: var(--muted); }
+.bar .track { height: 6px; background: var(--panel); border: 1px solid var(--line); border-radius: 3px; overflow: hidden; }
+.bar .fill { height: 100%; transition: width .12s; }
+.bar .num { text-align: right; font-variant-numeric: tabular-nums; }
+.keping { display: grid; grid-template-columns: 34px 1fr 26px; gap: 6px; align-items: center; font: 11px var(--font-mono); color: var(--muted); }
+.keping .pips { display: flex; gap: 2px; flex-wrap: wrap; }
+.keping .pips i { width: 4px; height: 4px; transform: rotate(45deg); background: var(--shard); }
+.keping .pips i.off { background: var(--line); }
+.bang { position: absolute; transform: translate(-50%, -100%); font: 800 34px/1 var(--font-display); color: var(--hit); pointer-events: none; text-shadow: 0 0 6px var(--stage); }
+.console { position: absolute; left: 10px; bottom: 10px; right: 10px; max-width: 540px; background: var(--console); color: var(--console-ink);
+  border-radius: 4px; padding: 6px 9px; font: 12px/1.45 var(--font-mono); pointer-events: none; display: grid; gap: 1px; font-variant-numeric: tabular-nums; }
+.console .cmd { color: #9fb0aa; }
+.console .k-parry { color: #7fe0ae; } .console .k-block { color: #8cc8e8; } .console .k-hit { color: #f39a85; }
+.console .k-dodge { color: #c2b6f2; } .console .k-gb { color: #f39a85; } .console .k-info { color: #e9c77a; } .console .k-shield { color: #ffd27a; }
+.desc { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 12px 14px; display: grid; gap: 6px; }
+.desc h2 { margin: 0; font: 800 22px var(--font-display); text-transform: uppercase; }
+.desc p { margin: 0; }
+.kbd { font: 500 12px var(--font-mono); padding: 1px 7px; border: 1px solid var(--line); border-bottom-width: 2.5px; border-radius: 4px; background: var(--bg); white-space: nowrap; }
+.meta { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 13px; color: var(--muted); }
+.lanes { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 4px 8px; align-items: center; font: 12px var(--font-mono); color: var(--muted); }
+.lane { position: relative; height: 18px; background: var(--panel); border: 1px solid var(--line); border-radius: 3px; overflow: hidden; }
+.lane i { position: absolute; top: 0; bottom: 0; opacity: .8; }
+.lane.keys { overflow: visible; background: transparent; border-color: transparent; }
+.lane.keys span { position: absolute; top: 0; transform: translateX(-1px); border-left: 2px solid var(--ink); padding-left: 3px; font-size: 11px; color: var(--ink); white-space: nowrap; line-height: 18px; }
+.lane .head { position: absolute; top: -2px; bottom: -2px; width: 2px; background: var(--ink); opacity: 1; }
+.c-warn { background: var(--gold); } .c-hit { background: var(--hit); } .c-parry { background: var(--parry); }
+.c-block { background: var(--move); } .c-iframe { background: var(--iframe); } .c-fire { background: var(--fire); } .c-shield { background: var(--shard); }
+.side { display: grid; gap: 14px; }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 12px; display: grid; gap: 10px; align-content: start; }
+.panel h3 { margin: 0; font: 600 13px var(--font-mono); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+.list { display: grid; gap: 4px; }
+.group { font: 12px var(--font-mono); color: var(--muted); margin-top: 6px; }
+button { font: 600 14px var(--font-body); border: 1.5px solid var(--ink); background: var(--panel); color: var(--ink); border-radius: 4px; padding: 6px 12px; cursor: pointer; }
+button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.list button { text-align: left; border-width: 1px; border-color: var(--line); display: flex; justify-content: space-between; gap: 8px; }
+.list button small { font: 12px var(--font-mono); opacity: .7; white-space: nowrap; }
+.list button.try { border-color: var(--shard); border-width: 1.5px; }
+.row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+input[type=range] { width: 100%; accent-color: var(--gold); }
+.mono { font: 13px var(--font-mono); }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 12px; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 5px; }
+.sw { width: 12px; height: 8px; border-radius: 2px; display: inline-block; }
+.note { font-size: 13px; color: var(--muted); margin: 0; }
+.try-ui { display: grid; gap: 10px; }
+.try-ui[hidden], .play-ui[hidden] { display: none; }
+.guard-btn { width: 100%; padding: 14px; font: 800 20px var(--font-display); text-transform: uppercase; letter-spacing: .04em; touch-action: none; user-select: none; -webkit-user-select: none; }
+.guard-btn.down { background: var(--shard); border-color: var(--shard); color: #1d2422; }
+.tally { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; font: 13px var(--font-mono); }
+.dots { display: flex; gap: 4px; }
+.dots i { width: 14px; height: 14px; border-radius: 50%; border: 1px solid var(--line); background: var(--panel); }
+.dots i.parry { background: var(--parry); border-color: var(--parry); }
+.dots i.block { background: var(--shard); border-color: var(--shard); }
+.dots i.hit, .dots i.gb { background: var(--hit); border-color: var(--hit); }
+/* Rencana */
+.plan { display: grid; gap: 14px; }
+.plan h2 { font: 800 30px/1 var(--font-display); text-transform: uppercase; margin: 0; }
+.plan-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; }
+.plan .panel p, .plan .panel li { font-size: 14px; }
+.plan ul, .plan ol { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+.tbl { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th, td { text-align: left; padding: 5px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font: 600 12px var(--font-mono); color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+td.n { font-family: var(--font-mono); font-size: 12px; font-variant-numeric: tabular-nums; }
+code { font: 12px var(--font-mono); }
+@media (prefers-reduced-motion: reduce) { .bar .fill { transition: none; } }
+</style>
+
+<div class="wrap">
+  <div>
+    <div class="eyebrow">Usulan · Jayadwara · Iterasi 3 raksasa + mekanik baru</div>
+    <h1>Tameng Inten</h1>
+  </div>
+  <p class="lead">Jayadwara bertahan dengan dua cara. Pukulan fisik ditangkis lengan, sama seperti Aksa. Serangan kekuatan (bola api, sinar, semburan) tidak bisa ditangkis lengan: permata di dada menyala dan melepas keping-keping berlian bercahaya yang menyatu jadi perisai belah ketupat, lalu kembali ke permata dan padam. Tombolnya tetap satu, yaitu tangkis.</p>
+
+  <div class="layout">
+    <div class="main">
+      <div class="stage" id="stage">
+        <canvas id="cv" aria-label="Panggung 3D musuh dan Jayadwara"></canvas>
+        <div class="hud">
+          <b id="hud-title"></b>
+          <div class="right">
+            <span class="state" id="hud-state">—</span>
+            <div class="bars">
+              <div class="bar"><span>HP</span><span class="track"><span class="fill" id="hp-fill" style="background:var(--hit)"></span></span><span class="num" id="hp-num">100</span></div>
+              <div class="bar"><span>SYNC</span><span class="track"><span class="fill" id="sy-fill" style="background:var(--move)"></span></span><span class="num" id="sy-num">100</span></div>
+              <div class="keping"><span>INTEN</span><span class="pips" id="pips"></span><span class="num" id="kp-num" style="text-align:right">16</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="bang" id="bang" hidden>!</div>
+        <div class="console" id="console"></div>
+      </div>
+
+      <div class="desc">
+        <h2 id="d-title"></h2>
+        <div class="meta" id="d-meta"></div>
+        <p id="d-text"></p>
+      </div>
+
+      <div class="play-ui"><div class="lanes" id="lanes"></div></div>
+
+      <div class="try-ui panel" id="try-ui" hidden>
+        <button type="button" class="guard-btn" id="guard">Tahan untuk perisai</button>
+        <p class="note">Di keyboard: tahan <span class="kbd">Spasi</span> atau klik kanan panggung. Tekan dalam 0,25 s terakhir sebelum bola api kena = <b>pantul</b>. Ditahan lebih awal = perisai menyerap, keping berkurang 2. Keping pulih saat tombol dilepas.</p>
+        <div class="tally">
+          <span id="t-count">Pantul 0 / 0</span>
+          <div class="dots" id="t-dots" aria-label="10 serangan terakhir"></div>
+        </div>
+        <div class="row"><button type="button" id="t-reset">Ulang hitungan</button></div>
+      </div>
+    </div>
+
+    <div class="side">
+      <div class="panel">
+        <h3>Skenario</h3>
+        <div class="list" id="list"></div>
+      </div>
+      <div class="panel play-ui">
+        <h3>Putar</h3>
+        <div class="row">
+          <button type="button" id="play" aria-pressed="true">Jeda</button>
+          <button type="button" data-speed="0.25">0,25×</button>
+          <button type="button" data-speed="0.5" aria-pressed="true">0,5×</button>
+          <button type="button" data-speed="1">1×</button>
+        </div>
+        <input type="range" id="scrub" min="0" max="1000" value="0" aria-label="Posisi waktu">
+        <div class="mono" id="time">0,00 s</div>
+        <div class="legend">
+          <span><i class="sw c-warn"></i> aba-aba</span>
+          <span><i class="sw c-fire"></i> energi melayang</span>
+          <span><i class="sw c-hit"></i> kena</span>
+          <span><i class="sw c-parry"></i> jendela parry / pantul</span>
+          <span><i class="sw c-block"></i> tangkis lengan</span>
+          <span><i class="sw c-shield"></i> perisai</span>
+          <span><i class="sw c-iframe"></i> i-frame</span>
+        </div>
+      </div>
+      <p class="note">Stikman tidak diskalakan. Di game Jayadwara ±50 m, jadi gedung di belakangnya seukuran pinggang. Semua angka di bagian Tameng Inten masih usulan.</p>
+    </div>
+  </div>
+
+  <section class="plan" aria-labelledby="plan-h">
+    <h2 id="plan-h">Rencana</h2>
+    <div class="plan-grid">
+      <div class="panel">
+        <h3>Aturan main</h3>
+        <ul>
+          <li><b>Satu tombol.</b> Tangkis (<span class="kbd">RMB</span> / <span class="kbd">RT</span>) tetap tombolnya. Kalau yang datang serangan berlabel energi, yang keluar perisai. Kalau fisik, lengan yang menangkis.</li>
+          <li><b>Serap.</b> Ditahan sebelum energi tiba: keping menyatu dalam 0,25 s dan menyerap serangan tanpa damage. Kepingnya yang berkurang, bukan HP.</li>
+          <li><b>Pantul.</b> Ditekan dalam 0,25 s terakhir: keping langsung menyatu dan memantulkan proyektil ke pengirimnya, tanpa kehilangan keping. Sama dengan jendela parry raksasa.</li>
+          <li><b>Sinar ditahan.</b> Sinar tidak bisa dipantul. Selama ditahan, keping lepas satu per satu. Habis = perisai pecah, stagger 1,2 s, sisa sinar kena badan.</li>
+          <li><b>Pilihan kota.</b> Menghindar selalu aman untuk Jayadwara, tapi energi yang lolos menghantam gedung di belakangnya, jadi Sync turun. Perisai = cara melindungi kota.</li>
+          <li><b>Terbaca dari layar.</b> Sisa keping kelihatan dari jumlah berlian di perisai dan di HUD, bukan dari permata dada.</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>Angka usulan</h3>
+        <div class="tbl"><table>
+          <tr><th>Hal</th><th>Usulan</th></tr>
+          <tr><td>Jumlah keping</td><td class="n">16</td></tr>
+          <tr><td>Waktu menyatu</td><td class="n">0,25 s</td></tr>
+          <tr><td>Jendela pantul</td><td class="n">0,25 s, anti spam 0,5 s</td></tr>
+          <tr><td>Bola api diserap</td><td class="n">−2 keping</td></tr>
+          <tr><td>Sinar ditahan</td><td class="n">−1 keping tiap 0,15 s</td></tr>
+          <tr><td>Pulih</td><td class="n">1 keping / 1,5 s, 1 s setelah dilepas</td></tr>
+          <tr><td>Pecah</td><td class="n">stagger 1,2 s, penuh lagi 8 s</td></tr>
+          <tr><td>Arah</td><td class="n">depan 140°, sama tangkis</td></tr>
+          <tr><td>Stamina</td><td class="n">tidak dipakai</td></tr>
+          <tr><td>Tanpa perisai</td><td class="n">energi −15 HP</td></tr>
+        </table></div>
+        <p class="note">Perisai tidak memakai stamina supaya sumber dayanya satu dan terlihat (keping). Tangkis lengan tetap memakai stamina seperti Aksa.</p>
+      </div>
+      <div class="panel">
+        <h3>Bentuk & batas IP</h3>
+        <ul>
+          <li>Bentuk: belah ketupat besar dari 16 belah ketupat kecil, emas hangat seperti permata (bukan biru/putih), ada celah tipis antar keping. Belah ketupat = bentuk kalung pecahan arca Ki Zahid, jadi asalnya jelas.</li>
+          <li>Pose: tangan kiri terbuka ke depan, tangan kanan di sisi dada. <b>Tanpa silang lengan, tanpa pose L</b>, dan energi tidak keluar dari tangan.</li>
+          <li>Bukan dinding bulat atau heksagon transparan (barrier Ultra), dan tidak keluar dari lengan (Mebius Brace).</li>
+          <li>Permata dada menyala hanya selama perisai keluar, lalu padam. <b>Tidak berkedip</b> dan tidak dipakai menunjukkan sisa keping (K1, K6 di docs/14).</li>
+          <li>Aksa tidak punya perisai ini, walau kalungnya sama. Kekuatan permata baru keluar saat menjadi Jayadwara.</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>Masuk kapan</h3>
+        <ul>
+          <li><b>Bukan Fase 1.</b> Musuh Fase 1 (kerangka, Jerangkong) tidak punya serangan energi. Puing Jerangkong itu fisik, jadi cukup ditangkis atau di-parry.</li>
+          <li><b>Sekarang:</b> catat desainnya di <code>docs/07</code> (bagian Parry) dan backlog di <code>docs/23</code>.</li>
+          <li><b>Fase 2:</b> dibuat bersama musuh energi pertama. Kemamang Ep 6 (bola api) cocok untuk pantul, dan Banaspati Ep 10 bisa memakai sinar.</li>
+          <li>Iterasi 3 versi raksasa (tangkis & parry 0,25 s) sudah ada di kode dan tinggal uji tangan, sama dengan Aksa.</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>Kerja C++ (perkiraan)</h3>
+        <ul>
+          <li>Tag <code>Attack.Type.Energy</code> di serangan, dibaca <code>ResolveIncomingHit</code>, dengan hasil baru <code>ShieldAbsorbed</code>, <code>Reflected</code>, <code>ShieldBroken</code>.</li>
+          <li><code>UJDInsigniaShieldComponent</code>: jumlah keping, pulih, pecah, event ke HUD.</li>
+          <li><code>UJDGA_Block</code> bercabang: profil raksasa punya <code>bEnergyShield</code>. Data angka di <code>DA_CombatProfile_Giant</code>.</li>
+          <li><code>AJDEnergyProjectile</code> (bisa dipantul) dan <code>AJDEnergyBeam</code> (trace tiap tick, berhenti di perisai atau gedung).</li>
+          <li>Developer: Niagara keping dari socket permata, material emissive keping, SFX "kaca berdenting".</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function () {
+  // ---------------------------------------------------------------- rig konsep (sama dengan halaman Aksa)
+  var S = { root: [0, 0], ah: 0, ph: 86, yaw: 0, lean: 5, twist: 15, flip: 0, cart: 0,
+            lh: [10, 8, 26], rh: [-8, 4, 18], lf: [-14, 0, 16], rf: [14, 0, -16] };
+  function K(t, o) { var k = { t: t }; for (var n in o) k[n] = o[n]; return k; }
+  function M() { var o = {}; for (var i = 0; i < arguments.length; i++) for (var n in arguments[i]) o[n] = arguments[i][n]; return o; }
+
+  var BLOCK = { lh: [8, 24, 20], rh: [-8, 24, 20], lean: 8, twist: 5 };
+  var TEPIS = { twist: -22, lean: 4, lh: [28, 22, 30], lpole: [-1, 0.3, 0], rh: [-8, 12, 16] };
+  var REEL = { lean: -26, twist: -22, ph: 84, rh: [-22, 34, -6], lh: [22, 30, -6], rf: [14, 0, -32] };
+  var SHIELD = { lh: [14, 20, 42], rh: [-10, 6, 14], lean: 6, twist: 10, lf: [-14, 0, 22], rf: [14, 0, -22] };
+
+  // musuh: pukulan dekat
+  var D_PUNCH = [K(0, {}), K(0.45, { twist: -40, lean: -6, ph: 80, rh: [-14, -4, -10], lh: [14, 8, 30] }),
+    K(0.56, { root: [0, 40], twist: 45, lean: 12, ph: 82, rh: [-18, 6, 56], lf: [-14, 0, 40], rf: [14, 4, -20] }),
+    K(0.65, { root: [0, 40], twist: 45, lean: 12, ph: 82, rh: [-18, 6, 56], lf: [-14, 0, 40], rf: [14, 4, -20] }), K(1.05, {})];
+  // musuh: lempar bola api, lepas 0,58
+  var D_THROW = [K(0, {}), K(0.45, { twist: -45, lean: -8, ph: 80, rh: [-16, 34, -20], lh: [14, 8, 30] }),
+    K(0.58, { root: [0, 20], twist: 40, lean: 14, ph: 82, rh: [-14, 16, 58], lf: [-14, 0, 36], rf: [14, 2, -20] }),
+    K(0.85, { root: [0, 20], twist: 30, lean: 10, rh: [-14, 6, 40], lf: [-14, 0, 36], rf: [14, 2, -20] }), K(1.3, { root: [0, 20] })];
+  // musuh: sinar dari dua telapak, 0,62–1,8
+  var BEAMPOSE = { ph: 80, lean: 10, twist: 0, lh: [8, 14, 52], rh: [-8, 14, 52], lf: [-14, 0, 30], rf: [14, 0, -26] };
+  function dBeam(off) { return [K(0, {}), K(0.5, { ph: 80, lean: -6, twist: 0, lh: [18, -2, 8], rh: [-18, -2, 8] }), K(0.62, BEAMPOSE), K(off, BEAMPOSE), K(off + 0.4, {})]; }
+
+  var END = 2.4;
+  var FAR = { dummy: { x: 0, z: 0, yaw: 0 }, aksa: { x: 0, z: 420, yaw: 180 } };
+  var NEAR = { dummy: { x: 0, z: 0, yaw: 0 }, aksa: { x: 0, z: 130, yaw: 180 } };
+
+  var SC = [
+    { id: "tangkis", group: "Fisik · sama dengan Aksa", title: "Tangkis lengan", input: ["RMB", "tahan"], len: 2.0, base: NEAR,
+      text: "Pukulan fisik tetap ditangkis lengan, persis seperti Aksa: damage tinggal 20%, stamina −15. Permata tidak menyala dan perisai tidak keluar, karena ini bukan serangan kekuatan.",
+      lanes: { warn: [[0, 0.5]], hit: [[0.55, 0.65]], block: [[0.30, 1.2]] }, keys: [["RMB", 0.30]], hp: [[0.6, -2]],
+      log: [[0.6, "block", "TANGKIS fisik · −15 stamina"]],
+      dummy: D_PUNCH, aksa: [K(0, {}), K(0.30, {}), K(0.40, BLOCK), K(0.60, BLOCK), K(0.70, M(BLOCK, { root: [0, -30], lean: -4 })), K(1.2, M(BLOCK, { root: [0, -30] })), K(1.5, { root: [0, -30] }), K(2.0, { root: [0, -30] })] },
+    { id: "parry", group: "Fisik · sama dengan Aksa", title: "Parry raksasa", input: ["RMB"], len: 2.2, base: NEAR,
+      text: "Jendela parry raksasa 0,25 s (Aksa 0,2 s). Beku sesaat, tepisan, slow-mo, musuh stagger. Ini Iterasi 3 versi Jayadwara yang sudah ada di kode, tinggal uji tangan.",
+      lanes: { warn: [[0, 0.5]], hit: [[0.55, 0.65]], parry: [[0.45, 0.70]] }, keys: [["RMB", 0.45]],
+      slow: { at: 0.6, steps: [[0.12, 0.02, "BEKU"], [0.35, 0.35, "SLOW-MO 0,35×"]] }, spark: 0.6,
+      log: [[0.6, "parry", "PARRY   tekan 150 ms sebelum kena · jendela 250 ms"]],
+      dummy: D_PUNCH.slice(0, 4).concat([K(0.76, M(REEL, { root: [0, 16] })), K(1.3, { root: [0, 6], lean: -12, twist: -10 }), K(2.2, { root: [0, 6] })]),
+      aksa: [K(0, {}), K(0.45, {}), K(0.52, TEPIS), K(0.68, TEPIS), K(0.95, {}), K(2.2, {})] },
+
+    { id: "serap", group: "Energi · Tameng Inten", title: "Bola api diserap", input: ["RMB", "tahan"], len: END, base: FAR,
+      text: "Tangkis ditahan sebelum bola api datang. Permata dada menyala, 16 keping berlian terbang keluar dan menyatu jadi perisai dalam 0,25 s. Bola api pecah di perisai, HP utuh, keping berkurang 2. Saat dilepas, keping kembali ke permata dan permata padam.",
+      lanes: { warn: [[0, 0.5]], fire: [[0.58, 1.05]], shield: [[0.30, 1.6]] }, keys: [["RMB", 0.30]],
+      ball: { from: 0.58, hit: 1.05, res: "absorb" }, sh: { press: 0.30, off: 1.6, lose: [[1.05, 2]] },
+      log: [[1.05, "shield", "SERAP   bola api · −2 keping (14/16)"]],
+      dummy: D_THROW, aksa: [K(0, {}), K(0.30, {}), K(0.42, SHIELD), K(1.05, SHIELD), K(1.12, M(SHIELD, { root: [0, -18], lean: 0 })), K(1.6, M(SHIELD, { root: [0, -18] })), K(1.9, { root: [0, -18] }), K(END, { root: [0, -18] })] },
+
+    { id: "pantul", group: "Energi · Tameng Inten", title: "Bola api dipantul", input: ["RMB"], len: END, base: FAR,
+      text: "Tangkis ditekan 170 ms sebelum bola api kena, masuk jendela pantul 0,25 s. Keping langsung menyatu rapat dan bola api berbalik ke pengirimnya. Tidak ada keping yang hilang. Ini versi parry untuk serangan kekuatan.",
+      lanes: { warn: [[0, 0.5]], fire: [[0.58, 1.05], [1.05, 1.45]], parry: [[0.88, 1.13]], shield: [[0.88, 1.4]] }, keys: [["RMB", 0.88]],
+      ball: { from: 0.58, hit: 1.05, res: "reflect", back: 1.45 }, sh: { press: 0.88, fast: true, off: 1.4, flash: 1.05 },
+      slow: { at: 1.05, steps: [[0.12, 0.02, "BEKU"], [0.35, 0.35, "SLOW-MO 0,35×"]] },
+      log: [[1.05, "parry", "PANTUL  tekan 170 ms sebelum kena · jendela 250 ms"], [1.45, "info", "BALIK   bola api kena pengirim (−20 HP, stagger)"]],
+      dummy: D_THROW.slice(0, 4).concat([K(1.45, { root: [0, 20], twist: 30, lean: 10 }), K(1.6, M(REEL, { root: [0, -10] })), K(2.1, { root: [0, -20], lean: -10 }), K(END, { root: [0, -20] })]),
+      aksa: [K(0, {}), K(0.88, {}), K(0.95, SHIELD), K(1.4, SHIELD), K(1.7, {}), K(END, {})] },
+
+    { id: "telat", group: "Energi · Tameng Inten", title: "Telat, kena energi", input: ["RMB"], len: END, base: FAR,
+      text: "Tombol ditekan setelah bola api kena. Tangkis lengan tidak berguna melawan energi, jadi Jayadwara kena penuh (−15 HP). Perisai yang terlambat langsung ditarik lagi.",
+      lanes: { warn: [[0, 0.5]], fire: [[0.58, 1.05]], hit: [[1.05, 1.12]] }, keys: [["RMB", 1.12]],
+      ball: { from: 0.58, hit: 1.05, res: "hit" }, hp: [[1.05, -15]],
+      log: [[1.05, "hit", "KENA    energi −15 HP"], [1.12, "hit", "        tombol datang 70 ms setelah kena · telat"]],
+      dummy: D_THROW, aksa: [K(0, {}), K(1.03, {}), K(1.12, { root: [0, -40], lean: -22, twist: 18, rh: [-6, 10, 8] }), K(1.6, { root: [0, -40] }), K(END, { root: [0, -40] })] },
+
+    { id: "sinar", group: "Energi · Tameng Inten", title: "Sinar ditahan", input: ["RMB", "tahan"], len: 2.6, base: FAR,
+      text: "Sinar tidak bisa dipantul, hanya ditahan. Selama sinar menekan, keping lepas satu per satu dari pinggir (1 tiap 0,15 s) dan Jayadwara terdorong mundur. Sinar 1,2 s menghabiskan 8 keping. Gedung di belakang selamat.",
+      lanes: { warn: [[0, 0.62]], fire: [[0.62, 1.8]], shield: [[0.30, 2.0]] }, keys: [["RMB", 0.30]],
+      beam: { on: 0.62, off: 1.8 }, sh: { press: 0.30, off: 2.0, lose: [0.75, 0.9, 1.05, 1.2, 1.35, 1.5, 1.65, 1.8].map(function (x) { return [x, 1]; }) },
+      log: [[0.75, "shield", "SINAR   ditahan perisai"], [1.8, "shield", "SINAR   selesai · −8 keping (8/16) · gedung aman"]],
+      dummy: dBeam(1.8), aksa: [K(0, {}), K(0.30, {}), K(0.42, SHIELD), K(0.62, SHIELD), K(1.8, M(SHIELD, { root: [0, -60], lean: 14 })), K(2.0, M(SHIELD, { root: [0, -60] })), K(2.3, { root: [0, -60] }), K(2.6, { root: [0, -60] })] },
+
+    { id: "hindar", group: "Energi · Tameng Inten", title: "Sinar dihindari", input: ["Shift", "+", "A"], len: 2.6, base: FAR,
+      text: "Jayadwara cartwheel ke samping dan selamat, tapi sinar terus melaju dan menghancurkan gedung di belakangnya. Sync −10. Inilah alasan perisai ada: menghindar menyelamatkan diri, perisai menyelamatkan kota.",
+      lanes: { warn: [[0, 0.62]], fire: [[0.62, 1.8]], iframe: [[0.55, 0.80]] }, keys: [["Shift+A", 0.55]],
+      beam: { on: 0.62, off: 1.8, pass: true, bldgAt: 0.9 }, sync: [[0.9, -10]],
+      log: [[0.62, "dodge", "DODGE   i-frame aktif · sinar meleset"], [0.9, "hit", "GEDUNG  runtuh kena sinar · Sync −10"]],
+      dummy: dBeam(1.8), aksa: [K(0, {}), K(0.55, {}), K(0.60, { ph: 76, lean: 5, lh: [6, 46, 4], rh: [-6, 46, 4] }),
+        K(0.68, { ah: 40, root: [-170, 0], cart: 120, lh: [6, 46, 4], rh: [-6, 46, 4], lf: [-24, 30, 0], rf: [24, 30, 0] }),
+        K(0.77, { ah: 30, root: [-310, 0], cart: 250, lh: [6, 46, 4], rh: [-6, 46, 4], lf: [-24, 30, 0], rf: [24, 30, 0] }),
+        K(0.86, { ah: 0, root: [-390, 0], cart: 360, ph: 78 }), K(1.0, { root: [-390, 0], cart: 360 }), K(2.6, { root: [-390, 0], cart: 360 })] },
+
+    { id: "pecah", group: "Energi · Tameng Inten", title: "Perisai pecah", input: ["RMB", "tahan"], len: 2.8, base: FAR, k0: 5,
+      text: "Keping tinggal 5 dari serangan sebelumnya. Sinar menghabiskannya dalam 0,75 s, perisai pecah berhamburan, Jayadwara stagger 1,2 s dan sisa sinar kena badan. Mirip guard break, tapi sumber dayanya keping, bukan stamina.",
+      lanes: { warn: [[0, 0.62]], fire: [[0.62, 1.8]], shield: [[0.30, 1.35]], hit: [[1.35, 1.8]] }, keys: [["RMB", 0.30]],
+      beam: { on: 0.62, off: 1.8, brokeAt: 1.35 }, sh: { press: 0.30, lose: [[0.75, 1], [0.9, 1], [1.05, 1], [1.2, 1]], brk: 1.35 }, hp: [[1.5, -8], [1.7, -8]],
+      log: [[1.35, "gb", "PECAH   keping habis · stagger 1,2 s"], [1.7, "hit", "KENA    sisa sinar −16 HP"]],
+      dummy: dBeam(1.8), aksa: [K(0, {}), K(0.30, {}), K(0.42, SHIELD), K(1.35, M(SHIELD, { root: [0, -40], lean: 12 })), K(1.5, M(REEL, { root: [0, -80] })), K(2.3, { root: [0, -100], lean: -12, twist: -10 }), K(2.8, { root: [0, -100] })] }
+  ];
+
+  // ---------------------------------------------------------------- pose
+  var FIELDS = ["ah", "ph", "yaw", "lean", "twist", "flip", "cart"], VEC = ["root", "lh", "rh", "lf", "rf", "lpole", "rpole", "lkp", "rkp"];
+  function get(k, n) { return k[n] !== undefined ? k[n] : S[n]; }
+  function ease(x) { return x * x * (3 - 2 * x); }
+  function clamp01(x) { return Math.max(0, Math.min(1, x)); }
+  function sample(ks, t) {
+    var i = 0;
+    while (i < ks.length - 2 && t > ks[i + 1].t) i++;
+    var a = ks[i], b = ks[Math.min(i + 1, ks.length - 1)], span = b.t - a.t, u = span > 0 ? ease(clamp01((t - a.t) / span)) : 0, p = {};
+    if (t <= a.t) u = 0;
+    FIELDS.forEach(function (n) { var x = get(a, n), y = get(b, n); p[n] = x + (y - x) * u; });
+    VEC.forEach(function (n) {
+      var x = get(a, n), y = get(b, n);
+      if (!x && !y) return; x = x || y; y = y || x;
+      p[n] = x.map(function (v, j) { return v + (y[j] - v) * u; });
+    });
+    return p;
+  }
+  var V = THREE.Vector3;
+  function rotY(v, deg) { var a = deg * Math.PI / 180, c = Math.cos(a), s = Math.sin(a); return new V(v.x * c + v.z * s, v.y, -v.x * s + v.z * c); }
+  function ik(root, target, a, b, pole) {
+    var d = target.clone().sub(root), len = Math.min(d.length(), a + b - 0.5), dir = d.normalize();
+    var along = (a * a - b * b + len * len) / (2 * len), h = Math.sqrt(Math.max(0, a * a - along * along));
+    var perp = pole.clone().sub(dir.clone().multiplyScalar(pole.dot(dir))).normalize();
+    return { mid: root.clone().add(dir.clone().multiplyScalar(along)).add(perp.multiplyScalar(h)), end: root.clone().add(dir.multiplyScalar(len)) };
+  }
+  function solve(p) {
+    var O = new V(p.root ? p.root[0] : 0, 0, p.root ? p.root[1] : 0);
+    function body(x, y, z) { return O.clone().add(rotY(new V(x, y, z), p.yaw)); }
+    var pelvis = body(0, p.ph + p.ah, 0);
+    var l = p.lean * Math.PI / 180;
+    var up = rotY(rotY(new V(0, Math.cos(l), Math.sin(l)), -p.twist), p.yaw);
+    var fw = rotY(rotY(new V(0, -Math.sin(l), Math.cos(l)), -p.twist), p.yaw);
+    var rt = rotY(rotY(new V(1, 0, 0), -p.twist), p.yaw);
+    function tor(base, v) { return base.clone().add(rt.clone().multiplyScalar(v[0])).add(up.clone().multiplyScalar(v[1])).add(fw.clone().multiplyScalar(v[2])); }
+    var chest = pelvis.clone().add(up.clone().multiplyScalar(45)), neck = chest.clone().add(up.clone().multiplyScalar(8)),
+        head = neck.clone().add(up.clone().multiplyScalar(13));
+    var J = { pelvis: pelvis, chest: chest, neck: neck, head: head, gem: chest.clone().add(up.clone().multiplyScalar(-6)).add(fw.clone().multiplyScalar(9)) };
+    [["l", -1], ["r", 1]].forEach(function (sd) {
+      var s = sd[0], sign = sd[1];
+      var sh = chest.clone().add(rt.clone().multiplyScalar(18 * sign)).add(up.clone().multiplyScalar(-3));
+      var pole = p[s + "pole"] ? tor(new V(), p[s + "pole"]) : up.clone().multiplyScalar(-1).add(rt.clone().multiplyScalar(0.6 * sign)).add(fw.clone().multiplyScalar(-0.3));
+      var arm = ik(sh, tor(sh, p[s + "h"]), 28, 27, pole);
+      J[s + "sh"] = sh; J[s + "el"] = arm.mid; J[s + "ha"] = arm.end;
+      var hip = pelvis.clone().add(rotY(new V(10 * sign, -4, 0), p.yaw));
+      var f = p[s + "f"], foot = body(f[0], f[1] + p.ah, f[2]);
+      var kp = p[s + "kp"] ? rotY(new V(p[s + "kp"][0] * sign, p[s + "kp"][1], p[s + "kp"][2]), p.yaw) : rotY(new V(0.15 * sign, 0, 1), p.yaw);
+      var leg = ik(hip, foot, 44, 44, kp);
+      J[s + "hip"] = hip; J[s + "kn"] = leg.mid; J[s + "an"] = leg.end;
+      var shin = leg.end.clone().sub(leg.mid).normalize();
+      var toeDir = f[1] > 18 ? shin : rotY(new V(0, -0.2, 1), p.yaw).normalize();
+      J[s + "to"] = leg.end.clone().add(toeDir.multiplyScalar(14));
+    });
+    if (p.flip || p.cart) {
+      var piv = pelvis.clone(), ax = rotY(new V(1, 0, 0), p.yaw), az = rotY(new V(0, 0, 1), p.yaw);
+      Object.keys(J).forEach(function (k) { J[k] = J[k].clone().sub(piv).applyAxisAngle(ax, p.flip * Math.PI / 180).applyAxisAngle(az, p.cart * Math.PI / 180).add(piv); });
+    }
+    return J;
+  }
+  function solveAt(p, base) {
+    var q = M(p), r = p.root || [0, 0], w = rotY(new V(r[0], 0, r[1]), base.yaw);
+    q.yaw = p.yaw + base.yaw; q.root = [base.x + w.x, base.z + w.z];
+    return solve(q);
+  }
+  var LINKS = [["pelvis", "chest"], ["chest", "neck"], ["lsh", "rsh"], ["lsh", "lel"], ["lel", "lha"], ["rsh", "rel"], ["rel", "rha"],
+    ["lhip", "rhip"], ["lhip", "lkn"], ["lkn", "lan"], ["lan", "lto"], ["rhip", "rkn"], ["rkn", "ran"], ["ran", "rto"]];
+  var JOINTS = ["pelvis", "chest", "neck", "lsh", "rsh", "lel", "rel", "lha", "rha", "lhip", "rhip", "lkn", "rkn", "lan", "ran", "lto", "rto", "head"];
+  var ARM_R = { rsh: 1, rel: 1, rha: 1 }, ARMS = { lsh: 1, lel: 1, lha: 1, rsh: 1, rel: 1, rha: 1 };
+
+  // ---------------------------------------------------------------- 3D
+  function css(n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim() || "#888"; }
+  var C;
+  function colors() { C = {}; ["bone", "dummy", "hit", "line", "move", "parry", "iframe", "gold", "fire", "shard", "bldg"].forEach(function (n) { C[n] = new THREE.Color(css("--" + n)); }); C.white = new THREE.Color("#fff6dc"); }
+  var stage = document.getElementById("stage"), canvas = document.getElementById("cv");
+  var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  var scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(38, 16 / 10, 1, 8000);
+  var actors = {}, spark, gem, ball, beam, shards = [], bldgs = [];
+  var NK = 16, G = 24, SLOT = [], ORDER = [];
+  for (var a = 0; a < 4; a++) for (var b = 0; b < 4; b++) { var u = (a - 1.5) * G, v = (b - 1.5) * G; SLOT.push([(u - v) / Math.SQRT2, (u + v) / Math.SQRT2]); }
+  ORDER = SLOT.map(function (s, i) { return i; }).sort(function (i, j) { return Math.hypot(SLOT[j][0], SLOT[j][1]) - Math.hypot(SLOT[i][0], SLOT[i][1]) || i - j; });
+
+  function makeActor() {
+    var a = { joints: {}, segs: [] };
+    JOINTS.forEach(function (b) {
+      var g = b === "head" ? new THREE.SphereGeometry(11, 18, 12) : new THREE.SphereGeometry(b === "lha" || b === "rha" ? 5.5 : 4, 12, 8);
+      var mesh = new THREE.Mesh(g, new THREE.MeshBasicMaterial({ color: C.bone })); scene.add(mesh); a.joints[b] = mesh;
+    });
+    LINKS.forEach(function (l) {
+      var g = new THREE.CylinderGeometry(2.8, 2.8, 1, 8); g.translate(0, 0.5, 0); g.rotateX(Math.PI / 2);
+      var mesh = new THREE.Mesh(g, new THREE.MeshBasicMaterial({ color: C.bone })); scene.add(mesh); a.segs.push({ a: l[0], b: l[1], m: mesh });
+    });
+    return a;
+  }
+  function diamondGeo(s) { var g = new THREE.PlaneGeometry(s, s); g.rotateZ(Math.PI / 4); return g; }
+  function build() {
+    colors();
+    while (scene.children.length) scene.remove(scene.children[0]);
+    scene.add(new THREE.GridHelper(1600, 32, C.line, C.line));
+    actors.dummy = makeActor(); actors.aksa = makeActor();
+    spark = new THREE.Mesh(new THREE.RingGeometry(0.7, 1, 32), new THREE.MeshBasicMaterial({ color: C.gold, transparent: true, side: THREE.DoubleSide }));
+    spark.visible = false; scene.add(spark);
+    gem = new THREE.Mesh(diamondGeo(9), new THREE.MeshBasicMaterial({ color: C.gold, side: THREE.DoubleSide, transparent: true })); scene.add(gem);
+    ball = new THREE.Mesh(new THREE.SphereGeometry(13, 16, 12), new THREE.MeshBasicMaterial({ color: C.fire })); ball.visible = false; scene.add(ball);
+    var bg = new THREE.CylinderGeometry(8, 8, 1, 12); bg.translate(0, 0.5, 0); bg.rotateX(Math.PI / 2);
+    beam = new THREE.Mesh(bg, new THREE.MeshBasicMaterial({ color: C.fire, transparent: true, opacity: 0.85 })); beam.visible = false; scene.add(beam);
+    shards = [];
+    for (var i = 0; i < NK; i++) {
+      var g = diamondGeo(G * 0.86);
+      var m = new THREE.Mesh(g, new THREE.MeshBasicMaterial({ color: C.shard, transparent: true, opacity: 0.6, side: THREE.DoubleSide, depthWrite: false }));
+      var e = new THREE.LineSegments(new THREE.EdgesGeometry(g), new THREE.LineBasicMaterial({ color: C.shard, transparent: true }));
+      m.add(e); m.visible = false; scene.add(m); shards.push({ m: m, e: e });
+    }
+    bldgs = [[-150, 640, 60, 70], [0, 680, 70, 100], [150, 650, 55, 60], [-60, 760, 50, 80], [90, 780, 60, 50]].map(function (d) {
+      var g = new THREE.BoxGeometry(d[2], d[3], d[2]); g.translate(0, d[3] / 2, 0);
+      var m = new THREE.Mesh(g, new THREE.MeshBasicMaterial({ color: C.bldg }));
+      var e = new THREE.LineSegments(new THREE.EdgesGeometry(g), new THREE.LineBasicMaterial({ color: C.line }));
+      m.add(e); m.position.set(d[0], 0, d[1]); scene.add(m); return m;
+    });
+  }
+  function drawActor(a, J, base, hot) {
+    Object.keys(a.joints).forEach(function (b) { a.joints[b].position.copy(J[b]); a.joints[b].material.color = hot[b] || base; });
+    a.segs.forEach(function (s) {
+      var p = J[s.a], q = J[s.b]; s.m.position.copy(p); s.m.lookAt(q); s.m.scale.set(1, 1, Math.max(0.01, p.distanceTo(q)));
+      s.m.material.color = (hot[s.a] && hot[s.b]) ? hot[s.b] : base;
+    });
+  }
+  function paint(set, col) { var o = {}; for (var k in set) o[k] = col; return o; }
+  function allJoints(col) { var o = {}; JOINTS.forEach(function (j) { o[j] = col; }); return o; }
+  function setCyl(m, a, b) { m.visible = true; m.position.copy(a); m.lookAt(b); m.scale.set(1, 1, Math.max(0.01, a.distanceTo(b))); }
+
+  // Perisai: st = { form, fast, off, lostAt[16], flash }, waktu dalam "now"
+  function shieldFrame(J, Jd) {
+    var fwd = Jd.pelvis.clone().sub(J.pelvis); fwd.y = 0; fwd.normalize();
+    var upv = new V(0, 1, 0), rt = new V().crossVectors(upv, fwd).normalize();
+    var center = J.gem.clone().add(fwd.clone().multiplyScalar(52)).add(new V(0, 14, 0));
+    return { fwd: fwd, rt: rt, up: upv, center: center };
+  }
+  function drawShield(J, Jd, now, st) {
+    var active = st && st.form !== null && st.form !== undefined && now >= st.form;
+    var fr = shieldFrame(J, Jd), glow = 0;
+    shards.forEach(function (sh, idx) {
+      var i = ORDER.indexOf(idx), m = sh.m;
+      if (!active) { m.visible = false; return; }
+      var slot = SLOT[idx], tgt = fr.center.clone().add(fr.rt.clone().multiplyScalar(slot[0])).add(fr.up.clone().multiplyScalar(slot[1]));
+      var dur = st.fast ? 0.08 : 0.25, delay = (st.fast ? 0.002 : 0.008) * i;
+      var f = ease(clamp01((now - st.form - delay) / Math.max(0.05, dur - delay * 0.5)));
+      if (st.off !== null && st.off !== undefined && now >= st.off) f = Math.min(f, 1 - ease(clamp01((now - st.off - 0.006 * (NK - i)) / 0.25)));
+      var pos = J.gem.clone().lerp(tgt, f).add(fr.fwd.clone().multiplyScalar(Math.sin(Math.PI * f) * 12)).add(fr.rt.clone().multiplyScalar(slot[0] * 0.5 * Math.sin(Math.PI * f)));
+      var op = f, scl = 0.25 + 0.75 * f;
+      var lost = st.lostAt && st.lostAt[idx];
+      if (lost !== null && lost !== undefined && now >= lost) {
+        var g = clamp01((now - lost) / 0.5), out = tgt.clone().sub(fr.center).normalize();
+        pos = tgt.clone().add(out.multiplyScalar(g * 90)).add(fr.fwd.clone().multiplyScalar(-g * 30)).add(new V(0, -g * g * 70, 0));
+        op = 1 - g; scl = 1 - g * 0.4;
+        if (g >= 1) { m.visible = false; return; }
+      }
+      if (f <= 0.001) { m.visible = false; return; }
+      glow = Math.max(glow, f);
+      m.visible = true; m.position.copy(pos); m.lookAt(pos.clone().add(fr.fwd)); m.scale.set(scl, scl, scl);
+      var flash = st.flash !== undefined && now >= st.flash && now < st.flash + 0.2;
+      m.material.color = flash ? C.white : C.shard; m.material.opacity = 0.55 * op; sh.e.material.opacity = op;
+    });
+    // permata dada: menyala hanya selama perisai keluar, lalu padam (tidak berkedip)
+    gem.position.copy(J.gem); gem.lookAt(J.gem.clone().add(fr.fwd));
+    var s = 1 + glow * 0.9; gem.scale.set(s, s, s);
+    gem.material.color = glow > 0.05 ? C.white.clone().lerp(C.shard, 1 - glow) : C.gold;
+    gem.material.opacity = 0.75 + glow * 0.25;
+    return fr;
+  }
+
+  // ---------------------------------------------------------------- HUD
+  var bang = document.getElementById("bang"), con = document.getElementById("console"), hudState = document.getElementById("hud-state");
+  function setState(cls, text) { hudState.className = "state" + (cls ? " " + cls : ""); hudState.textContent = text; }
+  var pips = document.getElementById("pips"); pips.innerHTML = new Array(NK + 1).join("<i></i>");
+  function setBars(hp, sy, kp) {
+    hp = Math.max(0, Math.min(100, hp)); sy = Math.max(0, Math.min(100, sy));
+    document.getElementById("hp-fill").style.width = hp + "%"; document.getElementById("hp-num").textContent = Math.round(hp);
+    document.getElementById("sy-fill").style.width = sy + "%"; document.getElementById("sy-num").textContent = Math.round(sy);
+    document.getElementById("kp-num").textContent = kp;
+    pips.querySelectorAll("i").forEach(function (p, i) { p.className = i < kp ? "" : "off"; });
+  }
+  function showBang(J, on) {
+    if (!on) { bang.hidden = true; return; }
+    var p = J.head.clone().add(new V(0, 30, 0)).project(camera);
+    bang.hidden = false; bang.style.left = ((p.x + 1) / 2 * stage.clientWidth) + "px"; bang.style.top = ((1 - p.y) / 2 * stage.clientHeight) + "px";
+  }
+  function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;"); }
+  function renderConsole(lines, extra) {
+    var h = '<span class="cmd">&gt; JD.Debug.Parry 1' + (extra ? "   ·   " + esc(extra) : "") + "</span>";
+    lines.slice(-4).forEach(function (l) { h += '<span class="k-' + l[0] + '">' + esc(l[1]).replace(/ /g, "&nbsp;") + "</span>"; });
+    con.innerHTML = h;
+  }
+  function inAny(list, tt) { return (list || []).some(function (w) { return tt >= w[0] && tt <= w[1]; }); }
+  function sparkAt(pos, u, col) { var r = 8 + u * 50; spark.visible = true; spark.position.copy(pos); spark.lookAt(camera.position); spark.scale.set(r, r, r); spark.material.opacity = 1 - u; spark.material.color = col; }
+  function resetBldgs() { bldgs.forEach(function (b) { b.rotation.set(0, 0, 0); b.scale.set(1, 1, 1); b.material.color = C.bldg; }); }
+
+  // ---------------------------------------------------------------- mode putar
+  function fmt(x) { return x.toFixed(2).replace(".", ","); }
+  var mode = "play", cur = SC[0], t = 0, speed = 0.5, playing = true, slowState = null;
+  var yaw = 2.65, pitch = 0.22, dist = 900, target = new V(0, 95, 200);
+
+  function shieldState(s) {
+    if (!s.sh) return null;
+    var lostAt = new Array(NK).fill(null), k = 0, start = s.k0 !== undefined ? s.k0 : NK;
+    for (var i = 0; i < NK - start; i++) lostAt[ORDER[k++]] = -1;
+    (s.sh.lose || []).forEach(function (e) { for (var j = 0; j < e[1]; j++) if (k < NK) lostAt[ORDER[k++]] = e[0]; });
+    if (s.sh.brk !== undefined) while (k < NK) lostAt[ORDER[k++]] = s.sh.brk;
+    return { form: s.sh.press, fast: !!s.sh.fast, off: s.sh.off, lostAt: lostAt, flash: s.sh.flash };
+  }
+  function keping(st, now, k0) {
+    if (!st) return k0;
+    return st.lostAt.filter(function (x) { return x === null || x > now; }).length;
+  }
+
+  function playFrame(tt) {
+    var s = cur, L = s.lanes;
+    var Jd = solveAt(sample(s.dummy, tt), s.base.dummy), Ja = solveAt(sample(s.aksa, tt), s.base.aksa);
+    var dHot = inAny(L.hit, tt) && s.base === NEAR ? paint(ARM_R, C.hit) : {};
+    var aHot = {};
+    if (inAny(L.parry, tt) && !s.sh) aHot = paint(ARMS, C.parry);
+    else if (inAny(L.block, tt)) aHot = paint(ARMS, C.move);
+    else if (inAny(L.iframe, tt)) aHot = allJoints(C.iframe);
+    else if (inAny(L.hit, tt) && s.base === FAR) aHot = allJoints(C.hit);
+    var refl = s.ball && s.ball.res === "reflect" && tt >= s.ball.back && tt < s.ball.back + 0.5;
+    if (refl) dHot = allJoints(C.hit);
+    drawActor(actors.dummy, Jd, C.dummy, dHot); drawActor(actors.aksa, Ja, C.bone, aHot);
+    showBang(Jd, inAny(L.warn, tt) && Math.floor(tt / 0.1) % 2 === 0);
+    var st = shieldState(s), fr = drawShield(Ja, Jd, tt, st);
+    // bola api
+    ball.visible = false; spark.visible = false;
+    if (s.ball) {
+      var b = s.ball, from0 = solveAt(sample(s.dummy, b.from), s.base.dummy).rha;
+      var hitPos = st ? fr.center.clone() : Ja.chest.clone();
+      if (tt >= b.from && tt < b.hit) { ball.visible = true; ball.position.copy(from0.clone().lerp(hitPos, (tt - b.from) / (b.hit - b.from))); }
+      else if (b.res === "reflect" && tt >= b.hit && tt < b.back) { ball.visible = true; ball.position.copy(hitPos.clone().lerp(Jd.chest, (tt - b.hit) / (b.back - b.hit))); }
+      if (tt >= b.hit && tt < b.hit + 0.3 && b.res !== "reflect") sparkAt(hitPos, (tt - b.hit) / 0.3, C.fire);
+      if (b.res === "reflect" && tt >= b.hit && tt < b.hit + 0.25) sparkAt(hitPos, (tt - b.hit) / 0.25, C.shard);
+      if (b.res === "reflect" && tt >= b.back && tt < b.back + 0.3) sparkAt(Jd.chest, (tt - b.back) / 0.3, C.fire);
+    }
+    if (s.spark !== undefined && tt >= s.spark && tt < s.spark + 0.25) sparkAt(Jd.rha, (tt - s.spark) / 0.25, C.gold);
+    // sinar
+    beam.visible = false; resetBldgs();
+    if (s.beam && tt >= s.beam.on && tt <= s.beam.off) {
+      var src = Jd.lha.clone().add(Jd.rha).multiplyScalar(0.5), end;
+      var grow = clamp01((tt - s.beam.on) / 0.12);
+      if (s.beam.pass) end = new V(0, src.y * 0.8, 690);
+      else if (s.beam.brokeAt !== undefined && tt >= s.beam.brokeAt) end = Ja.chest.clone();
+      else end = fr.center.clone();
+      setCyl(beam, src, src.clone().lerp(end, grow));
+      beam.scale.x = beam.scale.y = 0.8 + 0.25 * Math.sin(tt * 60);
+      if (grow >= 1) sparkAt(end, (tt * 4) % 1, s.beam.pass ? C.fire : C.shard);
+    }
+    if (s.beam && s.beam.bldgAt !== undefined && tt >= s.beam.bldgAt) {
+      var g = clamp01((tt - s.beam.bldgAt) / 0.9), bb = bldgs[1];
+      bb.material.color = C.hit; bb.rotation.x = g * 0.5; bb.rotation.z = -g * 0.25; bb.scale.y = 1 - g * 0.6;
+    }
+    // HUD
+    var hp = 100, sy = 100;
+    (s.hp || []).forEach(function (e) { if (tt >= e[0]) hp += e[1]; });
+    (s.sync || []).forEach(function (e) { if (tt >= e[0]) sy += e[1]; });
+    var kp = keping(st, tt, s.k0 !== undefined ? s.k0 : NK);
+    setBars(hp, sy, kp);
+    if (slowState) setState("slow", slowState.label);
+    else if (s.beam && s.beam.brokeAt !== undefined && tt >= s.beam.brokeAt && tt < s.beam.brokeAt + 1.2) setState("hit", "PECAH · stagger");
+    else if (inAny(L.iframe, tt)) setState("iframe", "i-frame");
+    else if (inAny(L.parry, tt)) setState("parry", s.sh ? "jendela pantul" : "jendela parry");
+    else if (inAny(L.shield, tt)) setState("shield", "Tameng Inten");
+    else if (inAny(L.block, tt)) setState("block", "tangkis lengan");
+    else if (inAny(L.hit, tt)) setState("hit", "KENA");
+    else if (inAny(L.fire, tt)) setState("hit", "energi datang");
+    else if (inAny(L.warn, tt)) setState("hit", "aba-aba");
+    else setState("", "—");
+    renderConsole(s.log.filter(function (l) { return tt >= l[0]; }).map(function (l) { return [l[1], l[2]]; }), "contoh");
+    target.lerp(new V((Jd.pelvis.x + Ja.pelvis.x) / 2, 95, (Jd.pelvis.z + Ja.pelvis.z) / 2 + (s.base === FAR ? 60 : 0)), 0.08);
+  }
+  function lanesHtml(s) {
+    var L = s.len, l = s.lanes;
+    function bars(list, cls) { return (list || []).map(function (w) { return '<i class="' + cls + '" style="left:' + (w[0] / L * 100) + "%;width:" + ((w[1] - w[0]) / L * 100) + '%"></i>'; }).join(""); }
+    var h = '<span>Musuh</span><div class="lane">' + bars(l.warn, "c-warn") + bars(l.fire, "c-fire") + (s.base === NEAR ? bars(l.hit, "c-hit") : "") + '<i class="head"></i></div>';
+    h += '<span>Jayadwara</span><div class="lane">' + bars(l.shield, "c-shield") + bars(l.block, "c-block") + bars(l.parry, "c-parry") + bars(l.iframe, "c-iframe") + (s.base === FAR ? bars(l.hit, "c-hit") : "") + '<i class="head"></i></div>';
+    h += '<span>Tombol</span><div class="lane keys">' + s.keys.map(function (k) { return '<span style="left:' + (k[1] / L * 100) + '%">' + k[0] + "</span>"; }).join("") + '<i class="head"></i></div>';
+    return h;
+  }
+
+  // ---------------------------------------------------------------- mode coba sendiri: pantul bola api
+  var TRY = { cycle: 3.0, wind: 0.5, release: 0.58, impact: 1.05, window: 0.25, lockout: 0.5, form: 0.25 };
+  var tr;
+  function tryReset() {
+    tr = { clock: 0, held: false, pressAt: -9, lastPress: -9, windowUntil: -9, releaseAt: -9, k: NK, regenAt: 0, regenAcc: 0,
+           results: [], log: [], judged: -1, lostAt: new Array(NK).fill(null), flash: -9, refl: null, dReel: -9, aHurt: -9, stunUntil: -9, sy: 100, hp: 100, lateWatch: null };
+  }
+  tryReset();
+  function guardEl() { return document.getElementById("guard"); }
+  function press() {
+    if (mode !== "try" || tr.held || tr.clock < tr.stunUntil) return;
+    tr.held = true; guardEl().classList.add("down");
+    var now = tr.clock;
+    if (now - tr.lastPress >= TRY.lockout) tr.windowUntil = now + TRY.window;
+    else tr.log.push(["info", "        tekan ulang " + Math.round((now - tr.lastPress) * 1000) + " ms setelah sebelumnya · anti spam"]);
+    tr.pressAt = now; tr.lastPress = now; tr.releaseAt = null;
+    if (tr.lateWatch !== null && now - tr.lateWatch < 0.35) { tr.log.push(["hit", "        tombol datang " + Math.round((now - tr.lateWatch) * 1000) + " ms setelah kena · telat"]); tr.lateWatch = null; }
+  }
+  function release() { if (!tr || !tr.held) return; tr.held = false; tr.releaseAt = tr.clock; tr.regenAt = tr.clock + 1.0; guardEl().classList.remove("down"); }
+  function loseShards(n, at) { var c = 0; for (var i = 0; i < NK && c < n; i++) { var idx = ORDER[i]; if (tr.lostAt[idx] === null) { tr.lostAt[idx] = at; c++; } } tr.k = Math.max(0, tr.k - c); }
+  function judge(impactAt) {
+    var before = Math.round((impactAt - tr.pressAt) * 1000), res, txt;
+    if (tr.held && impactAt <= tr.windowUntil) {
+      res = "parry"; txt = "PANTUL  tekan " + before + " ms sebelum kena · jendela 250 ms";
+      tr.flash = tr.clock; tr.refl = tr.clock;
+      slowState = { steps: [[0.12, 0.02, "BEKU"], [0.35, 0.35, "SLOW-MO 0,35×"]], i: 0, left: 0.12, label: "BEKU" };
+    } else if (tr.held && tr.k > 0) {
+      loseShards(2, tr.clock);
+      if (tr.k <= 0) { res = "gb"; txt = "PECAH   keping habis · stagger 1,2 s"; tr.stunUntil = tr.clock + 1.2; tr.aHurt = tr.clock; release(); tr.regenAt = tr.clock + 8; }
+      else { res = "block"; txt = "SERAP   bola api · −2 keping (" + tr.k + "/16)" + (tr.windowUntil < tr.pressAt ? " · pantul diblok anti spam" : " · terlalu awal " + (before - 250) + " ms untuk pantul"); }
+    } else {
+      res = "hit"; tr.hp -= 15; tr.aHurt = tr.clock; txt = "KENA    energi −15 HP"; tr.lateWatch = tr.clock;
+      if (tr.hp <= 25) tr.hp = 100;
+    }
+    tr.results.push(res); tr.log.push([res === "gb" ? "gb" : res === "block" ? "shield" : res, txt]);
+    renderTally();
+  }
+  function renderTally() {
+    var last = tr.results.slice(-10), all = tr.results.filter(function (r) { return r === "parry"; }).length;
+    document.getElementById("t-count").textContent = "Pantul " + all + " / " + tr.results.length;
+    var d = ""; for (var i = 0; i < 10; i++) d += '<i class="' + (last[i] || "") + '"></i>';
+    document.getElementById("t-dots").innerHTML = d;
+  }
+  function tryFrame(dt) {
+    tr.clock += dt;
+    var now = tr.clock;
+    // pulih: keping yang hilang kembali satu per satu saat tombol dilepas
+    if (!tr.held && now >= tr.regenAt && tr.k < NK) {
+      tr.regenAcc += dt;
+      if (tr.regenAcc >= (tr.k === 0 ? 0.5 : 1.5)) { tr.regenAcc = 0; for (var i = NK - 1; i >= 0; i--) { var idx = ORDER[i]; if (tr.lostAt[idx] !== null) { tr.lostAt[idx] = null; tr.k++; break; } } }
+    }
+    var n = Math.floor(now / TRY.cycle), c = now - n * TRY.cycle;
+    if (c >= TRY.impact && tr.judged < n) { tr.judged = n; judge(n * TRY.cycle + TRY.impact); }
+    var dp = (tr.refl !== null && now - tr.refl >= 0.4 && now - tr.refl < 1.4) ? sample([K(0, {}), K(0.12, M(REEL, { root: [0, -10] })), K(0.7, { lean: -10 }), K(1.0, {})], now - tr.refl - 0.4) : sample(D_THROW, Math.min(c, 1.3));
+    var ap;
+    if (now - tr.aHurt < 0.6) ap = sample([K(0, {}), K(0.1, { root: [0, -30], lean: -22, twist: 18 }), K(0.6, {})], now - tr.aHurt);
+    else if (tr.held) ap = sample([K(0, SHIELD)], 0);
+    else ap = sample([K(0, {})], 0);
+    var Jd = solveAt(dp, FAR.dummy), Ja = solveAt(ap, FAR.aksa);
+    var hotD = tr.refl !== null && now - tr.refl >= 0.4 && now - tr.refl < 0.8 ? allJoints(C.hit) : {};
+    drawActor(actors.dummy, Jd, C.dummy, hotD); drawActor(actors.aksa, Ja, C.bone, now - tr.aHurt < 0.25 ? allJoints(C.hit) : {});
+    showBang(Jd, c < TRY.wind && Math.floor(c / 0.1) % 2 === 0);
+    var fast = tr.held && tr.windowUntil >= tr.pressAt && tr.windowUntil > now - 0.3;
+    var st = { form: tr.held || (tr.releaseAt !== null && now - tr.releaseAt < 0.5) ? tr.pressAt : null, fast: fast, off: tr.held ? null : tr.releaseAt, lostAt: tr.lostAt, flash: tr.flash };
+    var fr = drawShield(Ja, Jd, now, st);
+    ball.visible = false; spark.visible = false;
+    var cyc0 = n * TRY.cycle, rel = cyc0 + TRY.release, imp = cyc0 + TRY.impact;
+    var from0 = solveAt(sample(D_THROW, TRY.release), FAR.dummy).rha, hitPos = tr.held ? fr.center.clone() : Ja.chest.clone();
+    if (now >= rel && now < imp) { ball.visible = true; ball.position.copy(from0.clone().lerp(hitPos, (now - rel) / (imp - rel))); }
+    if (tr.refl !== null && now - tr.refl < 0.4) { ball.visible = true; ball.position.copy(fr.center.clone().lerp(Jd.chest, (now - tr.refl) / 0.4)); }
+    var last = tr.results[tr.results.length - 1];
+    if (now >= imp && now < imp + 0.3 && last && last !== "parry") sparkAt(hitPos, (now - imp) / 0.3, C.fire);
+    if (tr.refl !== null && now - tr.refl < 0.25) sparkAt(fr.center, (now - tr.refl) / 0.25, C.shard);
+    setBars(tr.hp, tr.sy, tr.k);
+    if (slowState) setState("slow", slowState.label);
+    else if (now < tr.stunUntil) setState("hit", "PECAH · stagger");
+    else if (tr.held && now <= tr.windowUntil) setState("parry", "jendela pantul");
+    else if (tr.held) setState("shield", "Tameng Inten");
+    else if (now >= rel && now < imp) setState("hit", "energi datang");
+    else if (c < TRY.wind) setState("hit", "aba-aba");
+    else setState("", "—");
+    renderConsole(tr.log, tr.results.length ? "pantul " + tr.results.filter(function (x) { return x === "parry"; }).length + " dari " + tr.results.length : "");
+    target.lerp(new V(0, 95, 270), 0.08);
+  }
+
+  // ---------------------------------------------------------------- UI
+  var list = document.getElementById("list"), lastGroup = "";
+  var tb = document.createElement("button"); tb.type = "button"; tb.className = "try"; tb.dataset.id = "try";
+  tb.innerHTML = "<span>Coba sendiri</span><small>pantul bola api</small>"; tb.addEventListener("click", function () { select("try"); }); list.appendChild(tb);
+  SC.forEach(function (s) {
+    if (s.group !== lastGroup) { var gh = document.createElement("div"); gh.className = "group"; gh.textContent = s.group; list.appendChild(gh); lastGroup = s.group; }
+    var b = document.createElement("button"); b.type = "button"; b.dataset.id = s.id;
+    b.innerHTML = "<span>" + s.title + "</span><small>" + s.input.filter(function (k) { return k !== "tahan" && k !== "+"; }).join(" ") + "</small>";
+    b.addEventListener("click", function () { select(s.id); });
+    list.appendChild(b);
+  });
+  function kbd(input) { return input.map(function (k) { return /^(\+|tahan)$/.test(k) ? k : '<span class="kbd">' + k + "</span>"; }).join(" "); }
+  function select(id) {
+    list.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.id === id); });
+    slowState = null; release(); resetBldgs();
+    var isTry = id === "try";
+    document.getElementById("try-ui").hidden = !isTry;
+    document.querySelectorAll(".play-ui").forEach(function (e) { e.hidden = isTry; });
+    if (isTry) {
+      mode = "try"; tryReset(); renderTally();
+      document.getElementById("hud-title").textContent = "Coba sendiri";
+      document.getElementById("d-title").textContent = "Coba sendiri · pantul bola api";
+      document.getElementById("d-meta").innerHTML = "<span>" + kbd(["Spasi"]) + " / klik kanan / tombol di bawah</span><span>jendela pantul 0,25 s · menyatu 0,25 s</span>";
+      document.getElementById("d-text").textContent = "Musuh melempar bola api tiap 3 s. Tekan tepat sebelum bola api kena untuk memantulkannya, atau tahan lebih awal untuk menyerap dengan perisai. Perhatikan keping di perisai dan di HUD: kalau habis, perisai pecah.";
+      return;
+    }
+    mode = "play"; cur = SC.find(function (s) { return s.id === id; }); t = 0;
+    document.getElementById("hud-title").textContent = cur.title;
+    document.getElementById("d-title").textContent = cur.title;
+    document.getElementById("d-text").textContent = cur.text;
+    document.getElementById("d-meta").innerHTML = "<span>" + kbd(cur.input) + "</span><span>" + fmt(cur.len) + " s</span>";
+    document.getElementById("lanes").innerHTML = lanesHtml(cur);
+  }
+  function setPlaying(v) { playing = v; var b = document.getElementById("play"); b.textContent = v ? "Jeda" : "Putar"; b.setAttribute("aria-pressed", v); }
+  document.getElementById("play").addEventListener("click", function () { setPlaying(!playing); });
+  document.querySelectorAll("[data-speed]").forEach(function (b) {
+    b.addEventListener("click", function () { speed = parseFloat(b.dataset.speed); document.querySelectorAll("[data-speed]").forEach(function (o) { o.setAttribute("aria-pressed", o === b); }); });
+  });
+  var scrub = document.getElementById("scrub");
+  scrub.addEventListener("input", function () { t = scrub.value / 1000 * cur.len; slowState = null; setPlaying(false); });
+  document.getElementById("t-reset").addEventListener("click", function () { tryReset(); renderTally(); });
+  var guard = guardEl();
+  guard.addEventListener("pointerdown", function (e) { e.preventDefault(); guard.setPointerCapture(e.pointerId); press(); });
+  guard.addEventListener("pointerup", release); guard.addEventListener("pointercancel", release);
+  guard.addEventListener("contextmenu", function (e) { e.preventDefault(); });
+  window.addEventListener("keydown", function (e) { if (mode === "try" && e.code === "Space") { e.preventDefault(); if (!e.repeat) press(); } });
+  window.addEventListener("keyup", function (e) { if (mode === "try" && e.code === "Space") { e.preventDefault(); release(); } });
+  stage.addEventListener("contextmenu", function (e) { if (mode === "try") e.preventDefault(); });
+  var drag = null;
+  canvas.addEventListener("pointerdown", function (e) {
+    if (e.button === 2) { if (mode === "try") press(); return; }
+    drag = { x: e.clientX, y: e.clientY }; canvas.setPointerCapture(e.pointerId);
+  });
+  canvas.addEventListener("pointermove", function (e) { if (!drag) return; yaw -= (e.clientX - drag.x) * 0.008; pitch = Math.max(-0.05, Math.min(1.2, pitch + (e.clientY - drag.y) * 0.006)); drag = { x: e.clientX, y: e.clientY }; });
+  canvas.addEventListener("pointerup", function (e) { if (e.button === 2) { release(); return; } drag = null; });
+  canvas.addEventListener("wheel", function (e) { e.preventDefault(); dist = Math.max(350, Math.min(1600, dist + e.deltaY * 0.6)); }, { passive: false });
+  function resize() { var w = stage.clientWidth, h = stage.clientHeight; renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); }
+  window.addEventListener("resize", resize);
+  if (window.matchMedia) window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function () { build(); });
+  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) speed = 0.25;
+
+  var last = performance.now();
+  function tick(now) {
+    var real = Math.min(0.05, (now - last) / 1000); last = now;
+    var rate = mode === "try" ? 1 : speed, dt = real * rate;
+    if (slowState) {
+      var st = slowState.steps[slowState.i]; dt *= st[1]; slowState.left -= real * rate;
+      if (slowState.left <= 0) { slowState.i++; if (slowState.i < slowState.steps.length) { slowState.left = slowState.steps[slowState.i][0]; slowState.label = slowState.steps[slowState.i][2]; } else slowState = null; }
+    }
+    if (mode === "play") {
+      if (playing) {
+        var prev = t; t += dt;
+        if (cur.slow && prev < cur.slow.at && t >= cur.slow.at && !slowState) { t = cur.slow.at; slowState = { steps: cur.slow.steps, i: 0, left: cur.slow.steps[0][0], label: cur.slow.steps[0][2] }; }
+        if (t > cur.len + 0.5) { t = 0; slowState = null; }
+      }
+      var tt = Math.min(t, cur.len);
+      playFrame(tt);
+      scrub.value = Math.round(tt / cur.len * 1000);
+      document.querySelectorAll("#lanes .head").forEach(function (h) { h.style.left = (tt / cur.len * 100) + "%"; });
+      document.getElementById("time").textContent = fmt(tt) + " / " + fmt(cur.len) + " s";
+    } else tryFrame(dt);
+    camera.position.set(target.x + Math.sin(yaw) * Math.cos(pitch) * dist, target.y + Math.sin(pitch) * dist, target.z + Math.cos(yaw) * Math.cos(pitch) * dist);
+    camera.lookAt(target);
+    renderer.render(scene, camera);
+    requestAnimationFrame(tick);
+  }
+  build(); resize(); select("serap"); requestAnimationFrame(tick);
+})();
+</script>

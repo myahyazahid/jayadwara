@@ -208,70 +208,95 @@ void UJDAbilitySystemComponent::AbilitySpecInputReleased(FGameplayAbilitySpec& S
 	}
 }
 
-// ------------------------------------------------------------------ stamina
+// ------------------------------------------------------------------ regen stamina & poise
 
 void UJDAbilitySystemComponent::ConfigureStaminaRegen(float PerSecond, float Delay)
 {
-	StaminaRegenPerSecond = FMath::Max(PerSecond, 0.0f);
-	StaminaRegenDelay = FMath::Max(Delay, 0.0f);
-
-	if (!StaminaChangedHandle.IsValid())
-	{
-		StaminaChangedHandle = GetGameplayAttributeValueChangeDelegate(UJDAttributeSet::GetStaminaAttribute())
-			.AddUObject(this, &UJDAbilitySystemComponent::OnStaminaChanged);
-	}
-
-	StopStaminaRegen();
-	StartStaminaRegen();
+	FJDAttributeRegen& Regen = Regens[JDRegen::Stamina];
+	Regen.Attribute = UJDAttributeSet::GetStaminaAttribute();
+	Regen.Effect = UJDGE_StaminaRegen::StaticClass();
+	Regen.DataTag = JDGameplayTags::Data_StaminaRegen;
+	Regen.TickPeriod = UJDGE_StaminaRegen::TickPeriod;
+	ConfigureRegen(JDRegen::Stamina, PerSecond, Delay);
 }
 
-void UJDAbilitySystemComponent::OnStaminaChanged(const FOnAttributeChangeData& Data)
+void UJDAbilitySystemComponent::ConfigurePoiseRegen(float PerSecond, float Delay)
 {
-	if (Data.NewValue >= Data.OldValue || StaminaRegenPerSecond <= 0.0f)
+	FJDAttributeRegen& Regen = Regens[JDRegen::Poise];
+	Regen.Attribute = UJDAttributeSet::GetPoiseAttribute();
+	Regen.Effect = UJDGE_PoiseRegen::StaticClass();
+	Regen.DataTag = JDGameplayTags::Data_PoiseRegen;
+	Regen.TickPeriod = UJDGE_PoiseRegen::TickPeriod;
+	ConfigureRegen(JDRegen::Poise, PerSecond, Delay);
+}
+
+void UJDAbilitySystemComponent::ConfigureRegen(int32 Index, float PerSecond, float Delay)
+{
+	FJDAttributeRegen& Regen = Regens[Index];
+	Regen.PerSecond = FMath::Max(PerSecond, 0.0f);
+	Regen.Delay = FMath::Max(Delay, 0.0f);
+
+	if (!Regen.ChangedHandle.IsValid())
+	{
+		Regen.ChangedHandle = GetGameplayAttributeValueChangeDelegate(Regen.Attribute)
+			.AddUObject(this, &UJDAbilitySystemComponent::OnRegenAttributeChanged, Index);
+	}
+
+	StopRegen(Index);
+	StartRegen(Index);
+}
+
+void UJDAbilitySystemComponent::OnRegenAttributeChanged(const FOnAttributeChangeData& Data, int32 Index)
+{
+	FJDAttributeRegen& Regen = Regens[Index];
+	if (Data.NewValue >= Data.OldValue || Regen.PerSecond <= 0.0f)
 	{
 		return;
 	}
 
-	// Stamina terpakai: regen berhenti, mulai lagi setelah jeda (dihitung ulang tiap pemakaian).
-	StopStaminaRegen();
+	// Atribut terpakai / kena: regen berhenti, mulai lagi setelah jeda (dihitung ulang tiap pemakaian).
+	StopRegen(Index);
 	if (UWorld* World = GetWorld())
 	{
-		if (StaminaRegenDelay > 0.0f)
+		if (Regen.Delay > 0.0f)
 		{
-			World->GetTimerManager().SetTimer(StaminaRegenDelayTimer, this, &UJDAbilitySystemComponent::StartStaminaRegen, StaminaRegenDelay, false);
+			World->GetTimerManager().SetTimer(Regen.DelayTimer,
+				FTimerDelegate::CreateUObject(this, &UJDAbilitySystemComponent::StartRegen, Index), Regen.Delay, false);
 		}
 		else
 		{
-			StartStaminaRegen();
+			StartRegen(Index);
 		}
 	}
 }
 
-void UJDAbilitySystemComponent::StartStaminaRegen()
+void UJDAbilitySystemComponent::StartRegen(int32 Index)
 {
-	if (StaminaRegenPerSecond <= 0.0f || StaminaRegenHandle.IsValid())
+	FJDAttributeRegen& Regen = Regens[Index];
+	if (Regen.PerSecond <= 0.0f || Regen.Handle.IsValid() || !Regen.Effect)
 	{
 		return;
 	}
 
-	FGameplayEffectSpecHandle Spec = MakeOutgoingSpec(UJDGE_StaminaRegen::StaticClass(), 1.0f, MakeEffectContext());
+	FGameplayEffectSpecHandle Spec = MakeOutgoingSpec(Regen.Effect, 1.0f, MakeEffectContext());
 	if (Spec.IsValid())
 	{
-		Spec.Data->SetSetByCallerMagnitude(JDGameplayTags::Data_StaminaRegen, StaminaRegenPerSecond * UJDGE_StaminaRegen::TickPeriod);
-		StaminaRegenHandle = ApplyGameplayEffectSpecToSelf(*Spec.Data.Get());
+		Spec.Data->SetSetByCallerMagnitude(Regen.DataTag, Regen.PerSecond * Regen.TickPeriod);
+		Regen.Handle = ApplyGameplayEffectSpecToSelf(*Spec.Data.Get());
 	}
 }
 
-void UJDAbilitySystemComponent::StopStaminaRegen()
+void UJDAbilitySystemComponent::StopRegen(int32 Index)
 {
+	FJDAttributeRegen& Regen = Regens[Index];
 	if (UWorld* World = GetWorld())
 	{
-		World->GetTimerManager().ClearTimer(StaminaRegenDelayTimer);
+		World->GetTimerManager().ClearTimer(Regen.DelayTimer);
 	}
-	if (StaminaRegenHandle.IsValid())
+	if (Regen.Handle.IsValid())
 	{
-		RemoveActiveGameplayEffect(StaminaRegenHandle);
-		StaminaRegenHandle.Invalidate();
+		RemoveActiveGameplayEffect(Regen.Handle);
+		Regen.Handle.Invalidate();
 	}
 }
 
@@ -279,7 +304,10 @@ void UJDAbilitySystemComponent::OnUnregister()
 {
 	if (UWorld* World = GetWorld())
 	{
-		World->GetTimerManager().ClearTimer(StaminaRegenDelayTimer);
+		for (FJDAttributeRegen& Regen : Regens)
+		{
+			World->GetTimerManager().ClearTimer(Regen.DelayTimer);
+		}
 	}
 	Super::OnUnregister();
 }

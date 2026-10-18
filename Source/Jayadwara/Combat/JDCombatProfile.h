@@ -53,6 +53,13 @@ struct FJDAttackStep
 	/** Gerak maju berhenti UJDCombatProfile::LungeStopDistance sebelum target (MoveDistance jadi batas atas). */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attack|Move")
 	bool bStopAtTarget = false;
+
+	/**
+	 * Tanda "Jatuh" (docs/23 Iterasi 4): kalau serangan ini menghabiskan poise korban, atau mengenai korban yang sedang
+	 * stagger, korban knockdown (bukan sekadar stagger). Dipakai finisher & hantaman ke bawah.
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attack|Reaction")
+	bool bKnockdown = false;
 };
 
 /** Montage per arah relatif hadap karakter (dodge 4 arah, Q10). Kosong = tanpa animasi (gerak tetap jalan). */
@@ -91,8 +98,8 @@ public:
 	TArray<FJDAttackStep> LightCombo;
 
 	// ------------------------------------------------------------------ combo & arah (docs/07 "Combo & arah")
-	// Arah input dihitung relatif ke target terdekat, bukan ke kamera. Maju/mundur memilih pembuka pengganti langkah 1;
-	// kiri/kanan dan tanpa target = combo biasa (kiri/kanan untuk memilih target, Iterasi 4). Combo berlanjut dari langkah 2.
+	// Arah input dihitung relatif ke soft target (atau terdekat), bukan ke kamera. Maju/mundur memilih pembuka pengganti
+	// langkah 1; kiri/kanan dan tanpa target = combo biasa (kiri/kanan memilih target lewat soft target). Combo berlanjut dari langkah 2.
 
 	/** Pembuka maju + pukul saat target lebih jauh dari LungeMinDistance (terjang). Montage kosong = langkah 1 biasa. */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Light Combo|Direction")
@@ -102,7 +109,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Light Combo|Direction")
 	FJDAttackStep BackAttack;
 
-	/** Jarak cari target untuk menentukan arah (sementara: target terdekat; UJDTargetingComponent di Iterasi 4). */
+	/** Radius soft target (UJDTargetingComponent) dan cari target arah pembuka (raksasa: x skala x 0,6). */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Light Combo|Direction", meta = (ClampMin = "0", Units = "cm"))
 	float TargetSearchRadius = 800.0f;
 
@@ -117,6 +124,33 @@ public:
 	/** Batas cos sudut input vs arah ke target: >= ini = maju, <= minus ini = mundur (0,5 = kerucut 60 derajat). */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Light Combo|Direction", meta = (ClampMin = "0", ClampMax = "1"))
 	float DirectionThreshold = 0.5f;
+
+	// ------------------------------------------------------------------ soft target & warp (docs/23 Iterasi 4, Q3)
+	// Hanya untuk pawn pemain. Jarak "celah" = jarak antar-permukaan kapsul, supaya skala manusia/raksasa tidak mengubah rasa.
+
+	/** Setengah lebar kerucut soft target searah stik/WASD (tanpa input: searah hadap). */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Targeting", meta = (ClampMin = "1", ClampMax = "180", Units = "deg"))
+	float SoftTargetHalfAngle = 30.0f;
+
+	/** Bobot sudut vs jarak saat memilih target di kerucut (0 = terdekat saja, 1 = sudut sama penting dengan jarak). */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Targeting", meta = (ClampMin = "0"))
+	float SoftTargetAngleWeight = 0.5f;
+
+	/** Target dengan celah sampai segini ditarik (warp) saat memukul; lebih jauh = hanya putar badan. */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Targeting", meta = (ClampMin = "0", Units = "cm"))
+	float WarpMaxGap = 220.0f;
+
+	/** Warp berhenti pada celah ini di depan target. */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Targeting", meta = (ClampMin = "0", Units = "cm"))
+	float WarpStopGap = 20.0f;
+
+	/** Geser warp paling jauh (anti "nyedot"). */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Targeting", meta = (ClampMin = "0", Units = "cm"))
+	float WarpMaxSlide = 200.0f;
+
+	/** Lama geser warp (detik nyata), di awal ancang-ancang pukulan. */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Targeting", meta = (ClampMin = "0.01", Units = "s"))
+	float WarpDuration = 0.1f;
 
 	/** Laju semua montage serangan yang terlihat (manusia 1,0; raksasa 1,0 sejak 16 Okt 2026, dulu ±0,55). GlobalAnimRateScale mesh dikompensasi ability. */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Animation", meta = (ClampMin = "0.05"))
@@ -301,9 +335,55 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Block|Parry")
 	FJDAttackStep ParryCounterAttack;
 
-	// ------------------------------------------------------------------ stagger
+	// ------------------------------------------------------------------ reaksi kena (docs/23 Iterasi 4, UJDGA_HitReact)
+	// Milik pihak yang kena. Poise masih ada = reaksi ringan; poise habis = stagger; habis oleh serangan bertanda
+	// Jatuh (FJDAttackStep::bKnockdown) = knockdown. Dorongan dikali skala aktor (dummy raksasa = dummy berskala).
 
-	/** Animasi stagger karakter ini (opsional; reaksi lengkap di Iterasi 4). */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Stagger")
+	/** Reaksi ringan (sentak), dipakai bergantian. Kosong = tanpa animasi. Pemain yang sedang menyerang tidak diputar animasinya. */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Hit React")
+	TArray<TObjectPtr<UAnimMontage>> HitReactMontages;
+
+	/** Lama reaksi ringan kalau tidak ada montage (s). */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Hit React", meta = (ClampMin = "0", Units = "s"))
+	float LightReactDuration = 0.3f;
+
+	/** Tahan sentak saat sedang menyerang: pukulan yang tidak menghabiskan poise tidak membatalkan serangan (boss). */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Hit React")
+	bool bHitReactArmorWhileAttacking = false;
+
+	/** Animasi stagger karakter ini (opsional). */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Hit React|Stagger")
 	TObjectPtr<UAnimMontage> StaggerMontage = nullptr;
+
+	/** Lama stagger karena poise habis (s). Guard break & parry memakai angka Block masing-masing. */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Hit React|Stagger", meta = (ClampMin = "0", Units = "s"))
+	float StaggerDuration = 1.2f;
+
+	/** Dorongan mundur saat stagger (cm/s). */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Hit React|Stagger", meta = (ClampMin = "0"))
+	float StaggerPushback = 300.0f;
+
+	/** Poise penuh lagi setelah stagger/knockdown selesai, supaya tidak bisa di-stagger terus. */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Hit React|Stagger")
+	bool bResetPoiseAfterStagger = true;
+
+	/** Jatuh + terbaring (montage diputar sekali; kosong = StaggerMontage). */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Hit React|Knockdown")
+	TObjectPtr<UAnimMontage> KnockdownMontage = nullptr;
+
+	/** Bangun (kebal selama GetUpDuration). Kosong = tanpa animasi. */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Hit React|Knockdown")
+	TObjectPtr<UAnimMontage> GetUpMontage = nullptr;
+
+	/** Lama jatuh + terbaring sebelum bangun (s). */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Hit React|Knockdown", meta = (ClampMin = "0", Units = "s"))
+	float KnockdownDuration = 1.9f;
+
+	/** Lama bangun, kebal (s). */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Hit React|Knockdown", meta = (ClampMin = "0", Units = "s"))
+	float GetUpDuration = 0.7f;
+
+	/** Dorongan saat terlempar knockdown (cm/s). */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Hit React|Knockdown", meta = (ClampMin = "0"))
+	float KnockdownPushback = 600.0f;
 };
