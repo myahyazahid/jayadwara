@@ -50,7 +50,7 @@ Disetujui developer 16 Okt 2026 dari konsep pose ([`visual/usulan-jurus-aksa.htm
 | Ringan ×2 → berat | Finisher 2: tendangan ganda melompat (*narae chagi*) | Lompat kecil, dua tendangan melingkar beruntun (kanan lalu kiri), dua kali kena |
 | Ringan ×3 → berat | Finisher 3 | Animasi dipilih developer langsung di Mixamo (`finisher_03.fbx`, keputusan 17 Okt 2026); selama belum ada, slot ini = pukulan putar |
 | Udara + ringan | Tendangan terbang memutar | Satu putaran penuh di udara, lalu kaki kanan menendang lurus, kaki kiri terlipat |
-| Udara + berat | Hantaman ke bawah | Menukik, tinju kanan ke tanah sampai berlutut, gelombang kejut |
+| Udara + berat | Hantaman berputar | Berputar di tempat (tanpa menukik), kaki kanan menyabet naik lalu badan melipat turun menghantam; berakhir jongkok menghadap depan |
 
 #### Daftar jurus Jayadwara (usulan)
 
@@ -104,11 +104,25 @@ Keputusan developer 16 Okt 2026. Sama untuk Aksa dan Jayadwara.
 
 | Input di udara | Hasil |
 |---|---|
-| Pukulan ringan | Tendangan terbang memutar; badan "ngambang" sebentar (gravitasi dikurangi ±0,3 s). Maks. **2 per lompatan**, reset saat mendarat |
-| Pukulan berat | **Hantaman ke bawah**: menukik lurus ke tanah, saat mendarat gelombang kejut dengan radius (hit-stop, shake). Untuk Jayadwara nanti ikut merusak gedung sekitar ([23](23-rencana-fase-1.md) Iterasi 7) |
+| Pukulan ringan | Tendangan terbang memutar; badan **jatuh mengikuti gravitasi** (tidak ada lagi "ngambang"). Maks. **1 serangan per lompatan** (berbagi jatah dengan pukulan berat), reset saat mendarat |
+| Pukulan berat | **Hantaman berputar di tempat**: badan memutar ±180° (berakhir menghadap depan), kaki kanan menyabet naik lalu badan melipat turun menghantam. **Tidak menukik dan tidak meluncur** — kapsul tetap di tempat. Satu target kena tepat di sabetan lewat jendela hit di montage. Memakai jatah serangan udara yang sama: kalau sudah memakai LMB, E tidak bisa dipakai di lompatan itu |
 | Dodge, tangkis | Tidak bisa di udara (F1) |
 
-Bentuknya tendangan terbang memutar dan hantaman tinju ke bawah (lihat daftar jurus di atas), bukan pose tendangan terbang khas Ultraman.
+Bentuknya tendangan terbang memutar dan hantaman berputar (lihat daftar jurus di atas), bukan pose tendangan terbang khas Ultraman.
+
+**Keputusan developer 18 Okt 2026: opsi yang dipakai adalah yang ada di build sekarang.** Rencana lama "menukik lurus ke tanah + gelombang kejut saat mendarat" **tidak dipakai**. Developer memilih bentuk sekarang karena lebih terbaca (kamera tidak kehilangan musuh karena badan meluncur turun), tetap di tempat sehingga combo tidak berakhir jauh dari lawan, dan rasa beratnya datang dari putaran badan + hit-stop, bukan dari jarak jatuh. **Implementasi sekarang adalah referensi utama sistem combat Aksa** — kalau nanti Jayadwara butuh varian yang lebih merusak, itu ditambahkan sebagai efek (gelombang kejut / kerusakan gedung di [23](23-rencana-fase-1.md) Iterasi 7), bukan dengan mengubah gerak hantamannya.
+
+Angka yang berlaku (Aksa):
+
+| Hal | Nilai |
+|---|---|
+| Montage | `AM_Hermes_air_slam` — 0,633 s, laju 1,45× (0,44 s nyata), blend masuk/keluar 0,15 / 0,11, blend out dimulai di ujung klip |
+| Gerak | Di tempat: geseran kapsul 0; putaran badan +186,6° (klip mulai saat badan sudah setengah berputar, berakhir menghadap depan) |
+| Damage | 1 jendela hit `foot_r` 0,40–0,58 s; damage 10, poise 5, radius 30 cm; satu korban sekali per serangan |
+| Fisika | Tanpa "ngambang": lompat + serangan memakai gravitasi normal |
+| Belum ada | Damage **area**/gelombang kejut saat mendarat (`ApplyAreaHit` tidak dipanggil lagi) |
+
+Sumber angka: `Data/DA_CombatProfile_Human_Hermes`, skrip `Hermes/Tools/combo_iter2_*.py`, catatan `Hermes/Laporan/2026-10-17-combo-iter2.md`.
 
 ### Reaksi kena pukul
 

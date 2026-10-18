@@ -147,17 +147,42 @@ def main():
     skeleton = mesh.get_editor_property("skeleton")
     log(f"{MESH_NAME}: skeleton {skeleton.get_name()}")
 
-    anims = []
+    anims, names = [], []
     for role in ROLES:
         if role not in files:
             continue
         name = f"A_Aksa_Mx_{role}"
+        for p in list(EAL.list_assets(RAW, True, False)):         # sisa nama sama (mesh/skeleton FBX "With Skin") dibuang
+            base = p.split("/")[-1].split(".")[0]
+            if base == name or base.startswith(name + "_"):
+                EAL.delete_asset(p)
         import_fbx(files[role], RAW, name, skeleton)
         seq = EAL.load_asset(f"{RAW}/{name}")
+        if not isinstance(seq, unreal.AnimSequence):
+            # FBX "With Skin" (bawa mesh karakter): UE mengimpor mesh ke <name> dan animasinya ke <name>_Anim_<stack>.
+            # Ambil animasinya, buang mesh-nya, ganti nama supaya jalur aset sama seperti biasa.
+            kandidat = []
+            for p in EAL.list_assets(RAW, True, False):
+                if p.startswith(f"{RAW}/{name}_Anim_"):
+                    a = EAL.load_asset(p)
+                    if isinstance(a, unreal.AnimSequence):
+                        kandidat.append((0 if "mixamo_com" in p else 1, a.get_play_length(), p))
+            if kandidat:
+                asal = sorted(kandidat)[0][2]
+                for buang in (f"{RAW}/{name}", f"{RAW}/{name}_Skeleton"):
+                    if EAL.does_asset_exist(buang):
+                        EAL.delete_asset(buang)
+                EAL.rename_asset(asal, f"{RAW}/{name}")
+                for sisa in list(EAL.list_assets(RAW, True, False)):      # take lain dari FBX yang sama
+                    if sisa.split("/")[-1].startswith(name + "_Anim_"):
+                        EAL.delete_asset(sisa)
+                log(f"{role}: FBX With Skin — animasi diambil dari {asal.split('/')[-1]}, mesh dibuang")
+                seq = EAL.load_asset(f"{RAW}/{name}")
         if not isinstance(seq, unreal.AnimSequence):
             fail(f"{role}.fbx: tidak menghasilkan AnimSequence")
             continue
         anims.append(seq)
+        names.append(name)
         log(f"{name}: {unreal.AnimationLibrary.get_sequence_length(seq):.2f} s — {ROLES[role]}")
     if not anims:
         unreal.log_error("[Jayadwara] tidak ada animasi peran yang diimpor")
@@ -177,14 +202,26 @@ def main():
     r.auto_align_all_bones(ST.TARGET, unreal.RetargetAutoAlignMethod.CHAIN_TO_CHAIN)
     EAL.save_loaded_asset(rtg, only_if_is_dirty=False)
 
+    for p in list(EAL.list_assets(MX, False, False)):             # hasil retarget lama (termasuk nama liar) dibuang
+        if p.split("/")[-1].startswith("A_Aksa_Mx_"):
+            EAL.delete_asset(p)
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
         unreal.JDEditorToolsLibrary.retarget_assets_to_folder(anims, mesh, manny, rtg, MX, "", False)
     EAL.save_directory(MX, only_if_is_dirty=False, recursive=False)
-    done = [a.get_name() for a in anims if EAL.does_asset_exist(f"{MX}/{a.get_name()}")]
+    wanted = names
+    missing = [n for n in wanted if not EAL.does_asset_exist(f"{MX}/{n}")]
+    if missing:                                                   # retargeter kadang memberi nama lain (mis. finisher_02 -> _04)
+        stray = [p.split("/")[-1].split(".")[0] for p in EAL.list_assets(MX, False, False)
+                 if p.split("/")[-1].split(".")[0] not in wanted]
+        if len(stray) == len(missing):
+            for n, st in zip(sorted(missing), sorted(stray)):
+                EAL.rename_asset(f"{MX}/{st}", f"{MX}/{n}")
+                log(f"{st} diganti nama jadi {n}")
+    done = [n for n in wanted if EAL.does_asset_exist(f"{MX}/{n}")]
     log(f"retarget ke Manny: {len(done)}/{len(anims)} animasi di {MX}")
     if len(done) < len(anims):
-        fail(f"gagal retarget: {sorted(set(a.get_name() for a in anims) - set(done))}")
+        fail(f"gagal retarget: {sorted(set(names) - set(done))}")
 
     if problems:
         unreal.log_warning(f"[Jayadwara] {len(problems)} masalah:")

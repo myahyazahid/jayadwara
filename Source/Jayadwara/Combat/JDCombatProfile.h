@@ -181,13 +181,18 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Air Attack")
 	FJDAttackStep AirAttack;
 
-	/** Maksimal pukulan udara per lompatan (reset saat mendarat). */
+	/** Maksimal serangan udara per lompatan (reset saat mendarat). Ringan (LMB) dan berat (E) memakai jatah yang sama. */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Air Attack", meta = (ClampMin = "1"))
-	int32 AirComboMax = 2;
+	int32 AirComboMax = 1;
 
 	/** "Ngambang": tiap pukulan udara, kecepatan jatuh dinolkan dan gravitasi dikali AirHangGravityScale selama AirHangTime. */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Air Attack", meta = (ClampMin = "0", Units = "s"))
 	float AirHangTime = 0.3f;
+
+	/** Hantaman ke bawah baru boleh dipakai kalau kecepatan vertikal sudah <= nilai ini (cm/s).
+	 *  0 = hanya saat puncak lompatan / mulai turun, jadi tidak bisa menukik saat masih naik. */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Air Attack", meta = (Units = "cm/s"))
+	float AirSlamApexVelocity = 0.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Air Attack", meta = (ClampMin = "0", ClampMax = "1"))
 	float AirHangGravityScale = 0.1f;
