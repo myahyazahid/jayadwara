@@ -1,6 +1,6 @@
 # 23 — Rencana Fase 1: Prototype Greybox
 
-> **Status: v0.4 (12 Okt 2026)**. Semua pertanyaan (Q1–Q18) sudah dijawab developer ([bagian 10](#10-keputusan--pertanyaan)); menunggu merge PR. Angka di dokumen ini adalah usulan awal Claude untuk dituning.
+> **Status: v0.5 (18 Okt 2026)**. Semua pertanyaan (Q1–Q18) sudah dijawab developer ([bagian 10](#10-keputusan--pertanyaan)); menunggu merge PR. Angka di dokumen ini adalah usulan awal Claude untuk dituning. **v0.5:** Iterasi 2b ditambahkan (paritas combat Jayadwara = Aksa, [§6](#iterasi-2b--combat-jayadwara--aksa-paritas-animasi)).
 > **Tanpa tanggal:** jadwal mulai & selesai tiap iterasi ditentukan developer (Q1). Urutan iterasi tetap.
 > Turunan dari [10](10-roadmap.md#fase-1--prototype-greybox-des-2026--mar-2027) (target bulanan), [18](18-kebutuhan-episode-1.md) (daftar kebutuhan bertanda F1), dan [12](12-technical-design.md) (arsitektur). Kalau dokumen ini bertentangan dengan 12, yang menang 12; perbedaannya dicatat di bagian 4.
 
@@ -32,6 +32,7 @@ Kalau G1–G3 gagal: **perbaiki combat dulu** sebelum masuk Fase 2 ([18](18-kebu
 ### Masuk Fase 1
 - GAS (ASC, atribut, tag, ability) untuk semua karakter.
 - Combat manusia: pukulan ringan (combo 3), berat, dodge, tangkis + parry, hit reaction, stagger, soft target, Motion Warping, hit-stop, camera shake.
+- **Combat Jayadwara = Aksa** (Iterasi 2b): animasi Aksa di-retarget ke Jayadwara2, tabel notify & isi profil combat disamakan. Jurus khas Jayadwara tetap ditunda.
 - Musuh: minion kerangka (pakai Manny), StateTree, 3 gelombang, **bangkit lagi** kalau tidak dihabisi + **finisher versi greybox** (Q6).
 - Checkpoint & kalah (mati → ulang dari checkpoint).
 - Transformasi: ganti pawn + ganti IMC + combat raksasa memakai ability yang sama dengan `UJDCombatProfile` raksasa.
@@ -53,13 +54,14 @@ Kalau G1–G3 gagal: **perbaiki combat dulu** sebelum masuk Fase 2 ([18](18-kebu
 | Menu utama, pause, setting grafis | F2 | Play In Editor / build dev |
 | Model final, animasi silat final, VFX final, audio final | F2 | Manny, proxy, Mixamo, kotak, SFX kandidat |
 | Jubah upacara Jayadwara (model, animasi pakai/lepas, Niagara, C++ pakai/lepas) — [07](07-gameplay-sistem.md#jubah-upacara), iterasi [26](26-rencana-jubah-jayadwara.md) | F2 (bareng cutscene transformasi) | Tanpa jubah |
+| Tameng Inten Jayadwara (perisai keping berlian melawan serangan energi: serap, pantul, pecah) — [07](07-gameplay-sistem.md#tameng-inten-perisai-energi) | F2 (bareng musuh energi pertama) | Tidak perlu: musuh F1 tidak punya serangan energi |
 | Motion Matching, Mass AI, skill tree, upgrade | Backlog / F4 | — |
 
 ## 3. Titik awal (12 Okt 2026)
 
 | Sudah ada | Dipakai di |
 |---|---|
-| `AJDCharacterBase` (Move/Look/Jump), `AJDHumanCharacter`, `AJDGiantCharacter` (skala, kapsul, kamera, gerak Froude) | Semua iterasi |
+| `AJDCharacterBase` (Move/Look/Jump), `AJDHumanCharacter`, `AJDGiantCharacter` (skala, kapsul, kamera, gerak; kelincahan `SpeedScaleExponent` sejak 16 Okt 2026) | Semua iterasi |
 | `AJDPlayerController`: transformasi tombol **T** (ganti pawn, pawn manusia disembunyikan, efek tumbuh/menyusut 2 s) | Iterasi 6 tinggal ditambah IMC raksasa, atribut, dan syarat |
 | `BP_Aksa`, `BP_Jayadwara`, `BP_JDPlayerController`, `Test_Greybox`, `Test_GiantScale` | Level uji |
 | `SK_Jayadwara` + RTG Mannequin → Jayadwara + socket JSON | Retarget animasi combat (Iterasi 6) |
@@ -175,15 +177,21 @@ Untuk transformasi pertama Ep 1 (cutscene) dan `Test_Loop`, energi diisi penuh o
 
 | Item | Manusia | Raksasa | Catatan |
 |---|---|---|---|
-| Combo ringan | 3 pukulan, damage 10 / 10 / 18 | sama × skala damage boss | Jendela combo dari notify |
+| Combo ringan | **4 pukulan**, damage 10 / 10 / 12 / 20 (dulu 3 pukulan 10 / 10 / 18) | sama × skala damage boss | Jendela combo dari notify. Combo & arah: [07](07-gameplay-sistem.md#combo--arah) (16 Okt 2026) |
+| Pembuka arah | terjang (maju, target > 2,5 m, maks. 6 m, berhenti 1 m dari target), mundur 1,5 m sambil memukul; damage 10, poise 8; cari target 8 m | jarak × skala raksasa × 0,6 | Arah input relatif ke soft target (atau terdekat); kiri/kanan = combo biasa |
+| Soft target & warp | kerucut ±30° dari arah input, skor jarak + sudut (bobot sudut 0,5); warp kalau celah ≤ 2,2 m: meluncur maks. 2 m dalam 0,1 s, berhenti 20 cm dari badan target | celah & luncur × skala × 0,6, berhenti × skala | [07](07-gameplay-sistem.md#soft-target) (Iterasi 4) |
+| Poise & reaksi | poise 50, regen 20/s setelah 1,5 s; ringan 0,3 s; stagger 1,2 s + dorong 3 m; jatuh 1,9 s + dorong 6 m, bangun 0,7 s (i-frame) | poise sama; dorong × skala × 0,6 | [07](07-gameplay-sistem.md#reaksi-kena-pukul). Jatuh: finisher berat & hantaman ke bawah. Pukulan dummy poise 25 (2 pukulan = stagger) |
+| Serangan udara | pukulan udara damage 10, maks. 1 per lompatan (LMB atau E, berbagi jatah), **tanpa "ngambang"** (gravitasi normal); hantaman berputar di tempat, 1 jendela hit di sabetan (damage 10, poise 5, radius 0,3 m), montage 0,633 s laju 1,45× | kecepatan × skala × 0,6, radius × skala | [07](07-gameplay-sistem.md#serangan-udara); dodge & tangkis tidak bisa di udara. **Revisi 18 Okt 2026:** angka lama (ngambang 0,3 s, menukik 2000 cm/s, radius 2,5 m) tidak dipakai lagi |
+| Cabang finisher | pukulan berat setelah pukulan 1 / 2 punya animasi sendiri; angka sama dengan pukulan berat | sama | `HeavyFinishers` di `DA_CombatProfile_*`; slot kosong = pukulan berat biasa |
 | Buffer input | 0,2 s | 0,3 s | Input saat animasi berjalan diingat |
 | Pukulan berat | damage 30, poise 40, stamina 25 | sama | Tanpa charge di F1 |
-| Dodge | stamina 20, i-frame ±0,25 s | i-frame lebih panjang, jarak × skala | Bisa membatalkan *recovery* serangan setelah frame hit |
+| Dodge | stamina 20, i-frame ±0,25 s | durasi 0,35 s & i-frame 0,25 s (sama dengan manusia, ala Mebius), jarak ±55 m | Bisa membatalkan *recovery* serangan setelah frame hit |
 | Tangkis | kurangi 80% damage, tiap hit −15 stamina; stamina habis → *guard break* (stagger 1 s) | sama | Tahan tombol |
 | Parry | 0,2 s pertama setelah tekan tangkis (tombol sama, Q5) | 0,25 s | Penyerang stagger, `GameplayCue.Parry` |
 | Stamina | 100, regen 25/s setelah jeda 0,8 s | sama | |
-| Hit-stop | 0,06 s | 0,12 s | Time dilation lokal pada penyerang & korban |
-| Play rate montage | 1,0 | **±0,55** | Locomotion raksasa sudah 1/√skala ≈ 0,2; serangan setara itu terlalu lambat, jadi angka ini dicari di Iterasi 6 |
+| Hit-stop | 0,06 s | 0,15 s | Time dilation lokal pada penyerang & korban |
+| Play rate montage | 1,0 | **1,0** | Ala Mebius (keputusan developer 16 Okt 2026): serangan raksasa secepat manusia; dulu ±0,55. Berat dari hit-stop & shake |
+| Gerak raksasa | lari 5 m/s, berbalik 500°/s | **lari ±70 m/s, animasi ±0,6×, berbalik 720°/s, akselerasi setara manusia, lompat ×1,25** | `SpeedScaleExponent` 0,83 di `BP_Jayadwara2` (0,5 = Froude/berat lama: lari ±24 m/s, animasi 0,2×, berbalik ±100°/s). Boss `BP_Jerangkong` tetap 0,5. Ubah lalu jalankan `Tools/ue_setup_giant_speed.py` + `ue_setup_giant_combo.py` |
 | Minion | HP 30, poise 20, wind-up serangan 0,5 s dengan kedip | — | Maks. **2 penyerang** bersamaan (token) |
 | Minion bangkit | roboh 4 s lalu bangkit dengan HP 50% kecuali di-finisher | — | Gelombang 3 saja |
 | Energi transformasi | 0 → penuh ±40 s setelah kalah | Health kembali ±50% | Bagian 4.5 |
@@ -198,6 +206,7 @@ Kapasitas ±50 jam/bulan. Jam di bawah = **jam developer** (build, editor, tunin
 |---|---|---|---|
 | 1 | Fondasi GAS | ±12 | `Test_Combat` |
 | 2 | Combo ringan & hit | ±25 | `Test_Combat` |
+| 2b | Combat Jayadwara = Aksa (paritas animasi) | ±10 | `Test_GiantScale` |
 | 3 | Berat, dodge, tangkis, parry | ±25 | `Test_Combat` |
 | 4 | Reaksi, stagger, target, warp | ±20 | `Test_Combat` |
 | 5 | Minion, gelombang, checkpoint | ±30 | `Test_Combat` |
@@ -205,7 +214,7 @@ Kapasitas ±50 jam/bulan. Jam di bawah = **jam developer** (build, editor, tunin
 | 7 | Gedung hancur & meter sinkronisasi | ±30 | `Test_Destruction` |
 | 8 | Boss Jerangkong greybox | ±30 | `Test_Boss` |
 | 9 | Loop utuh & playtest | ±15 | `Test_Loop` |
-| | **Total** | **±212** | Anggaran F1 ±200 |
+| | **Total** | **±222** | Anggaran F1 ±200; 2b (±10) memakai sisa buffer dan memindahkan beban combo dari Iterasi 6 |
 
 ### Iterasi 1 — Fondasi GAS
 - **Claude:** pemetaan kontrol KB/M + gamepad (bagian 4.4), `UJDAbilitySystemComponent`, `UJDAttributeSet`, `UJDGameplayAbility`, `UJDAbilitySet`, `UJDInputConfig`, GE awal (init atribut, regen stamina, damage), ASC di `AJDCharacterBase` + `IAbilitySystemInterface`, binding input tag di karakter (+ buffer input di ASC), native gameplay tag (`JDGameplayTags`), `UJDCheatManager` (`JD.God`, `JD.Damage <n>`, `JD.Heal`, `JD.Stamina <n>`, `JD.Debug.Input`), `UJDHUDWidget` (bar Health/Stamina/Energi, layout bawaan dibuat C++ sehingga jalan tanpa WBP). Skrip `Tools/ue_setup_combat.py`: buat `IMC_Human` (salin `IMC_Default`) + IA combat + chord L1+R1, `DA_InputConfig_Human`, `DA_AbilitySet_Aksa`, isi `BP_Aksa` & `BP_JDPlayerController`, level `Test_Combat` (tanpa musuh).
@@ -216,6 +225,30 @@ Kapasitas ±50 jam/bulan. Jam di bawah = **jam developer** (build, editor, tunin
 - **Claude:** `UJDCombatComponent`, `UJDCombatProfile`, `UJDGA_LightAttack` (3 section, buffer input), notify `HitWindow` & `ComboWindow`, `AJDTrainingDummy` (target diam dengan atribut, angka damage melayang opsional), hit-stop, camera shake, Gameplay Cue hit → SFX kandidat slot 01–02.
 - **Developer:** uji rasa & tuning. (Implementasi 12 Okt 2026: **satu montage per langkah** `AM_Aksa_Light_01..03`, bukan satu montage 3 section, supaya bisa dibuat & diisi notify dari Python; placeholder `MM_Attack_01..03` bawaan Mannequin dengan root motion, waktu hit dari analisis kecepatan tulang. Mixamo *Jab/Cross/Hook* opsional: ganti `SOURCE`/waktu di `Tools/ue_setup_light_combo.py` lalu jalankan ulang. `ABP_Aksa` sudah punya `DefaultSlot`.)
 - **Gate:** combo 3 pukulan ke dummy terasa responsif (tekan cepat = 3 pukulan beruntun, berhenti menekan = berhenti), hit terasa (hit-stop + shake + suara), hitbox terlihat lewat `JD.Debug.Hitbox 1`.
+- **Revisi 16 Okt 2026 (keputusan developer, [07](07-gameplay-sistem.md#combo--arah)):** combo jadi **4 pukulan** (langkah 4 sementara `MM_ChargedAttack`), pembuka **terjang** (maju + pukul ke target yang agak jauh) dan **mundur** (mundur + pukul), serta **cabang finisher** pukulan berat setelah pukulan 1 / 2. C++: `FJDAttackStep` dapat `MoveDistance/MoveDuration/bStopAtTarget`; `UJDCombatProfile` dapat `LungeAttack`, `BackAttack`, `HeavyFinishers`, jarak arah; `UJDCombatComponent::FindNearestTarget` (sementara sampai `UJDTargetingComponent`). Skrip: `ue_setup_light_combo.py` (Aksa), `ue_setup_jayadwara2.py` (retarget `MM_ChargedAttack`) lalu `ue_setup_giant_combo.py` (Jayadwara). Waktu hit langkah 4 dicari otomatis dari puncak kecepatan tangan/kaki (lihat log). **Gate tambahan:** tekan cepat = 4 pukulan; maju + pukul dari ±5 m menerjang lalu combo berlanjut; mundur + pukul mundur sambil memukul; berat setelah pukulan 1 dan 2 terlihat berbeda.
+- **Animasi jurus Mixamo (17 Okt 2026):** `Tools/ue_import_mixamo.py` mengimpor FBX dari `Art/Mixamo/` (diisi agent dari `mixamo/result/`, lihat `mixamo/README.md`; Y Bot *With Skin* + animasi *Without Skin*, nama file = peran: `light_04`, `finisher_01/02`, `air`, `dodge_*`, `parry_01/02`, dst.), membuat `IK_Mixamo` + `RTG_Mixamo_To_Manny`, lalu me-retarget ke `Aksa/Anims/Mixamo/A_Aksa_Mx_<peran>`. `ue_setup_light_combo.py`, `ue_setup_defense.py`, `ue_setup_parry.py` memakai hasilnya otomatis (waktu hit dicari dari puncak kecepatan; narae chagi 2× kena lewat `bNewHit` di JD Hit Window). Terjang jadi **lompat kecil** (`FJDAttackStep::MoveHeight`, root motion jump force). Pelaksana pemasangan animasi: Hermes ([`Hermes/combo_iter2_hermes.md`](../Hermes/combo_iter2_hermes.md), sandbox), lalu review + pemasangan Claude.
+  - **Terpasang di proyek (18 Okt 2026, dari `hermes/combo-iter2`):** FBX yang lulus (`ybot`, `light_01–04`, `back`, `finisher_01–03`, `air`, `air_slam`) ada di `Art/Mixamo/`. Urutan skrip: `ue_import_mixamo.py` → **`ue_mixamo_postproses.py`** (baru: pangkas klip + ratakan translasi tulang `root`, lewat `AnimSequencerController.set_bone_track_keys`) → `ue_setup_light_combo.py` → `ue_setup_defense.py` → `ue_setup_parry.py`. `ue_setup_light_combo.py` sekarang: waktu hit dibatasi ke keluarga tulang jurusnya (tangan/kaki) dan mengabaikan puncak < 0,1 s; narae chagi dipasang tangan (`mx_hit`); jendela combo = 0,55 s terakhir klip (klik cepat tidak memotong animasi) dan **`light_04` ikut punya jendela combo** (tanpa itu finisher 3 tidak bisa dipicu: `JDGA_HeavyAttack::CanActivate` butuh `IsAttackCancelable` atau tag `ComboWindow`); laju, blend, dorongan maju 12 cm pukulan 1–2, dan nilai udara (`air_hang_*`, `air_slam_speed/recovery`) dari hasil tes tangan Hermes. Finisher sengaja tanpa jendela combo (kalau ada, E bisa memutar ulang finisher yang sedang jalan). **Belum:** `lunge.fbx` salah isi (= `light_03`, Hook) → terjang masih placeholder sampai di-download ulang (kata kunci *Superman Punch*, In Place); FBX `heavy`, `dodge_*`, `parry_*` belum ada; hasil tes tangan 11 poin (checklist di laporan Hermes): **lulus, developer 18 Okt 2026** — gate Iterasi 2 terpenuhi untuk Aksa; sisa `lunge` benar + FBX Iterasi 3.
+- **Serangan udara (16 Okt 2026, [07](07-gameplay-sistem.md#serangan-udara)):** `AirAttack` (+ `AirComboMax`, `AirHang*`) dan `AirSlam` (+ `AirSlamSpeed/Radius/Recovery`) di `UJDCombatProfile`; `UJDCombatComponent::ApplyAreaHit` + `OnLanded`; tangkis diblok di udara. Placeholder tanpa root motion: udara = salinan `MM_Attack_03`, hantaman = salinan `MM_ChargedAttack` (skrip yang sama). **Gate:** lompat = **1 serangan udara saja** (LMB atau E, berbagi jatah `AirComboMax` = 1, reset saat mendarat); lompat + E di dekat dummy = hantaman berputar, dummy kena di sabetan. **Revisi 18 Okt 2026 (keputusan developer):** hantaman udara **tidak menukik** — bentuk finalnya berputar di tempat, damage lewat satu jendela hit di montage (`foot_r` 0,40–0,58 s), `AirHang*` tidak dipakai lagi (fisika normal, LMB tidak "ngambang"), dan `ApplyAreaHit` tidak dipanggil (damage area belum ada). Implementasi di `Content/Hermes/ComboIter2` = **referensi utama sistem combat Aksa**; angka dan alasannya di [07](07-gameplay-sistem.md#serangan-udara).
+
+### Iterasi 2b — Combat Jayadwara = Aksa (paritas animasi)
+
+**Kenapa ada:** keputusan developer ([07](07-gameplay-sistem.md#daftar-jurus-jayadwara-usulan), 17 Okt 2026) — Jayadwara memakai **jurus yang sama** dengan Aksa, animasinya di-retarget; jurus khas ditunda. Combo raksasa yang dipasang 13 Okt masih memakai placeholder Mannequin (`MM_Attack_0x_JD2`), **3 langkah**, tanpa terjang/mundur/finisher ke-3/serangan udara/dodge/tangkis beranimasi. Iterasi 2b menyamakan itu **sebelum** Iterasi 6, supaya tuning rasa raksasa tidak dikerjakan dua kali (tuning di atas animasi placeholder = kerja ulang).
+
+**Prinsip: paritas, bukan tuning baru.** Satu animasi sumber = satu tabel notify. Montage raksasa **menyalin tabel notify montage Aksa apa adanya** (tulang, waktu mulai, durasi, jumlah jendela, `new_hit`), bukan menghitung ulang dari kecepatan tulang. Yang boleh berbeda hanya angka yang memang berskala: radius hit ×skala, jarak terjang & dodge ×skala ×0,6, shake ×2,5, hit-stop 0,15 s, jendela parry 0,25 s, dorongan tangkis ×skala.
+
+- **Claude:**
+  - `Tools/ue_setup_giant_mixamo.py` — retarget animasi sumber tiap montage Aksa (10 animasi Mixamo `A_Aksa_Mx_*` + 3 placeholder `A_Aksa_Attack_01/02`, `A_Aksa_Stagger`) dari skeleton Mannequin → `Jayadwara2/Anims/Mixamo/A_JD2_Mx_<peran>` lewat `RTG_Mannequin_To_Jayadwara2` yang sudah ada (`JDEditorToolsLibrary.retarget_assets_to_folder`). Tidak ada download Mixamo baru.
+  - `Tools/ue_setup_giant_combo.py` ditulis ulang mengikuti `ue_setup_light_combo.py` + `ue_setup_defense.py` + `ue_setup_parry.py`: **4 langkah** (langkah 4 = `light_04` **dengan jendela combo** — tanpa itu finisher 3 tak bisa dipicu, `JDGA_HeavyAttack::CanActivate` butuh `IsAttackCancelable`/tag `ComboWindow`), terjang **lompat kecil** (`MoveHeight`), pukul mundur, **3** finisher, serangan udara + hantaman dengan angka 18 Okt (tanpa "ngambang"), blend per peran sama dengan Aksa (0,08/0,2; dodge 0,05/0,15; parry 0,04/0,15) dikali `GlobalAnimRateScale` mesh raksasa.
+  - `DA_CombatProfile_Giant` mengisi **semua slot yang terisi di `DA_CombatProfile_Human`** — termasuk dodge 4 arah, tepisan, hit-stop/slow-mo parry, serangan balik parry (`AM_JD2_Light_04`), stagger. Slot yang di Aksa masih kosong (animasi dodge & tepisan Mixamo belum ada) dibiarkan kosong di **kedua** profil, bukan diisi placeholder baru.
+  - Update §11 dokumen ini + `KONTEKS_PROYEK.md` setelah lulus.
+- **Developer:** build (tidak ada C++ baru; 2b hanya Python + aset), jalankan `ue_setup_giant_mixamo.py` → `ue_setup_giant_combo.py` → `ue_setup_giant_speed.py` (kalau kelincahan diubah), lalu uji tangan di `Test_GiantScale`.
+- **Gate:**
+  - **G2b-1 Paritas notify** — tiap montage raksasa punya pasangan Aksa dengan jumlah jendela hit sama, tulang sama, selisih waktu mulai/durasi ≤ 0,01 s. Bukti: tabel paritas (`Log/parity.json` dari Hermes, diverifikasi ulang Claude).
+  - **G2b-2 Paritas profil** — daftar slot `DA_CombatProfile_Giant` = daftar slot `DA_CombatProfile_Human`, kecuali angka berskala di atas.
+  - **G2b-3 Uji tangan** di `Test_GiantScale` — LMB×4 = 4 jurus Mixamo beruntun; W+LMB = terjang lompat; S+LMB = pukul mundur; LMB→E, ×2→E, ×3→E = 3 finisher berbeda (narae chagi 2× kena); Space+LMB = tendangan terbang (1× per lompatan); Space+E = hantaman berputar di tempat; Shift = dodge; RMB = tangkis/parry.
+  - **G2b-4 Tanpa regresi** — `Test_Combat` (Aksa) tetap sama; `git status` bersih di luar sandbox.
+- **Bukan bagian 2b** (tetap Iterasi 6): `IMC_Giant`, rig kamera + lock-on boss, syarat transformasi, kalah → Aksa + `TransformEnergy`, tuning rasa khas raksasa (shake, hit-stop, jarak & framing kamera), jurus khas Jayadwara ([07](07-gameplay-sistem.md#jurus-khas-jayadwara-usulan)), jubah.
+- **Panduan Hermes:** [`Hermes/combo_iter2b_hermes.md`](../Hermes/combo_iter2b_hermes.md) — bukti paritas di sandbox `/Game/Hermes/ComboIter2b`, termasuk cek tubuh 45 m: kaki tidak menembus lantai, tangan tidak menembus badan, root motion tidak melenceng.
 
 ### Iterasi 3 — Pukulan berat, dodge, tangkis, parry
 - **Claude:** `UJDGA_HeavyAttack`, `UJDGA_Dodge` (arah dari input, i-frame, biaya stamina, batal recovery), `UJDGA_Block` (tahan, reduksi, guard break, jendela parry), `AJDTrainingDummy` mode **menyerang** berkala dengan wind-up yang terbaca (untuk latihan tangkis/parry), Gameplay Cue blok/parry/dodge.
@@ -223,7 +256,7 @@ Kapasitas ±50 jam/bulan. Jam di bawah = **jam developer** (build, editor, tunin
 - **Gate:** parry ke dummy bisa dilakukan dengan sengaja ≥ 7 dari 10 kali setelah 5 menit latihan; dodge menembus serangan tanpa kena; stamina jadi pertimbangan (tidak bisa spam tangkis/dodge).
 
 ### Iterasi 4 — Reaksi, stagger, target, warp
-- **Claude:** `UJDGA_HitReact` (ringan / stagger / knockdown dari poise), regen poise, `UJDTargetingComponent` (soft target searah input dalam kerucut; indikator di HUD; Q3), Motion Warping ke target, lock kamera (Q3).
+- **Claude:** `UJDGA_HitReact` (ringan / stagger / knockdown dari poise), regen poise, `UJDTargetingComponent` (soft target searah input dalam kerucut; indikator di HUD; Q3), warp ke target (root motion source, bukan notify Motion Warping supaya jalan dengan montage placeholder). Lock kamera pindah ke Iterasi 6 (lock-on boss; 17 Okt 2026).
 - **Developer:** animasi hit react ×2, stagger, knockdown + bangun; warp target di montage; tuning radius target.
 - **Gate:** pukulan "menempel" ke musuh terdekat searah stik/WASD tanpa terasa menyedot; pukulan berat membuat dummy stagger; pemain bisa kena stagger juga.
 
@@ -233,9 +266,11 @@ Kapasitas ±50 jam/bulan. Jam di bawah = **jam developer** (build, editor, tunin
 - **Gate:** 3 gelombang selesai dalam 4–6 menit; musuh tidak menyerang bareng-bareng; gelombang 3 memaksa pemain memakai finisher; mati di gelombang 3 → ulang dari awal gelombang 3.
 
 ### Iterasi 6 — Transformasi & combat raksasa
+
+> **Sejak Iterasi 2b** combo, animasi, dan isi profil combat raksasa sudah paritas dengan Aksa (4 langkah, terjang, mundur, 3 finisher, udara, hantaman, dodge, tangkis). Sisa Iterasi 6 = `IMC_Giant`, rig kamera + lock-on, syarat transformasi, kalah → Aksa + `TransformEnergy`, dan tuning rasa khas raksasa di atas animasi yang sudah final.
 - **Claude:** `IMC_Giant` (skrip), ASC & atribut Jayadwara (`DA_AbilitySet_Jayadwara`, Sync awal penuh), `DA_CombatProfile_Giant`, socket hit dari `SK_Jayadwara_sockets.json`, rig kamera raksasa (framing target, lag, jarak saat combat) + **lock-on boss** (Q3), transformasi tombol **T** / **L1+R1** dengan syarat (Q8), **kalah → Aksa muncul di tempat + `TransformEnergy` + berubah lagi** (bagian 4.5), `AJDTrainingDummy` skala raksasa.
-- **Developer:** retarget montage combat Aksa ke Jayadwara (RTG yang sudah ada), tuning play rate, shake, hit-stop; uji di `Test_GiantScale`.
-- **Gate:** combo, berat, dodge, tangkis jalan sebagai Jayadwara dengan **ability yang sama**; terasa berat tapi tidak lamban (G2); bolak-balik transformasi tanpa bug kamera/input; kalah → jadi Aksa di tempat → energi penuh → berubah lagi berjalan tanpa reload.
+- **Developer:** uji tangan di `Test_GiantScale` (animasi & montage sudah dari Iterasi 2b), lalu tuning rasa khas raksasa: shake, hit-stop, jarak & framing kamera, IMC.
+- **Gate:** combo, berat, dodge, tangkis jalan sebagai Jayadwara dengan **ability yang sama**; terasa raksasa tapi **gesit** (G2, ala Mebius: berat dari impact, bukan dari kelambatan); bolak-balik transformasi tanpa bug kamera/input; kalah → jadi Aksa di tempat → energi penuh → berubah lagi berjalan tanpa reload.
 
 ### Iterasi 7 — Gedung hancur & meter sinkronisasi
 - **Claude:** `AJDDestructibleBuilding` (kerusakan sebanding gaya dari pukulan, tabrakan badan, terpental, proyektil; Q7), pembersih puing (puing → hilang bertahap), `UJDSyncComponent` + `UJDSyncConfig` + `UJDGE_SyncPenalty`, `OnSyncDepleted` → kembali jadi Aksa di tempat (alur bagian 4.5, Q17), `AJDCivilianMarker` (Q11), `WBP_HUD_Giant` base (bar Sync), cheat `JD.Sync <n>`.
@@ -257,9 +292,12 @@ Didownload developer (butuh akun Adobe), di-retarget ke skeleton Mannequin (sama
 
 | Untuk | Animasi (cari di Mixamo) | Iter |
 |---|---|---|
-| Aksa combo ringan | *Jab*, *Cross Punch*, *Hook Punch* (atau *Punching* 3 variasi) | 2 |
-| Aksa berat | *Mma Kick* / *Uppercut* | 3 |
-| Aksa dodge | *Dodging* / *Standing Dodge* (kiri, kanan, belakang, depan) | 3 |
+| Aksa combo ringan | *Jab*, *Cross Punch*, *Hook Punch*, combo 4 *Spinning Back Kick* / *Spinning Hook Kick* (dwi huryeo chagi) | 2 |
+| Aksa pembuka arah | Terjang (lompat kecil, pukulan dari atas ke dada): *Jump Attack* / *Superman Punch* / *Overhand Punch*; mundur: *Back Step Punch* | 2 |
+| Aksa serangan udara | *Flying Kick* / *Jump Spin Kick* / *Tornado Kick* (tendangan terbang memutar), *Jump Down Attack* / *Ground Slam* (hantaman) | 2 |
+| Aksa cabang finisher | Finisher 1 *Back Kick* / *Spinning Back Kick* (dwi chagi); finisher 2 *Double Kick* / *Jumping Double Kick* (narae chagi) | 2–3 |
+| Aksa berat | Pukulan putar satu tangan: *Cross Punch* / *Heavy Punch* / *Spinning Punch* (melangkah + putar badan) | 3 |
+| Aksa dodge | Belakang *Back Flip*; kiri/kanan *Dodge Roll* / *Cartwheel*; depan *Quick Step* / *Dodging* ([07](07-gameplay-sistem.md#dodge-per-arah)) | 3 |
 | Aksa tangkis | *Body Block*, *Center Block*, *Standing Block React* | 3 |
 | Reaksi | *Hit Reaction* ×2, *Stunned*, *Knocked Down*, *Getting Up*, *Dying* | 4 |
 | Minion | *Zombie Walk*, *Zombie Attack* ×2, *Zombie Dying*, *Zombie Stand Up* | 5 |
@@ -345,11 +383,12 @@ PR dibuat kecil (satu iterasi atau setengahnya) karena Claude tidak bisa build U
 | Iter | Status | Tanggal | Catatan |
 |---|---|---|---|
 | 1 | ✅ (KB/M) | 12 Okt 2026 | Build + `ue_setup_combat.py` selesai. Uji otomatis PIE lulus (atribut awal, `JD.Damage`, `JD.God`, `JD.Heal`, regen stamina ±25/s setelah jeda). Uji tangan developer KB/M lulus: HUD tampil (kiri bawah), LMB/E/RMB/Shift/Q terbaca sebagai input tag. **Menyusul:** gamepad lewat x360ce (Q16), `showdebug abilitysystem` |
-| 2 | ✅ | 13 Okt 2026 | `ue_setup_light_combo.py` selesai: montage + notify, `GC_Hit_Light/Heavy` (SFX Kenney k1, **pilihan sementara** slot 01–02), `DA_CombatProfile_Human`, `BP_TrainingDummy` di `Test_Combat`. Uji otomatis: pukulan 1 ke dummy -10 HP. Fix 13 Okt: tendangan (langkah 3) tertahan foot IK Control Rig `ABP_Aksa` → node dilepas (kaki kanan 29 → 113 cm pada 0,33 s); telapak tidak menyesuaikan tangga/miring sampai foot IK versi F2 (curve `DisableLegIK` sudah ada di `A_Aksa_Attack_*`). **13 Okt: uji tangan developer lulus** (combo 3 pukulan Aksa sesuai harapan) |
+| 2 | ✅ | 13 Okt 2026 | `ue_setup_light_combo.py` selesai: montage + notify, `GC_Hit_Light/Heavy` (SFX Kenney k1, **pilihan sementara** slot 01–02), `DA_CombatProfile_Human`, `BP_TrainingDummy` di `Test_Combat`. Uji otomatis: pukulan 1 ke dummy -10 HP. Fix 13 Okt: tendangan (langkah 3) tertahan foot IK Control Rig `ABP_Aksa` → node dilepas (kaki kanan 29 → 113 cm pada 0,33 s); telapak tidak menyesuaikan tangga/miring sampai foot IK versi F2 (curve `DisableLegIK` sudah ada di `A_Aksa_Attack_*`). **13 Okt: uji tangan developer lulus** (combo 3 pukulan Aksa sesuai harapan). **16 Okt revisi:** combo 4 + pembuka arah + cabang finisher (bagian 6 Iterasi 2); menunggu build + skrip + uji tangan |
+| 2b | 🟡 | 18 Okt 2026 | Rencana (§6) + panduan [`Hermes/combo_iter2b_hermes.md`](../Hermes/combo_iter2b_hermes.md) siap. **Skrip ditulis:** `Tools/ue_setup_giant_mixamo.py` (retarget 13 animasi Aksa → `A_JD2_Mx_*`) dan `Tools/ue_setup_giant_combo.py` ditulis ulang (14 montage, notify **disalin** dari `AM_Aksa_*` lewat reflection, `DA_CombatProfile_Giant` paritas, tabel paritas dicetak di akhir log = bukti G2b-1). **Menunggu:** build + `ue_setup_giant_mixamo.py` → `ue_setup_giant_combo.py`, lalu uji tangan 13 titik di `Test_GiantScale` |
 | 3 | 🟡 | 13 Okt 2026 | C++: `UJDGA_HeavyAttack` (dari diam/jendela combo/recovery), `UJDGA_Dodge` (root motion source, hadap tetap, montage 4 arah opsional, i-frame `State.Invulnerable`), `UJDGA_Block` (tahan; tiap tekan buka `State.ParryWindow`, anti spam `ParryLockout` 0,5 s; jalan ×0,4), `UJDCombatComponent::ResolveIncomingHit` (dodge/parry/tangkis hanya dari depan 140°/guard break) + `ApplyStagger` (sementara sampai Iterasi 4), `AJDTrainingDummy` mode menyerang (aba-aba "!" merah berkedip 0,5 s, tiap 2,5 s, jarak 2,5 m). Skrip `Tools/ue_setup_defense.py` (Aksa + dummy; `Dummy_Attacker` di `Test_Combat`) dan `ue_setup_giant_combo.py` (Jayadwara2). Animasi placeholder: berat & pose tangkis dari `A_Aksa_Attack_02` (berat diputar 0,75×, tangkis = frame 0,75 s ditahan), stagger dari `MM_HitReact_Front_Hvy_01` (Rifle), **dodge tanpa animasi**. SFX **pilihan sementara**: tangkis k1, parry k2, dodge k1. Uji otomatis PIE: berat −30 HP/−25 stamina; dodge mundur 404 cm/−20 stamina, i-frame aktif lalu lepas; tangkis −2 HP/−15 stamina, jalan 200; guard break → stagger; parry → tanpa damage, dummy stagger (raksasa: berat −30, dodge ±56 m). Sisa: uji tangan gate (parry ≥ 7/10), animasi Mixamo (berat, dodge 4 arah, tangkis) |
-| 4 | ⬜ | | |
+| 4 | 🟡 | 17 Okt 2026 | C++: `UJDGA_HitReact` (ringan / stagger / jatuh + bangun dengan i-frame, dipicu `Event.HitReact.*`), `UJDCombatComponent::ChooseHitReaction` (poise pecah → stagger, serangan bertanda Jatuh → jatuh; `ApplyStagger` lama meneruskan ke sini), regen poise (`UJDGE_PoiseRegen`, regen ASC digeneralisasi), `UJDTargetingComponent` (soft target kerucut + warp root motion source; `JD.Debug.Target 1`), HUD baris poise + penanda target. Skrip `Tools/ue_setup_hitreact.py` (montage reaksi placeholder dari `MM_HitReact_Front_Lgt_01/02`, flag Jatuh, warp raksasa, poise 50). Belum ada animasi jatuh & bangun (Mixamo). Menunggu build + uji tangan developer |
 | 5 | ⬜ | | |
-| 6 | 🟡 | 13 Okt 2026 | Transformasi tombol T sudah ada sejak Iterasi 6 Jayadwara. **Dimajukan (permintaan developer):** combo ringan Jayadwara2 lewat `Tools/ue_setup_giant_combo.py` — `AM_JD2_Light_01..03` (salinan `MM_Attack_0x_JD2`, notify sama dengan Aksa), `DA_CombatProfile_Giant` (laju terlihat 0,55, radius hit 711 cm, hit-stop 0,12 s, shake ×2,5, cue `Hit.Heavy`), `DA_AbilitySet_Jayadwara` (Sync 100, buffer 0,3 s), `BP_Jayadwara2` memakai `DA_InputConfig_Human`, `Dummy_Giant` (BP_TrainingDummy ×20) di `Test_GiantScale`. C++: `JDGA_LightAttack` membagi laju montage dengan `GlobalAnimRateScale` mesh (raksasa ±0,205) supaya `MontagePlayRate` = laju terlihat. Uji otomatis PIE: pukulan 1 ke `Dummy_Giant` −10 HP. Iterasi 3 ikut dipasang (berat, dodge 55 m/0,64 s, tangkis, parry 0,25 s; `AM_JD2_Heavy/Block`). Sisa Iterasi 6: uji tangan & tuning, `IMC_Giant`, rig kamera + lock-on, syarat transformasi, kalah → Aksa |
+| 6 | 🟡 | 13 Okt 2026 | Transformasi tombol T sudah ada sejak Iterasi 6 Jayadwara. **Dimajukan (permintaan developer):** combo ringan Jayadwara2 lewat `Tools/ue_setup_giant_combo.py` — `AM_JD2_Light_01..03` (salinan `MM_Attack_0x_JD2`, notify sama dengan Aksa), `DA_CombatProfile_Giant` (laju terlihat 0,55, radius hit 711 cm, hit-stop 0,12 s, shake ×2,5, cue `Hit.Heavy`), `DA_AbilitySet_Jayadwara` (Sync 100, buffer 0,3 s), `BP_Jayadwara2` memakai `DA_InputConfig_Human`, `Dummy_Giant` (BP_TrainingDummy ×20) di `Test_GiantScale`. C++: `JDGA_LightAttack` membagi laju montage dengan `GlobalAnimRateScale` mesh (raksasa ±0,205) supaya `MontagePlayRate` = laju terlihat. Uji otomatis PIE: pukulan 1 ke `Dummy_Giant` −10 HP. Iterasi 3 ikut dipasang (berat, dodge 55 m/0,64 s, tangkis, parry 0,25 s; `AM_JD2_Heavy/Block`). Sisa Iterasi 6: uji tangan & tuning, `IMC_Giant`, rig kamera + lock-on, syarat transformasi, kalah → Aksa. **16 Okt 2026, ala Mebius (permintaan developer):** `AJDGiantCharacter` dapat `SpeedScaleExponent` (0,83: lari ±70 m/s, animasi ±0,6×, kaki tetap menapak), `GiantTurnRate` 720°/s, akselerasi × speed, `JumpBoost` 1,25; combat raksasa laju 1,0, dodge 0,35 s, hit-stop 0,15 s; `BP_Jerangkong` tetap 0,5. Skrip `Tools/ue_setup_giant_speed.py` lalu `ue_setup_giant_combo.py`. Menunggu build + uji tangan developer |
 | 7 | ⬜ | | |
 | 8 | ⬜ | | |
 | 9 | ⬜ | | |

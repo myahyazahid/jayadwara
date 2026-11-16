@@ -173,7 +173,8 @@ def setup_bps(meshes):
     d = unreal.get_default_object(bp.generated_class())
     h = MODEL_H_CM * VARIANTS["Jerangkong"]["scale"]
     for prop, val in (("giant_height_cm", h), ("mesh_height_cm", h), ("authored_height_cm", MODEL_H_CM),
-                      ("authored_capsule_radius", 45.0), ("authored_capsule_half_height", MODEL_H_CM / 2)):
+                      ("authored_capsule_radius", 45.0), ("authored_capsule_half_height", MODEL_H_CM / 2),
+                      ("speed_scale_exponent", 0.5)):   # boss tetap berat (Froude), cocok dengan BS x sqrt(skala) di bawah
         d.set_editor_property(prop, val)
     m = d.get_editor_property("mesh")
     m.set_editor_property("skeletal_mesh_asset", meshes["Jerangkong"][0])

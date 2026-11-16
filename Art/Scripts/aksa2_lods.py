@@ -14,7 +14,8 @@ import bpy
 from mathutils import Matrix, Vector
 
 ROOT = Path(__file__).resolve().parents[1].parent
-BLEND_IN = ROOT / "Art" / "Blender" / "aksa2" / "aksa2_v07_morph.blend"
+argv = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
+BLEND_IN = Path(argv[0]) if argv else ROOT / "Art" / "Blender" / "aksa2" / "aksa2_v07_morph.blend"
 OUT_DIR = ROOT / "Art" / "Export"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -124,8 +125,8 @@ def export_fbx(mesh_obj, arm_obj, fbx_path):
 LOD_SPECS = [
     # (level, ratio, use_protect, vg_factor, max_tris)
     (1, 0.55, True, 0.60, 25000),
-    (2, 0.23, True, 0.50, 10000),
-    (3, 0.09, False, 0.0, 4000),
+    (2, 0.19, True, 0.50, 10000),
+    (3, 0.075, False, 0.0, 4000),
 ]
 
 summary = [("LOD0", get_tris(mesh), 0)]
@@ -149,7 +150,11 @@ for lv, ratio, use_protect, vg_fac, max_tris in LOD_SPECS:
     
     if use_protect:
         vg = ob.vertex_groups.new(name="Protect_LOD")
-        p_idx = [v.index for v in ob.data.vertices if (v.co.z >= 1.48 and abs(v.co.x) <= 0.12) or (abs(v.co.x) >= 0.40 and v.co.z <= 1.15) or (1.25 <= v.co.z <= 1.35 and abs(v.co.x) <= 0.05 and v.co.y <= -0.05)]
+        head_only = lv >= 2      # LOD2/3: tangan ikut didecimate (pagu tris lebih ketat)
+        p_idx = [v.index for v in ob.data.vertices
+                 if (v.co.z >= 1.48 and abs(v.co.x) <= 0.12)
+                 or (not head_only and abs(v.co.x) >= 0.40 and v.co.z <= 1.15)
+                 or (1.25 <= v.co.z <= 1.35 and abs(v.co.x) <= 0.05 and v.co.y <= -0.05)]
         vg.add(p_idx, 1.0, "REPLACE")
         mod.vertex_group = "Protect_LOD"
         mod.invert_vertex_group = True

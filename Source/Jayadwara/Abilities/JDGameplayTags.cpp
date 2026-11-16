@@ -34,6 +34,10 @@ namespace JDGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG(Event_Hit_Parried, "Event.Hit.Parried");
 	UE_DEFINE_GAMEPLAY_TAG(Event_Combo_Continue, "Event.Combo.Continue");
 	UE_DEFINE_GAMEPLAY_TAG(Event_Poise_Broken, "Event.Poise.Broken");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Event_HitReact, "Event.HitReact", "Pemicu UJDGA_HitReact; jenis reaksi = tag anak, durasi = EventMagnitude (0 = dari profil)");
+	UE_DEFINE_GAMEPLAY_TAG(Event_HitReact_Light, "Event.HitReact.Light");
+	UE_DEFINE_GAMEPLAY_TAG(Event_HitReact_Stagger, "Event.HitReact.Stagger");
+	UE_DEFINE_GAMEPLAY_TAG(Event_HitReact_Knockdown, "Event.HitReact.Knockdown");
 	UE_DEFINE_GAMEPLAY_TAG(Event_BodyPart_Detached, "Event.BodyPart.Detached");
 	UE_DEFINE_GAMEPLAY_TAG(Event_BodyPart_Reattached, "Event.BodyPart.Reattached");
 
@@ -41,6 +45,7 @@ namespace JDGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG(Data_PoiseDamage, "Data.PoiseDamage");
 	UE_DEFINE_GAMEPLAY_TAG(Data_SyncPenalty, "Data.SyncPenalty");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Data_StaminaRegen, "Data.StaminaRegen", "Stamina per tick UJDGE_StaminaRegen");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Data_PoiseRegen, "Data.PoiseRegen", "Poise per tick UJDGE_PoiseRegen");
 	UE_DEFINE_GAMEPLAY_TAG(Data_Init_MaxHealth, "Data.Init.MaxHealth");
 	UE_DEFINE_GAMEPLAY_TAG(Data_Init_MaxStamina, "Data.Init.MaxStamina");
 	UE_DEFINE_GAMEPLAY_TAG(Data_Init_MaxPoise, "Data.Init.MaxPoise");

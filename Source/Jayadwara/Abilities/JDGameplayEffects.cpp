@@ -53,6 +53,15 @@ UJDGE_StaminaRegen::UJDGE_StaminaRegen()
 	Modifiers.Add(MakeSetByCallerModifier(UJDAttributeSet::GetStaminaAttribute(), EGameplayModOp::Additive, JDGameplayTags::Data_StaminaRegen));
 }
 
+UJDGE_PoiseRegen::UJDGE_PoiseRegen()
+{
+	DurationPolicy = EGameplayEffectDurationType::Infinite;
+	Period = FScalableFloat(TickPeriod);
+	bExecutePeriodicEffectOnApplication = false;
+
+	Modifiers.Add(MakeSetByCallerModifier(UJDAttributeSet::GetPoiseAttribute(), EGameplayModOp::Additive, JDGameplayTags::Data_PoiseRegen));
+}
+
 UJDGE_Damage::UJDGE_Damage()
 {
 	DurationPolicy = EGameplayEffectDurationType::Instant;

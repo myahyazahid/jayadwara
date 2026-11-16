@@ -1,6 +1,6 @@
 # 16 — Panduan Arc 1 "Kebangkitan" (Ep 1–10)
 
-> **Status: USULAN v0.1 (12 Okt 2026)**, menunggu persetujuan developer. Setelah disetujui, dokumen ini menjadi acuan Claude saat membangun episode Arc 1.
+> **Status: DISETUJUI v0.2 (15 Okt 2026)**: keputusan D1–D6 dijawab developer (bagian 9), aturan skala diperbarui (bagian 2.6, keputusan F1 di [31](31-desain-level-ep02.md#9-keputusan-dijawab-developer-15-okt-2026)). Dokumen ini menjadi acuan Claude saat membangun episode Arc 1.
 > Sumber: [04](04-skenario-cerita.md#arc-1--kebangkitan-ep-110) (cerita), [05](05-daftar-episode-boss.md#arc-1--kebangkitan-ep-110) (boss), [07](07-gameplay-sistem.md) (sistem), [11](11-vertical-slice-spec.md) (Ep 1), [12](12-technical-design.md) (arsitektur). Kalau dokumen ini bertentangan dengan dokumen sumber, dokumen sumber yang berlaku sampai keputusannya diperbarui.
 
 **Posisi di roadmap:** Ep 1 = vertical slice (Fase 2, Apr–Des 2027). Ep 2–10 = produksi Season 1 (Fase 4, mulai Apr 2028). Dokumen ini **tidak memajukan jadwal**. Tujuannya supaya sistem yang dibuat untuk Ep 1 sudah disiapkan untuk dipakai ulang di Ep 2–10, dan supaya setiap episode punya arahan yang konsisten.
@@ -45,7 +45,7 @@ Roadmap memberi ±2 bulan per episode ([10](10-roadmap.md#fase-4--produksi-seaso
 - **Maksimal 1 sistem C++ baru** per episode (kolom "Mekanik baru" di tabel 3). Sisanya data/konten.
 - **1 boss baru** (class turunan `AJDBossBase` + StateTree + DataAsset).
 - **Maksimal 1 tipe minion baru**; minion lama boleh dipakai ulang.
-- **Distrik dipakai ulang.** Episode menambah layout/prop lewat Data Layer, tidak membangun distrik baru dari nol (kecuali distrik itu muncul pertama kali).
+- **Distrik dipakai ulang.** Kit distrik (Level Instance) dirangkai ulang di map episode baru, tidak membangun distrik baru dari nol (kecuali distrik itu muncul pertama kali). Lihat [28 bagian 3](28-struktur-level-episode.md#3-kit-distrik-dibangun-sekali-dipakai-ulang).
 - Kalau satu episode butuh lebih dari itu, potong fiturnya atau pindahkan ke backlog.
 
 ### 2.3 Penyegelan (ritual penutup tiap boss)
@@ -75,11 +75,11 @@ Lore: makhluk yang menyerap energi Kala membesar menjadi raksasa ([02](02-settin
 | Mode | Musuh | Ukuran |
 |---|---|---|
 | Manusia (Aksa) | Minion + **wujud awal** makhluknya sebelum membesar | Skala manusia (±1–3 m) |
-| Raksasa (Jayadwara ±45 m) | Boss setelah membesar | Raksasa, **di bawah ukuran Jayadwara** |
+| Raksasa (Jayadwara ±45 m) | Boss setelah membesar | Raksasa, **0,5–1,0× Jayadwara** (lihat di bawah) |
 
-- **Boss Arc 1 = 0,5–0,8× tinggi Jayadwara** (±22–36 m); finale Ep 10 boleh sampai 0,9×. Ukuran per boss ada di tabel 3.
+- **Boss Arc 1 = 0,5–1,0× tinggi Jayadwara** (±22–45 m), ditentukan per boss sesuai cerita. Diperbarui 15 Okt 2026 (keputusan F1): developer ingin boss bisa sama besar dengan Jayadwara, seperti kaiju di serial Ultraman; contoh pertama tuyul raksasa Ep 2 (45 m). Ukuran per boss ada di tabel 3.
 - **Batas bawah 0,5×**: di bawah itu Jayadwara terus memukul ke bawah (kamera sulit, butuh animasi khusus, gedung lebih mudah kena). Boss yang rendah tapi panjang (mis. Babi Ngepet) butuh serangan bawah sebagai pengecualian.
-- **Progresi ukuran antar-arc**: Arc 1 di bawah Jayadwara → Arc 2 mendekati 1× → **Ep 20 Geunteut = raksasa setara pertama** ([05](05-daftar-episode-boss.md#arc-2--gelombang-nusantara-ep-1120)) → Arc 5 lebih besar (Bedawang Nala, Batara Kala). Boss Arc 1 **tidak boleh** setara Jayadwara supaya momen Ep 20 tetap bermakna.
+- **Progresi antar-arc** (diperbarui 15 Okt 2026): yang naik bertahap adalah **kekuatan dan teknik**, bukan hanya tinggi. Boss Arc 1 boleh setinggi Jayadwara tapi bertarung liar/tanpa teknik; **Ep 20 Geunteut = lawan setara pertama**: raksasa humanoid yang menyamai Jayadwara dalam tenaga dan teknik, duel grapple dan dorong-dorongan ([05](05-daftar-episode-boss.md#arc-2--gelombang-nusantara-ep-1120)). Arc 5 lebih besar dari Jayadwara (Bedawang Nala, Batara Kala).
 - Ukuran ditulis relatif ke Jayadwara karena skala final Jayadwara masih placeholder (D4 di [13](13-rencana-model-jayadwara.md), 45 m).
 
 ### 2.7 Aturan konten
@@ -95,7 +95,7 @@ Lore: makhluk yang menyerap energi Kala membesar menjadi raksasa ([02](02-settin
 | Ep | Judul (usulan) | Boss | Ukuran boss | Lokasi | Fokus | **Mekanik baru** | Unlock debrief |
 |---|---|---|---|---|---|---|---|
 | 1 | Gerbang yang Retak | Jerangkong | 0,7× | Situs Lawang Sapta | Aksa | Semua dasar: gerak, silat, scanner, transformasi, combat raksasa, meter (versi dasar) | Jurus spesial #1 |
-| 2 | Tangan-Tangan Kecil | Tuyul | 0,5× | Kampung Kali | Sekar | **Kejar-kejaran + kawanan musuh** | Scanner: jangkauan +50% |
+| 2 | Tangan-Tangan Kecil | Tuyul | 1,0× (fase 1), 0,6× ×3 (fase 2) | Kampung Kali | Sekar | **Kejar-kejaran + kawanan musuh** | Scanner: jangkauan +50% |
 | 3 | Lapar Listrik | Jenglot | 0,55× → 0,8× | Distrik Adikara | Nadia | **Objektif lingkungan saat boss** (putus sumber energi) + boss yang makin kuat | Jurus spesial #2 |
 | 4 | Lilin di Pasar Malam | Babi Ngepet | 0,5× (badan panjang) | Kampung Kali (pasar) | Sekar | **Investigasi warga / dialog** (wawancara sebagai petunjuk) | Silat manusia: finisher baru |
 | 5 | Tali yang Belum Dilepas | Pocong ⚠️ | 0,75× | Kota Lama (makam tua) | Ki Sastro | **Serangan area bertelegraf + bidik bagian tubuh** | Scanner: tandai titik lemah dari jauh |
@@ -150,8 +150,36 @@ Sistem upgrade baru dibangun di Fase 4 ([10](10-roadmap.md#fase-4--produksi-seas
 | **Silat** (berlaku di dua skala) | finisher (Ep 4), cengkeram/lepas (Ep 8) | Ingatan latihan Ki Zahid |
 | **Meter** | kapasitas +15% (Ep 6) | Alat penstabil Nadia |
 
-- Nama dan gerak jurus spesial: berbasis pencak silat + motif Dwarapala (mis. gada, injakan bumi). **Hindari pose dan nama yang mirip Specium Ray** ([01](01-konsep-dan-pilar.md#wajib-dihindari)). Desain jurus #2–#4 ditentukan di Fase 4.
+- Nama dan gerak jurus spesial: berbasis pencak silat + motif Dwarapala (mis. gada, injakan bumi). **Hindari pose dan nama yang mirip Specium Ray** ([01](01-konsep-dan-pilar.md#wajib-dihindari)). Jurus #1 di bawah (keputusan developer 16 Okt 2026); desain jurus #2–#4 ditentukan di Fase 4.
 - Kurva kesulitan: Ep 1–3 pemaaf (checkpoint rapat, meter turun pelan), Ep 4–7 normal, Ep 8–10 menuntut pemain memakai semua mekanik.
+
+### Jurus spesial #1: Ajian Braja Lawang *(keputusan developer 16 Okt 2026)*
+
+Bola petir kuning keemasan yang didorong dua telapak. *Braja* = petir; langkah 3 merujuk legenda Ki Ageng Selo, penangkap petir dari Jawa.
+
+| # | Gerak | Efek |
+|---|---|---|
+| 1 | Berdiri **tegak**, kaki selebar bahu, dua telapak rapat tegak di depan dada (sikap sembah). Tanpa kuda-kuda tengah | Permata dada **menyala selama jurus**, percik petir kuning merambat ke lengan |
+| 2 | Telapak dibuka lalu dihempas ke bawah ke sisi paha; kaki kanan mundur selangkah, badan sedikit turun | Petir menyambar tanah: retak + debu |
+| 3 | Tangan kanan diangkat lurus ke atas | Petir dari langit menyambar telapak |
+| 4 | Tangan kanan turun, menyilang **bentuk X** dengan tangan kiri di depan dada (pergelangan bertemu) | — |
+| 5 | Dua tangan memutar satu lingkaran di depan badan (kembangan silat) | Bola petir terbentuk di antara telapak |
+| 6 | Kaki kanan melangkah maju, badan condong, dua telapak didorong ke depan | Bola petir melesat ke target, meledak saat kena |
+
+- **Dua versi:** sinematik (langkah 1–6, ±4–5 s) saat pertama dipakai di Ep 1; gameplay (langkah 3–6, ±2 s).
+- **Dipakai:** mulai Ep 1 (klimaks, hancurkan tengkorak Jerangkong), terbuka resmi di debrief Ep 1, versi gameplay mulai Ep 2.
+- **Dikerjakan:** Fase 2 (`UJDGA_JurusSpesial01`, [18](18-kebutuhan-episode-1.md)), slot Agu–Sep 2027 bareng boss final, animasi silat, dan VFX. Di Fase 1 diganti finisher/pukulan berat ke tengkorak ([23](23-rencana-fase-1.md)).
+- **Syarat pakai:** boss **stagger** atau titik lemah terbuka (berfungsi sebagai finisher); tidak ada meter baru.
+- **Proyektil, bukan sinar:** meleset lalu kena gedung → kerusakan gedung + penalti Sync seperti sumber lain.
+- **Batas IP** ([01](01-konsep-dan-pilar.md#wajib-dihindari)): silang hanya **X**, tidak pernah **L** atau **+**, dan energi tidak keluar dari posisi silang. Permata dada hanya menyala selama jurus lalu padam, **tidak pernah berkedip** sebagai penanda status/waktu (lihat K1 di [14](14-model-sheet-jayadwara.md)).
+- **Kaitan Ep 3:** Jenglot menyerap listrik, jadi Braja Lawang justru **menguatkannya**. Ini alasan cerita Jayadwara butuh jurus #2.
+
+### Senjata *(usulan developer 16 Okt 2026, mulai Ep 3)*
+
+- **Aksa: kujang**, **Jayadwara: keris** pusaka sang penjaga (bilah ber-luk, pamor menyala), dipanggil dari kalung lewat gerbang cahaya. Bilah berwujud fisik, **bukan** bilah cahaya yang keluar dari lengan (beda dari Mebium Blade).
+- Senjata = **jurus/mode tambahan**; combo silat tangan kosong tetap inti. Fase 1–2 tetap tangan kosong. Dikerjakan di **Fase 4** saat produksi Ep 3.
+- **Satu moveset**: combo senjata sama di dua skala (sabet, sabet, tusuk, finisher); beda bentuk hitbox, efek, dan animasi lewat `UJDCombatProfile` per senjata.
+- **Belum diputuskan:** asal-usul kujang Aksa (keluarga Mangkubumi Jawa, kujang dari Sunda), misalnya dibuat DWARA/Nadia atau ditemukan saat misi Ep 3. Ditentukan di Fase 4.
 
 ---
 
@@ -173,7 +201,7 @@ Batas scope ada di [11-vertical-slice-spec.md](11-vertical-slice-spec.md); skena
   - Fase 1: lari dan mencuri properti warga (mobil, gerobak). Kejar dan pukul untuk menjatuhkan.
   - Fase 2: tubuhnya pecah lagi jadi 3 tuyul besar, hanya satu yang asli. **Kelemahan:** pola rute dari CCTV menandai yang asli.
 - **Meter:** gang sempit = mudah merusak rumah. Mengajarkan pemain bahwa mengejar membabi buta itu mahal.
-- **Catatan:** tuyul boleh lucu dan jahil, cocok untuk episode kedua yang ringan.
+- **Catatan (diperbarui 16 Okt 2026, keputusan developer):** tuyul **seram dan body-horror**, bukan lucu. Model ([27](27-rencana-model-tuyul.md)) sengaja memuat sosok kecil menyerupai bayi/tengkorak dan tangan kecil yang menempel di perut, bahu, dan punggung. Ini **pengecualian** atas "seram boleh, gore tidak" di tabel Tema: tidak ada darah atau luka basah, merah hanya emissive (energi Kala). Nada jahil-kejam diatur lewat animasi dan SFX, bukan model. Catat untuk rating (target remaja) dan formulir Steam. Kemiripan visual dengan Wewe Gombel ([Ep 8](#ep-8--kentongan-tengah-malam--wewe-gombel), anak-anak di tubuh boss) **dibiarkan**; kalau terbaca membingungkan di game, pembeda visual jadi tugas polish.
 
 ### Ep 3 — Lapar Listrik · Jenglot
 - **Pembuka wayang:** jenglot sebagai sosok kecil yang "haus" dan disimpan sebagai jimat.
@@ -184,6 +212,7 @@ Batas scope ada di [11-vertical-slice-spec.md](11-vertical-slice-spec.md); skena
   - Fase 2: boss yang sudah lemah mengamuk; selesaikan dengan combat. **Kelemahan:** jimat menunjukkan intinya di dada boss.
 - **Meter:** gardu harus diputus tanpa meruntuhkan gedung di sampingnya.
 - **Catatan:** pertumbuhan boss dibatasi per fase, **bukan timer menit**, supaya tidak terasa seperti batas waktu transformasi (aturan IP).
+- **Jurus #1 gagal:** Ajian Braja Lawang (petir) diserap dan membuat boss membesar; debrief membuka jurus #2. **Senjata** pertama kali didapat di episode ini (bagian 5).
 
 ### Ep 4 — Lilin di Pasar Malam · Babi Ngepet
 - **Pembuka wayang:** babi ngepet yang mencuri sementara rekannya menjaga lilin. Lilin yang bergoyang tanda bahaya.
@@ -276,15 +305,17 @@ Mengikuti arsitektur [12](12-technical-design.md):
 - **Satu episode = satu `UJDEpisodeData`** (`DA_Ep02_Tuyul`, dst.): ID, judul, boss class, daftar clue (`Clue.Ep02.*`), DataTable dialog (`DT_Dialogue_Ep02`), sequence, unlock.
 - **Boss:** `AJDBoss_<Nama>` turunan `AJDBossBase` + StateTree `ST_Boss_<Nama>`. Fase dan transisi didefinisikan di data, bukan hardcode.
 - **Mekanik baru per episode** = komponen atau subsystem generik yang bisa dipakai episode lain (mis. `UJDFireSpreadSubsystem`, `UJDBodyZoneComponent`, `UJDEnvironmentObjective`), **bukan** logic khusus satu boss.
-- **Map:** Ep 1 = `Ep01_LawangSapta` (vertical slice). Ep 2–10 diusulkan memakai satu map `Arunapura` (World Partition) dengan **Data Layer per episode** (`DL_Ep02`, ...). Ini diputuskan saat Fase 4 dimulai, setelah uji performa.
+- **Map:** satu map per episode (`Ep01_LawangSapta`, `Ep02_KampungKali`, ...) ala Resident Evil 4, distrik dipakai ulang sebagai kit Level Instance; rincian per episode di [28](28-struktur-level-episode.md) (usulan 15 Okt 2026). Usulan lama satu map `Arunapura` (World Partition + Data Layer per episode) **diarsipkan** di [28 bagian 9](28-struktur-level-episode.md#9-arsip-konsep-satu-map-arunapura).
 - **Tag & penamaan:** `Clue.EpNN.<Nama>`, `Boss.EpNN`, `Unlock.<Jalur>.<Nama>`.
 - **Definisi selesai per episode:** bisa dimainkan dari briefing sampai debrief; semua petunjuk ★ bisa ditemukan; boss bisa dikalahkan dengan **dan** tanpa kelemahan; checklist IP & budaya dicek; tidak ada crash dalam satu playthrough.
 
 ---
 
-## 9. Keputusan yang Perlu Dijawab Developer
+## 9. Keputusan (dijawab developer 15 Okt 2026)
 
-| # | Pertanyaan | Usulan Claude |
+Semua dijawab developer 15 Okt 2026 sesuai usulan.
+
+| # | Pertanyaan | Keputusan ✅ |
 |---|---|---|
 | **D1** | Syarat transformasi ([08 keputusan terbuka #1](08-requirement-produksi.md#keputusan-terbuka)) untuk Arc 1? | **Terjadi di momen cerita** (setelah konfrontasi manusia). Paling mudah diatur untuk arc tutorial; transformasi bebas dipertimbangkan di Arc 2 |
 | **D2** | Meter di Ep 1 versus tutorial meter di Ep 6? | Ep 1 = versi dasar (**hanya turun**, sesuai [11](11-vertical-slice-spec.md)); Ep 6 = mekanik naik + api menyebar |

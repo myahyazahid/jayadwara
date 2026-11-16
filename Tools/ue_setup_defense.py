@@ -34,6 +34,9 @@ BLOCK = {"name": "AM_Aksa_Block", "seq": f"{SEQS}/A_Aksa_Attack_02", "hold": 0.7
 STAGGER = {"name": "AM_Aksa_Stagger", "seq": f"{SEQS}/A_Aksa_Stagger",
            "source": "/Game/Characters/Mannequins/Anims/Rifle/HitReact/MM_HitReact_Front_Hvy_01"}
 DODGE_SOURCES = {}     # {"Forward": "/Game/.../A_Aksa_Dodge_F", ...} (montage dibuat AM_Aksa_Dodge_<arah>)
+# Hasil Tools/ue_import_mixamo.py (dodge_back/left/right/forward) mengisi arah yang belum ada di DODGE_SOURCES.
+MIXAMO = f"{AKSA}/Anims/Mixamo"
+MIXAMO_DODGE = {"Forward": "dodge_forward", "Backward": "dodge_back", "Left": "dodge_left", "Right": "dodge_right"}
 
 HUMAN = {"dodge_distance": 400.0, "dodge_duration": 0.35, "dodge_i_frame_start": 0.0, "dodge_i_frame_duration": 0.25,
          "dodge_stamina_cost": 20.0, "block_hold_time": BLOCK["hold"], "block_damage_reduction": 0.8,
@@ -185,8 +188,12 @@ def fill_defense(prof, values, block_montage, stagger_montage, dodge_montages):
 def setup_human(stagger):
     heavy = make_montage(MONTAGES, HEAVY["name"], HEAVY["seq"], HEAVY["hit"])
     block = make_montage(MONTAGES, BLOCK["name"], BLOCK["seq"], blend_in=0.1, blend_out=0.15)
+    sources = dict(DODGE_SOURCES)
+    for d, role in MIXAMO_DODGE.items():
+        if d not in sources and EAL.does_asset_exist(f"{MIXAMO}/A_Aksa_Mx_{role}"):
+            sources[d] = f"{MIXAMO}/A_Aksa_Mx_{role}"
     dodges = {d: make_montage(MONTAGES, f"AM_Aksa_Dodge_{d}", src, blend_in=0.05, blend_out=0.15)
-              for d, src in DODGE_SOURCES.items()}
+              for d, src in sources.items()}
 
     prof = load(f"{DATA}/DA_CombatProfile_Human")
     if not prof:

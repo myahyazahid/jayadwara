@@ -43,6 +43,7 @@ void UJDAbilitySet::GiveToAbilitySystem(UJDAbilitySystemComponent* ASC, FJDAbili
 	}
 
 	ASC->ConfigureStaminaRegen(Attributes.StaminaRegenPerSecond, Attributes.StaminaRegenDelay);
+	ASC->ConfigurePoiseRegen(Attributes.PoiseRegenPerSecond, Attributes.PoiseRegenDelay);
 	ASC->SetInputBufferTime(InputBufferTime);
 
 	for (const FJDAbilitySet_Effect& Entry : Effects)

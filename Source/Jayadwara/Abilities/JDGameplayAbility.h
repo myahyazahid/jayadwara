@@ -52,7 +52,7 @@ protected:
 
 	/**
 	 * Laju montage yang membuat animasi terlihat berjalan pada Profile->MontagePlayRate x StepRate. Mesh raksasa sudah
-	 * diperlambat GlobalAnimRateScale (1/sqrt(skala) ≈ 0,2, untuk locomotion), jadi dikompensasi di sini.
+	 * diperlambat GlobalAnimRateScale (speed / skala, ±0,6 ala Mebius, untuk locomotion), jadi dikompensasi di sini.
 	 */
 	float GetMontageRate(float StepRate = 1.0f) const;
 
@@ -62,9 +62,18 @@ protected:
 	/** Arah input gerak di bidang datar (ternormalisasi), nol kalau tidak ada input. */
 	FVector GetInputDirection2D() const;
 
+	/**
+	 * Putar & tarik avatar ke soft target searah input sebelum pukulan (UJDTargetingComponent, Iterasi 4). Hanya pemain;
+	 * tanpa target = tetap menghadap input. Return target (boleh null).
+	 */
+	AActor* WarpToSoftTarget() const;
+
 	/** Gagal aktif kalau Stamina < Cost (docs/23 Iterasi 3: tidak bisa spam dodge/tangkis/berat). */
 	static bool HasStamina(const FGameplayAbilityActorInfo* ActorInfo, float Cost);
 	void SpendStamina(float Cost) const;
+
+	/** Avatar sedang melompat/jatuh (serangan udara; dodge & tangkis tidak bisa di udara). */
+	static bool IsAvatarFalling(const FGameplayAbilityActorInfo* ActorInfo);
 
 	/** Batalkan ability lain milik avatar yang punya salah satu tag ini. */
 	void CancelAbilitiesWithAnyTag(std::initializer_list<FGameplayTag> Tags);

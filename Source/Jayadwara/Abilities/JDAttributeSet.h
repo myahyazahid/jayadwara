@@ -54,7 +54,7 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stamina")
 	FGameplayAttributeData MaxStamina;
 
-	/** Habis -> stagger (Iterasi 4). */
+	/** Habis -> stagger / knockdown (UJDCombatComponent::ChooseHitReaction); regen setelah jeda tanpa kena. */
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Poise")
 	FGameplayAttributeData Poise;
 

@@ -1,0 +1,119 @@
+{
+  "mesh": "SK_Tuyul",
+  "export_scale": 1.0,
+  "note": "posisi rest; ue_component_cm = (x, -y, z) x 100 x export_scale (konvensi docs/13 Iterasi 6)",
+  "sockets": [
+    {
+      "name": "SOCKET_head_top",
+      "bone": "head",
+      "blender_m": [
+        0.0,
+        -0.02,
+        0.97
+      ],
+      "ue_component_cm": [
+        0.0,
+        2.0,
+        97.0
+      ]
+    },
+    {
+      "name": "SOCKET_mouth_fx",
+      "bone": "jaw",
+      "blender_m": [
+        0.0,
+        -0.2,
+        0.83
+      ],
+      "ue_component_cm": [
+        0.0,
+        20.0,
+        83.0
+      ]
+    },
+    {
+      "name": "SOCKET_hand_l_hit",
+      "bone": "hand_l",
+      "blender_m": [
+        0.24362,
+        -0.02419,
+        0.2084
+      ],
+      "ue_component_cm": [
+        24.362,
+        2.419,
+        20.84
+      ]
+    },
+    {
+      "name": "SOCKET_carry_l",
+      "bone": "hand_l",
+      "blender_m": [
+        0.248,
+        -0.022,
+        0.238
+      ],
+      "ue_component_cm": [
+        24.8,
+        2.2,
+        23.8
+      ]
+    },
+    {
+      "name": "SOCKET_foot_l_hit",
+      "bone": "foot_l",
+      "blender_m": [
+        0.13,
+        -0.06,
+        0.03
+      ],
+      "ue_component_cm": [
+        13.0,
+        6.0,
+        3.0
+      ]
+    },
+    {
+      "name": "SOCKET_hand_r_hit",
+      "bone": "hand_r",
+      "blender_m": [
+        -0.24286,
+        -0.02,
+        0.21244
+      ],
+      "ue_component_cm": [
+        -24.286,
+        2.0,
+        21.244
+      ]
+    },
+    {
+      "name": "SOCKET_carry_r",
+      "bone": "hand_r",
+      "blender_m": [
+        -0.248,
+        -0.02,
+        0.242
+      ],
+      "ue_component_cm": [
+        -24.8,
+        2.0,
+        24.2
+      ]
+    },
+    {
+      "name": "SOCKET_foot_r_hit",
+      "bone": "foot_r",
+      "blender_m": [
+        -0.13,
+        -0.06,
+        0.03
+      ],
+      "ue_component_cm": [
+        -13.0,
+        6.0,
+        3.0
+      ]
+    }
+  ]
+}

@@ -38,7 +38,7 @@ DWARA membuka operasi regional. Di tiap titik gerbang **selalu ada proyek Adikar
 - Ep 18 Harimau Cindaku — misi Bayu.
 - Ep 19 Begu Ganjang — Nadia memecahkan mekanik pantulan.
 
-**Akhir arc (Ep 20, Geunteut)**: Aksa mengalahkan monster setara raksasa pertama, tapi tubuhnya mulai menyerap energi Kala terlalu banyak.
+**Akhir arc (Ep 20, Geunteut)**: Aksa mengalahkan lawan setara pertama (tenaga dan teknik menyamai Jayadwara), tapi tubuhnya mulai menyerap energi Kala terlalu banyak.
 
 ---
 

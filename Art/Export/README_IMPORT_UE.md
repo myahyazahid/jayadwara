@@ -121,3 +121,7 @@ Status 12 Okt 2026 (dicek Claude lewat Python + capture; detail di docs/13 Itera
 - LOD3 sedikit belang di paha karena normal halus ikut di-decimate. Masih wajar untuk jarak jauh.
 - Tekstur masih versi otomatis (hand-paint belum).
 - File Blender sumber: `Art/Blender/jayadwara/jayadwara_giant_v05_revisi.blend`. Untuk membangun ulang paket: `Art/Scripts/16_make_lods.py` (urutan lengkap di `Art/README.md`).
+
+## 9. Tuyul (16 Okt 2026)
+
+Paket Tuyul di `Art/Export/`: `SK_Tuyul`, `SK_TuyulBesar`, `SK_TuyulRaksasa` (+ `_LOD1..3`), `SK_Tuyul*_sockets.json` (8 socket, `ue_component_cm` sudah dikali skala), dan `Textures_Tuyul/T_Tuyul_{Color,N,ORM,Emit}.png`. Ukuran di-bake di FBX (100 cm / 2700 cm / 4500 cm), **bukan** skala actor. Skeleton 52 tulang bernama Mannequin + `jaw`, tangan 3 jari. Impor lewat `Tools/ue_import_tuyul.py` lalu `Tools/ue_setup_tuyul.py`; kombinasi wajib sama seperti Aksa2 (`BAKE_CM`=100 di FBX, importer FBX lama, Compatible Skeleton SK_Mannequin tersimpan di `SKEL_Tuyul`). Detail, uji, dan risiko: [docs/27](../../docs/27-rencana-model-tuyul.md).

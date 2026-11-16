@@ -22,6 +22,19 @@ enum class EJDHitOutcome : uint8
 	Parried
 };
 
+/** Reaksi korban yang kena pukul (docs/23 Iterasi 4, UJDGA_HitReact). Urutan = prioritas (tidak pernah diturunkan). */
+UENUM(BlueprintType)
+enum class EJDHitReaction : uint8
+{
+	None,
+	/** Poise masih ada: sentak sebentar. */
+	Light,
+	/** Poise habis (atau guard break / di-parry): terhuyung, tidak bisa apa-apa. */
+	Stagger,
+	/** Poise habis oleh serangan bertanda Jatuh: jatuh, terbaring, bangun kebal. */
+	Knockdown
+};
+
 /** Pukulan kena: korban, titik kena, langkah serangan. */
 DECLARE_MULTICAST_DELEGATE_ThreeParams(FJDHitLandedEvent, AActor* /*Victim*/, const FHitResult& /*Hit*/, const FJDAttackStep& /*Attack*/);
 
@@ -34,9 +47,13 @@ DECLARE_MULTICAST_DELEGATE_ThreeParams(FJDHitLandedEvent, AActor* /*Victim*/, co
  * dan pemain mendapat camera shake. Satu korban maksimal satu kali per serangan.
  *
  * Bertahan (Iterasi 3): komponen milik korban memutuskan hasilnya (ResolveIncomingHit) dari tag ASC-nya:
- * State.Invulnerable -> Dodged, State.ParryWindow -> Parried (penyerang stagger), State.Blocking -> Blocked/GuardBreak.
- * Tangkis & parry hanya berlaku untuk serangan dari depan (BlockAngle). Stagger sementara (ApplyStagger) membatalkan
- * ability combat, memasang State.Stagger, dan menahan gerak; reaksi lengkap (poise, knockdown) di Iterasi 4.
+ * State.Invulnerable -> Dodged, State.ParryWindow -> Parried (penyerang stagger, penangkis menepis lalu boleh serangan
+ * balik: HandleParrySuccess), State.Blocking -> Blocked/GuardBreak.
+ * Tangkis & parry hanya berlaku untuk serangan dari depan (BlockAngle).
+ *
+ * Reaksi (Iterasi 4): pukulan yang kena (tidak ditangkis) memilih reaksi korban dari poise-nya (ChooseHitReaction):
+ * poise masih ada = ringan, poise habis = stagger, habis oleh serangan bertanda Jatuh = knockdown. Reaksi dijalankan
+ * UJDGA_HitReact lewat Gameplay Event (ApplyHitReaction), di frame berikutnya.
  */
 UCLASS(ClassGroup = (Jayadwara), meta = (BlueprintSpawnableComponent))
 class JAYADWARA_API UJDCombatComponent : public UActorComponent
@@ -57,24 +74,77 @@ public:
 
 	bool IsAttacking() const { return bAttackActive; }
 
+	/**
+	 * Target terdekat dalam Radius, ke segala arah. Dipakai pembuka arah (pukul mundur) kalau soft target tidak menemukan
+	 * apa pun searah input (UJDTargetingComponent).
+	 */
+	AActor* FindNearestTarget(float Radius) const;
+
+	/** Other boleh dijadikan target oleh Owner: terlihat, hidup, beda pihak (dikendalikan pemain vs tidak), punya combat. */
+	static bool IsValidTarget(const APawn* Owner, const APawn* Other);
+
+	/** Langkah combo ringan yang sedang jalan (dipanggil UJDGA_LightAttack; INDEX_NONE = combo berakhir). */
+	void SetLightComboStep(int32 Step, bool bWasCancelled = false);
+
+	/**
+	 * Langkah combo ringan untuk cabang finisher pukulan berat: langkah yang sedang jalan, atau yang baru dipotong di frame
+	 * ini (pukulan berat membatalkan combo sebelum ActivateAbility-nya jalan). INDEX_NONE = dari diam.
+	 */
+	int32 GetComboStepForFinisher() const;
+
+	/** Masih boleh pukulan udara di lompatan ini (UJDCombatProfile::AirComboMax). */
+	bool CanAirAttack() const;
+	void NoteAirAttack() { ++AirAttacksUsed; }
+
+	/**
+	 * Serangan area (hantaman ke bawah): semua karakter ber-ASC dalam Radius dari Center kena CurrentAttack lewat jalur hit
+	 * biasa (tangkis/parry/dodge, hit-stop, cue). Shake kamera pemain tetap jalan walau tidak ada yang kena.
+	 */
+	void ApplyAreaHit(const FVector& Center, float Radius);
+
+	/** Pemilik mendarat (reset hitungan pukulan udara; hantaman ke bawah menunggu ini). */
+	FSimpleMulticastDelegate OnLanded;
+
 	/** Serangan berjalan tapi jendela hit sudah lewat: boleh dibatalkan dodge/tangkis (docs/23 bagian 5). */
 	bool IsInAttackRecovery() const { return bAttackActive && bHitWindowDone; }
 
 	/** Dipanggil komponen penyerang saat pukulannya mengenai pemilik komponen ini. Mengurangi stamina kalau ditangkis. */
 	EJDHitOutcome ResolveIncomingHit(const AActor* Attacker);
 
-	/** Stagger selama Duration detik (dibatalkan ability combat, gerak ditahan, StaggerMontage profil diputar). */
-	void ApplyStagger(float Duration);
+	/**
+	 * Pemilik komponen ini berhasil parry pukulan Attacker (dipanggil komponen penyerang): tangkis dibatalkan, tepisan
+	 * ParryMontages diputar bergantian menghadap penyerang, shake kamera, slow-mo setelah hit-stop (kalau pemain
+	 * terlibat), dan jendela serangan balik dibuka (docs/07 "Parry").
+	 */
+	void HandleParrySuccess(AActor* Attacker);
+
+	/** Penyerang yang baru di-parry kalau jendela serangan balik masih terbuka (sekali pakai), selain itu nullptr. */
+	AActor* ConsumeCounterTarget();
+
+	/** Stagger selama Duration detik (guard break, di-parry), lewat UJDGA_HitReact. Instigator = arah hadap & dorongan. */
+	void ApplyStagger(float Duration, AActor* Instigator = nullptr);
+
+	/** Jalankan reaksi kena pada pemilik (UJDGA_HitReact). Duration > 0 menimpa durasi profil. */
+	void ApplyHitReaction(EJDHitReaction Reaction, AActor* Instigator, float Duration = 0.0f);
+
+	/**
+	 * Reaksi pemilik untuk pukulan yang baru kena (tidak ditangkis). bPoiseBroken = pukulan ini menghabiskan poise;
+	 * bKnockdownAttack = serangan bertanda Jatuh. None = tanpa reaksi (mati, sedang knockdown, atau tahan sentak).
+	 */
+	EJDHitReaction ChooseHitReaction(bool bPoiseBroken, bool bKnockdownAttack) const;
 
 	bool IsStaggered() const;
+	bool IsKnockedDown() const;
 
-	void BeginHitWindow(FName SocketName, float RadiusOverride);
+	/** bNewHit = korban jendela sebelumnya boleh kena lagi (jurus 2× kena). */
+	void BeginHitWindow(FName SocketName, float RadiusOverride, bool bNewHit = false);
 	void UpdateHitWindow();
 	void EndHitWindow();
 
 	FJDHitLandedEvent OnHitLanded;
 
 protected:
+	virtual void BeginPlay() override;
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
 	/** Angka combat skala karakter ini (DA_CombatProfile_*). */
@@ -82,12 +152,19 @@ protected:
 	TObjectPtr<UJDCombatProfile> CombatProfile;
 
 private:
+	UFUNCTION()
+	void HandleLanded(const FHitResult& Hit);
+
+	void PlayHitCameraShake() const;
 	USkeletalMeshComponent* GetOwnerMesh() const;
 	FVector GetSocketLocation() const;
 	void ProcessHit(const FHitResult& Hit);
-	void StartHitStop(AActor* Victim, float DurationScale = 1.0f);
+	void StartHitStop(AActor* Victim);
+	void StartHitStop(AActor* Victim, float Duration, float TimeDilation);
 	void EndHitStop();
-	void EndStagger();
+	void PlayParryDeflect(TWeakObjectPtr<AActor> Attacker);
+	void StartParrySlowMo();
+	void EndParrySlowMo();
 	void ShowDebugMessage(const FString& Message, const FColor& Color) const;
 
 	FJDAttackStep CurrentAttack;
@@ -105,5 +182,15 @@ private:
 	TArray<TWeakObjectPtr<AActor>> HitStopActors;
 	FTimerHandle HitStopTimer;
 
-	FTimerHandle StaggerTimer;
+	int32 ParryVariant = 0;
+	TWeakObjectPtr<AActor> CounterTarget;
+	double CounterExpireRealTime = 0.0;
+	FTimerHandle ParrySlowMoTimer;
+	bool bParrySlowMoActive = false;
+
+	int32 LightComboStep = INDEX_NONE;
+	int32 CancelledLightComboStep = INDEX_NONE;
+	uint64 CancelledLightComboFrame = 0;
+
+	int32 AirAttacksUsed = 0;
 };

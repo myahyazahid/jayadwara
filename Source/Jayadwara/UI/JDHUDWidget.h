@@ -8,6 +8,7 @@ class UAbilitySystemComponent;
 class UProgressBar;
 class UTextBlock;
 class UVerticalBox;
+class UWidget;
 struct FGameplayAttribute;
 
 /**
@@ -15,9 +16,12 @@ struct FGameplayAttribute;
  * dikendalikan (ikut berganti saat transformasi) setiap frame.
  *
  * Bisa dipakai langsung (tanpa WBP): kalau tidak ada layout dari Widget Blueprint, kelas ini membuat sendiri bar
- * Health/Stamina di kiri bawah. WBP_HUD_* turunan boleh menaruh ProgressBar bernama HealthBar, StaminaBar, SyncBar,
- * TransformEnergyBar (+ TextBlock *Text) di mana saja; yang tidak ada dilewati. Bar untuk atribut ber-Max 0
+ * Health/Stamina di kiri bawah. WBP_HUD_* turunan boleh menaruh ProgressBar bernama HealthBar, StaminaBar, PoiseBar,
+ * SyncBar, TransformEnergyBar (+ TextBlock *Text) di mana saja; yang tidak ada dilewati. Bar untuk atribut ber-Max 0
  * disembunyikan (mis. Sync saat jadi Aksa).
+ *
+ * Penanda soft target (Iterasi 4): widget TargetMarker (anak langsung Canvas Panel) dipindah tiap frame ke atas kepala
+ * UJDTargetingComponent::GetSoftTarget pawn pemain; disembunyikan kalau tidak ada target.
  */
 UCLASS()
 class JAYADWARA_API UJDHUDWidget : public UUserWidget
@@ -49,6 +53,9 @@ protected:
 	TObjectPtr<UProgressBar> StaminaBar;
 
 	UPROPERTY(BlueprintReadOnly, Category = "HUD", meta = (BindWidgetOptional))
+	TObjectPtr<UProgressBar> PoiseBar;
+
+	UPROPERTY(BlueprintReadOnly, Category = "HUD", meta = (BindWidgetOptional))
 	TObjectPtr<UProgressBar> SyncBar;
 
 	UPROPERTY(BlueprintReadOnly, Category = "HUD", meta = (BindWidgetOptional))
@@ -61,7 +68,14 @@ protected:
 	TObjectPtr<UTextBlock> StaminaText;
 
 	UPROPERTY(BlueprintReadOnly, Category = "HUD", meta = (BindWidgetOptional))
+	TObjectPtr<UTextBlock> PoiseText;
+
+	UPROPERTY(BlueprintReadOnly, Category = "HUD", meta = (BindWidgetOptional))
 	TObjectPtr<UTextBlock> SyncText;
+
+	/** Penanda di atas soft target. Harus anak langsung Canvas Panel (posisinya diatur lewat slot canvas). */
+	UPROPERTY(BlueprintReadOnly, Category = "HUD", meta = (BindWidgetOptional))
+	TObjectPtr<UWidget> TargetMarker;
 
 	UPROPERTY(BlueprintReadOnly, Category = "HUD", meta = (BindWidgetOptional))
 	TObjectPtr<UTextBlock> TransformEnergyText;
@@ -75,4 +89,5 @@ private:
 	void AddDefaultRow(UVerticalBox* Box, const FText& Label, const FLinearColor& Color, TObjectPtr<UProgressBar>& OutBar, TObjectPtr<UTextBlock>& OutText);
 
 	void UpdateRow(UProgressBar* Bar, UTextBlock* Text, const FGameplayAttribute& Value, const FGameplayAttribute& Max) const;
+	void UpdateTargetMarker();
 };

@@ -4,11 +4,12 @@
 #include "GameplayCueNotify_Static.h"
 #include "JDGameplayCueNotify_Sound.generated.h"
 
+class UNiagaraSystem;
 class USoundBase;
 
 /**
- * Gameplay Cue sekali-bunyi (docs/23 R5): putar salah satu Sounds secara acak di titik kena, pitch acak tipis.
- * Dipakai lewat Blueprint turunan GC_* di /Game/Jayadwara/Abilities/GameplayCues (Gameplay Cue Tag di Class Defaults),
+ * Gameplay Cue sekali-bunyi (docs/23 R5): putar salah satu Sounds secara acak di titik kena, pitch acak tipis, plus
+ * efek Niagara opsional (mis. percikan parry) di titik yang sama, menghadap normal kena. Dipakai lewat Blueprint turunan GC_* di /Game/Jayadwara/Abilities/GameplayCues (Gameplay Cue Tag di Class Defaults),
  * dibuat Tools/ue_setup_combat.py. Ganti SFX placeholder -> final cukup mengganti isi Sounds.
  */
 UCLASS(Blueprintable)
@@ -29,4 +30,12 @@ public:
 	/** Pitch acak antara X dan Y (raksasa: turunkan, mis. 0,6-0,7). */
 	UPROPERTY(EditDefaultsOnly, Category = "Sound")
 	FVector2D PitchRange = FVector2D(0.94f, 1.06f);
+
+	/** Efek sekali-jalan di titik kena (kosong = suara saja). */
+	UPROPERTY(EditDefaultsOnly, Category = "Effect")
+	TObjectPtr<UNiagaraSystem> Effect;
+
+	/** Skala efek (raksasa: perbesar). */
+	UPROPERTY(EditDefaultsOnly, Category = "Effect", meta = (ClampMin = "0.01"))
+	float EffectScale = 1.0f;
 };

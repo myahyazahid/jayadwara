@@ -7,8 +7,10 @@
 #include "Characters/JDCharacterBase.h"
 #include "Combat/JDCombatComponent.h"
 #include "Combat/JDCombatProfile.h"
+#include "Combat/JDTargetingComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "GameFramework/Character.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 UJDGameplayAbility::UJDGameplayAbility()
 {
@@ -79,6 +81,13 @@ FVector UJDGameplayAbility::GetInputDirection2D() const
 	return Direction.SizeSquared() > 0.01f ? Direction.GetSafeNormal() : FVector::ZeroVector;
 }
 
+AActor* UJDGameplayAbility::WarpToSoftTarget() const
+{
+	const AActor* Avatar = GetAvatarActorFromActorInfo();
+	UJDTargetingComponent* Targeting = Avatar ? Avatar->FindComponentByClass<UJDTargetingComponent>() : nullptr;
+	return Targeting ? Targeting->WarpForAttack(GetInputDirection2D()) : nullptr;
+}
+
 void UJDGameplayAbility::FaceInputDirection() const
 {
 	AActor* Avatar = GetAvatarActorFromActorInfo();
@@ -102,6 +111,12 @@ void UJDGameplayAbility::SpendStamina(float Cost) const
 		// Lewat base value: delegate perubahan Stamina memicu jeda regen di UJDAbilitySystemComponent.
 		ASC->ApplyModToAttribute(UJDAttributeSet::GetStaminaAttribute(), EGameplayModOp::Additive, -Cost);
 	}
+}
+
+bool UJDGameplayAbility::IsAvatarFalling(const FGameplayAbilityActorInfo* ActorInfo)
+{
+	const ACharacter* Character = ActorInfo ? Cast<ACharacter>(ActorInfo->AvatarActor.Get()) : nullptr;
+	return Character && Character->GetCharacterMovement() && Character->GetCharacterMovement()->IsFalling();
 }
 
 void UJDGameplayAbility::CancelAbilitiesWithAnyTag(std::initializer_list<FGameplayTag> Tags)

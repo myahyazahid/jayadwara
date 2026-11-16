@@ -5,8 +5,9 @@ Membuat / mengisi ulang:
   /Game/Jayadwara/Characters/Jayadwara/BP_Jayadwara   parent AJDGiantCharacter, SK_Jayadwara (45 m ter-bake) + ABP_Jayadwara, IA_*
   /Game/Jayadwara/Core/BP_JDGameMode_Giant             pawn BP_Jayadwara (uji; transformasi sungguhan di Fase 1)
   /Game/Jayadwara/Maps/Test_GiantScale                 salinan Test_Greybox dengan GameMode Override di atas
-  Anims/BS_Idle_Walk_Run_JD: sumbu Speed = nilai BlendSpace Mannequin x sqrt(skala raksasa), pasangan dari
-  GlobalAnimRateScale = 1/sqrt(skala) di AJDGiantCharacter (skala Froude). Jalankan ulang kalau GiantHeightCm berubah.
+  Anims/BS_Idle_Walk_Run_JD: sumbu Speed = nilai BlendSpace Mannequin x GetSpeedScale(), pasangan dari
+  GlobalAnimRateScale = speed / skala di AJDGiantCharacter. Jalankan ulang kalau GiantHeightCm atau SpeedScaleExponent berubah
+  (atau cukup Tools/ue_setup_giant_speed.py).
   Mesh/PA_Jayadwara: dibangun ulang, 1 kapsul per anggota badan (PA_BODIES), tanpa selendang/kain/IK.
   Anims/ABP_Jayadwara: node Anim Dynamics untuk 4 rantai selendang/kain (docs/13 D5), dengan bola penolak di paha.
 Langkah PA & Anim Dynamics butuh modul editor C++ JayadwaraEditor (unreal.JDEditorToolsLibrary).
@@ -130,8 +131,9 @@ def main():
                        ("jump_action", "/Game/Input/Actions/IA_Jump")):
         d.set_editor_property(prop, EAL.load_asset(path))
     finish(bp)
-    giant_scale = unreal.get_default_object(bp.generated_class()).get_giant_scale()
-    scale_blendspace(giant_scale ** 0.5)
+    d = unreal.get_default_object(bp.generated_class())
+    giant_scale = d.get_giant_scale()
+    scale_blendspace(d.get_speed_scale())
     setup_physics_asset()
     setup_anim_dynamics(giant_scale)
 

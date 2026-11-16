@@ -37,7 +37,7 @@ Tanda ⚠️ = perlu penanganan hati-hati secara budaya — lihat [06-referensi-
 | 17 | **Suanggi** ⚠️ | Maluku / Papua | Maluku–Papua | Kutukan yang membalik kontrol; hancurkan sumber kutukan | Ki Sastro |
 | 18 | **Harimau Cindaku** | Kerinci | Hutan Kerinci | Predator sangat cepat; menang dengan timing counter | Bayu |
 | 19 | **Begu Ganjang** ⚠️ | Batak | Toba | Makin tinggi kalau dilihat; lawan lewat pantulan / tanpa menatap langsung | Nadia |
-| 20 | **Geunteut** | Aceh | Pesisir Aceh | **Finale arc.** Pertarungan raksasa vs raksasa setara pertama | Kol. Bagas |
+| 20 | **Geunteut** | Aceh | Pesisir Aceh | **Finale arc.** Lawan setara pertama: raksasa yang menyamai Jayadwara dalam tenaga dan teknik | Kol. Bagas |
 
 ## Arc 3 — Bangsa Buto (Ep 21–30)
 **Raksasa wayang & legenda · Tier C · musuh mulai terorganisir**

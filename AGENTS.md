@@ -70,6 +70,7 @@ git lfs pull
 | Skrip Python editor / Blender / tool | `Hermes/Tools/` | Bukan di `Tools/` atau `Art/Scripts/` |
 | File Blender, sumber GLB, gambar, ekspor | `Hermes/Art/<topik>/` | Bukan di `Art/` |
 | Catatan, usulan desain, laporan | `Hermes/Laporan/` | Bukan di `docs/` |
+| Daftar & mentahan Mixamo untuk developer | `mixamo/asset/` | Aturan di [`mixamo/README.md`](mixamo/README.md) (read-only). FBX hasil download developer di `mixamo/result/` **dipindah** ke `Hermes/Art/<topik>/Mixamo/` (hanya di WORKTREE-mu; di folder developer cukup disalin) |
 
 Di luar tabel di atas: **read-only**. Kamu boleh membaca semua file untuk memahami proyek. `Hermes/panduan_model_3d.md` dan semua `Hermes/<model>_hermes.md` juga read-only (instruksi dari Claude); progresmu ditulis di `Hermes/Laporan/`.
 

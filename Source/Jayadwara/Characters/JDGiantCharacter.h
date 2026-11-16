@@ -14,8 +14,10 @@ class USpringArmComponent;
  * Skala raksasa di-bake ke SK_Jayadwara saat export Blender (docs/13 D4, revisi Iterasi 6b): mesh sudah setinggi
  * MeshHeightCm dan komponennya berskala 1 (Anim Dynamics tidak mendukung komponen berskala). Kapsul, kamera, dan gerak
  * diturunkan dari skala raksasa terhadap tinggi manusia (GiantHeightCm / AuthoredHeightCm) di OnConstruction.
- * Kecepatan & lompatan memakai skala Froude (x sqrt(skala)) dan animasi diputar 1/sqrt(skala) kali supaya terasa
- * berat tanpa kaki meluncur; angka final dituning di Fase 1.
+ * Kecepatan lari = manusia x skala^SpeedScaleExponent dan animasi diputar skala^(SpeedScaleExponent - 1) kali, jadi kaki
+ * tetap menapak. Sejak 16 Okt 2026 bawaannya "ala Mebius" (gesit, docs/07): exponent 0,83 (lari ±70 m/s, animasi ±0,6x),
+ * berbalik 720°/s, akselerasi setara manusia. Rasa berat datang dari hit-stop, guncangan kamera, debu, dan suara, bukan
+ * dari kelambatan. Exponent 0,5 = skala Froude (setelan berat lama). Lompatan tetap Froude x JumpBoost.
  * Transformasi (ganti pawn) dilakukan AJDPlayerController; pawn ini hanya menyediakan efek tumbuh/menyusut
  * (BeginScaleTransition). UJDSyncComponent menyusul di Fase 1 (Feb 2027).
  */
@@ -41,6 +43,14 @@ public:
 	/** Setengah tinggi kapsul pada skala aktor 1 (cm). */
 	UFUNCTION(BlueprintPure, Category = "Giant")
 	float GetGiantHalfHeight() const;
+
+	/**
+	 * Pengali kecepatan gerak raksasa terhadap manusia = skala^SpeedScaleExponent. Animasi locomotion diputar
+	 * GetSpeedScale() / GetGiantScale() kali; sumbu Speed BlendSpace raksasa dikali nilai ini (Tools/ue_setup_jayadwara2.py,
+	 * Tools/ue_setup_giant.py) supaya kaki menapak.
+	 */
+	UFUNCTION(BlueprintPure, Category = "Giant")
+	float GetSpeedScale() const;
 
 	UFUNCTION(BlueprintPure, Category = "Giant")
 	bool IsScaleTransitioning() const { return bScaleTransitioning; }
@@ -87,8 +97,25 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Giant|Movement")
 	float HumanJumpZVelocity = 500.0f;
 
+	/** Akselerasi manusia (cm/s²), nilai bawaan CharacterMovement; dikali GetSpeedScale() supaya raksasa secepat manusia mencapai lari penuh. */
 	UPROPERTY(EditDefaultsOnly, Category = "Giant|Movement")
-	float HumanTurnRate = 500.0f;
+	float HumanMaxAcceleration = 2048.0f;
+
+	/**
+	 * Kelincahan: kecepatan = manusia x skala^exponent. 0,5 = Froude (berat, lari ±24 m/s, animasi ±0,2x);
+	 * 0,83 = ala Mebius (lari ±70 m/s, animasi ±0,6x); 1,0 = animasi kecepatan normal (lari ±118 m/s).
+	 * Setelah diubah, jalankan ulang Tools/ue_setup_giant_speed.py supaya BlendSpace & montage combat ikut.
+	 */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Giant|Movement", meta = (ClampMin = "0.5", ClampMax = "1.0"))
+	float SpeedScaleExponent = 0.83f;
+
+	/** Kecepatan berbalik badan raksasa (°/s), tidak diskalakan. Manusia 500; ala Mebius 720. */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Giant|Movement", meta = (ClampMin = "10"))
+	float GiantTurnRate = 720.0f;
+
+	/** Pengali kecepatan lompat di atas skala Froude (tinggi lompatan naik kuadratnya). 1,25 → ±1,56x tinggi proporsional. */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Giant|Movement", meta = (ClampMin = "0.5"))
+	float JumpBoost = 1.25f;
 
 	/** Panjang boom kamera di skala 1 (cm); dikalikan skala raksasa. */
 	UPROPERTY(EditDefaultsOnly, Category = "Giant|Camera")

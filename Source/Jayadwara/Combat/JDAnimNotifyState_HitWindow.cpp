@@ -18,7 +18,7 @@ void UJDAnimNotifyState_HitWindow::NotifyBegin(USkeletalMeshComponent* MeshComp,
 	Super::NotifyBegin(MeshComp, Animation, TotalDuration, EventReference);
 	if (UJDCombatComponent* Combat = FindCombat(MeshComp))
 	{
-		Combat->BeginHitWindow(SocketName, RadiusOverride);
+		Combat->BeginHitWindow(SocketName, RadiusOverride, bNewHit);
 	}
 }
 
